@@ -122,7 +122,7 @@ export default function Page() {
   if (loading && !order) {
     return (
       <div className="container page od-page" aria-busy="true">
-        <Seo title={title} />
+        <Seo robots="noindex,nofollow" title={title} />
         <div className="od-skel">
           <div className="skeleton" style={{ height: 120 }} />
           <div className="skeleton" style={{ height: 96 }} />
@@ -145,7 +145,7 @@ export default function Page() {
     const notFound = err.status === 404;
     return (
       <div className="container page od-page">
-        <Seo title={title} />
+        <Seo robots="noindex,nofollow" title={title} />
         <div className="cart-empty card od-notfound">
           <div className="cart-empty-icon">
             <Icon name={notFound ? 'search' : 'warning'} size={30} />
@@ -186,7 +186,7 @@ export default function Page() {
 
   return (
     <div className="container page od-page">
-      <Seo title={title} description={`Status and delivery details for order ${order.id}.`} />
+      <Seo robots="noindex,nofollow" title={title} description={`Status and delivery details for order ${order.id}.`} />
 
       {justPlaced && awaiting && (
         <div className="alert alert-success od-placed" role="status">

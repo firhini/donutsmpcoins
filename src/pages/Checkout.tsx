@@ -199,7 +199,7 @@ export default function Page() {
   if (placedId) {
     return (
       <div className="container page co-page">
-        <Seo title={title} />
+        <Seo robots="noindex,nofollow" title={title} />
         <div className="co-redirect card pad">
           <span className="spinner" style={{ width: 28, height: 28 }} />
           <h2>Order {placedId} placed</h2>
@@ -215,7 +215,7 @@ export default function Page() {
   if (!lines.length) {
     return (
       <div className="container page co-page">
-        <Seo title={title} description="Secure checkout for DonutSMP money, spawners and mystery boxes." />
+        <Seo robots="noindex,nofollow" title={title} description="Secure checkout for DonutSMP money, spawners and mystery boxes." />
         <div className="cart-empty card">
           <div className="cart-empty-icon">
             <Icon name="cart" size={30} />
@@ -235,7 +235,7 @@ export default function Page() {
 
   return (
     <div className="container page co-page">
-      <Seo title={title} description="Secure checkout – enter your Minecraft username, pick a payment method and get your items delivered in-game." />
+      <Seo robots="noindex,nofollow" title={title} description="Secure checkout – enter your Minecraft username, pick a payment method and get your items delivered in-game." />
       <div className="page-head co-head">
         <div>
           <div className="eyebrow">Step 2 of 2</div>

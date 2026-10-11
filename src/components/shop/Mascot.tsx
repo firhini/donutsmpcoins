@@ -8,7 +8,7 @@ export function Mascot({ size = 260, className = '', float = true }: { size?: nu
   const [ok, setOk] = useState(true);
   const cls = `mascot ${float ? 'float' : ''} ${className}`;
   if (ok) {
-    return <img src="/img/brand/mascot.svg" alt="" width={size} height={size} className={cls} draggable={false} onError={() => setOk(false)} />;
+    return <img src="/img/brand/mascot.svg" alt="" width={size} height={size} className={cls} draggable={false} fetchPriority="high" decoding="async" onError={() => setOk(false)} />;
   }
   return (
     <svg viewBox="0 0 200 200" width={size} height={size} className={cls} aria-hidden="true">

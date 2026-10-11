@@ -63,7 +63,7 @@ export default function Dashboard() {
 
   return (
     <div className="adm-page">
-      <Seo title="Dashboard · Admin · DonutCoins" description="DonutCoins back office" />
+      <Seo robots="noindex,nofollow" title="Dashboard · Admin · DonutCoins" description="DonutCoins back office" />
       <PageHead title="Dashboard" sub="What needs your attention right now.">
         <button type="button" className="btn btn-secondary btn-sm" onClick={() => void Promise.all([dash.reload(true), needs.reload(true)])}>
           <Icon name="refresh" size={14} /> Refresh

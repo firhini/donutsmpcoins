@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { storageGet, storageSet } from '../../lib/device';
 
 /** Minecraft Java usernames: 3–16 chars, letters, digits, underscore. */
@@ -36,7 +36,12 @@ export function rememberUsername(name: string): void {
 
 /** Username state that is remembered across pages (localStorage). */
 export function useRememberedUsername(): [string, (v: string) => void] {
-  const [name, setNameState] = useState<string>(() => getRememberedUsername());
+  const [name, setNameState] = useState<string>('');
+  // load after mount so pre-rendered HTML matches the first client render
+  useEffect(() => {
+    const saved = getRememberedUsername();
+    if (saved) setNameState((cur) => cur || saved);
+  }, []);
   const setName = useCallback((v: string) => {
     setNameState(v);
     if (isValidUsername(v)) storageSet(USERNAME_KEY, v.trim());

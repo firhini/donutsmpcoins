@@ -48,7 +48,7 @@ export default function OrderDetail() {
   if (q.loading && !order) {
     return (
       <div className="adm-page">
-        <Seo title={`${orderId} · Admin · DonutCoins`} description="Order detail" />
+        <Seo robots="noindex,nofollow" title={`${orderId} · Admin · DonutCoins`} description="Order detail" />
         <Loading label={`Loading ${orderId}…`} />
       </div>
     );
@@ -56,7 +56,7 @@ export default function OrderDetail() {
   if (!order) {
     return (
       <div className="adm-page">
-        <Seo title={`${orderId} · Admin · DonutCoins`} description="Order detail" />
+        <Seo robots="noindex,nofollow" title={`${orderId} · Admin · DonutCoins`} description="Order detail" />
         <Link to="/admin/orders" className="btn btn-ghost btn-sm" style={{ alignSelf: 'flex-start' }}>
           <Icon name="arrowRight" size={14} style={{ transform: 'rotate(180deg)' }} /> Orders
         </Link>
@@ -71,7 +71,7 @@ export default function OrderDetail() {
 
   return (
     <div className="adm-page">
-      <Seo title={`${order.id} · Admin · DonutCoins`} description="Order detail" />
+      <Seo robots="noindex,nofollow" title={`${order.id} · Admin · DonutCoins`} description="Order detail" />
       <div className="stack" style={{ gap: 10 }}>
         <Link to="/admin/orders" className="btn btn-ghost btn-sm" style={{ alignSelf: 'flex-start', marginLeft: -10 }}>
           <Icon name="arrowRight" size={14} style={{ transform: 'rotate(180deg)' }} /> All orders

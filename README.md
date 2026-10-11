@@ -186,6 +186,41 @@ der Stripe-Checkout-Seite automatisch aktiv; weitere Methoden (Klarna, SEPA, iDE
 Hinweis: Stripe und PayPal prüfen Händler nachträglich und können Konten mit vielen Rückbuchungen (Chargebacks) oder bei
 Verstößen gegen ihre Richtlinien sperren. Halte Lieferbelege (Screenshots) bereit und liefere schnell.
 
+## 5c. Google SEO – was eingebaut ist und was du noch tun musst
+
+**Eingebaut (automatisch bei jedem Deploy):**
+- **Pre-Rendering:** Alle öffentlichen Seiten (Startseite, Shop, 8 Kategorien, 57 Produktseiten, Guides, Landingpages, FAQ,
+  Rechtliches) werden beim Build als fertiges HTML erzeugt. Google bekommt Inhalte, Titel und Beschreibungen ohne
+  JavaScript. Danach übernimmt React („Hydration“) – die Seite bleibt eine schnelle App.
+- **Meta-Tags pro Seite:** Title, Description, Canonical, Open Graph/Twitter, `robots` (private Seiten wie Warenkorb,
+  Checkout, Bestellung, Account, Admin sind `noindex`).
+- **Strukturierte Daten (JSON-LD):** OnlineStore + WebSite (Startseite), Product + Offer + Breadcrumbs (Produkte),
+  CollectionPage (Kategorien), FAQPage (FAQ, Landingpages, Guides, Produkte), Article (Guides/Landingpages),
+  AggregateRating (Bewertungsseite, sobald echte Bewertungen existieren).
+- **sitemap.xml + robots.txt** werden beim Build generiert (`dist/sitemap.xml`).
+- **Echte 404-Seiten** (Status 404 statt „Soft 404“), saubere URLs ohne Parameter, Breadcrumbs, interne Verlinkung.
+- **Performance:** Code-Splitting, CSS der Seite wird direkt im HTML verlinkt, Bilder lazy, Assets ein Jahr gecacht.
+- Prüfung: `npm run build && npm run seo:check` validiert jede generierte Seite (Title, Description, Canonical, JSON-LD, H1).
+
+**Das musst du einmalig machen:**
+1. **Domain:** Eine eigene Domain (z. B. `donutcoins.gg`) rankt deutlich besser als `*.netlify.app`. In Netlify unter
+   *Domain management* verbinden, danach `SITE_URL=https://deine-domain` als Umgebungsvariable setzen (sonst nimmt der
+   Build automatisch die Netlify-URL).
+2. **Google Search Console:** https://search.google.com/search-console → Property anlegen → Methode „HTML-Tag“ → den
+   `content`-Wert als `GOOGLE_SITE_VERIFICATION` in Netlify setzen → neu deployen → verifizieren. Dann unter *Sitemaps*
+   `https://deine-domain/sitemap.xml` einreichen.
+3. **Google Analytics (optional):** GA4-Property anlegen, Mess-ID (`G-XXXXXXX`) als `GA_MEASUREMENT_ID` setzen. Die Seite
+   zeigt einen kleinen Cookie-Hinweis und lädt Analytics erst nach „Accept“ (DSGVO).
+4. **Bing Webmaster Tools** (gratis, importiert aus der Search Console) – bringt zusätzlich Bing/DuckDuckGo-Traffic.
+5. **Backlinks & Inhalte:** Discord-Server-Beschreibung, YouTube-Shorts/TikTok mit Link, Minecraft-Foren und
+   Serverlisten verlinken. Die Guides unter `/guides` sind dafür gemacht, geteilt zu werden. Neue Guides: einfach einen
+   Eintrag in `src/data/guides.ts` ergänzen – Seite, Sitemap und strukturierte Daten entstehen automatisch.
+6. **Bewertungen sammeln:** Echte Bewertungen erzeugen Sterne-Snippets in Google. Nach jeder Lieferung auf die
+   Bewertungsfunktion hinweisen (der Bestellstatus macht das automatisch).
+
+Wichtig: Die Seite muss die **Google-Richtlinien** einhalten – keine gekauften Bewertungen, keine Keyword-Massen, keine
+irreführenden Preise. Alles Eingebaute hält sich daran.
+
 ## 6. Ablauf einer Bestellung (für dich)
 
 1. Discord-Ping „🛒 New order DC-ABC123“ (Spieler, Items, Betrag, Zahlungsart).

@@ -55,7 +55,7 @@ export default function Settings() {
 
   return (
     <div className="adm-page">
-      <Seo title="Settings · Admin · DonutCoins" description="DonutCoins back office" />
+      <Seo robots="noindex,nofollow" title="Settings · Admin · DonutCoins" description="DonutCoins back office" />
       <PageHead title="Settings" sub="Everything here is stored in Netlify Blobs and applied instantly to the store." />
 
       <div className="alert alert-info adm-settings-intro">

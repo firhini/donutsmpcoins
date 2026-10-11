@@ -4,6 +4,7 @@ import { Header } from './Header';
 import { Footer } from './Footer';
 import { CartDrawer } from '../cart/CartDrawer';
 import { useStore } from '../../context/StoreContext';
+import { Analytics } from '../ui/Analytics';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -39,6 +40,7 @@ export function Layout() {
       </main>
       <Footer />
       <CartDrawer />
+      <Analytics />
     </>
   );
 }

@@ -68,7 +68,7 @@ export default function Credit() {
 
   return (
     <div className="adm-page">
-      <Seo title="Store credit · Admin · DonutCoins" description="DonutCoins back office" />
+      <Seo robots="noindex,nofollow" title="Store credit · Admin · DonutCoins" description="DonutCoins back office" />
       <PageHead title="Store credit" sub="Credit is applied automatically at checkout. Referral rewards land here too." />
 
       <Panel title="Look up a player" icon="search">

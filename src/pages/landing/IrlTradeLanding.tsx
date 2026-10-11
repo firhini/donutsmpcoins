@@ -21,8 +21,27 @@ export default function IrlTradeLanding() {
   const store = config.storeName;
   const methods = config.paymentMethods;
 
+  const faqItems = [
+          {
+            id: 'irl-faq-middleman',
+            q: 'Do you use a middleman?',
+            a: <p>No – and you do not need one. The order record, the refund policy and our public review history are the guarantee. Middlemen add a fee and a second stranger to trust.</p>,
+          },
+          {
+            id: 'irl-faq-first',
+            q: 'Will you ever deliver first?',
+            a: <p>No. Chargebacks make it impossible for a store to deliver before payment. We keep the first step small instead: order a few million, see it land, then scale up.</p>,
+          },
+          {
+            id: 'irl-faq-ban',
+            q: 'What happens if I get banned?',
+            a: <p>A ban is between you and the server; we cannot refund a delivered order because of a later punishment. That is why we are upfront about the rules here and on every order.</p>,
+          },
+        ];
+
   return (
     <ContentPage
+      faq={faqItems}
       eyebrow="Guide"
       title={`${server} IRL trading: how it works and how not to get scammed`}
       seoTitle={`${server} IRL Trading Guide – Safe Real-Money Trades · ${store}`}
@@ -175,23 +194,7 @@ export default function IrlTradeLanding() {
 
       <h2 id="faq">Quick answers</h2>
       <Accordion
-        items={[
-          {
-            id: 'irl-faq-middleman',
-            q: 'Do you use a middleman?',
-            a: <p>No – and you do not need one. The order record, the refund policy and our public review history are the guarantee. Middlemen add a fee and a second stranger to trust.</p>,
-          },
-          {
-            id: 'irl-faq-first',
-            q: 'Will you ever deliver first?',
-            a: <p>No. Chargebacks make it impossible for a store to deliver before payment. We keep the first step small instead: order a few million, see it land, then scale up.</p>,
-          },
-          {
-            id: 'irl-faq-ban',
-            q: 'What happens if I get banned?',
-            a: <p>A ban is between you and the server; we cannot refund a delivered order because of a later punishment. That is why we are upfront about the rules here and on every order.</p>,
-          },
-        ]}
+        items={faqItems}
       />
       <div className="prose-cta">
         <Link to="/shop" className="btn btn-primary btn-lg">

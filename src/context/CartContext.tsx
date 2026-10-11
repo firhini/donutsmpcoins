@@ -39,12 +39,22 @@ const KEY = 'dc_cart_v1';
 export function CartProvider({ children }: { children: ReactNode }) {
   const { products, config, productById } = useStore();
   const { toast } = useToast();
-  const [items, setItems] = useState<CartLineInput[]>(() => storageGet<CartLineInput[]>(KEY, []));
+  // Persisted state is loaded in an effect so server-rendered HTML and the first client render match (hydration).
+  const [items, setItems] = useState<CartLineInput[]>([]);
+  const [hydrated, setHydrated] = useState(false);
   const [isOpen, setOpen] = useState(false);
-  const [discountCode, setDiscountCodeState] = useState<string>(() => storageGet<string>('dc_discount', ''));
-  const [referralCode, setReferralCodeState] = useState<string>(() => storageGet<string>('dc_referral', ''));
+  const [discountCode, setDiscountCodeState] = useState<string>('');
+  const [referralCode, setReferralCodeState] = useState<string>('');
 
-  useEffect(() => storageSet(KEY, items), [items]);
+  useEffect(() => {
+    setItems(storageGet<CartLineInput[]>(KEY, []));
+    setDiscountCodeState(storageGet<string>('dc_discount', ''));
+    setReferralCodeState(storageGet<string>('dc_referral', ''));
+    setHydrated(true);
+  }, []);
+  useEffect(() => {
+    if (hydrated) storageSet(KEY, items);
+  }, [items, hydrated]);
 
   // capture ?ref=CODE from the URL once
   useEffect(() => {

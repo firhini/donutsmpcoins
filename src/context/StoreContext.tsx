@@ -56,7 +56,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [stats, setStats] = useState<SiteStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [currencyCode, setCurrencyCode] = useState<string>(() => storageGet<string>('dc_currency', 'USD'));
+  const [currencyCode, setCurrencyCode] = useState<string>('USD');
+  useEffect(() => {
+    const saved = storageGet<string>('dc_currency', 'USD');
+    if (saved && saved !== 'USD') setCurrencyCode(saved);
+  }, []);
 
   const refresh = useCallback(async () => {
     setLoading(true);

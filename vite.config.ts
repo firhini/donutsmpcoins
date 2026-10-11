@@ -4,12 +4,27 @@ import { netlifyApiPlugin } from './scripts/vite-api-plugin';
 
 /** Replaces %SITE_URL% in index.html with the deploy URL (Netlify sets URL at build time). */
 function siteUrlPlugin() {
-  const url = (process.env.SITE_URL || process.env.URL || '').replace(/\/$/, '');
-  return { name: 'site-url', transformIndexHtml: (html: string) => html.replace(/%SITE_URL%/g, url) };
+  const url = (process.env.SITE_URL || process.env.URL || process.env.DEPLOY_PRIME_URL || '').replace(/\/$/, '');
+  const verification = process.env.GOOGLE_SITE_VERIFICATION || '';
+  const ga = process.env.GA_MEASUREMENT_ID || '';
+  return {
+    name: 'site-url',
+    transformIndexHtml: (html: string) =>
+      html
+        .replace(/%SITE_URL%/g, url)
+        .replace(/\s*<meta name="google-site-verification" content="%GOOGLE_SITE_VERIFICATION%" \/>/, verification ? `\n    <meta name="google-site-verification" content="${verification}" />` : '')
+        .replace(/%GA_MEASUREMENT_ID%/g, ga),
+  };
 }
+
+const siteUrl = (process.env.SITE_URL || process.env.URL || process.env.DEPLOY_PRIME_URL || '').replace(/\/$/, '');
 
 export default defineConfig({
   plugins: [react(), netlifyApiPlugin(), siteUrlPlugin()],
+  define: {
+    'import.meta.env.VITE_SITE_URL': JSON.stringify(siteUrl),
+    'import.meta.env.VITE_GA_ID': JSON.stringify(process.env.GA_MEASUREMENT_ID || ''),
+  },
   server: {
     port: 5173,
     strictPort: true,
@@ -17,6 +32,10 @@ export default defineConfig({
   build: {
     sourcemap: false,
     chunkSizeWarningLimit: 900,
+    manifest: true,
+  },
+  ssr: {
+    noExternal: [],
   },
   test: {
     environment: 'node',

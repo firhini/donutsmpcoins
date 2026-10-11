@@ -159,7 +159,7 @@ export default function Giveaways() {
 
   return (
     <div className="adm-page">
-      <Seo title="Giveaways · Admin · DonutCoins" description="DonutCoins back office" />
+      <Seo robots="noindex,nofollow" title="Giveaways · Admin · DonutCoins" description="DonutCoins back office" />
       <PageHead title="Giveaways" sub="Players enter with their Minecraft name; you draw the winners and hand out the prize.">
         <button type="button" className="btn btn-secondary btn-sm" onClick={() => void list.reload(true)}>
           <Icon name="refresh" size={14} /> Refresh

@@ -23,9 +23,131 @@
   status = 200
   force = true
 
-# SPA fallback
+# SPA fallback – only for known app routes. Public pages are pre-rendered to static
+# HTML at build time (scripts/prerender.mjs) and static files always win. Unknown
+# URLs fall through to dist/404.html, which Netlify serves with a real 404 status.
 [[redirects]]
-  from = "/*"
+  from = "/order/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admin/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/account"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/cart"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/checkout"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/track"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/spin"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/free"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/redeem"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/referral"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/giveaways"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/reviews"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/faq"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/product/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/shop"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/shop/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/guides"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/guides/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/donutsmp-money"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/donutsmp-spawners"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/donutsmp-irl-trade"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/refund-policy"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
   to = "/index.html"
   status = 200
 
@@ -41,3 +163,13 @@
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

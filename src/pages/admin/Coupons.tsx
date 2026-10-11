@@ -320,7 +320,7 @@ export default function Coupons() {
   };
   return (
     <div className="adm-page">
-      <Seo title="Coupons · Admin · DonutCoins" description="DonutCoins back office" />
+      <Seo robots="noindex,nofollow" title="Coupons · Admin · DonutCoins" description="DonutCoins back office" />
       <PageHead title="Coupons & gift codes" sub="Discount codes for checkout and gift codes that give away items." />
       <div className="adm-tabs" role="tablist">
         <button type="button" role="tab" aria-selected={tab === 'coupons'} className={`adm-tab ${tab === 'coupons' ? 'active' : ''}`} onClick={() => setTab('coupons')}>

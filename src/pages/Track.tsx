@@ -4,6 +4,7 @@ import type { PublicOrder } from '../shared/types';
 import { apiGet } from '../lib/api';
 import { useStore } from '../context/StoreContext';
 import { Seo } from '../components/ui/Seo';
+import { breadcrumbSchema, webPageSchema } from '../seo/schema';
 import { Icon } from '../components/ui/Icons';
 import { forgetOrder, formatDate, getRecentOrders, itemTitle, normalizeOrderId, ORDER_ID_RE, relativeTime, STATUS_BADGE, STATUS_LABEL, type RecentOrder } from '../components/cart/cartUtils';
 import '../styles/cart.css';
@@ -61,7 +62,7 @@ export default function Page() {
 
   return (
     <div className="container page tr-page">
-      <Seo title={`Track your order · ${config.storeName}`} description="Check the payment and delivery status of your DonutCoins order and see what your mystery boxes rolled." />
+      <Seo title={`Track your order · ${config.storeName}`} description="Check the payment and delivery status of your DonutCoins order and see what your mystery boxes rolled." canonical="/track" jsonLd={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Track your order', path: '/track' }]), webPageSchema('Track your order', '/track')]} />
       <div className="tr-hero">
         <div className="eyebrow">Order tracking</div>
         <h1>Track your order</h1>

@@ -7,12 +7,15 @@
   "scripts": {
     "dev": "npx --yes netlify-cli dev",
     "dev:vite": "vite",
-    "build": "vite build",
+    "build": "vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.functions.json",
     "test": "vitest run",
     "art": "node scripts/gen-art.mjs",
-    "art:check": "node scripts/check-art.mjs"
+    "art:check": "node scripts/check-art.mjs",
+    "build:client": "vite build",
+    "prerender": "vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "seo:check": "node scripts/check-seo.mjs"
   },
   "dependencies": {
     "@netlify/blobs": "^11.1.4",

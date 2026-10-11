@@ -6,6 +6,7 @@ import { getDeviceId, storageGet, storageSet } from '../lib/device';
 import { useStore } from '../context/StoreContext';
 import { useToast } from '../context/ToastContext';
 import { Seo } from '../components/ui/Seo';
+import { breadcrumbSchema, webPageSchema } from '../seo/schema';
 import { Icon } from '../components/ui/Icons';
 import { Countdown, msUntil } from '../components/free/Countdown';
 import { UsernameInput } from '../components/free/UsernameInput';
@@ -183,7 +184,8 @@ export default function Page() {
   const [giveaways, setGiveaways] = useState<Giveaway[] | null>(null);
   const [failed, setFailed] = useState(false);
   const [username, setUsername] = useRememberedUsername();
-  const [entries, setEntries] = useState<Entries>(() => storageGet<Entries>(ENTRIES_KEY, {}));
+  const [entries, setEntries] = useState<Entries>({});
+  useEffect(() => setEntries(storageGet<Entries>(ENTRIES_KEY, {})), []);
   const [confetti, setConfetti] = useState(false);
 
   const load = useCallback(async () => {
@@ -218,7 +220,7 @@ export default function Page() {
 
   return (
     <div className="container page">
-      <Seo title={`Giveaways – win free ${config.serverName} loot | ${config.storeName}`} description={`Enter the current ${config.storeName} giveaways with your Minecraft username and win ${config.serverName} money, mystery boxes and spawners for free.`} />
+      <Seo title={`Giveaways – win free ${config.serverName} loot | ${config.storeName}`} description={`Enter the current ${config.storeName} giveaways with your Minecraft username and win ${config.serverName} money, mystery boxes and spawners for free.`} canonical="/giveaways" jsonLd={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Giveaways', path: '/giveaways' }]), webPageSchema('Giveaways', '/giveaways')]} />
       <Confetti active={confetti} count={90} />
 
       <header className="free-hero free-hero-compact">

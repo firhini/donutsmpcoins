@@ -26,8 +26,37 @@ export default function SpawnersLanding() {
   const skelly = spawners.find((p) => p.id === 'skeleton-spawner');
   const cheapest = spawners.length ? Math.min(...spawners.map((p) => lowestBulkTier(p)?.priceCents ?? p.priceCents)) : 0;
 
+  const faqItems = [
+          {
+            id: 'sp-faq-silk',
+            q: 'Can I move spawners after delivery?',
+            a: <p>Yes – they are normal spawner items. Place them, and pick them up again with a silk-touch pickaxe if the server allows it (it does on {server}).</p>,
+          },
+          {
+            id: 'sp-faq-stock',
+            q: 'What if a spawner is sold out?',
+            a: <p>We restock weekly. Click the product to see the current count, or ask on Discord – we can often source a specific type within a day.</p>,
+          },
+          {
+            id: 'sp-faq-bulk',
+            q: 'Do the bulk tiers combine across types?',
+            a: <p>Tiers apply per product line. Sixteen skeleton spawners and sixteen zombie spawners are two lines – but the total still counts toward the spending-tier discount on the whole cart.</p>,
+          },
+          {
+            id: 'sp-faq-safe',
+            q: 'Is buying spawners allowed?',
+            a: (
+              <p>
+                Trading for real money is against {server}'s rules and is your own responsibility; we deliver through normal gameplay actions and keep it discreet. More in the{' '}
+                <Link to="/donutsmp-irl-trade">IRL trading guide</Link>.
+              </p>
+            ),
+          },
+        ];
+
   return (
     <ContentPage
+      faq={faqItems}
       eyebrow={`${server} spawners`}
       title={`${server} spawners – skeletons, golems, blazes and more`}
       seoTitle={`Buy ${server} Spawners – Skeleton Spawners from ${fmt(cheapest)} · ${config.storeName}`}
@@ -169,33 +198,7 @@ export default function SpawnersLanding() {
 
       <h2 id="faq">Spawner FAQ</h2>
       <Accordion
-        items={[
-          {
-            id: 'sp-faq-silk',
-            q: 'Can I move spawners after delivery?',
-            a: <p>Yes – they are normal spawner items. Place them, and pick them up again with a silk-touch pickaxe if the server allows it (it does on {server}).</p>,
-          },
-          {
-            id: 'sp-faq-stock',
-            q: 'What if a spawner is sold out?',
-            a: <p>We restock weekly. Click the product to see the current count, or ask on Discord – we can often source a specific type within a day.</p>,
-          },
-          {
-            id: 'sp-faq-bulk',
-            q: 'Do the bulk tiers combine across types?',
-            a: <p>Tiers apply per product line. Sixteen skeleton spawners and sixteen zombie spawners are two lines – but the total still counts toward the spending-tier discount on the whole cart.</p>,
-          },
-          {
-            id: 'sp-faq-safe',
-            q: 'Is buying spawners allowed?',
-            a: (
-              <p>
-                Trading for real money is against {server}'s rules and is your own responsibility; we deliver through normal gameplay actions and keep it discreet. More in the{' '}
-                <Link to="/donutsmp-irl-trade">IRL trading guide</Link>.
-              </p>
-            ),
-          },
-        ]}
+        items={faqItems}
       />
       <div className="prose-cta">
         <Link to="/shop/spawners" className="btn btn-primary btn-lg">

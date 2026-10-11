@@ -160,3 +160,18 @@ Shared components the storefront builder must export (others may use them):
 ## Product images
 `/img/products/<slug>.svg` – every product in `src/data/catalog.ts` has `image` set; the art builder generates them.
 Until then a missing image must not break layout (use `onError` fallback to `/img/products/_fallback.svg`).
+
+
+## SEO / pre-rendering (added later)
+
+* `npm run build` = client build → SSR build (`src/entry-server.tsx` → `dist-ssr/`) → `scripts/prerender.mjs`, which
+  renders every route from `src/seo/routes.ts` to `dist/<route>/index.html` (home → `dist/index.html`, 404 → `dist/404.html`),
+  injects per-page head tags collected by `<Seo>` (`src/seo/head.tsx`), inlines the page chunk's CSS from the Vite manifest,
+  and writes `sitemap.xml` + `robots.txt`. `npm run seo:check` validates the output.
+* `<Seo>` (re-exported from `components/ui/Seo`) takes `title, description, canonical, robots, image, type, jsonLd, status`.
+  JSON-LD builders live in `src/seo/schema.ts`. `ContentPage` emits Breadcrumb + Article + FAQPage automatically (`faq` prop).
+* Persisted client state (cart, currency, remembered username…) is loaded in effects, never in `useState` initialisers,
+  so server HTML and the first client render match (hydration). New pages must follow that rule and must not touch
+  `window`/`document` during render.
+* Netlify: static files win over the SPA redirects in `netlify.toml`; unknown URLs get `dist/404.html` with a real 404.
+* Env at build time: `SITE_URL` (falls back to Netlify `URL`), `GOOGLE_SITE_VERIFICATION`, `GA_MEASUREMENT_ID`.

@@ -82,7 +82,7 @@ export default function Account() {
   if (!auth.configured && !auth.loading) {
     return (
       <div className="container page">
-        <Seo title={`Account · ${config.storeName}`} />
+        <Seo robots="noindex,nofollow" title={`Account · ${config.storeName}`} />
         <div className="empty">
           <div className="big">🔒</div>
           <h2>Accounts are not enabled yet</h2>
@@ -98,7 +98,7 @@ export default function Account() {
   if (!auth.user) {
     return (
       <div className="container page">
-        <Seo title={`Account · ${config.storeName}`} />
+        <Seo robots="noindex,nofollow" title={`Account · ${config.storeName}`} />
         <div className="acc-login card pad">
           <img src="/img/brand/mascot.svg" alt="" width={96} height={96} />
           <h1>Your DonutCoins account</h1>
@@ -115,7 +115,7 @@ export default function Account() {
   const u = auth.user;
   return (
     <div className="container page acc">
-      <Seo title={`My account · ${config.storeName}`} />
+      <Seo robots="noindex,nofollow" title={`My account · ${config.storeName}`} />
       <header className="acc-head card pad">
         <img src={u.avatarUrl} alt="" className="acc-avatar" width={72} height={72} />
         <div className="acc-head-text">

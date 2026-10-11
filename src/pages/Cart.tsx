@@ -38,7 +38,7 @@ export default function Page() {
   if (!lines.length) {
     return (
       <div className="container page cart-page">
-        <Seo title={title} description="Your DonutCoins cart – DonutSMP money, spawners and mystery boxes delivered in-game." />
+        <Seo robots="noindex,follow" title={title} description="Your DonutCoins cart – DonutSMP money, spawners and mystery boxes delivered in-game." />
         <div className="cart-empty card">
           <div className="cart-empty-icon">
             <Icon name="cart" size={30} />
@@ -69,7 +69,7 @@ export default function Page() {
 
   return (
     <div className="container page cart-page">
-      <Seo title={title} description="Review your DonutCoins order, apply discount codes and continue to checkout." />
+      <Seo robots="noindex,follow" title={title} description="Review your DonutCoins order, apply discount codes and continue to checkout." />
       <div className="page-head cart-head">
         <div>
           <div className="eyebrow">Step 1 of 2</div>

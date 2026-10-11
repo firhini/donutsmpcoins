@@ -66,7 +66,7 @@ export default function Admin() {
   if (auth === 'checking') {
     return (
       <div className="adm-fullbleed-splash">
-        <Seo title="Admin · DonutCoins" description="DonutCoins back office" />
+        <Seo robots="noindex,nofollow" title="Admin · DonutCoins" description="DonutCoins back office" />
         <div className="row">
           <span className="spinner" /> Checking session…
         </div>
@@ -77,7 +77,7 @@ export default function Admin() {
   if (auth === 'anonymous') {
     return (
       <>
-        <Seo title="Sign in · Admin · DonutCoins" description="DonutCoins back office" />
+        <Seo robots="noindex,nofollow" title="Sign in · Admin · DonutCoins" description="DonutCoins back office" />
         <Login
           onSuccess={() => {
             setApiProblem(null);

@@ -4,6 +4,7 @@ import { apiGet } from '../lib/api';
 import { useStore } from '../context/StoreContext';
 import { useToast } from '../context/ToastContext';
 import { Seo } from '../components/ui/Seo';
+import { breadcrumbSchema, webPageSchema } from '../seo/schema';
 import { Icon } from '../components/ui/Icons';
 import { UsernameInput } from '../components/free/UsernameInput';
 import { CopyButton, useCopy } from '../components/free/CopyButton';
@@ -70,7 +71,7 @@ export default function Page() {
 
   return (
     <div className="container page">
-      <Seo title={`Refer a friend – earn store credit | ${config.storeName}`} description={`Share your ${config.storeName} referral link: your friend gets ${ref.friendPercent}% off, you earn ${ref.referrerPercent}% of their order as store credit.`} />
+      <Seo title={`Refer a friend – earn store credit | ${config.storeName}`} description={`Share your ${config.storeName} referral link: your friend gets ${ref.friendPercent}% off, you earn ${ref.referrerPercent}% of their order as store credit.`} canonical="/referral" jsonLd={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Refer a friend', path: '/referral' }]), webPageSchema('Refer a friend', '/referral')]} />
 
       <header className="free-hero free-hero-compact">
         <span className="eyebrow">

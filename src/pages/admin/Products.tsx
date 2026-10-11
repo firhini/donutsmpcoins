@@ -139,7 +139,7 @@ export default function Products() {
 
   return (
     <div className="adm-page">
-      <Seo title="Products · Admin · DonutCoins" description="DonutCoins back office" />
+      <Seo robots="noindex,nofollow" title="Products · Admin · DonutCoins" description="DonutCoins back office" />
       <PageHead title="Products" sub={`${cat.products.length} products · edit prices, stock and visibility inline`}>
         <button type="button" className="btn btn-secondary btn-sm" onClick={() => void cat.reload(true)}>
           <Icon name="refresh" size={14} /> Refresh

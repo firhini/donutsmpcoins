@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import { Seo } from '../ui/Seo';
 import { Icon } from '../ui/Icons';
 import { useStore } from '../../context/StoreContext';
+import { useLocation } from 'react-router-dom';
+import { articleSchema, breadcrumbSchema, faqSchema } from '../../seo/schema';
+import { cleanText, nodeText } from '../../seo/text';
 import '../../styles/content.css';
 
 export interface TocEntry {
@@ -26,6 +29,10 @@ export function ContentPage({
   aside,
   children,
   wide = false,
+  faq,
+  type = 'article',
+  jsonLd,
+  datePublished = '2026-10-01',
 }: {
   title: string;
   seoTitle?: string;
@@ -39,11 +46,23 @@ export function ContentPage({
   aside?: ReactNode;
   children: ReactNode;
   wide?: boolean;
+  /** questions shown on the page – also emitted as FAQPage structured data */
+  faq?: { q: string; a: ReactNode }[];
+  type?: 'article' | 'website';
+  jsonLd?: object[];
+  datePublished?: string;
 }) {
   const { config } = useStore();
+  const { pathname } = useLocation();
+  const ld: object[] = [
+    breadcrumbSchema([{ name: 'Home', path: '/' }, ...crumbs.map((c) => ({ name: c.label, path: c.to ?? pathname }))]),
+    ...(type === 'article' ? [articleSchema({ title: seoTitle ?? title, description, path: pathname, datePublished, dateModified: updated ? new Date(updated).toISOString().slice(0, 10) : undefined, author: config.storeName })] : []),
+    ...(faq?.length ? [faqSchema(faq.map((f) => ({ q: f.q, a: cleanText(nodeText(f.a)) })))!] : []),
+    ...(jsonLd ?? []),
+  ];
   return (
     <div className={`container page content-page ${wide ? 'content-wide' : ''}`}>
-      <Seo title={seoTitle ?? `${title} · ${config.storeName}`} description={description} />
+      <Seo title={seoTitle ?? `${title} · ${config.storeName}`} description={description} type={type} jsonLd={ld} />
       <nav className="breadcrumbs" aria-label="Breadcrumb">
         <Link to="/">Home</Link>
         {crumbs.map((c, i) => (

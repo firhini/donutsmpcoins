@@ -5,6 +5,7 @@ import { apiPost, ApiClientError } from '../lib/api';
 import { useStore } from '../context/StoreContext';
 import { useToast } from '../context/ToastContext';
 import { Seo } from '../components/ui/Seo';
+import { breadcrumbSchema, webPageSchema } from '../seo/schema';
 import { Icon } from '../components/ui/Icons';
 import { UsernameInput } from '../components/free/UsernameInput';
 import { rememberUsername, useRememberedUsername, usernameProblem } from '../components/free/username';
@@ -70,7 +71,7 @@ export default function Page() {
 
   return (
     <div className="container page">
-      <Seo title={`Redeem a gift code | ${config.storeName}`} description={`Redeem a ${config.storeName} gift code for free ${config.serverName} items – delivered in-game to your Minecraft account.`} />
+      <Seo title={`Redeem a gift code | ${config.storeName}`} description={`Redeem a ${config.storeName} gift code for free ${config.serverName} items – delivered in-game to your Minecraft account.`} canonical="/redeem" jsonLd={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Redeem a gift code', path: '/redeem' }]), webPageSchema('Redeem a gift code', '/redeem')]} />
 
       <header className="free-hero free-hero-compact">
         <span className="eyebrow">

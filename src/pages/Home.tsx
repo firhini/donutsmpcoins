@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import type { Product } from '../shared/types';
 import { useStore } from '../context/StoreContext';
 import { Seo } from '../components/ui/Seo';
+import { organizationSchema, websiteSchema } from '../seo/schema';
 import { Icon } from '../components/ui/Icons';
 import { CategoryHotbar, type HotbarValue } from '../components/shop/CategoryHotbar';
 import { ProductGrid } from '../components/shop/ProductGrid';
@@ -62,7 +63,7 @@ export default function Home() {
 
   return (
     <>
-      <Seo title={`${config.storeName} — ${config.serverName} Money, Spawners & Mystery Boxes`} description={`Buy ${config.serverName} money, spawners, mystery boxes and items. Bulk discounts, daily free spins and fast in-game delivery by real staff.`} />
+      <Seo title={`${config.storeName} — ${config.serverName} Money, Spawners & Mystery Boxes`} description={`Buy ${config.serverName} money, spawners, mystery boxes and items. Bulk discounts, daily free spins and fast in-game delivery by real staff.`} jsonLd={[organizationSchema(config), websiteSchema(config)]} />
 
       {/* ───────── hero ───────── */}
       <section className="hero">

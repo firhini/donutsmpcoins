@@ -97,7 +97,7 @@ export default function Orders() {
 
   return (
     <div className="adm-page">
-      <Seo title="Orders · Admin · DonutCoins" description="DonutCoins back office" />
+      <Seo robots="noindex,nofollow" title="Orders · Admin · DonutCoins" description="DonutCoins back office" />
       <PageHead title="Orders" sub={data ? `${total} order${total === 1 ? '' : 's'}${status ? ` · ${STATUS_LABEL[status]}` : ''}` : 'All orders, newest first.'}>
         <button type="button" className="btn btn-secondary btn-sm" onClick={() => void list.reload(true)}>
           <Icon name="refresh" size={14} /> Refresh

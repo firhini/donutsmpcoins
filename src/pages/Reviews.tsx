@@ -5,6 +5,7 @@ import { apiGet, apiPost, ApiClientError } from '../lib/api';
 import { useStore } from '../context/StoreContext';
 import { useToast } from '../context/ToastContext';
 import { Seo } from '../components/ui/Seo';
+import { breadcrumbSchema, organizationSchema } from '../seo/schema';
 import { Icon } from '../components/ui/Icons';
 import { StarRating } from '../components/free/StarRating';
 import { Confetti } from '../components/free/Confetti';
@@ -201,7 +202,7 @@ export default function Page() {
 
   return (
     <div className="container page">
-      <Seo title={`Customer reviews | ${config.storeName}`} description={`Real reviews from ${config.serverName} players who bought money, spawners and mystery boxes at ${config.storeName}. Leave yours and get ${config.reviewRewardPercent}% off.`} />
+      <Seo title={`Customer reviews | ${config.storeName}`} description={`Real reviews from ${config.serverName} players who bought money, spawners and mystery boxes at ${config.storeName}. Leave yours and get ${config.reviewRewardPercent}% off.`} canonical="/reviews" jsonLd={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Reviews', path: '/reviews' }]), count > 0 ? { ...organizationSchema(config), aggregateRating: { '@type': 'AggregateRating', ratingValue: avg.toFixed(1), reviewCount: count, bestRating: 5, worstRating: 1 } } : organizationSchema(config)]} />
       <Confetti active={confetti} count={100} />
 
       <header className="page-head rev-head-row">

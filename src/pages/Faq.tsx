@@ -6,6 +6,8 @@ import { Icon } from '../components/ui/Icons';
 import { Accordion } from '../components/shop/Accordion';
 import { renderRich } from '../components/shop/richText';
 import { faqGroups } from '../data/faq';
+import { breadcrumbSchema, faqSchema } from '../seo/schema';
+import { cleanText, nodeText } from '../seo/text';
 import '../styles/shop.css';
 import '../styles/content.css';
 
@@ -35,7 +37,12 @@ export default function Faq() {
 
   return (
     <div className="container page content-page">
-      <Seo title={`FAQ · ${config.storeName}`} description={`Answers about ordering, delivery, payments, free spins, referrals and safety at ${config.storeName}.`} />
+      <Seo
+        title={`FAQ – DonutSMP money, delivery, payments & safety · ${config.storeName}`}
+        description={`Answers about ordering ${config.serverName} money and items, delivery times, payment methods, free spins, referrals and account safety at ${config.storeName}.`}
+        canonical="/faq"
+        jsonLd={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq' }]), faqSchema(faqGroups.flatMap((g) => g.items.map((i) => ({ q: i.q, a: cleanText(nodeText(i.a as never)) }))))!]}
+      />
       <nav className="breadcrumbs" aria-label="Breadcrumb">
         <Link to="/">Home</Link>
         <span aria-hidden="true">/</span>

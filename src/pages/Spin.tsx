@@ -9,6 +9,7 @@ import { useStore } from '../context/StoreContext';
 import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import { Seo } from '../components/ui/Seo';
+import { breadcrumbSchema, webPageSchema } from '../seo/schema';
 import { Modal } from '../components/ui/Modal';
 import { Icon } from '../components/ui/Icons';
 import { Wheel, prizeColor, prizeGlyph, targetRotation, type PrizeGlyph, type WheelPrize } from '../components/free/Wheel';
@@ -77,8 +78,12 @@ export default function Page() {
   const [result, setResult] = useState<SpinResult | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [confetti, setConfetti] = useState(false);
-  const [last, setLast] = useState<LastSpin | null>(() => storageGet<LastSpin | null>(LAST_KEY, null));
-  const [sound, setSound] = useState<boolean>(() => soundEnabled());
+  const [last, setLast] = useState<LastSpin | null>(null);
+  const [sound, setSound] = useState<boolean>(true);
+  useEffect(() => {
+    setLast(storageGet<LastSpin | null>(LAST_KEY, null));
+    setSound(soundEnabled());
+  }, []);
 
   const needsUsername = useMemo(() => config.spinRequireUsername || prizes.some((p) => p.type === 'free_item'), [config.spinRequireUsername, prizes]);
 
@@ -247,7 +252,7 @@ export default function Page() {
 
   return (
     <div className="container page spin-page">
-      <Seo title={`Daily Free Spin – win coins & coupons | ${config.storeName}`} description={`Spin the ${config.storeName} wheel once every ${status?.cooldownHours ?? 24} hours for free ${config.serverName} coins, discount coupons and store credit.`} />
+      <Seo title={`Daily Free Spin – win coins & coupons | ${config.storeName}`} description={`Spin the ${config.storeName} wheel once every ${status?.cooldownHours ?? 24} hours for free ${config.serverName} coins, discount coupons and store credit.`} canonical="/spin" jsonLd={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Daily Free Spin', path: '/spin' }]), webPageSchema('Daily Free Spin', '/spin')]} />
       <Confetti active={confetti} />
 
       <div className="spin-layout">

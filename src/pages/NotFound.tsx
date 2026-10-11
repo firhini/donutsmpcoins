@@ -10,7 +10,7 @@ export default function NotFound() {
   const { pathname } = useLocation();
   return (
     <div className="container page">
-      <Seo title={`Page not found · ${config.storeName}`} description="This page does not exist. Head back to the store." />
+      <Seo title={`Page not found · ${config.storeName}`} description="This page does not exist. Head back to the store." robots="noindex,follow" status={404} canonical="/404" />
       <div className="nf">
         <Mascot size={180} />
         <div className="nf-code" aria-hidden="true">

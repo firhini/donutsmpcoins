@@ -32,7 +32,7 @@ export default function Reviews() {
 
   return (
     <div className="adm-page">
-      <Seo title="Reviews · Admin · DonutCoins" description="DonutCoins back office" />
+      <Seo robots="noindex,nofollow" title="Reviews · Admin · DonutCoins" description="DonutCoins back office" />
       <PageHead title="Reviews" sub="Approving a review publishes it and sends the customer a thank-you coupon.">
         <button type="button" className="btn btn-secondary btn-sm" onClick={() => void list.reload(true)}>
           <Icon name="refresh" size={14} /> Refresh

@@ -29,8 +29,32 @@ export default function MoneyLanding() {
   const bestRate = tiers.length ? Math.min(...tiers.map((t) => t.priceCents)) : unit?.priceCents ?? 0;
   const enabledMethods = config.paymentMethods.map((m) => m.name);
 
+  const faqItems = [
+          {
+            id: 'money-faq-min',
+            q: 'Is there a minimum amount?',
+            a: <p>One million. There is no practical maximum – the store caps a single line at {unit ? formatMillions(unit.maxQty ?? 5000) : '5B'}, but you can order several lines or message us for a custom quote.</p>,
+          },
+          {
+            id: 'money-faq-offline',
+            q: 'Do I have to be online?',
+            a: <p>Not necessarily – on most setups a /pay goes through to an offline balance. We still recommend being online so you can watch the chat confirmation and leave a review right away.</p>,
+          },
+          {
+            id: 'money-faq-split',
+            q: 'Can I split a big order over several days?',
+            a: <p>Yes. Mention it in the order note or on Discord and we will deliver in portions on a schedule you choose. The price is locked at checkout.</p>,
+          },
+          {
+            id: 'money-faq-alt',
+            q: 'Can you pay an alt instead of my main?',
+            a: <p>Only the username on the order receives the money. Put the alt's name on the order if that is where you want it; we cannot redirect after delivery.</p>,
+          },
+        ];
+
   return (
     <ContentPage
+      faq={faqItems}
       eyebrow={`${server} money`}
       title={`Buy ${server} money – paid straight to your balance`}
       seoTitle={`Buy ${server} Money – Live Prices from ${fmt(bestRate)} per 1M · ${config.storeName}`}
@@ -221,28 +245,7 @@ export default function MoneyLanding() {
 
       <h2 id="faq">Money FAQ</h2>
       <Accordion
-        items={[
-          {
-            id: 'money-faq-min',
-            q: 'Is there a minimum amount?',
-            a: <p>One million. There is no practical maximum – the store caps a single line at {unit ? formatMillions(unit.maxQty ?? 5000) : '5B'}, but you can order several lines or message us for a custom quote.</p>,
-          },
-          {
-            id: 'money-faq-offline',
-            q: 'Do I have to be online?',
-            a: <p>Not necessarily – on most setups a /pay goes through to an offline balance. We still recommend being online so you can watch the chat confirmation and leave a review right away.</p>,
-          },
-          {
-            id: 'money-faq-split',
-            q: 'Can I split a big order over several days?',
-            a: <p>Yes. Mention it in the order note or on Discord and we will deliver in portions on a schedule you choose. The price is locked at checkout.</p>,
-          },
-          {
-            id: 'money-faq-alt',
-            q: 'Can you pay an alt instead of my main?',
-            a: <p>Only the username on the order receives the money. Put the alt's name on the order if that is where you want it; we cannot redirect after delivery.</p>,
-          },
-        ]}
+        items={faqItems}
       />
       <div className="prose-cta">
         {unit && (
