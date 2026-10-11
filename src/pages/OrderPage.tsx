@@ -8,6 +8,7 @@ import { useStore } from '../context/StoreContext';
 import { useToast } from '../context/ToastContext';
 import { Seo } from '../components/ui/Seo';
 import { Icon } from '../components/ui/Icons';
+import { safeHref } from '../lib/url';
 import { Modal } from '../components/ui/Modal';
 import { CopyButton } from '../components/cart/CopyButton';
 import { StatusTimeline } from '../components/cart/StatusTimeline';
@@ -61,6 +62,8 @@ export default function Page() {
     },
     [id],
   );
+
+  const reload = useCallback(() => load(true), [load]);
 
   useEffect(() => {
     void load();
@@ -224,7 +227,7 @@ export default function Page() {
 
       <div className="od-layout">
         <div className="od-main">
-          {awaiting && <PaymentPanel order={order} onChange={() => load(true)} />}
+          {awaiting && <PaymentPanel order={order} onChange={reload} />}
           {(order.status === 'paid' || order.status === 'delivering') && <DeliveryPanel order={order} />}
           {order.status === 'delivered' && <DeliveredPanel order={order} />}
           {order.status === 'cancelled' && (
@@ -520,8 +523,8 @@ function PaymentPanel({ order, onChange }: { order: PublicOrder; onChange: () =>
               <InstructionText text={p.instructions} />
             </div>
           )}
-          {p.payLink && (
-            <a href={p.payLink} target="_blank" rel="noreferrer" className="btn btn-primary btn-lg od-paylink">
+          {safeHref(p.payLink) && (
+            <a href={safeHref(p.payLink)!} target="_blank" rel="noreferrer" className="btn btn-primary btn-lg od-paylink">
               Open {p.methodName} <Icon name="external" size={16} />
             </a>
           )}

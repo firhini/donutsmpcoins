@@ -30,18 +30,19 @@ function sameItems(a: Quote, b: Quote): boolean {
  * loading, on error, or when the server result is for a different item set.
  */
 export function useServerQuote(req: QuoteRequest | null, fallback: Quote, debounceMs = 350): ServerQuoteState {
-  const [state, setState] = useState<{ quote: Quote | null; loading: boolean; error: string | null; status: number | null }>({
+  const [state, setState] = useState<{ quote: Quote | null; loading: boolean; error: string | null; status: number | null; forKey: string }>({
     quote: null,
     loading: false,
     error: null,
     status: null,
+    forKey: '',
   });
   const [tick, setTick] = useState(0);
   const key = req && req.items.length ? JSON.stringify(req) : '';
 
   useEffect(() => {
     if (!key) {
-      setState({ quote: null, loading: false, error: null, status: null });
+      setState({ quote: null, loading: false, error: null, status: null, forKey: '' });
       return;
     }
     const body = JSON.parse(key) as QuoteRequest;
@@ -51,11 +52,11 @@ export function useServerQuote(req: QuoteRequest | null, fallback: Quote, deboun
     const t = window.setTimeout(async () => {
       try {
         const q = await api<Quote>('/quote', { body, signal: ctrl.signal });
-        if (!cancelled) setState({ quote: q, loading: false, error: null, status: 200 });
+        if (!cancelled) setState({ quote: q, loading: false, error: null, status: 200, forKey: key });
       } catch (err) {
         if (cancelled || (err as Error).name === 'AbortError') return;
         const status = err instanceof ApiClientError ? err.status : 0;
-        setState({ quote: null, loading: false, error: (err as Error).message || 'Could not load live prices.', status });
+        setState({ quote: null, loading: false, error: (err as Error).message || 'Could not load live prices.', status, forKey: key });
       }
     }, debounceMs);
     return () => {
@@ -68,7 +69,8 @@ export function useServerQuote(req: QuoteRequest | null, fallback: Quote, deboun
   const refresh = useCallback(() => setTick((n) => n + 1), []);
 
   return useMemo(() => {
-    const usable = state.quote && sameItems(state.quote, fallback) ? state.quote : null;
+    // a quote is only 'live' when it answers the CURRENT request (codes/username/credit) – not a stale one
+    const usable = state.quote && state.forKey === key && sameItems(state.quote, fallback) ? state.quote : null;
     return {
       quote: usable ?? fallback,
       live: !!usable,
@@ -77,5 +79,5 @@ export function useServerQuote(req: QuoteRequest | null, fallback: Quote, deboun
       unavailable: state.status === 404 || state.status === 0,
       refresh,
     };
-  }, [state, fallback, refresh]);
+  }, [state, fallback, refresh, key]);
 }

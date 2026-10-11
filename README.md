@@ -166,6 +166,11 @@ einfach ausliefern und auf *Delivered* setzen.
 ## 8. Sicherheit & Hinweise
 
 - Preise werden **immer serverseitig** berechnet – der Browser kann keine Preise manipulieren.
+- Guthaben, Gutscheine, Geschenk-Codes, Lagerbestand, Glücksrad-Cooldowns und Rate-Limits werden **atomar** gespeichert
+  (Netlify-Blobs-ETags) – parallele Anfragen können nichts doppelt einlösen.
+- Stornierte/erstattete Bestellungen geben Guthaben, Lagerbestand, Gutschein und Referral-Bonus automatisch zurück;
+  beim Wiedereröffnen wird alles erneut abgezogen.
+- Deploy-Previews und Branch-Deploys benutzen einen eigenen Datenspeicher und können Live-Daten nicht verändern.
 - Glücksrad-Ergebnis, Box-Inhalte und Gutscheine werden serverseitig ausgelost/geprüft, Cooldowns laufen über IP + Gerät.
 - Admin-Login ist rate-limited; Session-Token laufen nach 7 Tagen ab.
 - Der Shop ist nicht mit DonutSMP, Mojang oder Microsoft verbunden. DonutSMP verbietet laut eigenen Regeln Real-Money-Trading –

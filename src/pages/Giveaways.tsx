@@ -71,10 +71,13 @@ function GiveawayCard({ g, entries, username, setUsername, onEntered, onEnded }:
       toast(`You're in! Good luck, ${name}.`, 'gold');
     } catch (error) {
       const ex = error as ApiClientError;
-      if (ex instanceof ApiClientError && (ex.status === 409 || /already/i.test(ex.message))) {
+      if (ex instanceof ApiClientError && ex.code === 'already_entered') {
         onEntered(g.id, name);
         toast('You are already entered in this giveaway.', 'info');
-      } else if (ex instanceof ApiClientError && ex.status === 404) {
+      } else if (ex instanceof ApiClientError && ex.code === 'ended') {
+        setErr('Entries are closed – this giveaway has ended.');
+        onEnded();
+      } else if (ex instanceof ApiClientError && (ex.status === 404 || ex.status === 410)) {
         setErr('This giveaway is no longer open.');
       } else {
         setErr(ex instanceof ApiClientError ? ex.message : 'Could not enter right now – please try again.');

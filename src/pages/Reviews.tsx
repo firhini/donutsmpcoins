@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState, type FormEvent } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import type { PublicOrder, Review, ReviewStats } from '../shared/types';
+import type { PublicOrder, Review, PublicReview, ReviewStats } from '../shared/types';
 import { apiGet, apiPost, ApiClientError } from '../lib/api';
 import { useStore } from '../context/StoreContext';
 import { useToast } from '../context/ToastContext';
@@ -44,7 +44,7 @@ function Avatar({ name, size = 44, className = 'rev-avatar' }: { name: string; s
   return <img className={className} src={avatarUrl(name, 64)} alt="" width={size} height={size} loading="lazy" onError={() => setOk(false)} />;
 }
 
-function ReviewCard({ r }: { r: Review }) {
+function ReviewCard({ r }: { r: PublicReview }) {
   return (
     <article className="card rev-card">
       <div className="rev-head">
@@ -79,7 +79,7 @@ export default function Page() {
   const { toast } = useToast();
   const [params] = useSearchParams();
 
-  const [reviews, setReviews] = useState<Review[] | null>(null);
+  const [reviews, setReviews] = useState<PublicReview[] | null>(null);
   const [stats, setStats] = useState<ReviewStats | null>(null);
   const [limit, setLimit] = useState(FETCH);
   const [shown, setShown] = useState(PAGE);
@@ -97,7 +97,7 @@ export default function Page() {
   const [confetti, setConfetti] = useState(false);
 
   const load = useCallback(async (lim: number) => {
-    const r = await apiGet<{ reviews: Review[]; stats: ReviewStats }>(`/reviews?limit=${lim}`);
+    const r = await apiGet<{ reviews: PublicReview[]; stats: ReviewStats }>(`/reviews?limit=${lim}`);
     const list = Array.isArray(r.reviews) ? r.reviews : [];
     setReviews(list);
     setStats(r.stats ?? null);
@@ -173,7 +173,7 @@ export default function Page() {
     setSubmitErr(null);
     setSubmitting(true);
     try {
-      await apiPost<{ review: Review }>('/reviews', { orderId: check.order.id, rating, comment: text });
+      await apiPost<{ review: PublicReview }>('/reviews', { orderId: check.order.id, rating, comment: text });
       setDone(true);
       setConfetti(true);
       window.setTimeout(() => setConfetti(false), 300);

@@ -13,6 +13,11 @@ export function PayPalButtons({ order, onPaid }: { order: PublicOrder; onPaid: (
   const [state, setState] = useState<'loading' | 'ready' | 'capturing' | 'error'>('loading');
   const [error, setError] = useState<string | null>(null);
   const clientId = config.paypalClientId;
+  // keep callbacks in refs so the Buttons instance is created ONCE per order (the order page re-renders on every poll)
+  const onPaidRef = useRef(onPaid);
+  onPaidRef.current = onPaid;
+  const toastRef = useRef(toast);
+  toastRef.current = toast;
 
   useEffect(() => {
     if (!clientId) return;
@@ -33,14 +38,14 @@ export function PayPalButtons({ order, onPaid }: { order: PublicOrder; onPaid: (
             setState('capturing');
             try {
               await capturePayPalOrder(order.id, data.orderID);
-              toast('Payment received – thank you!', 'success');
-              await onPaid();
+              toastRef.current('Payment received – thank you!', 'success');
+              await onPaidRef.current();
             } catch (err) {
               setError((err as Error).message || 'Capture failed. If you were charged, contact us on Discord with your order ID.');
               setState('error');
             }
           },
-          onCancel: () => toast('PayPal checkout cancelled – your order is still waiting.', 'info'),
+          onCancel: () => toastRef.current('PayPal checkout cancelled – your order is still waiting.', 'info'),
           onError: (err) => {
             setError((err as Error)?.message || 'PayPal reported an error. Please try again.');
             setState('error');
@@ -59,7 +64,7 @@ export function PayPalButtons({ order, onPaid }: { order: PublicOrder; onPaid: (
       cancelled = true;
       void buttons?.close?.();
     };
-  }, [clientId, order.id, onPaid, toast]);
+  }, [clientId, order.id]);
 
   if (!clientId) {
     return (

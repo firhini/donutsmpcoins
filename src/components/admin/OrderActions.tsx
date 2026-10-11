@@ -20,14 +20,14 @@ function actionsFor(status: OrderStatus): Action[] {
     label: 'Cancel',
     icon: 'close',
     cls: 'btn-danger',
-    confirm: { title: 'Cancel this order?', message: 'The customer will see the order as cancelled. Applied store credit is not restored automatically – adjust it under Store credit if needed.', confirmLabel: 'Cancel order' },
+    confirm: { title: 'Cancel this order?', message: 'The customer will see the order as cancelled. Applied store credit, reserved stock, a used coupon and any referral reward are returned automatically.', confirmLabel: 'Cancel order' },
   };
   const refund: Action = {
     status: 'refunded',
     label: 'Refund',
     icon: 'refresh',
     cls: 'btn-danger',
-    confirm: { title: 'Mark as refunded?', message: 'Only do this after you sent the money back. The order is marked refunded for the customer.', confirmLabel: 'Mark refunded' },
+    confirm: { title: 'Mark as refunded?', message: 'Only do this after you sent the money back. The order is marked refunded; applied store credit, stock, coupon and referral reward are returned automatically.', confirmLabel: 'Mark refunded' },
   };
   const reopen: Action = { status: 'awaiting_payment', label: 'Reopen (awaiting payment)', icon: 'clock', cls: 'btn-secondary' };
   switch (status) {

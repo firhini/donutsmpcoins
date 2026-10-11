@@ -273,7 +273,7 @@ describe('coupons & gift codes', () => {
 
     const custom = await apost<{ gift: GiftCode }>('/admin/gifts', { productId: 'money-1m', qty: 10, code: 'youtube 10m' });
     expect(custom.data.gift.code).toBe('YOUTUBE10M');
-    expect(custom.data.gift.maxUses).toBe(1);
+    expect(custom.data.gift.maxUses).toBeUndefined(); // blank = unlimited
     expect(custom.data.gift.expiresAt).toBeUndefined();
 
     expect((await apost('/admin/gifts', { productId: 'ghost', qty: 1 })).status).toBe(400);

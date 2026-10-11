@@ -2,8 +2,10 @@ import type { Order, OrderIndexEntry, OrderStatus, PublicOrder, TimelineEntry } 
 import { kvGet, kvSet, kvUpdate } from './store';
 import { nowIso } from './http';
 import { COLORS, notifyDiscord, siteUrl } from './discord';
-import { addCredit } from './credit';
-import { restoreStock } from './catalog';
+import { addCredit, debitCredit } from './credit';
+import { restoreStock, decrementStock } from './catalog';
+import { consumeCoupon, unconsumeCoupon } from './coupons';
+import { HttpError } from './http';
 import { getSettings } from './settings';
 
 const INDEX_KEY = '_index';
@@ -68,22 +70,50 @@ export function pushTimeline(o: Order, status: TimelineEntry['status'], note?: s
  *  - paid: referral reward to referrer (once), Discord notification
  *  - delivered: Discord notification
  */
+const PAID_LIKE = new Set<OrderStatus>(['paid', 'delivering', 'delivered']);
+class NoTransition extends Error {}
+
 export async function setOrderStatus(o: Order, status: OrderStatus, note?: string): Promise<Order> {
   if (o.status === status) return o;
-  o.status = status;
-  if (status === 'paid') {
-    o.payment.status = 'paid';
-    o.payment.paidAt = o.payment.paidAt ?? nowIso();
+  const from = o.status;
+  const reviving = (from === 'cancelled' || from === 'refunded') && status !== 'cancelled' && status !== 'refunded';
+  if (reviving) await reclaimOrder(o); // throws 409 when credit/stock are no longer available
+
+  // Atomic transition: a concurrent webhook / verify / admin click cannot apply the same
+  // transition twice (and 'paid' can never be re-applied over delivering/delivered).
+  try {
+    await kvUpdate<Order>('orders', o.id, (cur) => {
+      const stored = cur ?? o;
+      if (stored.status === status) throw new NoTransition();
+      if (status === 'paid' && PAID_LIKE.has(stored.status)) throw new NoTransition();
+      o.status = status;
+      if (status === 'paid') {
+        o.payment.status = 'paid';
+        o.payment.paidAt = o.payment.paidAt ?? nowIso();
+      }
+      if (status === 'refunded') o.payment.status = 'refunded';
+      // keep bookkeeping flags that another writer may have set meanwhile
+      o.referralRewarded = o.referralRewarded || stored.referralRewarded;
+      o.referralRewardCents = o.referralRewardCents ?? stored.referralRewardCents;
+      o.reviewed = o.reviewed || stored.reviewed;
+      pushTimeline(o, status, note);
+      o.updatedAt = nowIso();
+      return o;
+    });
+  } catch (err) {
+    if (err instanceof NoTransition) {
+      const fresh = await getOrder(o.id);
+      return fresh ?? o;
+    }
+    throw err;
   }
-  if (status === 'refunded') o.payment.status = 'refunded';
-  pushTimeline(o, status, note);
-  await saveOrder(o);
+  await updateIndex(o);
 
   if (status === 'paid' && o.referralCode && !o.referralRewarded) {
     try {
       const settings = await getSettings();
       if (settings.referral.enabled && settings.referral.referrerPercent > 0 && o.referralCode.toLowerCase() !== o.username.toLowerCase()) {
-        const reward = Math.round((o.totalCents * settings.referral.referrerPercent) / 100);
+        const reward = Math.round(((o.quote?.totalCents ?? o.totalCents) * settings.referral.referrerPercent) / 100);
         if (reward > 0) {
           await addCredit(o.referralCode, reward, `Referral reward (${o.username})`, o.id);
           o.referralRewarded = true;
@@ -150,6 +180,16 @@ export async function releaseOrder(o: Order): Promise<void> {
       console.warn('[orders] stock restore failed', err);
     }
   }
+  if (o.discountCode && o.payment.type !== 'free' && !o.couponRestored) {
+    try {
+      await unconsumeCoupon(o.discountCode);
+      o.couponRestored = true;
+      pushTimeline(o, 'note', `Coupon ${o.discountCode} is usable again`);
+      changed = true;
+    } catch (err) {
+      console.warn('[orders] coupon restore failed', err);
+    }
+  }
   if (o.referralRewarded && o.referralCode && (o.referralRewardCents ?? 0) > 0) {
     try {
       await addCredit(o.referralCode, -(o.referralRewardCents ?? 0), `Referral reward reverted (order ${o.id} ${o.status})`, o.id);
@@ -162,6 +202,48 @@ export async function releaseOrder(o: Order): Promise<void> {
     }
   }
   if (changed) await saveOrder(o);
+}
+
+/**
+ * Re-apply what releaseOrder() gave back when a cancelled/refunded order is
+ * reopened (e.g. the owner marks it paid after all). Throws 409 when the
+ * customer's credit or the stock is no longer available.
+ */
+export async function reclaimOrder(o: Order): Promise<void> {
+  const lines = o.items.map((i) => ({ productId: i.productId, qty: i.qty }));
+  if (o.stockRestored) {
+    await decrementStock(lines); // 409 when sold out meanwhile
+    o.stockRestored = false;
+  }
+  if (o.creditRestored && o.creditAppliedCents > 0) {
+    try {
+      await debitCredit(o.username, o.creditAppliedCents, `Order ${o.id} reopened – credit re-applied`, o.id);
+      o.creditRestored = false;
+    } catch (err) {
+      await restoreStock(lines).catch(() => undefined);
+      o.stockRestored = true;
+      if (err instanceof HttpError) throw new HttpError(409, `Cannot reopen: ${o.username} no longer has the $${(o.creditAppliedCents / 100).toFixed(2)} store credit that was applied to this order.`, 'insufficient_credit');
+      throw err;
+    }
+  }
+  if (o.couponRestored && o.discountCode) {
+    try {
+      await consumeCoupon(o.discountCode, o.username);
+    } catch (err) {
+      console.warn('[orders] coupon could not be re-consumed on reopen', (err as Error).message);
+    }
+    o.couponRestored = false;
+  }
+  pushTimeline(o, 'note', 'Order reopened – credit, stock and coupon re-applied');
+}
+
+/** Save a brand-new order; fails instead of overwriting if the id already exists. */
+export async function saveNewOrder(order: Order): Promise<void> {
+  await kvUpdate<Order>('orders', order.id, (cur) => {
+    if (cur) throw new HttpError(500, 'Order id collision – please try again.', 'id_collision');
+    return order;
+  });
+  await updateIndex(order);
 }
 
 /** Discord ping for a brand-new order. */

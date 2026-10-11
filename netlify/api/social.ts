@@ -6,7 +6,8 @@
  *  GET  /giveaways             live giveaways + the last 5 ended/drawn
  *  POST /giveaways/:id/enter   { username, deviceId } → one entry per player / device
  */
-import type { Review } from '../../src/shared/types';
+import { kvUpdate } from '../lib/store';
+import type { Order, Review } from '../../src/shared/types';
 import type { Route } from '../lib/http';
 import { HttpError, getIp, hashIp, json, readJson, requireString, requireUsername } from '../lib/http';
 import { rateLimit } from '../lib/ratelimit';
@@ -42,7 +43,9 @@ export const routes: Route[] = [
     handler: async ({ url }) => {
       const limit = parseLimit(url.searchParams.get('limit'), 50, 100);
       const [reviews, stats] = await Promise.all([listReviews({ status: 'approved', limit }), getReviewStats()]);
-      return json({ reviews, stats: toPublicStats(stats) }, 200, { 'cache-control': 'public, max-age=30' });
+      // never publish the order id (it is the key to the order page) or the reward code
+      const publicReviews = reviews.map(({ orderId: _o, rewardCode: _r, ...rest }) => rest);
+      return json({ reviews: publicReviews, stats: toPublicStats(stats) }, 200, { 'cache-control': 'public, max-age=30' });
     },
   },
 
@@ -58,14 +61,26 @@ export const routes: Route[] = [
       if (comment.length > COMMENT_MAX) throw new HttpError(400, `Keep it under ${COMMENT_MAX} characters.`, 'validation');
       await rateLimit(`reviews:${hashIp(getIp(req, context))}`, 5, 600);
 
-      const order = await getOrder(orderId);
-      if (!order) throw new HttpError(404, 'Order not found – check the ID (it looks like DC-XXXXXX).', 'not_found');
-      if (order.reviewed) throw new HttpError(409, 'This order has already been reviewed – thank you!', 'already_reviewed');
-      if (order.status !== 'delivered') throw new HttpError(400, 'You can review an order once it has been delivered.', 'not_delivered');
+      const existing = await getOrder(orderId);
+      if (!existing) throw new HttpError(404, 'Order not found – check the ID (it looks like DC-XXXXXX).', 'not_found');
+      if (existing.reviewed) throw new HttpError(409, 'This order has already been reviewed – thank you!', 'already_reviewed');
+      if (existing.status !== 'delivered') throw new HttpError(400, 'You can review an order once it has been delivered.', 'not_delivered');
 
-      const review = await createReview(order, rating, comment);
-      order.reviewed = true;
-      pushTimeline(order, 'note', `Review submitted (${rating}★) – pending approval`);
+      // flip the flag atomically first – parallel submissions cannot create several reviews
+      const order = await kvUpdate<Order>('orders', existing.id, (cur) => {
+        if (!cur || cur.reviewed) throw new HttpError(409, 'This order has already been reviewed – thank you!', 'already_reviewed');
+        if (cur.status !== 'delivered') throw new HttpError(400, 'You can review an order once it has been delivered.', 'not_delivered');
+        cur.reviewed = true;
+        pushTimeline(cur, 'note', `Review submitted (${rating}★) – pending approval`);
+        return cur;
+      });
+      let review;
+      try {
+        review = await createReview(order, rating, comment);
+      } catch (err) {
+        await kvUpdate<Order>('orders', order.id, (cur) => (cur ? { ...cur, reviewed: false } : (cur as unknown as Order))).catch(() => undefined);
+        throw err;
+      }
       await saveOrder(order);
 
       await notifyDiscord({

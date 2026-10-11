@@ -6,7 +6,7 @@
  */
 import { randomInt } from 'node:crypto';
 import type { Giveaway, GiveawayEntry } from '../../src/shared/types';
-import { kvGet, kvList, kvSet, kvUpdate } from './store';
+import { kvDelete, kvGet, kvList, kvSet, kvUpdate } from './store';
 import { uuid } from './ids';
 import { HttpError, nowIso } from './http';
 
@@ -103,13 +103,16 @@ export interface AddEntryInput {
   ipHash?: string;
 }
 
-/** Enter a giveaway. Throws 409 when the player or the device already entered. */
+const MAX_ENTRIES_PER_IP = 3;
+const ipKey = (gwId: string, ipHash: string) => `${gwId}:ip:${ipHash}`;
+
+/**
+ * Enter a giveaway. One entry per username and per device, at most a few per
+ * IP. Every marker is written with an atomic compare-and-swap, so parallel
+ * requests cannot create duplicate entries or inflate the counter.
+ */
 export async function addEntry(g: Giveaway, input: AddEntryInput): Promise<{ entry: GiveawayEntry; giveaway: Giveaway }> {
   if (!isLive(g)) throw new HttpError(409, 'This giveaway has ended – entries are closed.', 'ended');
-  if (await getEntry(g.id, input.username)) throw new HttpError(409, 'You already entered this giveaway – good luck!', 'already_entered');
-  if (input.deviceId && (await deviceEntry(g.id, input.deviceId))) {
-    throw new HttpError(409, 'This device already entered the giveaway with another username.', 'device_entered');
-  }
   const entry: GiveawayEntry = {
     giveawayId: g.id,
     username: input.username.trim(),
@@ -117,8 +120,37 @@ export async function addEntry(g: Giveaway, input: AddEntryInput): Promise<{ ent
     ipHash: input.ipHash,
     deviceId: input.deviceId,
   };
-  await kvSet('giveaway-entries', entryKey(g.id, entry.username), entry);
-  if (input.deviceId) await kvSet('giveaway-entries', deviceKey(g.id, input.deviceId), { username: entry.username });
+  // 1) username marker
+  await kvUpdate<GiveawayEntry>('giveaway-entries', entryKey(g.id, entry.username), (cur) => {
+    if (cur) throw new HttpError(409, 'You already entered this giveaway – good luck!', 'already_entered');
+    return entry;
+  });
+  const rollback = async () => kvDelete('giveaway-entries', entryKey(g.id, entry.username));
+  // 2) device marker
+  if (input.deviceId) {
+    try {
+      await kvUpdate<{ username: string }>('giveaway-entries', deviceKey(g.id, input.deviceId), (cur) => {
+        if (cur) throw new HttpError(409, 'This device already entered the giveaway with another username.', 'device_entered');
+        return { username: entry.username };
+      });
+    } catch (err) {
+      await rollback();
+      throw err;
+    }
+  }
+  // 3) per-IP cap
+  if (input.ipHash) {
+    try {
+      await kvUpdate<{ count: number }>('giveaway-entries', ipKey(g.id, input.ipHash), (cur) => {
+        if ((cur?.count ?? 0) >= MAX_ENTRIES_PER_IP) throw new HttpError(409, `Too many entries from your connection (max ${MAX_ENTRIES_PER_IP} per giveaway).`, 'ip_limit');
+        return { count: (cur?.count ?? 0) + 1 };
+      });
+    } catch (err) {
+      await rollback();
+      if (input.deviceId) await kvDelete('giveaway-entries', deviceKey(g.id, input.deviceId));
+      throw err;
+    }
+  }
   const giveaway = await kvUpdate<Giveaway>('giveaways', key(g.id), (cur) => {
     const base = cur ?? g;
     return { ...base, entriesCount: (base.entriesCount ?? 0) + 1 };
@@ -128,7 +160,7 @@ export async function addEntry(g: Giveaway, input: AddEntryInput): Promise<{ ent
 
 /** Every entry of a giveaway, oldest first. */
 export async function listEntries(gwId: string): Promise<GiveawayEntry[]> {
-  const keys = (await kvList('giveaway-entries', `${gwId}:`)).filter((k) => !k.includes(':dev:'));
+  const keys = (await kvList('giveaway-entries', `${gwId}:`)).filter((k) => !k.includes(':dev:') && !k.includes(':ip:'));
   const out: GiveawayEntry[] = [];
   for (let i = 0; i < keys.length; i += 25) {
     const chunk = await Promise.all(keys.slice(i, i + 25).map((k) => kvGet<GiveawayEntry>('giveaway-entries', k)));

@@ -171,6 +171,7 @@ export const routes: Route[] = [
       if (PAID_STATUSES.has(order.status)) return json({ status: 'COMPLETED', paid: true, order: toPublicOrder(order) });
       if (order.payment.type !== 'paypal') throw new HttpError(400, `This order was placed with ${order.payment.methodName} – it cannot be captured through PayPal Checkout.`, 'wrong_method');
       if (order.status === 'refunded') throw new HttpError(409, 'This order was refunded.', 'refunded');
+      if (order.status === 'cancelled') throw new HttpError(409, 'This order was cancelled. Please place a new order.', 'cancelled');
 
       let po;
       try {
@@ -199,6 +200,12 @@ export const routes: Route[] = [
       order.payment.status = 'pending_review';
       pushTimeline(order, 'payment_pending', `PayPal capture ${pending?.status ?? po.status} – waiting for PayPal to clear it`);
       await saveOrder(order);
+      await notifyDiscord({
+        title: `⏳ PayPal capture ${pending?.status ?? po.status} · ${order.id}`,
+        color: COLORS.gold,
+        url: `${siteUrl()}/admin/orders/${order.id}`,
+        description: `PayPal has not cleared the payment yet (${po.id}). Check your PayPal account and mark the order paid once the money arrives.`,
+      });
       return json({ status: pending?.status ?? po.status, paid: false, order: toPublicOrder(order) });
     },
   },

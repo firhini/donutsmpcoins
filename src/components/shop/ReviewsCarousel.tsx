@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import type { Review, ReviewStats } from '../../shared/types';
+import type { Review, PublicReview, ReviewStats } from '../../shared/types';
 import { apiGet } from '../../lib/api';
 import { useStore } from '../../context/StoreContext';
 import { Icon } from '../ui/Icons';
@@ -44,13 +44,13 @@ function timeAgo(iso: string): string {
 /** Horizontal, snap-scrolling carousel of approved reviews from /api/reviews. */
 export function ReviewsCarousel({ limit = 12 }: { limit?: number }) {
   const { config } = useStore();
-  const [reviews, setReviews] = useState<Review[] | null>(null);
+  const [reviews, setReviews] = useState<PublicReview[] | null>(null);
   const [stats, setStats] = useState<ReviewStats | null>(null);
   const track = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let alive = true;
-    apiGet<{ reviews: Review[]; stats: ReviewStats }>(`/reviews?limit=${limit}`)
+    apiGet<{ reviews: PublicReview[]; stats: ReviewStats }>(`/reviews?limit=${limit}`)
       .then((r) => {
         if (!alive) return;
         setReviews(Array.isArray(r?.reviews) ? r.reviews : []);

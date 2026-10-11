@@ -60,6 +60,8 @@ export interface QuoteOptions {
   /** username (lowercase) for bound coupons */
   username?: string;
   now?: Date;
+  /** free orders (spin/gift/admin) may include products hidden from the shop */
+  allowHidden?: boolean;
 }
 
 /**
@@ -82,7 +84,7 @@ export function computeQuote(products: Product[], items: CartLineInput[], opts: 
 
   for (const it of mergedItems) {
     const p = byId.get(it.productId);
-    if (!p || p.hidden) {
+    if (!p || (p.hidden && !opts.allowHidden)) {
       warnings.push(`Item ${it.productId} is no longer available.`);
       continue;
     }

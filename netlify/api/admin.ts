@@ -213,11 +213,80 @@ function validateSettingsPatch(body: unknown): Partial<SiteSettings> {
   }
   if (patch.reviewRewardPercent !== undefined && ((patch.reviewRewardPercent as number) < 0 || (patch.reviewRewardPercent as number) > 100)) throw new HttpError(400, 'reviewRewardPercent must be 0–100.', 'validation');
   if (Array.isArray(patch.paymentMethods)) {
+    const TYPES = new Set(['manual', 'stripe', 'paypal', 'nowpayments']);
     for (const m of patch.paymentMethods) {
       if (!isObj(m) || typeof m.id !== 'string' || typeof m.name !== 'string' || typeof m.type !== 'string') throw new HttpError(400, 'Every payment method needs id, name and type.', 'validation');
+      if (!TYPES.has(m.type)) throw new HttpError(400, `Payment method "${m.name}" has an unknown type.`, 'validation');
+      if (m.enabled !== undefined && typeof m.enabled !== 'boolean') throw new HttpError(400, `Payment method "${m.name}": enabled must be true/false.`, 'validation');
+      numField(m, 'feePercent', `Payment method "${m.name}" fee`, 0, 100);
+      numField(m, 'minCents', `Payment method "${m.name}" minimum`, 0, 10_000_000, true);
+      numField(m, 'sortOrder', `Payment method "${m.name}" sort order`, -1000, 1000);
+      for (const k of ['description', 'icon', 'instructions', 'handle', 'linkTemplate', 'referenceLabel']) {
+        if (m[k] !== undefined && m[k] !== null && typeof m[k] !== 'string') throw new HttpError(400, `Payment method "${m.name}": ${k} must be text.`, 'validation');
+      }
+      if (typeof m.linkTemplate === 'string' && m.linkTemplate.trim() && !/^https?:\/\//i.test(m.linkTemplate.trim())) {
+        throw new HttpError(400, `Payment method "${m.name}": the pay link must start with https://`, 'validation');
+      }
     }
   }
+  // nested numeric fields – a bad type here would corrupt every quote
+  const sale = patch.sale;
+  if (isObj(sale)) numField(sale, 'percent', 'Sale percent', 0, 90, true);
+  const referral = patch.referral;
+  if (isObj(referral)) {
+    numField(referral, 'friendPercent', 'Referral friend percent', 0, 100, true);
+    numField(referral, 'referrerPercent', 'Referral referrer percent', 0, 100, true);
+  }
+  const welcome = patch.welcomeCoupon;
+  if (isObj(welcome)) {
+    numField(welcome, 'percent', 'Welcome coupon percent', 0, 100, true);
+    if (welcome.code !== undefined && (typeof welcome.code !== 'string' || !/^[A-Z0-9_-]{2,40}$/i.test(welcome.code))) throw new HttpError(400, 'Welcome code: 2–40 letters, numbers, - or _.', 'validation');
+  }
+  if (Array.isArray(patch.spendingTiers)) {
+    for (const t of patch.spendingTiers) {
+      if (!isObj(t)) throw new HttpError(400, 'Every spending tier needs minCents and percent.', 'validation');
+      numField(t, 'minCents', 'Spending tier minimum', 0, 100_000_000, true, true);
+      numField(t, 'percent', 'Spending tier percent', 0, 90, true, true);
+    }
+  }
+  if (Array.isArray(patch.currencies)) {
+    for (const c of patch.currencies) {
+      if (!isObj(c) || typeof c.code !== 'string' || !/^[A-Z]{3}$/.test(c.code) || typeof c.symbol !== 'string') throw new HttpError(400, 'Every currency needs a 3-letter code and a symbol.', 'validation');
+      numField(c, 'rate', `Currency ${c.code} rate`, 0.000001, 1_000_000, true, true);
+    }
+    if (!patch.currencies.some((c) => isObj(c) && c.code === 'USD')) throw new HttpError(400, 'USD must stay in the currency list.', 'validation');
+  }
+  if (isObj(spin) && Array.isArray(spin.prizes)) {
+    for (const p of spin.prizes as Record<string, unknown>[]) {
+      numField(p, 'percent', `Prize "${p.label}" percent`, 1, 100);
+      numField(p, 'qty', `Prize "${p.label}" quantity`, 1, 100_000);
+      numField(p, 'creditCents', `Prize "${p.label}" credit`, 1, 10_000_000);
+      numField(p, 'minOrderCents', `Prize "${p.label}" minimum order`, 0, 10_000_000);
+      numField(p, 'validDays', `Prize "${p.label}" valid days`, 1, 365);
+    }
+  }
+  const stats = patch.stats;
+  if (isObj(stats)) numField(stats, 'ordersOffset', 'Orders offset', 0, 10_000_000, true, true);
+  const ann = patch.announcement;
+  if (isObj(ann) && typeof ann.link === 'string' && ann.link.trim() && !/^(https?:\/\/|\/(?!\/))/i.test(ann.link.trim())) {
+    throw new HttpError(400, 'Announcement link must start with https:// or /', 'validation');
+  }
   return patch as Partial<SiteSettings>;
+}
+
+/** Validate an optional numeric field in place (NaN / strings / out of range → 400). */
+function numField(obj: Record<string, unknown>, k: string, label: string, min: number, max: number, required = false, integer = false): void {
+  const v = obj[k];
+  if (v === undefined || v === null || v === '') {
+    if (required) throw new HttpError(400, `${label} is required.`, 'validation');
+    delete obj[k];
+    return;
+  }
+  const n = typeof v === 'string' && v.trim() !== '' ? Number(v) : v;
+  if (typeof n !== 'number' || !Number.isFinite(n) || n < min || n > max || (integer && !Number.isInteger(n))) {
+    throw new HttpError(400, `${label} must be a number between ${min} and ${max}.`, 'validation');
+  }
+  obj[k] = n;
 }
 
 // ───────────── routes ─────────────
@@ -429,7 +498,7 @@ export const routes: Route[] = [
     const gift = await createGift({
       productId,
       qty: requireInt(body.qty ?? 1, 'Quantity', { min: 1, max: 100_000 }),
-      maxUses: optionalInt(body.maxUses, 'Max uses', { min: 1, max: 1_000_000 }) ?? 1,
+      maxUses: optionalInt(body.maxUses, 'Max uses', { min: 1, max: 1_000_000 }),
       validDays: optionalInt(body.validDays, 'Valid days', { min: 1, max: 3650 }),
       code: optionalString(body.code, 'Code', 40),
       note: optionalString(body.note, 'Note', 300),

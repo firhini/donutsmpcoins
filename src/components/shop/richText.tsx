@@ -1,5 +1,6 @@
 import { Fragment, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { safeHref, isExternal } from '../../lib/url';
 
 /**
  * Tiny inline markup renderer for content strings (FAQ answers, legal copy):
@@ -27,8 +28,11 @@ export function renderRich(text: string, vars: Record<string, string | number | 
     } else {
       const lm = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(tok);
       if (lm) {
-        const [, label, href] = lm;
-        if (/^https?:\/\//.test(href)) {
+        const [, label, rawHref] = lm;
+        const href = safeHref(rawHref);
+        if (!href) {
+          parts.push(<Fragment key={key++}>{label}</Fragment>);
+        } else if (isExternal(href)) {
           parts.push(
             <a key={key++} href={href} target="_blank" rel="noreferrer">
               {label}

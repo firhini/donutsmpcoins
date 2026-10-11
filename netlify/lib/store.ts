@@ -3,7 +3,7 @@
  * - On Netlify (deploys + `netlify dev`): Netlify Blobs.
  * - Local fallback (plain `vite` dev / tests): JSON files under .data/<store>/ .
  */
-import { getStore as getBlobStore } from '@netlify/blobs';
+import { getStore as getBlobStore, getDeployStore } from '@netlify/blobs';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 
@@ -27,24 +27,36 @@ function safeKey(key: string): string {
   return key.replace(/[^a-zA-Z0-9:_\-.@]/g, '_');
 }
 
+/**
+ * Production uses the site-wide store. Deploy previews / branch deploys get a
+ * deploy-scoped store so a preview can never touch live orders, stock or coupons.
+ */
 function blobStore(name: StoreName) {
+  const ctx = process.env.CONTEXT;
+  if (ctx && ctx !== 'production' && ctx !== 'dev') return getDeployStore({ name, consistency: 'strong' });
   return getBlobStore({ name, consistency: 'strong' });
+}
+
+function isMissingEnvError(err: unknown): boolean {
+  const e = err as { name?: string; message?: string } | undefined;
+  return e?.name === 'MissingBlobsEnvironmentError' || /environment has not been configured/i.test(String(e?.message ?? ''));
 }
 
 async function useBlobs(): Promise<boolean> {
   if (blobsAvailable !== null) return blobsAvailable;
+  if (process.env.NETLIFY_BLOBS_CONTEXT) {
+    blobsAvailable = true;
+    return true;
+  }
   try {
     const s = blobStore('misc');
     await s.get('__ping__');
     blobsAvailable = true;
   } catch (err) {
-    const msg = String((err as Error)?.message ?? err);
-    if (/MissingBlobsEnvironment|environment has not been configured|Netlify Blobs/i.test(msg)) {
-      blobsAvailable = false;
-    } else {
-      // network or other transient error – assume blobs exist (we are on Netlify)
-      blobsAvailable = !!process.env.NETLIFY || !!process.env.NETLIFY_BLOBS_CONTEXT;
-    }
+    // Only the explicit "not configured" error means we are running outside Netlify.
+    // Anything else (network blip, 5xx) must NOT silently switch a production
+    // function to the local file fallback – that would lose writes.
+    blobsAvailable = !isMissingEnvError(err);
   }
   if (!blobsAvailable) {
     console.warn('[store] Netlify Blobs not available – using local file fallback in .data/');
@@ -60,7 +72,7 @@ async function filePath(store: StoreName, key: string): Promise<string> {
 
 export async function kvGet<T>(store: StoreName, key: string): Promise<T | null> {
   if (await useBlobs()) {
-    const v = await blobStore(store).get(key, { type: 'json' });
+    const v = await blobStore(store).get(safeKey(key), { type: 'json' });
     return (v as T) ?? null;
   }
   try {
@@ -73,7 +85,7 @@ export async function kvGet<T>(store: StoreName, key: string): Promise<T | null>
 
 export async function kvSet<T>(store: StoreName, key: string, value: T): Promise<void> {
   if (await useBlobs()) {
-    await blobStore(store).setJSON(key, value as unknown as object);
+    await blobStore(store).setJSON(safeKey(key), value as unknown as object);
     return;
   }
   const p = await filePath(store, key);
@@ -84,7 +96,7 @@ export async function kvSet<T>(store: StoreName, key: string, value: T): Promise
 
 export async function kvDelete(store: StoreName, key: string): Promise<void> {
   if (await useBlobs()) {
-    await blobStore(store).delete(key);
+    await blobStore(store).delete(safeKey(key));
     return;
   }
   try {
@@ -97,7 +109,7 @@ export async function kvDelete(store: StoreName, key: string): Promise<void> {
 /** List keys (optionally by prefix). */
 export async function kvList(store: StoreName, prefix?: string): Promise<string[]> {
   if (await useBlobs()) {
-    const { blobs } = await blobStore(store).list(prefix ? { prefix } : undefined);
+    const { blobs } = await blobStore(store).list(prefix ? { prefix: safeKey(prefix) } : undefined);
     return blobs.map((b) => b.key);
   }
   try {
@@ -121,12 +133,13 @@ export async function kvList(store: StoreName, prefix?: string): Promise<string[
 export async function kvUpdate<T>(store: StoreName, key: string, mutate: (current: T | null) => T): Promise<T> {
   if (await useBlobs()) {
     const s = blobStore(store);
+    const k = safeKey(key);
     for (let attempt = 0; attempt < 8; attempt++) {
-      const entry = await s.getWithMetadata(key, { type: 'json' });
+      const entry = await s.getWithMetadata(k, { type: 'json' });
       const current = (entry?.data as T | undefined) ?? null;
       const etag = entry?.etag;
       const next = mutate(current);
-      const res = etag ? await s.setJSON(key, next as unknown as object, { onlyIfMatch: etag }) : await s.setJSON(key, next as unknown as object, { onlyIfNew: true });
+      const res = etag ? await s.setJSON(k, next as unknown as object, { onlyIfMatch: etag }) : await s.setJSON(k, next as unknown as object, { onlyIfNew: true });
       if (res.modified) return next;
       await new Promise((r) => setTimeout(r, 15 + Math.floor(Math.random() * 60) * (attempt + 1)));
     }

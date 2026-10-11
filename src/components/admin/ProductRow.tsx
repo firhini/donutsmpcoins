@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Product } from '../../shared/types';
 import { Icon } from '../ui/Icons';
 import type { ProductPatch } from '../../lib/adminApi';
@@ -64,8 +64,13 @@ export function ProductRow({
   onDelete: () => void;
 }) {
   const [draft, setDraft] = useState<Draft>(() => toDraft(product));
-  useEffect(() => setDraft(toDraft(product)), [product]);
   const dirty = !same(draft, toDraft(product));
+  const dirtyRef = useRef(dirty);
+  dirtyRef.current = dirty;
+  // a background reload (another row was saved) must not wipe this row's unsaved edits
+  useEffect(() => {
+    if (!dirtyRef.current) setDraft(toDraft(product));
+  }, [product]);
   const invalid = draft.priceCents === null || draft.priceCents < 0;
 
   const set = <K extends keyof Draft>(k: K, v: Draft[K]) => setDraft((d) => ({ ...d, [k]: v }));

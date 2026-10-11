@@ -5,13 +5,13 @@
  */
 import type { CartLineInput, Order, OrderItem, PaymentMethodConfig, Product, Quote } from '../../src/shared/types';
 import { computeQuote } from '../../src/shared/pricing';
-import { getCatalog, decrementStock, restoreStock } from './catalog';
+import { getCatalog, getFullCatalog, decrementStock, restoreStock } from './catalog';
 import { getSettings, usablePaymentMethods, renderTemplate } from './settings';
 import { getCoupon, consumeCoupon, unconsumeCoupon, normalizeCode } from './coupons';
 import { listOrderIndex } from './orders';
 import { getCredit, addCredit, debitCredit } from './credit';
 import { rollBox, kitContents } from './boxes';
-import { saveOrder, announceNewOrder } from './orders';
+import { saveNewOrder, announceNewOrder } from './orders';
 import { orderId } from './ids';
 import { HttpError, MC_USERNAME_RE, nowIso } from './http';
 
@@ -39,11 +39,13 @@ export interface ServerQuoteInput {
   referralCode?: string;
   username?: string;
   applyCredit?: boolean;
+  /** free orders (spin / gift / admin) may contain products hidden from the public shop */
+  includeHidden?: boolean;
 }
 
 /** Server-side quote with coupon / referral / credit lookups. */
 export async function serverQuote(input: ServerQuoteInput): Promise<{ quote: Quote; products: Product[] }> {
-  const [catalog, settings] = await Promise.all([getCatalog(), getSettings()]);
+  const [catalog, settings] = await Promise.all([input.includeHidden ? getFullCatalog() : getCatalog(), getSettings()]);
   const username = input.username?.trim();
   let coupon = input.discountCode ? await getCoupon(input.discountCode) : null;
   const welcomeWarnings: string[] = [];
@@ -90,6 +92,7 @@ export async function serverQuote(input: ServerQuoteInput): Promise<{ quote: Quo
     creditAvailableCents,
     applyCredit: !!input.applyCredit,
     username,
+    allowHidden: !!input.includeHidden,
   });
   if (input.referralCode && !referralCode && username && input.referralCode.trim().toLowerCase() === username.toLowerCase()) {
     quote.warnings.push('You cannot refer yourself.');
@@ -151,6 +154,7 @@ export async function buildOrder(input: BuildOrderInput): Promise<Order> {
     referralCode: input.free ? undefined : input.referralCode,
     username,
     applyCredit: input.free ? false : input.applyCredit,
+    includeHidden: !!input.free,
   });
   if (!quote.lines.length) throw new HttpError(400, quote.warnings[0] || 'No purchasable items in cart.', 'validation');
 
@@ -217,7 +221,7 @@ export async function buildOrder(input: BuildOrderInput): Promise<Order> {
     }
     await decrementStock(stockLines);
     stockTaken = true;
-    await saveOrder(order);
+    await saveNewOrder(order);
   } catch (err) {
     if (stockTaken) await restoreStock(stockLines).catch(() => undefined);
     if (couponTaken && quote.couponCode) await unconsumeCoupon(quote.couponCode).catch(() => undefined);

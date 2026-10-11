@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useStore } from '../../context/StoreContext';
 import { useCart } from '../../context/CartContext';
 import { Icon } from '../ui/Icons';
+import { safeHref, isExternal } from '../../lib/url';
 import '../../styles/shop.css';
 
 const NAV: { to: string; label: string; badge?: string }[] = [
@@ -18,7 +19,8 @@ export function AnnouncementBar() {
   const { config } = useStore();
   const a = config.announcement;
   if (!a?.enabled || !a.text) return null;
-  const inner = a.link ? (a.link.startsWith('http') ? <a href={a.link} target="_blank" rel="noreferrer">{a.text}</a> : <Link to={a.link}>{a.text}</Link>) : a.text;
+  const href = safeHref(a.link);
+  const inner = href ? (isExternal(href) ? <a href={href} target="_blank" rel="noreferrer">{a.text}</a> : <Link to={href}>{a.text}</Link>) : a.text;
   return <div className="announce">{inner}</div>;
 }
 

@@ -9,7 +9,7 @@ import type { Coupon, SiteSettings, SpinPrize, SpinResult, SpinStatus } from '..
 import type { Route } from '../lib/http';
 import { HttpError, getIp, hashIp, json, nowIso, readJson, requireString, requireUsername } from '../lib/http';
 import { rateLimit } from '../lib/ratelimit';
-import { kvGet, kvSet } from '../lib/store';
+import { kvGet, kvSet, kvUpdate } from '../lib/store';
 import { getSettings } from '../lib/settings';
 import { createCoupon, getCoupon, normalizeCode, saveCoupon } from '../lib/coupons';
 import { getCredit, addCredit } from '../lib/credit';
@@ -75,13 +75,61 @@ async function cooldown(ipHash: string, deviceId: string | undefined, cooldownHo
   return { canSpin: true };
 }
 
-async function recordSpin(ipHash: string, deviceId: string | undefined, at: Date): Promise<void> {
-  const bump = async (k: string) => {
-    const cur = await kvGet<SpinRecord>('spins', k);
-    await kvSet('spins', k, { lastAt: at.toISOString(), count: (cur?.count ?? 0) + 1 });
-  };
-  await bump(spinIpKey(ipHash));
-  if (deviceId) await bump(spinDeviceKey(deviceId));
+class CooldownActive extends Error {
+  nextSpinAt: string;
+  constructor(nextSpinAt: string) {
+    super('cooldown');
+    this.nextSpinAt = nextSpinAt;
+  }
+}
+
+/**
+ * Consume the spin atomically for the IP and (if given) the device: the
+ * cooldown check and the write are one compare-and-swap per key, so parallel
+ * requests cannot all pass. Returns null on success, else the time of the next spin.
+ */
+async function consumeSpin(ipHash: string, deviceId: string | undefined, cooldownHours: number, at: Date): Promise<string | null> {
+  const windowMs = Math.max(0, cooldownHours) * 3600_000;
+  const claim = (k: string) =>
+    kvUpdate<SpinRecord>('spins', k, (cur) => {
+      const last = cur?.lastAt ? Date.parse(cur.lastAt) : 0;
+      if (last && last + windowMs > at.getTime()) throw new CooldownActive(new Date(last + windowMs).toISOString());
+      return { lastAt: at.toISOString(), count: (cur?.count ?? 0) + 1 };
+    });
+  try {
+    await claim(spinIpKey(ipHash));
+  } catch (err) {
+    if (err instanceof CooldownActive) return err.nextSpinAt;
+    throw err;
+  }
+  if (deviceId) {
+    try {
+      await claim(spinDeviceKey(deviceId));
+    } catch (err) {
+      if (err instanceof CooldownActive) return err.nextSpinAt; // ip record stays consumed – the device already spun today anyway
+      throw err;
+    }
+  }
+  return null;
+}
+
+/** Atomically reserve the weekly free-item slot for a username. Returns days to wait when it is taken. */
+async function claimFreeItemSlot(username: string): Promise<number | null> {
+  try {
+    await kvUpdate<SpinRecord>('spins', freeItemKey(username), (cur) => {
+      const last = cur?.lastAt ? Date.parse(cur.lastAt) : 0;
+      if (last && Date.now() - last < FREE_ITEM_WINDOW_MS) throw new CooldownActive(new Date(last + FREE_ITEM_WINDOW_MS).toISOString());
+      return { lastAt: nowIso(), count: (cur?.count ?? 0) + 1 };
+    });
+    return null;
+  } catch (err) {
+    if (err instanceof CooldownActive) return Math.max(1, Math.ceil((Date.parse(err.nextSpinAt) - Date.now()) / 86400_000));
+    throw err;
+  }
+}
+
+async function releaseFreeItemSlot(username: string): Promise<void> {
+  await kvUpdate<SpinRecord>('spins', freeItemKey(username), (cur) => ({ lastAt: '', count: Math.max(0, (cur?.count ?? 1) - 1) })).catch(() => undefined);
 }
 
 /**
@@ -159,21 +207,19 @@ async function grantPrize(prize: SpinPrize, username: string | undefined, settin
     case 'free_item': {
       if (!username) return downgrade(5, `You hit ${prize.label}, but free items need a Minecraft username.`);
       if (!prize.productId) return downgrade(10, `You hit ${prize.label}, but that prize is not set up right now.`);
-      const recent = await kvGet<SpinRecord>('spins', freeItemKey(username));
-      const last = recent?.lastAt ? Date.parse(recent.lastAt) : 0;
-      if (last && Date.now() - last < FREE_ITEM_WINDOW_MS) {
-        const days = Math.max(1, Math.ceil((last + FREE_ITEM_WINDOW_MS - Date.now()) / 86400_000));
-        return downgrade(5, `You hit ${prize.label}, but ${username} already won a free item this week (next one in ${days} day${days === 1 ? '' : 's'}).`);
+      const wait = await claimFreeItemSlot(username);
+      if (wait !== null) {
+        return downgrade(5, `You hit ${prize.label}, but ${username} already won a free item this week (next one in ${wait} day${wait === 1 ? '' : 's'}).`);
       }
       try {
         const order = await createFreeOrder(username, [{ productId: prize.productId, qty: Math.max(1, Math.floor(prize.qty ?? 1)) }], 'spin', `🎡 Spin wheel prize: ${prize.label}`);
-        await kvSet('spins', freeItemKey(username), { lastAt: nowIso(), count: (recent?.count ?? 0) + 1 });
         return {
           prize: stripWeight(prize),
           orderId: order.id,
           message: `You won ${prize.label}! Free order ${order.id} is on its way – we deliver it to ${username} in-game as soon as we are online.`,
         };
       } catch (err) {
+        await releaseFreeItemSlot(username);
         if (err instanceof HttpError && err.status < 500) {
           console.warn('[spin] free item unavailable, downgrading', err.message);
           return downgrade(10, `You hit ${prize.label}, but it is out of stock right now.`);
@@ -267,14 +313,13 @@ export const routes: Route[] = [
       if (!prizes.length) throw new HttpError(503, 'The wheel has no prizes configured yet.', 'not_configured');
       if (settings.spin.requireUsername && !username) throw new HttpError(400, 'Enter your Minecraft username to win free items', 'username_required');
 
-      const cd = await cooldown(ipHash, deviceId, settings.spin.cooldownHours);
-      if (!cd.canSpin) {
-        return json({ error: 'You already spun – come back when the timer hits zero.', code: 'cooldown', nextSpinAt: cd.nextSpinAt, details: { nextSpinAt: cd.nextSpinAt } }, 429);
-      }
-
-      // the spin is consumed before any prize side effect so a failure can never grant a re-roll
+      // the spin is consumed atomically before any prize side effect: parallel requests
+      // cannot all pass the cooldown, and a failure can never grant a re-roll
       const spunAt = new Date();
-      await recordSpin(ipHash, deviceId, spunAt);
+      const blockedUntil = await consumeSpin(ipHash, deviceId, settings.spin.cooldownHours, spunAt);
+      if (blockedUntil) {
+        return json({ error: 'You already spun – come back when the timer hits zero.', code: 'cooldown', nextSpinAt: blockedUntil, details: { nextSpinAt: blockedUntil } }, 429);
+      }
       const nextSpinAt = new Date(spunAt.getTime() + settings.spin.cooldownHours * 3600_000).toISOString();
 
       const index = weightedIndex(prizes.map((p) => Math.max(0, Number(p.weight) || 0)));

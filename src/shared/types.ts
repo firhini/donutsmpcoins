@@ -244,6 +244,8 @@ export interface Order {
   creditRestored?: boolean;
   /** reserved stock was given back (cancel/refund) */
   stockRestored?: boolean;
+  /** consumed coupon use was given back (cancel/refund) */
+  couponRestored?: boolean;
   source?: 'checkout' | 'redeem' | 'spin' | 'giveaway' | 'admin';
 }
 
@@ -293,6 +295,9 @@ export interface Review {
   rewardCode?: string;
   productNames?: string[];
 }
+
+/** Review as published on the site – never exposes the order id or the reward code. */
+export type PublicReview = Omit<Review, 'orderId' | 'rewardCode'>;
 
 export interface ReviewStats {
   count: number;
