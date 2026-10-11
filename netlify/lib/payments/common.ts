@@ -7,6 +7,7 @@
 import type { Order, OrderPayment } from '../../../src/shared/types';
 import { HttpError } from '../http';
 import { getOrder, pushTimeline, saveOrder, setOrderStatus } from '../orders';
+import { COLORS, notifyDiscord, siteUrl } from '../discord';
 
 /** Statuses that mean "money already arrived" – never charge or mark again. */
 export const PAID_STATUSES = new Set<Order['status']>(['paid', 'delivering', 'delivered']);
@@ -81,8 +82,22 @@ export async function markPaid(order: Order, note: string, extra: Partial<Pick<O
   if (extra.providerId) order.payment.providerId = extra.providerId;
   if (extra.providerUrl) order.payment.providerUrl = extra.providerUrl;
   if (extra.reference) order.payment.reference = extra.reference;
-  const revived = order.status === 'cancelled';
-  await setOrderStatus(order, 'paid', revived ? `${note} (payment arrived after cancellation – please deliver or refund)` : note);
+  if (order.status === 'cancelled') {
+    // Money arrived for an order the customer already cancelled (credit/stock were
+    // returned at cancellation). Do NOT revive it automatically – record the payment
+    // and alert the owner so they can refund or re-open it deliberately.
+    order.payment.status = 'pending_review';
+    pushTimeline(order, 'payment_pending', `${note} – payment arrived AFTER cancellation. Review in the admin: refund it or mark the order paid manually.`);
+    await saveOrder(order);
+    await notifyDiscord({
+      title: `⚠️ Payment for CANCELLED order ${order.id}`,
+      color: COLORS.red,
+      url: `${siteUrl()}/admin/orders/${order.id}`,
+      description: `${order.username} paid $${(order.totalCents / 100).toFixed(2)} via ${order.payment.methodName} after cancelling. Refund or mark as paid manually.`,
+    });
+    return { order, changed: true };
+  }
+  await setOrderStatus(order, 'paid', note);
   return { order, changed: true };
 }
 

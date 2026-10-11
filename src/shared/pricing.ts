@@ -71,7 +71,16 @@ export function computeQuote(products: Product[], items: CartLineInput[], opts: 
   const warnings: string[] = [];
   const lines: QuoteLine[] = [];
 
+  // merge duplicate product lines (sum quantities) so per-product limits apply once
+  const merged = new Map<string, number>();
   for (const it of items) {
+    if (!it || typeof it.productId !== 'string') continue;
+    const q = Number(it.qty);
+    merged.set(it.productId, (merged.get(it.productId) ?? 0) + (Number.isFinite(q) ? q : 0));
+  }
+  const mergedItems: CartLineInput[] = [...merged.entries()].map(([productId, qty]) => ({ productId, qty }));
+
+  for (const it of mergedItems) {
     const p = byId.get(it.productId);
     if (!p || p.hidden) {
       warnings.push(`Item ${it.productId} is no longer available.`);
@@ -101,14 +110,14 @@ export function computeQuote(products: Product[], items: CartLineInput[], opts: 
 
   // 1) site-wide sale
   const salePercent = Math.max(0, Math.min(90, opts.salePercent ?? 0));
-  const saleDiscountCents = Math.round((subtotalCents * salePercent) / 100);
+  let saleDiscountCents = Math.round((subtotalCents * salePercent) / 100);
   let running = subtotalCents - saleDiscountCents;
 
   // 2) spending tier (based on subtotal before coupons)
   const tiers = opts.tiers ?? [];
   const { current, next } = spendingTierFor(subtotalCents, tiers);
   const tierPercent = current?.percent ?? 0;
-  const tierDiscountCents = Math.round((running * tierPercent) / 100);
+  let tierDiscountCents = Math.round((running * tierPercent) / 100);
   running -= tierDiscountCents;
 
   // 3) coupon OR referral (coupon wins)
@@ -146,14 +155,20 @@ export function computeQuote(products: Product[], items: CartLineInput[], opts: 
   }
   running -= couponDiscountCents + referralDiscountCents;
 
-  // cap total discount
+  // cap total discount – trim coupon, then referral, then tier, then sale
   const maxDiscount = Math.round((subtotalCents * MAX_TOTAL_DISCOUNT_PERCENT) / 100);
   const totalDiscount = saleDiscountCents + tierDiscountCents + couponDiscountCents + referralDiscountCents;
   if (totalDiscount > maxDiscount) {
-    const overflow = totalDiscount - maxDiscount;
-    // reduce the coupon/referral part first
-    if (couponDiscountCents >= overflow) couponDiscountCents -= overflow;
-    else if (referralDiscountCents >= overflow) referralDiscountCents -= overflow;
+    let overflow = totalDiscount - maxDiscount;
+    const trim = (v: number) => {
+      const cut = Math.min(v, overflow);
+      overflow -= cut;
+      return v - cut;
+    };
+    couponDiscountCents = trim(couponDiscountCents);
+    referralDiscountCents = trim(referralDiscountCents);
+    tierDiscountCents = trim(tierDiscountCents);
+    saleDiscountCents = trim(saleDiscountCents);
     running = subtotalCents - (saleDiscountCents + tierDiscountCents + couponDiscountCents + referralDiscountCents);
     warnings.push(`Discounts are capped at ${MAX_TOTAL_DISCOUNT_PERCENT}%.`);
   }

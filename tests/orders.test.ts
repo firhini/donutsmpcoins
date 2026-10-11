@@ -274,7 +274,8 @@ describe('POST /orders/:id/cancel', () => {
     const res = await post<{ order: PublicOrder }>(`/orders/${order.id}/cancel`);
     expect(res.status).toBe(200);
     expect(res.data.order.status).toBe('cancelled');
-    expect(res.data.order.timeline[res.data.order.timeline.length - 1]).toMatchObject({ status: 'cancelled', note: 'Cancelled by customer' });
+    expect(res.data.order.timeline.some((t) => t.status === 'cancelled' && t.note === 'Cancelled by customer')).toBe(true);
+    expect(res.data.order.creditRestored).toBe(true);
     const credit = await lib.credit.getCredit('Canceller');
     expect(credit.balanceCents).toBe(500);
     expect(credit.history[0]).toMatchObject({ deltaCents: 500, orderId: order.id });

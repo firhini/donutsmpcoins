@@ -17,7 +17,7 @@ import { createFreeOrder } from '../lib/orderBuilder';
 import { listOrderIndex, toPublicOrder } from '../lib/orders';
 import { weightedIndex } from '../lib/ids';
 import { COLORS, notifyDiscord, siteUrl } from '../lib/discord';
-import { getGift, getRedemption, giftProblem, normalizeGiftCode, recordRedemption } from '../lib/gifts';
+import { claimGift, finalizeClaim, getGift, giftProblem, normalizeGiftCode, rollbackClaim } from '../lib/gifts';
 
 // ───────────── helpers ─────────────
 
@@ -318,21 +318,22 @@ export const routes: Route[] = [
       const username = requireUsername(body.username);
       await rateLimit(`redeem:${hashIp(getIp(req, context))}`, 10, 600);
 
-      const gift = await getGift(code);
-      if (!gift) throw new HttpError(404, 'Unknown gift code – check for typos.', 'not_found');
-      const problem = giftProblem(gift);
+      const existing = await getGift(code);
+      if (!existing) throw new HttpError(404, 'Unknown gift code – check for typos.', 'not_found');
+      const problem = giftProblem(existing);
       if (problem) throw new HttpError(problem.status, problem.message, problem.code);
-      const already = await getRedemption(code, username);
-      if (already) throw new HttpError(409, `You already redeemed this code – it was delivered with order ${already.orderId}.`, 'already_redeemed');
 
+      // claim first (atomic: per-player marker + uses counter), then create the order
+      const gift = await claimGift(code, username);
       let order;
       try {
         order = await createFreeOrder(username, [{ productId: gift.productId, qty: gift.qty }], 'redeem', `🎁 Gift code ${gift.code}`, { ipHash: hashIp(getIp(req, context)) });
       } catch (err) {
+        await rollbackClaim(code, username);
         if (err instanceof HttpError && err.status === 400) throw new HttpError(409, 'The item behind this gift code is currently unavailable – contact us on Discord and we will sort it out.', 'unavailable');
         throw err;
       }
-      await recordRedemption(gift, username, order.id);
+      await finalizeClaim(code, username, order.id);
       return json({ order: toPublicOrder(order) }, 201);
     },
   },

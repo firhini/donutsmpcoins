@@ -5,11 +5,11 @@
  */
 import type { CartLineInput, Order, OrderItem, PaymentMethodConfig, Product, Quote } from '../../src/shared/types';
 import { computeQuote } from '../../src/shared/pricing';
-import { getCatalog, decrementStock } from './catalog';
+import { getCatalog, decrementStock, restoreStock } from './catalog';
 import { getSettings, usablePaymentMethods, renderTemplate } from './settings';
-import { getCoupon, consumeCoupon, normalizeCode } from './coupons';
+import { getCoupon, consumeCoupon, unconsumeCoupon, normalizeCode } from './coupons';
 import { listOrderIndex } from './orders';
-import { getCredit, addCredit } from './credit';
+import { getCredit, addCredit, debitCredit } from './credit';
 import { rollBox, kitContents } from './boxes';
 import { saveOrder, announceNewOrder } from './orders';
 import { orderId } from './ids';
@@ -101,11 +101,11 @@ export async function serverQuote(input: ServerQuoteInput): Promise<{ quote: Quo
   return { quote, products: catalog.products };
 }
 
-/** True when the player already has a paid / delivering / delivered order (welcome code is first-order only). */
+/** True when the player already has an open or completed order (welcome code is first-order only). */
 export async function hasPreviousOrder(username: string): Promise<boolean> {
   const u = username.toLowerCase();
   const idx = await listOrderIndex();
-  return idx.some((e) => e.username.toLowerCase() === u && (e.status === 'paid' || e.status === 'delivering' || e.status === 'delivered'));
+  return idx.some((e) => e.username.toLowerCase() === u && e.status !== 'cancelled' && e.status !== 'refunded');
 }
 
 function buildItems(quote: Quote, products: Product[]): OrderItem[] {
@@ -201,11 +201,29 @@ export async function buildOrder(input: BuildOrderInput): Promise<Order> {
     source: input.source ?? 'checkout',
   };
 
-  // side effects
-  await decrementStock(quote.lines.map((l) => ({ productId: l.productId, qty: l.qty })));
-  if (!input.free && quote.couponCode) await consumeCoupon(quote.couponCode);
-  if (!input.free && quote.creditAppliedCents > 0) await addCredit(username, -quote.creditAppliedCents, 'Applied to order', id);
-  await saveOrder(order);
+  // side effects – each step is atomic; later failures roll earlier steps back
+  const stockLines = quote.lines.map((l) => ({ productId: l.productId, qty: l.qty }));
+  let creditTaken = false;
+  let couponTaken = false;
+  let stockTaken = false;
+  try {
+    if (!input.free && quote.creditAppliedCents > 0) {
+      await debitCredit(username, quote.creditAppliedCents, 'Applied to order', id);
+      creditTaken = true;
+    }
+    if (!input.free && quote.couponCode) {
+      await consumeCoupon(quote.couponCode, username);
+      couponTaken = true;
+    }
+    await decrementStock(stockLines);
+    stockTaken = true;
+    await saveOrder(order);
+  } catch (err) {
+    if (stockTaken) await restoreStock(stockLines).catch(() => undefined);
+    if (couponTaken && quote.couponCode) await unconsumeCoupon(quote.couponCode).catch(() => undefined);
+    if (creditTaken) await addCredit(username, quote.creditAppliedCents, 'Order failed – credit returned', id).catch(() => undefined);
+    throw err;
+  }
   await announceNewOrder(order);
   return order;
 }

@@ -4,7 +4,7 @@
  *   gift:<CODE>              → GiftCode
  *   giftuse:<CODE>:<user>    → GiftRedemption (one redemption per player per code)
  */
-import { kvDelete, kvGet, kvList, kvSet } from './store';
+import { kvDelete, kvGet, kvList, kvSet, kvUpdate } from './store';
 import { randomCode } from './ids';
 import { HttpError, nowIso } from './http';
 import type { GiftCode as SharedGiftCode } from '../../src/shared/types';
@@ -105,12 +105,45 @@ export async function getRedemption(code: string, username: string): Promise<Gif
   return kvGet<GiftRedemption>('misc', useKey(code, username));
 }
 
-/** Count a redemption: bump `uses` and remember who redeemed it. */
+/**
+ * Claim a gift code for a player BEFORE creating the free order. Both steps are
+ * atomic: (1) the per-player redemption marker (rejects a second redemption by
+ * the same player, also under concurrency), (2) the `uses` counter (rejects
+ * exhausted codes). Call `rollbackClaim` if the order could not be created.
+ */
+export async function claimGift(code: string, username: string): Promise<GiftCode> {
+  const user = username.trim().toLowerCase();
+  const marker: GiftRedemption = { code: normalizeGiftCode(code), username: user, orderId: '', at: nowIso() };
+  await kvUpdate<GiftRedemption>('misc', useKey(code, username), (cur) => {
+    if (cur) throw new HttpError(409, `You already redeemed this code${cur.orderId ? ` – it was delivered with order ${cur.orderId}` : ''}.`, 'already_redeemed');
+    return marker;
+  });
+  try {
+    return await kvUpdate<GiftCode>('misc', giftKey(code), (cur) => {
+      if (!cur) throw new HttpError(404, 'Unknown gift code – check for typos.', 'not_found');
+      const problem = giftProblem(cur);
+      if (problem) throw new HttpError(problem.status, problem.message, problem.code);
+      return { ...cur, uses: (cur.uses ?? 0) + 1 };
+    });
+  } catch (err) {
+    await kvDelete('misc', useKey(code, username));
+    throw err;
+  }
+}
+
+/** Attach the created order id to the redemption marker. */
+export async function finalizeClaim(code: string, username: string, orderId: string): Promise<void> {
+  await kvUpdate<GiftRedemption>('misc', useKey(code, username), (cur) => ({ ...(cur ?? { code: normalizeGiftCode(code), username: username.trim().toLowerCase(), at: nowIso() }), orderId }));
+}
+
+/** Undo a claim (order creation failed). */
+export async function rollbackClaim(code: string, username: string): Promise<void> {
+  await kvDelete('misc', useKey(code, username));
+  await kvUpdate<GiftCode>('misc', giftKey(code), (cur) => (cur ? { ...cur, uses: Math.max(0, (cur.uses ?? 0) - 1) } : (cur as unknown as GiftCode))).catch(() => undefined);
+}
+
+/** @deprecated use claimGift/finalizeClaim – kept for the admin listing of redemptions. */
 export async function recordRedemption(gift: GiftCode, username: string, orderId: string): Promise<GiftCode> {
-  const fresh = (await getGift(gift.code)) ?? gift;
-  fresh.uses = (fresh.uses ?? 0) + 1;
-  await saveGift(fresh);
-  const redemption: GiftRedemption = { code: normalizeGiftCode(gift.code), username: username.trim().toLowerCase(), orderId, at: nowIso() };
-  await kvSet('misc', useKey(gift.code, username), redemption);
-  return fresh;
+  await finalizeClaim(gift.code, username, orderId);
+  return (await getGift(gift.code)) ?? gift;
 }

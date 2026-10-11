@@ -1,7 +1,7 @@
 import type { Coupon, CouponSource } from '../../src/shared/types';
-import { kvGet, kvSet, kvList, kvDelete } from './store';
+import { kvGet, kvSet, kvList, kvDelete, kvUpdate } from './store';
 import { couponCode } from './ids';
-import { nowIso } from './http';
+import { HttpError, nowIso } from './http';
 
 export function normalizeCode(code: string): string {
   return code.trim().toUpperCase().replace(/\s+/g, '');
@@ -75,10 +75,27 @@ export async function createCoupon(input: CreateCouponInput): Promise<Coupon> {
   return c;
 }
 
-/** Increment usage after a successful order creation. */
-export async function consumeCoupon(code: string): Promise<void> {
-  const c = await getCoupon(code);
-  if (!c) return;
-  c.uses += 1;
-  await saveCoupon(c);
+/**
+ * Consume one use of a coupon atomically. Throws 409 when the coupon is no
+ * longer usable at write time (so N concurrent orders cannot all use a
+ * single-use code). Returns the updated coupon, or null for unknown codes.
+ */
+export async function consumeCoupon(code: string, username?: string): Promise<Coupon | null> {
+  const key = normalizeCode(code);
+  if (!key || !(await kvGet<Coupon>('coupons', key))) return null;
+  return kvUpdate<Coupon>('coupons', key, (cur) => {
+    if (!cur) throw new HttpError(409, 'This code is no longer available.', 'coupon_gone');
+    if (!cur.active) throw new HttpError(409, 'This code is no longer active.', 'coupon_inactive');
+    if (cur.expiresAt && new Date(cur.expiresAt).getTime() < Date.now()) throw new HttpError(409, 'This code has expired.', 'coupon_expired');
+    if (cur.maxUses !== undefined && cur.uses >= cur.maxUses) throw new HttpError(409, 'This code has already been used.', 'coupon_used');
+    if (cur.boundUsername && username && cur.boundUsername !== username.toLowerCase()) throw new HttpError(409, 'This code belongs to a different Minecraft account.', 'coupon_bound');
+    return { ...cur, uses: cur.uses + 1 };
+  });
+}
+
+/** Give a use back (order creation failed after the coupon was consumed). */
+export async function unconsumeCoupon(code: string): Promise<void> {
+  const key = normalizeCode(code);
+  if (!key || !(await kvGet<Coupon>('coupons', key))) return;
+  await kvUpdate<Coupon>('coupons', key, (cur) => (cur ? { ...cur, uses: Math.max(0, cur.uses - 1) } : (cur as unknown as Coupon)));
 }

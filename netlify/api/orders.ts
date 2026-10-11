@@ -202,9 +202,6 @@ export const routes: Route[] = [
         throw new HttpError(409, 'You already reported a payment for this order – please contact us on Discord so nothing gets lost.', 'pending_review');
       }
 
-      if (order.creditAppliedCents > 0) {
-        await addCredit(order.username, order.creditAppliedCents, 'Order cancelled – credit returned', order.id);
-      }
       await expireStripeSession(order);
       await setOrderStatus(order, 'cancelled', 'Cancelled by customer');
       return json({ order: toPublicOrder(order) });

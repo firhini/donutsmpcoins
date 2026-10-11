@@ -113,12 +113,45 @@ export async function kvList(store: StoreName, prefix?: string): Promise<string[
 }
 
 /**
- * Read-modify-write helper. Blobs have no transactions; this is best-effort
- * (fine for a small shop). `mutate` receives the current value (or null).
+ * Atomic read-modify-write with optimistic concurrency.
+ * - Blobs: uses ETags (`onlyIfMatch` / `onlyIfNew`) and retries on conflict.
+ * - File fallback: serialises through an exclusive lock file.
+ * `mutate` may throw to abort (nothing is written then). Returns the stored value.
  */
 export async function kvUpdate<T>(store: StoreName, key: string, mutate: (current: T | null) => T): Promise<T> {
-  const current = await kvGet<T>(store, key);
-  const next = mutate(current);
-  await kvSet(store, key, next);
-  return next;
+  if (await useBlobs()) {
+    const s = blobStore(store);
+    for (let attempt = 0; attempt < 8; attempt++) {
+      const entry = await s.getWithMetadata(key, { type: 'json' });
+      const current = (entry?.data as T | undefined) ?? null;
+      const etag = entry?.etag;
+      const next = mutate(current);
+      const res = etag ? await s.setJSON(key, next as unknown as object, { onlyIfMatch: etag }) : await s.setJSON(key, next as unknown as object, { onlyIfNew: true });
+      if (res.modified) return next;
+      await new Promise((r) => setTimeout(r, 15 + Math.floor(Math.random() * 60) * (attempt + 1)));
+    }
+    throw new Error(`[store] concurrent update conflict on ${store}/${key}`);
+  }
+  // local file fallback: exclusive lock file
+  const p = await filePath(store, key);
+  const lock = `${p}.lock`;
+  let handle: fs.FileHandle | null = null;
+  for (let attempt = 0; attempt < 200 && !handle; attempt++) {
+    try {
+      handle = await fs.open(lock, 'wx');
+    } catch {
+      await new Promise((r) => setTimeout(r, 5));
+    }
+  }
+  try {
+    const current = await kvGet<T>(store, key);
+    const next = mutate(current);
+    await kvSet(store, key, next);
+    return next;
+  } finally {
+    if (handle) {
+      await handle.close();
+      await fs.unlink(lock).catch(() => undefined);
+    }
+  }
 }

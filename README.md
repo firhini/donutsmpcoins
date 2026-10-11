@@ -172,3 +172,27 @@ einfach ausliefern und auf *Delivered* setzen.
   das Risiko trägt der Spieler; das steht so auch in den AGB-/FAQ-Texten der Seite.
 - Bei manuellen Zahlungsarten gibt es für dich **keinen Käuferschutz** in beide Richtungen – bestätige erst nach
   tatsächlichem Zahlungseingang.
+
+---
+
+## 9. Checkliste nach dem ersten Deploy
+
+1. `/admin` → Einstellungen → **Store**: Discord-Invite, Server-IP, Support-E-Mail.
+2. **Zahlungsarten**: PayPal-Handle / Wallet-Adressen eintragen, Platzhalter-Methoden deaktivieren, die du nicht nutzt.
+3. **Ankündigungsleiste** anpassen (z. B. „Glücksrad – jeden Tag Gratis-Coins“).
+4. Testbestellung machen (eigener Minecraft-Name, 1M Money) → Discord-Ping prüfen → im Admin auf *Paid* und *Delivered* setzen.
+5. Einmal das Glücksrad drehen und prüfen, dass der Gutschein im Checkout funktioniert.
+6. Optional: `SITE_URL` in Netlify auf deine echte Domain setzen (wird für Links in Discord, Zahlungs-Redirects und das Vorschaubild benutzt).
+
+## 10. Troubleshooting
+
+| Problem | Lösung |
+|---|---|
+| `/admin` sagt „Admin is not configured“ | `ADMIN_PASSWORD` in Netlify setzen und neu deployen |
+| Keine Discord-Nachrichten | `DISCORD_WEBHOOK_URL` prüfen (Webhook muss im richtigen Kanal angelegt sein) |
+| Bestellungen verschwinden nach Redeploy | Nur lokal (`.data/`). Auf Netlify liegen Daten dauerhaft in Blobs |
+| Minecraft-Name wird nicht bestätigt | Mojang-API kurz nicht erreichbar – Bestellung geht trotzdem („unverified“) |
+| Stripe-Methode erscheint nicht im Checkout | Methode im Admin aktiviert **und** `STRIPE_SECRET_KEY` gesetzt? Beides nötig |
+| Glücksrad sagt „Try again tomorrow“ obwohl neu | Cooldown läuft pro IP **und** Gerät (24 h) – im Admin unter *Spin* änderbar |
+
+Tests: `npm test` · API-Smoke-Test gegen einen laufenden Dev-Server: `BASE=http://localhost:5173 ADMIN_PASSWORD=… node scripts/smoke-api.mjs` · Screenshots aller Seiten: `node scripts/screenshot-all.mjs`.

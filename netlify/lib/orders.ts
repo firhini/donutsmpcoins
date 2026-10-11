@@ -3,6 +3,7 @@ import { kvGet, kvSet, kvUpdate } from './store';
 import { nowIso } from './http';
 import { COLORS, notifyDiscord, siteUrl } from './discord';
 import { addCredit } from './credit';
+import { restoreStock } from './catalog';
 import { getSettings } from './settings';
 
 const INDEX_KEY = '_index';
@@ -86,12 +87,17 @@ export async function setOrderStatus(o: Order, status: OrderStatus, note?: strin
         if (reward > 0) {
           await addCredit(o.referralCode, reward, `Referral reward (${o.username})`, o.id);
           o.referralRewarded = true;
+          o.referralRewardCents = reward;
           await saveOrder(o);
         }
       }
     } catch (err) {
       console.warn('[orders] referral reward failed', err);
     }
+  }
+
+  if (status === 'cancelled' || status === 'refunded') {
+    await releaseOrder(o);
   }
 
   const label: Record<OrderStatus, string> = {
@@ -116,6 +122,46 @@ export async function setOrderStatus(o: Order, status: OrderStatus, note?: strin
     });
   }
   return o;
+}
+
+/**
+ * Give everything back that an order reserved or granted: applied store
+ * credit, reserved stock and the referrer's reward. Each part runs once
+ * (flags on the order) so repeated cancel/refund transitions are harmless.
+ */
+export async function releaseOrder(o: Order): Promise<void> {
+  let changed = false;
+  if (o.creditAppliedCents > 0 && !o.creditRestored) {
+    try {
+      await addCredit(o.username, o.creditAppliedCents, `Order ${o.status} – credit returned`, o.id);
+      o.creditRestored = true;
+      pushTimeline(o, 'note', `$${(o.creditAppliedCents / 100).toFixed(2)} store credit returned to ${o.username}`);
+      changed = true;
+    } catch (err) {
+      console.warn('[orders] credit restore failed', err);
+    }
+  }
+  if (!o.stockRestored) {
+    try {
+      await restoreStock(o.items.map((i) => ({ productId: i.productId, qty: i.qty })));
+      o.stockRestored = true;
+      changed = true;
+    } catch (err) {
+      console.warn('[orders] stock restore failed', err);
+    }
+  }
+  if (o.referralRewarded && o.referralCode && (o.referralRewardCents ?? 0) > 0) {
+    try {
+      await addCredit(o.referralCode, -(o.referralRewardCents ?? 0), `Referral reward reverted (order ${o.id} ${o.status})`, o.id);
+      pushTimeline(o, 'note', `Referral reward of $${((o.referralRewardCents ?? 0) / 100).toFixed(2)} reverted from ${o.referralCode}`);
+      o.referralRewarded = false;
+      o.referralRewardCents = 0;
+      changed = true;
+    } catch (err) {
+      console.warn('[orders] referral revert failed', err);
+    }
+  }
+  if (changed) await saveOrder(o);
 }
 
 /** Discord ping for a brand-new order. */

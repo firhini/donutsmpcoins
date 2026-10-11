@@ -238,6 +238,12 @@ export interface Order {
   reviewed?: boolean;
   /** store-credit reward already granted to referrer */
   referralRewarded?: boolean;
+  /** amount granted to the referrer (reverted on refund/cancel) */
+  referralRewardCents?: number;
+  /** applied store credit was returned (cancel/refund) */
+  creditRestored?: boolean;
+  /** reserved stock was given back (cancel/refund) */
+  stockRestored?: boolean;
   source?: 'checkout' | 'redeem' | 'spin' | 'giveaway' | 'admin';
 }
 

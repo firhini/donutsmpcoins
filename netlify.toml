@@ -19,7 +19,7 @@
 # API: single catch-all function (netlify/functions/api.ts) that routes internally.
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/api"
+  to = "/.netlify/functions/api/:splat"
   status = 200
   force = true
 
