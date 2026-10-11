@@ -74,7 +74,7 @@ docs/           ARCHITECTURE.md (API-Vertrag), ART.md
 npm install
 cp .env.example .env     # ADMIN_PASSWORD setzen!
 npm run dev:vite         # http://localhost:5173  (API inklusive, Daten in .data/)
-# oder mit Netlify-CLI (echte Blobs-Sandbox):
+# oder mit Netlify-CLI (echte Blobs-Sandbox, lädt die CLI beim ersten Mal per npx):
 npm run dev              # http://localhost:8888
 ```
 

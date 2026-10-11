@@ -7,7 +7,8 @@ import type { CartLineInput, Order, OrderItem, PaymentMethodConfig, Product, Quo
 import { computeQuote } from '../../src/shared/pricing';
 import { getCatalog, decrementStock } from './catalog';
 import { getSettings, usablePaymentMethods, renderTemplate } from './settings';
-import { getCoupon, consumeCoupon } from './coupons';
+import { getCoupon, consumeCoupon, normalizeCode } from './coupons';
+import { listOrderIndex } from './orders';
 import { getCredit, addCredit } from './credit';
 import { rollBox, kitContents } from './boxes';
 import { saveOrder, announceNewOrder } from './orders';
@@ -44,7 +45,25 @@ export interface ServerQuoteInput {
 export async function serverQuote(input: ServerQuoteInput): Promise<{ quote: Quote; products: Product[] }> {
   const [catalog, settings] = await Promise.all([getCatalog(), getSettings()]);
   const username = input.username?.trim();
-  const coupon = input.discountCode ? await getCoupon(input.discountCode) : null;
+  let coupon = input.discountCode ? await getCoupon(input.discountCode) : null;
+  const welcomeWarnings: string[] = [];
+  if (input.discountCode && settings.welcomeCoupon.enabled && normalizeCode(input.discountCode) === normalizeCode(settings.welcomeCoupon.code)) {
+    // The advertised welcome code is virtual (no stored record needed) and only valid for a player's first order.
+    if (username && (await hasPreviousOrder(username))) {
+      coupon = null;
+      welcomeWarnings.push('The welcome code is only valid on your first order.');
+    } else if (!coupon) {
+      coupon = {
+        code: normalizeCode(settings.welcomeCoupon.code),
+        type: 'percent',
+        value: settings.welcomeCoupon.percent,
+        uses: 0,
+        source: 'welcome',
+        active: true,
+        createdAt: '',
+      };
+    }
+  }
 
   let referralPercent = 0;
   let referralCode: string | undefined;
@@ -75,7 +94,18 @@ export async function serverQuote(input: ServerQuoteInput): Promise<{ quote: Quo
   if (input.referralCode && !referralCode && username && input.referralCode.trim().toLowerCase() === username.toLowerCase()) {
     quote.warnings.push('You cannot refer yourself.');
   }
+  if (welcomeWarnings.length) {
+    quote.warnings = quote.warnings.filter((w) => w !== 'Unknown discount code.');
+    quote.warnings.push(...welcomeWarnings);
+  }
   return { quote, products: catalog.products };
+}
+
+/** True when the player already has a paid / delivering / delivered order (welcome code is first-order only). */
+export async function hasPreviousOrder(username: string): Promise<boolean> {
+  const u = username.toLowerCase();
+  const idx = await listOrderIndex();
+  return idx.some((e) => e.username.toLowerCase() === u && (e.status === 'paid' || e.status === 'delivering' || e.status === 'delivered'));
 }
 
 function buildItems(quote: Quote, products: Product[]): OrderItem[] {
@@ -137,7 +167,7 @@ export async function buildOrder(input: BuildOrderInput): Promise<Order> {
   const id = orderId();
   const now = nowIso();
   const totalStr = `$${(totalCents / 100).toFixed(2)}`;
-  const vars = { orderId: id, total: totalStr, username, handle: method?.handle ?? '' };
+  const vars = { orderId: id, total: totalStr, amount: (totalCents / 100).toFixed(2), username, handle: method?.handle ?? '' };
 
   const order: Order = {
     id,
@@ -151,9 +181,9 @@ export async function buildOrder(input: BuildOrderInput): Promise<Order> {
     displayCurrency: input.displayCurrency,
     discountCode: quote.couponCode,
     referralCode: quote.referralCode,
-    creditAppliedCents: isFree ? 0 : quote.creditAppliedCents,
+    creditAppliedCents: input.free ? 0 : quote.creditAppliedCents,
     payment: isFree
-      ? { methodId: 'free', methodName: input.freeReason ?? 'Free', type: 'free', status: 'paid', paidAt: now }
+      ? { methodId: 'free', methodName: input.freeReason ?? (quote.creditAppliedCents > 0 ? 'Store credit' : 'Free'), type: 'free', status: 'paid', paidAt: now }
       : {
           methodId: method!.id,
           methodName: method!.name,
@@ -161,9 +191,10 @@ export async function buildOrder(input: BuildOrderInput): Promise<Order> {
           status: 'unpaid',
           instructions: renderTemplate(method!.instructions, vars),
           payLink: renderTemplate(method!.linkTemplate, vars),
+          handle: method!.type === 'manual' ? method!.handle : undefined,
         },
     status: isFree ? 'paid' : 'awaiting_payment',
-    timeline: [{ at: now, status: isFree ? 'paid' : 'awaiting_payment', note: isFree ? input.freeReason ?? 'Free order' : `Order placed · ${method!.name}` }],
+    timeline: [{ at: now, status: isFree ? 'paid' : 'awaiting_payment', note: isFree ? input.freeReason ?? (quote.creditAppliedCents > 0 ? 'Paid with store credit' : 'Free order') : `Order placed · ${method!.name}` }],
     customerNote: input.customerNote?.trim().slice(0, 500) || undefined,
     ipHash: input.ipHash,
     deviceId: input.deviceId,
@@ -172,8 +203,8 @@ export async function buildOrder(input: BuildOrderInput): Promise<Order> {
 
   // side effects
   await decrementStock(quote.lines.map((l) => ({ productId: l.productId, qty: l.qty })));
-  if (!isFree && quote.couponCode) await consumeCoupon(quote.couponCode);
-  if (!isFree && quote.creditAppliedCents > 0) await addCredit(username, -quote.creditAppliedCents, 'Applied to order', id);
+  if (!input.free && quote.couponCode) await consumeCoupon(quote.couponCode);
+  if (!input.free && quote.creditAppliedCents > 0) await addCredit(username, -quote.creditAppliedCents, 'Applied to order', id);
   await saveOrder(order);
   await announceNewOrder(order);
   return order;

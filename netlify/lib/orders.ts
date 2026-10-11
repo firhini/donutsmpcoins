@@ -30,6 +30,7 @@ export function toIndexEntry(o: Order): OrderIndexEntry {
     status: o.status,
     paymentStatus: o.payment.status,
     methodId: o.payment.methodId,
+    referralCode: o.referralCode,
     itemsSummary: o.items.map((i) => `${i.qty}× ${i.name}`).join(', ').slice(0, 140),
   };
 }

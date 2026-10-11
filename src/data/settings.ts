@@ -26,7 +26,7 @@ export const defaultSettings: SiteSettings = {
       description: 'Send the total to our PayPal. Friends & Family = no fees.',
       icon: 'paypal',
       handle: 'YourPayPalName',
-      linkTemplate: 'https://paypal.me/{{handle}}/{{total}}USD',
+      linkTemplate: 'https://paypal.me/{{handle}}/{{amount}}USD',
       instructions:
         'Send **{{total}}** to **paypal.me/{{handle}}** (Friends & Family). Put your order ID **{{orderId}}** in the note. Then paste the transaction ID or the e-mail you paid from below – we confirm within minutes.',
       referenceLabel: 'PayPal transaction ID or e-mail',

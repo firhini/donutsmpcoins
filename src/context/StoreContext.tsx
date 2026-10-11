@@ -33,6 +33,8 @@ const fallbackConfig: PublicConfig = {
   spendingTiers: defaultSettings.spendingTiers,
   paymentMethods: [],
   spinEnabled: defaultSettings.spin.enabled,
+  spinRequireUsername: defaultSettings.spin.requireUsername,
+  spinCooldownHours: defaultSettings.spin.cooldownHours,
   referral: defaultSettings.referral,
   reviewRewardPercent: defaultSettings.reviewRewardPercent,
   welcomeCoupon: defaultSettings.welcomeCoupon,

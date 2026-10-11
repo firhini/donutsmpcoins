@@ -12,7 +12,10 @@ export interface CartLine extends CartLineInput {
 interface CartApi {
   items: CartLineInput[];
   lines: CartLine[];
+  /** number of distinct lines (badge) */
   count: number;
+  /** sum of quantities */
+  totalQty: number;
   add: (productId: string, qty?: number, opts?: { silent?: boolean; open?: boolean }) => void;
   setQty: (productId: string, qty: number) => void;
   remove: (productId: string) => void;
@@ -118,7 +121,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     () => ({
       items,
       lines,
-      count: lines.reduce((s, l) => s + l.qty, 0),
+      count: lines.length,
+      totalQty: lines.reduce((s, l) => s + l.qty, 0),
       add,
       setQty,
       remove,

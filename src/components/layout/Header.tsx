@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useStore } from '../../context/StoreContext';
 import { useCart } from '../../context/CartContext';
 import { Icon } from '../ui/Icons';
+import '../../styles/shop.css';
 
 const NAV: { to: string; label: string; badge?: string }[] = [
   { to: '/shop', label: 'Shop' },
@@ -23,15 +24,24 @@ export function AnnouncementBar() {
 
 export function Header() {
   const { config, currency, setCurrency } = useStore();
-  const { count, toggle } = useCart();
+  const { lines, toggle } = useCart();
+  // distinct lines, not summed quantity (a 250M money line would otherwise read "99+")
+  const count = lines.length;
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const loc = useLocation();
   useEffect(() => setOpen(false), [loc.pathname]);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <>
       <AnnouncementBar />
-      <header className="header">
+      <header className={`header ${scrolled ? 'scrolled' : ''}`}>
         <div className="container header-inner">
           <button className="btn btn-ghost btn-icon only-mobile" aria-label="Menu" onClick={() => setOpen((o) => !o)}>
             <Icon name={open ? 'close' : 'menu'} size={22} />

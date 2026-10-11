@@ -204,6 +204,8 @@ export interface OrderPayment {
   /** rendered instructions (manual methods) */
   instructions?: string;
   payLink?: string;
+  /** manual methods: the pay-to handle / wallet address / e-mail (copyable in the UI) */
+  handle?: string;
 }
 
 export interface TimelineEntry {
@@ -254,6 +256,21 @@ export interface OrderIndexEntry {
   paymentStatus: PaymentStatus;
   methodId: string;
   itemsSummary: string;
+  referralCode?: string;
+}
+
+// ───────────────────────── Gift codes ─────────────────────────
+
+/** Admin-created code that a player redeems for a free item (creates a free order). */
+export interface GiftCode {
+  code: string;
+  productId: string;
+  qty: number;
+  uses: number;
+  maxUses?: number;
+  expiresAt?: string;
+  note?: string;
+  createdAt?: string;
 }
 
 // ───────────────────────── Reviews ─────────────────────────
@@ -367,11 +384,11 @@ export interface PaymentMethodConfig {
   description?: string;
   /** icon key for the UI: 'paypal' | 'card' | 'bitcoin' | 'ethereum' | 'litecoin' | 'tether' | 'bank' | 'revolut' | 'giftcard' | 'generic' */
   icon?: string;
-  /** manual: instructions shown after order creation. Placeholders: {{orderId}} {{total}} {{username}} {{handle}} */
+  /** manual: instructions shown after order creation. Placeholders: {{orderId}} {{total}} ($8.50) {{amount}} (8.50) {{username}} {{handle}} */
   instructions?: string;
   /** manual: your handle / address / IBAN / email */
   handle?: string;
-  /** manual: optional pay link template. Placeholders: {{handle}} {{total}} {{orderId}} */
+  /** manual: optional pay link template. Placeholders: {{handle}} {{amount}} (e.g. 8.50) {{total}} (e.g. $8.50) {{orderId}} */
   linkTemplate?: string;
   /** label for the reference the customer sends back ("Transaction ID", "PayPal e-mail") */
   referenceLabel?: string;
@@ -428,6 +445,8 @@ export interface PublicConfig {
   spendingTiers: SpendingTier[];
   paymentMethods: Pick<PaymentMethodConfig, 'id' | 'type' | 'name' | 'description' | 'icon' | 'feePercent' | 'minCents' | 'sortOrder' | 'referenceLabel'>[];
   spinEnabled: boolean;
+  spinRequireUsername: boolean;
+  spinCooldownHours: number;
   referral: SiteSettings['referral'];
   reviewRewardPercent: number;
   welcomeCoupon: SiteSettings['welcomeCoupon'];

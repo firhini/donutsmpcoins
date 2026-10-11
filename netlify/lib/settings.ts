@@ -21,14 +21,20 @@ function deepMerge<T>(base: T, patch: Partial<T> | null | undefined): T {
 /** Merged settings: defaults ⟵ admin overrides stored in Blobs. */
 export async function getSettings(): Promise<SiteSettings> {
   const stored = await kvGet<Partial<SiteSettings>>('settings', KEY);
-  return deepMerge(defaultSettings, stored);
+  return normalize(deepMerge(defaultSettings, stored));
+}
+
+/** Empty strings sent by the admin UI to clear optional dates become undefined. */
+function normalize(s: SiteSettings): SiteSettings {
+  if (s.sale && (s.sale.endsAt as unknown) === '') s.sale = { ...s.sale, endsAt: undefined };
+  return s;
 }
 
 export async function saveSettings(patch: Partial<SiteSettings>): Promise<SiteSettings> {
   const stored = (await kvGet<Partial<SiteSettings>>('settings', KEY)) ?? {};
   const next = deepMerge(stored as SiteSettings, patch);
   await kvSet('settings', KEY, next);
-  return deepMerge(defaultSettings, next);
+  return normalize(deepMerge(defaultSettings, next));
 }
 
 export function integrations() {
@@ -70,6 +76,8 @@ export function toPublicConfig(settings: SiteSettings): PublicConfig {
       referenceLabel: m.referenceLabel,
     })),
     spinEnabled: settings.spin.enabled,
+    spinRequireUsername: settings.spin.requireUsername,
+    spinCooldownHours: settings.spin.cooldownHours,
     referral: settings.referral,
     reviewRewardPercent: settings.reviewRewardPercent,
     welcomeCoupon: settings.welcomeCoupon,
