@@ -137,6 +137,31 @@
   status = 200
 
 [[redirects]]
+  from = "/donutsmp-mystery-boxes"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/donutsmp-elytra"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/donutsmp-skeleton-spawner"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/donutsmp-money-prices"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/donutsmp-netherite"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
   from = "/terms"
   to = "/index.html"
   status = 200

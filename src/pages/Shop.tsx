@@ -2,7 +2,9 @@ import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useStore } from '../context/StoreContext';
 import { Seo } from '../components/ui/Seo';
-import { breadcrumbSchema, collectionSchema } from '../seo/schema';
+import { breadcrumbSchema, collectionSchema, faqSchema } from '../seo/schema';
+import { copyFor } from '../data/categoryCopy';
+import { Accordion } from '../components/shop/Accordion';
 import { Icon } from '../components/ui/Icons';
 import { CategoryHotbar, type HotbarValue } from '../components/shop/CategoryHotbar';
 import { ProductGrid } from '../components/shop/ProductGrid';
@@ -47,16 +49,18 @@ export default function Shop() {
   const title = category ? category.name : 'Shop';
   const tagline = category ? category.tagline : `Everything we sell on ${config.serverName} – money, spawners, mystery boxes, gear and bundles.`;
   const landing = category ? LANDING[category.id] : undefined;
+  const copy = copyFor(value);
 
   return (
     <div className="container page">
       <Seo
-        title={`${title} · ${config.storeName}`}
-        description={`${tagline} Fast in-game delivery, bulk discounts and daily free spins.`}
+        title={copy.seoTitle}
+        description={copy.metaDescription}
         canonical={category ? `/shop/${category.slug}` : '/shop'}
         jsonLd={[
           breadcrumbSchema(category ? [{ name: 'Home', path: '/' }, { name: 'Shop', path: '/shop' }, { name: category.name, path: `/shop/${category.slug}` }] : [{ name: 'Home', path: '/' }, { name: 'Shop', path: '/shop' }]),
-          collectionSchema(`${title} – ${config.serverName}`, category ? `/shop/${category.slug}` : '/shop', list, tagline),
+          collectionSchema(`${title} – ${config.serverName}`, category ? `/shop/${category.slug}` : '/shop', list, copy.metaDescription),
+          faqSchema(copy.faq)!,
         ]}
       />
       <nav className="breadcrumbs" aria-label="Breadcrumb">
@@ -75,6 +79,7 @@ export default function Shop() {
       <div className="shop-head">
         <h1>{title}</h1>
         <p className="lead">{tagline}</p>
+        <p className="shop-intro">{copy.intro}</p>
         {landing && (
           <Link to={landing.to} className="shop-landing-link">
             <Icon name="info" size={14} /> {landing.label}
@@ -124,6 +129,18 @@ export default function Shop() {
           )
         }
       />
+
+      <section className="shop-copy">
+        {copy.body.map((para, i) => (
+          <p key={i}>{para}</p>
+        ))}
+        {copy.faq.length > 0 && (
+          <>
+            <h2>{title} – questions &amp; answers</h2>
+            <Accordion items={copy.faq.map((f, i) => ({ id: `${value}-faq-${i}`, q: f.q, a: f.a }))} />
+          </>
+        )}
+      </section>
     </div>
   );
 }

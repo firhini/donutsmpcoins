@@ -200,6 +200,11 @@ Verstößen gegen ihre Richtlinien sperren. Halte Lieferbelege (Screenshots) ber
 - **sitemap.xml + robots.txt** werden beim Build generiert (`dist/sitemap.xml`).
 - **Echte 404-Seiten** (Status 404 statt „Soft 404“), saubere URLs ohne Parameter, Breadcrumbs, interne Verlinkung.
 - **Performance:** Code-Splitting, CSS der Seite wird direkt im HTML verlinkt, Bilder lazy, Assets ein Jahr gecacht.
+- **SEO-Inhalte:** 57 eigene Produkttexte (`src/data/productCopy.ts`), Kategorie-Texte (`src/data/categoryCopy.ts`),
+  7 lange Guides unter `/guides` (`src/data/guides.ts`), 5 Keyword-Landingpages (`src/data/landingCopy.ts`, z. B.
+  `/donutsmp-elytra`, `/donutsmp-money-prices`) und 39 FAQ-Einträge – alles original, mit echten Preisen aus dem Katalog.
+  Achtung: Preise in diesen Texten sind fest eingetragen. Änderst du Preise im Admin oder in `catalog.ts`, passe die
+  betroffenen Sätze dort an (die Tests `tests/productCopy.test.ts` prüfen, dass der Preis im Seitentitel stimmt).
 - Prüfung: `npm run build && npm run seo:check` validiert jede generierte Seite (Title, Description, Canonical, JSON-LD, H1).
 
 **Das musst du einmalig machen:**

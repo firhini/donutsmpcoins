@@ -31,6 +31,8 @@ export function Footer() {
               <li><Link to="/shop/mystery-boxes">Mystery Boxes</Link></li>
               <li><Link to="/shop/bundles">Bundles</Link></li>
               <li><Link to="/shop/investments">Investments</Link></li>
+              <li><Link to="/donutsmp-elytra">Elytra</Link></li>
+              <li><Link to="/donutsmp-skeleton-spawner">Skeleton spawners</Link></li>
             </ul>
           </div>
           <div>
@@ -48,6 +50,8 @@ export function Footer() {
             <ul>
               <li><Link to="/track">Track your order</Link></li>
               <li><Link to="/faq">FAQ</Link></li>
+              <li><Link to="/guides">Guides</Link></li>
+              <li><Link to="/donutsmp-money-prices">Money price guide</Link></li>
               <li><Link to="/reviews">Customer reviews</Link></li>
               <li><Link to="/donutsmp-irl-trade">DonutSMP IRL trading guide</Link></li>
               <li><Link to="/terms">Terms of Service</Link></li>

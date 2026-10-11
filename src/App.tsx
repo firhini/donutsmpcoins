@@ -5,6 +5,9 @@ import { StoreProvider } from './context/StoreContext';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import { Layout } from './components/layout/Layout';
+import { landingCopy } from './data/landingCopy';
+
+const LANDING_SLUGS = landingCopy.map((l) => l.slug);
 
 // Storefront
 const Home = lazy(() => import('./pages/Home'));
@@ -31,6 +34,9 @@ const Referral = lazy(() => import('./pages/Referral'));
 const Giveaways = lazy(() => import('./pages/Giveaways'));
 const Reviews = lazy(() => import('./pages/Reviews'));
 const Account = lazy(() => import('./pages/Account'));
+const Guides = lazy(() => import('./pages/Guides'));
+const GuidePage = lazy(() => import('./pages/GuidePage'));
+const LandingPage = lazy(() => import('./pages/LandingPage'));
 // Admin
 const Admin = lazy(() => import('./pages/admin/Admin'));
 
@@ -50,6 +56,11 @@ export default function App() {
               <Route path="/donutsmp-money" element={<MoneyLanding />} />
               <Route path="/donutsmp-spawners" element={<SpawnersLanding />} />
               <Route path="/donutsmp-irl-trade" element={<IrlTradeLanding />} />
+              <Route path="/guides" element={<Guides />} />
+              <Route path="/guides/:slug" element={<GuidePage />} />
+              {LANDING_SLUGS.map((slug) => (
+                <Route key={slug} path={`/${slug}`} element={<LandingPage />} />
+              ))}
               <Route path="/faq" element={<Faq />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/refund-policy" element={<RefundPolicy />} />

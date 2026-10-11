@@ -4,7 +4,9 @@ import { formatMillions } from '../shared/pricing';
 import { useStore } from '../context/StoreContext';
 import { useCart } from '../context/CartContext';
 import { Seo } from '../components/ui/Seo';
-import { breadcrumbSchema, productPng, productSchema } from '../seo/schema';
+import { breadcrumbSchema, faqSchema, productPng, productSchema } from '../seo/schema';
+import { copyFor } from '../data/productCopy';
+import { Accordion } from '../components/shop/Accordion';
 import { Icon } from '../components/ui/Icons';
 import { Price } from '../components/ui/Price';
 import { ProductImage } from '../components/shop/ProductImage';
@@ -77,19 +79,24 @@ export default function ProductPage() {
     timer.current = window.setTimeout(() => setAdded(false), 1600);
   };
 
-  const description = product.description ?? product.shortDesc ?? `${product.name} for ${config.serverName}, delivered in-game by our staff.`;
+  const copy = copyFor(product.id);
+  const description = copy?.description.split(/\n\n+/)[0] ?? product.description ?? product.shortDesc ?? `${product.name} for ${config.serverName}, delivered in-game by our staff.`;
+  const paragraphs = copy ? copy.description.split(/\n\n+/) : [description];
+  const seoTitle = copy?.seoTitle ?? `${product.name} · ${config.storeName}`;
+  const metaDescription = copy?.metaDescription ?? `${description} ${fmt(product.priceCents)}${product.unitLabel ? ` ${product.unitLabel}` : ''}. Fast delivery on ${config.serverName}.`;
 
   return (
     <div className="container page">
       <Seo
-        title={`${product.name} · ${config.storeName}`}
-        description={`${description} ${fmt(product.priceCents)}${product.unitLabel ? ` ${product.unitLabel}` : ''}. Fast delivery on ${config.serverName}.`}
+        title={seoTitle}
+        description={metaDescription}
         canonical={`/product/${product.slug}`}
         type="product"
         image={productPng(product)}
         jsonLd={[
           breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Shop', path: '/shop' }, ...(category ? [{ name: category.name, path: `/shop/${category.slug}` }] : []), { name: product.name, path: `/product/${product.slug}` }]),
-          productSchema(product, config, category, description),
+          productSchema(product, config, category, copy?.metaDescription ?? description),
+          ...(copy?.faq?.length ? [faqSchema(copy.faq)!] : []),
         ]}
       />
       <nav className="breadcrumbs" aria-label="Breadcrumb">
@@ -140,7 +147,20 @@ export default function ProductPage() {
             {perMillion !== null && <span className="muted">≈ {fmt(perMillion)} per 1M</span>}
             {off && <span className="badge badge-pink">Save {off}%</span>}
           </div>
-          <p className="pp-desc">{description}</p>
+          <div className="pp-desc">
+            {paragraphs.map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
+          </div>
+          {copy?.bullets?.length ? (
+            <ul className="pp-bullets">
+              {copy.bullets.map((b, i) => (
+                <li key={i}>
+                  <Icon name="check" size={14} /> {b}
+                </li>
+              ))}
+            </ul>
+          ) : null}
 
           <div className="pp-buy">
             <div className="pp-buy-row">
@@ -243,6 +263,18 @@ export default function ProductPage() {
           </div>
         </div>
       </div>
+
+      {copy?.faq?.length ? (
+
+        <section className="pp-faq">
+
+          <h2>{product.name} – questions &amp; answers</h2>
+
+          <Accordion items={copy.faq.map((f, i) => ({ id: `${product.id}-faq-${i}`, q: f.q, a: f.a }))} />
+
+        </section>
+
+      ) : null}
 
       {related.length > 0 && (
         <section className="pp-section">

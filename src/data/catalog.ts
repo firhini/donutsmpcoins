@@ -126,7 +126,7 @@ export const products: Product[] = [
   P({
     id: 'god-mystery-box', slug: 'god-mystery-box', name: 'God Mystery Box', categoryId: 'mystery', kind: 'box', priceCents: 2899, compareAtCents: 2999, stock: null, boxRolls: 5,
     tags: ['Hot'], image: '/img/products/god-mystery-box.svg', sortOrder: 5, maxQty: 25,
-    shortDesc: 'Five drops. Guaranteed at least one rare – Elytra odds 1 in 6.',
+    shortDesc: 'Five drops from the top pool – Elytra, netherite blocks, dragon heads, blaze spawners and 50M.',
     contents: [
       { name: 'Elytra', min: 1, max: 1, weight: 10, rarity: 'legendary' },
       { name: 'Netherite Block', min: 1, max: 5, weight: 14, rarity: 'rare' },
@@ -142,7 +142,7 @@ export const products: Product[] = [
   P({
     id: 'legendary-crate', slug: 'legendary-crate', name: 'Legendary Crate', categoryId: 'mystery', kind: 'box', priceCents: 4999, stock: null, boxRolls: 6,
     tags: ['New', 'Guaranteed Elytra'], image: '/img/products/legendary-crate.svg', sortOrder: 6, maxQty: 10,
-    shortDesc: 'Guaranteed Elytra + 50M, plus five more drops from the top pool.',
+    shortDesc: 'Guaranteed Elytra + 50M, plus six more drops from the top pool.',
     contents: [
       { name: 'Elytra (guaranteed)', min: 1, max: 1, weight: 0, rarity: 'legendary' },
       { name: '50M Money (guaranteed)', min: 1, max: 1, weight: 0, rarity: 'legendary' },
@@ -164,7 +164,7 @@ export const products: Product[] = [
   P({ id: 'nether-star', slug: 'nether-star', name: 'Nether Star', categoryId: 'investments', kind: 'item', priceCents: 19, stock: null, image: '/img/products/nether-star.svg', sortOrder: 3, bulkPricing: [{ minQty: 32, priceCents: 17 }, { minQty: 128, priceCents: 15 }], maxQty: 1280 }),
   P({ id: 'deepslate-emerald-ore', slug: 'deepslate-emerald-ore', name: 'Deepslate Emerald Ore', categoryId: 'investments', kind: 'item', priceCents: 57, stock: null, image: '/img/products/deepslate-emerald-ore.svg', sortOrder: 4, bulkPricing: [{ minQty: 32, priceCents: 52 }], maxQty: 640 }),
   P({ id: 'ancient-debris', slug: 'ancient-debris', name: 'Ancient Debris', categoryId: 'investments', kind: 'item', priceCents: 57, stock: null, image: '/img/products/ancient-debris.svg', sortOrder: 5, bulkPricing: [{ minQty: 32, priceCents: 52 }], maxQty: 640 }),
-  P({ id: 'heavy-core', slug: 'heavy-core', name: 'Heavy Core', categoryId: 'investments', kind: 'item', priceCents: 145, stock: null, image: '/img/products/heavy-core.svg', sortOrder: 6, maxQty: 64 }),
+  P({ id: 'heavy-core', slug: 'heavy-core', name: 'Heavy Core', categoryId: 'investments', kind: 'item', priceCents: 129, stock: null, image: '/img/products/heavy-core.svg', sortOrder: 6, maxQty: 64 }),
   P({ id: 'netherite-ingot', slug: 'netherite-ingot', name: 'Netherite Ingot', categoryId: 'investments', kind: 'item', priceCents: 329, compareAtCents: 349, stock: null, image: '/img/products/netherite-ingot.svg', sortOrder: 7, bulkPricing: [{ minQty: 9, priceCents: 309 }, { minQty: 36, priceCents: 289 }], maxQty: 640 }),
   P({ id: 'netherite-block', slug: 'netherite-block', name: 'Netherite Block', categoryId: 'investments', kind: 'item', priceCents: 1449, compareAtCents: 1499, stock: null, tags: ['Popular'], image: '/img/products/netherite-block.svg', sortOrder: 8, bulkPricing: [{ minQty: 4, priceCents: 1349 }], maxQty: 128 }),
   P({ id: 'dragon-head', slug: 'dragon-head', name: 'Dragon Head', categoryId: 'investments', kind: 'item', priceCents: 1899, compareAtCents: 1999, stock: null, image: '/img/products/dragon-head.svg', sortOrder: 9, maxQty: 64 }),
@@ -195,14 +195,14 @@ export const products: Product[] = [
   P({ id: 'diamond-leggings-shulker', slug: 'diamond-leggings-shulker', name: 'Diamond Leggings Shulker', categoryId: 'armor', kind: 'kit', priceCents: 139, stock: null, image: '/img/products/diamond-leggings-shulker.svg', sortOrder: 4, maxQty: 50, shortDesc: '27× Blast Prot IV / Unb III / Mending', contents: [{ name: 'Diamond Leggings', min: 27, max: 27 }] }),
   P({ id: 'diamond-boots-shulker', slug: 'diamond-boots-shulker', name: 'Diamond Boots Shulker', categoryId: 'armor', kind: 'kit', priceCents: 139, stock: null, image: '/img/products/diamond-boots-shulker.svg', sortOrder: 5, maxQty: 50, shortDesc: '27× Blast Prot IV / Unb III / Mending', contents: [{ name: 'Diamond Boots', min: 27, max: 27 }] }),
   P({ id: 'netherite-armor-set', slug: 'netherite-armor-set', name: 'Netherite Armor Set (God)', categoryId: 'armor', kind: 'kit', priceCents: 499, stock: null, tags: ['New'], image: '/img/products/netherite-armor-set.svg', sortOrder: 6, maxQty: 50, shortDesc: 'One full maxed netherite set: Prot IV, Unb III, Mending, Thorns III.', contents: [{ name: 'Netherite Helmet', min: 1, max: 1 }, { name: 'Netherite Chestplate', min: 1, max: 1 }, { name: 'Netherite Leggings', min: 1, max: 1 }, { name: 'Netherite Boots', min: 1, max: 1 }] }),
-  P({ id: 'pvp-kit', slug: 'pvp-kit', name: 'PvP Kit', categoryId: 'armor', kind: 'kit', priceCents: 949, compareAtCents: 999, stock: null, tags: ['Popular'], image: '/img/products/pvp-kit.svg', sortOrder: 7, maxQty: 50, shortDesc: 'Netherite set + sword + pickaxe, all maxed, plus 8 totems.', contents: [{ name: 'Netherite Armor Set (maxed)', min: 1, max: 1 }, { name: 'Netherite Sword (maxed)', min: 1, max: 1 }, { name: 'Netherite Pickaxe (maxed)', min: 1, max: 1 }, { name: 'Totem of Undying', min: 8, max: 8 }] }),
+  P({ id: 'pvp-kit', slug: 'pvp-kit', name: 'PvP Kit', categoryId: 'armor', kind: 'kit', priceCents: 849, compareAtCents: 897, stock: null, tags: ['Popular'], image: '/img/products/pvp-kit.svg', sortOrder: 7, maxQty: 50, shortDesc: 'Netherite set + sword + pickaxe, all maxed, plus 8 totems.', contents: [{ name: 'Netherite Armor Set (maxed)', min: 1, max: 1 }, { name: 'Netherite Sword (maxed)', min: 1, max: 1 }, { name: 'Netherite Pickaxe (maxed)', min: 1, max: 1 }, { name: 'Totem of Undying', min: 8, max: 8 }] }),
   P({ id: 'netherite-armor-shulker', slug: 'netherite-armor-shulker', name: 'Netherite Armor Shulker', categoryId: 'armor', kind: 'kit', priceCents: 1899, compareAtCents: 1999, stock: null, image: '/img/products/netherite-armor-shulker.svg', sortOrder: 8, maxQty: 20, shortDesc: '6 full maxed netherite sets in one shulker.', contents: [{ name: 'Netherite Helmet', min: 6, max: 6 }, { name: 'Netherite Chestplate', min: 6, max: 6 }, { name: 'Netherite Leggings', min: 6, max: 6 }, { name: 'Netherite Boots', min: 6, max: 6 }] }),
 
   // ───────────── TOOLS & WEAPONS ─────────────
   P({ id: 'netherite-sword', slug: 'netherite-sword', name: 'Netherite Sword (God)', categoryId: 'tools', kind: 'item', priceCents: 99, stock: null, image: '/img/products/netherite-sword.svg', sortOrder: 1, maxQty: 100, shortDesc: 'Sharpness V, Unbreaking III, Mending, Fire Aspect II, Looting III.' }),
   P({ id: 'netherite-pickaxe', slug: 'netherite-pickaxe', name: 'Netherite Pickaxe (God)', categoryId: 'tools', kind: 'item', priceCents: 99, stock: null, image: '/img/products/netherite-pickaxe.svg', sortOrder: 2, maxQty: 100, shortDesc: 'Efficiency V, Unbreaking III, Mending, Fortune III.' }),
   P({ id: 'god-bow', slug: 'god-bow', name: 'God Bow', categoryId: 'tools', kind: 'item', priceCents: 89, stock: null, image: '/img/products/god-bow.svg', sortOrder: 3, maxQty: 100, shortDesc: 'Power V, Punch II, Flame, Infinity, Unbreaking III.' }),
-  P({ id: 'mace', slug: 'mace', name: 'Mace', categoryId: 'tools', kind: 'item', priceCents: 139, compareAtCents: 149, stock: null, tags: ['Hot'], image: '/img/products/mace.svg', sortOrder: 4, maxQty: 64, shortDesc: 'Density V, Breach IV, Wind Burst III, Mending, Unbreaking III.' }),
+  P({ id: 'mace', slug: 'mace', name: 'Mace', categoryId: 'tools', kind: 'item', priceCents: 149, stock: null, tags: ['Hot'], image: '/img/products/mace.svg', sortOrder: 4, maxQty: 64, shortDesc: 'Density V, Breach IV, Wind Burst III, Mending, Unbreaking III.' }),
   P({ id: 'trident', slug: 'trident', name: 'Trident', categoryId: 'tools', kind: 'item', priceCents: 189, compareAtCents: 199, stock: null, image: '/img/products/trident.svg', sortOrder: 5, maxQty: 64, shortDesc: 'Loyalty III, Channeling, Impaling V, Mending.' }),
   P({ id: 'amethyst-pickaxe', slug: 'amethyst-pickaxe', name: 'Amethyst Pickaxe', categoryId: 'tools', kind: 'item', priceCents: 479, compareAtCents: 499, stock: null, tags: ['Rare'], image: '/img/products/amethyst-pickaxe.svg', sortOrder: 6, maxQty: 32, shortDesc: 'DonutSMP custom pickaxe – ultra fast base hunting.' }),
   P({ id: 'netherite-pickaxes-27', slug: 'netherite-pickaxes-shulker', name: 'Netherite Pickaxes Shulker', categoryId: 'tools', kind: 'kit', priceCents: 1899, compareAtCents: 1999, stock: null, image: '/img/products/netherite-pickaxes-27.svg', sortOrder: 7, maxQty: 20, shortDesc: '27× maxed Netherite Pickaxes.', contents: [{ name: 'Netherite Pickaxe (maxed)', min: 27, max: 27 }] }),
@@ -210,27 +210,27 @@ export const products: Product[] = [
 
   // ───────────── BUNDLES ─────────────
   P({
-    id: 'starter-bundle', slug: 'starter-bundle', name: 'Starter Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 949, compareAtCents: 1099, stock: null, tags: ['Best value'], image: '/img/products/starter-bundle.svg', sortOrder: 1, maxQty: 20,
+    id: 'starter-bundle', slug: 'starter-bundle', name: 'Starter Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 949, compareAtCents: 1054, stock: null, tags: ['Best value'], image: '/img/products/starter-bundle.svg', sortOrder: 1, maxQty: 20,
     shortDesc: '20M + 15 Skeleton Spawners + Diamond Armor Shulker.',
     bundleItems: [{ productId: 'money-1m', quantity: 20 }, { productId: 'skeleton-spawner', quantity: 15 }, { productId: 'diamond-armor-shulker', quantity: 1 }],
   }),
   P({
-    id: 'spawner-farm-bundle', slug: 'spawner-farm-bundle', name: 'Spawner Farm Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 2999, compareAtCents: 3499, stock: null, tags: ['New'], image: '/img/products/spawner-farm-bundle.svg', sortOrder: 2, maxQty: 20,
+    id: 'spawner-farm-bundle', slug: 'spawner-farm-bundle', name: 'Spawner Farm Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 2599, compareAtCents: 2740, stock: null, tags: ['New'], image: '/img/products/spawner-farm-bundle.svg', sortOrder: 2, maxQty: 20,
     shortDesc: '64 Skeleton Spawners + 10M to build the farm.',
     bundleItems: [{ productId: 'skeleton-spawner', quantity: 64 }, { productId: 'money-1m', quantity: 10 }],
   }),
   P({
-    id: 'pro-bundle', slug: 'pro-bundle', name: 'Pro Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 4099, compareAtCents: 4699, stock: null, tags: ['Popular'], image: '/img/products/pro-bundle.svg', sortOrder: 3, maxQty: 20,
+    id: 'pro-bundle', slug: 'pro-bundle', name: 'Pro Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 4099, compareAtCents: 4387, stock: null, tags: ['Popular'], image: '/img/products/pro-bundle.svg', sortOrder: 3, maxQty: 20,
     shortDesc: '50M + 16 Skeleton Spawners + Elytra.',
     bundleItems: [{ productId: 'money-1m', quantity: 50 }, { productId: 'skeleton-spawner', quantity: 16 }, { productId: 'elytra', quantity: 1 }],
   }),
   P({
-    id: 'basehunter-bundle', slug: 'basehunter-bundle', name: 'Basehunter Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 5699, compareAtCents: 6499, stock: null, image: '/img/products/basehunter-bundle.svg', sortOrder: 4, maxQty: 20,
+    id: 'basehunter-bundle', slug: 'basehunter-bundle', name: 'Basehunter Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 3799, compareAtCents: 4040, stock: null, image: '/img/products/basehunter-bundle.svg', sortOrder: 4, maxQty: 20,
     shortDesc: '20M + Elytra + Amethyst Pickaxe + 16 Totems.',
     bundleItems: [{ productId: 'money-1m', quantity: 20 }, { productId: 'elytra', quantity: 1 }, { productId: 'amethyst-pickaxe', quantity: 1 }, { productId: 'totem', quantity: 16 }],
   }),
   P({
-    id: 'rich-bundle', slug: 'rich-bundle', name: 'Rich Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 7999, compareAtCents: 9999, stock: null, tags: ['Whale'], image: '/img/products/rich-bundle.svg', sortOrder: 5, maxQty: 10,
+    id: 'rich-bundle', slug: 'rich-bundle', name: 'Rich Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 7999, compareAtCents: 10347, stock: null, tags: ['Whale'], image: '/img/products/rich-bundle.svg', sortOrder: 5, maxQty: 10,
     shortDesc: '250M + God Mystery Box + Elytra + PvP Kit.',
     bundleItems: [{ productId: 'money-1m', quantity: 250 }, { productId: 'god-mystery-box', quantity: 1 }, { productId: 'elytra', quantity: 1 }, { productId: 'pvp-kit', quantity: 1 }],
   }),

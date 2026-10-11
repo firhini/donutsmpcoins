@@ -11,9 +11,9 @@ const NAV: { to: string; label: string; badge?: string }[] = [
   { to: '/shop', label: 'Shop' },
   { to: '/shop/mystery-boxes', label: 'Mystery Boxes' },
   { to: '/spin', label: 'Daily Spin', badge: 'FREE' },
+  { to: '/guides', label: 'Guides' },
   { to: '/giveaways', label: 'Giveaways' },
   { to: '/reviews', label: 'Reviews' },
-  { to: '/faq', label: 'FAQ' },
 ];
 
 export function AnnouncementBar() {

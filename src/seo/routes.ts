@@ -3,6 +3,8 @@
  * `page` is the source module of the lazy page (to inline its CSS in the static HTML).
  */
 import { products, categories } from '../data/catalog';
+import { guides } from '../data/guides';
+import { landingCopy } from '../data/landingCopy';
 
 export interface SeoRoute {
   path: string;
@@ -22,6 +24,9 @@ export function seoRoutes(): SeoRoute[] {
     { path: '/donutsmp-money', page: 'src/pages/landing/MoneyLanding.tsx', changefreq: 'weekly', priority: 0.9 },
     { path: '/donutsmp-spawners', page: 'src/pages/landing/SpawnersLanding.tsx', changefreq: 'weekly', priority: 0.9 },
     { path: '/donutsmp-irl-trade', page: 'src/pages/landing/IrlTradeLanding.tsx', changefreq: 'monthly', priority: 0.8 },
+    ...landingCopy.map((l) => ({ path: `/${l.slug}`, page: 'src/pages/LandingPage.tsx', changefreq: 'monthly' as const, priority: 0.8 })),
+    { path: '/guides', page: 'src/pages/Guides.tsx', changefreq: 'weekly', priority: 0.8 },
+    ...guides.map((g) => ({ path: `/guides/${g.slug}`, page: 'src/pages/GuidePage.tsx', changefreq: 'monthly' as const, priority: 0.8 })),
     { path: '/spin', page: 'src/pages/Spin.tsx', changefreq: 'weekly', priority: 0.7 },
     { path: '/free', page: 'src/pages/Free.tsx', changefreq: 'weekly', priority: 0.7 },
     { path: '/giveaways', page: 'src/pages/Giveaways.tsx', changefreq: 'daily', priority: 0.6 },

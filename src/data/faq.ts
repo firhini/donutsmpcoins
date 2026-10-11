@@ -51,6 +51,21 @@ export const faqGroups: FaqGroup[] = [
         q: 'Is there a minimum order?',
         a: 'No minimum on our side. Some payment methods have a small minimum (shown next to the method at checkout) and crypto networks charge their own fees for tiny amounts.',
       },
+      {
+        id: 'cheapest-money',
+        q: 'What is the cheapest way to get DonutSMP money?',
+        a: 'Per million, the big fixed packs: **1B for $114.99** (about $0.115 per 1M), 500M for $61.99 and 100M for $13.99 beat the pick-your-amount rate of $0.18–$0.13. Then let the discounts stack – carts over $15 get 5% off, over $40 8% and over $100 12%, plus one coupon from the [daily spin](/spin) or the welcome code and any store credit. If you only need a few million, win them: the spin gives away 1M, 5M and 20M prizes every day. Full price list on [/donutsmp-money](/donutsmp-money).',
+      },
+      {
+        id: 'out-of-stock',
+        q: 'What happens if an item is out of stock after I pay?',
+        a: 'Stock is reserved when your order is created, so this is rare – it mostly affects limited items like bases. If we cannot deliver part of an order, you choose: wait for the restock (we tell you how long), swap for an item of the same value, or get that part refunded or credited to your username. Non-delivery within 48 hours of payment confirmation is always a full refund under our [refund policy](/refund-policy).',
+      },
+      {
+        id: 'bedrock-players',
+        q: 'Do you deliver to Bedrock players?',
+        a: 'Orders need a **Java Edition username** – 3 to 16 characters, letters, numbers and underscores – which we validate against Mojang at checkout, and money and items go to that account on {{server}}. Bedrock names with a dot prefix do not pass that check. If you play {{server}} through a Bedrock account, ask us on Discord before paying and we will tell you whether delivery to your name is possible.',
+      },
     ],
   },
   {
@@ -83,6 +98,21 @@ export const faqGroups: FaqGroup[] = [
         id: 'offline-delivery',
         q: 'What if I am not online when you deliver?',
         a: 'Money can be paid while you are offline on most setups; items need you online. We will ping you on Discord (if you joined) or wait until you are on. Orders never expire after payment.',
+      },
+      {
+        id: 'delivery-speed',
+        q: 'How fast is delivery? Is it instant?',
+        a: 'Fast, but not instant – there is no bot. {{eta}} A real member of our staff logs on to {{server}}, runs `/pay` or hands the items over, and marks the order delivered; you can watch each step on your order page. Outside our online hours (see the status in our Discord) the order waits for the next person on duty. Paid orders never expire.',
+      },
+      {
+        id: 'need-online',
+        q: 'Do I need to be online for delivery?',
+        a: 'For **items, spawners and box drops – yes**: you accept a teleport from our delivery account and pick up the drop, so you need to be on {{server}} with the username from your order and have inventory space. For **money – usually not**, because `/pay` reaches an offline balance on most setups, though being online lets you see the confirmation in chat. Tell us on Discord when you are on and we will time the delivery.',
+      },
+      {
+        id: 'box-odds',
+        q: 'How do mystery box odds work?',
+        a: 'Every line in a box has a weight, and its chance on one roll is that weight divided by the total of the pool – click **What\'s inside?** on any box to see the percentages. Boxes with several rolls draw without repeats, so a three-roll box always has three different lines and your chance of any given line is higher than the single-roll figure. Lines marked guaranteed are in every box. The roll happens on our server when you order and the result is written to your order page before delivery.',
       },
     ],
   },
@@ -117,6 +147,11 @@ export const faqGroups: FaqGroup[] = [
         q: 'Can I pay in my own currency?',
         a: 'Prices are set in USD. The currency switcher in the header shows estimates in EUR, GBP and others; your payment provider does the actual conversion at its own rate.',
       },
+      {
+        id: 'apple-pay-crypto-paypal',
+        q: 'Can I pay with Apple Pay, crypto or PayPal?',
+        a: '**PayPal** – yes, Friends & Family is our default method. **Crypto** – yes, Litecoin is always on and Bitcoin, USDT and 100+ other coins appear at checkout when enabled. **Apple Pay, Google Pay and cards** run through Stripe and are available whenever card checkout is switched on. Whatever is live right now is listed at checkout; if your preferred method is missing, ask on Discord and we will try to arrange it.',
+      },
     ],
   },
   {
@@ -150,6 +185,11 @@ export const faqGroups: FaqGroup[] = [
         q: 'I have a gift code – where do I use it?',
         a: 'Gift codes from giveaways or support are redeemed at [/redeem](/redeem): enter the code and your username and we create a free order for you. Discount coupons go into the coupon field at checkout instead.',
       },
+      {
+        id: 'discord-login-spin',
+        q: 'How does the Discord login for the daily spin work?',
+        a: 'When the login gate is on, you click **Login with Discord** on [/spin](/spin), approve the request on Discord and are sent straight back to the wheel – we only read your Discord ID, name and (if required) whether you are in our server. The login ties your spins and prizes to one account, so the **one spin every {{spinCooldown}} hours** limit is per person, not per browser, and your coupons, free items and store credit show up on your account page. We never see your Discord password and you can revoke the access in Discord at any time.',
+      },
     ],
   },
   {
@@ -177,6 +217,16 @@ export const faqGroups: FaqGroup[] = [
         id: 'data',
         q: 'What data do you store?',
         a: 'Your Minecraft username, the order and payment reference, an optional e-mail, a hashed IP address and a random device id used for spin cooldowns. We do not sell data. Full details in the [privacy policy](/privacy).',
+      },
+      {
+        id: 'is-legit',
+        q: 'Is DonutCoins legit?',
+        a: 'We think the honest answer is "check for yourself": every order gets an ID and a public tracking page at [/track](/track), deliveries are done by our own staff rather than by random traders, the reviews on [/reviews](/reviews) can only be written from delivered orders, and the [refund policy](/refund-policy) refunds non-delivery in full. We do not show invented order counts or testimonials. Start with a small order – a few million or a handful of spawners – and scale up once you have seen the delivery.',
+      },
+      {
+        id: 'ban-risk',
+        q: 'Can I get banned for buying DonutSMP money?',
+        a: 'It is possible. {{server}}\'s rules prohibit real-money trading, and the server decides how to enforce that – warnings, balance resets or bans. We reduce the footprint: deliveries use ordinary `/pay`, teleports and drops, large amounts can be split over time, we never advertise in-game and we never touch your account. But we cannot make it risk-free, and a punishment after delivery is not a refund reason. Read the [IRL trading guide](/donutsmp-irl-trade) before you order.',
       },
     ],
   },
