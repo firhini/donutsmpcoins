@@ -44,8 +44,9 @@ function assetsFor(pageSource) {
   return { css: [...css].filter((c) => !entryCss.has(c)), js: [...js] };
 }
 
-function buildPage(appHtml, title, headTags, assets) {
+function buildPage(appHtml, title, headTags, assets, routePath) {
   let out = template;
+  if (routePath === '/') out = out.replace('</head>', '    <link rel="preload" as="image" href="/img/brand/mascot.svg" fetchpriority="high">\n  </head>');
   out = out.replace(/<title>[\s\S]*?<\/title>/, `<title>${title}</title>`);
   out = out.replace(/\s*<meta name="description"[^>]*>/g, '');
   out = out.replace(/\s*<meta name="robots"[^>]*>/g, '');
@@ -65,7 +66,7 @@ for (const r of routes) {
   try {
     const { html, title, headTags, status } = await render(r.path);
     const assets = assetsFor(r.page);
-    const page = buildPage(html, title, headTags, assets);
+    const page = buildPage(html, title, headTags, assets, r.path);
     const file = r.path === '/' ? path.join(DIST, 'index.html') : r.path === '/404' ? path.join(DIST, '404.html') : path.join(DIST, r.path.slice(1), 'index.html');
     await fs.mkdir(path.dirname(file), { recursive: true });
     await fs.writeFile(file, page, 'utf8');

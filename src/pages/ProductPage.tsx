@@ -4,7 +4,7 @@ import { formatMillions } from '../shared/pricing';
 import { useStore } from '../context/StoreContext';
 import { useCart } from '../context/CartContext';
 import { Seo } from '../components/ui/Seo';
-import { breadcrumbSchema, productSchema } from '../seo/schema';
+import { breadcrumbSchema, productPng, productSchema } from '../seo/schema';
 import { Icon } from '../components/ui/Icons';
 import { Price } from '../components/ui/Price';
 import { ProductImage } from '../components/shop/ProductImage';
@@ -86,7 +86,7 @@ export default function ProductPage() {
         description={`${description} ${fmt(product.priceCents)}${product.unitLabel ? ` ${product.unitLabel}` : ''}. Fast delivery on ${config.serverName}.`}
         canonical={`/product/${product.slug}`}
         type="product"
-        image={product.image}
+        image={productPng(product)}
         jsonLd={[
           breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Shop', path: '/shop' }, ...(category ? [{ name: category.name, path: `/shop/${category.slug}` }] : []), { name: product.name, path: `/product/${product.slug}` }]),
           productSchema(product, config, category, description),

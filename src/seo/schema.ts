@@ -4,6 +4,11 @@ import { absUrl } from './head';
 
 const ctx = 'https://schema.org';
 
+/** PNG twin of a product SVG (Open Graph / rich results need raster images). */
+export function productPng(p: Product): string {
+  return p.image.replace(/^\/img\/products\/([^/]+)\.svg$/, '/img/products/png/$1.png');
+}
+
 export function organizationSchema(config: PublicConfig) {
   return {
     '@context': ctx,
@@ -86,7 +91,7 @@ export function productSchema(p: Product, config: PublicConfig, category?: Categ
     '@id': absUrl(`/product/${p.slug}#product`),
     name: `${p.name} – ${config.serverName}`,
     description: description || p.shortDesc || p.description || `${p.name} for ${config.serverName}, delivered in-game.`,
-    image: absUrl(p.image),
+    image: [absUrl(productPng(p)), absUrl(p.image)],
     sku: p.id,
     brand: { '@type': 'Brand', name: config.storeName },
     category: category?.name,
