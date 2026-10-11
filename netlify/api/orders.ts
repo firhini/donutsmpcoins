@@ -6,6 +6,8 @@
 import { z } from 'zod';
 import type { Order } from '../../src/shared/types';
 import type { Route } from '../lib/http';
+import { currentUser } from './auth';
+import { linkOrder, updateUser } from '../lib/users';
 import { HttpError, MC_USERNAME_RE, getIp, hashIp, json, optionalString, readJson, requireString } from '../lib/http';
 import { rateLimit } from '../lib/ratelimit';
 import { buildOrder, serverQuote } from '../lib/orderBuilder';
@@ -116,6 +118,7 @@ export const routes: Route[] = [
       if (body.email && !EMAIL_RE.test(body.email)) throw new HttpError(400, 'That e-mail address does not look right.', 'validation');
 
       const ipHash = hashIp(getIp(req, context));
+      const user = await currentUser(req);
       await rateLimit(`orders:${ipHash}`, 10, 600);
 
       const order = await buildOrder({
@@ -131,7 +134,13 @@ export const routes: Route[] = [
         deviceId: body.deviceId,
         ipHash,
         source: 'checkout',
+        discordUserId: user?.id,
+        discordUsername: user?.username,
       });
+      if (user) {
+        await linkOrder(user.id, order.id).catch(() => undefined);
+        if (!user.mcUsername) await updateUser(user.id, { mcUsername: order.username }).catch(() => undefined);
+      }
       return json({ order: toPublicOrder(order) }, 201);
     },
   },

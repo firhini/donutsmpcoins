@@ -247,6 +247,9 @@ export interface Order {
   /** consumed coupon use was given back (cancel/refund) */
   couponRestored?: boolean;
   source?: 'checkout' | 'redeem' | 'spin' | 'giveaway' | 'admin';
+  /** Discord account that placed the order (when logged in) */
+  discordUserId?: string;
+  discordUsername?: string;
 }
 
 /** What the public order page is allowed to see */
@@ -265,6 +268,7 @@ export interface OrderIndexEntry {
   methodId: string;
   itemsSummary: string;
   referralCode?: string;
+  discordUserId?: string;
 }
 
 // ───────────────────────── Gift codes ─────────────────────────
@@ -373,6 +377,58 @@ export interface SpinStatus {
   nextSpinAt?: string;
   prizes: Omit<SpinPrize, 'weight'>[];
   cooldownHours: number;
+  /** Discord login gate */
+  loginRequired?: boolean;
+  loggedIn?: boolean;
+  guildRequired?: boolean;
+  inGuild?: boolean;
+}
+
+// ───────────────────────── Discord accounts ─────────────────────────
+
+export interface WonPrize {
+  at: string;
+  label: string;
+  type: SpinPrizeType | 'gift' | 'giveaway';
+  code?: string;
+  orderId?: string;
+  creditCents?: number;
+  expiresAt?: string;
+}
+
+/** Stored profile of a Discord-authenticated player (server-side). */
+export interface UserProfile {
+  id: string;
+  username: string;
+  globalName?: string;
+  avatar?: string;
+  /** saved Minecraft username (delivery target) */
+  mcUsername?: string;
+  inGuild?: boolean;
+  guildCheckedAt?: string;
+  createdAt: string;
+  lastLoginAt: string;
+  logins: number;
+  prizes: WonPrize[];
+  orderIds: string[];
+}
+
+/** What the browser sees about the logged-in user. */
+export interface PublicUser {
+  id: string;
+  username: string;
+  displayName: string;
+  avatarUrl: string;
+  mcUsername?: string;
+  inGuild?: boolean;
+}
+
+export interface AccountSummary {
+  user: PublicUser;
+  creditCents: number;
+  orders: OrderIndexEntry[];
+  prizes: WonPrize[];
+  referral: { code?: string; referrals: number; earnedCents: number };
 }
 
 // ───────────────────────── Store credit / referral ─────────────────────────
@@ -424,7 +480,16 @@ export interface SiteSettings {
   sale: { enabled: boolean; percent: number; label: string; endsAt?: string };
   spendingTiers: SpendingTier[];
   paymentMethods: PaymentMethodConfig[];
-  spin: { enabled: boolean; cooldownHours: number; prizes: SpinPrize[]; requireUsername: boolean };
+  spin: {
+    enabled: boolean;
+    cooldownHours: number;
+    prizes: SpinPrize[];
+    requireUsername: boolean;
+    /** players must log in with Discord to spin (only effective when Discord OAuth is configured) */
+    requireLogin: boolean;
+    /** players must be a member of your Discord server (needs DISCORD_GUILD_ID) */
+    requireGuild: boolean;
+  };
   referral: { enabled: boolean; friendPercent: number; referrerPercent: number };
   reviewRewardPercent: number;
   welcomeCoupon: { enabled: boolean; code: string; percent: number };
@@ -458,6 +523,8 @@ export interface PublicConfig {
   spinEnabled: boolean;
   spinRequireUsername: boolean;
   spinCooldownHours: number;
+  spinRequireLogin: boolean;
+  spinRequireGuild: boolean;
   referral: SiteSettings['referral'];
   reviewRewardPercent: number;
   welcomeCoupon: SiteSettings['welcomeCoupon'];
@@ -467,7 +534,7 @@ export interface PublicConfig {
   serverName: string;
   serverIp: string;
   /** which integrations are configured on the server */
-  integrations: { stripe: boolean; paypal: boolean; nowpayments: boolean; discord: boolean };
+  integrations: { stripe: boolean; paypal: boolean; nowpayments: boolean; discord: boolean; discordOAuth: boolean };
   paypalClientId?: string;
 }
 

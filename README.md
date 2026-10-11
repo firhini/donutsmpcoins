@@ -31,6 +31,12 @@ in dem du Bestellungen abarbeitest. Gebaut für **Netlify** (kostenloser Plan re
 - Giveaways mit Teilnahme per Minecraft-Name und Zufallsziehung
 - Bewertungen mit Belohnung (nach Freigabe bekommt der Kunde einen Rabattcode)
 
+**Discord-Login & Accounts**
+- Spieler melden sich mit Discord an (OAuth2, kein Passwort). Das Glücksrad kann so eingestellt werden, dass nur
+  eingeloggte Spieler drehen dürfen – optional nur Mitglieder deines Discord-Servers („Join to spin“).
+- Account-Seite `/account`: Minecraft-Name speichern, eigene Bestellungen, Store-Guthaben, gewonnene Preise/Codes.
+- Cooldown gilt dann **pro Discord-Account** (zusätzlich zu IP und Gerät) – Mehrfach-Drehen ist praktisch unmöglich.
+
 **Bestellen & Bezahlen**
 - Checkout mit Live-Prüfung des Minecraft-Namens (Mojang API) + Skin-Vorschau
 - Zahlungsarten frei konfigurierbar im Admin:
@@ -94,6 +100,9 @@ Admin: `http://localhost:5173/admin` → Passwort aus `.env`.
 | `ADMIN_PASSWORD` | ✅ | Passwort für `/admin` |
 | `ADMIN_SECRET` | optional | separater Schlüssel zum Signieren der Admin-Session (sonst wird aus dem Passwort abgeleitet) |
 | `DISCORD_WEBHOOK_URL` | empfohlen | Discord → Servereinstellungen → Integrationen → Webhooks → URL kopieren |
+| `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET` | empfohlen | Discord-Login (siehe Abschnitt 5a) |
+| `DISCORD_GUILD_ID` | optional | deine Server-ID – „Nur Server-Mitglieder dürfen drehen“ |
+| `SESSION_SECRET` | optional | Schlüssel für Login-Cookies (sonst aus `ADMIN_SECRET`/`ADMIN_PASSWORD` abgeleitet) |
 | `SITE_URL` | empfohlen | z. B. `https://deinshop.netlify.app` (für Zahlungs-Redirects & Links in Discord) |
 | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | optional | nur für Karten-/Apple-Pay-Zahlung über Stripe |
 | `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `PAYPAL_ENV` | optional | nur für PayPal Checkout (automatische Bestätigung) |
@@ -138,6 +147,44 @@ Bei manuellen Methoden gilt: Bestellung steht auf *Awaiting payment* → Kunde m
   IPN-URL `https://deinshop.netlify.app/api/payments/nowpayments/ipn`.
 
 ---
+
+## 5a. Discord-Login einrichten (5 Minuten)
+
+1. https://discord.com/developers/applications → **New Application** (z. B. „DonutCoins“).
+2. Links **OAuth2** → **Client ID** kopieren, **Reset Secret** → **Client Secret** kopieren.
+3. Unter **Redirects** eintragen: `https://deinshop.netlify.app/api/auth/discord/callback`
+   (für lokales Testen zusätzlich `http://localhost:5173/api/auth/discord/callback`).
+4. In Netlify die Variablen `DISCORD_CLIENT_ID` und `DISCORD_CLIENT_SECRET` setzen, neu deployen.
+5. Optional „nur Server-Mitglieder“: In Discord **Entwicklermodus** aktivieren (Einstellungen → Erweitert), Rechtsklick auf
+   deinen Server → **Server-ID kopieren** → als `DISCORD_GUILD_ID` setzen und im Admin unter *Spin* den Schalter
+   „Require membership“ aktivieren.
+
+Der Button „Login with Discord“ erscheint im Header automatisch, sobald die Variablen gesetzt sind. Im Admin unter *Spin*
+steuerst du, ob das Rad einen Login verlangt (Standard: ja, sobald Discord-Login konfiguriert ist).
+
+## 5b. Welches Zahlungssystem? (Empfehlung)
+
+Kein einzelner Anbieter liefert Kreditkarte, Apple Pay **und** Krypto ohne Verifizierung. Die praktikable Kombination:
+
+| Wunsch | Anbieter | Verifizierung | Status im Shop |
+|---|---|---|---|
+| Kreditkarte, Apple Pay, Google Pay, Klarna, Link | **Stripe** | Ausweis + IBAN, Angaben zum Geschäft (als Privatperson/Einzelunternehmer möglich, 18+) | fertig eingebaut – nur Keys eintragen |
+| PayPal + Karte über PayPal | **PayPal Checkout** (Business-Konto) | Ausweis, Bankkonto | fertig eingebaut |
+| Krypto (BTC, ETH, LTC, USDT, 100+) mit automatischer Bestätigung | **NOWPayments** | nur E-Mail + Auszahlungs-Wallet | fertig eingebaut |
+| Alles manuell ohne jede Prüfung | PayPal.me / Wallet-Adressen / Revolut | keine | fertig, Standard |
+
+**Stripe aktivieren:** Stripe-Konto anlegen → Dashboard → *Entwickler → API-Schlüssel* → `sk_live_…` als `STRIPE_SECRET_KEY`.
+Dann *Entwickler → Webhooks → Endpunkt hinzufügen*: `https://deinshop.netlify.app/api/payments/stripe/webhook`,
+Ereignis `checkout.session.completed`, den Signing-Secret als `STRIPE_WEBHOOK_SECRET`. Apple Pay und Google Pay sind auf
+der Stripe-Checkout-Seite automatisch aktiv; weitere Methoden (Klarna, SEPA, iDEAL, …) schaltest du im Stripe-Dashboard unter
+*Zahlungsmethoden* frei – der Shop übergibt keine feste Liste. Zuletzt im Admin die Methode „Card / Apple Pay / Google Pay“ einschalten.
+
+**NOWPayments aktivieren:** Konto auf nowpayments.io → Auszahlungs-Wallet hinterlegen → *Store settings → API keys* →
+`NOWPAYMENTS_API_KEY`; *IPN secret* generieren → `NOWPAYMENTS_IPN_SECRET`. IPN-URL ist
+`https://deinshop.netlify.app/api/payments/nowpayments/ipn`. Im Admin „Crypto (automatic)“ einschalten.
+
+Hinweis: Stripe und PayPal prüfen Händler nachträglich und können Konten mit vielen Rückbuchungen (Chargebacks) oder bei
+Verstößen gegen ihre Richtlinien sperren. Halte Lieferbelege (Screenshots) bereit und liefere schnell.
 
 ## 6. Ablauf einer Bestellung (für dich)
 

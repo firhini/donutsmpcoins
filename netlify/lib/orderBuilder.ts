@@ -28,6 +28,9 @@ export interface BuildOrderInput {
   deviceId?: string;
   ipHash?: string;
   source?: Order['source'];
+  /** Discord account of the buyer (from the session cookie) */
+  discordUserId?: string;
+  discordUsername?: string;
   /** force a free order (spin / redeem / giveaway / admin). Items are given away regardless of price. */
   free?: boolean;
   freeReason?: string;
@@ -203,6 +206,8 @@ export async function buildOrder(input: BuildOrderInput): Promise<Order> {
     ipHash: input.ipHash,
     deviceId: input.deviceId,
     source: input.source ?? 'checkout',
+    discordUserId: input.discordUserId,
+    discordUsername: input.discordUsername,
   };
 
   // side effects – each step is atomic; later failures roll earlier steps back

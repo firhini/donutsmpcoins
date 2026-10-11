@@ -30,6 +30,8 @@ export function SpinSection({ settings, onSave }: { settings: SiteSettings; onSa
           enabled: d.enabled,
           cooldownHours: Math.max(1, Math.round(d.cooldownHours || 24)),
           requireUsername: d.requireUsername,
+          requireLogin: d.requireLogin,
+          requireGuild: d.requireGuild,
           prizes: d.prizes.map((p) => ({
             ...p,
             label: p.label.trim() || p.type,
@@ -60,6 +62,8 @@ export function SpinSection({ settings, onSave }: { settings: SiteSettings; onSa
               <div className="stack" style={{ gap: 10, justifyContent: 'center' }}>
                 <Toggle checked={d.enabled} onChange={(v) => set({ ...d, enabled: v })} label="Spin wheel enabled" />
                 <Toggle checked={d.requireUsername} onChange={(v) => set({ ...d, requireUsername: v })} label="Require Minecraft name to spin" />
+                <Toggle checked={d.requireLogin} onChange={(v) => set({ ...d, requireLogin: v })} label="Require Discord login to spin (needs DISCORD_CLIENT_ID + DISCORD_CLIENT_SECRET)" />
+                <Toggle checked={d.requireGuild} onChange={(v) => set({ ...d, requireGuild: v })} label="Require membership in your Discord server (needs DISCORD_GUILD_ID)" />
               </div>
               <Field label="Cooldown (hours)" hint="Per device and IP" htmlFor="sp-cd">
                 <NumberInput id="sp-cd" value={d.cooldownHours} onChange={(v) => set({ ...d, cooldownHours: v ?? 24 })} min={1} max={168} step={1} allowEmpty={false} />

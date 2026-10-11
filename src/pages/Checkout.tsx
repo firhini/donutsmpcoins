@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import type { CreateOrderRequest, PublicOrder, QuoteRequest } from '../shared/types';
 import { apiGet, apiPost, ApiClientError } from '../lib/api';
+import { useAuth } from '../context/AuthContext';
 import { getDeviceId, storageGet, storageSet } from '../lib/device';
 import { avatarUrl } from '../lib/mc';
 import { createNowPaymentsInvoice, createStripeSession, redirectToPayment } from '../lib/payments';
@@ -27,6 +28,10 @@ export default function Page() {
   const nav = useNavigate();
 
   const [username, setUsername] = useState(() => storageGet<string>(USERNAME_KEY, ''));
+  const auth = useAuth();
+  useEffect(() => {
+    if (auth.user?.mcUsername) setUsername((u) => (u.trim() ? u : auth.user!.mcUsername!));
+  }, [auth.user?.mcUsername]); // eslint-disable-line react-hooks/exhaustive-deps
   const uname = useUsernameCheck(username);
   const [email, setEmail] = useState(() => storageGet<string>(EMAIL_KEY, ''));
   const [credit, setCredit] = useState<number | null>(null);

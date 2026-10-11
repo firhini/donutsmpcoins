@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties }
 import { Link, useNavigate } from 'react-router-dom';
 import type { SpinResult, SpinStatus } from '../shared/types';
 import { apiGet, apiPost, ApiClientError } from '../lib/api';
+import { useAuth } from '../context/AuthContext';
 import { getDeviceId, storageGet, storageSet } from '../lib/device';
 import { defaultSettings } from '../data/settings';
 import { useStore } from '../context/StoreContext';
@@ -53,6 +54,8 @@ function SoundIcon({ on }: { on: boolean }) {
 
 export default function Page() {
   const { config, fmt } = useStore();
+  const auth = useAuth();
+  const [guildBusy, setGuildBusy] = useState(false);
   const { setDiscountCode } = useCart();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -62,6 +65,10 @@ export default function Page() {
   const [loadingStatus, setLoadingStatus] = useState(true);
   const [prizes, setPrizes] = useState<WheelPrize[]>(fallbackPrizes);
   const [username, setUsername] = useRememberedUsername();
+  // a logged-in player's saved Minecraft name fills the field when it is empty
+  useEffect(() => {
+    if (auth.user?.mcUsername && !username.trim()) setUsername(auth.user.mcUsername);
+  }, [auth.user?.mcUsername]); // eslint-disable-line react-hooks/exhaustive-deps
   const [usernameErr, setUsernameErr] = useState<string | null>(null);
   const [rotation, setRotation] = useState(0);
   const rotRef = useRef(0);
@@ -97,8 +104,14 @@ export default function Page() {
     void loadStatus();
   }, [loadStatus]);
 
+  useEffect(() => {
+    if (!auth.loading) void loadStatus();
+  }, [auth.user?.id, auth.loading]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const loginRequired = !!status?.loginRequired && !auth.user;
+  const guildRequired = !!status?.guildRequired && !!auth.user && !auth.user.inGuild;
   const enabled = status?.enabled ?? config.spinEnabled;
-  const canSpin = !!status?.canSpin && enabled && phase === 'idle';
+  const canSpin = !!status?.canSpin && enabled && phase === 'idle' && !loginRequired && !guildRequired;
   const coolingDown = !!status && !status.canSpin && !!status.nextSpinAt && msUntil(status.nextSpinAt) > 0;
 
   const setRot = (deg: number) => {
@@ -148,6 +161,11 @@ export default function Page() {
       const msg = e instanceof ApiClientError ? e.message : 'Could not reach the spin service.';
       if (e instanceof ApiClientError && e.status === 429) {
         toast(msg || 'You already spun today – come back tomorrow!', 'error');
+        void loadStatus();
+      } else if (e instanceof ApiClientError && e.code === 'login_required') {
+        auth.login('/spin');
+      } else if (e instanceof ApiClientError && e.code === 'join_discord') {
+        toast(msg, 'error');
         void loadStatus();
       } else if (e instanceof ApiClientError && e.status === 400 && /username/i.test(msg)) {
         setUsernameErr(msg);
@@ -267,6 +285,53 @@ export default function Page() {
               <div className="alert alert-warn">
                 <Icon name="info" size={18} />
                 <span>The wheel is taking a short break. New rounds are announced in our Discord.</span>
+              </div>
+            ) : loginRequired ? (
+              <div className="spin-gate card pad">
+                <Icon name="discord" size={26} />
+                <div className="stack" style={{ gap: 4 }}>
+                  <strong>Log in with Discord to spin</strong>
+                  <span className="small muted">One free spin per account every {status?.cooldownHours ?? 24}h. Your prizes are saved to your account.</span>
+                </div>
+                <button type="button" className="btn btn-discord btn-lg" onClick={() => auth.login('/spin')} disabled={auth.loading}>
+                  <Icon name="discord" size={18} /> Login with Discord
+                </button>
+              </div>
+            ) : guildRequired ? (
+              <div className="spin-gate card pad">
+                <Icon name="users" size={26} />
+                <div className="stack" style={{ gap: 4 }}>
+                  <strong>Join our Discord server to unlock the wheel</strong>
+                  <span className="small muted">Members spin for free every day. Join, then click “I joined”.</span>
+                </div>
+                <div className="row wrap">
+                  <a href={config.discordInvite} target="_blank" rel="noreferrer" className="btn btn-discord">
+                    <Icon name="discord" size={16} /> Join the server
+                  </a>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    disabled={guildBusy}
+                    onClick={async () => {
+                      setGuildBusy(true);
+                      try {
+                        const ok = await auth.refreshGuild();
+                        if (ok) {
+                          toast('Welcome aboard – the wheel is unlocked!', 'success');
+                          void loadStatus();
+                        } else toast('We still cannot see you in the server – join via the invite and try again.', 'info');
+                      } catch (e2) {
+                        const ae = e2 as ApiClientError;
+                        if (ae.code === 'relogin') auth.login('/spin');
+                        else toast(ae.message || 'Could not check membership', 'error');
+                      } finally {
+                        setGuildBusy(false);
+                      }
+                    }}
+                  >
+                    {guildBusy ? <span className="spinner" /> : 'I joined – check again'}
+                  </button>
+                </div>
               </div>
             ) : coolingDown ? (
               <div className="spin-cooldown" role="status">

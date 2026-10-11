@@ -35,6 +35,8 @@ const fallbackConfig: PublicConfig = {
   spinEnabled: defaultSettings.spin.enabled,
   spinRequireUsername: defaultSettings.spin.requireUsername,
   spinCooldownHours: defaultSettings.spin.cooldownHours,
+  spinRequireLogin: false,
+  spinRequireGuild: false,
   referral: defaultSettings.referral,
   reviewRewardPercent: defaultSettings.reviewRewardPercent,
   welcomeCoupon: defaultSettings.welcomeCoupon,
@@ -43,7 +45,7 @@ const fallbackConfig: PublicConfig = {
   maintenance: defaultSettings.maintenance,
   serverName: defaultSettings.serverName,
   serverIp: defaultSettings.serverIp,
-  integrations: { stripe: false, paypal: false, nowpayments: false, discord: false },
+  integrations: { stripe: false, paypal: false, nowpayments: false, discord: false, discordOAuth: false },
 };
 
 const Ctx = createContext<StoreApi | null>(null);

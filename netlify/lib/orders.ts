@@ -34,6 +34,7 @@ export function toIndexEntry(o: Order): OrderIndexEntry {
     paymentStatus: o.payment.status,
     methodId: o.payment.methodId,
     referralCode: o.referralCode,
+    discordUserId: o.discordUserId,
     itemsSummary: o.items.map((i) => `${i.qty}× ${i.name}`).join(', ').slice(0, 140),
   };
 }

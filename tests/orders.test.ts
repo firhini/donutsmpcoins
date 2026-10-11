@@ -34,7 +34,7 @@ describe('GET /catalog, /config, /stats, /products/:id/odds', () => {
       expect(m).not.toHaveProperty('handle');
       expect(m).not.toHaveProperty('instructions');
     }
-    expect(res.data.integrations).toEqual({ stripe: false, paypal: false, nowpayments: false, discord: false });
+    expect(res.data.integrations).toEqual({ stripe: false, paypal: false, nowpayments: false, discord: false, discordOAuth: false });
   });
 
   it('returns live stats (zero on a fresh store)', async () => {

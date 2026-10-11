@@ -10,6 +10,9 @@ import type { Route } from '../lib/http';
 import { HttpError, getIp, hashIp, json, nowIso, readJson, requireString, requireUsername } from '../lib/http';
 import { rateLimit } from '../lib/ratelimit';
 import { kvGet, kvSet, kvUpdate } from '../lib/store';
+import { currentUser } from './auth';
+import { addPrize, updateUser } from '../lib/users';
+import { integrations } from '../lib/settings';
 import { getSettings } from '../lib/settings';
 import { createCoupon, getCoupon, normalizeCode, saveCoupon } from '../lib/coupons';
 import { getCredit, addCredit } from '../lib/credit';
@@ -59,14 +62,16 @@ function optionalUsername(v: unknown): string | undefined {
 const spinIpKey = (ipHash: string) => `ip:${ipHash}`;
 const spinDeviceKey = (deviceId: string) => `dev:${deviceId}`;
 const freeItemKey = (username: string) => `free:${username.trim().toLowerCase()}`;
+const spinUserKey = (uid: string) => `user:${uid}`;
 
-async function cooldown(ipHash: string, deviceId: string | undefined, cooldownHours: number): Promise<{ canSpin: boolean; nextSpinAt?: string }> {
-  const [byIp, byDevice] = await Promise.all([
+async function cooldown(ipHash: string, deviceId: string | undefined, cooldownHours: number, uid?: string): Promise<{ canSpin: boolean; nextSpinAt?: string }> {
+  const [byIp, byDevice, byUser] = await Promise.all([
     kvGet<SpinRecord>('spins', spinIpKey(ipHash)),
     deviceId ? kvGet<SpinRecord>('spins', spinDeviceKey(deviceId)) : Promise.resolve(null),
+    uid ? kvGet<SpinRecord>('spins', spinUserKey(uid)) : Promise.resolve(null),
   ]);
   let latest = 0;
-  for (const r of [byIp, byDevice]) {
+  for (const r of [byIp, byDevice, byUser]) {
     const t = r?.lastAt ? Date.parse(r.lastAt) : 0;
     if (Number.isFinite(t) && t > latest) latest = t;
   }
@@ -88,7 +93,7 @@ class CooldownActive extends Error {
  * cooldown check and the write are one compare-and-swap per key, so parallel
  * requests cannot all pass. Returns null on success, else the time of the next spin.
  */
-async function consumeSpin(ipHash: string, deviceId: string | undefined, cooldownHours: number, at: Date): Promise<string | null> {
+async function consumeSpin(ipHash: string, deviceId: string | undefined, cooldownHours: number, at: Date, uid?: string): Promise<string | null> {
   const windowMs = Math.max(0, cooldownHours) * 3600_000;
   const claim = (k: string) =>
     kvUpdate<SpinRecord>('spins', k, (cur) => {
@@ -107,6 +112,14 @@ async function consumeSpin(ipHash: string, deviceId: string | undefined, cooldow
       await claim(spinDeviceKey(deviceId));
     } catch (err) {
       if (err instanceof CooldownActive) return err.nextSpinAt; // ip record stays consumed – the device already spun today anyway
+      throw err;
+    }
+  }
+  if (uid) {
+    try {
+      await claim(spinUserKey(uid));
+    } catch (err) {
+      if (err instanceof CooldownActive) return err.nextSpinAt; // the account already spun today (from another device/IP)
       throw err;
     }
   }
@@ -241,6 +254,14 @@ async function grantPrize(prize: SpinPrize, username: string | undefined, settin
   }
 }
 
+/** Which login gates apply right now (settings × configured integrations). */
+function spinGate(settings: SiteSettings): { oauth: boolean; loginRequired: boolean; guildRequired: boolean } {
+  const oauth = integrations().discordOAuth;
+  const loginRequired = oauth && settings.spin.requireLogin;
+  const guildRequired = loginRequired && settings.spin.requireGuild && !!process.env.DISCORD_GUILD_ID;
+  return { oauth, loginRequired, guildRequired };
+}
+
 // ───────────── routes ─────────────
 
 export const routes: Route[] = [
@@ -284,13 +305,19 @@ export const routes: Route[] = [
       const settings = await getSettings();
       const deviceId = cleanDeviceId(url.searchParams.get('deviceId'));
       const ipHash = hashIp(getIp(req, context));
-      const cd = settings.spin.enabled ? await cooldown(ipHash, deviceId, settings.spin.cooldownHours) : { canSpin: false };
+      const gate = spinGate(settings);
+      const user = gate.oauth ? await currentUser(req) : null;
+      const cd = settings.spin.enabled ? await cooldown(ipHash, deviceId, settings.spin.cooldownHours, user?.id) : { canSpin: false };
       const status: SpinStatus = {
         enabled: settings.spin.enabled,
-        canSpin: settings.spin.enabled && cd.canSpin,
+        canSpin: settings.spin.enabled && cd.canSpin && (!gate.loginRequired || !!user) && (!gate.guildRequired || !!user?.inGuild),
         nextSpinAt: cd.nextSpinAt,
         prizes: settings.spin.prizes.map(stripWeight),
         cooldownHours: settings.spin.cooldownHours,
+        loginRequired: gate.loginRequired,
+        loggedIn: !!user,
+        guildRequired: gate.guildRequired,
+        inGuild: user?.inGuild,
       };
       return json(status);
     },
@@ -303,7 +330,7 @@ export const routes: Route[] = [
       const body = await readJson<{ deviceId?: unknown; username?: unknown }>(req);
       const deviceId = cleanDeviceId(body.deviceId);
       if (typeof body.deviceId !== 'string' || !body.deviceId.trim()) throw new HttpError(400, 'deviceId is required', 'validation');
-      const username = optionalUsername(body.username);
+      let username = optionalUsername(body.username);
       const ipHash = hashIp(getIp(req, context));
       await rateLimit(`spin:${ipHash}`, 10, 60);
 
@@ -311,12 +338,22 @@ export const routes: Route[] = [
       if (!settings.spin.enabled) throw new HttpError(403, 'The spin wheel is taking a break – check back soon.', 'disabled');
       const prizes = settings.spin.prizes;
       if (!prizes.length) throw new HttpError(503, 'The wheel has no prizes configured yet.', 'not_configured');
+
+      // Discord login gate
+      const gate = spinGate(settings);
+      const user = gate.oauth ? await currentUser(req) : null;
+      if (gate.loginRequired && !user) throw new HttpError(401, 'Log in with Discord to spin the wheel.', 'login_required');
+      if (gate.guildRequired && !user?.inGuild) throw new HttpError(403, 'Join our Discord server to spin the wheel.', 'join_discord');
+      if (user) {
+        if (!username && user.mcUsername) username = user.mcUsername;
+        else if (username && username !== user.mcUsername) await updateUser(user.id, { mcUsername: username }).catch(() => undefined);
+      }
       if (settings.spin.requireUsername && !username) throw new HttpError(400, 'Enter your Minecraft username to win free items', 'username_required');
 
       // the spin is consumed atomically before any prize side effect: parallel requests
       // cannot all pass the cooldown, and a failure can never grant a re-roll
       const spunAt = new Date();
-      const blockedUntil = await consumeSpin(ipHash, deviceId, settings.spin.cooldownHours, spunAt);
+      const blockedUntil = await consumeSpin(ipHash, deviceId, settings.spin.cooldownHours, spunAt, user?.id);
       if (blockedUntil) {
         return json({ error: 'You already spun – come back when the timer hits zero.', code: 'cooldown', nextSpinAt: blockedUntil, details: { nextSpinAt: blockedUntil } }, 429);
       }
@@ -325,6 +362,9 @@ export const routes: Route[] = [
       const index = weightedIndex(prizes.map((p) => Math.max(0, Number(p.weight) || 0)));
       const prize = prizes[index];
       const granted = await grantPrize(prize, username, settings);
+      if (user && granted.prize.type !== 'nothing') {
+        await addPrize(user.id, { at: nowIso(), label: granted.prize.label, type: granted.prize.type, code: granted.code, orderId: granted.orderId, creditCents: granted.creditCents }).catch(() => undefined);
+      }
 
       if (granted.prize.type !== 'nothing') {
         await notifyDiscord({

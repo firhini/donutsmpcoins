@@ -103,6 +103,11 @@ export default function OrderDetail() {
                   </div>
                   <div className="muted small meta">
                     {order.usernameUuid ? <span className="mono xs">{order.usernameUuid}</span> : <span>UUID not verified</span>}
+                    {order.discordUserId && (
+                      <span className="xs">
+                        Discord: <strong>{order.discordUsername ?? '?'}</strong> <span className="mono muted">({order.discordUserId})</span>
+                      </span>
+                    )}
                     {order.email && <a href={`mailto:${order.email}`}>{order.email}</a>}
                   </div>
                 </div>

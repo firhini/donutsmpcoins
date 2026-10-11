@@ -43,6 +43,7 @@ export function integrations() {
     paypal: !!(process.env.PAYPAL_CLIENT_ID && process.env.PAYPAL_CLIENT_SECRET),
     nowpayments: !!process.env.NOWPAYMENTS_API_KEY,
     discord: !!process.env.DISCORD_WEBHOOK_URL,
+    discordOAuth: !!(process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET),
   };
 }
 
@@ -78,6 +79,8 @@ export function toPublicConfig(settings: SiteSettings): PublicConfig {
     spinEnabled: settings.spin.enabled,
     spinRequireUsername: settings.spin.requireUsername,
     spinCooldownHours: settings.spin.cooldownHours,
+    spinRequireLogin: settings.spin.requireLogin && integrations().discordOAuth,
+    spinRequireGuild: settings.spin.requireGuild && integrations().discordOAuth && !!process.env.DISCORD_GUILD_ID,
     referral: settings.referral,
     reviewRewardPercent: settings.reviewRewardPercent,
     welcomeCoupon: settings.welcomeCoupon,

@@ -121,6 +121,8 @@ export const defaultSettings: SiteSettings = {
     enabled: true,
     cooldownHours: 24,
     requireUsername: true,
+    requireLogin: true,
+    requireGuild: false,
     prizes: [
       { id: 'c5', label: '5% OFF', type: 'coupon', percent: 5, weight: 28, color: '#3b82f6', validDays: 7 },
       { id: 'c10', label: '10% OFF', type: 'coupon', percent: 10, weight: 20, color: '#8b5cf6', validDays: 7 },

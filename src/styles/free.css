@@ -1429,3 +1429,17 @@
   gap: 10px;
   padding: var(--sp-5);
 }
+
+/* ───────── spin login gate ───────── */
+.spin-gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  border-color: rgba(88, 101, 242, 0.45);
+  background: linear-gradient(180deg, rgba(88, 101, 242, 0.14), rgba(88, 101, 242, 0.04));
+}
+.spin-gate > svg {
+  color: #8b97ff;
+}

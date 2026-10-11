@@ -88,7 +88,7 @@ describe('dashboard & orders', () => {
     expect(dash.data.recent[0].id).not.toBe(a.id); // newest first
     expect(dash.data.pendingReviews).toBe(0);
     expect(dash.data.activeGiveaways).toBe(0);
-    expect(dash.data.integrations).toEqual({ stripe: false, paypal: false, nowpayments: false, discord: false });
+    expect(dash.data.integrations).toEqual({ stripe: false, paypal: false, nowpayments: false, discord: false, discordOAuth: false });
   });
 
   it('lists, filters and searches orders with paging info', async () => {

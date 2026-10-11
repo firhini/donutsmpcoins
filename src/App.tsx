@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { ToastProvider } from './context/ToastContext';
 import { StoreProvider } from './context/StoreContext';
 import { CartProvider } from './context/CartContext';
+import { AuthProvider } from './context/AuthContext';
 import { Layout } from './components/layout/Layout';
 
 // Storefront
@@ -29,6 +30,7 @@ const Redeem = lazy(() => import('./pages/Redeem'));
 const Referral = lazy(() => import('./pages/Referral'));
 const Giveaways = lazy(() => import('./pages/Giveaways'));
 const Reviews = lazy(() => import('./pages/Reviews'));
+const Account = lazy(() => import('./pages/Account'));
 // Admin
 const Admin = lazy(() => import('./pages/admin/Admin'));
 
@@ -36,6 +38,7 @@ export default function App() {
   return (
     <ToastProvider>
       <StoreProvider>
+        <AuthProvider>
         <CartProvider>
           <Routes>
             <Route path="/admin/*" element={<Admin />} />
@@ -61,10 +64,12 @@ export default function App() {
               <Route path="/referral" element={<Referral />} />
               <Route path="/giveaways" element={<Giveaways />} />
               <Route path="/reviews" element={<Reviews />} />
+              <Route path="/account" element={<Account />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </CartProvider>
+        </AuthProvider>
       </StoreProvider>
     </ToastProvider>
   );
