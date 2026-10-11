@@ -33,7 +33,7 @@ let orderId;
   const cfg = await call('/config');
   const manual = cfg.data.paymentMethods.find((m) => m.type === 'manual');
   const o = await call('/orders', { method: 'POST', body: { username: 'Notch', items: [{ productId: 'money-1m', qty: 50 }, { productId: 'mystery-box', qty: 2 }], paymentMethodId: manual?.id, tosAccepted: true, deviceId } });
-  ok(o.status === 200 && o.data.order?.id?.startsWith('DC-'), `POST /orders → ${o.status} ${o.data?.order?.id || JSON.stringify(o.data)}`);
+  ok((o.status === 200 || o.status === 201) && o.data.order?.id?.startsWith('DC-'), `POST /orders → ${o.status} ${o.data?.order?.id || JSON.stringify(o.data)}`);
   orderId = o.data?.order?.id;
   ok(o.data?.order?.status === 'awaiting_payment', `status awaiting_payment`);
   ok(!!o.data?.order?.payment?.instructions, `instructions rendered: ${String(o.data?.order?.payment?.instructions).slice(0, 60)}…`);
@@ -87,7 +87,7 @@ console.log('Admin');
   const list = await call('/admin/orders?status=awaiting_payment', { token }); ok(list.status === 200 && list.data.orders?.some((o) => o.id === orderId), `orders list contains ${orderId}`);
   const paid = await call(`/admin/orders/${orderId}`, { method: 'PATCH', token, body: { status: 'paid' } }); ok(paid.status === 200 && paid.data.order?.status === 'paid', `mark paid → ${paid.data?.order?.status}`);
   const del = await call(`/admin/orders/${orderId}`, { method: 'PATCH', token, body: { status: 'delivered' } }); ok(del.data?.order?.status === 'delivered', `mark delivered → ${del.data?.order?.status}`);
-  const pr = await call('/reviews', { method: 'POST', body: { orderId, rating: 5, comment: 'Fast delivery, thanks!' } }); ok(pr.status === 200 && pr.data.review?.status === 'pending', `review submitted → ${pr.status}`);
+  const pr = await call('/reviews', { method: 'POST', body: { orderId, rating: 5, comment: 'Fast delivery, thanks!' } }); ok((pr.status === 200 || pr.status === 201) && pr.data.review?.status === "pending", `review submitted → ${pr.status}`);
   const pending = await call('/admin/reviews?status=pending', { token }); ok(pending.status === 200 && pending.data.reviews?.length >= 1, `pending reviews: ${pending.data?.reviews?.length}`);
   const rid = pending.data?.reviews?.[0]?.id;
   const appr = await call(`/admin/reviews/${rid}`, { method: 'PATCH', token, body: { status: 'approved' } }); ok(appr.status === 200 && appr.data.review?.rewardCode, `approve → reward ${appr.data?.review?.rewardCode}`);
@@ -98,7 +98,7 @@ console.log('Admin');
   const q = await call('/quote', { method: 'POST', body: { items: [{ productId: 'money-1m', qty: 10 }], discountCode: 'SMOKE10' } }); ok(q.data?.couponDiscountCents === Math.round(169 * 0.1) || q.data?.couponDiscountCents === 17 || q.data?.couponDiscountCents === 18, `coupon discount ${q.data?.couponDiscountCents} on ${q.data?.subtotalCents}`);
   const gift = await call('/admin/gifts', { method: 'POST', token, body: { productId: 'skeleton-spawner', qty: 2, maxUses: 1 } }); ok(gift.status === 200 || gift.status === 201, `create gift → ${gift.status} ${gift.data?.gift?.code || gift.data?.code || ''}`);
   const gcode = gift.data?.gift?.code || gift.data?.code;
-  if (gcode) { const rd = await call('/redeem', { method: 'POST', body: { code: gcode, username: 'Notch' } }); ok(rd.status === 200 && rd.data.order?.status === 'paid' && rd.data.order?.payment?.type === 'free', `redeem gift → free order ${rd.data?.order?.id}`); }
+  if (gcode) { const rd = await call('/redeem', { method: 'POST', body: { code: gcode, username: 'Notch' } }); ok((rd.status === 200 || rd.status === 201) && rd.data.order?.status === "paid" && rd.data.order?.payment?.type === "free", `redeem gift → free order ${rd.data?.order?.id}`); }
   const gw = await call('/admin/giveaways', { method: 'POST', token, body: { title: 'Smoke giveaway', prize: '10M Money', endsAt: new Date(Date.now() + 86400000).toISOString(), maxWinners: 1 } }); ok(gw.status === 200 || gw.status === 201, `create giveaway → ${gw.status}`);
   const gid = gw.data?.giveaway?.id || gw.data?.id;
   if (gid) {

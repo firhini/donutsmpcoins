@@ -178,6 +178,11 @@ export default function Page() {
       if (ae.status === 404) msg = 'Ordering is temporarily unavailable. Please try again in a minute or ping us on Discord.';
       if (ae.status === 429) msg = 'Too many orders from your connection – please wait a few minutes and try again.';
       if (ae.status === 503) msg = ae.message || 'The store is in maintenance – back in a moment.';
+      if (ae.status === 409) {
+        // credit / coupon / stock changed since the quote was made – reload live prices
+        sq.refresh();
+        msg = `${ae.message} Your totals were refreshed – please check and try again.`;
+      }
       setFormErr(msg);
       toast(msg, 'error');
       setPlacing(false);
