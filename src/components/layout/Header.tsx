@@ -106,7 +106,7 @@ export function Header() {
                 </div>
               ) : (
                 <button type="button" className="btn btn-discord btn-sm only-desktop" onClick={() => auth.login()}>
-                  <Icon name="discord" size={16} /> Login with Discord
+                  <Icon name="discord" size={16} /> Login<span className="only-wide"> with Discord</span>
                 </button>
               )
             ) : (
