@@ -811,7 +811,7 @@
   border: 1px solid var(--border-1);
   background: var(--bg-2);
 }
-.pp-block h3 {
+.pp-block h2 {
   font-size: var(--fs-md);
   margin-bottom: 10px;
   display: flex;

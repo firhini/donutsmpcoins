@@ -2,7 +2,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 // api-helpers MUST be imported first – it relocates the file store before loading the API.
 import { call, cleanupTestData, freshIp, get, lib, orderBody, post } from './api-helpers';
 import { defaultSettings } from '../src/data/settings';
-import type { Catalog, Coupon, CreditAccount, Order, OrderIndexEntry, Product, PublicOrder, SiteSettings } from '../src/shared/types';
+import type { Catalog, Coupon, CreditAccount, Order, OrderIndexEntry, Product, PublicConfig, PublicOrder, SiteSettings } from '../src/shared/types';
 import type { GiftCode } from '../netlify/lib/gifts';
 
 process.env.ADMIN_PASSWORD = 'test-pass';
@@ -318,6 +318,26 @@ describe('settings', () => {
     expect(tiers.data.spendingTiers).toEqual([{ minCents: 500, percent: 2 }]);
 
     await aput('/admin/settings', { sale: defaultSettings.sale, storeName: defaultSettings.storeName, spendingTiers: defaultSettings.spendingTiers });
+  });
+
+  it('stores the legal notice, exposes it publicly and validates it', async () => {
+    const res = await aput<SiteSettings>('/admin/settings', { legal: { operatorName: 'Max Mustermann', address: 'Musterstraße 1\n12345 Musterstadt', email: 'legal@example.com' } });
+    expect(res.status, JSON.stringify(res.data)).toBe(200);
+    expect(res.data.legal.operatorName).toBe('Max Mustermann');
+    expect(res.data.legal.address).toBe('Musterstraße 1\n12345 Musterstadt');
+    // untouched fields keep their defaults (deep merge)
+    expect(res.data.legal.priceNote).toBe(defaultSettings.legal.priceNote);
+
+    const cfg = await get<PublicConfig>('/config');
+    expect(cfg.data.legal.email).toBe('legal@example.com');
+    expect(cfg.data.legal.priceNote).toBe(defaultSettings.legal.priceNote);
+
+    expect((await aput('/admin/settings', { legal: { email: 42 } })).status).toBe(400);
+    expect((await aput('/admin/settings', { legal: { extra: 'x'.repeat(2001) } })).status).toBe(400);
+    expect((await aput('/admin/settings', { legal: 'none' })).status).toBe(400);
+
+    await aput('/admin/settings', { legal: defaultSettings.legal });
+    expect((await get<PublicConfig>('/config')).data.legal.operatorName).toBe('');
   });
 
   it('rejects malformed settings', async () => {

@@ -199,6 +199,11 @@ Verstößen gegen ihre Richtlinien sperren. Halte Lieferbelege (Screenshots) ber
   AggregateRating (Bewertungsseite, sobald echte Bewertungen existieren).
 - **sitemap.xml + robots.txt** werden beim Build generiert (`dist/sitemap.xml`).
 - **Echte 404-Seiten** (Status 404 statt „Soft 404“), saubere URLs ohne Parameter, Breadcrumbs, interne Verlinkung.
+- **URL-Form:** Die Seiten werden als flache Dateien (`dist/shop/money.html`) erzeugt. Netlify liefert sie unter
+  `/shop/money` aus und leitet `/shop/money/` per 301 darauf um – genau die Form, die in Canonical-Tags und Sitemap
+  steht. Lass in Netlify unter *Build & deploy → Post processing* die Option **Pretty URLs** eingeschaltet (Standard).
+- **Kein Spinner, kein Layout-Sprung:** Der Inhalt steht direkt im HTML (React `prerender`), und beim Laden wird zuerst
+  das Modul der aktuellen Seite geholt, bevor React übernimmt – Google und Nutzer sehen sofort die fertige Seite.
 - **Performance:** Code-Splitting, CSS der Seite wird direkt im HTML verlinkt, Bilder lazy, Assets ein Jahr gecacht.
 - **SEO-Inhalte:** 57 eigene Produkttexte (`src/data/productCopy.ts`), Kategorie-Texte (`src/data/categoryCopy.ts`),
   7 lange Guides unter `/guides` (`src/data/guides.ts`), 5 Keyword-Landingpages (`src/data/landingCopy.ts`, z. B.
@@ -225,6 +230,25 @@ Verstößen gegen ihre Richtlinien sperren. Halte Lieferbelege (Screenshots) ber
 
 Wichtig: Die Seite muss die **Google-Richtlinien** einhalten – keine gekauften Bewertungen, keine Keyword-Massen, keine
 irreführenden Preise. Alles Eingebaute hält sich daran.
+
+## 5d. Rechtliches: Impressum, Datenschutz, Preise, Widerruf
+
+Die Seite bringt alle Texte mit, aber ein paar Angaben kann nur der Betreiber machen – **ohne sie ist der Shop in
+Deutschland/der EU nicht rechtssicher**:
+
+1. **Impressum (Pflicht, § 5 DDG):** `/admin` → *Settings* → **Legal notice & prices** – Name, Anschrift, E-Mail
+   (optional Telefon, USt-IdNr./Kleinunternehmer-Hinweis, weitere Pflichtangaben). Erscheint unter `/imprint`, im Footer
+   und als „Controller“ in der Datenschutzerklärung. Bis du es ausfüllst, zeigt die Seite einen Hinweis statt erfundener Daten.
+2. **Preisangabe (PAngV):** Der *Price note*-Text („All prices are final prices …“) steht unter jeder Bestellsumme und im
+   Footer. Bist du Kleinunternehmer, ergänze z. B. „No VAT is charged (§ 19 UStG)“; führst du Umsatzsteuer ab, „incl. VAT“.
+3. **Widerrufsrecht bei digitalen Inhalten:** Die Checkbox im Checkout enthält die ausdrückliche Zustimmung zum sofortigen
+   Lieferbeginn und den Hinweis auf das Erlöschen des Widerrufsrechts (§ 356 Abs. 5 BGB). Der Server speichert die
+   Bestellung nur mit gesetzter Zustimmung; AGB (§ 2) und Refund Policy erklären es.
+4. **Datenschutz:** `/privacy` beschreibt Bestelldaten, Discord-Login (Cookies `dc_session`, `dc_oauth_state`), lokale
+   Speicherung und – nur wenn `GA_MEASUREMENT_ID` gesetzt ist – Google Analytics mit Consent-Banner (Accept / No thanks).
+5. **Steuern & Gewerbe:** Regelmäßige Verkäufe sind in Deutschland in der Regel gewerblich (Gewerbeanmeldung,
+   Einkommensteuer, ggf. Umsatzsteuer). Das kann die Seite nicht für dich lösen – kläre es mit dem Finanzamt oder einem
+   Steuerberater, bevor du Umsatz machst.
 
 ## 6. Ablauf einer Bestellung (für dich)
 
@@ -269,7 +293,8 @@ einfach ausliefern und auf *Delivered* setzen.
 
 ## 9. Checkliste nach dem ersten Deploy
 
-1. `/admin` → Einstellungen → **Store**: Discord-Invite, Server-IP, Support-E-Mail.
+1. `/admin` → Einstellungen → **Store**: Discord-Invite, Server-IP, Support-E-Mail. **Legal notice & prices**: Impressum
+   (Name, Anschrift, E-Mail) und Preis-Hinweis ausfüllen – siehe Abschnitt 5d.
 2. **Zahlungsarten**: PayPal-Handle / Wallet-Adressen eintragen, Platzhalter-Methoden deaktivieren, die du nicht nutzt.
 3. **Ankündigungsleiste** anpassen (z. B. „Glücksrad – jeden Tag Gratis-Coins“).
 4. Testbestellung machen (eigener Minecraft-Name, 1M Money) → Discord-Ping prüfen → im Admin auf *Paid* und *Delivered* setzen.

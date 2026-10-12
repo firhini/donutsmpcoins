@@ -433,3 +433,19 @@
   text-align: left;
   width: min(100%, 460px);
 }
+
+/* legal notice */
+.imprint-address {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px 18px;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border-1);
+  background: var(--bg-2);
+  margin-bottom: 16px;
+}
+.imprint-address strong {
+  margin-bottom: 4px;
+}

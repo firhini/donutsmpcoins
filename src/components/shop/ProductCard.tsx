@@ -47,7 +47,8 @@ export function ProductCard({ product, compact = false, eager = false }: { produ
 
   return (
     <article className={`pcard card hover ${compact ? 'pcard-compact' : ''} ${stock.soldOut ? 'pcard-out' : ''}`} data-kind={product.kind}>
-      <Link to={`/product/${product.slug}`} className="pcard-media" aria-label={`${product.name} – details`} tabIndex={-1}>
+      {/* duplicate of the title link below – hidden from assistive tech and the tab order */}
+      <Link to={`/product/${product.slug}`} className="pcard-media" aria-hidden="true" tabIndex={-1}>
         <ProductImage product={product} size={compact ? 'sm' : 'md'} eager={eager} />
         {tags.length > 0 && (
           <div className="pcard-badges">

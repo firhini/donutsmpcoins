@@ -8,13 +8,14 @@ import { useToast } from '../../context/ToastContext';
 import { getAdminSettings, saveAdminSettings, errorMessage } from '../../lib/adminApi';
 import { useAdminQuery } from '../../components/admin/hooks';
 import { ErrorBlock, PageHead } from '../../components/admin/Bits';
-import { AnnouncementSection, DeliverySection, MaintenanceSection, SaleSection, StoreSection } from '../../components/admin/SettingsSections/StoreSections';
+import { AnnouncementSection, DeliverySection, LegalSection, MaintenanceSection, SaleSection, StoreSection } from '../../components/admin/SettingsSections/StoreSections';
 import { CurrenciesSection, RewardsSection, TiersSection } from '../../components/admin/SettingsSections/TiersCurrenciesRewards';
 import { PaymentMethodsSection } from '../../components/admin/SettingsSections/PaymentMethodsSection';
 import { SpinSection } from '../../components/admin/SettingsSections/SpinSection';
 
 const JUMP: { id: string; label: string }[] = [
   { id: 'store', label: 'Store' },
+  { id: 'legal', label: 'Legal' },
   { id: 'announcement', label: 'Announcement' },
   { id: 'sale', label: 'Sale' },
   { id: 'tiers', label: 'Tiers' },
@@ -82,6 +83,7 @@ export default function Settings() {
       ) : (
         <div className="adm-stack" key={q.data ? 'live' : 'defaults'}>
           <StoreSection settings={settings} onSave={save} />
+          <LegalSection settings={settings} onSave={save} />
           <AnnouncementSection settings={settings} onSave={save} />
           <SaleSection settings={settings} onSave={save} />
           <TiersSection settings={settings} onSave={save} />

@@ -28,6 +28,7 @@ const fallbackConfig: PublicConfig = {
   storeName: defaultSettings.storeName,
   tagline: defaultSettings.tagline,
   discordInvite: defaultSettings.discordInvite,
+  legal: defaultSettings.legal,
   announcement: defaultSettings.announcement,
   sale: defaultSettings.sale,
   spendingTiers: defaultSettings.spendingTiers,

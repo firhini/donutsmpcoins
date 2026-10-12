@@ -229,6 +229,14 @@ function validateSettingsPatch(body: unknown): Partial<SiteSettings> {
       }
     }
   }
+  const legal = patch.legal;
+  if (isObj(legal)) {
+    for (const [k, v] of Object.entries(legal)) {
+      if (v === undefined) continue;
+      if (typeof v !== 'string') throw new HttpError(400, `legal.${k} must be text.`, 'validation');
+      if (v.length > 2000) throw new HttpError(400, `legal.${k} is too long (max 2000 characters).`, 'validation');
+    }
+  }
   // nested numeric fields – a bad type here would corrupt every quote
   const sale = patch.sale;
   if (isObj(sale)) numField(sale, 'percent', 'Sale percent', 0, 90, true);

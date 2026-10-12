@@ -12,6 +12,9 @@ const TOC = [
   { id: 'contact', label: 'Contact' },
 ];
 
+// set at build time from GA_MEASUREMENT_ID – identical on server and client, so safe to render
+const GA_ENABLED = Boolean(import.meta.env.VITE_GA_ID);
+
 export default function Privacy() {
   const { config } = useStore();
   const store = config.storeName;
@@ -19,7 +22,7 @@ export default function Privacy() {
     <ContentPage
       eyebrow="Legal"
       title="Privacy Policy"
-      description={`What ${store} stores about you (username, order, optional e-mail, hashed IP, device id), why, who else sees it, and how to get it deleted.`}
+      description={`What ${store} stores about you (username, order, optional e-mail, hashed IP, device id, Discord login), why, who else sees it, and how to get it deleted.`}
       lead="We store as little as a store can get away with. This page lists all of it."
       crumbs={[{ label: 'Privacy Policy' }]}
       toc={TOC}
@@ -66,18 +69,27 @@ export default function Privacy() {
               <td>If you leave a review</td>
               <td>Shown publicly with your username after approval</td>
             </tr>
+            <tr>
+              <td>Discord account: id, username, avatar, and – if we check it – whether you are a member of our Discord server</td>
+              <td>Only if you log in with Discord (optional)</td>
+              <td>To recognise you, apply the daily-spin rules to your account and show you your own orders. We never see your Discord password or e-mail.</td>
+            </tr>
           </tbody>
         </table>
       </div>
       <p>
-        We do not store payment card numbers, PayPal passwords, wallet keys or your Minecraft password – we never ask for them. We do not run analytics trackers or advertising pixels on
-        this site.
+        We do not store payment card numbers, PayPal passwords, wallet keys or your Minecraft password – we never ask for them.{' '}
+        {GA_ENABLED
+          ? 'The only analytics tool is Google Analytics, and it loads only after you accept the cookie notice (details below). No advertising pixels.'
+          : 'We do not run analytics trackers or advertising pixels on this site.'}
       </p>
 
       <h2 id="why">Why we store it</h2>
       <p>
-        To fulfil your order and keep a record of it (contract), to prevent fraud and abuse of free promotions (legitimate interest), and to show reviews you chose to publish (consent).
-        That is the complete list of purposes. We do not build profiles, we do not sell or rent data, and we do not send marketing e-mails.
+        To fulfil your order and keep a record of it (contract), to prevent fraud and abuse of free promotions (legitimate interest), to show reviews you chose to publish (consent), to
+        keep you logged in when you chose to log in with Discord (contract){GA_ENABLED ? ', and to see which pages help players when you accept analytics (consent)' : ''}. That is the
+        complete list of purposes. We do not build profiles, we do not sell or rent data, and we do not send marketing e-mails. The controller is the operator named in the{' '}
+        <Link to="/imprint">legal notice</Link>.
       </p>
 
       <h2 id="third-parties">Third parties that see some of it</h2>
@@ -100,15 +112,28 @@ export default function Privacy() {
           <strong>mc-heads.net.</strong> Review cards and some pages load avatar images for usernames from this service; your browser requests the image directly.
         </li>
         <li>
+          <strong>Discord (login).</strong> If you use “Login with Discord”, Discord asks you to approve sharing your account id, username and avatar (and your server list if we
+          check membership). The login happens on Discord's site under Discord's privacy policy; you can revoke it any time in Discord → Settings → Authorized Apps.
+        </li>
+        {GA_ENABLED && (
+          <li>
+            <strong>Google Analytics 4.</strong> Only after you click “Accept” in the cookie notice. It records page views and interactions with IP anonymisation; Google processes this
+            under its own terms, partly on servers outside the EU. Clicking “No thanks” keeps it off, and you can change your mind by clearing the site's storage.
+          </li>
+        )}
+        <li>
           <strong>Google Fonts.</strong> Fonts are loaded from Google's servers, which see your IP address when the page loads.
         </li>
       </ul>
 
       <h2 id="cookies">Cookies and local storage</h2>
       <p>
-        We do not set tracking cookies. The site keeps a few things in your browser's local storage so it works smoothly: your cart, your chosen currency, a referral or discount code you
-        entered, the random device id mentioned above, and – only if you are staff – an admin session token. You can clear all of it through your browser settings at any time; the only
-        effect is an empty cart and a new device id.
+        We set no tracking cookies. Two technical cookies exist only if you log in with Discord: <code className="kbd">dc_session</code> (your signed login, HttpOnly, 30 days or until you
+        log out) and <code className="kbd">dc_oauth_state</code> (10 minutes, protects the login against forgery). The site keeps a few things in your browser's local storage so it works
+        smoothly: your cart, your chosen currency, a referral or discount code you entered, the random device id mentioned above, your cookie-notice choice
+        {GA_ENABLED ? ' (dc_consent)' : ''}, and – only if you are staff – an admin session token.{' '}
+        {GA_ENABLED ? 'Google Analytics sets its own cookies (_ga, _ga_*) only after you accept. ' : ''}
+        You can clear all of it through your browser settings at any time; the only effect is an empty cart, a new device id and being logged out.
       </p>
 
       <h2 id="retention">Retention</h2>
@@ -119,8 +144,10 @@ export default function Privacy() {
 
       <h2 id="rights">Your rights</h2>
       <p>
-        You can ask us what we store about a username, ask for it to be corrected or deleted, and withdraw consent for a published review. We will do it unless we are legally required to
-        keep a record (for example an order under an open payment dispute). Depending on where you live you may also have the right to complain to a data-protection authority.
+        You can ask us what we store about a username or Discord account, ask for it to be corrected or deleted, withdraw consent for a published review, and have your Discord login
+        data removed (log out, revoke the app in Discord and tell us). We will do it unless we are legally required to keep a record (for example an order under an open payment dispute
+        or a tax record). Depending on where you live you may also have the right to complain to a data-protection authority – in the EU that is the authority of your country of
+        residence.
       </p>
 
       <h2 id="contact">Contact</h2>

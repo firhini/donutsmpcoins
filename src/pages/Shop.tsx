@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useStore } from '../context/StoreContext';
 import { Seo } from '../components/ui/Seo';
@@ -29,6 +29,25 @@ export default function Shop() {
   const { config, products, categories, loading } = useStore();
   const [q, setQ] = useState('');
   const [sort, setSort] = useState<SortKey>('featured');
+
+  // `/shop?q=term` is the search URL advertised to Google (WebSite SearchAction in the
+  // JSON-LD) – read it once on the client and keep the address bar in sync while typing.
+  // Done in effects (not in the initial state) so the pre-rendered HTML hydrates cleanly.
+  const synced = useRef(false);
+  useEffect(() => {
+    const initial = new URLSearchParams(window.location.search).get('q');
+    if (initial) setQ(initial.slice(0, 60));
+    synced.current = true;
+  }, []);
+  useEffect(() => {
+    if (!synced.current) return;
+    const url = new URL(window.location.href);
+    const term = q.trim();
+    if ((url.searchParams.get('q') ?? '') === term) return;
+    if (term) url.searchParams.set('q', term);
+    else url.searchParams.delete('q');
+    window.history.replaceState(window.history.state, '', url);
+  }, [q]);
 
   const category = slug ? categories.find((c) => c.slug === slug) : undefined;
   const value: HotbarValue = category ? category.id : 'all';

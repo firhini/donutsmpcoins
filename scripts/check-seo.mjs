@@ -34,6 +34,17 @@ for await (const f of walk(DIST)) {
       issues.push('JSON-LD invalid: ' + e.message);
     }
   }
+  // streaming Suspense markup = content hidden for crawlers + a spinner flash + layout shift
+  if (/<!--\$\?-->|<div hidden id="S:|\$RC\(/.test(html)) issues.push('unresolved Suspense boundary (streaming markup)');
+  if (/<main>\s*(<!--[^>]*-->)?\s*<div class="container" style="padding:80px 0/.test(html)) issues.push('main starts with the page fallback spinner');
+  // canonical must be the URL Netlify actually serves for this file: no trailing slash, same path as the file
+  const canon = html.match(/<link rel="canonical" href="([^"]*)"/);
+  if (canon) {
+    const expected = rel === 'index.html' ? '/' : rel === '404.html' ? '/404' : '/' + rel.replace(/\\/g, '/').replace(/\.html$/, '');
+    const got = canon[1].replace(/^https?:\/\/[^/]+/, '') || '/';
+    if (got !== expected) issues.push(`canonical path ${got} ≠ file path ${expected}`);
+    if (got.length > 1 && got.endsWith('/')) issues.push('canonical has a trailing slash');
+  }
   const body = html.match(/<div id="root">([\s\S]*)<\/div>\s*<script/);
   if (!body || body[1].length < 1500) issues.push('thin body (' + (body ? body[1].length : 0) + ' chars)');
   if (!/<h1[\s>]/.test(html)) issues.push('no h1');

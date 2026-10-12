@@ -52,6 +52,53 @@ export function StoreSection({ settings, onSave }: { settings: SiteSettings; onS
   );
 }
 
+export function LegalSection({ settings, onSave }: { settings: SiteSettings; onSave: SaveFn }) {
+  const value: SiteSettings['legal'] = { ...settings.legal };
+  return (
+    <SectionCard<SiteSettings['legal']>
+      id="legal"
+      title="Legal notice & prices"
+      icon="info"
+      sub={
+        <>
+          Shown on <code className="kbd">/imprint</code>, in the footer and at checkout. A store run from Germany/the EU must publish an Impressum with name, address and e-mail
+          (§ 5 DDG) – the page stays empty until you fill this in.
+        </>
+      }
+      value={value}
+      toPatch={(d) => ({ legal: Object.fromEntries(Object.entries(d).map(([k, v]) => [k, (v ?? '').toString().trim()])) as SiteSettings['legal'] })}
+      validate={(d) => (d.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email.trim()) ? 'The legal contact e-mail does not look valid.' : null)}
+      onSave={onSave}
+    >
+      {(d, set) => (
+        <div className="adm-form-grid cols-2">
+          <Field label="Operator / business name" hint="Your full name, or the business name plus the responsible person." htmlFor="lg-name">
+            <TextInput id="lg-name" value={d.operatorName} onChange={(e) => set({ ...d, operatorName: e.target.value })} placeholder="Max Mustermann" />
+          </Field>
+          <Field label="Contact e-mail" hint="Required in the legal notice. Can be the same as the support e-mail." htmlFor="lg-mail">
+            <TextInput id="lg-mail" type="email" value={d.email} onChange={(e) => set({ ...d, email: e.target.value })} placeholder="legal@yourstore.com" />
+          </Field>
+          <Field label="Postal address" hint="Street, postcode, city, country – one per line." htmlFor="lg-addr">
+            <TextArea id="lg-addr" rows={3} value={d.address} onChange={(e) => set({ ...d, address: e.target.value })} placeholder={'Musterstraße 1\n12345 Musterstadt\nGermany'} />
+          </Field>
+          <Field label="Phone / other contact" optional htmlFor="lg-phone">
+            <TextInput id="lg-phone" value={d.phone} onChange={(e) => set({ ...d, phone: e.target.value })} placeholder="+49 …" />
+          </Field>
+          <Field label="VAT id / tax note" optional hint="E.g. “VAT not charged – small business under § 19 UStG” or your VAT id." htmlFor="lg-vat">
+            <TextInput id="lg-vat" value={d.vatId} onChange={(e) => set({ ...d, vatId: e.target.value })} placeholder="DE123456789 or § 19 UStG note" />
+          </Field>
+          <Field label="Price note" hint="Shown under the order total and in the footer. Consumers must see final prices." htmlFor="lg-price">
+            <TextInput id="lg-price" value={d.priceNote} onChange={(e) => set({ ...d, priceNote: e.target.value })} />
+          </Field>
+          <Field label="Additional legal text" optional hint="Anything else your legal notice must contain (register number, supervisory authority, responsible for content …)." htmlFor="lg-extra" className="span-2">
+            <TextArea id="lg-extra" rows={3} value={d.extra} onChange={(e) => set({ ...d, extra: e.target.value })} />
+          </Field>
+        </div>
+      )}
+    </SectionCard>
+  );
+}
+
 export function AnnouncementSection({ settings, onSave }: { settings: SiteSettings; onSave: SaveFn }) {
   const value = { ...settings.announcement, link: settings.announcement.link ?? '' };
   return (

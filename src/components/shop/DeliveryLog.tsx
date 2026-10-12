@@ -28,11 +28,18 @@ export function DeliveryLog() {
     ],
     [config.storeName, staff],
   );
-  const reduced = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-  const [shown, setShown] = useState(reduced ? lines.length : 0);
+  // read the media query in an effect so server HTML and first client render match
+  const [reduced, setReduced] = useState(false);
+  const [shown, setShown] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) setReduced(true);
+  }, []);
 
   useEffect(() => {
-    if (reduced) return;
+    if (reduced) {
+      setShown(lines.length);
+      return;
+    }
     let cancelled = false;
     let t: number;
     const tick = (n: number) => {

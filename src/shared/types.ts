@@ -471,11 +471,30 @@ export interface CurrencyConfig {
   rate: number;
 }
 
+/** Legal notice (Impressum) + price note – shown on /imprint, in the footer and at checkout. All optional text. */
+export interface LegalSettings {
+  /** operator / business name as it must appear in the legal notice */
+  operatorName: string;
+  /** postal address, line breaks allowed */
+  address: string;
+  /** contact e-mail (legal notice requires one) */
+  email: string;
+  /** phone or other fast contact channel (optional) */
+  phone: string;
+  /** VAT id or tax note, e.g. "VAT not charged under § 19 UStG" (optional) */
+  vatId: string;
+  /** short sentence next to prices/checkout, e.g. "All prices are final prices." */
+  priceNote: string;
+  /** anything else the legal notice must contain (supervisory authority, register no., …) */
+  extra: string;
+}
+
 export interface SiteSettings {
   storeName: string;
   tagline: string;
   discordInvite: string;
   supportEmail?: string;
+  legal: LegalSettings;
   announcement: { enabled: boolean; text: string; link?: string };
   sale: { enabled: boolean; percent: number; label: string; endsAt?: string };
   spendingTiers: SpendingTier[];
@@ -516,6 +535,7 @@ export interface PublicConfig {
   tagline: string;
   discordInvite: string;
   supportEmail?: string;
+  legal: LegalSettings;
   announcement: SiteSettings['announcement'];
   sale: SiteSettings['sale'];
   spendingTiers: SpendingTier[];

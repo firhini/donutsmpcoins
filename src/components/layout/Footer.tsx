@@ -24,7 +24,7 @@ export function Footer() {
             </a>
           </div>
           <div>
-            <h4>Shop</h4>
+            <h2>Shop</h2>
             <ul>
               <li><Link to="/shop/money">DonutSMP Money</Link></li>
               <li><Link to="/shop/spawners">Spawners & Items</Link></li>
@@ -36,7 +36,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h4>Free stuff</h4>
+            <h2>Free stuff</h2>
             <ul>
               <li><Link to="/spin">Daily Spin</Link></li>
               <li><Link to="/free">Free Coins & Coupons</Link></li>
@@ -46,7 +46,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h4>Help</h4>
+            <h2>Help</h2>
             <ul>
               <li><Link to="/track">Track your order</Link></li>
               <li><Link to="/faq">FAQ</Link></li>
@@ -57,12 +57,14 @@ export function Footer() {
               <li><Link to="/terms">Terms of Service</Link></li>
               <li><Link to="/refund-policy">Refund Policy</Link></li>
               <li><Link to="/privacy">Privacy Policy</Link></li>
+              <li><Link to="/imprint">Legal notice (Impressum)</Link></li>
             </ul>
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {year} {config.storeName}. All rights reserved.</span>
+          <span suppressHydrationWarning>© {year} {config.storeName}. All rights reserved.</span>
           <span>Not affiliated with DonutSMP, Mojang or Microsoft.</span>
+          {config.legal.priceNote && <span className="footer-pricenote">{config.legal.priceNote}</span>}
         </div>
       </div>
     </footer>

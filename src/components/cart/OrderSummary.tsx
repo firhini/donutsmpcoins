@@ -107,6 +107,7 @@ export function OrderSummary({
           {currency.code !== 'USD' && <small>{formatUsd(total)} USD · charged in USD</small>}
         </div>
       </div>
+      {config.legal.priceNote && <p className="xs muted summary-pricenote">{config.legal.priceNote}</p>}
       {savings > 0 && (
         <div className="summary-savings">
           <Icon name="sparkles" size={14} /> You save {fmt(savings)}

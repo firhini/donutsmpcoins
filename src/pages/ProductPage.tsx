@@ -202,9 +202,9 @@ export default function ProductPage() {
 
           {table.length > 1 && (
             <div className="pp-block">
-              <h3>
+              <h2>
                 <Icon name="percent" size={16} /> Bulk pricing
-              </h3>
+              </h2>
               <table className="bulk-table">
                 <thead>
                   <tr>
@@ -233,17 +233,17 @@ export default function ProductPage() {
 
           {hasContents(product) && (
             <div className="pp-block">
-              <h3>
+              <h2>
                 <Icon name="eye" size={16} /> What's inside?
-              </h3>
+              </h2>
               <BoxContents product={product} />
             </div>
           )}
 
           <div className="pp-block">
-            <h3>
+            <h2>
               <Icon name="truck" size={16} /> Delivery
-            </h3>
+            </h2>
             <p className="small text-2">{deliveryText}</p>
             <p className="xs muted" style={{ marginTop: 8 }}>
               <Icon name="clock" size={12} /> {config.delivery.etaText}

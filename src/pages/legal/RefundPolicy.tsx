@@ -85,7 +85,9 @@ export default function RefundPolicy() {
           your own risk, as stated on every product and in our <Link to="/terms">terms</Link>.
         </li>
         <li>
-          <strong>Change of mind after delivery.</strong> You may cancel any order while it is still awaiting payment, at no cost. After delivery, not.
+          <strong>Change of mind after delivery.</strong> You may cancel any order while it is still awaiting payment, at no cost. After delivery, not – at checkout you expressly asked
+          us to start delivering this digital content right away and acknowledged that the statutory 14-day right of withdrawal ends once delivery has begun (see the{' '}
+          <Link to="/terms#digital-goods">terms</Link>).
         </li>
         <li>
           <strong>Mystery box results.</strong> Boxes are random with published odds; getting a common drop is not a defect.

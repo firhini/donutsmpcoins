@@ -67,22 +67,31 @@ for (const r of routes) {
     const { html, title, headTags, status } = await render(r.path);
     const assets = assetsFor(r.page);
     const page = buildPage(html, title, headTags, assets, r.path);
-    const file = r.path === '/' ? path.join(DIST, 'index.html') : r.path === '/404' ? path.join(DIST, '404.html') : path.join(DIST, r.path.slice(1), 'index.html');
+    // Flat files (`shop/money.html`, not `shop/money/index.html`): Netlify serves
+    // `/shop/money` directly and 301s `/shop/money/` → `/shop/money`, which matches
+    // the canonical URLs and the sitemap. A folder + index.html would make Netlify
+    // redirect every canonical URL to a trailing-slash version instead.
+    const file = r.path === '/' ? path.join(DIST, 'index.html') : path.join(DIST, `${r.path.slice(1)}.html`);
     await fs.mkdir(path.dirname(file), { recursive: true });
     await fs.writeFile(file, page, 'utf8');
     ok++;
     if (r.sitemap !== false && status === 200) sitemap.push(r);
     if (html.length < 500) console.warn(`[prerender] ${r.path}: suspiciously small output (${html.length} chars)`);
+    if (/<!--\$\?-->|<div hidden id="S:|\$RC\(/.test(html)) {
+      console.error(`[prerender] ${r.path}: output contains an unresolved Suspense boundary (streaming markup) – content would be hidden for crawlers`);
+      process.exitCode = 1;
+    }
   } catch (err) {
     console.error(`[prerender] FAILED ${r.path}:`, err);
     process.exitCode = 1;
   }
 }
 
-// sitemap.xml + robots.txt
-const today = new Date().toISOString().slice(0, 10);
+// sitemap.xml + robots.txt. No <lastmod>: Google only trusts it when it reflects a
+// real content change, and stamping every URL with the build date would make it
+// ignore the field (and possibly the sitemap's freshness signals) altogether.
 const urlset = sitemap
-  .map((r) => `  <url>\n    <loc>${SITE_URL}${r.path}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${r.changefreq}</changefreq>\n    <priority>${r.priority.toFixed(1)}</priority>\n  </url>`)
+  .map((r) => `  <url>\n    <loc>${SITE_URL}${r.path}</loc>\n    <changefreq>${r.changefreq}</changefreq>\n    <priority>${r.priority.toFixed(1)}</priority>\n  </url>`)
   .join('\n');
 await fs.writeFile(path.join(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urlset}\n</urlset>\n`, 'utf8');
 await fs.writeFile(

@@ -281,7 +281,7 @@
     grid-template-columns: 1fr;
   }
 }
-.footer h4 {
+.footer h2 {
   font-size: var(--fs-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;

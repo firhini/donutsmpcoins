@@ -422,7 +422,7 @@ export default function Page() {
               <label className={`checkbox co-tos ${touched && !tos ? 'is-missing' : ''}`}>
                 <input type="checkbox" checked={tos} onChange={(e) => setTos(e.target.checked)} />
                 <span>
-                  I accept the <Link to="/terms">Terms of Service</Link> and the <Link to="/refund-policy">Refund Policy</Link>. I understand these are virtual goods delivered in-game on {config.serverName}.
+                  I accept the <Link to="/terms">Terms of Service</Link> and the <Link to="/refund-policy">Refund Policy</Link>. I understand these are virtual goods delivered in-game on {config.serverName}, I expressly request delivery to start as soon as my payment is confirmed, and I acknowledge that my right of withdrawal ends once delivery has begun.
                 </span>
               </label>
               {formErr && (

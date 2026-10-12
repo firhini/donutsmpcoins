@@ -5,6 +5,7 @@ import { Footer } from './Footer';
 import { CartDrawer } from '../cart/CartDrawer';
 import { useStore } from '../../context/StoreContext';
 import { Analytics } from '../ui/Analytics';
+import { ErrorBoundary } from '../ui/ErrorBoundary';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -24,6 +25,7 @@ export function PageFallback() {
 
 export function Layout() {
   const { config } = useStore();
+  const { pathname } = useLocation();
   return (
     <>
       <ScrollToTop />
@@ -34,9 +36,11 @@ export function Layout() {
         </div>
       )}
       <main>
-        <Suspense fallback={<PageFallback />}>
-          <Outlet />
-        </Suspense>
+        <ErrorBoundary resetKey={pathname}>
+          <Suspense fallback={<PageFallback />}>
+            <Outlet />
+          </Suspense>
+        </ErrorBoundary>
       </main>
       <Footer />
       <CartDrawer />

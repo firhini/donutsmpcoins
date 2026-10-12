@@ -38,6 +38,7 @@ export function seoRoutes(): SeoRoute[] {
     { path: '/terms', page: 'src/pages/legal/Terms.tsx', changefreq: 'yearly', priority: 0.2 },
     { path: '/refund-policy', page: 'src/pages/legal/RefundPolicy.tsx', changefreq: 'yearly', priority: 0.2 },
     { path: '/privacy', page: 'src/pages/legal/Privacy.tsx', changefreq: 'yearly', priority: 0.2 },
+    { path: '/imprint', page: 'src/pages/legal/Imprint.tsx', changefreq: 'yearly', priority: 0.2 },
     { path: '/404', page: 'src/pages/NotFound.tsx', changefreq: 'yearly', priority: 0, sitemap: false },
   ];
   return r;

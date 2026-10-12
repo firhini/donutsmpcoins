@@ -24,8 +24,11 @@
   force = true
 
 # SPA fallback – only for known app routes. Public pages are pre-rendered to static
-# HTML at build time (scripts/prerender.mjs) and static files always win. Unknown
-# URLs fall through to dist/404.html, which Netlify serves with a real 404 status.
+# HTML at build time (scripts/prerender.mjs, flat files like dist/shop/money.html) and
+# static files always win over these non-forced rules. Unknown URLs fall through to
+# dist/404.html, which Netlify serves with a real 404 status. Keep Netlify's "Pretty
+# URLs" post-processing ON (default): it 301s /shop/money/ → /shop/money, matching the
+# canonical URLs in the HTML and the sitemap.
 [[redirects]]
   from = "/order/*"
   to = "/index.html"
@@ -176,6 +179,11 @@
   to = "/index.html"
   status = 200
 
+[[redirects]]
+  from = "/imprint"
+  to = "/index.html"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]
@@ -183,6 +191,9 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    # deliberately small CSP: blocks plugin content, <base> hijacking and framing without
+    # risking the third-party scripts (PayPal/Stripe SDKs, Google Analytics, Google Fonts)
+    Content-Security-Policy = "object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
 
 [[headers]]
   for = "/assets/*"

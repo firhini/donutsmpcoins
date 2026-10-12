@@ -62,6 +62,7 @@ export function toPublicConfig(settings: SiteSettings): PublicConfig {
     tagline: settings.tagline,
     discordInvite: settings.discordInvite,
     supportEmail: settings.supportEmail,
+    legal: settings.legal,
     announcement: settings.announcement,
     sale: settings.sale,
     spendingTiers: settings.spendingTiers,

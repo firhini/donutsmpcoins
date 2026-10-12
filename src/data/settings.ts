@@ -10,6 +10,17 @@ export const defaultSettings: SiteSettings = {
   tagline: 'DonutSMP money, spawners & items – delivered in-game, fast.',
   discordInvite: 'https://discord.gg/your-invite',
   supportEmail: '',
+  // Fill these in the admin panel (Settings → Legal). A store operated from Germany/the EU
+  // needs a legal notice (Impressum) with name, address and e-mail – it is shown on /imprint.
+  legal: {
+    operatorName: '',
+    address: '',
+    email: '',
+    phone: '',
+    vatId: '',
+    priceNote: 'All prices are final prices in USD. No taxes are added at checkout; payment-method fees are shown before you order.',
+    extra: '',
+  },
   announcement: { enabled: true, text: '🎡 Spin the wheel every day for free coins & coupons!', link: '/spin' },
   sale: { enabled: false, percent: 10, label: 'Weekend Sale' },
   spendingTiers: [
