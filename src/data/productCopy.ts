@@ -30,13 +30,12 @@ export interface ProductCopy {
 export const productCopy: Record<string, ProductCopy> = {
   // ───────────── MONEY ─────────────
   'money-1m': {
-    seoTitle: 'Buy DonutSMP Money – from $0.13 per 1M | DonutCoins',
+    seoTitle: 'DonutSMP Money – Any Amount, $0.13–0.18 per 1M | DonutCoins',
     metaDescription:
       'Buy DonutSMP money at $0.18 per million, dropping to $0.13 per 1M on bulk orders. Pick any amount; staff pay it to your balance with /pay within minutes.',
     description:
       'This is the flexible way to buy DonutSMP money: the quantity you enter is the number of millions, so 50 means 50M and 1000 means 1B. The base rate is $0.18 per 1M and bulk tiers kick in automatically – $0.17 from 50M, $0.16 from 100M, $0.15 from 250M, $0.14 from 500M and $0.13 from 1B. The lower rate applies to every million in the line, not just the ones above the threshold.\n\n' +
-      'Money is what moves on DonutSMP. It buys spawners from other players, pays claim costs, funds shop slots and settles the odd ransom. Earning a few hundred million by hand takes days of farming; ordering it takes a couple of minutes.\n\n' +
-      'Delivery is manual. A member of our staff logs in and sends the amount with /pay to the username on your order, usually within 5–30 minutes while we are online. You see the server\'s own confirmation in chat and your order page switches to delivered.',
+      'Money is what moves on DonutSMP. It buys spawners from other players, pays claim costs, funds shop slots and settles the odd ransom. Earning a few hundred million by hand takes days of farming; ordering it takes a couple of minutes.',
     bullets: [
       'Any amount from 1M to 5B in a single line',
       'Bulk tiers from $0.17 down to $0.13 per 1M',
@@ -148,14 +147,13 @@ export const productCopy: Record<string, ProductCopy> = {
       '100M DonutSMP money for $13.99 – $0.14 per million, 22% below the base rate. Hand-delivered to your balance with /pay by staff, usually within minutes.',
     description:
       'One hundred million DonutSMP money for $13.99 works out to $0.14 per 1M – 22% less than the $0.18 base rate, where 100M would be $18.00. It also beats the 100M bulk tier of the flexible listing ($0.16 per 1M, or $16.00), so if you want a round hundred, this is the pack to pick.\n\n' +
-      '100M changes how you play. It covers a full spawner farm with room to expand, a maxed netherite set from a player shop and a comfortable reserve for claims and trades, and it puts you on the /baltop radar without weeks of grinding.\n\n' +
-      'Delivery is by hand: a staff member sends the amount to your username with /pay, usually within 5–30 minutes while we are online. Larger amounts can be split into several payments on request to keep things low-key – mention it in your order note.',
+      '100M changes how you play. It covers a full spawner farm with room to expand, a maxed netherite set from a player shop and a comfortable reserve for claims and trades, and it puts you on the /baltop radar without weeks of grinding.',
     bullets: [
       '100,000,000 DonutSMP money for $13.99',
       '$0.14 per 1M – 22% below the base rate',
       'Beats the flexible listing\'s 100M tier ($16.00)',
       'Paid to your balance with /pay by real staff',
-      'Add a Mace ($1.39) and the cart passes $15 for 5% off',
+      'Add a Mace ($1.49) and the cart passes $15 for 5% off',
     ],
     faq: [
       {
@@ -209,8 +207,7 @@ export const productCopy: Record<string, ProductCopy> = {
       '500M DonutSMP money for $61.99 – about $0.12 per million, 31% below the base rate. Delivered manually with /pay in discreet portions by our staff.',
     description:
       'Half a billion DonutSMP money for $61.99 comes to about $0.12 per 1M – 31% below the $0.18 base rate (where 500M is $90.00) and well under the flexible listing\'s 500M tier of $70.00. At this size the order also qualifies for the 8% spending discount on carts of $40 or more.\n\n' +
-      'Players buy 500M to skip the grind entirely: a fully stocked base, a spawner farm that prints money on its own, maxed gear for the whole group and a balance that holds its own in any trade. It is also the pack shop owners use to restock.\n\n' +
-      'Delivery is manual and spread across several /pay transfers, usually starting within 5–30 minutes while staff are online. If you prefer the money delivered over several days, tell us in the order note – the price is locked at checkout and the plan is up to you.',
+      'Players buy 500M to skip the grind entirely: a fully stocked base, a spawner farm that prints money on its own, maxed gear for the whole group and a balance that holds its own in any trade. It is also the pack shop owners use to restock.',
     bullets: [
       '500,000,000 DonutSMP money for $61.99',
       'About $0.12 per 1M – 31% below the base rate',
@@ -240,8 +237,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'One billion DonutSMP money for $114.99 – about $0.115 per million, 36% below the base rate, plus the 12% spending discount. Hand-delivered by staff.',
     description:
       'One billion DonutSMP money – 1,000,000,000 – for $114.99. That is about $0.115 per 1M, 36% under the $0.18 base rate (1B would be $180.00 there) and cheaper than the flexible listing\'s top tier of $0.13, which prices 1B at $130.00. Carts of $100 or more also get the 12% spending discount.\n\n' +
-      'A billion is the whale pack. It is bought by players who want to dominate the balance board in one go, by groups pooling money for a mega-base, and by shop owners who need deep liquidity to buy up spawners and rare items at scale.\n\n' +
-      'Delivery is handled personally by our staff with multiple /pay transfers, scheduled with you on Discord if you like, usually starting within 5–30 minutes of a confirmed payment while we are online. Every transfer appears on your order page until the full 1B has arrived.',
+      'A billion is the whale pack. It is bought by players who want to dominate the balance board in one go, by groups pooling money for a mega-base, and by shop owners who need deep liquidity to buy up spawners and rare items at scale.',
     bullets: [
       '1,000,000,000 DonutSMP money for $114.99',
       'About $0.115 per 1M – our lowest rate',
@@ -291,7 +287,7 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'Do you sell a spawner-only bundle?',
-        a: 'Yes – the Spawner Farm Bundle has 64 skeleton spawners plus 10M for $29.99, and the Spawner Crate rolls two random spawner drops for $3.99.',
+        a: 'Yes – the Spawner Farm Bundle has 64 skeleton spawners plus 10M for $25.99, and the Spawner Crate rolls two random spawner drops for $3.99.',
       },
     ],
   },
@@ -302,8 +298,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Iron golem spawners for DonutSMP at $0.45 each – $0.43 from 25, $0.40 from 100. Iron ingots and poppies on autopilot, delivered in-game by our staff.',
     description:
       'Iron golem spawners turn a dark room into an iron factory. Each golem drops iron ingots and poppies, and because iron sells reliably and is used for everything from hoppers to anvils, a golem farm is one of the most dependable earners on DonutSMP. Price: $0.45 each, $0.43 from 25 and $0.40 from 100, up to 2,000 per line.\n\n' +
-      'Many players run golems next to their skeleton farm so the money keeps coming while they are off hunting bases. Golems are tough, so the kill area needs to be built right – but once it is, the output is hard to match with any manual method.\n\n' +
-      'Delivery is in-game and by hand: log on with the username from your order, accept the teleport from our staff account and pick up the spawners (shulker boxes for larger counts). Usually within 5–30 minutes while we are online.',
+      'Many players run golems next to their skeleton farm so the money keeps coming while they are off hunting bases. Golems are tough, so the kill area needs to be built right – but once it is, the output is hard to match with any manual method.',
     bullets: [
       '$0.45 each, $0.40 at 100+',
       'Iron ingots and poppies that always sell',
@@ -401,13 +396,12 @@ export const productCopy: Record<string, ProductCopy> = {
   },
 
   elytra: {
-    seoTitle: 'Buy DonutSMP Elytra (Mending) – $28.49 | DonutCoins',
+    seoTitle: 'DonutSMP Elytra Item – Mending, $28.49 | DonutCoins',
     metaDescription:
       'Buy a DonutSMP elytra with Unbreaking III and Mending for $28.49. Fly to bases, escape fights, skip the End grind – handed over in-game within minutes.',
     description:
       'The elytra is the most wanted item on DonutSMP, and for good reason: it turns hours of walking into minutes of flight, makes base hunting practical and gets you out of fights nobody else can escape. Ours comes with Unbreaking III and Mending for $28.49, so it repairs itself as you collect XP and will last as long as you do.\n\n' +
-      'Elytras are rare on the server because the End is picked clean and every ship has been looted. That scarcity is why player shops charge a fortune in coins – buying one here is often cheaper than grinding the money to pay a player.\n\n' +
-      'Delivery is in-game: log on to DonutSMP with the username on your order, accept the teleport from our staff account and pick up the elytra. Staff usually hand it over within 5–30 minutes while online. Pair it with a creeper spawner for rocket supply, or grab the Basehunter Bundle.',
+      'Elytras are rare on the server because the End is picked clean and every ship has been looted. That scarcity is why player shops charge a fortune in coins – buying one here is often cheaper than grinding the money to pay a player.',
     bullets: [
       'Unbreaking III + Mending – self-repairing',
       '$28.49, usually cheaper than the player market',
@@ -436,8 +430,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Empty shulker boxes for DonutSMP at $0.29 each, $0.25 from 27. Portable storage for base hunting, trading and your vault. Delivered in-game by staff.',
     description:
       'A shulker box is the item that makes everything else on DonutSMP manageable: 27 slots that travel with you, survive being broken and stack into a tidy vault. We sell empty shulker boxes for $0.29 each, or $0.25 from 27 (a full shulker of shulkers), up to 500 per line.\n\n' +
-      'Base hunters carry them to haul loot home, traders use them to hand over bulk stock in one drop, and anyone with a spawner farm needs a wall of them to store bones and arrows. Going to the End to farm shulkers yourself is slow and risky; buying a stack takes a minute.\n\n' +
-      'Delivery is in-game: join DonutSMP with the username on your order, accept the teleport request from our staff account and pick up the boxes. Usually within 5–30 minutes while we are online.',
+      'Base hunters carry them to haul loot home, traders use them to hand over bulk stock in one drop, and anyone with a spawner farm needs a wall of them to store bones and arrows. Going to the End to farm shulkers yourself is slow and risky; buying a stack takes a minute.',
     bullets: [
       '$0.29 each, $0.25 at 27+',
       '27 slots of portable storage',
@@ -477,7 +470,7 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'Do totems come with the PvP Kit?',
-        a: 'Yes, the PvP Kit ($9.49) includes 8 totems alongside a maxed netherite set, sword and pickaxe. The Basehunter Bundle includes 16.',
+        a: 'Yes, the PvP Kit ($8.49) includes 8 totems alongside a maxed netherite set, sword and pickaxe. The Basehunter Bundle includes 16.',
       },
     ],
   },
@@ -490,7 +483,7 @@ export const productCopy: Record<string, ProductCopy> = {
     description:
       'The Coin Crate is a DonutSMP mystery box that only contains money. For $2.49 you roll one result from a public table: 5M (40%), 10M (30%), 15M (15%), 25M (9%), 50M (5%) or 100M (1%). The worst case is still 5M. On average a crate pays about 13M, which is close to the straight-money rate – the small premium buys you the 6% shot at 50M or 100M.\n\n' +
       'It is popular with players who like a bit of chance without the risk of getting an item they do not need: every outcome is coins on your balance. Buy up to 50 crates in one order if you want to roll a batch at once.\n\n' +
-      'Drops are rolled server-side the moment you place the order and shown on your order page – no hidden re-rolls. After payment our staff send the rolled amount to your username with /pay, usually within 5–30 minutes while we are online.',
+      'Drops are rolled server-side the moment you place the order and shown on your order page once your payment is confirmed – no hidden re-rolls. After payment our staff send the rolled amount to your username with /pay, usually within 5–30 minutes while we are online.',
     bullets: [
       'Money only – every roll pays out',
       '5M guaranteed, 100M top prize (1%)',
@@ -520,7 +513,7 @@ export const productCopy: Record<string, ProductCopy> = {
     description:
       'The Spawner Crate is a DonutSMP mystery box filled only with spawners. Each crate rolls two different lines from this table: 5–12 Skeleton Spawners (50%), 13–24 Skeleton Spawners (20%), 4–10 Zombie Spawners (12%), 2–8 Iron Golem Spawners (10%), 2–6 Creeper Spawners (5%) and 2–5 Blaze Spawners (3%). The two drops are rolled without repeats, so you never get the same line twice.\n\n' +
       'At $3.99 most rolls are worth more than the price: the common 5–12 skelly line alone is $2.15 to $5.16 at single prices, and you get a second line on top. The two-roll format is also a cheap way to add golems, creepers or blazes to an existing farm.\n\n' +
-      'Drops are rolled server-side when the order is placed and listed on your order page. After payment, staff hand the spawners over in-game: join DonutSMP with your order username, accept the teleport and collect them. Usually within 5–30 minutes while online.',
+      'Drops are rolled server-side when the order is placed and listed on your order page once the payment is confirmed. After that, staff hand the spawners over in-game: join DonutSMP with your order username, accept the teleport and collect them. Usually within 5–30 minutes while online.',
     bullets: [
       'Two spawner drops per crate, no repeats',
       'Two skeleton lines make up 70% of the table',
@@ -550,7 +543,7 @@ export const productCopy: Record<string, ProductCopy> = {
     description:
       'Our standard DonutSMP mystery box rolls three different lines from an eleven-line pool: Gilded Blackstone 1–32, Netherite Ingot 1–32, Netherite Block 1–2, Skeleton Spawner 1–15, Dragon Head 1–2, Enchanted Golden Apple 1–16, Nether Star 1–32, Deepslate Emerald Ore 1–20, Totem of Undying 1–8, 10M Money and a single Elytra. Price: $5.69 for three drops.\n\n' +
       'The commons are useful rather than filler – skeleton spawners (about 16.5% per roll) and netherite ingots (12.8%) are things you would buy anyway. The rare end is where the fun is: a Dragon Head at about 2.8%, 10M money at 4.6% and the Elytra at roughly 0.9% per roll.\n\n' +
-      'Every drop is rolled server-side when you place the order and listed on your order page – what you see there is what you get. After payment, staff hand the items over in-game: log on with your order username, accept the teleport and collect. Usually within 5–30 minutes while we are online.',
+      'Every drop is rolled server-side when you place the order and listed on your order page after payment – what you see there is what you get. After payment, staff hand the items over in-game: log on with your order username, accept the teleport and collect. Usually within 5–30 minutes while we are online.',
     bullets: [
       'Three different drops per box',
       'Skeleton spawners, netherite, dragon heads, 10M, elytra',
@@ -581,7 +574,7 @@ export const productCopy: Record<string, ProductCopy> = {
     description:
       'The Elite Mystery Box steps up both the number of rolls and the odds. For $12.49 you get four different drops from a ten-line pool: Elytra (4%), Netherite Block 1–3 (10%), Netherite Ingot 1–20 (16%), Gilded Blackstone 1–45 (16%), Dragon Head 1–3 (6%), Nether Star 1–32 (14%), Enchanted Golden Apple 1–32 (12%), Deepslate Emerald Ore 1–20 (10%), Iron Golem Spawner 2–10 (8%) and 25M Money (4%).\n\n' +
       'Compared with the standard Mystery Box, the elytra chance per roll is about four times higher, the money line is 25M instead of 10M, and the item ranges are wider – up to 45 gilded blackstone or 32 enchanted golden apples in a single line. There is no low-value filler line in this pool.\n\n' +
-      'Drops are rolled server-side when the order is created and printed on your order page. Staff then deliver in-game – teleport, drop, done – and send a money line with /pay. Usually within 5–30 minutes while we are online.',
+      'Drops are rolled server-side when the order is created and printed on your order page once it is paid. Staff then deliver in-game – teleport, drop, done – and send a money line with /pay. Usually within 5–30 minutes while we are online.',
     bullets: [
       'Four different drops per box',
       'Elytra at 4% per roll, 25M money at 4%',
@@ -611,7 +604,7 @@ export const productCopy: Record<string, ProductCopy> = {
     description:
       'The God Mystery Box is our highest-odds box short of a guarantee. For $28.99 it rolls five different lines from nine: Elytra (about 11%), Netherite Block 1–5 (15.6%), Gilded Blackstone 16–128 (15.6%), Deepslate Emerald Ore 4–20 (13.3%), Netherite Ingot 4–32 (15.6%), Dragon Head 1–4 (8.9%), Blaze Spawner 2–6 (6.7%), 50M Money (5.6%) and Heavy Core 1–2 (7.8%).\n\n' +
       'Because five of the nine lines are drawn without repeats and only three of them are common or uncommon, at least two of your five drops are always rare or better. The minimum quantities are high too – no single gilded blackstone here, the line starts at 16 and the ingot line at 4.\n\n' +
-      'Like all our boxes, the drops are rolled server-side when you order and shown on your order page before delivery. Staff hand the items over in-game and send a 50M roll with /pay, usually within 5–30 minutes while we are online. Up to 25 boxes per order.',
+      'Like all our boxes, the drops are rolled server-side when you order and shown on your order page after payment, before delivery. Staff hand the items over in-game and send a 50M roll with /pay, usually within 5–30 minutes while we are online. Up to 25 boxes per order.',
     bullets: [
       'Five different drops per box',
       'Elytra at about 11% per roll – highest of any random box',
@@ -673,8 +666,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Enchanted golden apples for DonutSMP at $0.47 each – $0.44 from 16, $0.40 for a stack of 64. PvP essential and a stable investment. Delivered in-game.',
     description:
       'The enchanted golden apple – the god apple – is the strongest consumable in the game: Absorption IV, Regeneration II, Fire Resistance and Resistance for long enough to turn a fight. On DonutSMP they cannot be crafted, which keeps the price high and makes them one of the safest items to hold. We sell them at $0.47 each, $0.44 from 16 and $0.40 from 64, up to 640 per line.\n\n' +
-      'PvP players eat them, traders stockpile them, and both groups keep a steady demand going that rarely dips. That is why they sit in our Investments category: a stack bought today still sells tomorrow.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username from your order, accept the teleport request and pick up the apples – a stack of 64 costs $25.60. Usually within 5–30 minutes while we are online.',
+      'PvP players eat them, traders stockpile them, and both groups keep a steady demand going that rarely dips. That is why they sit in our Investments category: a stack bought today still sells tomorrow.',
     bullets: [
       '$0.47 each, $0.40 at 64+',
       'Absorption IV, Regen II, Resistance, Fire Resistance',
@@ -725,8 +717,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Nether stars for DonutSMP at $0.19 each – $0.17 from 32, $0.15 from 128. Beacons for your base or bulk stock to trade. Delivered in-game by our staff.',
     description:
       'Nether stars power beacons, and beacons – Haste II for mining, Speed for base runs, Regeneration for the fight – are standard kit for any serious DonutSMP base. Killing the Wither for each one is slow and dangerous; buying them is $0.19 each, $0.17 from 32 and $0.15 from 128, with up to 1,280 per line.\n\n' +
-      'They are also a popular bulk trade item: stars are compact, always in demand and hold a steady price, which is why they sit in our Investments category and appear in several mystery box pools.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username from your order, accept the teleport request and pick up the stars. Big orders come in shulker boxes. Usually within 5–30 minutes while we are online.',
+      'They are also a popular bulk trade item: stars are compact, always in demand and hold a steady price, which is why they sit in our Investments category and appear in several mystery box pools.',
     bullets: [
       '$0.19 each, down to $0.15 at 128+',
       'One star per beacon',
@@ -777,8 +768,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Ancient debris for DonutSMP at $0.57 each, $0.52 from 32. Smelt it for netherite scrap or hold it as an investment. Delivered in-game by our staff.',
     description:
       'Ancient debris is the raw material behind every piece of netherite on DonutSMP. Four pieces smelt into four scrap, which with four gold ingots make one netherite ingot. We sell debris at $0.57 each, $0.52 from 32, up to 640 per line – a cheap route to ingots if you have gold and furnaces to spare.\n\n' +
-      'Players also keep debris as an investment: it is finite, mining it takes hours of bed-bombing, and the price tracks netherite closely. Holding debris rather than ingots gives you the option of selling either the block or the finished product later.\n\n' +
-      'Delivery is in-game by our staff. Join DonutSMP with the username from your order, accept the teleport and pick up the debris – larger orders come in shulker boxes. Usually within 5–30 minutes while we are online.',
+      'Players also keep debris as an investment: it is finite, mining it takes hours of bed-bombing, and the price tracks netherite closely. Holding debris rather than ingots gives you the option of selling either the block or the finished product later.',
     bullets: [
       '$0.57 each, $0.52 at 32+',
       'Four debris = one netherite ingot (with gold)',
@@ -803,8 +793,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Heavy cores for DonutSMP at $1.29 each – the trial chamber vault drop needed to craft a mace. Buy one to craft or several to hold. Delivered in-game.',
     description:
       'The heavy core is the rarest crafting ingredient in the game: it only comes from ominous vaults in trial chambers, and one core plus a breeze rod makes a mace. On DonutSMP, where maces decide fights, the core is both a crafting item and a trade item with a stable value. Price: $1.29 each, up to 64 per order.\n\n' +
-      'Players buy heavy cores to craft their own mace with the enchantments they want, to hold as an investment, or to resell to PvP players who do not want to run trial chambers. It appears in the God Mystery Box and Legendary Crate pools too.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username on your order, accept the teleport request and collect the core. Usually within 5–30 minutes while we are online. If you just want the weapon, our fully enchanted Mace is $1.49.',
+      'Players buy heavy cores to craft their own mace with the enchantments they want, to hold as an investment, or to resell to PvP players who do not want to run trial chambers. It appears in the God Mystery Box and Legendary Crate pools too.',
     bullets: [
       '$1.29 each, up to 64 per order',
       'Ominous vault drop – crafts a mace',
@@ -814,7 +803,7 @@ export const productCopy: Record<string, ProductCopy> = {
     faq: [
       {
         q: 'Should I buy a heavy core or a mace?',
-        a: 'If you want a weapon to use, buy the Mace ($1.49) – it comes with Density V, Breach IV, Wind Burst III, Mending and Unbreaking III. Buy the core if you want to craft or enchant it yourself, or to hold as an investment.',
+        a: 'If you want a weapon to use, buy the Mace ($1.49) – it comes with Density V, Wind Burst III, Mending and Unbreaking III. Buy the core if you want to craft or enchant it yourself, or to hold as an investment.',
       },
       {
         q: 'How is the heavy core delivered?',
@@ -885,8 +874,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Dragon heads for DonutSMP at $18.99 each. The trophy block from End ships – rare, uncraftable and a top-tier flex. Handed over in-game by our staff.',
     description:
       'The dragon head is the ultimate trophy block: it only generates on End ships, one per ship, and cannot be crafted. On DonutSMP, where the End was stripped long ago, a dragon head on your base or in your vault says you have money. We sell them at $18.99 each, up to 64 per order.\n\n' +
-      'Beyond the flex, dragon heads are a serious investment item – rare, compact and always wanted by builders – and they feature as the epic line in our Mystery Box, Elite, God and Legendary pools. Placed and powered by redstone, the jaw animates – a classic base decoration.\n\n' +
-      'Delivery is in-game by our staff: log on to DonutSMP with the username from your order, accept the teleport request and pick up the head. Usually within 5–30 minutes while we are online.',
+      'Beyond the flex, dragon heads are a serious investment item – rare, compact and always wanted by builders – and they feature as the epic line in our Mystery Box, Elite, God and Legendary pools. Placed and powered by redstone, the jaw animates – a classic base decoration.',
     bullets: [
       '$18.99 each, up to 64 per order',
       'End-ship-only trophy block, uncraftable',
@@ -911,8 +899,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Starter Investment Box for DonutSMP: a fixed kit with a netherite ingot, gilded blackstone, nether stars, god apples and emerald ore for $9.49.',
     description:
       'The Starter Investment Box is a fixed kit, not a mystery box: every box contains exactly 1 Netherite Ingot, 4 Gilded Blackstone, 8 Nether Stars, 4 Enchanted Golden Apples and 4 Deepslate Emerald Ore. At single-item prices those add up to about $11.85; the box is $9.49.\n\n' +
-      'It is built for players who want a first portfolio of items that hold value on DonutSMP without picking them one by one – a mix of the rare blocks collectors want, the consumables PvP players burn through and a netherite ingot to anchor it. Everything inside can be resold on the player market or held.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username on your order, accept the teleport request and pick up the items. Usually within 5–30 minutes while we are online. Up to 20 boxes per order.',
+      'It is built for players who want a first portfolio of items that hold value on DonutSMP without picking them one by one – a mix of the rare blocks collectors want, the consumables PvP players burn through and a netherite ingot to anchor it. Everything inside can be resold on the player market or held.',
     bullets: [
       'Fixed contents – you know exactly what you get',
       'About $11.85 of items for $9.49',
@@ -963,8 +950,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Elite Investment Box for DonutSMP: dragon head, netherite block, 6 ingots, 32 gilded blackstone, 32 god apples and 2 heavy cores for $47.99.',
     description:
       'The Elite Investment Box is our biggest fixed kit. Every box contains 1 Dragon Head, 1 Netherite Block, 6 Netherite Ingots, 32 Gilded Blackstone, 32 Enchanted Golden Apples and 2 Heavy Cores. At catalog prices with bulk tiers those lines total around $92; the box is $47.99, and carts of $40 or more also get the 8% spending discount.\n\n' +
-      'This is the vault starter for players who want to hold value rather than coins: a dragon head and a netherite block as the anchors, enough ingots for a full gear upgrade, 32 each of the blocks and apples traders want, and two heavy cores for maces. Fixed contents – nothing is rolled.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username on your order, accept the teleport request and pick up the items, usually within 5–30 minutes while we are online. Up to 20 boxes per order.',
+      'This is the vault starter for players who want to hold value rather than coins: a dragon head and a netherite block as the anchors, enough ingots for a full gear upgrade, 32 each of the blocks and apples traders want, and two heavy cores for maces. Fixed contents – nothing is rolled.',
     bullets: [
       'Dragon head + netherite block in every box',
       'Around $92 of items for $47.99',
@@ -994,8 +980,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Diamond Armor Shulker for DonutSMP: six full diamond sets with Protection IV, Unbreaking III and Mending for $0.49. Gear a whole team for under a dollar.',
     description:
       'The Diamond Armor Shulker is the cheapest full-gear deal in our DonutSMP shop: six complete diamond sets – 6 helmets, 6 chestplates, 6 leggings and 6 boots, 24 pieces in total – each with Protection IV, Unbreaking III and Mending, packed in one shulker box for $0.49.\n\n' +
-      'It is the kit players buy when they keep dying: spare sets for base-hunting trips, armor for new recruits, or backup gear to stash in an ender chest so a bad fight costs nothing. Diamond with Protection IV is still very solid on DonutSMP, and Mending keeps every piece alive.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username from your order, accept the teleport request and pick up the shulker. Usually within 5–30 minutes while we are online. Up to 100 shulkers per order.',
+      'It is the kit players buy when they keep dying: spare sets for base-hunting trips, armor for new recruits, or backup gear to stash in an ender chest so a bad fight costs nothing. Diamond with Protection IV is still very solid on DonutSMP, and Mending keeps every piece alive.',
     bullets: [
       '6 full diamond sets (24 pieces) for $0.49',
       'Protection IV, Unbreaking III, Mending on every piece',
@@ -1020,8 +1005,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'A shulker of 27 diamond helmets with Protection IV, Unbreaking III and Mending for DonutSMP – $1.39, about 5 cents a helmet. Delivered in-game by staff.',
     description:
       'This shulker box holds 27 diamond helmets, each enchanted with Protection IV, Unbreaking III and Mending, for $1.39 – a little over five cents per helmet. It is the single-slot way to stock a base, a shop or a PvP crew with head armor that is already maxed.\n\n' +
-      'Helmets are the piece most often lost on DonutSMP – swapped for a turtle shell, left in a death chest, handed to a friend – so a full shulker of spares saves endless trips to the enchanting table. Shop owners also resell them individually for coins.\n\n' +
-      'Delivery is in-game by our staff: join DonutSMP with the username on your order, accept the teleport request and pick up the shulker. Usually within 5–30 minutes while we are online. Up to 50 shulkers per order.',
+      'Helmets are the piece most often lost on DonutSMP – swapped for a turtle shell, left in a death chest, handed to a friend – so a full shulker of spares saves endless trips to the enchanting table. Shop owners also resell them individually for coins.',
     bullets: [
       '27 maxed diamond helmets in one shulker',
       'Protection IV, Unbreaking III, Mending',
@@ -1046,8 +1030,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'A shulker of 27 diamond chestplates with Protection IV, Unbreaking III and Mending for DonutSMP – $1.39. The piece that matters most, in bulk.',
     description:
       'Twenty-seven diamond chestplates, each with Protection IV, Unbreaking III and Mending, packed in one shulker box for $1.39. The chestplate carries the biggest share of your armor points, so it is the piece where a maxed enchantment matters most – and this is the cheapest way to own a lot of them.\n\n' +
-      'On DonutSMP a shulker of chestplates is usually bought for one of three reasons: outfitting a group before a raid, stocking a player shop, or keeping backups so an elytra swap never leaves you without body armor. At about five cents each, the spare is always worth carrying.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username from your order, accept the teleport request and pick up the shulker. Usually within 5–30 minutes while we are online. Up to 50 per order.',
+      'On DonutSMP a shulker of chestplates is usually bought for one of three reasons: outfitting a group before a raid, stocking a player shop, or keeping backups so an elytra swap never leaves you without body armor. At about five cents each, the spare is always worth carrying.',
     bullets: [
       '27 maxed diamond chestplates in one shulker',
       'Protection IV, Unbreaking III, Mending',
@@ -1072,8 +1055,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'A shulker of 27 diamond leggings with Blast Protection IV, Unbreaking III and Mending for DonutSMP – $1.39. Built for crystal, TNT and creeper fights.',
     description:
       'This shulker holds 27 diamond leggings enchanted with Blast Protection IV, Unbreaking III and Mending for $1.39. Blast Protection is the deliberate choice: on DonutSMP most sudden deaths come from end crystals, TNT traps and creepers, and Blast Protection IV on leggings and boots takes a huge bite out of that damage.\n\n' +
-      'Crystal PvP players mix Blast Protection pieces with Protection IV pieces to balance explosion and melee damage, and shop owners stock these because the mix is hard to enchant at scale. A full shulker means every set in the base gets the right legs.\n\n' +
-      'Delivery is in-game by our staff: log on to DonutSMP with the username on your order, accept the teleport request and pick up the shulker. Usually within 5–30 minutes while we are online. Up to 50 per order.',
+      'Crystal PvP players mix Blast Protection pieces with Protection IV pieces to balance explosion and melee damage, and shop owners stock these because the mix is hard to enchant at scale. A full shulker means every set in the base gets the right legs.',
     bullets: [
       '27 diamond leggings in one shulker',
       'Blast Protection IV, Unbreaking III, Mending',
@@ -1098,8 +1080,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'A shulker of 27 diamond boots with Blast Protection IV, Unbreaking III and Mending for DonutSMP – $1.39. Blast-proof boots in bulk, delivered in-game.',
     description:
       'Twenty-seven diamond boots with Blast Protection IV, Unbreaking III and Mending, in a single shulker box for $1.39. Boots are the second explosion-facing slot, and with Blast Protection IV on both leggings and boots a crystal or TNT hit that would have ended a fight becomes survivable.\n\n' +
-      'Players buy the boots shulker alongside the leggings shulker to complete the blast half of a mixed set, or on its own to replace boots lost to lava and void deaths while base hunting. At about five cents a pair, nobody on your team needs to run barefoot.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username from your order, accept the teleport request and pick up the shulker. Usually within 5–30 minutes while we are online. Up to 50 per order.',
+      'Players buy the boots shulker alongside the leggings shulker to complete the blast half of a mixed set, or on its own to replace boots lost to lava and void deaths while base hunting. At about five cents a pair, nobody on your team needs to run barefoot.',
     bullets: [
       '27 diamond boots in one shulker',
       'Blast Protection IV, Unbreaking III, Mending',
@@ -1124,8 +1105,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Full maxed netherite armor set for DonutSMP – Protection IV, Unbreaking III, Mending and Thorns III on all four pieces for $4.99. Handed over in-game.',
     description:
       'One complete god-tier netherite set: helmet, chestplate, leggings and boots, each with Protection IV, Unbreaking III, Mending and Thorns III, for $4.99. It is the armor every serious DonutSMP player ends up in, without the hours of mining debris, smelting and enchanting.\n\n' +
-      'Netherite gives knockback resistance and the highest base armor in the game; Protection IV takes it to the cap, Mending keeps it repaired from the XP you pick up anyway, and Thorns III punishes anyone who melees you. Buying the set is also cheaper than the four ingots it would take to upgrade a diamond kit ($13.16).\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username on your order, accept the teleport request and pick up the four pieces. Usually within 5–30 minutes while we are online. Up to 50 sets per order.',
+      'Netherite gives knockback resistance and the highest base armor in the game; Protection IV takes it to the cap, Mending keeps it repaired from the XP you pick up anyway, and Thorns III punishes anyone who melees you. Buying the set is also cheaper than the four ingots it would take to upgrade a diamond kit ($13.16).',
     bullets: [
       'Full 4-piece netherite set for $4.99',
       'Protection IV, Unbreaking III, Mending, Thorns III',
@@ -1143,7 +1123,7 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'Is there a bulk option?',
-        a: 'The Netherite Armor Shulker holds six full sets for $18.99, and the PvP Kit adds a maxed sword, pickaxe and 8 totems to one set for $9.49.',
+        a: 'The Netherite Armor Shulker holds six full sets for $18.99, and the PvP Kit adds a maxed sword, pickaxe and 8 totems to one set for $8.49.',
       },
     ],
   },
@@ -1154,8 +1134,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'DonutSMP PvP Kit for $8.49: maxed netherite armor set, god sword, god pickaxe and 8 totems of undying in one handover. Delivered in-game by our staff.',
     description:
       'The PvP Kit is a complete loadout in one order: a maxed netherite armor set (Protection IV, Unbreaking III, Mending, Thorns III), a maxed netherite sword, a maxed netherite pickaxe and 8 Totems of Undying, for $8.49. Spawn in, gear up, fight.\n\n' +
-      'It exists because most players who lose a fight on DonutSMP lose everything at once – armor, weapon, totems – and rebuying piece by piece is tedious. The kit is also what people grab after joining a new group or coming back from a break: one checkout and you are no longer the weak link.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username from your order, accept the teleport request and collect the items in a single drop. Usually within 5–30 minutes while we are online. Up to 50 kits per order.',
+      'It exists because most players who lose a fight on DonutSMP lose everything at once – armor, weapon, totems – and rebuying piece by piece is tedious. The kit is also what people grab after joining a new group or coming back from a break: one checkout and you are no longer the weak link.',
     bullets: [
       'Maxed netherite set + sword + pickaxe + 8 totems',
       'Protection IV, Thorns III, Mending on the armor',
@@ -1184,8 +1163,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Netherite Armor Shulker for DonutSMP: six maxed netherite sets – Protection IV, Unbreaking III, Mending, Thorns III – for $18.99 instead of $29.94.',
     description:
       'Six complete god-tier netherite sets in one shulker box for $18.99. Every one of the 24 pieces carries Protection IV, Unbreaking III, Mending and Thorns III – the same spec as our single Netherite Armor Set, which costs $4.99, so the shulker saves you about $11 against six singles ($29.94).\n\n' +
-      'This is the group buy: gear a whole faction before a war, stock a player shop with sets that sell for coins, or keep five spares so a death on DonutSMP never slows you down. Orders of $15 or more also get the 5% spending discount at checkout.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username on your order, accept the teleport request and pick up the shulker box. Usually within 5–30 minutes while we are online. Up to 20 shulkers per order.',
+      'This is the group buy: gear a whole faction before a war, stock a player shop with sets that sell for coins, or keep five spares so a death on DonutSMP never slows you down. Orders of $15 or more also get the 5% spending discount at checkout.',
     bullets: [
       '6 maxed netherite sets (24 pieces) in one shulker',
       'Protection IV, Unbreaking III, Mending, Thorns III',
@@ -1211,8 +1189,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'God netherite sword for DonutSMP – Sharpness V, Unbreaking III, Mending, Fire Aspect II, Looting III – for $0.99. Ready for PvP and mob farms.',
     description:
       'A fully enchanted netherite sword for under a dollar: Sharpness V, Unbreaking III, Mending, Fire Aspect II and Looting III, for $0.99. It is the standard PvP blade on DonutSMP and the best tool for farming spawners, where Looting III multiplies the bones, rods and iron you sell.\n\n' +
-      'Players buy it to replace a sword lost in a fight, to equip a new alt or recruit, or in multiples because at this price it is cheaper than the XP and books to enchant one. Fire Aspect II also makes it a solid choice for killing golems and skeletons quickly in a farm.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username on your order, accept the teleport request and take the sword from the drop. Usually within 5–30 minutes while we are online. Up to 100 per order.',
+      'Players buy it to replace a sword lost in a fight, to equip a new alt or recruit, or in multiples because at this price it is cheaper than the XP and books to enchant one. Fire Aspect II also makes it a solid choice for killing golems and skeletons quickly in a farm.',
     bullets: [
       'Sharpness V, Unbreaking III, Mending, Fire Aspect II, Looting III',
       '$0.99 – cheaper than enchanting it yourself',
@@ -1237,8 +1214,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'God netherite pickaxe for DonutSMP – Efficiency V, Unbreaking III, Mending and Fortune III – for $0.99. Mine faster, never repair. Delivered in-game.',
     description:
       'The god pickaxe: Efficiency V, Unbreaking III, Mending and Fortune III on netherite, for $0.99. Efficiency V with a Haste beacon lets you instant-mine stone, Fortune III multiplies diamonds, emeralds and other ore drops, and Mending means you never see an anvil again.\n\n' +
-      'On DonutSMP a pickaxe like this pays for itself in one diamond trip. It is also the tool for building spawner rooms and raiding bases quickly – and because it is cheap, players keep a spare in their ender chest for when a death takes the main one.\n\n' +
-      'Delivery is in-game by our staff: join DonutSMP with the username from your order, accept the teleport request and pick up the pickaxe. Usually within 5–30 minutes while we are online. Up to 100 per order.',
+      'On DonutSMP a pickaxe like this pays for itself in one diamond trip. It is also the tool for building spawner rooms and raiding bases quickly – and because it is cheap, players keep a spare in their ender chest for when a death takes the main one.',
     bullets: [
       'Efficiency V, Unbreaking III, Mending, Fortune III',
       '$0.99 each, up to 100 per order',
@@ -1263,8 +1239,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'God bow for DonutSMP – Power V, Punch II, Flame, Infinity and Unbreaking III – for $0.89. Infinite arrows, max damage and knockback. Delivered in-game.',
     description:
       'A fully enchanted bow for $0.89: Power V for maximum arrow damage, Punch II to knock attackers off ledges and out of range, Flame to set them burning, Infinity so a single arrow lasts forever and Unbreaking III for durability. There is no Mending – Infinity and Mending do not stack – which is the standard trade-off on a god bow.\n\n' +
-      'On DonutSMP a bow is how you open a fight, finish a runner or keep a mace user at distance. Punch II is especially nasty near cliffs and in the End. Base hunters also use it to clear mobs from range before landing with an elytra.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username on your order, accept the teleport request and take the bow. Usually within 5–30 minutes while we are online. Up to 100 per order.',
+      'On DonutSMP a bow is how you open a fight, finish a runner or keep a mace user at distance. Punch II is especially nasty near cliffs and in the End. Base hunters also use it to clear mobs from range before landing with an elytra.',
     bullets: [
       'Power V, Punch II, Flame, Infinity, Unbreaking III',
       'One arrow, infinite shots',
@@ -1286,13 +1261,12 @@ export const productCopy: Record<string, ProductCopy> = {
   mace: {
     seoTitle: 'DonutSMP Mace (Maxed) – $1.49 | DonutCoins',
     metaDescription:
-      'Maxed mace for DonutSMP – Density V, Breach IV, Wind Burst III, Mending, Unbreaking III – for $1.49. The one-hit weapon that rules PvP. Delivered in-game.',
+      'Maxed mace for DonutSMP – Density V, Wind Burst III, Mending, Unbreaking III – for $1.49. The one-hit weapon that rules PvP. Delivered in-game.',
     description:
-      'The mace changed PvP on DonutSMP: fall from height, land a hit and the smash damage scales with the drop, enough to one-shot full netherite. Ours comes fully enchanted – Density V for extra damage per block fallen, Breach IV to cut through armor, Wind Burst III to launch yourself back up for the next hit, plus Mending and Unbreaking III – for $1.49.\n\n' +
-      'Crafting one yourself means finding a heavy core in an ominous trial chamber vault, then enchanting a weapon that only takes books from the same chambers. Buying the finished mace is faster – the core alone is $1.29 and still needs a breeze rod and crafting.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username on your order, accept the teleport request and take the mace. Usually within 5–30 minutes while we are online. Up to 64 per order.',
+      'The mace changed PvP on DonutSMP: fall from height, land a hit and the smash damage scales with the drop, enough to one-shot full netherite. Ours comes fully enchanted – Density V for extra damage per block fallen, Wind Burst III to launch yourself back up for the next hit, plus Mending and Unbreaking III – for $1.49.\n\n' +
+      'Crafting one yourself means finding a heavy core in an ominous trial chamber vault, then enchanting a weapon that only takes books from the same chambers. Buying the finished mace is faster – the core alone is $1.29 and still needs a breeze rod and crafting.',
     bullets: [
-      'Density V, Breach IV, Wind Burst III, Mending, Unbreaking III',
+      'Density V, Wind Burst III, Mending, Unbreaking III',
       'One-shot potential against full netherite',
       '$1.49 – less than a heavy core',
       'Up to 64 per order',
@@ -1300,7 +1274,7 @@ export const productCopy: Record<string, ProductCopy> = {
     faq: [
       {
         q: 'What enchantments does the DonutSMP mace have?',
-        a: 'Density V, Breach IV, Wind Burst III, Mending and Unbreaking III, exactly as listed in the catalog. Wind Burst III is the one that makes repeated smash attacks possible.',
+        a: 'Density V, Wind Burst III, Mending and Unbreaking III, exactly as listed in the catalog. Breach is not on it – Minecraft does not allow Breach and Density on the same mace. Wind Burst III is the one that makes repeated smash attacks possible.',
       },
       {
         q: 'How do I get the most out of a mace?',
@@ -1319,8 +1293,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Maxed trident for DonutSMP – Loyalty III, Channeling, Impaling V and Mending – for $1.89. Throw it, summon lightning, get it back. Delivered in-game.',
     description:
       'A maxed trident for $1.89: Loyalty III returns it to your hand after every throw, Channeling calls lightning down on whatever you hit during a storm, Impaling V adds heavy damage against aquatic mobs, and Mending keeps it repaired. Tridents only drop from drowned, and enchanted ones are rare – buying beats fishing for one.\n\n' +
-      'On DonutSMP the trident is part weapon, part toy: ranged poke in PvP, and with Channeling the way to make charged creepers, whose explosions drop zombie, skeleton and creeper heads for trophies. This is a Loyalty trident, not Riptide, so it works on dry land.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username on your order, accept the teleport request and take the trident. Usually within 5–30 minutes while we are online. Up to 64 per order.',
+      'On DonutSMP the trident is part weapon, part toy: ranged poke in PvP, and with Channeling the way to make charged creepers, whose explosions drop zombie, skeleton and creeper heads for trophies. This is a Loyalty trident, not Riptide, so it works on dry land.',
     bullets: [
       'Loyalty III, Channeling, Impaling V, Mending',
       'Returns to your hand after every throw',
@@ -1344,9 +1317,8 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'The DonutSMP Amethyst Pickaxe – the server\'s custom ultra-fast pickaxe for base hunting and mining – for $4.79. Rare in-game, handed over by our staff.',
     description:
-      'The Amethyst Pickaxe is a DonutSMP-exclusive item – a custom pickaxe that mines far faster than any vanilla tool. It is the base hunter\'s weapon of choice: tunnelling through walls, stripping obsidian vaults and digging out hidden stashes in a fraction of the time a netherite pickaxe needs. We sell it for $4.79.\n\n' +
-      'Because it is a server custom item it cannot be crafted and only enters the economy through limited in-game sources, which is why it carries a \'Rare\' tag here and a steep price in coins on the player market. Many buyers pair it with an elytra and totems – which is exactly what the Basehunter Bundle does.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username on your order, accept the teleport request and pick up the pickaxe. Usually within 5–30 minutes while we are online. Up to 32 per order.',
+      'The Amethyst Pickaxe is a DonutSMP-exclusive item – a custom pickaxe that mines far faster than any vanilla tool. It is the base hunter\'s weapon of choice: tunneling through walls, stripping obsidian vaults and digging out hidden stashes in a fraction of the time a netherite pickaxe needs. We sell it for $4.79.\n\n' +
+      'Because it is a server custom item it cannot be crafted and only enters the economy through limited in-game sources, which is why it carries a \'Rare\' tag here and a steep price in coins on the player market. Many buyers pair it with an elytra and totems – which is exactly what the Basehunter Bundle does.',
     bullets: [
       'DonutSMP custom pickaxe – ultra-fast mining',
       'Base hunter\'s essential',
@@ -1375,8 +1347,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'A shulker of 27 maxed netherite pickaxes for DonutSMP – Efficiency V, Unbreaking III, Mending, Fortune III – for $18.99 instead of $26.73 as singles.',
     description:
       'Twenty-seven god netherite pickaxes – Efficiency V, Unbreaking III, Mending and Fortune III – in one shulker box for $18.99. Bought one at a time they would be $26.73, so the shulker saves about $7.74, and carts of $15 or more get a further 5% off automatically.\n\n' +
-      'Who needs 27 pickaxes? Player shops that sell tools for coins, groups kitting out everyone before a mining trip or base raid, and anyone running a reseller business on DonutSMP. A pickaxe is also a popular giveaway item for Discord events and recruitment.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username from your order, accept the teleport request and pick up the shulker. Usually within 5–30 minutes while we are online. Up to 20 shulkers per order.',
+      'Who needs 27 pickaxes? Player shops that sell tools for coins, groups kitting out everyone before a mining trip or base raid, and anyone running a reseller business on DonutSMP. A pickaxe is also a popular giveaway item for Discord events and recruitment.',
     bullets: [
       '27 maxed netherite pickaxes in one shulker',
       'Efficiency V, Unbreaking III, Mending, Fortune III',
@@ -1401,8 +1372,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'A shulker of 27 maxed netherite swords for DonutSMP – Sharpness V, Fire Aspect II, Looting III, Mending – for $21.99 instead of $26.73 as singles.',
     description:
       'Twenty-seven god netherite swords in one shulker box for $21.99. Each sword carries Sharpness V, Unbreaking III, Mending, Fire Aspect II and Looting III – the same spec as our $0.99 single – so the shulker saves about $4.74 against 27 singles and qualifies for the 5% spending discount on carts of $15 or more.\n\n' +
-      'Swords in bulk are bought by player shops, by factions arming up for a war on DonutSMP, and by farm owners who hand out Looting III blades to everyone grinding their spawners. Twenty-seven is a full shulker, which also makes it the neat unit for reselling.\n\n' +
-      'Delivery is in-game by our staff: be online on DonutSMP with the username on your order, accept the teleport request and pick up the shulker. Usually within 5–30 minutes while we are online. Up to 20 shulkers per order.',
+      'Swords in bulk are bought by player shops, by factions arming up for a war on DonutSMP, and by farm owners who hand out Looting III blades to everyone grinding their spawners. Twenty-seven is a full shulker, which also makes it the neat unit for reselling.',
     bullets: [
       '27 maxed netherite swords in one shulker',
       'Sharpness V, Fire Aspect II, Looting III, Mending, Unbreaking III',
@@ -1428,8 +1398,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'DonutSMP Starter Bundle for $9.49: 20M money, 15 skeleton spawners and six diamond armor sets – about $10.54 separately. Money by /pay, items in-game.',
     description:
       'The Starter Bundle is the fastest way to go from fresh spawn to self-sufficient on DonutSMP: 20M money, 15 Skeleton Spawners and a Diamond Armor Shulker (six full Protection IV sets) for $9.49. Bought separately those three lines cost about $10.54.\n\n' +
-      'The idea is simple. The spawners become your first farm and income, the money covers a claim, hoppers and chests to build it, and the armor keeps you alive while you set up. Fifteen skellies is enough to produce real bones-and-arrows money from day one, and the 20M gives you room to buy more from players as you grow.\n\n' +
-      'Delivery is split by type: staff send the 20M to your balance with /pay, and hand over the spawners and the armor shulker in-game – join DonutSMP with the username on your order, accept the teleport and collect. Usually within 5–30 minutes while we are online.',
+      'The idea is simple. The spawners become your first farm and income, the money covers a claim, hoppers and chests to build it, and the armor keeps you alive while you set up. Fifteen skellies is enough to produce real bones-and-arrows money from day one, and the 20M gives you room to buy more from players as you grow.',
     bullets: [
       '20M money + 15 skeleton spawners + 6 diamond sets',
       '$9.49 – about $10.54 separately',
@@ -1458,8 +1427,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Spawner Farm Bundle for DonutSMP: 64 skeleton spawners plus 10M money to build the farm, for $25.99 in one order. Spawners in-game, money by /pay.',
     description:
       'A full stack of 64 Skeleton Spawners plus 10M money, for $25.99. Sixty-four skellies is the classic DonutSMP farm size – one big spawner room, a drop chute, a kill platform – and the 10M pays for the hoppers, chests, water and claim blocks to build it.\n\n' +
-      'Players buy this bundle when they are done with small farms and want an income that runs while they are offline. Bones sell steadily, arrows sell steadily, and the XP from 64 stacked spawners keeps every Mending tool and armor piece topped up. It is also the bundle to grab when a base raid wipes your old farm.\n\n' +
-      'Delivery is split by type: staff pay the 10M with /pay and hand the spawners over in-game – join DonutSMP with the username on your order, accept the teleport and pick up the shulker. Usually within 5–30 minutes while we are online. Up to 20 bundles per order.',
+      'Players buy this bundle when they are done with small farms and want an income that runs while they are offline. Bones sell steadily, arrows sell steadily, and the XP from 64 stacked spawners keeps every Mending tool and armor piece topped up. It is also the bundle to grab when a base raid wipes your old farm.',
     bullets: [
       '64 skeleton spawners – a full stack',
       '10M money to build the farm',
@@ -1488,8 +1456,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Pro Bundle for DonutSMP: 50M money, an elytra with Unbreaking III and Mending and 16 skeleton spawners for $40.99 – with the 8% spending discount.',
     description:
       'The Pro Bundle packs the three things an established DonutSMP player wants into one order: 50M money, an Elytra (Unbreaking III + Mending) and 16 Skeleton Spawners, for $40.99. As separate lines – the 50M pack, the elytra and 16 skellies – that is about $42.86, and because the cart passes $40 the 8% spending discount comes off automatically at checkout.\n\n' +
-      'It is the upgrade path after a starter farm: the elytra opens up base hunting and fast travel, the spawners double a small farm, and 50M is enough to buy maxed gear, a bigger claim or whatever the player market has on offer that week.\n\n' +
-      'Delivery is split by type: staff send the 50M with /pay and hand over the elytra and spawners in-game – join DonutSMP with the username on your order, accept the teleport and collect. Usually within 5–30 minutes while we are online. Up to 20 bundles per order.',
+      'It is the upgrade path after a starter farm: the elytra opens up base hunting and fast travel, the spawners double a small farm, and 50M is enough to buy maxed gear, a bigger claim or whatever the player market has on offer that week.',
     bullets: [
       '50M money + elytra + 16 skeleton spawners',
       'Elytra with Unbreaking III and Mending',
@@ -1517,13 +1484,12 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'Basehunter Bundle for DonutSMP: elytra, Amethyst Pickaxe, 16 totems and 20M money for $37.99 – the full base-hunting loadout, delivered by our staff.',
     description:
-      'Base hunting on DonutSMP needs four things: a way to get there, a way to get in, a way to survive and money to make the trip worth it. The Basehunter Bundle has all four – an Elytra (Unbreaking III + Mending), the server-custom Amethyst Pickaxe, 16 Totems of Undying and 20M money – for $37.99. Carts over $40 get the 8% spending discount.\n\n' +
-      'The elytra covers thousands of blocks in minutes, the Amethyst Pickaxe chews through walls and vaults faster than any netherite tool, sixteen totems mean traps and ambushes do not end the run, and the 20M buys rockets, food and whatever you cannot loot.\n\n' +
-      'Delivery is split by type: staff send the 20M to your balance with /pay and hand over the elytra, pickaxe and totems in-game – join DonutSMP with your order username, accept the teleport and collect. Usually within 5–30 minutes while we are online. Up to 20 bundles per order.',
+      'Base hunting on DonutSMP needs four things: a way to get there, a way to get in, a way to survive and money to make the trip worth it. The Basehunter Bundle has all four – an Elytra (Unbreaking III + Mending), the server-custom Amethyst Pickaxe, 16 Totems of Undying and 20M money – for $37.99. On its own that sits in the 5% spending tier ($36.09 at checkout); add any $2 item to pass $40 and get 8% off the whole cart.\n\n' +
+      'The elytra covers thousands of blocks in minutes, the Amethyst Pickaxe chews through walls and vaults faster than any netherite tool, sixteen totems mean traps and ambushes do not end the run, and the 20M buys rockets, food and whatever you cannot loot.',
     bullets: [
       'Elytra + Amethyst Pickaxe + 16 totems + 20M',
       'Complete base-hunting loadout',
-      '8% spending discount at checkout',
+      '5% spending discount at checkout (8% from $40)',
       'Items in-game, money by /pay',
     ],
     faq: [
@@ -1545,14 +1511,13 @@ export const productCopy: Record<string, ProductCopy> = {
   'rich-bundle': {
     seoTitle: 'DonutSMP Rich Bundle – $79.99 | DonutCoins',
     metaDescription:
-      'Rich Bundle for DonutSMP: 250M money, a God Mystery Box, an elytra and the full PvP Kit for $79.99 – about $99.96 separately, with 8% off at checkout.',
+      'Rich Bundle for DonutSMP: 250M money, a God Mystery Box, an elytra and the full PvP Kit for $79.99 – about $98.96 separately, with 8% off at checkout.',
     description:
-      'The Rich Bundle is the whale order: 250M money, a God Mystery Box (five drops with roughly 11% elytra odds per roll), a guaranteed Elytra and the complete PvP Kit – maxed netherite set, sword, pickaxe and 8 totems – for $79.99. Bought as separate lines that is about $99.96, and the 8% spending discount for carts over $40 comes off on top.\n\n' +
-      'It is built for players who want to arrive on DonutSMP, or come back to it, already at the top: a balance that competes on /baltop, the gear to hold it, flight, and a box roll that can add a second elytra, dragon heads or another 50M.\n\n' +
-      'Delivery is in stages: 250M in several /pay transfers, then an in-game handover of the elytra, the PvP Kit and the rolled box contents. Box drops are rolled when you order and listed on your order page. Usually within 5–30 minutes while we are online; max 10 per order.',
+      'The Rich Bundle is the whale order: 250M money, a God Mystery Box (five drops with roughly 11% elytra odds per roll), a guaranteed Elytra and the complete PvP Kit – maxed netherite set, sword, pickaxe and 8 totems – for $79.99. Bought as separate lines that is about $98.96, and the 8% spending discount for carts over $40 comes off on top.\n\n' +
+      'It is built for players who want to arrive on DonutSMP, or come back to it, already at the top: a balance that competes on /baltop, the gear to hold it, flight, and a box roll that can add a second elytra, dragon heads or another 50M.',
     bullets: [
       '250M + God Mystery Box + elytra + PvP Kit',
-      '$79.99 – about $99.96 as separate lines',
+      '$79.99 – about $98.96 as separate lines',
       '8% spending discount at checkout',
       'Box drops rolled on order, visible on the order page',
       'Delivered in stages by real staff',

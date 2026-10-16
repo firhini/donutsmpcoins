@@ -18,7 +18,7 @@ export default function Page() {
 
   return (
     <div className="container page">
-      <Seo title={`Free coins, coupons & discounts | ${config.storeName}`} description={`Every way to get free ${config.serverName} coins and discounts at ${config.storeName}: daily spin, welcome coupon, spending tiers, referrals, review rewards, giveaways and gift codes.`} canonical="/free" jsonLd={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Free coins & coupons', path: '/free' }]), webPageSchema('Free coins & coupons', '/free')]} />
+      <Seo title={`Free coins, coupons & discounts | ${config.storeName}`} description={`Every way to get free ${config.serverName} coins and discounts at ${config.storeName}: daily spin, welcome coupon, spending tiers, referrals, reviews, giveaways and gift codes.`} canonical="/free" jsonLd={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Free coins & coupons', path: '/free' }]), webPageSchema('Free coins & coupons', '/free')]} />
 
       <header className="free-hero">
         <span className="eyebrow">

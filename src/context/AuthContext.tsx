@@ -48,8 +48,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = useCallback(async () => {
     try {
       await apiPost('/auth/logout', {});
-    } finally {
       setUser(null);
+    } catch (err) {
+      // the HttpOnly cookie is still valid – do not pretend to be logged out
+      console.warn('[auth] logout failed', err);
+      throw err;
     }
   }, []);
 

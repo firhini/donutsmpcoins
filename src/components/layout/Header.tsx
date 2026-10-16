@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useStore } from '../../context/StoreContext';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
 import { Icon } from '../ui/Icons';
 import { safeHref, isExternal } from '../../lib/url';
 import '../../styles/shop.css';
@@ -22,13 +23,14 @@ export function AnnouncementBar() {
   if (!a?.enabled || !a.text) return null;
   const href = safeHref(a.link);
   const inner = href ? (isExternal(href) ? <a href={href} target="_blank" rel="noreferrer">{a.text}</a> : <Link to={href}>{a.text}</Link>) : a.text;
-  return <div className="announce">{inner}</div>;
+  return <div className="announce" role="region" aria-label="Announcement">{inner}</div>;
 }
 
 export function Header() {
   const { config, currency, setCurrency } = useStore();
   const { lines, toggle } = useCart();
   const auth = useAuth();
+  const { toast } = useToast();
   const [menu, setMenu] = useState(false);
   // distinct lines, not summed quantity (a 250M money line would otherwise read "99+")
   const count = lines.length;
@@ -51,7 +53,7 @@ export function Header() {
       <AnnouncementBar />
       <header className={`header ${scrolled ? 'scrolled' : ''}`}>
         <div className="container header-inner">
-          <button className="btn btn-ghost btn-icon only-mobile" aria-label="Menu" onClick={() => setOpen((o) => !o)}>
+          <button className="btn btn-ghost btn-icon only-mobile" aria-label="Menu" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((o) => !o)}>
             <Icon name={open ? 'close' : 'menu'} size={22} />
           </button>
           <Link to="/" className="brand" aria-label={config.storeName}>
@@ -98,7 +100,7 @@ export function Header() {
                       <Link to="/spin" role="menuitem">
                         <Icon name="spin" size={16} /> Daily spin
                       </Link>
-                      <button type="button" role="menuitem" onClick={() => void auth.logout()}>
+                      <button type="button" role="menuitem" onClick={() => void auth.logout().catch(() => toast('Could not log out – please try again.', 'error'))}>
                         <Icon name="logout" size={16} /> Log out
                       </button>
                     </div>
@@ -121,7 +123,7 @@ export function Header() {
           </div>
         </div>
         {open && (
-          <div className="mobile-menu only-mobile">
+          <div className="mobile-menu only-mobile" id="mobile-menu">
             {NAV.map((n) => (
               <NavLink key={n.to} to={n.to} className={({ isActive }) => (isActive ? 'active' : '')}>
                 {n.label} {n.badge && <span className="badge badge-pink">{n.badge}</span>}
@@ -135,7 +137,7 @@ export function Header() {
               </button>
             )}
             {auth.configured && auth.user && (
-              <button type="button" className="btn btn-ghost btn-sm" style={{ alignSelf: 'flex-start' }} onClick={() => void auth.logout()}>
+              <button type="button" className="btn btn-ghost btn-sm" style={{ alignSelf: 'flex-start' }} onClick={() => void auth.logout().catch(() => toast('Could not log out – please try again.', 'error'))}>
                 <Icon name="logout" size={16} /> Log out
               </button>
             )}

@@ -3,7 +3,7 @@
  * Payload is a compact JSON object signed with HMAC-SHA256 (no server state needed).
  */
 import { createHmac, timingSafeEqual, randomBytes } from 'node:crypto';
-import { HttpError } from './http';
+import { HttpError, derivedKey } from './http';
 
 export const SESSION_COOKIE = 'dc_session';
 export const STATE_COOKIE = 'dc_oauth_state';
@@ -17,10 +17,18 @@ export interface SessionPayload {
   exp: number;
 }
 
-function secret(): string {
-  const s = process.env.SESSION_SECRET || process.env.ADMIN_SECRET || process.env.ADMIN_PASSWORD;
-  if (!s) throw new HttpError(503, 'Login is not configured (set SESSION_SECRET or ADMIN_PASSWORD).', 'auth_unconfigured');
-  return `donutcoins-session:${s}`;
+/**
+ * Signing key. SESSION_SECRET (random, ≥32 chars) is the intended source. Without it the
+ * key is derived from the admin password with scrypt – a signed cookie is handed to every
+ * visitor (the OAuth state), so a fast HMAC of the raw password would be an offline
+ * brute-force oracle for the admin login. Set SESSION_SECRET in production.
+ */
+function secret(): Buffer {
+  const s = process.env.SESSION_SECRET;
+  if (s) return Buffer.from(`donutcoins-session:${s}`);
+  const fallback = process.env.ADMIN_SECRET || process.env.ADMIN_PASSWORD;
+  if (!fallback) throw new HttpError(503, 'Login is not configured (set SESSION_SECRET).', 'auth_unconfigured');
+  return derivedKey('session', fallback);
 }
 
 function b64url(input: string | Buffer): string {

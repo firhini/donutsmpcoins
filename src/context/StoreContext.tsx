@@ -51,9 +51,28 @@ const fallbackConfig: PublicConfig = {
 
 const Ctx = createContext<StoreApi | null>(null);
 
-export function StoreProvider({ children }: { children: ReactNode }) {
-  const [config, setConfig] = useState<PublicConfig>(fallbackConfig);
-  const [catalog, setCatalog] = useState<Catalog>({ ...defaultCatalog, products: defaultCatalog.products.filter((p) => !p.hidden) });
+/** Live config + catalog captured at build time (scripts/prerender.mjs) so the static HTML shows the admin's real settings and prices. */
+export interface InitialState {
+  config?: PublicConfig;
+  catalog?: Catalog;
+}
+declare global {
+  interface Window {
+    __DC_STATE__?: InitialState;
+  }
+}
+
+function bootState(initial?: InitialState): InitialState {
+  if (initial) return initial;
+  return (typeof window !== 'undefined' && window.__DC_STATE__) || {};
+}
+
+export function StoreProvider({ children, initial }: { children: ReactNode; initial?: InitialState }) {
+  const boot = bootState(initial);
+  const [config, setConfig] = useState<PublicConfig>(() => (boot.config?.storeName ? { ...fallbackConfig, ...boot.config } : fallbackConfig));
+  const [catalog, setCatalog] = useState<Catalog>(() =>
+    boot.catalog?.products?.length ? { ...boot.catalog, products: boot.catalog.products.filter((p) => !p.hidden) } : { ...defaultCatalog, products: defaultCatalog.products.filter((p) => !p.hidden) },
+  );
   const [stats, setStats] = useState<SiteStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

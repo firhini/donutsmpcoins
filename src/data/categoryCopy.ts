@@ -32,7 +32,7 @@ export interface CategoryCopy {
 export const categoryCopy: Record<CategoryId, CategoryCopy> = {
   // ───────────── MONEY ─────────────
   money: {
-    seoTitle: 'Buy DonutSMP Money – from $0.13 per 1M | DonutCoins',
+    seoTitle: 'DonutSMP Money Packs 10M–1B & Bulk Prices | DonutCoins',
     metaDescription:
       'Buy DonutSMP money from $0.18 per 1M, down to $0.13 in bulk, or fixed packs from 10M to 1B. Paid to your balance with /pay by real staff within minutes.',
     intro:
@@ -79,7 +79,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
     faq: [
       {
         q: 'How much is a skeleton spawner on DonutSMP?',
-        a: 'In our store a skeleton spawner is $0.43, dropping to $0.42 at 25+, $0.40 at 50+, $0.38 at 100+ and $0.36 at 250+. A full 64-spawner room is therefore $25.60 at the 50+ tier, before the 8% spending discount for carts over $40.',
+        a: 'In our store a skeleton spawner is $0.43, dropping to $0.42 at 25+, $0.40 at 50+, $0.38 at 100+ and $0.36 at 250+. A full 64-spawner room is therefore $25.60 at the 50+ tier, before the 5% spending discount for carts over $15 (8% from $40).',
       },
       {
         q: 'How are spawners delivered?',
@@ -98,7 +98,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
 
   // ───────────── MYSTERY BOXES ─────────────
   mystery: {
-    seoTitle: 'DonutSMP Mystery Boxes – Win an Elytra or 100M | DonutCoins',
+    seoTitle: 'DonutSMP Mystery Boxes & Crates – Shop All 6 | DonutCoins',
     metaDescription:
       'DonutSMP mystery boxes from $2.49 with public odds: Coin Crate (5M–100M), Elite and God boxes with Elytra chances, Legendary Crate with guaranteed Elytra.',
     intro:
@@ -201,11 +201,11 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
     metaDescription:
       'Maxed DonutSMP tools and weapons delivered in-game: god netherite sword and pickaxe $0.99, God Bow $0.89, Mace $1.49, Trident $1.89, Amethyst Pickaxe.',
     intro:
-      'Fully enchanted tools and weapons for DonutSMP, ready to use the moment they land in your inventory. The god netherite sword (Sharpness V, Fire Aspect II, Looting III) and pickaxe (Efficiency V, Fortune III) are $0.99 each, the God Bow with Infinity is $0.89, the Mace with Density V, Breach IV and Wind Burst III is $1.49 and the Loyalty III trident is $1.89. Base hunters get the DonutSMP-exclusive Amethyst Pickaxe. Every tool here includes Mending and Unbreaking III.',
+      'Fully enchanted tools and weapons for DonutSMP, ready to use the moment they land in your inventory. The god netherite sword (Sharpness V, Fire Aspect II, Looting III) and pickaxe (Efficiency V, Fortune III) are $0.99 each, the God Bow with Infinity is $0.89, the Mace with Density V and Wind Burst III is $1.49 and the Loyalty III trident is $1.89. Base hunters get the DonutSMP-exclusive Amethyst Pickaxe. The netherite sword, pickaxe, mace and Amethyst Pickaxe include Mending and Unbreaking III; the God Bow trades Mending for Infinity, and the trident has Mending without Unbreaking.',
     body: [
       'On a lifesteal server the weapon decides the trade. The Mace with Density V and Wind Burst III is the current meta for one-shot plays from height, the Sharpness V sword with Fire Aspect II and Looting III handles everything else and doubles as a farming tool, and the Power V, Punch II, Flame, Infinity bow needs one arrow forever. The trident with Loyalty III, Channeling and Impaling V is the pick for rain fights and water.',
       'Single tools are priced to be disposable: $0.99 for the sword or pickaxe, $0.89 for the bow, $1.49 for the mace and $1.89 for the trident. If you lose gear regularly, the 27-piece shulkers are cheaper per item – 27 maxed netherite pickaxes for $18.99 (about $0.70 each) and 27 maxed netherite swords for $21.99 (about $0.81 each). The Amethyst Pickaxe, DonutSMP\'s custom ultra-fast pickaxe, is $4.79.',
-      'Tools are handed over in-game by our staff: accept the teleport from the delivery account, pick up the drop, done – usually within 5–30 minutes while we are online. Every tool here has Mending, so a few minutes at an XP farm repairs a full fight\'s wear. Keep spares in an Ender Chest; the Basehunter Bundle pairs the Amethyst Pickaxe with an Elytra, 16 totems and 20M.',
+      'Tools are handed over in-game by our staff: accept the teleport from the delivery account, pick up the drop, done – usually within 5–30 minutes while we are online. Most tools here have Mending (the God Bow swaps it for Infinity), so a few minutes at an XP farm repairs a full fight\'s wear. Keep spares in an Ender Chest; the Basehunter Bundle pairs the Amethyst Pickaxe with an Elytra, 16 totems and 20M.',
     ],
     faq: [
       {
@@ -218,7 +218,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
       },
       {
         q: 'Is the Mace worth buying on DonutSMP?',
-        a: 'If you PvP, yes – Density V, Breach IV and Wind Burst III make it the strongest burst weapon on the server, and ours has Mending and Unbreaking III. For farming and general play the $0.99 sword is the better everyday tool.',
+        a: 'If you PvP, yes – Density V and Wind Burst III make it the strongest burst weapon on the server, and ours has Mending and Unbreaking III. For farming and general play the $0.99 sword is the better everyday tool.',
       },
       {
         q: 'Can I buy tools in bulk?',
@@ -236,7 +236,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
       'Bundles are the fastest way to go from fresh spawn to running farm on DonutSMP. Each one combines money, spawners and gear in a single order with one delivery: the Starter Bundle ($9.49) covers 20M, 15 skeleton spawners and a Diamond Armor Shulker; the Pro Bundle ($40.99) steps up to 50M, 16 spawners and an Elytra; the Rich Bundle ($79.99) brings 250M, a God Mystery Box, an Elytra and the full PvP Kit. Every item is listed before you buy.',
     body: [
       'Bundles are for new players who do not want to research what a first farm needs, returning players after a season reset, and anyone gifting a friend a head start. The Starter Bundle is enough to place a small skeleton farm, sell the first drops and buy more spawners with the 20M; the Spawner Farm Bundle (64 skeleton spawners plus 10M, $25.99) is the one-order farm for players who already have a base.',
-      'Bundle pricing is easy to check because every bundle lists its exact contents. The Rich Bundle\'s parts – a 250M pack, God Mystery Box, Elytra and PvP Kit – add up to about $99.96 bought separately, against $79.99 as a bundle, and the Starter and Pro bundles also come in under their parts. The Spawner Farm and Basehunter bundles are convenience sets; compare them with the single products if you only want part of the list.',
+      'Bundle pricing is easy to check because every bundle lists its exact contents. The Rich Bundle\'s parts – a 250M pack, God Mystery Box, Elytra and PvP Kit – add up to about $98.96 bought separately, against $79.99 as a bundle, and the Starter and Pro bundles also come in under their parts. The Spawner Farm and Basehunter bundles are convenience sets; compare them with the single products if you only want part of the list.',
       'Bundles are delivered in two parts because money and items travel differently: the money is paid with /pay to your balance, and the items are handed over through a teleport and drop, in shulkers where needed. Both happen in the same session, usually within 5–30 minutes while our staff are online. The order page lists every component, including the rolled contents of the God Mystery Box in the Rich Bundle.',
       'Discounts stack on bundles like on everything else: carts over $15 get 5% off, over $40 get 8% and over $100 get 12%, plus one coupon and any store credit. Buying is at your own risk under DonutSMP\'s rules on real-money trading – we deliver with normal player actions and keep it low-key, but enforcement is the server\'s call, and we are not affiliated with DonutSMP or Mojang.',
     ],
@@ -247,7 +247,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
       },
       {
         q: 'Are bundles cheaper than buying the items separately?',
-        a: 'The Starter, Pro and Rich bundles are – the Rich Bundle saves about $20 against its parts. The Spawner Farm and Basehunter bundles are priced for convenience, so if you only want some of the contents, the single products can be the better deal.',
+        a: 'The Starter, Pro and Rich bundles are – the Rich Bundle saves about $19 against its parts. The Spawner Farm and Basehunter bundles are priced for convenience, so if you only want some of the contents, the single products can be the better deal.',
       },
       {
         q: 'Can I swap an item in a bundle?',

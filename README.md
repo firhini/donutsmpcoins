@@ -98,11 +98,11 @@ Admin: `http://localhost:5173/admin` → Passwort aus `.env`.
 | Variable | Pflicht | Beschreibung |
 |---|---|---|
 | `ADMIN_PASSWORD` | ✅ | Passwort für `/admin` |
-| `ADMIN_SECRET` | optional | separater Schlüssel zum Signieren der Admin-Session (sonst wird aus dem Passwort abgeleitet) |
+| `ADMIN_SECRET` | empfohlen | langer Zufallswert (z. B. `openssl rand -hex 32`) zum Signieren der Admin-Session |
 | `DISCORD_WEBHOOK_URL` | empfohlen | Discord → Servereinstellungen → Integrationen → Webhooks → URL kopieren |
 | `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET` | empfohlen | Discord-Login (siehe Abschnitt 5a) |
 | `DISCORD_GUILD_ID` | optional | deine Server-ID – „Nur Server-Mitglieder dürfen drehen“ |
-| `SESSION_SECRET` | optional | Schlüssel für Login-Cookies (sonst aus `ADMIN_SECRET`/`ADMIN_PASSWORD` abgeleitet) |
+| `SESSION_SECRET` | Pflicht bei Discord-Login | langer Zufallswert (≥ 32 Zeichen) für die Login-Cookies – nie das Admin-Passwort wiederverwenden |
 | `SITE_URL` | empfohlen | z. B. `https://deinshop.netlify.app` (für Zahlungs-Redirects & Links in Discord) |
 | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | optional | nur für Karten-/Apple-Pay-Zahlung über Stripe |
 | `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `PAYPAL_ENV` | optional | nur für PayPal Checkout (automatische Bestätigung) |
@@ -154,7 +154,8 @@ Bei manuellen Methoden gilt: Bestellung steht auf *Awaiting payment* → Kunde m
 2. Links **OAuth2** → **Client ID** kopieren, **Reset Secret** → **Client Secret** kopieren.
 3. Unter **Redirects** eintragen: `https://deinshop.netlify.app/api/auth/discord/callback`
    (für lokales Testen zusätzlich `http://localhost:5173/api/auth/discord/callback`).
-4. In Netlify die Variablen `DISCORD_CLIENT_ID` und `DISCORD_CLIENT_SECRET` setzen, neu deployen.
+4. In Netlify die Variablen `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET` **und `SESSION_SECRET`** (langer Zufallswert,
+   z. B. aus `openssl rand -hex 32` oder einem Passwort-Generator, mindestens 32 Zeichen) setzen, neu deployen.
 5. Optional „nur Server-Mitglieder“: In Discord **Entwicklermodus** aktivieren (Einstellungen → Erweitert), Rechtsklick auf
    deinen Server → **Server-ID kopieren** → als `DISCORD_GUILD_ID` setzen und im Admin unter *Spin* den Schalter
    „Require membership“ aktivieren.
@@ -283,7 +284,18 @@ einfach ausliefern und auf *Delivered* setzen.
   beim Wiedereröffnen wird alles erneut abgezogen.
 - Deploy-Previews und Branch-Deploys benutzen einen eigenen Datenspeicher und können Live-Daten nicht verändern.
 - Glücksrad-Ergebnis, Box-Inhalte und Gutscheine werden serverseitig ausgelost/geprüft, Cooldowns laufen über IP + Gerät.
-- Admin-Login ist rate-limited; Session-Token laufen nach 7 Tagen ab.
+- Admin-Login ist rate-limited; Session-Token laufen nach 7 Tagen ab und werden beim Ändern von `ADMIN_PASSWORD`
+  sofort ungültig. Signatur-Schlüssel werden nie direkt aus dem Passwort gebildet (scrypt); für den Discord-Login
+  gehört ein eigenes `SESSION_SECRET` gesetzt.
+- **Unbezahlte Bestellungen laufen nach 24 h ab** (stündliche Netlify-Funktion `expire-orders` + Prüfung bei jeder
+  neuen Bestellung): reservierter Bestand, Gutschein-Nutzung und Guthaben kommen automatisch zurück. Bestellungen, bei
+  denen der Kunde eine Zahlung gemeldet hat, bleiben für dich zur Prüfung offen.
+- **Mystery-Box-Ergebnisse** werden zwar beim Bestellen ausgelost, auf der öffentlichen Bestellseite aber erst nach
+  Zahlungseingang angezeigt – sonst könnte man „bestellen, gucken, stornieren“ so lange wiederholen, bis der Wurf passt.
+- **Guthaben** kann, sobald Discord-Login konfiguriert ist, nur noch der Spieler ausgeben, der den Minecraft-Namen in
+  seinem Account hinterlegt hat (vorher könnte jeder unter fremdem Namen fremdes Guthaben verbrauchen).
+- **PayPal Checkout:** Es wird nur die PayPal-Bestellung akzeptiert, die der Server selbst für genau diese Bestellung
+  angelegt hat, und jede Capture-ID kann nur einmal eine Bestellung bezahlen.
 - Der Shop ist nicht mit DonutSMP, Mojang oder Microsoft verbunden. DonutSMP verbietet laut eigenen Regeln Real-Money-Trading –
   das Risiko trägt der Spieler; das steht so auch in den AGB-/FAQ-Texten der Seite.
 - Bei manuellen Zahlungsarten gibt es für dich **keinen Käuferschutz** in beide Richtungen – bestätige erst nach
@@ -300,6 +312,10 @@ einfach ausliefern und auf *Delivered* setzen.
 4. Testbestellung machen (eigener Minecraft-Name, 1M Money) → Discord-Ping prüfen → im Admin auf *Paid* und *Delivered* setzen.
 5. Einmal das Glücksrad drehen und prüfen, dass der Gutschein im Checkout funktioniert.
 6. Optional: `SITE_URL` in Netlify auf deine echte Domain setzen (wird für Links in Discord, Zahlungs-Redirects und das Vorschaubild benutzt).
+7. **Nach Änderungen an Preisen, Produkten, Store-Name oder Discord-Invite im Admin einmal neu deployen** (Netlify →
+   *Deploys* → *Trigger deploy*): Der Build holt sich beim Vorrendern die Live-Einstellungen und den Live-Katalog von
+   deiner Seite (`/api/config`, `/api/catalog`), damit Google exakt das sieht, was Kunden sehen. Bis dahin zeigt das
+   statische HTML den alten Stand und der Browser aktualisiert ihn nach dem Laden.
 
 ## 10. Troubleshooting
 

@@ -72,7 +72,11 @@ export default function Page() {
     let cancelled = false;
     apiGet<{ balanceCents: number }>(`/credit?username=${encodeURIComponent(checkedName)}`)
       .then((r) => {
-        if (!cancelled) setCredit(Math.max(0, r.balanceCents || 0));
+        if (cancelled) return;
+        const bal = Math.max(0, r.balanceCents || 0);
+        setCredit(bal);
+        // the site promises credit is applied automatically – default the box on
+        setApplyCredit(bal > 0);
       })
       .catch(() => {
         if (!cancelled) setCredit(0);
@@ -83,7 +87,9 @@ export default function Page() {
   }, [usernameOk, checkedName]);
 
   const items = useMemo(() => lines.map((l) => ({ productId: l.productId, qty: l.qty })), [lines]);
-  const useCredit = applyCredit && (credit ?? 0) > 0;
+  // with Discord login available, credit can only be spent by the player who proved the name on their account
+  const creditLocked = !!config.integrations.discordOAuth && !(auth.user?.mcUsername && auth.user.mcUsername.toLowerCase() === checkedName.toLowerCase());
+  const useCredit = applyCredit && !creditLocked && (credit ?? 0) > 0;
   const req = useMemo<QuoteRequest | null>(
     () =>
       items.length
@@ -194,7 +200,7 @@ export default function Page() {
     }
   };
 
-  const title = `Checkout · ${config.storeName}`;
+  const title = `Checkout | ${config.storeName}`;
 
   if (placedId) {
     return (
@@ -341,7 +347,24 @@ export default function Page() {
             </header>
             <div className="co-step-body">
               <PromoCodes subtotalCents={quote.subtotalCents} username={checkedName || undefined} quote={quote} live={sq.live} onApplied={sq.refresh} />
-              {credit !== null && credit > 0 && (
+              {credit !== null && credit > 0 && creditLocked && (
+                <div className="alert alert-info" role="status">
+                  <Icon name="lock" size={16} /> {fmt(credit)} store credit belongs to <strong>{checkedName}</strong>.{' '}
+                  {auth.user ? (
+                    <>
+                      Set this Minecraft username on your <Link to="/account">account</Link> to use it.
+                    </>
+                  ) : (
+                    <>
+                      <button type="button" className="btn btn-link" onClick={() => auth.login('/checkout')}>
+                        Log in with Discord
+                      </button>{' '}
+                      to use it.
+                    </>
+                  )}
+                </div>
+              )}
+              {credit !== null && credit > 0 && !creditLocked && (
                 <label className={`co-credit ${applyCredit ? 'is-on' : ''}`}>
                   <input type="checkbox" checked={applyCredit} onChange={(e) => setApplyCredit(e.target.checked)} />
                   <span className="co-credit-body">

@@ -117,7 +117,7 @@ export default function Page() {
   }, [order?.status, order?.id]);
 
   const boxItems = useMemo(() => (order?.items ?? []).filter((i) => i.kind === 'box' && i.rolled && i.rolled.length > 0), [order]);
-  const title = `Order ${id} · ${config.storeName}`;
+  const title = `Order ${id} | ${config.storeName}`;
 
   if (loading && !order) {
     return (
@@ -261,7 +261,7 @@ export default function Page() {
                 <strong>
                   {boxItems.reduce((s, i) => s + i.qty, 0)} mystery {boxItems.reduce((s, i) => s + i.qty, 0) === 1 ? 'box unlocks' : 'boxes unlock'} once your payment is confirmed.
                 </strong>
-                <p className="muted small">The drops were already rolled when you ordered – you will open them right here.</p>
+                <p className="muted small">The drops were rolled when you ordered – they unlock here as soon as the payment is confirmed.</p>
               </div>
             </div>
           )}

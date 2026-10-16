@@ -61,7 +61,7 @@ export interface Product {
   /** null = unlimited */
   stock: number | null;
   bulkPricing?: BulkTier[];
-  /** e.g. 'Instant', 'Hot', 'New', 'Best value', 'Popular' */
+  /** e.g. 'Fast', 'Hot', 'New', 'Best value', 'Popular' */
   tags?: string[];
   featured?: boolean;
   sortOrder?: number;

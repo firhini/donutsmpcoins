@@ -96,8 +96,8 @@ export default function Terms() {
         cap combined discounts.
       </p>
       <p>
-        For manual payment methods you must send the exact amount and submit the payment reference on your order page. Orders that remain unpaid are cancelled automatically after a
-        while. Underpayments are credited as store credit; overpayments are refunded or credited on request.
+        For manual payment methods you must send the exact amount and submit the payment reference on your order page. Orders that stay unpaid for 24 hours are cancelled automatically (stock, coupon and credit are returned), and you can cancel them yourself
+        from the order page at any time before delivery starts. Underpayments are credited as store credit; overpayments are refunded or credited on request.
       </p>
       <p>
         <strong>Chargebacks.</strong> Opening a chargeback, PayPal dispute or payment reversal on a delivered order is fraud. We will dispute it with the order record and delivery

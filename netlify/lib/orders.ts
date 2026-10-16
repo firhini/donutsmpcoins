@@ -51,9 +51,13 @@ export async function listOrderIndex(): Promise<OrderIndexEntry[]> {
   return (await kvGet<OrderIndexEntry[]>('orders', INDEX_KEY)) ?? [];
 }
 
+/** Box results stay hidden until the order is paid – otherwise "order, peek, cancel, retry" turns the odds into best-of-N for free. */
+const ROLLS_HIDDEN = new Set<OrderStatus>(['awaiting_payment', 'cancelled']);
+
 export function toPublicOrder(o: Order): PublicOrder {
   const { ipHash, deviceId, adminNote, email, ...rest } = o;
-  return { ...rest, emailMasked: email ? maskEmail(email) : undefined };
+  const items = ROLLS_HIDDEN.has(o.status) ? rest.items.map((i) => (i.rolled ? { ...i, rolled: undefined } : i)) : rest.items;
+  return { ...rest, items, emailMasked: email ? maskEmail(email) : undefined };
 }
 
 function maskEmail(e: string): string {
@@ -73,6 +77,12 @@ export function pushTimeline(o: Order, status: TimelineEntry['status'], note?: s
  */
 const PAID_LIKE = new Set<OrderStatus>(['paid', 'delivering', 'delivered']);
 class NoTransition extends Error {}
+/** The stored order moved on since the caller loaded it (e.g. cancelled while a webhook was in flight). */
+export class StaleOrderError extends HttpError {
+  constructor(public readonly fresh: Order) {
+    super(409, 'The order changed meanwhile – reload and try again.', 'stale');
+  }
+}
 
 export async function setOrderStatus(o: Order, status: OrderStatus, note?: string): Promise<Order> {
   if (o.status === status) return o;
@@ -80,30 +90,53 @@ export async function setOrderStatus(o: Order, status: OrderStatus, note?: strin
   const reviving = (from === 'cancelled' || from === 'refunded') && status !== 'cancelled' && status !== 'refunded';
   if (reviving) await reclaimOrder(o); // throws 409 when credit/stock are no longer available
 
-  // Atomic transition: a concurrent webhook / verify / admin click cannot apply the same
-  // transition twice (and 'paid' can never be re-applied over delivering/delivered).
+  // Atomic transition on the STORED order: a concurrent webhook / verify / admin click cannot
+  // apply the same transition twice, 'paid' can never be re-applied over delivering/delivered,
+  // and a caller holding a stale copy (status changed since it was loaded) is rejected instead
+  // of silently overwriting the newer state (which would e.g. revive a cancelled order whose
+  // stock and credit were already given back).
+  let stale: Order | null = null;
   try {
     await kvUpdate<Order>('orders', o.id, (cur) => {
       const stored = cur ?? o;
       if (stored.status === status) throw new NoTransition();
       if (status === 'paid' && PAID_LIKE.has(stored.status)) throw new NoTransition();
-      o.status = status;
-      if (status === 'paid') {
-        o.payment.status = 'paid';
-        o.payment.paidAt = o.payment.paidAt ?? nowIso();
+      if (cur && cur.status !== from) {
+        stale = cur;
+        throw new NoTransition();
       }
-      if (status === 'refunded') o.payment.status = 'refunded';
-      // keep bookkeeping flags that another writer may have set meanwhile
-      o.referralRewarded = o.referralRewarded || stored.referralRewarded;
-      o.referralRewardCents = o.referralRewardCents ?? stored.referralRewardCents;
-      o.reviewed = o.reviewed || stored.reviewed;
-      pushTimeline(o, status, note);
-      o.updatedAt = nowIso();
-      return o;
+      // apply the transition to the fresh copy and mirror the result into the caller's object
+      const next: Order = { ...stored, payment: { ...stored.payment }, timeline: [...stored.timeline] };
+      next.status = status;
+      if (status === 'paid') {
+        next.payment.status = 'paid';
+        next.payment.paidAt = next.payment.paidAt ?? o.payment.paidAt ?? nowIso();
+      }
+      if (status === 'refunded') next.payment.status = 'refunded';
+      // bookkeeping flags set by the caller (reclaimOrder) or by another writer meanwhile
+      next.stockRestored = o.stockRestored ?? stored.stockRestored;
+      next.creditRestored = o.creditRestored ?? stored.creditRestored;
+      next.couponRestored = o.couponRestored ?? stored.couponRestored;
+      next.referralRewarded = o.referralRewarded || stored.referralRewarded;
+      next.referralRewardCents = o.referralRewardCents ?? stored.referralRewardCents;
+      next.reviewed = o.reviewed || stored.reviewed;
+      if (o.payment.providerId) next.payment.providerId = o.payment.providerId;
+      if (o.payment.providerUrl) next.payment.providerUrl = o.payment.providerUrl;
+      if (o.payment.reference) next.payment.reference = o.payment.reference;
+      pushTimeline(next, status, note);
+      next.updatedAt = nowIso();
+      Object.assign(o, next);
+      return next;
     });
   } catch (err) {
     if (err instanceof NoTransition) {
+      if (stale) {
+        if (reviving) await releaseOrder(o).catch(() => undefined); // undo reclaimOrder
+        Object.assign(o, stale);
+        throw new StaleOrderError(stale);
+      }
       const fresh = await getOrder(o.id);
+      if (fresh) Object.assign(o, fresh);
       return fresh ?? o;
     }
     throw err;
@@ -262,6 +295,49 @@ export async function announceNewOrder(o: Order): Promise<void> {
       ...(o.referralCode ? [{ name: 'Referral', value: o.referralCode, inline: true }] : []),
     ],
   });
+}
+
+/** Unpaid orders are cancelled after this long so reserved stock / coupon uses come back. */
+export const UNPAID_ORDER_TTL_MS = 24 * 60 * 60 * 1000;
+const EXPIRE_THROTTLE_KEY = 'expire-unpaid-last-run';
+
+/**
+ * Cancel orders that have been awaiting payment for longer than UNPAID_ORDER_TTL_MS.
+ * Orders with a customer-reported payment (pending_review) are left for the owner.
+ * Runs from the scheduled function (netlify/functions/expire-orders.ts) and, throttled,
+ * after each new order so it also works without the scheduler (e.g. `netlify dev`).
+ */
+export async function expireUnpaidOrders(opts: { max?: number; now?: number } = {}): Promise<string[]> {
+  const now = opts.now ?? Date.now();
+  const idx = await listOrderIndex();
+  const due = idx.filter((e) => e.status === 'awaiting_payment' && e.paymentStatus !== 'pending_review' && now - Date.parse(e.createdAt) > UNPAID_ORDER_TTL_MS).slice(0, opts.max ?? 25);
+  const cancelled: string[] = [];
+  for (const e of due) {
+    const order = await getOrder(e.id);
+    if (!order || order.status !== 'awaiting_payment' || order.payment.status === 'pending_review') continue;
+    try {
+      await setOrderStatus(order, 'cancelled', 'Expired – no payment within 24 hours (stock, coupon and credit returned)');
+      cancelled.push(order.id);
+    } catch (err) {
+      console.warn('[orders] expiry failed for', order.id, (err as Error).message);
+    }
+  }
+  return cancelled;
+}
+
+/** Fire-and-forget expiry, at most once per 15 minutes per deployment. */
+export async function expireUnpaidOrdersThrottled(): Promise<void> {
+  try {
+    let run = false;
+    await kvUpdate<{ at: number }>('giveaways', EXPIRE_THROTTLE_KEY, (cur) => {
+      if (cur && Date.now() - cur.at < 15 * 60 * 1000) return cur;
+      run = true;
+      return { at: Date.now() };
+    });
+    if (run) await expireUnpaidOrders();
+  } catch (err) {
+    console.warn('[orders] throttled expiry failed', (err as Error).message);
+  }
 }
 
 /** Count delivered orders (for the public stats) */

@@ -9,17 +9,40 @@ export function productPng(p: Product): string {
   return p.image.replace(/^\/img\/products\/([^/]+)\.svg$/, '/img/products/png/$1.png');
 }
 
+/** Real, owner-configured Discord invite (the shipped default is a placeholder). */
+export function realDiscordInvite(config: PublicConfig): string | undefined {
+  const u = config.discordInvite;
+  return u && /^https?:\/\//.test(u) && !/your-invite/i.test(u) ? u : undefined;
+}
+
+/** Compact Organization node – embedded wherever a page references the store (publisher, seller). */
+export function organizationRef(config: PublicConfig) {
+  return {
+    '@type': 'Organization',
+    '@id': absUrl('/#organization'),
+    name: config.storeName,
+    url: absUrl('/'),
+    logo: { '@type': 'ImageObject', url: absUrl('/img/brand/logo.svg') },
+  };
+}
+
+/** Compact WebSite node for isPartOf references. */
+export function websiteRef(config: PublicConfig) {
+  return { '@type': 'WebSite', '@id': absUrl('/#website'), name: config.storeName, url: absUrl('/') };
+}
+
 export function organizationSchema(config: PublicConfig) {
+  const discord = realDiscordInvite(config);
   return {
     '@context': ctx,
     '@type': 'OnlineStore',
     '@id': absUrl('/#organization'),
     name: config.storeName,
     url: absUrl('/'),
-    logo: absUrl('/img/brand/logo.svg'),
+    logo: { '@type': 'ImageObject', url: absUrl('/img/brand/logo.svg') },
     image: absUrl('/img/brand/og.png'),
     description: `${config.storeName} sells ${config.serverName} in-game money, spawners, mystery boxes and items with fast in-game delivery, daily free spins and discount coupons.`,
-    sameAs: config.discordInvite && /^https?:\/\//.test(config.discordInvite) ? [config.discordInvite] : undefined,
+    sameAs: discord ? [discord] : undefined,
     priceRange: '$',
     currenciesAccepted: 'USD',
     paymentAccepted: 'PayPal, Credit Card, Cryptocurrency',
@@ -34,12 +57,9 @@ export function websiteSchema(config: PublicConfig) {
     '@id': absUrl('/#website'),
     name: config.storeName,
     url: absUrl('/'),
-    publisher: { '@id': absUrl('/#organization') },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: { '@type': 'EntryPoint', urlTemplate: absUrl('/shop?q={search_term_string}') },
-      'query-input': 'required name=search_term_string',
-    },
+    publisher: organizationRef(config),
+    // no SearchAction: Google retired the sitelinks search box (Nov 2024) and the
+    // robots.txt keeps ?q= result pages out of the index
   };
 }
 
@@ -73,7 +93,7 @@ export function productSchema(p: Product, config: PublicConfig, category?: Categ
           offerCount: (p.bulkPricing?.length ?? 0) + 1,
           availability: inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
           url: absUrl(`/product/${p.slug}`),
-          seller: { '@id': absUrl('/#organization') },
+          seller: organizationRef(config),
         }
       : {
           '@type': 'Offer',
@@ -82,7 +102,7 @@ export function productSchema(p: Product, config: PublicConfig, category?: Categ
           availability: inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
           url: absUrl(`/product/${p.slug}`),
           itemCondition: 'https://schema.org/NewCondition',
-          seller: { '@id': absUrl('/#organization') },
+          seller: organizationRef(config),
           shippingDetails: { '@type': 'OfferShippingDetails', shippingRate: { '@type': 'MonetaryAmount', value: '0', currency: 'USD' }, shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'US' } },
         };
   return {
@@ -115,7 +135,7 @@ export function collectionSchema(name: string, path: string, products: Product[]
   };
 }
 
-export function articleSchema(opts: { title: string; description: string; path: string; datePublished: string; dateModified?: string; author: string; image?: string }) {
+export function articleSchema(opts: { title: string; description: string; path: string; datePublished: string; dateModified?: string; author: string; image?: string; config?: PublicConfig }) {
   return {
     '@context': ctx,
     '@type': 'Article',
@@ -127,10 +147,17 @@ export function articleSchema(opts: { title: string; description: string; path: 
     datePublished: opts.datePublished,
     dateModified: opts.dateModified ?? opts.datePublished,
     author: { '@type': 'Organization', name: opts.author, url: absUrl('/') },
-    publisher: { '@id': absUrl('/#organization') },
+    publisher: opts.config ? organizationRef(opts.config) : { '@type': 'Organization', name: opts.author, url: absUrl('/'), logo: { '@type': 'ImageObject', url: absUrl('/img/brand/logo.svg') } },
   };
 }
 
-export function webPageSchema(name: string, path: string, description?: string) {
-  return { '@context': ctx, '@type': 'WebPage', name, url: absUrl(path), description, isPartOf: { '@id': absUrl('/#website') } };
+export function webPageSchema(name: string, path: string, description?: string, config?: PublicConfig) {
+  return {
+    '@context': ctx,
+    '@type': 'WebPage',
+    name,
+    url: absUrl(path),
+    description,
+    isPartOf: config ? websiteRef(config) : { '@type': 'WebSite', '@id': absUrl('/#website'), url: absUrl('/') },
+  };
 }

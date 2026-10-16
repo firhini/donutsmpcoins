@@ -17,6 +17,42 @@ const SITE_URL = (process.env.SITE_URL || process.env.URL || process.env.DEPLOY_
 const entryPath = path.join(SSR, 'entry-server.js');
 const { render, seoRoutes } = await import(pathToFileURL(entryPath).href);
 const template = await fs.readFile(path.join(DIST, 'index.html'), 'utf8');
+
+// Neutral SPA shell for routes that are NOT pre-rendered (cart, checkout, orders, products
+// added in the admin after this build …). netlify.toml rewrites those to /app.html. It must not
+// carry the home page's title/canonical/JSON-LD, so strip the template's own SEO tags.
+const shell = template
+  .replace(/<title>[\s\S]*?<\/title>/, '<title>DonutCoins</title>')
+  .replace(/\s*<meta name="description"[^>]*>/g, '')
+  .replace(/\s*<meta property="og:[^"]*"[^>]*>/g, '')
+  .replace(/\s*<meta name="twitter:[^"]*"[^>]*>/g, '');
+await fs.writeFile(path.join(DIST, 'app.html'), shell, 'utf8');
+
+// Live settings + catalog from the deployed API (the admin edits them at runtime). Falls back
+// to the bundled defaults on the first deploy or when the API is unreachable.
+const API_BASE = (process.env.PRERENDER_API_URL || SITE_URL).replace(/\/$/, '');
+let initial = {};
+if (API_BASE) {
+  const fetchJson = async (p) => {
+    const res = await fetch(`${API_BASE}/api${p}`, { signal: AbortSignal.timeout(10_000), headers: { accept: 'application/json' } });
+    if (!res.ok) throw new Error(`${p} → HTTP ${res.status}`);
+    return res.json();
+  };
+  try {
+    const [config, catalog] = await Promise.all([fetchJson('/config'), fetchJson('/catalog')]);
+    if (config && typeof config.storeName === 'string' && catalog && Array.isArray(catalog.products) && Array.isArray(catalog.categories)) {
+      initial = { config, catalog };
+      console.log(`[prerender] using live settings + catalog from ${API_BASE} (${catalog.products.length} products)`);
+    } else {
+      console.warn('[prerender] live API answered with an unexpected shape – using bundled defaults');
+    }
+  } catch (err) {
+    console.warn(`[prerender] live API not reachable (${err.message}) – using bundled defaults`);
+  }
+} else {
+  console.warn('[prerender] no SITE_URL/URL – using bundled defaults for settings and catalog');
+}
+const initialScript = initial.config ? `<script>window.__DC_STATE__=${JSON.stringify(initial).replace(/</g, '\\u003c')};</script>` : '';
 let manifest = {};
 try {
   manifest = JSON.parse(await fs.readFile(path.join(DIST, '.vite', 'manifest.json'), 'utf8'));
@@ -54,17 +90,17 @@ function buildPage(appHtml, title, headTags, assets, routePath) {
   out = out.replace(/\s*<meta property="og:[^"]*"[^>]*>/g, '');
   out = out.replace(/\s*<meta name="twitter:[^"]*"[^>]*>/g, '');
   const assetTags = [...assets.css.map((c) => `<link rel="stylesheet" crossorigin href="/${c}">`), ...assets.js.map((j) => `<link rel="modulepreload" crossorigin href="/${j}">`)];
-  out = out.replace('</head>', `    ${[headTags, ...assetTags].filter(Boolean).join('\n    ')}\n  </head>`);
-  out = out.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
+  out = out.replace('</head>', `    <meta name="x-prerender-path" content="${routePath}">\n    ${[headTags, ...assetTags].filter(Boolean).join('\n    ')}\n  </head>`);
+  out = out.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>${initialScript}`);
   return out;
 }
 
-const routes = seoRoutes();
+const routes = seoRoutes(initial.catalog);
 let ok = 0;
 const sitemap = [];
 for (const r of routes) {
   try {
-    const { html, title, headTags, status } = await render(r.path);
+    const { html, title, headTags, status } = await render(r.path, initial);
     const assets = assetsFor(r.page);
     const page = buildPage(html, title, headTags, assets, r.path);
     // Flat files (`shop/money.html`, not `shop/money/index.html`): Netlify serves

@@ -299,7 +299,7 @@ p {
 }
 .btn-pink {
   background: var(--grad-pink);
-  color: #fff;
+  color: var(--text-inverse, #10121a);
   box-shadow: 0 6px 18px rgba(255, 61, 147, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 .btn-pink:hover:not(:disabled) {
@@ -723,5 +723,43 @@ p {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* skip link (keyboard users) */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 1000;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--gold, #f5b43a);
+  color: #10121a;
+  font-weight: 700;
+  transition: top 0.15s;
+}
+.skip-link:focus {
+  top: 12px;
+}
+/* touch targets: the purchase-flow controls are tiny on phones */
+@media (pointer: coarse) {
+  .qty button,
+  .cart-qty button,
+  .cart-qty-sm button,
+  .cline-remove,
+  .promo-chip-x,
+  .shop-clear,
+  .code-copy,
+  .btn-icon {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .pcard-add,
+  .btn-sm {
+    min-height: 44px;
+  }
+  .pcard-inside {
+    padding: 10px 0;
   }
 }

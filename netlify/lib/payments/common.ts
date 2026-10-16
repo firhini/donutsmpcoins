@@ -6,7 +6,7 @@
  */
 import type { Order, OrderPayment } from '../../../src/shared/types';
 import { HttpError } from '../http';
-import { getOrder, pushTimeline, saveOrder, setOrderStatus } from '../orders';
+import { getOrder, pushTimeline, saveOrder, setOrderStatus, StaleOrderError } from '../orders';
 import { COLORS, notifyDiscord, siteUrl } from '../discord';
 
 /** Statuses that mean "money already arrived" – never charge or mark again. */
@@ -97,7 +97,18 @@ export async function markPaid(order: Order, note: string, extra: Partial<Pick<O
     });
     return { order, changed: true };
   }
-  await setOrderStatus(order, 'paid', note);
+  try {
+    await setOrderStatus(order, 'paid', note);
+  } catch (err) {
+    if (err instanceof StaleOrderError) {
+      // the customer cancelled (or an admin changed the order) while the provider call was in
+      // flight – re-run on the fresh copy so a cancelled order is flagged, never revived
+      if (extra.providerId) err.fresh.payment.providerId = extra.providerId;
+      if (extra.reference) err.fresh.payment.reference = extra.reference;
+      return markPaid(err.fresh, note, {});
+    }
+    throw err;
+  }
   return { order, changed: true };
 }
 

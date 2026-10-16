@@ -44,8 +44,8 @@ export default function IrlTradeLanding() {
       faq={faqItems}
       eyebrow="Guide"
       title={`${server} IRL trading: how it works and how not to get scammed`}
-      seoTitle={`${server} IRL Trading Guide – Safe Real-Money Trades · ${store}`}
-      description={`What IRL trading on ${server} is, why "going first" gets people scammed, how a stocked store removes that risk, red flags to watch for, and what the server rules say.`}
+      seoTitle={`${server} IRL Trading Guide – Trade Safely | ${store}`}
+      description={`What IRL trading on ${server} is, why "going first" gets people scammed, how a stocked store removes that risk, and what the server rules say.`}
       lead={`Real-money trading on ${server} is everywhere – in Discord DMs, on marketplaces, in chat. Most of it works. Some of it is a scam. Here is how to tell the difference, written by people who sell for a living.`}
       crumbs={[{ label: 'IRL trading guide' }]}
       toc={TOC}

@@ -15,6 +15,7 @@ import { getOrder, pushTimeline, saveOrder, toPublicOrder } from '../lib/orders'
 import { getSettings } from '../lib/settings';
 import { COLORS, notifyDiscord, siteUrl } from '../lib/discord';
 import { PAID_STATUSES, amountMatches, attachProvider, loadPayableOrder, markPaid, toHttpError } from '../lib/payments/common';
+import { kvUpdate } from '../lib/store';
 import { constructWebhookEvent, createCheckoutSession, retrieveSession, sessionOrderId, stripeConfigured } from '../lib/payments/stripe';
 import { anyCapture, capturePayPalOrder, completedCapture, createPayPalOrder, paypalConfigured } from '../lib/payments/paypal';
 import { NOW_PAID_STATUSES, createInvoice, ipnCoversOrder, nowpaymentsConfigured, verifyIpnSignature, type NowIpn } from '../lib/payments/nowpayments';
@@ -172,6 +173,12 @@ export const routes: Route[] = [
       if (order.payment.type !== 'paypal') throw new HttpError(400, `This order was placed with ${order.payment.methodName} – it cannot be captured through PayPal Checkout.`, 'wrong_method');
       if (order.status === 'refunded') throw new HttpError(409, 'This order was refunded.', 'refunded');
       if (order.status === 'cancelled') throw new HttpError(409, 'This order was cancelled. Please place a new order.', 'cancelled');
+      // Only the PayPal order that THIS server created for THIS order may be captured here.
+      // (reference_id/custom_id are set by whoever creates a PayPal order – the public client
+      // id lets anyone create one – so they must never be used to decide ownership.)
+      if (!order.payment.providerId || order.payment.providerId !== paypalOrderId) {
+        throw new HttpError(400, 'This PayPal payment does not belong to this order. Start the PayPal checkout again from the order page.', 'mismatch');
+      }
 
       let po;
       try {
@@ -179,9 +186,7 @@ export const routes: Route[] = [
       } catch (err) {
         throw toHttpError(err, 'PayPal');
       }
-      const unit = po.purchase_units?.[0];
-      const belongs = order.payment.providerId === po.id || unit?.reference_id === order.id || unit?.custom_id === order.id;
-      if (!belongs) throw new HttpError(400, 'This PayPal payment does not belong to this order.', 'mismatch');
+      if (po.id !== paypalOrderId) throw new HttpError(400, 'This PayPal payment does not belong to this order.', 'mismatch');
 
       const capture = completedCapture(po);
       if (po.status === 'COMPLETED' && capture) {
@@ -189,6 +194,12 @@ export const routes: Route[] = [
           await flagForReview(order, 'PayPal', `captured ${capture.amount?.value ?? '?'} ${capture.amount?.currency_code ?? ''} but the order total is ${usd(order.totalCents)} (PayPal order ${po.id})`);
           throw new HttpError(409, 'The captured amount does not match the order total – please contact us on Discord with your order ID.', 'amount_mismatch');
         }
+        // one PayPal capture settles exactly one order – claim the capture id atomically
+        const captureKey = `paypal-capture:${capture.id ?? po.id}`;
+        await kvUpdate<{ orderId: string; at: string }>('giveaways', captureKey, (cur) => {
+          if (cur && cur.orderId !== order.id) throw new HttpError(409, 'This PayPal payment was already used for another order.', 'capture_used');
+          return cur ?? { orderId: order.id, at: new Date().toISOString() };
+        });
         await markPaid(order, `PayPal payment captured (${capture.id ?? po.id})`, { providerId: po.id, reference: capture.id });
         return json({ status: 'COMPLETED', paid: true, order: toPublicOrder(order) });
       }

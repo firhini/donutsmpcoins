@@ -47,7 +47,15 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [referralCode, setReferralCodeState] = useState<string>('');
 
   useEffect(() => {
-    setItems(storageGet<CartLineInput[]>(KEY, []));
+    // validate persisted lines – a malformed entry (older schema, manual edit) must not crash the always-mounted drawer
+    const raw = storageGet<unknown>(KEY, []);
+    setItems(
+      Array.isArray(raw)
+        ? raw
+            .filter((l): l is CartLineInput => !!l && typeof l === 'object' && typeof (l as CartLineInput).productId === 'string' && Number.isFinite(Number((l as CartLineInput).qty)) && Number((l as CartLineInput).qty) > 0)
+            .map((l) => ({ productId: l.productId, qty: Math.floor(Number(l.qty)) }))
+        : [],
+    );
     setDiscountCodeState(storageGet<string>('dc_discount', ''));
     setReferralCodeState(storageGet<string>('dc_referral', ''));
     setHydrated(true);

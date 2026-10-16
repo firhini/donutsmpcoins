@@ -88,7 +88,7 @@ export const landingCopy: LandingCopy[] = [
     faq: [
       {
         q: 'Can I see what I rolled before delivery?',
-        a: 'Yes. The box is rolled when the order is created and every line with its quantity is listed on your order page immediately – before you even pay. What you see there is exactly what is handed over.',
+        a: 'Yes. The box is rolled server-side when the order is created and every line with its quantity appears on your order page as soon as your payment is confirmed – before anything is handed over. What you see there is exactly what you get.',
       },
       {
         q: 'Can I get a refund on a bad roll?',
@@ -108,7 +108,7 @@ export const landingCopy: LandingCopy[] = [
   {
     slug: 'donutsmp-elytra',
     title: 'Buy a DonutSMP Elytra – Price, Enchantments and Delivery',
-    seoTitle: 'Buy DonutSMP Elytra – $28.49 with Mending | DonutCoins',
+    seoTitle: 'Buy DonutSMP Elytra – Price, Odds & Delivery | DonutCoins',
     metaDescription:
       'DonutSMP Elytra (Unbreaking III + Mending) for $28.49, delivered in-game by staff. Why it costs so much, bundles and boxes with an Elytra, keeping yours.',
     intro:
@@ -200,7 +200,7 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Delivery: how 100 spawners reach you',
         paragraphs: [
-          'Spawners are items, so they are handed over, not paid. After you pay and report the reference, join DonutSMP with the exact username from your order and accept the teleport request from our delivery account. Larger orders arrive in shulker boxes – 27 spawners per shulker – so bring inventory space and pick a safe spot; your base is better than spawn. A member of our staff does this by hand, usually within 5–30 minutes while we are online.',
+          'Spawners are items, so they are handed over, not paid. After you pay and report the reference, join DonutSMP with the exact username from your order and accept the teleport request from our delivery account. Larger orders arrive in shulker boxes, so bring inventory space and pick a safe spot; your base is better than spawn. A member of our staff does this by hand, usually within 5–30 minutes while we are online.',
           'DonutSMP\'s rules prohibit real-money trading; we deliver through normal gameplay and keep it discreet, but the risk is yours. Spawners can be mined back with a silk touch pickaxe on DonutSMP, which also means a found farm can be taken – hide it well.',
         ],
       },

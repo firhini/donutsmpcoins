@@ -17,8 +17,8 @@ export default function Guides() {
   const server = config.serverName;
   const vars = { store, server, eta: config.delivery.etaText };
 
-  const title = `${server} Guides – Money, Spawners, Mystery Boxes & Safe Buying · ${store}`;
-  const description = `${server} guides from the ${store} team: how to get money fast, spawner payback math, mystery box odds, Elytra routes, base hunting and how to buy ${server} money without getting scammed.`;
+  const title = `${server} Guides – Money, Spawners & Boxes | ${store}`;
+  const description = `${server} guides from the ${store} team: getting money fast, spawner payback math, mystery box odds, Elytra routes, base hunting and buying safely.`;
 
   const jsonLd = [
     breadcrumbSchema([

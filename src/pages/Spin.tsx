@@ -366,7 +366,7 @@ export default function Page() {
               <span className="xs muted">
                 <Icon name="shield" size={12} className="ico-inline" /> Fair draw on our server · one spin per player & device
               </span>
-              <button type="button" className="btn btn-ghost btn-sm" onClick={toggleSound} aria-pressed={sound} aria-label={sound ? 'Mute wheel sounds' : 'Unmute wheel sounds'}>
+              <button type="button" className="btn btn-ghost btn-sm" onClick={toggleSound} aria-pressed={sound} title={sound ? 'Mute wheel sounds' : 'Unmute wheel sounds'}>
                 <SoundIcon on={sound} /> {sound ? 'Sound on' : 'Muted'}
               </button>
             </div>

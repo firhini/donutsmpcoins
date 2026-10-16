@@ -190,9 +190,15 @@ describe('POST /orders (manual payment)', () => {
   });
 
   it('rolls mystery boxes server-side and records fixed kit contents', async () => {
-    const order = await createOrder({ username: 'Gambler', items: [{ productId: 'mystery-box', qty: 2 }, { productId: 'legendary-crate', qty: 1 }, { productId: 'pvp-kit', qty: 1 }, { productId: 'starter-bundle', qty: 1 }] });
+    const placed = await createOrder({ username: 'Gambler', items: [{ productId: 'mystery-box', qty: 2 }, { productId: 'legendary-crate', qty: 1 }, { productId: 'pvp-kit', qty: 1 }, { productId: 'starter-bundle', qty: 1 }] });
+    // results are rolled at creation but hidden from the public order until it is paid (no peek-and-cancel re-rolls)
+    expect(placed.items.find((i) => i.productId === 'mystery-box')!.rolled).toBeUndefined();
+    const order = (await lib.orders.getOrder(placed.id))!;
     const box = order.items.find((i) => i.productId === 'mystery-box')!;
     expect(box.rolled).toHaveLength(2);
+    await lib.orders.setOrderStatus(order, 'paid', 'test');
+    const visible = await get<{ order: PublicOrder }>(`/orders/${placed.id}`);
+    expect(visible.data.order.items.find((i) => i.productId === 'mystery-box')!.rolled).toHaveLength(2);
     const pool = defaultProducts.find((p) => p.id === 'mystery-box')!.contents!;
     for (const roll of box.rolled!) {
       expect(roll).toHaveLength(3);

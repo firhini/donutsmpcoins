@@ -3,6 +3,7 @@ import { StrictMode } from 'react';
 import { prerender } from 'react-dom/static.edge';
 import { StaticRouter } from 'react-router';
 import App from './App';
+import type { InitialState } from './context/StoreContext';
 import { HeadProvider, headToHtml, type HeadCollector } from './seo/head';
 import './styles/base.css';
 import './styles/ui.css';
@@ -18,13 +19,13 @@ export { seoRoutes } from './seo/routes';
  * hidden <div> and a `$RC` swap script – that caused a visible spinner, a layout
  * shift on every page and hidden content for crawlers.
  */
-export async function render(url: string): Promise<{ html: string; title: string; headTags: string; status: number }> {
+export async function render(url: string, initial?: InitialState): Promise<{ html: string; title: string; headTags: string; status: number }> {
   const collector: HeadCollector = { head: null, status: 200 };
   const { prelude } = await prerender(
     <StrictMode>
       <StaticRouter location={url}>
         <HeadProvider collector={collector}>
-          <App />
+          <App initial={initial} />
         </HeadProvider>
       </StaticRouter>
     </StrictMode>,

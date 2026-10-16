@@ -59,8 +59,8 @@ export default function SpawnersLanding() {
       faq={faqItems}
       eyebrow={`${server} spawners`}
       title={`${server} spawners – skeletons, golems, blazes and more`}
-      seoTitle={`Buy ${server} Spawners – Skeleton Spawners from ${fmt(cheapest)} · ${config.storeName}`}
-      description={`Skeleton, iron golem, zombie, creeper and blaze spawners for ${server} with live stock and bulk prices. Handed over in-game by our staff.`}
+      seoTitle={`${server} Spawner Buying Guide – Types & Prices | ${config.storeName}`}
+      description={`Skeleton, iron golem, zombie, creeper and blaze spawners for ${server} with stock status and bulk prices. Handed over in-game by our staff.`}
       lead={`Live prices and stock for every spawner we sell, from ${fmt(cheapest)} each in bulk. Handed over in-game by our staff, usually within minutes.`}
       crumbs={[{ label: `${server} spawners` }]}
       toc={TOC}

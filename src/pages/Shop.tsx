@@ -130,6 +130,7 @@ export default function Shop() {
         </span>
       </div>
 
+      <h2 className="sr-only">Products</h2>
       <ProductGrid
         products={list}
         loading={loading}

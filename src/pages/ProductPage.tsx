@@ -82,7 +82,7 @@ export default function ProductPage() {
   const copy = copyFor(product.id);
   const description = copy?.description.split(/\n\n+/)[0] ?? product.description ?? product.shortDesc ?? `${product.name} for ${config.serverName}, delivered in-game by our staff.`;
   const paragraphs = copy ? copy.description.split(/\n\n+/) : [description];
-  const seoTitle = copy?.seoTitle ?? `${product.name} · ${config.storeName}`;
+  const seoTitle = copy?.seoTitle ?? `${product.name} | ${config.storeName}`;
   const metaDescription = copy?.metaDescription ?? `${description} ${fmt(product.priceCents)}${product.unitLabel ? ` ${product.unitLabel}` : ''}. Fast delivery on ${config.serverName}.`;
 
   return (
@@ -92,7 +92,7 @@ export default function ProductPage() {
         description={metaDescription}
         canonical={`/product/${product.slug}`}
         type="product"
-        image={productPng(product)}
+        image={productPng(product)} twitterCard="summary"
         jsonLd={[
           breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Shop', path: '/shop' }, ...(category ? [{ name: category.name, path: `/shop/${category.slug}` }] : []), { name: product.name, path: `/product/${product.slug}` }]),
           productSchema(product, config, category, copy?.metaDescription ?? description),
@@ -261,6 +261,10 @@ export default function ProductPage() {
               <Icon name="discord" size={16} /> Support on Discord
             </div>
           </div>
+          <p className="xs muted pp-rules">
+            Buying is against {config.serverName}'s rules on real-money trading and at your own risk – we deliver with normal player actions and are not affiliated with the server or
+            Mojang. <Link to="/terms#server-rules">Details</Link>
+          </p>
         </div>
       </div>
 

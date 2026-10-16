@@ -1,12 +1,13 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
-import { HttpError } from './http';
+import { HttpError, derivedKey } from './http';
 
 const TOKEN_TTL_MS = 1000 * 60 * 60 * 24 * 7; // 7 days
 
-function secret(): string {
-  const s = process.env.ADMIN_SECRET || process.env.ADMIN_PASSWORD;
-  if (!s) throw new HttpError(503, 'Admin is not configured (set ADMIN_PASSWORD).', 'admin_unconfigured');
-  return `donutcoins-admin:${s}`;
+/** Token key derived (scrypt) from ADMIN_SECRET *and* the password: changing the password revokes every token. */
+function secret(): Buffer {
+  const password = process.env.ADMIN_PASSWORD;
+  if (!password) throw new HttpError(503, 'Admin is not configured (set ADMIN_PASSWORD).', 'admin_unconfigured');
+  return derivedKey('admin', `${process.env.ADMIN_SECRET ?? ''}|${password}`);
 }
 
 function sign(payload: string): string {

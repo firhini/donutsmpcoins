@@ -1177,7 +1177,7 @@ async function main() {
   put('brand/mascot.svg', mascot);
   put('brand/wordmark.svg', wordmarkSvg());
   const html = ogHtml(mascot, logo);
-  write('brand/og.html', html); count++;
+  // og.html is only an intermediate for the PNG render – never written into public/ (it would be deployed as an indexable page)
   console.log(`✓ wrote ${count} files (${(bytes / 1024).toFixed(0)} KB of SVG) to ${OUT}`);
   if (!noOg) {
     const ok = await renderOg(html, join(OUT, 'brand', 'og.png'));

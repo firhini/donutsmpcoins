@@ -1,6 +1,6 @@
 import { Routes, Route, matchPath } from 'react-router-dom';
 import { ToastProvider } from './context/ToastContext';
-import { StoreProvider } from './context/StoreContext';
+import { StoreProvider, type InitialState } from './context/StoreContext';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import { Layout } from './components/layout/Layout';
@@ -77,10 +77,10 @@ export function preloadRoute(pathname: string): Promise<void> {
   return (hit ? hit[1] : NotFound).preload();
 }
 
-export default function App() {
+export default function App({ initial }: { initial?: InitialState } = {}) {
   return (
     <ToastProvider>
-      <StoreProvider>
+      <StoreProvider initial={initial}>
         <AuthProvider>
           <CartProvider>
             <Routes>

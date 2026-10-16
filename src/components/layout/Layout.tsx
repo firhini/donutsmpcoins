@@ -24,18 +24,32 @@ export function PageFallback() {
 }
 
 export function Layout() {
-  const { config } = useStore();
+  const { config, error, refresh } = useStore();
   const { pathname } = useLocation();
   return (
     <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <ScrollToTop />
       <Header />
+      {error && (
+        // fixed bar (same style as the cookie notice) so an API hiccup never shifts the page layout
+        <div className="consent" role="status">
+          <span>Live prices and payment methods could not be loaded – showing defaults.</span>
+          <div className="row">
+            <button type="button" className="btn btn-secondary btn-sm" onClick={() => void refresh()}>
+              Retry
+            </button>
+          </div>
+        </div>
+      )}
       {config.maintenance?.enabled && (
         <div className="container" style={{ paddingTop: 16 }}>
           <div className="alert alert-warn">⚠️ {config.maintenance.message}</div>
         </div>
       )}
-      <main>
+      <main id="main" tabIndex={-1}>
         <ErrorBoundary resetKey={pathname}>
           <Suspense fallback={<PageFallback />}>
             <Outlet />
@@ -43,7 +57,9 @@ export function Layout() {
         </ErrorBoundary>
       </main>
       <Footer />
-      <CartDrawer />
+      <ErrorBoundary fallback={() => null}>
+        <CartDrawer />
+      </ErrorBoundary>
       <Analytics />
     </>
   );

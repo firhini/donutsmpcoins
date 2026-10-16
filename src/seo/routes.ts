@@ -3,6 +3,7 @@
  * `page` is the source module of the lazy page (to inline its CSS in the static HTML).
  */
 import { products, categories } from '../data/catalog';
+import type { Category, Product } from '../shared/types';
 import { guides } from '../data/guides';
 import { landingCopy } from '../data/landingCopy';
 
@@ -15,12 +16,15 @@ export interface SeoRoute {
   sitemap?: boolean;
 }
 
-export function seoRoutes(): SeoRoute[] {
+/** `live` lets the pre-renderer use the catalog the admin edited (new products get pages too). */
+export function seoRoutes(live?: { products?: Product[]; categories?: Category[] }): SeoRoute[] {
+  const prods = live?.products ?? products;
+  const cats = live?.categories ?? categories;
   const r: SeoRoute[] = [
     { path: '/', page: 'src/pages/Home.tsx', changefreq: 'daily', priority: 1 },
     { path: '/shop', page: 'src/pages/Shop.tsx', changefreq: 'daily', priority: 0.9 },
-    ...categories.map((c) => ({ path: `/shop/${c.slug}`, page: 'src/pages/Shop.tsx', changefreq: 'daily' as const, priority: 0.8 })),
-    ...products.filter((p) => !p.hidden).map((p) => ({ path: `/product/${p.slug}`, page: 'src/pages/ProductPage.tsx', changefreq: 'weekly' as const, priority: 0.7 })),
+    ...cats.map((c) => ({ path: `/shop/${c.slug}`, page: 'src/pages/Shop.tsx', changefreq: 'daily' as const, priority: 0.8 })),
+    ...prods.filter((p) => !p.hidden).map((p) => ({ path: `/product/${p.slug}`, page: 'src/pages/ProductPage.tsx', changefreq: 'weekly' as const, priority: 0.7 })),
     { path: '/donutsmp-money', page: 'src/pages/landing/MoneyLanding.tsx', changefreq: 'weekly', priority: 0.9 },
     { path: '/donutsmp-spawners', page: 'src/pages/landing/SpawnersLanding.tsx', changefreq: 'weekly', priority: 0.9 },
     { path: '/donutsmp-irl-trade', page: 'src/pages/landing/IrlTradeLanding.tsx', changefreq: 'monthly', priority: 0.8 },

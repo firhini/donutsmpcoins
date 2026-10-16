@@ -33,7 +33,7 @@ export default function Page() {
     return [...featured, ...pool.filter((p) => !p.featured)].slice(0, 4);
   }, [products, lines]);
 
-  const title = `Your cart · ${config.storeName}`;
+  const title = `Your cart | ${config.storeName}`;
 
   if (!lines.length) {
     return (

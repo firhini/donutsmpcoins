@@ -106,7 +106,7 @@ export function ProductCard({ product, compact = false, eager = false }: { produ
 
         <div className="pcard-actions">
           <QtyStepper value={qty} onChange={setQty} min={minQty} max={maxQty} suffix={millions ? 'M' : undefined} step={millions ? 5 : 1} disabled={stock.soldOut} label={millions ? 'Millions' : 'Quantity'} />
-          <button type="button" className={`btn ${added ? 'btn-success' : 'btn-primary'} pcard-add`} onClick={onAdd} disabled={stock.soldOut} aria-label={`Add ${product.name} to cart`}>
+          <button type="button" className={`btn ${added ? 'btn-success' : 'btn-primary'} pcard-add`} onClick={onAdd} disabled={stock.soldOut} aria-label={stock.soldOut ? `${product.name} – sold out` : `Add ${product.name} to cart`}>
             {added ? (
               <>
                 <Icon name="check" size={16} /> Added

@@ -56,13 +56,13 @@ export function ContentPage({
   const { pathname } = useLocation();
   const ld: object[] = [
     breadcrumbSchema([{ name: 'Home', path: '/' }, ...crumbs.map((c) => ({ name: c.label, path: c.to ?? pathname }))]),
-    ...(type === 'article' ? [articleSchema({ title: seoTitle ?? title, description, path: pathname, datePublished, dateModified: updated ? new Date(updated).toISOString().slice(0, 10) : undefined, author: config.storeName })] : []),
+    ...(type === 'article' ? [articleSchema({ title: seoTitle ?? title, description, path: pathname, datePublished, dateModified: updated ? new Date(updated).toISOString().slice(0, 10) : undefined, author: config.storeName, config })] : []),
     ...(faq?.length ? [faqSchema(faq.map((f) => ({ q: f.q, a: cleanText(nodeText(f.a)) })))!] : []),
     ...(jsonLd ?? []),
   ];
   return (
     <div className={`container page content-page ${wide ? 'content-wide' : ''}`}>
-      <Seo title={seoTitle ?? `${title} · ${config.storeName}`} description={description} type={type} jsonLd={ld} />
+      <Seo title={seoTitle ?? `${title} | ${config.storeName}`} description={description} type={type} jsonLd={ld} />
       <nav className="breadcrumbs" aria-label="Breadcrumb">
         <Link to="/">Home</Link>
         {crumbs.map((c, i) => (

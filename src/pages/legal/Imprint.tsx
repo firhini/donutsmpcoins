@@ -22,7 +22,7 @@ export default function Imprint() {
     <ContentPage
       eyebrow="Legal"
       title="Legal Notice (Impressum)"
-      seoTitle={`Legal Notice (Impressum) · ${config.storeName}`}
+      seoTitle={`Legal Notice (Impressum) | ${config.storeName}`}
       description={`Who operates ${config.storeName}: operator name, address and contact details, plus the notes on dispute resolution and liability.`}
       lead="Who runs this store and how to reach us – the legal notice required for a store operated from the EU."
       crumbs={[{ label: 'Legal notice' }]}

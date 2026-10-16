@@ -58,7 +58,7 @@ export default function Home() {
     reviewReward: config.reviewRewardPercent,
     welcomeCode: config.welcomeCoupon.code,
     welcomePercent: config.welcomeCoupon.percent,
-    spinCooldown: 24,
+    spinCooldown: config.spinCooldownHours,
   };
 
   return (
@@ -121,7 +121,7 @@ export default function Home() {
               </span>
               <div>
                 <strong>Daily free spin</strong>
-                <span>Coupons, store credit or free coins – one spin every 24h.</span>
+                <span>Coupons, store credit or free coins – one spin every {config.spinCooldownHours}h.</span>
               </div>
               <Icon name="arrowRight" size={18} className="arrow" />
             </Link>

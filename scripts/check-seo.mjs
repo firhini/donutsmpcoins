@@ -9,17 +9,34 @@ async function* walk(dir) {
     if (e.isDirectory()) {
       if (e.name === 'assets' || e.name === 'img') continue;
       yield* walk(p);
-    } else if (e.name.endsWith('.html')) yield p;
+    } else if (e.name.endsWith('.html') && e.name !== 'app.html') yield p; // app.html = empty SPA shell, no SEO tags by design
   }
 }
 let files = 0;
 let problems = 0;
+let warnings = 0;
 const count = (html, re) => (html.match(re) || []).length;
+const decode = (s) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+const seenTitles = new Map();
+const seenDescriptions = new Map();
 for await (const f of walk(DIST)) {
   files++;
   const html = await fs.readFile(f, 'utf8');
   const rel = path.relative(DIST, f);
   const issues = [];
+  const noindex = /<meta name="robots" content="noindex/.test(html);
+  const title = decode((html.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || '');
+  const description = decode((html.match(/<meta name="description" content="([^"]*)"/) || [])[1] || '');
+  if (!noindex) {
+    if (title.length > 60) issues.push(`title too long (${title.length} chars)`);
+    if (description.length > 160) issues.push(`description too long (${description.length} chars)`);
+    if (description.length > 0 && description.length < 70) issues.push(`description too short (${description.length} chars)`);
+    if (seenTitles.has(title)) issues.push(`duplicate title (also ${seenTitles.get(title)})`);
+    else seenTitles.set(title, rel);
+    if (seenDescriptions.has(description)) issues.push(`duplicate description (also ${seenDescriptions.get(description)})`);
+    else seenDescriptions.set(description, rel);
+  }
+  if (/discord\.gg\/your-invite/.test(html)) warnings++;
   if (count(html, /<title>/g) !== 1) issues.push('title count ' + count(html, /<title>/g));
   if (count(html, /<meta name="description"/g) !== 1) issues.push('description count ' + count(html, /<meta name="description"/g));
   if (count(html, /<link rel="canonical"/g) !== 1) issues.push('canonical count ' + count(html, /<link rel="canonical"/g));
@@ -55,5 +72,6 @@ for await (const f of walk(DIST)) {
     console.log('✗', rel, '→', issues.join('; '));
   }
 }
+if (warnings) console.log(`⚠ ${warnings} pages still contain the placeholder Discord invite – set the real invite in /admin (the build fetches it from the live API) or in src/data/settings.ts`);
 console.log(`${files} pages checked, ${problems} with problems`);
 process.exit(problems ? 1 : 0);

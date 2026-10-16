@@ -92,7 +92,7 @@ export const faqGroups: FaqGroup[] = [
       {
         id: 'mystery-box-delivery',
         q: 'How do mystery boxes work?',
-        a: 'Every box has a public drop table with odds (click **What\'s inside?** on any box). When you order, the drops are rolled server-side and listed on your order page, then handed over like normal items. You always receive exactly what was rolled.',
+        a: 'Every box has a public drop table with odds (click **What\'s inside?** on any box). When you order, the drops are rolled server-side; they appear on your order page once your payment is confirmed and are then handed over like normal items. You always receive exactly what was rolled.',
       },
       {
         id: 'offline-delivery',

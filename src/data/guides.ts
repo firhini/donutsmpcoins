@@ -42,7 +42,7 @@ const raw: GuideInput[] = [
   {
     slug: 'how-to-get-money-on-donutsmp',
     title: 'How to Get Money on DonutSMP Fast (2026 Guide)',
-    seoTitle: 'How to Get Money on DonutSMP Fast – 2026 Guide · {{store}}',
+    seoTitle: 'How to Get Money on DonutSMP Fast – 2026 Guide | {{store}}',
     metaDescription:
       'Legit ways to make money on DonutSMP – spawner farms, shop selling, auction flipping, base hunting – plus what buying DonutSMP money costs per 1M in 2026.',
     intro:
@@ -141,7 +141,7 @@ const raw: GuideInput[] = [
   {
     slug: 'donutsmp-spawners-guide',
     title: 'DonutSMP Spawners Explained: Skeleton, Iron Golem, Blaze & More',
-    seoTitle: 'DonutSMP Spawners Explained – Skeleton, Golem & Blaze Prices · {{store}}',
+    seoTitle: 'DonutSMP Spawners Guide – Types, Prices & Farms | {{store}}',
     metaDescription:
       'What every DonutSMP spawner produces, what it costs (skeleton spawners from $0.36 in bulk), payback math and where to place a farm so it does not get raided.',
     intro:
@@ -232,7 +232,7 @@ const raw: GuideInput[] = [
   {
     slug: 'buying-donutsmp-money-safely',
     title: 'Is Buying DonutSMP Money Safe? Scams, Rules and How We Deliver',
-    seoTitle: 'Is Buying DonutSMP Money Safe? Scams, Rules & Delivery · {{store}}',
+    seoTitle: 'Is Buying DonutSMP Money Safe? Scams & Rules | {{store}}',
     metaDescription:
       'Before you buy DonutSMP money: the scams to avoid, what the server rules mean for you, and how a tracked order with manual staff delivery works at {{store}}.',
     intro:
@@ -247,7 +247,7 @@ const raw: GuideInput[] = [
       },
       {
         heading: 'The scams you will actually meet',
-        paragraphs: ['Scams in the DonutSMP market are not clever. They work because the buyer wants the deal to be real. These are the patterns worth memorising:'],
+        paragraphs: ['Scams in the DonutSMP market are not clever. They work because the buyer wants the deal to be real. These are the patterns worth memorizing:'],
         list: [
           '**The vanishing seller.** You pay, the seller stops replying. Usually a fresh Discord account with copied vouches. Nothing to track, nothing to show anyone.',
           '**The impersonator.** Someone with the same name and avatar as a known store DMs you a “special price”. Real stores do not DM first and do not change their payment details mid-conversation.',
@@ -328,7 +328,7 @@ const raw: GuideInput[] = [
   {
     slug: 'donutsmp-mystery-boxes-explained',
     title: 'DonutSMP Mystery Boxes: Odds, Drops and Which Box to Buy',
-    seoTitle: 'DonutSMP Mystery Boxes – Odds, Drops & Which to Buy · {{store}}',
+    seoTitle: 'Which DonutSMP Mystery Box Should You Buy? | {{store}}',
     metaDescription:
       'Every DonutSMP mystery box at {{store}} explained: price, rolls, full drop pool, real Elytra odds and whether the box beats buying the items directly.',
     intro:
@@ -387,7 +387,7 @@ const raw: GuideInput[] = [
       {
         heading: 'Which box should you buy?',
         paragraphs: [
-          'Boxes are rolled server-side when you order and the result is on your order page before anything is handed over. Delivery is the same as any item: our staff teleport to you in-game and drop the loot. {{eta}} DonutSMP’s rules on real-money trading apply to boxes like everything else, and {{store}} is not affiliated with the server. With that said, here is how we would choose:',
+          'Boxes are rolled server-side when you order and the result is on your order page as soon as your payment is confirmed – before anything is handed over. Delivery is the same as any item: our staff teleport to you in-game and drop the loot. {{eta}} DonutSMP’s rules on real-money trading apply to boxes like everything else, and {{store}} is not affiliated with the server. With that said, here is how we would choose:',
         ],
         list: [
           '**Want money, cheaply:** none of them – buy a money pack. The Coin Crate is for fun.',
@@ -428,11 +428,11 @@ const raw: GuideInput[] = [
   {
     slug: 'donutsmp-elytra-guide',
     title: 'DonutSMP Elytra: How to Get One and What It Costs',
-    seoTitle: 'DonutSMP Elytra – How to Get One & What It Costs · {{store}}',
+    seoTitle: 'DonutSMP Elytra Guide – How to Get One & Cost | {{store}}',
     metaDescription:
       'Every way to get an Elytra on DonutSMP – End cities, the auction house, mystery boxes or buying one for $28.49 – plus rockets, enchantments and base hunting.',
     intro:
-      'An Elytra changes how you play DonutSMP. Without one you walk, boat and nether-tunnel; with one, the whole map is twenty minutes away and base hunting becomes possible. This guide covers every way to get an Elytra on the server, what each route costs in time or money, which enchantments matter, how to keep it fuelled with rockets and what players actually do once they have wings.',
+      'An Elytra changes how you play DonutSMP. Without one you walk, boat and nether-tunnel; with one, the whole map is twenty minutes away and base hunting becomes possible. This guide covers every way to get an Elytra on the server, what each route costs in time or money, which enchantments matter, how to keep it fueled with rockets and what players actually do once they have wings.',
     sections: [
       {
         heading: 'Why the Elytra matters on DonutSMP',
@@ -523,7 +523,7 @@ const raw: GuideInput[] = [
   {
     slug: 'donutsmp-base-hunting-guide',
     title: 'DonutSMP Base Hunting Guide: Amethyst Pickaxe, Elytra and Tactics',
-    seoTitle: 'DonutSMP Base Hunting Guide – Amethyst Pickaxe, Elytra & Tactics · {{store}}',
+    seoTitle: 'DonutSMP Base Hunting Guide – Gear & Tactics | {{store}}',
     metaDescription:
       'How base hunting works on DonutSMP: what hunters look for, the gear (Elytra, Amethyst Pickaxe, totems), honest odds and the Basehunter Bundle at $37.99.',
     intro:
@@ -544,7 +544,7 @@ const raw: GuideInput[] = [
         list: [
           '**Elytra with Mending** – non-negotiable. You will cover tens of thousands of blocks per session. Ours is $28.49 with Unbreaking III and Mending ([Elytra](/product/elytra)).',
           '**Rockets – a lot.** Two or three stacks per session. A creeper spawner farm is the long-term supply.',
-          '**Amethyst Pickaxe** – the [DonutSMP custom pickaxe](/product/amethyst-pickaxe) ($4.79) built for fast tunnelling. When you find a base you want to be in and out before the owner logs on, and a normal maxed netherite pickaxe is slow by comparison.',
+          '**Amethyst Pickaxe** – the [DonutSMP custom pickaxe](/product/amethyst-pickaxe) ($4.79) built for fast tunneling. When you find a base you want to be in and out before the owner logs on, and a normal maxed netherite pickaxe is slow by comparison.',
           '**Totems of Undying** – stack them. A hunter who dies loses the loot and the Elytra. $0.25 each, $0.19 from 64 ([Totems](/product/totem-of-undying)).',
           '**Shulker boxes** – empty, to carry what you find. $0.29 each, $0.25 from 27.',
           '**Decent armor** – a maxed [netherite set](/product/netherite-armor-set) ($4.99) or the [PvP Kit](/product/pvp-kit) ($8.49) if you expect a fight. Do not hunt in your best gear if you cannot afford to lose it.',
@@ -614,7 +614,7 @@ const raw: GuideInput[] = [
   {
     slug: 'donutsmp-irl-trading-discord',
     title: 'DonutSMP IRL Trading on Discord: How to Not Get Scammed',
-    seoTitle: 'DonutSMP IRL Trading on Discord – How to Not Get Scammed · {{store}}',
+    seoTitle: 'IRL Trading on DonutSMP Discord – Stay Safe | {{store}}',
     metaDescription:
       'DonutSMP IRL trading on Discord: middleman myths, fake vouches, which payment methods protect you, and why a stocked store with order tracking is safer.',
     intro:

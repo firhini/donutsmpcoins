@@ -34,7 +34,7 @@ export function TierProgress({ quote, compact = false }: { quote: Quote; compact
           </>
         )}
       </div>
-      <div className="tier-bar" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(pct)}>
+      <div className="tier-bar" role="progressbar" aria-label="Spending tier progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(pct)}>
         <i style={{ width: `${pct}%` }} />
         {tiers.map((t) => {
           const left = (t.minCents / maxCents) * 100;

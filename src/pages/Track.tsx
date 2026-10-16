@@ -17,7 +17,9 @@ export default function Page() {
   const { config, fmt } = useStore();
   const [value, setValue] = useState(() => (params.get('id') ?? '').replace(/^dc-?/i, ''));
   const [err, setErr] = useState<string | null>(null);
-  const [recent, setRecent] = useState<RecentOrder[]>(() => getRecentOrders());
+  // loaded in an effect: the pre-rendered page has no orders, so the first client render must not either
+  const [recent, setRecent] = useState<RecentOrder[]>([]);
+  useEffect(() => setRecent(getRecentOrders()), []);
   const [lookups, setLookups] = useState<Record<string, Lookup>>({});
 
   useEffect(() => {
@@ -62,7 +64,7 @@ export default function Page() {
 
   return (
     <div className="container page tr-page">
-      <Seo title={`Track your order · ${config.storeName}`} description="Check the payment and delivery status of your DonutCoins order and see what your mystery boxes rolled." canonical="/track" jsonLd={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Track your order', path: '/track' }]), webPageSchema('Track your order', '/track')]} />
+      <Seo title={`Track your order | ${config.storeName}`} description="Check the payment and delivery status of your DonutCoins order and see what your mystery boxes rolled." canonical="/track" jsonLd={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'Track your order', path: '/track' }]), webPageSchema('Track your order', '/track')]} />
       <div className="tr-hero">
         <div className="eyebrow">Order tracking</div>
         <h1>Track your order</h1>

@@ -23,7 +23,7 @@ export default function Faq() {
     reviewReward: config.reviewRewardPercent,
     welcomeCode: config.welcomeCoupon.code,
     welcomePercent: config.welcomeCoupon.percent,
-    spinCooldown: 24,
+    spinCooldown: config.spinCooldownHours,
   };
 
   const groups = useMemo(() => {
@@ -38,7 +38,7 @@ export default function Faq() {
   return (
     <div className="container page content-page">
       <Seo
-        title={`FAQ – DonutSMP money, delivery, payments & safety · ${config.storeName}`}
+        title={`FAQ – ${config.serverName} delivery, payments & safety | ${config.storeName}`}
         description={`Answers about ordering ${config.serverName} money and items, delivery times, payment methods, free spins, referrals and account safety at ${config.storeName}.`}
         canonical="/faq"
         jsonLd={[breadcrumbSchema([{ name: 'Home', path: '/' }, { name: 'FAQ', path: '/faq' }]), faqSchema(faqGroups.flatMap((g) => g.items.map((i) => ({ q: i.q, a: cleanText(nodeText(i.a as never)) }))))!]}

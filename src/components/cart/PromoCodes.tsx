@@ -67,7 +67,7 @@ export function PromoCodes({
       setCodeMsg(null);
       return;
     }
-    if (!/^[A-Z0-9_-]{3,32}$/.test(c)) {
+    if (!/^[A-Z0-9_-]{3,40}$/.test(c)) {
       setCodeMsg({ type: 'err', text: 'That does not look like a valid code.' });
       return;
     }

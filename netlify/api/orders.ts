@@ -11,11 +11,12 @@ import { linkOrder, updateUser } from '../lib/users';
 import { HttpError, MC_USERNAME_RE, getIp, hashIp, json, optionalString, readJson, requireString } from '../lib/http';
 import { rateLimit } from '../lib/ratelimit';
 import { buildOrder, serverQuote } from '../lib/orderBuilder';
-import { getOrder, pushTimeline, saveOrder, setOrderStatus, toPublicOrder } from '../lib/orders';
+import { expireUnpaidOrdersThrottled, getOrder, pushTimeline, saveOrder, setOrderStatus, toPublicOrder } from '../lib/orders';
 import { addCredit } from '../lib/credit';
 import { COLORS, notifyDiscord, siteUrl } from '../lib/discord';
 import { PAID_STATUSES } from '../lib/payments/common';
 import { getStripe, stripeConfigured } from '../lib/payments/stripe';
+import { integrations } from '../lib/settings';
 
 // ───────────── validation ─────────────
 
@@ -120,6 +121,14 @@ export const routes: Route[] = [
       const ipHash = hashIp(getIp(req, context));
       const user = await currentUser(req);
       await rateLimit(`orders:${ipHash}`, 10, 600);
+      // Store credit belongs to a Minecraft name. When Discord login is available, only the
+      // player who proved that name (Account → Minecraft username) may spend it – otherwise
+      // anyone could burn another player's credit by ordering under their name.
+      if (body.applyCredit && integrations().discordOAuth) {
+        const owner = user?.mcUsername && user.mcUsername.toLowerCase() === body.username.toLowerCase();
+        if (!owner) throw new HttpError(401, 'Log in with Discord and set this Minecraft username on your account to use store credit.', 'credit_login_required');
+      }
+      void expireUnpaidOrdersThrottled();
 
       const order = await buildOrder({
         username: body.username,

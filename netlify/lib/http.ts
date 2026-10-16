@@ -1,5 +1,5 @@
 import type { Context } from '@netlify/functions';
-import { createHash } from 'node:crypto';
+import { createHash, scryptSync } from 'node:crypto';
 
 export class HttpError extends Error {
   status: number;
@@ -27,11 +27,14 @@ export function error(status: number, message: string, code?: string, details?: 
 export async function readJson<T = unknown>(req: Request): Promise<T> {
   const text = await req.text();
   if (!text) return {} as T;
+  let v: unknown;
   try {
-    return JSON.parse(text) as T;
+    v = JSON.parse(text);
   } catch {
     throw new HttpError(400, 'Invalid JSON body', 'bad_json');
   }
+  if (v === null || typeof v !== 'object' || Array.isArray(v)) throw new HttpError(400, 'Expected a JSON object', 'bad_json');
+  return v as T;
 }
 
 export function getIp(req: Request, context?: Context): string {
@@ -44,8 +47,24 @@ export function getIp(req: Request, context?: Context): string {
   );
 }
 
+const keyCache = new Map<string, Buffer>();
+/**
+ * Slow (scrypt) key derivation for secrets that fall back to the admin password, cached per
+ * process. A leaked MAC must not be a fast offline oracle for the password.
+ */
+export function derivedKey(label: string, material: string): Buffer {
+  const cacheKey = `${label}\u0000${material}`;
+  let key = keyCache.get(cacheKey);
+  if (!key) {
+    key = scryptSync(material, `donutcoins:${label}`, 32, { N: 16384, r: 8, p: 1 });
+    keyCache.set(cacheKey, key);
+  }
+  return key;
+}
+
 export function hashIp(ip: string): string {
-  const salt = process.env.ADMIN_SECRET || process.env.ADMIN_PASSWORD || 'donutcoins';
+  const material = process.env.IP_HASH_SALT || process.env.SESSION_SECRET || process.env.ADMIN_SECRET || process.env.ADMIN_PASSWORD || 'donutcoins';
+  const salt = derivedKey('ip', material).toString('hex');
   return createHash('sha256').update(`${salt}:${ip}`).digest('hex').slice(0, 24);
 }
 
@@ -80,8 +99,13 @@ function matchPath(pattern: string, pathname: string): Record<string, string> | 
       return params;
     }
     if (sp[i] === undefined) return null;
-    if (seg.startsWith(':')) params[seg.slice(1)] = decodeURIComponent(sp[i]);
-    else if (seg !== sp[i]) return null;
+    if (seg.startsWith(':')) {
+      try {
+        params[seg.slice(1)] = decodeURIComponent(sp[i]);
+      } catch {
+        return null; // malformed %-encoding → no match → 404 instead of a function crash
+      }
+    } else if (seg !== sp[i]) return null;
   }
   return pp.length === sp.length ? params : null;
 }

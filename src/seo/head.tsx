@@ -6,6 +6,7 @@
  */
 import { createContext, useContext, useEffect, type ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useStore } from '../context/StoreContext';
 
 export const SITE_URL = ((import.meta.env.VITE_SITE_URL as string | undefined) || '').replace(/\/$/, '');
 export const DEFAULT_OG_IMAGE = '/img/brand/og.png';
@@ -25,6 +26,9 @@ export interface HeadData {
   type: string;
   jsonLd: object[];
   status: number;
+  siteName: string;
+  /** 'summary' for square images (product renders), 'summary_large_image' for 1200×630 art */
+  twitterCard: 'summary' | 'summary_large_image';
 }
 
 export interface HeadCollector {
@@ -50,11 +54,13 @@ export interface SeoProps {
   jsonLd?: object | object[];
   /** HTTP status the pre-renderer should emit (404 for not-found pages) */
   status?: number;
+  twitterCard?: 'summary' | 'summary_large_image';
 }
 
-export function Seo({ title, description, canonical, robots = 'index,follow', image, type = 'website', jsonLd, status = 200 }: SeoProps) {
+export function Seo({ title, description, canonical, robots = 'index,follow', image, type = 'website', jsonLd, status = 200, twitterCard = 'summary_large_image' }: SeoProps) {
   const collector = useContext(Ctx);
   const { pathname } = useLocation();
+  const { config } = useStore();
   const canonicalPath = (canonical ?? pathname).replace(/\/+$/, '') || '/';
   const data: HeadData = {
     title,
@@ -65,6 +71,8 @@ export function Seo({ title, description, canonical, robots = 'index,follow', im
     type,
     jsonLd: jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [],
     status,
+    siteName: config.storeName,
+    twitterCard,
   };
   if (collector) {
     // server: collect during render (effects never run while pre-rendering)
@@ -101,6 +109,8 @@ function applyHead(d: HeadData) {
   upsertMeta('property', 'og:url', d.canonical);
   upsertMeta('property', 'og:type', d.type);
   upsertMeta('property', 'og:image', d.image);
+  upsertMeta('property', 'og:site_name', d.siteName);
+  upsertMeta('name', 'twitter:card', d.twitterCard);
   upsertMeta('name', 'twitter:title', d.title);
   upsertMeta('name', 'twitter:description', d.description);
   upsertMeta('name', 'twitter:image', d.image);
@@ -137,9 +147,9 @@ export function headToHtml(d: HeadData): { title: string; tags: string } {
   tags.push(`<meta property="og:title" content="${esc(d.title)}" />`);
   if (d.description) tags.push(`<meta property="og:description" content="${esc(d.description)}" />`);
   tags.push(`<meta property="og:image" content="${esc(d.image)}" />`);
-  tags.push(`<meta property="og:site_name" content="DonutCoins" />`);
+  tags.push(`<meta property="og:site_name" content="${esc(d.siteName)}" />`);
   tags.push(`<meta property="og:locale" content="en_US" />`);
-  tags.push(`<meta name="twitter:card" content="summary_large_image" />`);
+  tags.push(`<meta name="twitter:card" content="${d.twitterCard}" />`);
   tags.push(`<meta name="twitter:title" content="${esc(d.title)}" />`);
   if (d.description) tags.push(`<meta name="twitter:description" content="${esc(d.description)}" />`);
   tags.push(`<meta name="twitter:image" content="${esc(d.image)}" />`);

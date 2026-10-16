@@ -57,7 +57,7 @@ export default function MoneyLanding() {
       faq={faqItems}
       eyebrow={`${server} money`}
       title={`Buy ${server} money – paid straight to your balance`}
-      seoTitle={`Buy ${server} Money – Live Prices from ${fmt(bestRate)} per 1M · ${config.storeName}`}
+      seoTitle={`Buy ${server} Money – Prices from ${fmt(bestRate)} per 1M | ${config.storeName}`}
       description={`${server} money from ${fmt(bestRate)} per million with bulk discounts. Delivered to your in-game balance with /pay by real staff, usually within minutes.`}
       lead={`In-game cash for ${server}, from ${fmt(bestRate)} per million at the top bulk tier. Pick any amount, pay the way you like, and our staff send it to your balance with /pay.`}
       crumbs={[{ label: `${server} money` }]}
