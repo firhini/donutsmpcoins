@@ -24,11 +24,15 @@ function loadGa(id: string) {
   s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
   document.head.appendChild(s);
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag(...args: unknown[]) {
-    window.dataLayer!.push(args);
-  };
+  // gtag.js only processes the real `arguments` object – pushing an array (e.g. from ...rest)
+  // is silently ignored and no hit is ever sent. Keep this exactly like Google's snippet.
+  window.gtag = function gtag() {
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer!.push(arguments);
+  } as (...args: unknown[]) => void;
   window.gtag('js', new Date());
-  window.gtag('config', id, { anonymize_ip: true, send_page_view: true });
+  // page views are sent by the effect below (initial load + every client-side navigation)
+  window.gtag('config', id, { anonymize_ip: true, send_page_view: false });
 }
 
 /**
@@ -51,7 +55,9 @@ export function Analytics() {
   }, [id, choice]);
 
   useEffect(() => {
-    if (id && choice === 'accepted' && window.gtag) window.gtag('event', 'page_view', { page_path: pathname + search });
+    if (id && choice === 'accepted' && window.gtag) {
+      window.gtag('event', 'page_view', { page_location: window.location.href, page_path: pathname + search, page_title: document.title });
+    }
   }, [id, choice, pathname, search]);
 
   if (!id || !ready || choice) return null;
