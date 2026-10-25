@@ -17,6 +17,8 @@
   framework = "#custom"
 
 # API: single catch-all function (netlify/functions/api.ts) that routes internally.
+# Keep this forced rewrite and do NOT add `config.path` to the function – a custom path
+# disables the default /.netlify/functions/api URL this rule targets (→ 404 for every call).
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api/:splat"

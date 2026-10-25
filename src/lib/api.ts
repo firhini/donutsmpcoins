@@ -56,7 +56,16 @@ export async function api<T = unknown>(path: string, opts: ApiOptions = {}): Pro
   try {
     data = text ? JSON.parse(text) : null;
   } catch {
-    data = { error: text };
+    // Not JSON: the request never reached the API function (Netlify served an HTML page). Never
+    // show a page's source as an error message – say what is actually wrong.
+    const html = /^\s*<!doctype html|^\s*<html/i.test(text);
+    data = {
+      error:
+        res.status === 404 && html
+          ? 'The API is not reachable (HTTP 404): the Netlify function "api" is not deployed on this site. Check the deploy log for "Functions bundling" errors and the Functions tab in Netlify.'
+          : `The server answered with HTTP ${res.status} instead of JSON${html ? ' (an HTML page)' : ''}. Please try again in a moment.`,
+      code: 'not_json',
+    };
   }
   if (!res.ok) {
     const e = (data ?? {}) as { error?: string; code?: string; details?: unknown };
