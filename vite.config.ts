@@ -3,10 +3,14 @@ import react from '@vitejs/plugin-react';
 import { netlifyApiPlugin } from './scripts/vite-api-plugin';
 
 /** Replaces %SITE_URL% in index.html with the deploy URL (Netlify sets URL at build time). */
+// Google Analytics 4 measurement id (public, not a secret). GA_MEASUREMENT_ID in Netlify overrides it.
+// Loaded only after the visitor clicks "Accept" in the cookie notice (src/components/ui/Analytics.tsx).
+const DEFAULT_GA_ID = 'G-Z2RKMF6X07';
+
 function siteUrlPlugin() {
   const url = (process.env.SITE_URL || process.env.URL || process.env.DEPLOY_PRIME_URL || '').replace(/\/$/, '');
   const verification = process.env.GOOGLE_SITE_VERIFICATION || '';
-  const ga = process.env.GA_MEASUREMENT_ID || '';
+  const ga = process.env.GA_MEASUREMENT_ID || DEFAULT_GA_ID;
   return {
     name: 'site-url',
     transformIndexHtml: (html: string) =>
@@ -23,7 +27,7 @@ export default defineConfig({
   plugins: [react(), netlifyApiPlugin(), siteUrlPlugin()],
   define: {
     'import.meta.env.VITE_SITE_URL': JSON.stringify(siteUrl),
-    'import.meta.env.VITE_GA_ID': JSON.stringify(process.env.GA_MEASUREMENT_ID || ''),
+    'import.meta.env.VITE_GA_ID': JSON.stringify(process.env.GA_MEASUREMENT_ID || DEFAULT_GA_ID),
   },
   server: {
     port: 5173,

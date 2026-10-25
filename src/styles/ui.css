@@ -433,3 +433,9 @@
   font-size: var(--fs-sm);
   color: var(--text-2);
 }
+
+/* API outage notice: same look as the cookie bar, but at the top so both can show at once */
+.consent.api-down {
+  top: calc(var(--header-h, 64px) + 8px);
+  bottom: auto;
+}

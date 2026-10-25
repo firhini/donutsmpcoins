@@ -35,7 +35,7 @@ export function Layout() {
       <Header />
       {error && (
         // fixed bar (same style as the cookie notice) so an API hiccup never shifts the page layout
-        <div className="consent" role="status">
+        <div className="consent api-down" role="status">
           <span>Live prices and payment methods could not be loaded – showing defaults.</span>
           <div className="row">
             <button type="button" className="btn btn-secondary btn-sm" onClick={() => void refresh()}>
