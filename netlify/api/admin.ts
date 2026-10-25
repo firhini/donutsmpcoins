@@ -408,6 +408,12 @@ export const routes: Route[] = [
     o.overrides[id] = current;
     await saveOverrides(o);
     const merged = (await getFullCatalog()).products.find((p) => p.id === id) ?? { ...existing, ...patch };
+    // Discord bot: post a restock ping when limited stock goes up (or a sold-out product comes back)
+    const before = existing.stock;
+    const after = merged.stock;
+    if (!merged.hidden && typeof before === 'number' && (after === null || (typeof after === 'number' && after > before))) {
+      await import('../lib/discordBot').then((m) => m.announceRestock([{ product: merged, added: after === null ? 0 : after - before, stock: after ?? null }])).catch(() => undefined);
+    }
     return json({ product: merged });
   }),
   admin('POST', '/admin/products', async ({ req }) => {

@@ -12,6 +12,7 @@ import { AnnouncementSection, DeliverySection, LegalSection, MaintenanceSection,
 import { CurrenciesSection, RewardsSection, TiersSection } from '../../components/admin/SettingsSections/TiersCurrenciesRewards';
 import { PaymentMethodsSection } from '../../components/admin/SettingsSections/PaymentMethodsSection';
 import { SpinSection } from '../../components/admin/SettingsSections/SpinSection';
+import { DiscordBotSection } from '../../components/admin/SettingsSections/DiscordBotSection';
 
 const JUMP: { id: string; label: string }[] = [
   { id: 'store', label: 'Store' },
@@ -25,6 +26,7 @@ const JUMP: { id: string; label: string }[] = [
   { id: 'currencies', label: 'Currencies' },
   { id: 'delivery', label: 'Delivery' },
   { id: 'maintenance', label: 'Maintenance' },
+  { id: 'discord', label: 'Discord bot' },
 ];
 
 export default function Settings() {
@@ -93,6 +95,7 @@ export default function Settings() {
           <CurrenciesSection settings={settings} onSave={save} />
           <DeliverySection settings={settings} onSave={save} />
           <MaintenanceSection settings={settings} onSave={save} />
+          <DiscordBotSection />
         </div>
       )}
     </div>

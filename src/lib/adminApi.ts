@@ -409,3 +409,24 @@ export async function getCreditAccount(username: string): Promise<CreditAccount>
 export async function adjustCredit(body: CreditAdjustInput): Promise<CreditAccount> {
   return toAccount(await post('/admin/credit', body), body.username);
 }
+
+// ───────────────────────── discord bot ─────────────────────────
+
+export interface DiscordBotStatus {
+  configured: boolean;
+  missing: string[];
+  interactionsUrl: string;
+  inviteUrl: string | null;
+  setupAt: string | null;
+  channels: number;
+  roles: number;
+}
+export function getDiscordBot(): Promise<DiscordBotStatus> {
+  return adminCall<DiscordBotStatus>('/admin/discord');
+}
+export function registerDiscordCommands(): Promise<{ registered: string[] }> {
+  return adminCall('/admin/discord/register', { method: 'POST', body: {} });
+}
+export function runDiscordSetup(): Promise<{ ok: boolean; done: boolean; created: string[]; channels: number }> {
+  return adminCall('/admin/discord/setup', { method: 'POST', body: {} });
+}

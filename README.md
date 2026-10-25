@@ -103,6 +103,7 @@ Admin: `http://localhost:5173/admin` → Passwort aus `.env`.
 | `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET` | empfohlen | Discord-Login (siehe Abschnitt 5a) |
 | `DISCORD_GUILD_ID` | optional | deine Server-ID – „Nur Server-Mitglieder dürfen drehen“ |
 | `DISCORD_BOT_TOKEN` | optional | Bot-Token – Spieler treten beim Login automatisch deinem Server bei (Bot muss auf dem Server sein) |
+| `DISCORD_PUBLIC_KEY` | optional | Public Key der App – aktiviert den `/setup`-Bot (siehe 5a) |
 | `SESSION_SECRET` | Pflicht bei Discord-Login | langer Zufallswert (≥ 32 Zeichen) für die Login-Cookies – nie das Admin-Passwort wiederverwenden |
 | `SITE_URL` | empfohlen | z. B. `https://deinshop.netlify.app` (für Zahlungs-Redirects & Links in Discord) |
 | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | optional | nur für Karten-/Apple-Pay-Zahlung über Stripe |
@@ -163,6 +164,24 @@ Bei manuellen Methoden gilt: Bestellung steht auf *Awaiting payment* → Kunde m
 
 Der Button „Login with Discord“ erscheint im Header automatisch, sobald die Variablen gesetzt sind. Im Admin unter *Spin*
 steuerst du, ob das Rad einen Login verlangt (Standard: ja, sobald Discord-Login konfiguriert ist).
+
+### Discord-Bot mit `/setup` (kein eigener Server nötig)
+
+Der Bot läuft komplett über Netlify (Discord „Interactions“ per HTTP) – nichts muss dauerhaft laufen.
+
+1. Developer Portal → deine App → **General Information** → **Public Key** kopieren → in Netlify als
+   `DISCORD_PUBLIC_KEY` setzen (dazu `DISCORD_BOT_TOKEN`, `DISCORD_CLIENT_ID`, `DISCORD_GUILD_ID`) → neu deployen.
+2. Auf derselben Seite bei **Interactions Endpoint URL** eintragen: `https://deinshop/api/discord/interactions` → Speichern.
+3. Admin → *Settings* → **Discord bot** → „Invite bot“ (Administrator-Recht) → danach in Discord unter
+   Servereinstellungen → Rollen die Bot-Rolle **ganz nach oben** ziehen.
+4. Im selben Admin-Bereich „1. Register /setup command“ klicken.
+5. In Discord `/setup` eingeben (oder im Admin „2. Run setup now“). Der Bot legt Rollen, Kategorien, Kanäle und alle
+   Panel-Nachrichten an. Erneut ausführen ist sicher: Vorhandenes wird wiederverwendet bzw. aktualisiert. Falls Discord
+   „Run /setup again“ meldet, einfach wiederholen, bis ✅ kommt (der Fortschritt wird gespeichert).
+6. Deinen Bestell-Webhook in die Kategorie **🔒 STAFF → 🧾・orders** verschieben.
+
+Danach: Ping-Rollen per Button, private Tickets, Guthaben-Abfrage, automatische Restock-Pings (wenn du im Admin den
+Bestand erhöhst) und die Rolle *Customer* nach jeder ausgelieferten Bestellung.
 
 ## 5b. Welches Zahlungssystem? (Empfehlung)
 

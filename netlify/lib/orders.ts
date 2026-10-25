@@ -164,6 +164,10 @@ export async function setOrderStatus(o: Order, status: OrderStatus, note?: strin
   if (status === 'cancelled' || status === 'refunded') {
     await releaseOrder(o);
   }
+  if (status === 'delivered' && o.discordUserId) {
+    // Discord bot: buyers get the Customer role (no-op when the bot is not set up)
+    await import('./discordBot').then((m) => m.grantCustomerRole(o.discordUserId)).catch(() => undefined);
+  }
 
   const label: Record<OrderStatus, string> = {
     awaiting_payment: '🕒 Awaiting payment',
