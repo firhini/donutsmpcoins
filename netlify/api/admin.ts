@@ -219,7 +219,7 @@ function validateSettingsPatch(body: unknown): Partial<SiteSettings> {
       if (!TYPES.has(m.type)) throw new HttpError(400, `Payment method "${m.name}" has an unknown type.`, 'validation');
       if (m.enabled !== undefined && typeof m.enabled !== 'boolean') throw new HttpError(400, `Payment method "${m.name}": enabled must be true/false.`, 'validation');
       numField(m, 'feePercent', `Payment method "${m.name}" fee`, 0, 100);
-      numField(m, 'minCents', `Payment method "${m.name}" minimum`, 0, 10_000_000, true);
+      numField(m, 'minCents', `Payment method "${m.name}" minimum`, 0, 10_000_000, false, true);
       numField(m, 'sortOrder', `Payment method "${m.name}" sort order`, -1000, 1000);
       for (const k of ['description', 'icon', 'instructions', 'handle', 'linkTemplate', 'referenceLabel']) {
         if (m[k] !== undefined && m[k] !== null && typeof m[k] !== 'string') throw new HttpError(400, `Payment method "${m.name}": ${k} must be text.`, 'validation');
@@ -260,7 +260,7 @@ function validateSettingsPatch(body: unknown): Partial<SiteSettings> {
   if (Array.isArray(patch.currencies)) {
     for (const c of patch.currencies) {
       if (!isObj(c) || typeof c.code !== 'string' || !/^[A-Z]{3}$/.test(c.code) || typeof c.symbol !== 'string') throw new HttpError(400, 'Every currency needs a 3-letter code and a symbol.', 'validation');
-      numField(c, 'rate', `Currency ${c.code} rate`, 0.000001, 1_000_000, true, true);
+      numField(c, 'rate', `Currency ${c.code} rate`, 0.000001, 1_000_000, true);
     }
     if (!patch.currencies.some((c) => isObj(c) && c.code === 'USD')) throw new HttpError(400, 'USD must stay in the currency list.', 'validation');
   }

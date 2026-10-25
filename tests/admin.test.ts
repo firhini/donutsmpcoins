@@ -340,6 +340,21 @@ describe('settings', () => {
     expect((await get<PublicConfig>('/config')).data.legal.operatorName).toBe('');
   });
 
+  it('saves payment methods without a minimum and currencies with decimal rates', async () => {
+    // exactly what the admin UI sends: optional minCents omitted, toggling methods on/off
+    const methods = defaultSettings.paymentMethods.map((m) => ({ ...m, enabled: m.id === 'stripe' ? true : m.enabled, minCents: undefined }));
+    const res = await aput<SiteSettings>('/admin/settings', { paymentMethods: methods });
+    expect(res.status, JSON.stringify(res.data)).toBe(200);
+    expect(res.data.paymentMethods.find((m) => m.id === 'stripe')?.enabled).toBe(true);
+    expect((await aput('/admin/settings', { paymentMethods: [{ ...methods[0], minCents: 12.5 }] })).status).toBe(400);
+
+    const cur = await aput<SiteSettings>('/admin/settings', { currencies: [{ code: 'USD', symbol: '$', rate: 1 }, { code: 'EUR', symbol: '€', rate: 0.92 }] });
+    expect(cur.status, JSON.stringify(cur.data)).toBe(200);
+    expect(cur.data.currencies.find((c) => c.code === 'EUR')?.rate).toBe(0.92);
+
+    await aput('/admin/settings', { paymentMethods: defaultSettings.paymentMethods, currencies: defaultSettings.currencies });
+  });
+
   it('rejects malformed settings', async () => {
     expect((await aput('/admin/settings', [])).status).toBe(400);
     expect((await aput('/admin/settings', { spendingTiers: 'none' })).status).toBe(400);
