@@ -429,6 +429,12 @@ export const routes: Route[] = [
     handler: async ({ req, context, url }) => {
       const username = requireUsername(url.searchParams.get('username'));
       await rateLimit(`credit:${hashIp(getIp(req, context))}`, 60, 60);
+      // With Discord login available, only the player who proved this Minecraft name sees its balance
+      // (same rule as spending it at checkout).
+      if (integrations().discordOAuth) {
+        const user = await currentUser(req);
+        if (!user?.mcUsername || user.mcUsername.toLowerCase() !== username.toLowerCase()) return json({ balanceCents: 0, locked: true });
+      }
       const acc = await getCredit(username);
       return json({ balanceCents: acc.balanceCents });
     },

@@ -122,6 +122,15 @@ describe('Discord login', () => {
     expect((await get('/account')).status).toBe(401);
     const full = await lib.orders.getOrder(order.data.order.id);
     expect(full?.discordUserId).toBe(DISCORD_USER.id);
+    // …but the public order page (anyone with the id) does not reveal the buyer's Discord identity
+    const pub = await get<{ order: Record<string, unknown> }>(`/orders/${order.data.order.id}`);
+    expect(pub.data.order).not.toHaveProperty('discordUserId');
+    expect(pub.data.order).not.toHaveProperty('discordUsername');
+
+    // store credit balance: only visible to the player who proved the name
+    await lib.credit.addCredit('FarhanMC', 300, 'test');
+    expect((await get<{ balanceCents: number }>('/credit?username=FarhanMC', { headers: { cookie } })).data.balanceCents).toBe(300);
+    expect((await get<{ balanceCents: number; locked?: boolean }>('/credit?username=FarhanMC')).data).toEqual({ balanceCents: 0, locked: true });
   });
 });
 

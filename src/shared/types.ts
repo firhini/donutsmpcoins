@@ -253,7 +253,7 @@ export interface Order {
 }
 
 /** What the public order page is allowed to see */
-export type PublicOrder = Omit<Order, 'ipHash' | 'deviceId' | 'adminNote' | 'email'> & {
+export type PublicOrder = Omit<Order, 'ipHash' | 'deviceId' | 'adminNote' | 'email' | 'discordUserId' | 'discordUsername'> & {
   emailMasked?: string;
 };
 
