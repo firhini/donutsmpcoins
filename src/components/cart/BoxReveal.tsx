@@ -14,7 +14,7 @@ interface BoxInstance {
   index: number;
 }
 
-type Phase = 'idle' | 'strip' | 'flipping' | 'done';
+type Phase = 'idle' | 'charge' | 'strip' | 'flipping' | 'done';
 
 const RARITY_COLORS: Record<Rarity, string> = {
   common: '#9ca3af',
@@ -66,6 +66,7 @@ export function BoxReveal({ orderId, items, initiallyRevealed }: { orderId: stri
   );
   const [phase, setPhase] = useState<Phase>(initiallyRevealed ? 'done' : 'idle');
   const [flipped, setFlipped] = useState(initiallyRevealed ? boxes.length : 0);
+  const [flash, setFlash] = useState(false);
   const timers = useRef<number[]>([]);
   const clearTimers = () => {
     timers.current.forEach((t) => window.clearTimeout(t));
@@ -100,8 +101,16 @@ export function BoxReveal({ orderId, items, initiallyRevealed }: { orderId: stri
       return;
     }
     const pool = boxes[0]?.product?.contents?.filter((c) => (c.weight ?? 1) > 0) ?? [];
-    if (pool.length >= 3) setPhase('strip');
-    else startFlips();
+    // 1) the box shakes harder and glows in the colour of the best drop, 2) white flash, 3) strip / flips
+    setPhase('charge');
+    timers.current.push(
+      window.setTimeout(() => {
+        setFlash(true);
+        timers.current.push(window.setTimeout(() => setFlash(false), 520));
+        if (pool.length >= 3) setPhase('strip');
+        else startFlips();
+      }, 1700),
+    );
   };
 
   if (!boxes.length) return null;
@@ -109,7 +118,8 @@ export function BoxReveal({ orderId, items, initiallyRevealed }: { orderId: stri
   const count = boxes.length;
 
   return (
-    <section className={`rv card rv-${phase}`} aria-live="polite">
+    <section className={`rv card rv-${phase}`} aria-live="polite" style={{ ['--rv-best' as string]: RARITY_COLORS[bestRarity] }}>
+      {flash && <div className="rv-flash" aria-hidden="true" />}
       <header className="rv-head">
         <div>
           <div className="eyebrow">Mystery boxes</div>
@@ -142,11 +152,21 @@ export function BoxReveal({ orderId, items, initiallyRevealed }: { orderId: stri
         </div>
       )}
 
+      {phase === 'charge' && (
+        <div className="rv-charge" aria-hidden="true">
+          <div className="rv-rays" />
+          <div className="rv-charge-box">
+            <Thumb src={first.product?.image ?? first.item.image} size={150} />
+          </div>
+          <p className="rv-charge-text pixel">Opening…</p>
+        </div>
+      )}
+
       {phase === 'strip' && first.product && (
         <CaseStrip pool={first.product.contents?.filter((c) => (c.weight ?? 1) > 0) ?? []} target={pickTarget(first.drops)} products={products} seed={orderId} onDone={startFlips} />
       )}
 
-      {phase !== 'idle' && (
+      {phase !== 'idle' && phase !== 'charge' && (
         <div className="rv-grid">
           {boxes.map((b, i) => (
             <RevealCard key={b.key} box={b} flipped={i < flipped} products={products} />
@@ -154,7 +174,7 @@ export function BoxReveal({ orderId, items, initiallyRevealed }: { orderId: stri
         </div>
       )}
 
-      {(phase === 'strip' || phase === 'flipping') && (
+      {(phase === 'charge' || phase === 'strip' || phase === 'flipping') && (
         <button type="button" className="rv-skip" onClick={() => finish(true)}>
           Skip animation
         </button>
@@ -178,6 +198,7 @@ function CaseStrip({ pool, target, products, seed, onDone }: { pool: BoxContent[
   const containerRef = useRef<HTMLDivElement>(null);
   const [width, setWidth] = useState(0);
   const [go, setGo] = useState(false);
+  const [landed, setLanded] = useState(false);
   const doneRef = useRef(false);
 
   const tiles = useMemo(() => {
@@ -218,8 +239,13 @@ function CaseStrip({ pool, target, products, seed, onDone }: { pool: BoxContent[
   const finish = useCallback(() => {
     if (doneRef.current) return;
     doneRef.current = true;
-    onDone();
-  }, [onDone]);
+    // hold on the winning tile for a moment so the result sinks in
+    setLanded(true);
+    if (RARITY_RANK[target.rarity ?? 'common'] >= RARITY_RANK.rare) {
+      fireConfetti({ colors: [RARITY_COLORS[target.rarity ?? 'rare'], '#fff', '#ffc233'], count: target.rarity === 'legendary' ? 160 : 70 });
+    }
+    window.setTimeout(onDone, 1100);
+  }, [onDone, target.rarity]);
 
   useEffect(() => {
     if (!go) return;
@@ -230,7 +256,7 @@ function CaseStrip({ pool, target, products, seed, onDone }: { pool: BoxContent[
   const offset = width ? -(TARGET * TILE + TILE_W / 2 - width / 2) + jitter : 0;
 
   return (
-    <div className="strip" ref={containerRef} aria-hidden="true">
+    <div className={`strip ${landed ? 'is-landed' : ''}`} ref={containerRef} aria-hidden="true">
       <div className="strip-marker" />
       <div
         className="strip-track"

@@ -43,7 +43,7 @@ function timeAgo(iso: string): string {
 
 /** Horizontal, snap-scrolling carousel of approved reviews from /api/reviews. */
 export function ReviewsCarousel({ limit = 12 }: { limit?: number }) {
-  const { config } = useStore();
+  const { config, stats: siteStats } = useStore();
   const [reviews, setReviews] = useState<PublicReview[] | null>(null);
   const [stats, setStats] = useState<ReviewStats | null>(null);
   const track = useRef<HTMLDivElement>(null);
@@ -78,6 +78,27 @@ export function ReviewsCarousel({ limit = 12 }: { limit?: number }) {
             <div className="skeleton" style={{ height: 60, width: '100%' }} />
           </div>
         ))}
+      </div>
+    );
+  }
+
+  const total = siteStats?.totalReviewCount ?? 0;
+  if (reviews.length === 0 && total > 0) {
+    return (
+      <div className="review-empty card">
+        <div className="review-empty-icon">
+          <Icon name="star" size={26} />
+        </div>
+        <h3>
+          {(siteStats?.totalAverageRating ?? 0).toFixed(1)} ★ from {total} reviews
+        </h3>
+        <Stars rating={Math.round(siteStats?.totalAverageRating ?? 0)} size={20} />
+        <p className="muted">
+          Bought from us? Leave a review after delivery and get <strong className="gold-text">{config.reviewRewardPercent}% off</strong> your next order.
+        </p>
+        <Link to="/reviews" className="btn btn-outline btn-sm">
+          See reviews
+        </Link>
       </div>
     );
   }

@@ -523,6 +523,8 @@ export interface SiteSettings {
   stats: {
     /** optional manual offset added to the live delivered-orders counter (e.g. orders from before this site) */
     ordersOffset: number;
+    /** real ratings you collected before this site existed (counts per star) – shown in the rating summary */
+    pastReviews?: { count5: number; count4: number; count3: number };
   };
   maintenance: { enabled: boolean; message: string };
   serverName: string;
@@ -560,8 +562,14 @@ export interface PublicConfig {
 
 export interface SiteStats {
   ordersDelivered: number;
+  /** approved reviews left on this site */
   reviewCount: number;
   averageRating: number;
+  /** site reviews + earlier ratings (admin: Stats → earlier reviews) */
+  totalReviewCount?: number;
+  totalAverageRating?: number;
+  /** star distribution 5..1 of the earlier ratings */
+  pastDistribution?: [number, number, number, number, number];
   spinsToday?: number;
 }
 

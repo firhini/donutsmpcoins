@@ -63,10 +63,19 @@ export const routes: Route[] = [
         reviewStats(),
       ]);
       const offset = Number(settings.stats?.ordersOffset ?? 0);
+      const past = settings.stats?.pastReviews;
+      const p5 = Math.max(0, Math.round(Number(past?.count5) || 0));
+      const p4 = Math.max(0, Math.round(Number(past?.count4) || 0));
+      const p3 = Math.max(0, Math.round(Number(past?.count3) || 0));
+      const pastCount = p5 + p4 + p3;
+      const total = reviews.count + pastCount;
       const stats: SiteStats = {
         ordersDelivered: Math.max(0, delivered + (Number.isFinite(offset) ? Math.round(offset) : 0)),
         reviewCount: reviews.count,
         averageRating: reviews.averageRating,
+        totalReviewCount: total,
+        totalAverageRating: total ? Math.round(((reviews.averageRating * reviews.count + p5 * 5 + p4 * 4 + p3 * 3) / total) * 10) / 10 : 0,
+        pastDistribution: [p5, p4, p3, 0, 0],
       };
       return json(stats, 200, { 'cache-control': 'public, max-age=60' });
     },

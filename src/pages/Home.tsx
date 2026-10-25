@@ -75,10 +75,7 @@ export default function Home() {
             <h1>
               {config.serverName} money, spawners &amp; items – <span className="grad-text">delivered fast.</span>
             </h1>
-            <p className="lead">
-              Pick what you need, pay the way you like, and our staff hand it over in-game – money straight to your balance, items by teleport. Bulk prices, spending-tier discounts
-              and a free spin every day.
-            </p>
+            <p className="lead">Cheap prices, real staff, delivered in-game in minutes. Plus a free spin every day.</p>
             <div className="hero-ctas">
               <a href="#store" className="btn btn-primary btn-lg">
                 <Icon name="cart" size={18} /> Shop now
@@ -149,6 +146,19 @@ export default function Home() {
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* ───────── mystery box deal ───────── */}
+      <section className="container box-deal-wrap">
+        <Link to="/shop/mystery-boxes" className="box-deal">
+          <img src="/img/products/god-mystery-box.svg" alt="" width={84} height={84} loading="lazy" decoding="async" />
+          <div>
+            <span className="box-deal-tag">Mystery Box Sale</span>
+            <strong>Up to 33% off every box</strong>
+            <span className="muted">Elytra, 100M jackpots, god gear – open yours now.</span>
+          </div>
+          <Icon name="arrowRight" size={20} className="arrow" />
+        </Link>
       </section>
 
       {/* ───────── store ───────── */}
@@ -250,8 +260,7 @@ export default function Home() {
         <div className="container">
           <div className="section-head center">
             <span className="eyebrow">How it works</span>
-            <h2>Three steps. No bots, no nonsense.</h2>
-            <p className="lead">Every order is handled by a real person on our team – that is why it just works.</p>
+            <h2>Three steps. Done in minutes.</h2>
           </div>
           <div className="hiw-steps">
             <div className="hiw-step card">
@@ -260,7 +269,7 @@ export default function Home() {
                 <Icon name="cart" size={22} />
               </span>
               <h3>Pick your items</h3>
-              <p>Add money, spawners, boxes or bundles to the cart. Bulk prices and spending tiers are applied automatically – no code needed.</p>
+              <p>Bulk discounts apply automatically.</p>
             </div>
             <div className="hiw-step card">
               <span className="hiw-num">STEP 02</span>
@@ -268,7 +277,7 @@ export default function Home() {
                 <Icon name="card" size={22} />
               </span>
               <h3>Pay your way</h3>
-              <p>Enter your Minecraft username, choose a payment method and send the total. Tell us the reference on your order page and we confirm.</p>
+              <p>Card, Apple Pay, Google Pay or crypto.</p>
               <div className="hiw-pay">
                 {(config.paymentMethods.length ? config.paymentMethods.map((m) => m.name) : ['PayPal', 'Crypto', 'Card']).slice(0, 5).map((n) => (
                   <span key={n} className="badge">
@@ -282,9 +291,8 @@ export default function Home() {
               <span className="hiw-icon">
                 <Icon name="truck" size={22} />
               </span>
-              <h3>Delivered in-game by our staff</h3>
-              <p>{config.delivery.moneyText}</p>
-              <p style={{ marginTop: 8 }}>{config.delivery.itemText}</p>
+              <h3>Get it in-game</h3>
+              <p>Money via /pay, items by teleport.</p>
               <div className="hiw-note">
                 <Icon name="clock" size={14} /> {config.delivery.etaText}
               </div>
@@ -298,22 +306,21 @@ export default function Home() {
         <div className="container">
           <div className="section-head">
             <span className="eyebrow">Why {config.storeName}</span>
-            <h2>Built to be the store we wanted to buy from.</h2>
+            <h2>Why players buy here</h2>
           </div>
           <div className="features">
             <div className="feature card hover">
               <span className="feature-icon">
                 <Icon name="dollar" size={20} />
               </span>
-              <h3>Low prices &amp; bulk discounts</h3>
-              <p>Prices are tuned to the live market and drop further the more you buy – money packs, spawners and investments all have bulk tiers.</p>
+              <h3>Lowest prices</h3>
+              <p>Bulk tiers on money, spawners and gear.</p>
             </div>
             <div className="feature card hover">
               <span className="feature-icon">
                 <Icon name="trophy" size={20} />
               </span>
-              <h3>Spending tier discounts</h3>
-              <p>Bigger carts get an automatic extra discount at checkout:</p>
+              <h3>Spend more, save more</h3>
               {tiers.length > 0 && (
                 <ul className="tiers">
                   {tiers.map((t) => (
@@ -329,17 +336,15 @@ export default function Home() {
               <span className="feature-icon">
                 <Icon name="spin" size={20} />
               </span>
-              <h3>Daily free spins &amp; coupons</h3>
-              <p>
-                Spin once a day for coupons, store credit or free coins. Reviews earn {config.reviewRewardPercent}% off, referrals earn credit – stack it all with bulk prices.
-              </p>
+              <h3>Free daily spin</h3>
+              <p>Every spin wins – coins, coupons, even an Elytra.</p>
             </div>
             <div className="feature card hover">
               <span className="feature-icon">
                 <Icon name="discord" size={20} />
               </span>
-              <h3>Real support on Discord</h3>
-              <p>Questions before or after an order? Our staff answer in the Discord, and every order can be tracked with its ID – no account needed.</p>
+              <h3>Real support</h3>
+              <p>Fast answers on Discord, every order trackable.</p>
             </div>
           </div>
         </div>
@@ -364,7 +369,7 @@ export default function Home() {
             <span className="eyebrow">FAQ</span>
             <h2>Good questions, honest answers</h2>
           </div>
-          <Accordion items={topFaq.map((f) => ({ id: `home-${f.id}`, q: f.q, a: <p>{renderRich(f.a, faqVars)}</p> }))} defaultOpen={`home-${topFaq[0]?.id ?? ''}`} />
+          <Accordion items={topFaq.map((f) => ({ id: `home-${f.id}`, q: f.q, a: <p>{renderRich(f.a, faqVars)}</p> }))} />
           <div className="store-more">
             <Link to="/faq" className="btn btn-outline">
               Read the full FAQ <Icon name="arrowRight" size={16} />
@@ -408,7 +413,9 @@ function formatTier(cents: number): string {
 function buildPills(stats: ReturnType<typeof useStore>['stats']): { icon: string; label: string }[] {
   const out: { icon: string; label: string }[] = [];
   if (stats && stats.ordersDelivered > 0) out.push({ icon: 'check', label: `${stats.ordersDelivered.toLocaleString('en-US')} ${stats.ordersDelivered === 1 ? 'order' : 'orders'} delivered` });
-  if (stats && stats.reviewCount > 0) out.push({ icon: 'star', label: `${stats.averageRating.toFixed(1)} ★ from ${stats.reviewCount} review${stats.reviewCount === 1 ? '' : 's'}` });
+  const reviewTotal = stats?.totalReviewCount ?? stats?.reviewCount ?? 0;
+  const reviewAvg = stats?.totalAverageRating ?? stats?.averageRating ?? 0;
+  if (stats && reviewTotal > 0) out.push({ icon: 'star', label: `${reviewAvg.toFixed(1)} ★ from ${reviewTotal} review${reviewTotal === 1 ? '' : 's'}` });
   const neutral = [
     { icon: 'bolt', label: 'Fast in-game delivery' },
     { icon: 'shield', label: 'Secure checkout' },

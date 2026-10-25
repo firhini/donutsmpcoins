@@ -354,11 +354,69 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+/* phones: two compact cards per row instead of one giant card */
 @media (max-width: 479px) {
   .pgrid-4,
   .pgrid-3,
   .pgrid-2 {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .pgrid .pcard-media {
+    padding: 10px 10px 0;
+  }
+  .pgrid .pcard-badges {
+    top: 8px;
+    left: 8px;
+    max-width: calc(100% - 48px);
+  }
+  .pgrid .pcard-badges .badge:nth-child(n + 2) {
+    display: none;
+  }
+  .pgrid .pcard-off {
+    top: 7px;
+    right: 8px;
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+  .pgrid .pcard-soldout {
+    font-size: 13px;
+  }
+  .pgrid .pcard-body {
+    padding: 2px 10px 10px;
+    gap: 4px;
+  }
+  .pgrid .pcard-meta .pcard-unit,
+  .pgrid .pcard-desc,
+  .pgrid .pcard-bulk,
+  .pgrid .pcard-actions .qty {
+    display: none;
+  }
+  .pgrid .pcard-name {
+    font-size: var(--fs-sm);
+    line-height: 1.25;
+    min-height: 2.5em;
+  }
+  .pgrid .pcard-inside {
+    font-size: 11px;
+  }
+  .pgrid .pcard-calc {
+    font-size: 11px;
+  }
+  .pgrid .pcard-calc .muted,
+  .pgrid .pcard-calc-badge {
+    display: none;
+  }
+  .pgrid .pcard-pricing {
+    padding-top: 2px;
+    gap: 6px;
+  }
+  .pgrid .pcard-actions {
+    margin-top: 4px;
+  }
+  .pgrid .btn.pcard-add {
+    height: 40px;
+    min-height: 40px;
   }
 }
 .pgrid-empty {
@@ -877,7 +935,8 @@
     gap: var(--sp-6);
   }
   .pp-hero {
-    position: static;
+    position: relative; /* keeps the tag/discount badges inside the image card */
+    top: auto;
     padding: 28px;
   }
   .pp-trust {
@@ -1220,4 +1279,44 @@
   margin-top: var(--sp-6);
   font-size: var(--fs-xl);
   color: var(--text-1);
+}
+
+/* ───────── product page: short lead + folded long description ───────── */
+.pp-lead {
+  color: var(--text-2);
+  font-size: var(--fs-md);
+  line-height: 1.55;
+  margin: 4px 0 12px;
+}
+.pp-about {
+  margin-top: var(--sp-8);
+  padding: 0;
+  overflow: hidden;
+}
+.pp-about summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+}
+.pp-about summary::-webkit-details-marker {
+  display: none;
+}
+.pp-about summary h2 {
+  font-size: var(--fs-lg);
+  margin: 0;
+}
+.pp-about summary svg {
+  transition: transform 0.2s;
+  flex: 0 0 auto;
+  color: var(--text-3);
+}
+.pp-about[open] summary svg {
+  transform: rotate(180deg);
+}
+.pp-about .pp-desc {
+  padding: 0 20px 18px;
 }

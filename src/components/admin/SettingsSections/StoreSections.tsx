@@ -203,12 +203,15 @@ export function DeliverySection({ settings, onSave }: { settings: SiteSettings; 
 
 interface OpsDraft {
   ordersOffset: number | undefined;
+  past5: number | undefined;
+  past4: number | undefined;
+  past3: number | undefined;
   maintenanceEnabled: boolean;
   maintenanceMessage: string;
 }
 
 export function MaintenanceSection({ settings, onSave }: { settings: SiteSettings; onSave: SaveFn }) {
-  const value: OpsDraft = { ordersOffset: settings.stats.ordersOffset, maintenanceEnabled: settings.maintenance.enabled, maintenanceMessage: settings.maintenance.message };
+  const value: OpsDraft = { ordersOffset: settings.stats.ordersOffset, past5: settings.stats.pastReviews?.count5 ?? 0, past4: settings.stats.pastReviews?.count4 ?? 0, past3: settings.stats.pastReviews?.count3 ?? 0, maintenanceEnabled: settings.maintenance.enabled, maintenanceMessage: settings.maintenance.message };
   return (
     <SectionCard<OpsDraft>
       id="maintenance"
@@ -216,7 +219,7 @@ export function MaintenanceSection({ settings, onSave }: { settings: SiteSetting
       icon="server"
       sub="Counter offset for orders from before this site, and the emergency switch."
       value={value}
-      toPatch={(d) => ({ stats: { ordersOffset: Math.max(0, Math.round(d.ordersOffset ?? 0)) }, maintenance: { enabled: d.maintenanceEnabled, message: d.maintenanceMessage.trim() || 'We are restocking – back in a few minutes!' } })}
+      toPatch={(d) => ({ stats: { ordersOffset: Math.max(0, Math.round(d.ordersOffset ?? 0)), pastReviews: { count5: Math.max(0, Math.round(d.past5 ?? 0)), count4: Math.max(0, Math.round(d.past4 ?? 0)), count3: Math.max(0, Math.round(d.past3 ?? 0)) } }, maintenance: { enabled: d.maintenanceEnabled, message: d.maintenanceMessage.trim() || 'We are restocking – back in a few minutes!' } })}
       onSave={onSave}
     >
       {(d, set) => (
@@ -224,6 +227,13 @@ export function MaintenanceSection({ settings, onSave }: { settings: SiteSetting
           <div className="adm-form-grid cols-2">
             <Field label="Delivered-orders offset" hint="Added to the live 'orders delivered' counter. Use it for orders you fulfilled before launching this site – not for made-up numbers." htmlFor="op-offset">
               <NumberInput id="op-offset" value={d.ordersOffset} onChange={(v) => set({ ...d, ordersOffset: v })} min={0} step={1} />
+            </Field>
+            <Field label="Earlier ratings (5★ / 4★ / 3★)" hint="Real ratings you received before this site (e.g. in an old Discord). Only the counts are shown in the rating summary – never invent numbers." htmlFor="op-p5">
+              <div className="row" style={{ gap: 8 }}>
+                <NumberInput id="op-p5" value={d.past5} onChange={(v) => set({ ...d, past5: v })} min={0} step={1} />
+                <NumberInput id="op-p4" value={d.past4} onChange={(v) => set({ ...d, past4: v })} min={0} step={1} />
+                <NumberInput id="op-p3" value={d.past3} onChange={(v) => set({ ...d, past3: v })} min={0} step={1} />
+              </div>
             </Field>
           </div>
           <div className={`alert ${d.maintenanceEnabled ? 'alert-warn' : ''}`} style={{ flexDirection: 'column', gap: 12 }}>

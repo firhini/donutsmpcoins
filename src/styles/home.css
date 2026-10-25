@@ -608,3 +608,80 @@
     padding: var(--sp-6);
   }
 }
+
+/* mystery box sale banner */
+.box-deal-wrap {
+  margin-top: var(--sp-6);
+}
+.box-deal {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  border-radius: var(--r-xl);
+  border: 1px solid rgba(217, 70, 239, 0.45);
+  background: radial-gradient(400px 120px at 10% 50%, rgba(217, 70, 239, 0.28), transparent 70%), linear-gradient(120deg, rgba(139, 92, 246, 0.18), rgba(255, 94, 168, 0.12));
+  box-shadow: 0 0 40px -16px rgba(217, 70, 239, 0.8);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.box-deal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 50px -10px rgba(217, 70, 239, 0.9);
+}
+.box-deal img {
+  flex: 0 0 auto;
+  animation: box-deal-bob 2.6s ease-in-out infinite;
+  filter: drop-shadow(0 6px 16px rgba(217, 70, 239, 0.55));
+}
+.box-deal > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.box-deal strong {
+  font-size: var(--fs-lg);
+}
+.box-deal .muted {
+  font-size: var(--fs-sm);
+}
+.box-deal-tag {
+  align-self: flex-start;
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f0abfc;
+}
+.box-deal .arrow {
+  flex: 0 0 auto;
+  color: #f0abfc;
+}
+@keyframes box-deal-bob {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-6px) rotate(4deg); }
+}
+@media (max-width: 520px) {
+  .box-deal {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+  .box-deal img {
+    width: 60px;
+    height: 60px;
+  }
+  .box-deal strong {
+    font-size: var(--fs-md);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .box-deal img { animation: none; }
+}
+
+/* phones: the example chat log is mostly empty space – keep the mascot, drop the log */
+@media (max-width: 520px) {
+  .hero-visual .dlog {
+    display: none;
+  }
+}

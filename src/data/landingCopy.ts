@@ -45,9 +45,9 @@ export const landingCopy: LandingCopy[] = [
     title: 'DonutSMP Mystery Boxes: Every Box, Price and Real Drop Chance',
     seoTitle: 'DonutSMP Mystery Boxes – Prices & Real Odds | DonutCoins',
     metaDescription:
-      'DonutSMP mystery boxes compared: Coin Crate, Spawner Crate, Mystery, Elite and God boxes, Legendary Crate – prices from $2.49, drop tables, Elytra odds.',
+      'DonutSMP mystery boxes compared: Coin Crate, Spawner Crate, Mystery, Elite and God boxes, Legendary Crate – prices from $1.99, drop tables, Elytra odds.',
     intro:
-      'Mystery boxes are the part of DonutCoins where luck is involved – but only the luck. Every box has a published drop table, the roll happens on our server when you order, and the result is on your order page before anything is handed over on DonutSMP. This page compares all six boxes, from the $2.49 Coin Crate to the $49.99 Legendary Crate, with prices, pools and the real chance of pulling an Elytra.',
+      'Mystery boxes are the part of DonutCoins where luck is involved – but only the luck. Every box has a published drop table, the roll happens on our server when you order, and the result is on your order page before anything is handed over on DonutSMP. This page compares all six boxes, from the $1.99 Coin Crate to the $34.99 Legendary Crate, with prices, pools and the real chance of pulling an Elytra.',
     sections: [
       {
         heading: 'How a DonutSMP mystery box is rolled',
@@ -59,15 +59,15 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'The six boxes at a glance',
         paragraphs: [
-          '[Coin Crate](/product/coin-crate) – $2.49, one roll, money only: 5M (40%), 10M (30%), 15M (15%), 25M (9%), 50M (5%) or 100M (1%). The average payout is about 13M – a flutter, not a cheap way to buy money.',
-          '[Spawner Crate](/product/spawner-crate) – $3.99, two rolls from a spawner-only pool: 5–12 or 13–24 skeleton spawners, 4–10 zombie, 2–8 iron golem, 2–6 creeper or 2–5 blaze spawners. About 79% of crates contain the 5–12 skeleton line and roughly 8% contain blazes.',
-          '[Mystery Box](/product/mystery-box) – $5.69, three rolls from an eleven-line pool of gilded blackstone, netherite ingots and blocks, skeleton spawners, dragon heads, enchanted golden apples, nether stars, emerald ore, totems, 10M and an Elytra. [Elite Mystery Box](/product/elite-mystery-box) – $12.49, four rolls, Elytra at 4% per roll and 25M money in the pool. [God Mystery Box](/product/god-mystery-box) – $28.99, five rolls, Elytra at about 11% per roll, with 50M in the pool. [Legendary Crate](/product/legendary-crate) – $49.99, a guaranteed Elytra and 50M plus six more rolls from a nine-line pool.',
+          '[Coin Crate](/product/coin-crate) – $1.99, one roll, money only: 5M (40%), 10M (30%), 15M (15%), 25M (9%), 50M (5%) or 100M (1%). The average payout is about 13M – a flutter, not a cheap way to buy money.',
+          '[Spawner Crate](/product/spawner-crate) – $2.99, two rolls from a spawner-only pool: 5–12 or 13–24 skeleton spawners, 4–10 zombie, 2–8 iron golem, 2–6 creeper or 2–5 blaze spawners. About 79% of crates contain the 5–12 skeleton line and roughly 8% contain blazes.',
+          '[Mystery Box](/product/mystery-box) – $3.99, three rolls from an eleven-line pool of gilded blackstone, netherite ingots and blocks, skeleton spawners, dragon heads, enchanted golden apples, nether stars, emerald ore, totems, 10M and an Elytra. [Elite Mystery Box](/product/elite-mystery-box) – $8.99, four rolls, Elytra at 4% per roll and 25M money in the pool. [God Mystery Box](/product/god-mystery-box) – $19.99, five rolls, Elytra at about 11% per roll, with 50M in the pool. [Legendary Crate](/product/legendary-crate) – $34.99, a guaranteed Elytra and 50M plus six more rolls from a nine-line pool.',
         ],
       },
       {
         heading: 'Elytra odds, box by box',
         paragraphs: [
-          'Because multi-roll boxes draw without repeats, the chance of seeing a line somewhere in the box is higher than its per-roll percentage. Simulating the server\'s exact roll logic gives roughly these box-wide Elytra odds: Mystery Box about **3%**, Elite Mystery Box about **19%**, God Mystery Box about **58%** – a little better than a coin flip – and the Legendary Crate **100%**, since the Elytra is guaranteed. In short: $5.69 is a long shot, $12.49 a real chance, $28.99 better-than-even odds, and $49.99 certainty plus extras.',
+          'Because multi-roll boxes draw without repeats, the chance of seeing a line somewhere in the box is higher than its per-roll percentage. Simulating the server\'s exact roll logic gives roughly these box-wide Elytra odds: Mystery Box about **3%**, Elite Mystery Box about **19%**, God Mystery Box about **58%** – a little better than a coin flip – and the Legendary Crate **100%**, since the Elytra is guaranteed. In short: $3.99 is a long shot, $8.99 a real chance, $19.99 better-than-even odds, and $34.99 certainty plus extras.',
         ],
       },
       {
@@ -131,8 +131,8 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Cheaper routes: bundles and boxes',
         paragraphs: [
-          'If you want more than the Elytra, two bundles include one at a lower combined price. The [Pro Bundle](/product/pro-bundle) ($40.99) adds 50M money and 16 skeleton spawners – bought separately that is about $42.86 – and the [Rich Bundle](/product/rich-bundle) ($79.99) comes with 250M, a God Mystery Box and the full PvP Kit for roughly $20 less than its parts. The [Basehunter Bundle](/product/basehunter-bundle) ($37.99) pairs an Elytra with the Amethyst Pickaxe, 16 totems and 20M – about $2.40 below the price of the single items.',
-          'Random boxes are the gamble: the [Elite Mystery Box](/product/elite-mystery-box) ($12.49) contains an Elytra in roughly 19% of boxes, the [God Mystery Box](/product/god-mystery-box) ($28.99) in about 58%, and the [Legendary Crate](/product/legendary-crate) ($49.99) guarantees one alongside 50M and six more drops. For the Elytra alone, buying it outright at $28.49 is the better deal; the boxes pay off only if you value the other lines.',
+          'If you want more than the Elytra, two bundles include one at a lower combined price. The [Pro Bundle](/product/pro-bundle) ($40.99) adds 50M money and 16 skeleton spawners – bought separately that is about $42.86 – and the [Rich Bundle](/product/rich-bundle) ($79.99) comes with 250M, a God Mystery Box and the full PvP Kit for roughly $10 less than its parts. The [Basehunter Bundle](/product/basehunter-bundle) ($37.99) pairs an Elytra with the Amethyst Pickaxe, 16 totems and 20M – about $2.40 below the price of the single items.',
+          'Random boxes are the gamble: the [Elite Mystery Box](/product/elite-mystery-box) ($8.99) contains an Elytra in roughly 19% of boxes, the [God Mystery Box](/product/god-mystery-box) ($19.99) in about 58%, and the [Legendary Crate](/product/legendary-crate) ($34.99) guarantees one alongside 50M and six more drops. For the Elytra alone, buying it outright at $28.49 is the better deal; the boxes pay off only if you value the other lines.',
         ],
       },
       {
@@ -207,7 +207,7 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Alternatives: crates and bundles',
         paragraphs: [
-          'The [Spawner Crate](/product/spawner-crate) ($3.99) rolls two spawner lines and contains skeleton spawners in about 79% of crates – 5–12 on the common line, 13–24 on the uncommon one. The [Starter Bundle](/product/starter-bundle) ($9.49) packs 15 skeleton spawners with 20M and a Diamond Armor Shulker, and the [Spawner Farm Bundle](/product/spawner-farm-bundle) ($25.99) is 64 skeleton spawners plus 10M in one order. For odd quantities or more than 2,000 spawners, message us on Discord for a quote.',
+          'The [Spawner Crate](/product/spawner-crate) ($2.99) rolls two spawner lines and contains skeleton spawners in about 79% of crates – 5–12 on the common line, 13–24 on the uncommon one. The [Starter Bundle](/product/starter-bundle) ($9.49) packs 15 skeleton spawners with 20M and a Diamond Armor Shulker, and the [Spawner Farm Bundle](/product/spawner-farm-bundle) ($25.99) is 64 skeleton spawners plus 10M in one order. For odd quantities or more than 2,000 spawners, message us on Discord for a quote.',
         ],
       },
     ],

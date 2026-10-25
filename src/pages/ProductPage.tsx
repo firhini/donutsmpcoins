@@ -147,11 +147,7 @@ export default function ProductPage() {
             {perMillion !== null && <span className="muted">≈ {fmt(perMillion)} per 1M</span>}
             {off && <span className="badge badge-pink">Save {off}%</span>}
           </div>
-          <div className="pp-desc">
-            {paragraphs.map((para, i) => (
-              <p key={i}>{para}</p>
-            ))}
-          </div>
+          {product.shortDesc && <p className="pp-lead">{product.shortDesc}</p>}
           {copy?.bullets?.length ? (
             <ul className="pp-bullets">
               {copy.bullets.map((b, i) => (
@@ -268,14 +264,26 @@ export default function ProductPage() {
         </div>
       </div>
 
-      {copy?.faq?.length ? (
+      {paragraphs.length > 0 && (
+        // the long SEO description stays in the HTML (Google reads it) but is folded away for shoppers
+        <details className="pp-about card">
+          <summary>
+            <h2>About {product.name}</h2>
+            <Icon name="chevron" size={18} />
+          </summary>
+          <div className="pp-desc">
+            {paragraphs.map((para, i) => (
+              <p key={i}>{para}</p>
+            ))}
+          </div>
+        </details>
+      )}
 
+      {copy?.faq?.length ? (
         <section className="pp-faq">
 
           <h2>{product.name} – questions &amp; answers</h2>
-
           <Accordion items={copy.faq.map((f, i) => ({ id: `${product.id}-faq-${i}`, q: f.q, a: f.a }))} />
-
         </section>
 
       ) : null}

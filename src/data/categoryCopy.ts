@@ -100,13 +100,13 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
   mystery: {
     seoTitle: 'DonutSMP Mystery Boxes & Crates – Shop All 6 | DonutCoins',
     metaDescription:
-      'DonutSMP mystery boxes from $2.49 with public odds: Coin Crate (5M–100M), Elite and God boxes with Elytra chances, Legendary Crate with guaranteed Elytra.',
+      'DonutSMP mystery boxes from $1.99 with public odds: Coin Crate (5M–100M), Elite and God boxes with Elytra chances, Legendary Crate with guaranteed Elytra.',
     intro:
-      'Mystery boxes are the fun way to shop for DonutSMP loot: every box has a public drop table, the rolls happen on our server the moment you order, and the result is listed on your order page before it is handed over in-game. Six boxes cover every budget – from the $2.49 Coin Crate that always pays between 5M and 100M to the $49.99 Legendary Crate with a guaranteed Elytra and 50M. The exact odds are shown under "What\'s inside?" on each box.',
+      'Mystery boxes are the fun way to shop for DonutSMP loot: every box has a public drop table, the rolls happen on our server the moment you order, and the result is listed on your order page before it is handed over in-game. Six boxes cover every budget – from the $1.99 Coin Crate that always pays between 5M and 100M to the $34.99 Legendary Crate with a guaranteed Elytra and 50M. The exact odds are shown under "What\'s inside?" on each box.',
     body: [
       'Each line in a box has a weight; its chance on a single roll is that weight divided by the pool total. Boxes with several rolls draw without repeats, so a three-roll box always contains three different lines and the box-wide chance of any line is higher than the per-roll figure. Guaranteed lines are included in every box. There is no re-rolling and no hidden pool – what the page shows is what the server rolls.',
-      'The Coin Crate ($2.49) is money only and averages about 13M per crate. The Spawner Crate ($3.99) draws two spawner lines and contains skeleton spawners in roughly 79% of crates. The Mystery Box ($5.69) rolls three times with an Elytra in about 3% of boxes, the Elite Mystery Box ($12.49) four times at roughly 19%, and the God Mystery Box ($28.99) five times with an Elytra in well over half of all boxes.',
-      'The Legendary Crate ($49.99) skips the gamble on the headline items: an Elytra and 50M are guaranteed, then six more lines are drawn from a pool of dragon heads, netherite blocks, blaze and iron golem spawners, heavy cores, totems, a maxed netherite armor set, a mace and a 100M money line. All box contents are delivered like normal items – teleport, drop, done – and money lines are paid to your balance with /pay.',
+      'The Coin Crate ($1.99) is money only and averages about 13M per crate. The Spawner Crate ($2.99) draws two spawner lines and contains skeleton spawners in roughly 79% of crates. The Mystery Box ($3.99) rolls three times with an Elytra in about 3% of boxes, the Elite Mystery Box ($8.99) four times at roughly 19%, and the God Mystery Box ($19.99) five times with an Elytra in well over half of all boxes.',
+      'The Legendary Crate ($34.99) skips the gamble on the headline items: an Elytra and 50M are guaranteed, then six more lines are drawn from a pool of dragon heads, netherite blocks, blaze and iron golem spawners, heavy cores, totems, a maxed netherite armor set, a mace and a 100M money line. All box contents are delivered like normal items – teleport, drop, done – and money lines are paid to your balance with /pay.',
       'Treat boxes as entertainment with a floor, not as a discount. If you simply want money, the money packs are cheaper per million than the Coin Crate; if you simply want an Elytra, buying it outright for $28.49 beats every random box. Boxes make sense when you would be happy with most lines in the pool – and the Elite and God pools contain no filler lines at all.',
     ],
     faq: [
@@ -116,7 +116,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
       },
       {
         q: 'Which mystery box has the best Elytra odds?',
-        a: 'The Legendary Crate ($49.99) includes an Elytra every time. Among random boxes the God Mystery Box ($28.99) lands one in well over half of all boxes, the Elite Mystery Box ($12.49) in roughly 19% and the standard Mystery Box ($5.69) in about 3%.',
+        a: 'The Legendary Crate ($34.99) includes an Elytra every time. Among random boxes the God Mystery Box ($19.99) lands one in well over half of all boxes, the Elite Mystery Box ($8.99) in roughly 19% and the standard Mystery Box ($3.99) in about 3%.',
       },
       {
         q: 'Can I get the same item twice in one box?',
@@ -236,7 +236,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
       'Bundles are the fastest way to go from fresh spawn to running farm on DonutSMP. Each one combines money, spawners and gear in a single order with one delivery: the Starter Bundle ($9.49) covers 20M, 15 skeleton spawners and a Diamond Armor Shulker; the Pro Bundle ($40.99) steps up to 50M, 16 spawners and an Elytra; the Rich Bundle ($79.99) brings 250M, a God Mystery Box, an Elytra and the full PvP Kit. Every item is listed before you buy.',
     body: [
       'Bundles are for new players who do not want to research what a first farm needs, returning players after a season reset, and anyone gifting a friend a head start. The Starter Bundle is enough to place a small skeleton farm, sell the first drops and buy more spawners with the 20M; the Spawner Farm Bundle (64 skeleton spawners plus 10M, $25.99) is the one-order farm for players who already have a base.',
-      'Bundle pricing is easy to check because every bundle lists its exact contents. The Rich Bundle\'s parts – a 250M pack, God Mystery Box, Elytra and PvP Kit – add up to about $98.96 bought separately, against $79.99 as a bundle, and the Starter and Pro bundles also come in under their parts. The Spawner Farm and Basehunter bundles are convenience sets; compare them with the single products if you only want part of the list.',
+      'Bundle pricing is easy to check because every bundle lists its exact contents. The Rich Bundle\'s parts – a 250M pack, God Mystery Box, Elytra and PvP Kit – add up to about $89.96 bought separately, against $79.99 as a bundle, and the Starter and Pro bundles also come in under their parts. The Spawner Farm and Basehunter bundles are convenience sets; compare them with the single products if you only want part of the list.',
       'Bundles are delivered in two parts because money and items travel differently: the money is paid with /pay to your balance, and the items are handed over through a teleport and drop, in shulkers where needed. Both happen in the same session, usually within 5–30 minutes while our staff are online. The order page lists every component, including the rolled contents of the God Mystery Box in the Rich Bundle.',
       'Discounts stack on bundles like on everything else: carts over $15 get 5% off, over $40 get 8% and over $100 get 12%, plus one coupon and any store credit. Buying is at your own risk under DonutSMP\'s rules on real-money trading – we deliver with normal player actions and keep it low-key, but enforcement is the server\'s call, and we are not affiliated with DonutSMP or Mojang.',
     ],
@@ -247,7 +247,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
       },
       {
         q: 'Are bundles cheaper than buying the items separately?',
-        a: 'The Starter, Pro and Rich bundles are – the Rich Bundle saves about $19 against its parts. The Spawner Farm and Basehunter bundles are priced for convenience, so if you only want some of the contents, the single products can be the better deal.',
+        a: 'The Starter, Pro and Rich bundles are – the Rich Bundle saves about $10 against its parts. The Spawner Farm and Basehunter bundles are priced for convenience, so if you only want some of the contents, the single products can be the better deal.',
       },
       {
         q: 'Can I swap an item in a bundle?',
@@ -303,7 +303,7 @@ export const shopCopy: CategoryCopy = {
     'DonutCoins is a shop for DonutSMP players who would rather play than grind. Browse eight categories – money, spawners and items, mystery boxes, investments, armor, tools and weapons, bundles and bases – with live prices in USD and estimates in your own currency. Everything is delivered in-game by our staff, by hand, usually within 5–30 minutes while we are online. Prices drop automatically with quantity, carts over $15 get an extra 5–12% off, and the daily spin hands out coupons and free coins.',
   body: [
     'Start with money if you are new – 1M is $0.18 and the rate falls to $0.13 per million on big orders, with fixed packs from 10M ($1.69) to 1B ($114.99). Spawners are the second most popular buy: skeleton spawners from $0.36 at 250+, plus iron golems, zombies, creepers and blazes. The spawners category also holds the Elytra ($28.49), shulker boxes and totems of undying.',
-    'For gear, the armor category has a full god netherite set for $4.99 and a Diamond Armor Shulker with six sets for $0.49; tools and weapons start at $0.89 for a God Bow and include the Mace and the DonutSMP Amethyst Pickaxe. Mystery boxes run from the $2.49 Coin Crate to the $49.99 Legendary Crate with a guaranteed Elytra, all with public odds. Investments cover netherite, nether stars, enchanted golden apples and dragon heads.',
+    'For gear, the armor category has a full god netherite set for $4.99 and a Diamond Armor Shulker with six sets for $0.49; tools and weapons start at $0.89 for a God Bow and include the Mace and the DonutSMP Amethyst Pickaxe. Mystery boxes run from the $1.99 Coin Crate to the $34.99 Legendary Crate with a guaranteed Elytra, all with public odds. Investments cover netherite, nether stars, enchanted golden apples and dragon heads.',
     'Ordering takes a minute: add to cart, enter your exact Java Edition username – we check it against Mojang – choose PayPal, crypto or card where enabled, and report your payment reference on the order page. A member of our staff then pays money with /pay and hands items over through a teleport. Track any order at /track with its ID; no account is needed.',
     'Two things we say on every page: DonutCoins is an independent, player-run store, not affiliated with DonutSMP, Mojang or Microsoft, and DonutSMP\'s rules prohibit real-money trading – we deliver with normal player actions and keep it discreet, but buying is your own responsibility. If you want to test us first, start with a small order; the refund policy covers non-delivery in full.',
   ],

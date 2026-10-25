@@ -274,7 +274,13 @@ function validateSettingsPatch(body: unknown): Partial<SiteSettings> {
     }
   }
   const stats = patch.stats;
-  if (isObj(stats)) numField(stats, 'ordersOffset', 'Orders offset', 0, 10_000_000, true, true);
+  if (isObj(stats)) {
+    numField(stats, 'ordersOffset', 'Orders offset', 0, 10_000_000, true, true);
+    if (stats.pastReviews !== undefined) {
+      if (!isObj(stats.pastReviews)) throw new HttpError(400, 'stats.pastReviews must be an object.', 'validation');
+      for (const k of ['count5', 'count4', 'count3']) numField(stats.pastReviews, k, `Earlier ${k.slice(-1)}-star reviews`, 0, 100_000, false, true);
+    }
+  }
   const ann = patch.announcement;
   if (isObj(ann) && typeof ann.link === 'string' && ann.link.trim() && !/^(https?:\/\/|\/(?!\/))/i.test(ann.link.trim())) {
     throw new HttpError(400, 'Announcement link must start with https:// or /', 'validation');

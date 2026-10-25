@@ -40,7 +40,17 @@ describe('GET /catalog, /config, /stats, /products/:id/odds', () => {
   it('returns live stats (zero on a fresh store)', async () => {
     const res = await get<SiteStats>('/stats');
     expect(res.status).toBe(200);
-    expect(res.data).toEqual({ ordersDelivered: 0, reviewCount: 0, averageRating: 0 });
+    expect(res.data).toEqual({ ordersDelivered: 0, reviewCount: 0, averageRating: 0, totalReviewCount: 0, totalAverageRating: 0, pastDistribution: [0, 0, 0, 0, 0] });
+  });
+
+  it('adds earlier ratings from the settings to the totals, not to the site review count', async () => {
+    await lib.settings.saveSettings({ stats: { ordersOffset: 0, pastReviews: { count5: 105, count4: 12, count3: 0 } } });
+    const res = await get<SiteStats>('/stats');
+    expect(res.data.reviewCount).toBe(0);
+    expect(res.data.totalReviewCount).toBe(117);
+    expect(res.data.totalAverageRating).toBe(4.9);
+    expect(res.data.pastDistribution).toEqual([105, 12, 0, 0, 0]);
+    await lib.settings.saveSettings({ stats: { ordersOffset: 0, pastReviews: { count5: 0, count4: 0, count3: 0 } } });
   });
 
   it('prefers the _stats document written by the social module', async () => {

@@ -16,6 +16,20 @@
   autoLaunch = false
   framework = "#custom"
 
+# Old Netlify address → custom domain (one canonical host for Google). The API on the old host keeps
+# working through the rewrite below, so webhooks/IPNs from older payments still arrive.
+[[redirects]]
+  from = "https://donutsmpcoins.netlify.app/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "https://donutsmpcoins.netlify.app/*"
+  to = "https://donutsmpcoins.shop/:splat"
+  status = 301
+  force = true
+
 # API: single catch-all function (netlify/functions/api.ts) that routes internally.
 # Keep this forced rewrite and do NOT add `config.path` to the function – a custom path
 # disables the default /.netlify/functions/api URL this rule targets (→ 404 for every call).

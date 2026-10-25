@@ -2695,3 +2695,96 @@
     height: 30px;
   }
 }
+
+/* ───────── box opening: charge-up, flash, landing ───────── */
+.rv {
+  position: relative;
+  overflow: hidden;
+}
+.rv-charge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 300px;
+  gap: 10px;
+}
+.rv-rays {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: repeating-conic-gradient(from 0deg, color-mix(in srgb, var(--rv-best, #fbbf24) 55%, transparent) 0deg 8deg, transparent 8deg 24deg);
+  mask-image: radial-gradient(circle, #000 0%, transparent 62%);
+  -webkit-mask-image: radial-gradient(circle, #000 0%, transparent 62%);
+  animation: rv-rays-spin 3s linear infinite, rv-rays-grow 1.7s ease-in forwards;
+  opacity: 0;
+}
+.rv-charge-box {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 0 18px var(--rv-best, #fbbf24));
+  animation: rv-shake 1.7s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+}
+.rv-charge-text {
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.2em;
+  color: var(--rv-best, #fbbf24);
+  animation: rv-blink 0.5s steps(2) infinite;
+}
+.rv-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 45%, #fff 0%, color-mix(in srgb, var(--rv-best, #fbbf24) 70%, #fff) 35%, transparent 80%);
+  animation: rv-flash 0.52s ease-out forwards;
+}
+.strip.is-landed .strip-tile.is-target {
+  animation: rv-land 0.9s ease-out;
+  box-shadow: 0 0 0 2px var(--rv-best, #fbbf24), 0 0 32px var(--rv-best, #fbbf24);
+  z-index: 2;
+}
+.strip.is-landed .strip-tile:not(.is-target) {
+  opacity: 0.35;
+  transition: opacity 0.4s;
+}
+.rv-card-legendary.is-flipped .rv-back,
+.rv-card-epic.is-flipped .rv-back {
+  overflow: hidden;
+}
+.rv-card-legendary.is-flipped .rv-back::after,
+.rv-card-epic.is-flipped .rv-back::after {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.35) 50%, transparent 60%);
+  animation: rv-shine 2.4s ease-in-out 0.4s infinite;
+  pointer-events: none;
+}
+@keyframes rv-shake {
+  0% { transform: rotate(0) scale(1); }
+  10% { transform: rotate(-3deg) scale(1.02); }
+  20% { transform: rotate(3deg) scale(1.03); }
+  30% { transform: rotate(-5deg) scale(1.05); }
+  40% { transform: rotate(5deg) scale(1.07); }
+  50% { transform: rotate(-7deg) scale(1.09); }
+  60% { transform: rotate(7deg) scale(1.11); }
+  70% { transform: translateX(-4px) rotate(-9deg) scale(1.14); }
+  80% { transform: translateX(4px) rotate(9deg) scale(1.17); }
+  90% { transform: translateX(-6px) rotate(-11deg) scale(1.21); }
+  100% { transform: rotate(0) scale(1.35); filter: brightness(2.2) drop-shadow(0 0 40px var(--rv-best, #fbbf24)); }
+}
+@keyframes rv-rays-spin { to { rotate: 360deg; } }
+@keyframes rv-rays-grow { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1.15); } }
+@keyframes rv-blink { 50% { opacity: 0.35; } }
+@keyframes rv-flash { 0% { opacity: 0; } 25% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes rv-land { 0% { transform: scale(1); } 35% { transform: scale(1.18); } 100% { transform: scale(1.06); } }
+@keyframes rv-shine { 0% { transform: translateX(-60%); } 60%, 100% { transform: translateX(60%); } }
+@media (max-width: 520px) {
+  .rv-charge { min-height: 240px; }
+  .rv-rays { width: 380px; height: 380px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rv-charge-box, .rv-rays, .rv-charge-text, .rv-flash { animation: none; }
+}

@@ -196,6 +196,11 @@ export default function Page() {
 
   const count = stats?.count ?? siteStats?.reviewCount ?? reviews?.length ?? 0;
   const avg = stats?.averageRating ?? siteStats?.averageRating ?? 0;
+  // summary incl. earlier ratings (admin: Stats → earlier ratings); JSON-LD below keeps site reviews only
+  const past = siteStats?.pastDistribution ?? [0, 0, 0, 0, 0];
+  const pastCount = past.reduce((a, b) => a + b, 0);
+  const shownCount = count + pastCount;
+  const shownAvg = shownCount ? (avg * count + past[0] * 5 + past[1] * 4 + past[2] * 3 + past[3] * 2 + past[4]) / shownCount : 0;
   const visible = (reviews ?? []).slice(0, shown);
   const hasMore = !!reviews && (shown < reviews.length || !exhausted);
   const chars = comment.trim().length;
@@ -223,14 +228,14 @@ export default function Page() {
           {/* stats */}
           <div className="card rev-stats">
             <div className="rev-avg">
-              <span className={`rev-avg-num ${count > 0 ? '' : 'is-empty'}`}>{count > 0 ? avg.toFixed(1) : '0.0'}</span>
-              <StarRating value={count > 0 ? avg : 0} size={20} />
-              <span className="rev-avg-count">{count > 0 ? `${count} verified review${count === 1 ? '' : 's'}` : 'No reviews yet'}</span>
+              <span className={`rev-avg-num ${shownCount > 0 ? '' : 'is-empty'}`}>{shownCount > 0 ? shownAvg.toFixed(1) : '0.0'}</span>
+              <StarRating value={shownCount > 0 ? shownAvg : 0} size={20} />
+              <span className="rev-avg-count">{shownCount > 0 ? `${shownCount} review${shownCount === 1 ? '' : 's'}` : 'No reviews yet'}</span>
             </div>
             <div className="rev-bars" aria-label="Rating distribution">
               {[5, 4, 3, 2, 1].map((n) => {
-                const c = distribution[n - 1];
-                const total = (reviews ?? []).length || 1;
+                const c = distribution[n - 1] + (past[5 - n] ?? 0);
+                const total = (reviews ?? []).length + pastCount || 1;
                 const pct = Math.round((c / total) * 100);
                 return (
                   <div key={n} className="rev-bar">

@@ -265,7 +265,7 @@ export default function Page() {
             <h1>
               Spin. <span className="grad-text">Win.</span> Flex.
             </h1>
-            <p>One free spin every {status?.cooldownHours ?? 24} hours. Coupons, store credit and free {config.serverName} loot – no purchase needed.</p>
+            <p>Every spin wins. Free every {status?.cooldownHours ?? 24}h.</p>
           </div>
 
           <Wheel prizes={prizes} rotation={rotation} spinning={phase === 'spinning'} windup={phase === 'windup'} disabled={!canSpin} onSpin={spin} onSpinEnd={onSpinEnd} onTick={playTick} />
@@ -280,7 +280,7 @@ export default function Page() {
                 }}
                 error={usernameErr}
                 label={needsUsername ? 'Minecraft username (required for free items)' : 'Minecraft username (optional)'}
-                hint="Free items are delivered to this account. Coupons get bound to it so nobody else can use your code."
+                hint="Prizes are delivered to this account."
                 disabled={phase !== 'idle'}
                 size="lg"
               />
@@ -405,25 +405,25 @@ export default function Page() {
               <li>
                 <Icon name="clock" size={16} />
                 <span>
-                  <strong>1 spin per {status?.cooldownHours ?? 24}h</strong> – the timer starts when you spin, not at midnight.
+                  <strong>1 free spin every {status?.cooldownHours ?? 24}h</strong>
                 </span>
               </li>
               <li>
                 <Icon name="user" size={16} />
                 <span>
-                  <strong>Free items need a Minecraft username.</strong> We create a free order and deliver it in-game. Max 1 free-item prize per username per week.
+                  <strong>Items are delivered in-game</strong> to your username
                 </span>
               </li>
               <li>
                 <Icon name="ticket" size={16} />
                 <span>
-                  <strong>Coupons expire</strong> (3–7 days) and are bound to your username. Use them at checkout – see the <Link to="/faq" className="gold-text">FAQ</Link>.
+                  <strong>Coupons</strong> work at checkout for 3–7 days
                 </span>
               </li>
               <li>
                 <Icon name="coin" size={16} />
                 <span>
-                  <strong>Store credit</strong> is applied automatically at checkout when you order with the same username.
+                  <strong>Credit</strong> is applied at checkout automatically
                 </span>
               </li>
             </ul>
@@ -449,7 +449,7 @@ export default function Page() {
                 </div>
               ))}
             </div>
-            <p className="xs muted spin-prizes-note">Every segment is a real prize. The result is drawn on our server – what you see is what you get.</p>
+            <p className="xs muted spin-prizes-note">Every segment is a real prize, drawn on our server.</p>
           </div>
         </aside>
       </div>

@@ -248,12 +248,13 @@ export function Wheel({ prizes, rotation, spinning, windup, disabled, onSpin, on
               <g transform={`translate(${CX} ${CY - 18.2})`} opacity="0.95">
                 <Glyph kind={s.glyph} />
               </g>
+              {/* labels on the left half are turned 180° so they never read upside down */}
               <text
                 x={CX}
                 y={CY - 43.5}
-                textAnchor="end"
+                textAnchor={s.mid > 180 ? 'start' : 'end'}
                 dominantBaseline="middle"
-                transform={`rotate(-90 ${CX} ${CY - 43.5})`}
+                transform={`rotate(${s.mid > 180 ? 90 : -90} ${CX} ${CY - 43.5})`}
                 fontSize={s.fontSize}
                 fontWeight={800}
                 fill="#fff"

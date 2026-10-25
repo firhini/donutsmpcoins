@@ -63,7 +63,7 @@ export const products: Product[] = [
 
   // ───────────── MYSTERY BOXES ─────────────
   P({
-    id: 'coin-crate', slug: 'coin-crate', name: 'Coin Crate', categoryId: 'mystery', kind: 'box', priceCents: 249, stock: null, boxRolls: 1,
+    id: 'coin-crate', slug: 'coin-crate', name: 'Coin Crate', categoryId: 'mystery', kind: 'box', priceCents: 199, compareAtCents: 299, stock: null, boxRolls: 1,
     tags: ['New', 'Money only'], image: '/img/products/coin-crate.svg', sortOrder: 1, maxQty: 50,
     shortDesc: 'Guaranteed money – between 5M and 100M.',
     contents: [
@@ -76,7 +76,7 @@ export const products: Product[] = [
     ],
   }),
   P({
-    id: 'spawner-crate', slug: 'spawner-crate', name: 'Spawner Crate', categoryId: 'mystery', kind: 'box', priceCents: 399, stock: null, boxRolls: 2,
+    id: 'spawner-crate', slug: 'spawner-crate', name: 'Spawner Crate', categoryId: 'mystery', kind: 'box', priceCents: 299, compareAtCents: 449, stock: null, boxRolls: 2,
     tags: ['New'], image: '/img/products/spawner-crate.svg', sortOrder: 2, maxQty: 50,
     shortDesc: 'Spawners only. 5 to 24 skellies, with a chance at blazes.',
     contents: [
@@ -89,7 +89,7 @@ export const products: Product[] = [
     ],
   }),
   P({
-    id: 'mystery-box', slug: 'mystery-box', name: 'Mystery Box', categoryId: 'mystery', kind: 'box', priceCents: 569, compareAtCents: 599, stock: null, boxRolls: 3,
+    id: 'mystery-box', slug: 'mystery-box', name: 'Mystery Box', categoryId: 'mystery', kind: 'box', priceCents: 399, compareAtCents: 599, stock: null, boxRolls: 3,
     featured: true, tags: ['Popular'], image: '/img/products/mystery-box.svg', sortOrder: 3, maxQty: 50,
     shortDesc: 'Three random drops. Netherite, spawners, dragon heads and more.',
     contents: [
@@ -107,7 +107,7 @@ export const products: Product[] = [
     ],
   }),
   P({
-    id: 'elite-mystery-box', slug: 'elite-mystery-box', name: 'Elite Mystery Box', categoryId: 'mystery', kind: 'box', priceCents: 1249, compareAtCents: 1299, stock: null, boxRolls: 4,
+    id: 'elite-mystery-box', slug: 'elite-mystery-box', name: 'Elite Mystery Box', categoryId: 'mystery', kind: 'box', priceCents: 899, compareAtCents: 1299, stock: null, boxRolls: 4,
     image: '/img/products/elite-mystery-box.svg', sortOrder: 4, maxQty: 50,
     shortDesc: 'Four drops, better odds, Elytra in the pool.',
     contents: [
@@ -124,7 +124,7 @@ export const products: Product[] = [
     ],
   }),
   P({
-    id: 'god-mystery-box', slug: 'god-mystery-box', name: 'God Mystery Box', categoryId: 'mystery', kind: 'box', priceCents: 2899, compareAtCents: 2999, stock: null, boxRolls: 5,
+    id: 'god-mystery-box', slug: 'god-mystery-box', name: 'God Mystery Box', categoryId: 'mystery', kind: 'box', priceCents: 1999, compareAtCents: 2999, stock: null, boxRolls: 5,
     tags: ['Hot'], image: '/img/products/god-mystery-box.svg', sortOrder: 5, maxQty: 25,
     shortDesc: 'Five drops from the top pool – Elytra, netherite blocks, dragon heads, blaze spawners and 50M.',
     contents: [
@@ -140,7 +140,7 @@ export const products: Product[] = [
     ],
   }),
   P({
-    id: 'legendary-crate', slug: 'legendary-crate', name: 'Legendary Crate', categoryId: 'mystery', kind: 'box', priceCents: 4999, stock: null, boxRolls: 6,
+    id: 'legendary-crate', slug: 'legendary-crate', name: 'Legendary Crate', categoryId: 'mystery', kind: 'box', priceCents: 3499, compareAtCents: 4999, stock: null, boxRolls: 6,
     tags: ['New', 'Guaranteed Elytra'], image: '/img/products/legendary-crate.svg', sortOrder: 6, maxQty: 10,
     shortDesc: 'Guaranteed Elytra + 50M, plus six more drops from the top pool.',
     contents: [

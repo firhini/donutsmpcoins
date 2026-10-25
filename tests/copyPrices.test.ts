@@ -67,6 +67,11 @@ if (ingot) add(ingot.priceCents * 9);
 // amounts that are rounded comparisons or sums of two lines – each checked by hand:
 const APPROXIMATE = new Set<string>([
   'productCopy:12', // 250M pack: $45.00 base − $32.99 = $12.01
+  'productCopy:2.08', // 4 ancient debris at the 32+ tier price
+  'categoryCopy:2.08', // same debris example
+  'landingCopy:2.08', // same debris example
+  'categoryCopy:10', // Rich Bundle parts $89.96 − $79.99 ≈ $10
+  'landingCopy:10', // same Rich Bundle saving
   'productCopy:0.10', // 1B pack after 12% tier: $101.19 / 1000M = $0.101 per 1M
   'productCopy:35.98', // elytra $28.49 + 50M $7.49
   'productCopy:53', // Value Investment Box parts ≈ $53
