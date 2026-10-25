@@ -8,6 +8,8 @@ afterAll(() => cleanupTestData());
 const realFetch = globalThis.fetch;
 const DISCORD_USER = { id: '123456789012345678', username: 'farhan', global_name: 'Farhan', avatar: 'abc123' };
 let inGuild = true;
+let joinFails = false;
+const joinCalls: { auth: string; body: string }[] = [];
 
 function mockDiscord() {
   vi.stubGlobal(
@@ -17,10 +19,16 @@ function mockDiscord() {
       if (url.endsWith('/oauth2/token')) {
         const body = String(init?.body);
         if (!body.includes('code=good')) return new Response(JSON.stringify({ error: 'invalid_grant' }), { status: 400 });
-        return new Response(JSON.stringify({ access_token: 'tok', expires_in: 604800, scope: 'identify guilds' }), { status: 200 });
+        return new Response(JSON.stringify({ access_token: 'tok', expires_in: 604800, scope: process.env.DISCORD_BOT_TOKEN ? 'identify guilds guilds.join' : 'identify guilds' }), { status: 200 });
       }
       if (url.endsWith('/users/@me')) return new Response(JSON.stringify(DISCORD_USER), { status: 200 });
       if (url.endsWith('/users/@me/guilds')) return new Response(JSON.stringify(inGuild ? [{ id: 'guild-1' }] : []), { status: 200 });
+      if (url.includes('/guilds/guild-1/members/') && init?.method === 'PUT') {
+        joinCalls.push({ auth: String((init.headers as Record<string, string>).authorization), body: String(init.body) });
+        if (joinFails) return new Response('{"message":"Missing Permissions"}', { status: 403 });
+        inGuild = true;
+        return new Response(null, { status: 204 });
+      }
       return realFetch(input, init);
     }),
   );
@@ -153,6 +161,32 @@ describe('login-gated spin wheel', () => {
     expect(re.data.inGuild).toBe(true);
     const ok = await post('/spin', { deviceId: 'dev-g2' }, { ip: '10.20.0.10', headers: { cookie } });
     expect(ok.status).toBe(200);
+  });
+
+  it('auto-joins the Discord server on login when a bot token is configured', async () => {
+    process.env.DISCORD_BOT_TOKEN = 'bot-secret';
+    try {
+      inGuild = false;
+      joinCalls.length = 0;
+      const start = await get('/auth/discord/login?next=/spin');
+      expect(new URL(start.headers.get('location')!).searchParams.get('scope')).toBe('identify guilds guilds.join');
+      const cookie = await loginAs();
+      expect(joinCalls).toHaveLength(1);
+      expect(joinCalls[0].auth).toBe('Bot bot-secret');
+      expect(JSON.parse(joinCalls[0].body)).toEqual({ access_token: 'tok' });
+      const me = await get<{ user: PublicUser }>('/auth/me', { headers: { cookie } });
+      expect(me.data.user.inGuild).toBe(true);
+
+      // join refused (bot lacks permission) → falls back to the membership check, login still works
+      inGuild = false;
+      joinFails = true;
+      const cookie2 = await loginAs();
+      const me2 = await get<{ user: PublicUser }>('/auth/me', { headers: { cookie: cookie2 } });
+      expect(me2.data.user.inGuild).toBe(false);
+    } finally {
+      delete process.env.DISCORD_BOT_TOKEN;
+      joinFails = false;
+    }
   });
 
   it('spins anonymously again when login is not required', async () => {

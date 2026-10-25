@@ -1,7 +1,7 @@
 /**
  * Discord OAuth2 login + player account endpoints.
  *
- *   GET  /auth/discord/login?next=/spin   → redirect to Discord
+ *   GET  /auth/discord/login?next=/spin   → redirect to Discord (adds guilds.join when DISCORD_BOT_TOKEN is set → auto-join)
  *   GET  /auth/discord/callback           → exchange code, set session cookie, redirect to `next`
  *   GET  /auth/me                         → { user: PublicUser | null, configured: boolean }
  *   POST /auth/logout
@@ -91,6 +91,37 @@ async function exchangeCode(req: Request, code: string): Promise<{ access_token:
   }
 }
 
+/**
+ * Auto-join: add the player to the store's Discord server with their own OAuth token
+ * (scope `guilds.join`). Needs DISCORD_BOT_TOKEN of a bot that is a member of that server
+ * with the "Create Invite" permission. 201 = added, 204 = was already a member.
+ */
+export function autoJoinConfigured(): boolean {
+  return !!(process.env.DISCORD_BOT_TOKEN && process.env.DISCORD_GUILD_ID);
+}
+async function joinGuild(userToken: string, uid: string, guildId: string): Promise<boolean> {
+  const bot = process.env.DISCORD_BOT_TOKEN;
+  if (!bot) return false;
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 8000);
+  try {
+    const res = await fetch(`${DISCORD_API}/guilds/${encodeURIComponent(guildId)}/members/${encodeURIComponent(uid)}`, {
+      method: 'PUT',
+      headers: { authorization: `Bot ${bot}`, 'content-type': 'application/json' },
+      body: JSON.stringify({ access_token: userToken }),
+      signal: ctrl.signal,
+    });
+    if (res.status === 201 || res.status === 204) return true;
+    console.warn('[auth] auto-join failed', res.status, (await res.text().catch(() => '')).slice(0, 200));
+    return false;
+  } catch (err) {
+    console.warn('[auth] auto-join failed', (err as Error).message);
+    return false;
+  } finally {
+    clearTimeout(t);
+  }
+}
+
 async function checkGuild(token: string, guildId: string): Promise<boolean> {
   try {
     const guilds = await discordFetch<{ id: string }[]>('/users/@me/guilds', token);
@@ -131,7 +162,7 @@ export const routes: Route[] = [
       if (!cfg) throw new HttpError(503, 'Discord login is not configured on this store yet.', 'auth_unconfigured');
       const next = safeNext(url.searchParams.get('next'));
       const { nonce, cookie } = newOAuthState(next);
-      const scope = cfg.guildId ? 'identify guilds' : 'identify';
+      const scope = cfg.guildId ? (autoJoinConfigured() ? 'identify guilds guilds.join' : 'identify guilds') : 'identify';
       const params = new URLSearchParams({ client_id: cfg.clientId, response_type: 'code', redirect_uri: redirectUri(req), scope, state: nonce, prompt: 'none' });
       return redirect(`https://discord.com/oauth2/authorize?${params.toString()}`, [cookieHeader(req, STATE_COOKIE, cookie, STATE_TTL_S)]);
     },
@@ -160,7 +191,9 @@ export const routes: Route[] = [
       }
       const me = await discordFetch<{ id: string; username: string; global_name?: string | null; avatar?: string | null }>('/users/@me', tokenData.access_token);
       const identity: DiscordIdentity = { id: me.id, username: me.username, globalName: me.global_name, avatar: me.avatar };
-      const inGuild = cfg.guildId && /guilds/.test(tokenData.scope) ? await checkGuild(tokenData.access_token, cfg.guildId) : undefined;
+      let inGuild: boolean | undefined;
+      if (cfg.guildId && /guilds\.join/.test(tokenData.scope)) inGuild = await joinGuild(tokenData.access_token, me.id, cfg.guildId);
+      if (cfg.guildId && !inGuild && /\bguilds\b/.test(tokenData.scope)) inGuild = await checkGuild(tokenData.access_token, cfg.guildId);
       await upsertUser(identity, inGuild);
       await storeToken(me.id, tokenData.access_token, tokenData.expires_in);
       return redirect(`${next}${next.includes('?') ? '&' : '?'}login=1`, [cookieHeader(req, SESSION_COOKIE, sessionCookieValue(me.id), SESSION_TTL_S), clearCookieHeader(req, STATE_COOKIE)]);
@@ -201,7 +234,7 @@ export const routes: Route[] = [
       if (!guildId) return json({ user: toPublicUser(user), inGuild: true });
       const token = await loadToken(user.id);
       if (!token) throw new HttpError(401, 'Please log in again so we can check your Discord membership.', 'relogin');
-      const inGuild = await checkGuild(token, guildId);
+      const inGuild = (autoJoinConfigured() && (await joinGuild(token, user.id, guildId))) || (await checkGuild(token, guildId));
       const updated = await updateUser(user.id, { inGuild, guildCheckedAt: nowIso() });
       return json({ user: toPublicUser(updated ?? user), inGuild });
     },

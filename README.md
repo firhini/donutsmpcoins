@@ -102,6 +102,7 @@ Admin: `http://localhost:5173/admin` → Passwort aus `.env`.
 | `DISCORD_WEBHOOK_URL` | empfohlen | Discord → Servereinstellungen → Integrationen → Webhooks → URL kopieren |
 | `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET` | empfohlen | Discord-Login (siehe Abschnitt 5a) |
 | `DISCORD_GUILD_ID` | optional | deine Server-ID – „Nur Server-Mitglieder dürfen drehen“ |
+| `DISCORD_BOT_TOKEN` | optional | Bot-Token – Spieler treten beim Login automatisch deinem Server bei (Bot muss auf dem Server sein) |
 | `SESSION_SECRET` | Pflicht bei Discord-Login | langer Zufallswert (≥ 32 Zeichen) für die Login-Cookies – nie das Admin-Passwort wiederverwenden |
 | `SITE_URL` | empfohlen | z. B. `https://deinshop.netlify.app` (für Zahlungs-Redirects & Links in Discord) |
 | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | optional | nur für Karten-/Apple-Pay-Zahlung über Stripe |
