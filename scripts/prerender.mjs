@@ -15,7 +15,7 @@ const SSR = path.join(root, 'dist-ssr');
 const SITE_URL = (process.env.SITE_URL || process.env.URL || process.env.DEPLOY_PRIME_URL || '').replace(/\/$/, '');
 
 const entryPath = path.join(SSR, 'entry-server.js');
-const { render, seoRoutes } = await import(pathToFileURL(entryPath).href);
+const { render, seoRoutes, mergeCatalog, defaultCatalog } = await import(pathToFileURL(entryPath).href);
 const template = await fs.readFile(path.join(DIST, 'index.html'), 'utf8');
 
 // Neutral SPA shell for routes that are NOT pre-rendered (cart, checkout, orders, products
@@ -38,11 +38,16 @@ if (API_BASE) {
     if (!res.ok) throw new Error(`${p} → HTTP ${res.status}`);
     return res.json();
   };
+  // Settings are pure runtime data → take them as they are. The catalog is code defaults + admin
+  // overrides; the live /catalog would still carry the PREVIOUS deploy's defaults, so fetch only the
+  // overrides and merge them with the defaults of the code being built right now.
   try {
-    const [config, catalog] = await Promise.all([fetchJson('/config'), fetchJson('/catalog')]);
-    if (config && typeof config.storeName === 'string' && catalog && Array.isArray(catalog.products) && Array.isArray(catalog.categories)) {
-      initial = { config, catalog };
-      console.log(`[prerender] using live settings + catalog from ${API_BASE} (${catalog.products.length} products)`);
+    const [config, overrides] = await Promise.all([fetchJson('/config'), fetchJson('/catalog/overrides').catch(() => null)]);
+    if (config && typeof config.storeName === 'string') {
+      const valid = overrides && typeof overrides.overrides === 'object' && Array.isArray(overrides.custom) && Array.isArray(overrides.deleted);
+      const merged = mergeCatalog(defaultCatalog, valid ? overrides : { overrides: {}, custom: [], deleted: [] });
+      initial = { config, catalog: { ...merged, products: merged.products.filter((p) => !p.hidden) } };
+      console.log(`[prerender] live settings from ${API_BASE}; catalog = code defaults + ${valid ? 'live admin overrides' : 'no overrides (endpoint not deployed yet)'} (${initial.catalog.products.length} products)`);
     } else {
       console.warn('[prerender] live API answered with an unexpected shape – using bundled defaults');
     }

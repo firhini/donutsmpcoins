@@ -43,6 +43,15 @@ describe('GET /catalog, /config, /stats, /products/:id/odds', () => {
     expect(res.data).toEqual({ ordersDelivered: 0, reviewCount: 0, averageRating: 0, totalReviewCount: 0, totalAverageRating: 0, pastDistribution: [0, 0, 0, 0, 0] });
   });
 
+  it('exposes the admin catalog overrides for the pre-renderer (hidden custom products excluded)', async () => {
+    await lib.catalog.saveOverrides({ overrides: { 'mystery-box': { priceCents: 349 } }, custom: [{ ...defaultProducts[0], id: 'secret-drop', slug: 'secret-drop', hidden: true }], deleted: [] });
+    const res = await get<{ overrides: Record<string, { priceCents?: number }>; custom: unknown[]; deleted: string[] }>('/catalog/overrides');
+    expect(res.status).toBe(200);
+    expect(res.data.overrides['mystery-box'].priceCents).toBe(349);
+    expect(res.data.custom).toEqual([]);
+    await lib.catalog.saveOverrides({ overrides: {}, custom: [], deleted: [] });
+  });
+
   it('adds earlier ratings from the settings to the totals, not to the site review count', async () => {
     await lib.settings.saveSettings({ stats: { ordersOffset: 0, pastReviews: { count5: 105, count4: 12, count3: 0 } } });
     const res = await get<SiteStats>('/stats');

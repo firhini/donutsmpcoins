@@ -4,7 +4,7 @@
 import type { Review, ReviewStats, SiteStats } from '../../src/shared/types';
 import type { Route } from '../lib/http';
 import { HttpError, json } from '../lib/http';
-import { getCatalog } from '../lib/catalog';
+import { getCatalog, getOverrides } from '../lib/catalog';
 import { getSettings, toPublicConfig } from '../lib/settings';
 import { countDelivered } from '../lib/orders';
 import { boxOdds } from '../lib/boxes';
@@ -40,6 +40,16 @@ async function reviewStats(): Promise<ReviewStats> {
 }
 
 export const routes: Route[] = [
+  {
+    // Admin overrides only (not the merged catalog): the pre-renderer merges them with the defaults
+    // of the code it is building, so price changes in the code are never masked by the old deploy.
+    method: 'GET',
+    path: '/catalog/overrides',
+    handler: async () => {
+      const o = await getOverrides();
+      return json({ ...o, custom: o.custom.filter((p) => !p.hidden) }, 200, { 'cache-control': 'no-store' });
+    },
+  },
   {
     method: 'GET',
     path: '/catalog',

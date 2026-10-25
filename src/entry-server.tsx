@@ -9,6 +9,8 @@ import './styles/base.css';
 import './styles/ui.css';
 
 export { seoRoutes } from './seo/routes';
+export { mergeCatalog } from './shared/catalogMerge';
+export { defaultCatalog } from './data/catalog';
 
 /**
  * Renders one route to a complete, static HTML string.
