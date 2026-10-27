@@ -256,9 +256,9 @@ async function grantPrize(prize: SpinPrize, username: string | undefined, settin
 
 /** Which login gates apply right now (settings × configured integrations). */
 function spinGate(settings: SiteSettings): { oauth: boolean; loginRequired: boolean; guildRequired: boolean } {
-  const oauth = integrations().discordOAuth;
+  const oauth = integrations().login;
   const loginRequired = oauth && settings.spin.requireLogin;
-  const guildRequired = loginRequired && settings.spin.requireGuild && !!process.env.DISCORD_GUILD_ID;
+  const guildRequired = loginRequired && settings.spin.requireGuild && integrations().discordOAuth && !!process.env.DISCORD_GUILD_ID;
   return { oauth, loginRequired, guildRequired };
 }
 
@@ -429,9 +429,9 @@ export const routes: Route[] = [
     handler: async ({ req, context, url }) => {
       const username = requireUsername(url.searchParams.get('username'));
       await rateLimit(`credit:${hashIp(getIp(req, context))}`, 60, 60);
-      // With Discord login available, only the player who proved this Minecraft name sees its balance
-      // (same rule as spending it at checkout).
-      if (integrations().discordOAuth) {
+      // With player login available, only the player who set this Minecraft name on their account sees
+      // its balance (same rule as spending it at checkout).
+      if (integrations().login) {
         const user = await currentUser(req);
         if (!user?.mcUsername || user.mcUsername.toLowerCase() !== username.toLowerCase()) return json({ balanceCents: 0, locked: true });
       }

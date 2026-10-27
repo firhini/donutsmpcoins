@@ -1,9 +1,11 @@
 /**
- * Discord OAuth2 login + player account endpoints.
+ * Discord / Google OAuth2 login + player account endpoints.
  *
  *   GET  /auth/discord/login?next=/spin   → redirect to Discord (adds guilds.join when DISCORD_BOT_TOKEN is set → auto-join)
  *   GET  /auth/discord/callback           → exchange code, set session cookie, redirect to `next`
- *   GET  /auth/me                         → { user: PublicUser | null, configured: boolean }
+ *   GET  /auth/google/login?next=/spin    → redirect to Google (scopes openid profile – no e-mail)
+ *   GET  /auth/google/callback            → exchange code, set session cookie, redirect to `next`
+ *   GET  /auth/me                         → { user: PublicUser | null, configured: boolean, providers }
  *   POST /auth/logout
  *   POST /auth/mc-username { username }   → save the Minecraft name on the profile
  *   POST /auth/refresh-guild              → re-check Discord server membership
@@ -14,7 +16,7 @@ import { HttpError, getIp, hashIp, json, readJson, requireUsername, nowIso } fro
 import { rateLimit } from '../lib/ratelimit';
 import { kvGet, kvSet } from '../lib/store';
 import { SESSION_COOKIE, STATE_COOKIE, SESSION_TTL_S, STATE_TTL_S, cookieHeader, clearCookieHeader, newOAuthState, readOAuthState, readSession, sessionCookieValue } from '../lib/session';
-import { getUser, toPublicUser, updateUser, upsertUser, type DiscordIdentity } from '../lib/users';
+import { getUser, googleUserId, isGoogleId, toPublicUser, updateUser, upsertUser, type DiscordIdentity } from '../lib/users';
 import { listOrderIndex } from '../lib/orders';
 import { getCredit } from '../lib/credit';
 import { siteUrl } from '../lib/discord';
@@ -29,6 +31,12 @@ function oauthConfig(): { clientId: string; clientSecret: string; guildId?: stri
   return { clientId, clientSecret, guildId: process.env.DISCORD_GUILD_ID || undefined };
 }
 
+function googleConfig(): { clientId: string; clientSecret: string } | null {
+  const clientId = process.env.GOOGLE_CLIENT_ID;
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+  return clientId && clientSecret ? { clientId, clientSecret } : null;
+}
+
 function requestOrigin(req: Request): string {
   try {
     const u = new URL(req.url);
@@ -40,8 +48,31 @@ function requestOrigin(req: Request): string {
   return siteUrl();
 }
 
-function redirectUri(req: Request): string {
-  return `${requestOrigin(req)}/api/auth/discord/callback`;
+function redirectUri(req: Request, provider: 'discord' | 'google' = 'discord'): string {
+  return `${requestOrigin(req)}/api/auth/${provider}/callback`;
+}
+
+const withFlag = (next: string, flag: string) => `${next}${next.includes('?') ? '&' : '?'}login=${flag}`;
+
+/** Google: authorization code → access token → OpenID userinfo (server-to-server, so no id_token check needed). */
+async function googleIdentity(req: Request, code: string): Promise<DiscordIdentity> {
+  const cfg = googleConfig();
+  if (!cfg) throw new HttpError(503, 'Google login is not configured.', 'auth_unconfigured');
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), 8000);
+  try {
+    const body = new URLSearchParams({ client_id: cfg.clientId, client_secret: cfg.clientSecret, grant_type: 'authorization_code', code, redirect_uri: redirectUri(req, 'google') });
+    const res = await fetch('https://oauth2.googleapis.com/token', { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body, signal: ctrl.signal });
+    const tok = (await res.json().catch(() => ({}))) as { access_token?: string; error?: string; error_description?: string };
+    if (!res.ok || !tok.access_token) throw new HttpError(400, `Google login failed (${tok.error_description || tok.error || res.status}).`, 'oauth_failed');
+    const infoRes = await fetch('https://openidconnect.googleapis.com/v1/userinfo', { headers: { authorization: `Bearer ${tok.access_token}` }, signal: ctrl.signal });
+    const info = (await infoRes.json().catch(() => ({}))) as { sub?: string; name?: string; given_name?: string; picture?: string };
+    if (!infoRes.ok || !info.sub || !/^[A-Za-z0-9_-]{5,128}$/.test(info.sub)) throw new HttpError(502, `Google answered ${infoRes.status} for userinfo`, 'oauth_failed');
+    const name = (info.name || info.given_name || 'Google user').slice(0, 64);
+    return { id: googleUserId(info.sub), username: name, globalName: name, avatar: info.picture ?? null, provider: 'google' };
+  } finally {
+    clearTimeout(t);
+  }
 }
 
 /** Only site-relative paths are allowed as post-login destinations. */
@@ -149,7 +180,7 @@ export async function currentUser(req: Request): Promise<UserProfile | null> {
 }
 
 export function requireUser(user: UserProfile | null): UserProfile {
-  if (!user) throw new HttpError(401, 'Please log in with Discord first.', 'login_required');
+  if (!user) throw new HttpError(401, 'Please log in first.', 'login_required');
   return user;
 }
 
@@ -201,11 +232,46 @@ export const routes: Route[] = [
   },
   {
     method: 'GET',
+    path: '/auth/google/login',
+    handler: async ({ req, url }) => {
+      const cfg = googleConfig();
+      if (!cfg) throw new HttpError(503, 'Google login is not configured on this store yet.', 'auth_unconfigured');
+      const { nonce, cookie } = newOAuthState(safeNext(url.searchParams.get('next')));
+      const params = new URLSearchParams({ client_id: cfg.clientId, response_type: 'code', redirect_uri: redirectUri(req, 'google'), scope: 'openid profile', state: nonce, prompt: 'select_account' });
+      return redirect(`https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`, [cookieHeader(req, STATE_COOKIE, cookie, STATE_TTL_S)]);
+    },
+  },
+  {
+    method: 'GET',
+    path: '/auth/google/callback',
+    handler: async ({ req, context, url }) => {
+      await rateLimit(`oauth:${hashIp(getIp(req, context))}`, 20, 600);
+      if (!googleConfig()) throw new HttpError(503, 'Google login is not configured on this store yet.', 'auth_unconfigured');
+      const state = readOAuthState(req);
+      const code = url.searchParams.get('code');
+      const next = safeNext(state?.next);
+      const clear = [clearCookieHeader(req, STATE_COOKIE)];
+      if (url.searchParams.get('error') || !code) return redirect(withFlag(next, 'cancelled'), clear);
+      if (!state || url.searchParams.get('state') !== state.nonce) return redirect(withFlag(next, 'error'), clear);
+      let identity: DiscordIdentity;
+      try {
+        identity = await googleIdentity(req, code);
+      } catch (e) {
+        console.warn('[auth] google login failed', (e as Error).message);
+        return redirect(withFlag(next, 'error'), clear);
+      }
+      await upsertUser(identity);
+      return redirect(withFlag(next, '1'), [cookieHeader(req, SESSION_COOKIE, sessionCookieValue(identity.id), SESSION_TTL_S), ...clear]);
+    },
+  },
+  {
+    method: 'GET',
     path: '/auth/me',
     handler: async ({ req }) => {
-      const configured = !!oauthConfig();
+      const providers = { discord: !!oauthConfig(), google: !!googleConfig() };
+      const configured = providers.discord || providers.google;
       const user = configured ? await currentUser(req) : null;
-      return json({ user: user ? toPublicUser(user) : null, configured, guildRequired: !!process.env.DISCORD_GUILD_ID });
+      return json({ user: user ? toPublicUser(user) : null, configured, providers, guildRequired: providers.discord && !!process.env.DISCORD_GUILD_ID });
     },
   },
   {
@@ -232,6 +298,7 @@ export const routes: Route[] = [
       await rateLimit(`guild:${hashIp(getIp(req, context))}`, 10, 60);
       const guildId = process.env.DISCORD_GUILD_ID;
       if (!guildId) return json({ user: toPublicUser(user), inGuild: true });
+      if (isGoogleId(user.id)) throw new HttpError(400, 'Server membership can only be checked for Discord accounts – log in with Discord.', 'discord_required');
       const token = await loadToken(user.id);
       if (!token) throw new HttpError(401, 'Please log in again so we can check your Discord membership.', 'relogin');
       const inGuild = (autoJoinConfigured() && (await joinGuild(token, user.id, guildId))) || (await checkGuild(token, guildId));

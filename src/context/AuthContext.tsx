@@ -2,13 +2,17 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import type { PublicUser } from '../shared/types';
 import { apiGet, apiPost } from '../lib/api';
 
+export type LoginProvider = 'discord' | 'google';
+
 interface AuthApi {
   user: PublicUser | null;
-  /** Discord login is configured on the server */
+  /** some player login (Discord and/or Google) is configured on the server */
   configured: boolean;
+  providers: Record<LoginProvider, boolean>;
   guildRequired: boolean;
   loading: boolean;
-  login: (next?: string) => void;
+  /** provider defaults to Discord when available */
+  login: (next?: string, provider?: LoginProvider) => void;
   logout: () => Promise<void>;
   refresh: () => Promise<void>;
   saveMcUsername: (username: string) => Promise<PublicUser>;
@@ -20,14 +24,16 @@ const Ctx = createContext<AuthApi | null>(null);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<PublicUser | null>(null);
   const [configured, setConfigured] = useState(false);
+  const [providers, setProviders] = useState<Record<LoginProvider, boolean>>({ discord: false, google: false });
   const [guildRequired, setGuildRequired] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const refresh = useCallback(async () => {
     try {
-      const r = await apiGet<{ user: PublicUser | null; configured: boolean; guildRequired: boolean }>('/auth/me');
+      const r = await apiGet<{ user: PublicUser | null; configured: boolean; providers?: Record<LoginProvider, boolean>; guildRequired: boolean }>('/auth/me');
       setUser(r.user);
       setConfigured(r.configured);
+      setProviders(r.providers ?? { discord: r.configured, google: false });
       setGuildRequired(!!r.guildRequired);
     } catch {
       setUser(null);
@@ -40,10 +46,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     void refresh();
   }, [refresh]);
 
-  const login = useCallback((next?: string) => {
-    const target = next ?? `${window.location.pathname}${window.location.search}`;
-    window.location.assign(`/api/auth/discord/login?next=${encodeURIComponent(target)}`);
-  }, []);
+  const login = useCallback(
+    (next?: string, provider?: LoginProvider) => {
+      const target = next ?? `${window.location.pathname}${window.location.search}`;
+      const p = provider ?? (providers.discord || !providers.google ? 'discord' : 'google');
+      window.location.assign(`/api/auth/${p}/login?next=${encodeURIComponent(target)}`);
+    },
+    [providers],
+  );
 
   const logout = useCallback(async () => {
     try {
@@ -68,7 +78,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return r.inGuild;
   }, []);
 
-  const value = useMemo<AuthApi>(() => ({ user, configured, guildRequired, loading, login, logout, refresh, saveMcUsername, refreshGuild }), [user, configured, guildRequired, loading, login, logout, refresh, saveMcUsername, refreshGuild]);
+  const value = useMemo<AuthApi>(() => ({ user, configured, providers, guildRequired, loading, login, logout, refresh, saveMcUsername, refreshGuild }), [user, configured, providers, guildRequired, loading, login, logout, refresh, saveMcUsername, refreshGuild]);
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
 

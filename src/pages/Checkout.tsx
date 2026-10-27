@@ -88,7 +88,7 @@ export default function Page() {
 
   const items = useMemo(() => lines.map((l) => ({ productId: l.productId, qty: l.qty })), [lines]);
   // with Discord login available, credit can only be spent by the player who proved the name on their account
-  const creditLocked = !!config.integrations.discordOAuth && !(auth.user?.mcUsername && auth.user.mcUsername.toLowerCase() === checkedName.toLowerCase());
+  const creditLocked = !!(config.integrations.login ?? config.integrations.discordOAuth) && !(auth.user?.mcUsername && auth.user.mcUsername.toLowerCase() === checkedName.toLowerCase());
   const useCredit = applyCredit && !creditLocked && (credit ?? 0) > 0;
   const req = useMemo<QuoteRequest | null>(
     () =>
@@ -357,7 +357,7 @@ export default function Page() {
                   ) : (
                     <>
                       <button type="button" className="btn btn-link" onClick={() => auth.login('/checkout')}>
-                        Log in with Discord
+                        Log in
                       </button>{' '}
                       to use it.
                     </>

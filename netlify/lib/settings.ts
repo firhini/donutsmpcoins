@@ -44,6 +44,9 @@ export function integrations() {
     nowpayments: !!process.env.NOWPAYMENTS_API_KEY,
     discord: !!process.env.DISCORD_WEBHOOK_URL,
     discordOAuth: !!(process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET),
+    googleOAuth: !!(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET),
+    /** any player login (Discord or Google) is available */
+    login: !!(process.env.DISCORD_CLIENT_ID && process.env.DISCORD_CLIENT_SECRET) || !!(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET),
   };
 }
 
@@ -80,7 +83,7 @@ export function toPublicConfig(settings: SiteSettings): PublicConfig {
     spinEnabled: settings.spin.enabled,
     spinRequireUsername: settings.spin.requireUsername,
     spinCooldownHours: settings.spin.cooldownHours,
-    spinRequireLogin: settings.spin.requireLogin && integrations().discordOAuth,
+    spinRequireLogin: settings.spin.requireLogin && integrations().login,
     spinRequireGuild: settings.spin.requireGuild && integrations().discordOAuth && !!process.env.DISCORD_GUILD_ID,
     referral: settings.referral,
     reviewRewardPercent: settings.reviewRewardPercent,

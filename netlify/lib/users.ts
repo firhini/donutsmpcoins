@@ -10,10 +10,17 @@ export interface DiscordIdentity {
   id: string;
   username: string;
   globalName?: string | null;
+  /** Discord avatar hash, or a full https image URL for Google accounts */
   avatar?: string | null;
+  provider?: 'discord' | 'google';
 }
 
+const GOOGLE_ID = /^g_[A-Za-z0-9_-]{5,128}$/;
+export const googleUserId = (sub: string): string => `g_${sub}`;
+export const isGoogleId = (id: string): boolean => GOOGLE_ID.test(id);
+
 export function avatarUrl(id: string, avatar?: string | null): string {
+  if (isGoogleId(id)) return avatar && /^https:\/\/[a-z0-9.-]+\.googleusercontent\.com\//.test(avatar) ? avatar : '/img/brand/mascot.svg';
   if (avatar) return `https://cdn.discordapp.com/avatars/${id}/${avatar}.${avatar.startsWith('a_') ? 'gif' : 'png'}?size=64`;
   let idx = 0;
   try {
@@ -25,17 +32,18 @@ export function avatarUrl(id: string, avatar?: string | null): string {
 }
 
 export async function getUser(id: string): Promise<UserProfile | null> {
-  if (!/^\d{5,25}$/.test(id)) return null;
+  if (!/^\d{5,25}$/.test(id) && !isGoogleId(id)) return null;
   return kvGet<UserProfile>('users', id);
 }
 
-/** Create or refresh a profile after a Discord login. */
+/** Create or refresh a profile after a Discord or Google login. */
 export async function upsertUser(identity: DiscordIdentity, inGuild?: boolean): Promise<UserProfile> {
   const now = nowIso();
   return kvUpdate<UserProfile>('users', identity.id, (cur) => {
     const base: UserProfile = cur ?? { id: identity.id, username: identity.username, createdAt: now, lastLoginAt: now, logins: 0, prizes: [], orderIds: [] };
     return {
       ...base,
+      provider: identity.provider ?? (isGoogleId(identity.id) ? 'google' : 'discord'),
       username: identity.username,
       globalName: identity.globalName ?? undefined,
       avatar: identity.avatar ?? undefined,
@@ -74,6 +82,7 @@ export function toPublicUser(u: UserProfile): PublicUser {
   return {
     id: u.id,
     username: u.username,
+    provider: isGoogleId(u.id) ? 'google' : 'discord',
     displayName: u.globalName || u.username,
     avatarUrl: avatarUrl(u.id, u.avatar),
     mcUsername: u.mcUsername,

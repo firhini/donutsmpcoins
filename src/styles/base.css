@@ -763,3 +763,18 @@ p {
     padding: 10px 0;
   }
 }
+
+.btn-google {
+  background: #fff;
+  color: #1f1f1f;
+  border: 1px solid #dadce0;
+}
+.btn-google:hover:not(:disabled) {
+  background: #f2f4f7;
+}
+.login-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}

@@ -124,9 +124,9 @@ export const routes: Route[] = [
       // Store credit belongs to a Minecraft name. When Discord login is available, only the
       // player who proved that name (Account → Minecraft username) may spend it – otherwise
       // anyone could burn another player's credit by ordering under their name.
-      if (body.applyCredit && integrations().discordOAuth) {
+      if (body.applyCredit && integrations().login) {
         const owner = user?.mcUsername && user.mcUsername.toLowerCase() === body.username.toLowerCase();
-        if (!owner) throw new HttpError(401, 'Log in with Discord and set this Minecraft username on your account to use store credit.', 'credit_login_required');
+        if (!owner) throw new HttpError(401, 'Log in and set this Minecraft username on your account to use store credit.', 'credit_login_required');
       }
       void expireUnpaidOrdersThrottled();
 
@@ -143,8 +143,8 @@ export const routes: Route[] = [
         deviceId: body.deviceId,
         ipHash,
         source: 'checkout',
-        discordUserId: user?.id,
-        discordUsername: user?.username,
+        discordUserId: user && user.provider !== 'google' ? user.id : undefined,
+        discordUsername: user && user.provider !== 'google' ? user.username : undefined,
       });
       if (user) {
         await linkOrder(user.id, order.id).catch(() => undefined);

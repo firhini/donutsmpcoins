@@ -115,6 +115,10 @@ export default function Privacy() {
           <strong>Discord (login).</strong> If you use “Login with Discord”, Discord asks you to approve sharing your account id, username and avatar (and your server list if we
           check membership). The login happens on Discord's site under Discord's privacy policy; you can revoke it any time in Discord → Settings → Authorized Apps.
         </li>
+        <li>
+          <strong>Google (login).</strong> If you use “Login with Google”, Google shares your account id, name and profile picture with us (no e-mail address). The login happens on
+          Google's site under Google's privacy policy; you can remove access any time at myaccount.google.com → Security → Third-party connections.
+        </li>
         {GA_ENABLED && (
           <li>
             <strong>Google Analytics 4.</strong> Only after you click “Accept” in the cookie notice. It records page views and interactions with IP anonymisation; Google processes this

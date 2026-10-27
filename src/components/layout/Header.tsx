@@ -5,6 +5,7 @@ import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import { Icon } from '../ui/Icons';
+import { GoogleLogo, LoginButtons } from '../auth/LoginButtons';
 import { safeHref, isExternal } from '../../lib/url';
 import '../../styles/shop.css';
 
@@ -107,9 +108,16 @@ export function Header() {
                   )}
                 </div>
               ) : (
-                <button type="button" className="btn btn-discord btn-sm only-desktop" onClick={() => auth.login()}>
-                  <Icon name="discord" size={16} /> Login<span className="only-wide"> with Discord</span>
-                </button>
+                auth.providers.discord && auth.providers.google ? (
+                  // two providers → the account page offers both buttons
+                  <Link to="/account" className="btn btn-secondary btn-sm only-desktop">
+                    <Icon name="user" size={16} /> Log in
+                  </Link>
+                ) : (
+                  <button type="button" className={`btn ${auth.providers.google ? 'btn-google' : 'btn-discord'} btn-sm only-desktop`} onClick={() => auth.login()}>
+                    {auth.providers.google ? <GoogleLogo size={16} /> : <Icon name="discord" size={16} />} Login<span className="only-wide"> with {auth.providers.google ? 'Google' : 'Discord'}</span>
+                  </button>
+                )
               )
             ) : (
               <a href={config.discordInvite} target="_blank" rel="noreferrer" className="btn btn-discord btn-sm only-desktop">
@@ -132,9 +140,9 @@ export function Header() {
             <NavLink to="/track">Track order</NavLink>
             {auth.configured && auth.user && <NavLink to="/account">My account ({auth.user.displayName})</NavLink>}
             {auth.configured && !auth.user && (
-              <button type="button" className="btn btn-discord btn-sm" style={{ alignSelf: 'flex-start' }} onClick={() => auth.login()}>
-                <Icon name="discord" size={16} /> Login with Discord
-              </button>
+              <div style={{ alignSelf: 'flex-start' }}>
+                <LoginButtons size="sm" />
+              </div>
             )}
             {auth.configured && auth.user && (
               <button type="button" className="btn btn-ghost btn-sm" style={{ alignSelf: 'flex-start' }} onClick={() => void auth.logout().catch(() => toast('Could not log out – please try again.', 'error'))}>

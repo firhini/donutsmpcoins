@@ -12,6 +12,7 @@ import { Seo } from '../components/ui/Seo';
 import { breadcrumbSchema, webPageSchema } from '../seo/schema';
 import { Modal } from '../components/ui/Modal';
 import { Icon } from '../components/ui/Icons';
+import { LoginButtons } from '../components/auth/LoginButtons';
 import { Wheel, prizeColor, prizeGlyph, targetRotation, type PrizeGlyph, type WheelPrize } from '../components/free/Wheel';
 import { PrizeIcon } from '../components/free/PrizeIcon';
 import { Confetti } from '../components/free/Confetti';
@@ -293,14 +294,21 @@ export default function Page() {
               </div>
             ) : loginRequired ? (
               <div className="spin-gate card pad">
-                <Icon name="discord" size={26} />
+                <Icon name="user" size={26} />
                 <div className="stack" style={{ gap: 4 }}>
-                  <strong>Log in with Discord to spin</strong>
+                  <strong>Log in to spin</strong>
                   <span className="small muted">One free spin per account every {status?.cooldownHours ?? 24}h. Your prizes are saved to your account.</span>
                 </div>
-                <button type="button" className="btn btn-discord btn-lg" onClick={() => auth.login('/spin')} disabled={auth.loading}>
-                  <Icon name="discord" size={18} /> Login with Discord
-                </button>
+                <LoginButtons next="/spin" only={status?.guildRequired ? 'discord' : undefined} />
+              </div>
+            ) : guildRequired && auth.user?.provider === 'google' ? (
+              <div className="spin-gate card pad">
+                <Icon name="discord" size={26} />
+                <div className="stack" style={{ gap: 4 }}>
+                  <strong>The wheel is for our Discord members</strong>
+                  <span className="small muted">Log in with Discord (and join our server) to spin for free every day.</span>
+                </div>
+                <LoginButtons next="/spin" only="discord" />
               </div>
             ) : guildRequired ? (
               <div className="spin-gate card pad">
@@ -327,7 +335,7 @@ export default function Page() {
                         } else toast('We still cannot see you in the server – join via the invite and try again.', 'info');
                       } catch (e2) {
                         const ae = e2 as ApiClientError;
-                        if (ae.code === 'relogin') auth.login('/spin');
+                        if (ae.code === 'relogin' || ae.code === 'discord_required') auth.login('/spin', 'discord');
                         else toast(ae.message || 'Could not check membership', 'error');
                       } finally {
                         setGuildBusy(false);

@@ -7,6 +7,7 @@ import { useToast } from '../context/ToastContext';
 import { apiGet, ApiClientError } from '../lib/api';
 import { Seo } from '../components/ui/Seo';
 import { Icon } from '../components/ui/Icons';
+import { LoginButtons } from '../components/auth/LoginButtons';
 import '../styles/account.css';
 
 const STATUS_LABEL: Record<OrderStatus, { text: string; cls: string }> = {
@@ -72,7 +73,7 @@ export default function Account() {
       toast(ok ? 'Membership confirmed – thanks for joining!' : 'We still cannot see you in the server. Join via the invite and try again.', ok ? 'success' : 'info');
     } catch (e2) {
       const ae = e2 as ApiClientError;
-      if (ae.code === 'relogin') auth.login('/account');
+      if (ae.code === 'relogin' || ae.code === 'discord_required') auth.login('/account', 'discord');
       else toast(ae.message || 'Could not check membership', 'error');
     } finally {
       setCheckingGuild(false);
@@ -86,7 +87,7 @@ export default function Account() {
         <div className="empty">
           <div className="big">🔒</div>
           <h2>Accounts are not enabled yet</h2>
-          <p className="muted">Discord login is not configured on this store. You can still track orders with your order ID.</p>
+          <p className="muted">Login is not configured on this store. You can still track orders with your order ID.</p>
           <Link to="/track" className="btn btn-primary" style={{ marginTop: 16 }}>
             Track an order
           </Link>
@@ -102,11 +103,9 @@ export default function Account() {
         <div className="acc-login card pad">
           <img src="/img/brand/mascot.svg" alt="" width={96} height={96} />
           <h1>Your DonutCoins account</h1>
-          <p className="lead">Log in with Discord to spin the daily wheel, see your orders, store credit and the prizes you won – no password needed.</p>
-          <button type="button" className="btn btn-discord btn-lg" onClick={() => auth.login('/account')} disabled={auth.loading}>
-            <Icon name="discord" size={18} /> Login with Discord
-          </button>
-          <p className="xs muted">We only read your Discord username and avatar.</p>
+          <p className="lead">Log in to spin the daily wheel, see your orders, store credit and the prizes you won – no password needed.</p>
+          <LoginButtons next="/account" />
+          <p className="xs muted">We only read your name and profile picture.</p>
         </div>
       </div>
     );
@@ -121,7 +120,7 @@ export default function Account() {
         <div className="acc-head-text">
           <span className="eyebrow">My account</span>
           <h1>{u.displayName}</h1>
-          <p className="muted small">@{u.username} · Discord</p>
+          <p className="muted small">{u.provider === 'google' ? 'Google account' : `@${u.username} · Discord`}</p>
         </div>
         <div className="acc-head-actions">
           <Link to="/spin" className="btn btn-pink">
@@ -154,8 +153,15 @@ export default function Account() {
             <div className={`alert ${u.inGuild ? 'alert-success' : 'alert-warn'}`} style={{ marginTop: 14 }}>
               <Icon name="discord" size={18} />
               <div className="stack" style={{ gap: 6 }}>
-                <span>{u.inGuild ? 'You are a member of our Discord server – the wheel is unlocked.' : 'Join our Discord server to unlock the daily spin.'}</span>
-                {!u.inGuild && (
+                <span>
+                  {u.inGuild
+                    ? 'You are a member of our Discord server – the wheel is unlocked.'
+                    : u.provider === 'google'
+                      ? 'The daily spin is for members of our Discord server – log in with Discord to unlock it.'
+                      : 'Join our Discord server to unlock the daily spin.'}
+                </span>
+                {!u.inGuild && u.provider === 'google' && <LoginButtons next="/account" size="sm" only="discord" />}
+                {!u.inGuild && u.provider !== 'google' && (
                   <div className="row wrap">
                     <a href={config.discordInvite} target="_blank" rel="noreferrer" className="btn btn-discord btn-sm">
                       Join the server

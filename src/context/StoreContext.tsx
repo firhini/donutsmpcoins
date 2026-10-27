@@ -46,7 +46,7 @@ const fallbackConfig: PublicConfig = {
   maintenance: defaultSettings.maintenance,
   serverName: defaultSettings.serverName,
   serverIp: defaultSettings.serverIp,
-  integrations: { stripe: false, paypal: false, nowpayments: false, discord: false, discordOAuth: false },
+  integrations: { stripe: false, paypal: false, nowpayments: false, discord: false, discordOAuth: false, googleOAuth: false, login: false },
 };
 
 const Ctx = createContext<StoreApi | null>(null);

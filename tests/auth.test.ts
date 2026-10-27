@@ -7,6 +7,7 @@ afterAll(() => cleanupTestData());
 
 const realFetch = globalThis.fetch;
 const DISCORD_USER = { id: '123456789012345678', username: 'farhan', global_name: 'Farhan', avatar: 'abc123' };
+const GOOGLE_USER = { sub: '109876543210987654321', name: 'Gina G', picture: 'https://lh3.googleusercontent.com/a/abc=s96-c' };
 let inGuild = true;
 let joinFails = false;
 const joinCalls: { auth: string; body: string }[] = [];
@@ -16,6 +17,15 @@ function mockDiscord() {
     'fetch',
     vi.fn(async (input: RequestInfo | URL, init?: RequestInit) => {
       const url = String(input);
+      if (url === 'https://oauth2.googleapis.com/token') {
+        const body = String(init?.body);
+        if (!body.includes('code=good') || !body.includes('redirect_uri=') || !body.includes('%2Fapi%2Fauth%2Fgoogle%2Fcallback')) return new Response(JSON.stringify({ error: 'invalid_grant' }), { status: 400 });
+        return new Response(JSON.stringify({ access_token: 'gtok', expires_in: 3599, id_token: 'x' }), { status: 200 });
+      }
+      if (url === 'https://openidconnect.googleapis.com/v1/userinfo') {
+        if ((init?.headers as Record<string, string>)?.authorization !== 'Bearer gtok') return new Response('{}', { status: 401 });
+        return new Response(JSON.stringify(GOOGLE_USER), { status: 200 });
+      }
       if (url.endsWith('/oauth2/token')) {
         const body = String(init?.body);
         if (!body.includes('code=good')) return new Response(JSON.stringify({ error: 'invalid_grant' }), { status: 400 });
@@ -131,6 +141,75 @@ describe('Discord login', () => {
     await lib.credit.addCredit('FarhanMC', 300, 'test');
     expect((await get<{ balanceCents: number }>('/credit?username=FarhanMC', { headers: { cookie } })).data.balanceCents).toBe(300);
     expect((await get<{ balanceCents: number; locked?: boolean }>('/credit?username=FarhanMC')).data).toEqual({ balanceCents: 0, locked: true });
+  });
+});
+
+describe('Google login', () => {
+  async function googleLogin(next = '/account'): Promise<string> {
+    const start = await get(`/auth/google/login?next=${encodeURIComponent(next)}`);
+    expect(start.status).toBe(302);
+    const loc = new URL(start.headers.get('location')!);
+    expect(loc.origin + loc.pathname).toBe('https://accounts.google.com/o/oauth2/v2/auth');
+    expect(loc.searchParams.get('scope')).toBe('openid profile');
+    expect(loc.searchParams.get('redirect_uri')).toMatch(/\/api\/auth\/google\/callback$/);
+    const cb = await get(`/auth/google/callback?code=good&state=${loc.searchParams.get('state')}`, { headers: { cookie: cookiesFrom(start) } });
+    expect(cb.headers.get('location')).toBe(`${next}?login=1`);
+    return cookiesFrom(cb).split('; ').find((c) => c.startsWith('dc_session='))!;
+  }
+
+  beforeAll(() => {
+    process.env.GOOGLE_CLIENT_ID = 'gid';
+    process.env.GOOGLE_CLIENT_SECRET = 'gsecret';
+  });
+  afterAll(() => {
+    delete process.env.GOOGLE_CLIENT_ID;
+    delete process.env.GOOGLE_CLIENT_SECRET;
+  });
+
+  it('is reported as a provider and rejects forged state', async () => {
+    const me = await get<{ providers: Record<string, boolean> }>('/auth/me');
+    expect(me.data.providers).toEqual({ discord: true, google: true });
+    const cb = await get('/auth/google/callback?code=good&state=forged');
+    expect(cb.headers.get('location')).toContain('login=error');
+    expect(cookiesFrom(cb)).not.toContain('dc_session=');
+  });
+
+  it('logs in, orders and uses credit like a Discord account – without a Discord identity on the order', async () => {
+    const cookie = await googleLogin();
+    const me = await get<{ user: PublicUser }>('/auth/me', { headers: { cookie } });
+    expect(me.data.user).toMatchObject({ id: `g_${GOOGLE_USER.sub}`, provider: 'google', displayName: 'Gina G', avatarUrl: GOOGLE_USER.picture });
+    await post('/auth/mc-username', { username: 'GinaMC' }, { headers: { cookie } });
+    const order = await post<{ order: PublicOrder }>('/orders', orderBody({ username: 'GinaMC' }), { headers: { cookie } });
+    expect(order.status).toBe(201);
+    const full = await lib.orders.getOrder(order.data.order.id);
+    expect(full?.discordUserId).toBeUndefined();
+    const acc = await get<AccountSummary>('/account', { headers: { cookie } });
+    expect(acc.data.orders.map((o) => o.id)).toContain(order.data.order.id);
+    await lib.credit.addCredit('GinaMC', 150, 'test');
+    expect((await get<{ balanceCents: number }>('/credit?username=GinaMC', { headers: { cookie } })).data.balanceCents).toBe(150);
+    // membership can only be checked for Discord accounts
+    const re = await post('/auth/refresh-guild', {}, { headers: { cookie } });
+    expect(re.status).toBe(400);
+    expect(re.data.code).toBe('discord_required');
+  });
+
+  it('keeps login-required spins working when only Google is configured', async () => {
+    const saved = { id: process.env.DISCORD_CLIENT_ID, secret: process.env.DISCORD_CLIENT_SECRET };
+    delete process.env.DISCORD_CLIENT_ID;
+    delete process.env.DISCORD_CLIENT_SECRET;
+    try {
+      await lib.settings.saveSettings({ spin: { enabled: true, cooldownHours: 24, requireUsername: false, requireLogin: true, requireGuild: true, prizes: [{ id: 'c', label: 'credit', type: 'credit', creditCents: 100, weight: 1 }] } } as Partial<SiteSettings>);
+      expect((await post('/spin', { deviceId: 'g-anon' }, { ip: '10.30.0.1' })).data.code).toBe('login_required');
+      const me = await get<{ providers: Record<string, boolean>; guildRequired: boolean }>('/auth/me');
+      expect(me.data).toMatchObject({ providers: { discord: false, google: true }, guildRequired: false });
+      const cookie = await googleLogin('/spin');
+      const r = await post('/spin', { deviceId: 'g-dev' }, { ip: '10.30.0.2', headers: { cookie } });
+      expect(r.status, JSON.stringify(r.data)).toBe(200);
+    } finally {
+      process.env.DISCORD_CLIENT_ID = saved.id;
+      process.env.DISCORD_CLIENT_SECRET = saved.secret;
+      await lib.settings.saveSettings({ spin: { requireLogin: false, requireGuild: false } } as Partial<SiteSettings>);
+    }
   });
 });
 

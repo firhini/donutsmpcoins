@@ -103,6 +103,7 @@ Admin: `http://localhost:5173/admin` → Passwort aus `.env`.
 | `DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET` | empfohlen | Discord-Login (siehe Abschnitt 5a) |
 | `DISCORD_GUILD_ID` | optional | deine Server-ID – „Nur Server-Mitglieder dürfen drehen“ |
 | `DISCORD_BOT_TOKEN` | optional | Bot-Token – Spieler treten beim Login automatisch deinem Server bei (Bot muss auf dem Server sein) |
+| `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` | optional | „Login with Google“ (siehe 5a) |
 | `DISCORD_PUBLIC_KEY` | optional | Public Key der App – aktiviert den `/setup`-Bot (siehe 5a) |
 | `SESSION_SECRET` | Pflicht bei Discord-Login | langer Zufallswert (≥ 32 Zeichen) für die Login-Cookies – nie das Admin-Passwort wiederverwenden |
 | `SITE_URL` | empfohlen | z. B. `https://deinshop.netlify.app` (für Zahlungs-Redirects & Links in Discord) |
@@ -164,6 +165,16 @@ Bei manuellen Methoden gilt: Bestellung steht auf *Awaiting payment* → Kunde m
 
 Der Button „Login with Discord“ erscheint im Header automatisch, sobald die Variablen gesetzt sind. Im Admin unter *Spin*
 steuerst du, ob das Rad einen Login verlangt (Standard: ja, sobald Discord-Login konfiguriert ist).
+
+### Login mit Google (zusätzlich zu Discord)
+
+1. https://console.cloud.google.com → **APIs & Dienste → Anmeldedaten → OAuth-Client-ID** (Typ „Webanwendung“).
+2. **Autorisierte Weiterleitungs-URI:** `https://deinshop/api/auth/google/callback`.
+3. **OAuth-Zustimmungsbildschirm** → App veröffentlichen („In Produktion“), sonst können sich nur Testnutzer anmelden.
+4. In Netlify `GOOGLE_CLIENT_ID` und `GOOGLE_CLIENT_SECRET` setzen (plus `SESSION_SECRET`) → neu deployen.
+
+Google-Konten können bestellen, Guthaben nutzen und Preise sammeln. Ist „Require membership“ beim Spin aktiv, brauchen sie
+für das Glücksrad trotzdem Discord (Server-Mitgliedschaft lässt sich nur dort prüfen).
 
 ### Discord-Bot mit `/setup` (kein eigener Server nötig)
 

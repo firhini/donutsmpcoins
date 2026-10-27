@@ -398,7 +398,9 @@ export interface WonPrize {
 
 /** Stored profile of a Discord-authenticated player (server-side). */
 export interface UserProfile {
+  /** Discord user id, or `g_<google sub>` for Google accounts */
   id: string;
+  provider?: 'discord' | 'google';
   username: string;
   globalName?: string;
   avatar?: string;
@@ -417,6 +419,7 @@ export interface UserProfile {
 export interface PublicUser {
   id: string;
   username: string;
+  provider: 'discord' | 'google';
   displayName: string;
   avatarUrl: string;
   mcUsername?: string;
@@ -556,7 +559,7 @@ export interface PublicConfig {
   serverName: string;
   serverIp: string;
   /** which integrations are configured on the server */
-  integrations: { stripe: boolean; paypal: boolean; nowpayments: boolean; discord: boolean; discordOAuth: boolean };
+  integrations: { stripe: boolean; paypal: boolean; nowpayments: boolean; discord: boolean; discordOAuth: boolean; googleOAuth?: boolean; login?: boolean };
   paypalClientId?: string;
 }
 
