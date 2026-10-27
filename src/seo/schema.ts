@@ -22,7 +22,7 @@ export function organizationRef(config: PublicConfig) {
     '@id': absUrl('/#organization'),
     name: config.storeName,
     url: absUrl('/'),
-    logo: { '@type': 'ImageObject', url: absUrl('/img/brand/logo.svg') },
+    logo: { '@type': 'ImageObject', url: absUrl('/img/brand/logo.png') },
   };
 }
 
@@ -39,7 +39,7 @@ export function organizationSchema(config: PublicConfig) {
     '@id': absUrl('/#organization'),
     name: config.storeName,
     url: absUrl('/'),
-    logo: { '@type': 'ImageObject', url: absUrl('/img/brand/logo.svg') },
+    logo: { '@type': 'ImageObject', url: absUrl('/img/brand/logo.png') },
     image: absUrl('/img/brand/og.png'),
     description: `${config.storeName} sells ${config.serverName} in-game money, spawners, mystery boxes and items with fast in-game delivery, daily free spins and discount coupons.`,
     sameAs: discord ? [discord] : undefined,
@@ -147,7 +147,7 @@ export function articleSchema(opts: { title: string; description: string; path: 
     datePublished: opts.datePublished,
     dateModified: opts.dateModified ?? opts.datePublished,
     author: { '@type': 'Organization', name: opts.author, url: absUrl('/') },
-    publisher: opts.config ? organizationRef(opts.config) : { '@type': 'Organization', name: opts.author, url: absUrl('/'), logo: { '@type': 'ImageObject', url: absUrl('/img/brand/logo.svg') } },
+    publisher: opts.config ? organizationRef(opts.config) : { '@type': 'Organization', name: opts.author, url: absUrl('/'), logo: { '@type': 'ImageObject', url: absUrl('/img/brand/logo.png') } },
   };
 }
 
