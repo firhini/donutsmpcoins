@@ -116,7 +116,7 @@ export default function Page() {
     fireConfetti({ count: 160 });
   }, [order?.status, order?.id]);
 
-  const boxItems = useMemo(() => (order?.items ?? []).filter((i) => i.kind === 'box' && i.rolled && i.rolled.length > 0), [order]);
+  const boxItems = useMemo(() => (order?.items ?? []).filter((i) => (i.kind === 'box' || i.kind === 'bundle') && i.rolled && i.rolled.length > 0), [order]);
   const title = `Order ${id} | ${config.storeName}`;
 
   if (loading && !order) {

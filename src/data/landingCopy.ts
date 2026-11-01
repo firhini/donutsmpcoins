@@ -53,28 +53,28 @@ export const landingCopy: LandingCopy[] = [
         heading: 'How a DonutSMP mystery box is rolled',
         paragraphs: [
           'Each line in a box\'s drop table has a weight. On a single roll, the chance of a line is its weight divided by the total weight of the pool – that is the percentage you see under **What\'s inside?** on every box page. Boxes with more than one roll draw without repeats, so a three-roll box always contains three different lines.',
-          'Guaranteed lines are added before the random rolls, and the quantity within a line (for example 1–15 skeleton spawners) is rolled within the stated range. Nothing is re-rolled; the server records the result on your order the moment it is created.',
+          'The quantity within a line (for example 1–3 skeleton spawners) is rolled within the stated range. Nothing is re-rolled; the server records the result on your order the moment it is created.',
         ],
       },
       {
         heading: 'The six boxes at a glance',
         paragraphs: [
-          '[Coin Crate](/product/coin-crate) – $1.99, one roll, money only: 5M (40%), 10M (30%), 15M (15%), 25M (9%), 50M (5%) or 100M (1%). The average payout is about 13M – a flutter, not a cheap way to buy money.',
-          '[Spawner Crate](/product/spawner-crate) – $2.99, two rolls from a spawner-only pool: 5–12 or 13–24 skeleton spawners, 4–10 zombie, 2–8 iron golem, 2–6 creeper or 2–5 blaze spawners. About 79% of crates contain the 5–12 skeleton line and roughly 8% contain blazes.',
-          '[Mystery Box](/product/mystery-box) – $3.99, three rolls from an eleven-line pool of gilded blackstone, netherite ingots and blocks, skeleton spawners, dragon heads, enchanted golden apples, nether stars, emerald ore, totems, 10M and an Elytra. [Elite Mystery Box](/product/elite-mystery-box) – $8.99, four rolls, Elytra at 4% per roll and 25M money in the pool. [God Mystery Box](/product/god-mystery-box) – $19.99, five rolls, Elytra at about 11% per roll, with 50M in the pool. [Legendary Crate](/product/legendary-crate) – $34.99, a guaranteed Elytra and 50M plus six more rolls from a nine-line pool.',
+          '[Coin Crate](/product/coin-crate) – $1.99, one roll, money only: 5M (55%), 7M (25%), 10M (12%), 25M (5%), 50M (2.5%) or 100M (0.5%). A flutter, not a cheap way to buy money.',
+          '[Spawner Crate](/product/spawner-crate) – $2.99, two rolls from a spawner-only pool: skeleton, zombie, iron golem, creeper or blaze spawners. About 9 in 10 crates contain skeleton spawners and roughly 7–8% contain blazes.',
+          '[Mystery Box](/product/mystery-box) – $3.99, three rolls from an eleven-line pool: mostly gilded blackstone, skeleton spawners, golden apples, nether stars, emerald ore and totems, with rare netherite, dragon heads, 10M and an Elytra. [Elite Mystery Box](/product/elite-mystery-box) – $8.99, four rolls with bigger stacks and 25M money in the pool. [God Mystery Box](/product/god-mystery-box) – $19.99, five rolls from a stronger pool with 50M in it. [Legendary Crate](/product/legendary-crate) – $34.99, six rolls from our best pool with the highest Elytra odds.',
         ],
       },
       {
         heading: 'Elytra odds, box by box',
         paragraphs: [
-          'Because multi-roll boxes draw without repeats, the chance of seeing a line somewhere in the box is higher than its per-roll percentage. Simulating the server\'s exact roll logic gives roughly these box-wide Elytra odds: Mystery Box about **3%**, Elite Mystery Box about **19%**, God Mystery Box about **58%** – a little better than a coin flip – and the Legendary Crate **100%**, since the Elytra is guaranteed. In short: $3.99 is a long shot, $8.99 a real chance, $19.99 better-than-even odds, and $34.99 certainty plus extras.',
+          'Because multi-roll boxes draw without repeats, the chance of seeing a line somewhere in the box is higher than its per-roll percentage. Simulating the server\'s exact roll logic gives roughly these box-wide Elytra odds: Mystery Box about **1 in 300**, Elite Mystery Box about **1 in 90**, God Mystery Box about **1 in 19** and Legendary Crate about **1 in 5**. If you want an Elytra for certain, [buy one directly](/product/elytra).',
         ],
       },
       {
         heading: 'Is a mystery box worth it?',
         paragraphs: [
-          'Boxes are not a discount and we do not pretend they are: an [Elytra](/product/elytra) is $28.49 on its own, 1M is $0.18 or less, a netherite block $14.49. A box makes sense when you would be happy with most lines in its pool – true for the Elite, God and Legendary pools, where even the cheapest line is something players pay for.',
-          'If you want a specific item, buy the item; if you enjoy the opening and would be happy with several outcomes, buy the box. The Coin Crate sits in between: every result is money, the floor is 5M and about 6% of crates pay 50M or more.',
+          'Boxes are not a discount and we do not pretend they are: on average every box pays out less than buying the same items directly. An [Elytra](/product/elytra) is $28.49 on its own, 1M is $0.18 or less, a netherite block $14.49.',
+          'If you want a specific item, buy the item; if you enjoy the opening and would be happy with several outcomes, buy the box. The Coin Crate sits in between: every result is money, the floor is 5M and about 3% of crates pay 50M or more.',
         ],
       },
       {
@@ -132,7 +132,7 @@ export const landingCopy: LandingCopy[] = [
         heading: 'Cheaper routes: bundles and boxes',
         paragraphs: [
           'If you want more than the Elytra, two bundles include one at a lower combined price. The [Pro Bundle](/product/pro-bundle) ($40.99) adds 50M money and 16 skeleton spawners – bought separately that is about $42.86 – and the [Rich Bundle](/product/rich-bundle) ($79.99) comes with 250M, a God Mystery Box and the full PvP Kit for roughly $10 less than its parts. The [Basehunter Bundle](/product/basehunter-bundle) ($37.99) pairs an Elytra with the Amethyst Pickaxe, 16 totems and 20M – about $2.40 below the price of the single items.',
-          'Random boxes are the gamble: the [Elite Mystery Box](/product/elite-mystery-box) ($8.99) contains an Elytra in roughly 19% of boxes, the [God Mystery Box](/product/god-mystery-box) ($19.99) in about 58%, and the [Legendary Crate](/product/legendary-crate) ($34.99) guarantees one alongside 50M and six more drops. For the Elytra alone, buying it outright at $28.49 is the better deal; the boxes pay off only if you value the other lines.',
+          'Random boxes are the gamble: the [Elite Mystery Box](/product/elite-mystery-box) ($8.99) contains an Elytra in roughly 1 in 90 boxes, the [God Mystery Box](/product/god-mystery-box) ($19.99) in about 1 in 19, and the [Legendary Crate](/product/legendary-crate) ($34.99) in about 1 in 5. For the Elytra itself, buying it outright at $28.49 is always the better deal.',
         ],
       },
       {
@@ -207,7 +207,7 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Alternatives: crates and bundles',
         paragraphs: [
-          'The [Spawner Crate](/product/spawner-crate) ($2.99) rolls two spawner lines and contains skeleton spawners in about 79% of crates – 5–12 on the common line, 13–24 on the uncommon one. The [Starter Bundle](/product/starter-bundle) ($9.49) packs 15 skeleton spawners with 20M and a Diamond Armor Shulker, and the [Spawner Farm Bundle](/product/spawner-farm-bundle) ($25.99) is 64 skeleton spawners plus 10M in one order. For odd quantities or more than 2,000 spawners, message us on Discord for a quote.',
+          'The [Spawner Crate](/product/spawner-crate) ($2.99) rolls two spawner lines and contains skeleton spawners in about 9 of 10 crates – a small stack on the common line, a bigger one on the uncommon line. The [Starter Bundle](/product/starter-bundle) ($9.49) packs 15 skeleton spawners with 20M and a Diamond Armor Shulker, and the [Spawner Farm Bundle](/product/spawner-farm-bundle) ($25.99) is 64 skeleton spawners plus 10M in one order. For odd quantities or more than 2,000 spawners, message us on Discord for a quote.',
         ],
       },
     ],

@@ -209,7 +209,7 @@ describe('POST /orders (manual payment)', () => {
   });
 
   it('rolls mystery boxes server-side and records fixed kit contents', async () => {
-    const placed = await createOrder({ username: 'Gambler', items: [{ productId: 'mystery-box', qty: 2 }, { productId: 'legendary-crate', qty: 1 }, { productId: 'pvp-kit', qty: 1 }, { productId: 'starter-bundle', qty: 1 }] });
+    const placed = await createOrder({ username: 'Gambler', items: [{ productId: 'mystery-box', qty: 2 }, { productId: 'legendary-crate', qty: 1 }, { productId: 'pvp-kit', qty: 1 }, { productId: 'starter-bundle', qty: 1 }, { productId: 'rich-bundle', qty: 2 }] });
     // results are rolled at creation but hidden from the public order until it is paid (no peek-and-cancel re-rolls)
     expect(placed.items.find((i) => i.productId === 'mystery-box')!.rolled).toBeUndefined();
     const order = (await lib.orders.getOrder(placed.id))!;
@@ -232,13 +232,17 @@ describe('POST /orders (manual payment)', () => {
     }
 
     const crate = order.items.find((i) => i.productId === 'legendary-crate')!;
-    expect(crate.rolled![0].map((d) => d.name)).toEqual(expect.arrayContaining(['Elytra (guaranteed)', '50M Money (guaranteed)']));
-    expect(crate.rolled![0]).toHaveLength(8); // 2 guaranteed + 6 rolls
+    expect(crate.rolled![0]).toHaveLength(6);
 
     const kit = order.items.find((i) => i.productId === 'pvp-kit')!;
     expect(kit.contents?.map((c) => c.name)).toContain('Totem of Undying');
     const bundle = order.items.find((i) => i.productId === 'starter-bundle')!;
     expect(bundle.contents?.map((c) => c.name)).toEqual(['20M Money', 'Skeleton Spawner', 'Diamond Armor Shulker']);
+    expect(bundle.rolled).toBeUndefined();
+    // a box inside a bundle is rolled too – one God Mystery Box per Rich Bundle
+    const rich = order.items.find((i) => i.productId === 'rich-bundle')!;
+    expect(rich.rolled).toHaveLength(2);
+    expect(rich.rolled![0]).toHaveLength(5);
   });
 });
 

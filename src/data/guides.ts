@@ -330,7 +330,7 @@ const raw: GuideInput[] = [
     title: 'DonutSMP Mystery Boxes: Odds, Drops and Which Box to Buy',
     seoTitle: 'Which DonutSMP Mystery Box Should You Buy? | {{store}}',
     metaDescription:
-      'Every DonutSMP mystery box at {{store}} explained: price, rolls, full drop pool, real Elytra odds and whether the box beats buying the items directly.',
+      'Every DonutSMP mystery box at {{store}} explained: price, rolls, full drop pool, real Elytra odds – and why buying items directly is cheaper on average.',
     intro:
       'Mystery boxes are the only thing in our store where you do not know exactly what you get, so they are worth understanding before you buy one. This guide lists every box with its price, rolls and drop pool, explains how the odds are calculated and gives an honest view of when a box is a good deal and when buying the items directly is smarter.',
     sections: [
@@ -338,64 +338,63 @@ const raw: GuideInput[] = [
         heading: 'How a box is rolled',
         paragraphs: [
           'Every box has a public drop table – click “What’s inside?” on any box – where each line has a **weight**. The chance of a line on a single roll is its weight divided by the total weight of the pool. A box with three rolls draws three lines **without repeats**: once a line is drawn it is removed, so you never get the same line twice in one box.',
-          'Lines marked guaranteed are always included and do not use up a roll. The quantity of an item is random within the range shown (1–32 netherite ingots, for example). Rolls happen on our server the moment you order, the result is written to your order page, and our staff hand over exactly what was rolled. There is no re-rolling and no staff discretion.',
+          'Lines marked guaranteed are always included and do not use up a roll. The quantity of an item is random within the range shown (1–3 skeleton spawners, for example). Rolls happen on our server the moment you order, the result is written to your order page, and our staff hand over exactly what was rolled. There is no re-rolling and no staff discretion.',
           'Because rolls are drawn without repeats, the chance of seeing a specific line somewhere in the box is higher than the single-roll percentage. The per-box figures below come from simulating the exact roll logic our server uses.',
         ],
       },
       {
         heading: 'Coin Crate – $1.99, 1 roll, money only',
         paragraphs: [
-          'The [Coin Crate](/product/coin-crate) is the simplest box: one roll, always money. 40% 5M, 30% 10M, 15% 15M, 9% 25M, 5% 50M and 1% 100M. The average payout works out to 13M.',
-          '13M bought directly costs about $2.34 at the single-million rate, so the crate is roughly a fair price with a small premium for the 6% chance of 50M or more. It is a fun first purchase, not a money strategy – if you simply want money, the [money packs](/donutsmp-money) are cheaper per million.',
+          'The [Coin Crate](/product/coin-crate) is the simplest box: one roll, always money. 55% 5M, 25% 7M, 12% 10M, 5% 25M, 2.5% 50M and 0.5% 100M.',
+          'On average a crate pays less than the same $1.99 spent on a [money pack](/donutsmp-money) – you pay for the 8% chance of 25M or more. It is a fun first purchase, not a money strategy.',
         ],
       },
       {
         heading: 'Spawner Crate – $2.99, 2 rolls',
         paragraphs: [
-          'The [Spawner Crate](/product/spawner-crate) draws two lines from a spawner-only pool: 5–12 skeleton spawners (50% per roll), 13–24 skeleton spawners (20%), 4–10 zombie spawners (12%), 2–8 iron golem spawners (10%), 2–6 creeper spawners (5%) and 2–5 blaze spawners (3%). Across the two rolls, about 79% of crates contain the small skeleton line and roughly 8% contain blazes.',
-          'Valued at our single-unit prices, the average crate holds more spawner value than it costs – around 16 skeleton spawners’ worth across both rolls. The catch is that you do not choose the type: if you specifically need golems or blazes, buy them directly.',
+          'The [Spawner Crate](/product/spawner-crate) draws two lines from a spawner-only pool: a small skeleton line (1–3), a large skeleton line (3–6), zombie spawners, iron golem spawners, creeper spawners and blaze spawners. Across the two rolls, about 9 in 10 crates contain skeleton spawners, about 13% contain creepers and roughly 7–8% contain blazes.',
+          'You do not choose the type, and on average the crate holds less spawner value than $2.99 buys directly. If you need a specific number of golems or blazes, buy them directly.',
         ],
       },
       {
         heading: 'Mystery Box – $3.99, 3 rolls',
         paragraphs: [
-          'The [Mystery Box](/product/mystery-box) is the general-purpose box with an 11-line pool: gilded blackstone, netherite ingots, a netherite block, skeleton spawners, dragon heads, enchanted golden apples, nether stars, deepslate emerald ore, totems, 10M money and an Elytra. The Elytra line carries 1 of 109 weight – about 0.9% per roll and roughly **3% per box**.',
-          'Most boxes land on the common lines: around half contain gilded blackstone and just under half contain 1–15 skeleton spawners. Netherite ingots show up in about 38% of boxes, a netherite block in 18%, and the 10M money line in 15%. It is a good box if you like variety and a bad box if the only thing you want is the Elytra.',
+          'The [Mystery Box](/product/mystery-box) is the general-purpose box with an 11-line pool. The common lines are gilded blackstone, skeleton spawners, nether stars, enchanted golden apples, deepslate emerald ore and totems; the rare lines are a netherite ingot (in about 7% of boxes), 10M money (about 4%), a netherite block (about 1%), a dragon head (under 1%) and an Elytra (about 1 in 300 boxes).',
+          'Most boxes are three commons. It is a good box if you like variety and opening things, and a bad box if the only thing you want is the Elytra.',
         ],
       },
       {
         heading: 'Elite Mystery Box – $8.99, 4 rolls',
         paragraphs: [
-          'The [Elite Mystery Box](/product/elite-mystery-box) drops the junk tiers and adds a fourth roll. The pool weights total 100, so the per-roll percentages read directly: Elytra 4%, netherite blocks 10%, netherite ingots 16%, gilded blackstone 16%, dragon heads 6%, nether stars 14%, enchanted golden apples 12%, emerald ore 10%, iron golem spawners 8% and 25M money 4%.',
-          'Across four rolls without repeats, an Elytra appears in about **19% of boxes** and 25M money in another 19%. Netherite ingots or blocks turn up in most boxes. Compared with the $28.49 Elytra price, the Elite box is the cheapest way to take a real shot at one while getting useful items either way.',
+          'The [Elite Mystery Box](/product/elite-mystery-box) adds a fourth roll and bigger stacks: gilded blackstone, enchanted golden apples, nether stars, emerald ore and iron golem spawners are the usual drops, and netherite ingots land in about a third of boxes.',
+          'The jackpot lines – 25M money (about 4% of boxes), a netherite block (about 2%), a dragon head and an Elytra (each roughly 1 in 70–90 boxes) – are rare. Treat them as a bonus, not the reason to buy.',
         ],
       },
       {
         heading: 'God Mystery Box – $19.99, 5 rolls',
         paragraphs: [
-          'The [God Mystery Box](/product/god-mystery-box) is where the Elytra becomes likely rather than lucky. The Elytra line holds 10 of 90 weight – 11% per roll – and with five rolls and no repeats it lands in roughly **55–60% of boxes**. The other lines are netherite blocks (1–5), gilded blackstone (16–128), emerald ore, netherite ingots (4–32), dragon heads (1–4), blaze spawners (2–6), 50M money and heavy cores.',
-          'Every roll in this pool is something you would otherwise pay real money for – the cheapest line is a handful of emerald ore – so there is no dud outcome. The 50M money line shows up in about a third of boxes. At $19.99, one God box costs about the same as one Elytra bought directly; you trade certainty for four extra drops.',
+          'The [God Mystery Box](/product/god-mystery-box) draws five of nine lines, so almost every box contains gilded blackstone, emerald ore, heavy cores, blaze spawners and netherite ingots.',
+          'The rare lines are a netherite block (about 10% of boxes), 50M money (about 9%), a dragon head and an Elytra (each about 5%, roughly 1 in 19 boxes). If you only want the wings, the [Elytra](/product/elytra) costs $28.49 outright.',
         ],
       },
       {
-        heading: 'Legendary Crate – $34.99, 2 guaranteed lines + 6 rolls',
+        heading: 'Legendary Crate – $34.99, 6 rolls',
         paragraphs: [
-          'The [Legendary Crate](/product/legendary-crate) is the only box with guaranteed drops: an **Elytra and 50M money are always included**. The remaining six rolls come from a nine-line pool of dragon heads, netherite blocks, blaze spawners, iron golem spawners, heavy cores, totems, 100M money, a maxed netherite armor set and a mace. Because six of nine lines are drawn, you receive most of the pool every time.',
-          'The 100M line has the lowest weight (4 of 100) and still appears in about a third of crates; a netherite armor set appears in more than half. The guaranteed Elytra and 50M alone list at $28.49 and $7.49, which is why this crate is priced the way it is.',
+          'The [Legendary Crate](/product/legendary-crate) draws six of ten lines from our best pool. Iron golem spawners, totems, blaze spawners, heavy cores and a mace turn up in about nine of ten crates, and a maxed netherite armor set in about three of four.',
+          'It has the best jackpot odds in the shop: a netherite block in about 1 in 5 crates, an Elytra in about 1 in 5, a dragon head in about 1 in 7 and 100M money in about 1 in 14. Nothing is guaranteed beyond the six drops.',
         ],
       },
       {
         heading: 'Which box should you buy?',
         paragraphs: [
-          'Boxes are rolled server-side when you order and the result is on your order page as soon as your payment is confirmed – before anything is handed over. Delivery is the same as any item: our staff teleport to you in-game and drop the loot. {{eta}} DonutSMP’s rules on real-money trading apply to boxes like everything else, and {{store}} is not affiliated with the server. With that said, here is how we would choose:',
+          'Boxes are rolled server-side when you order and the result is on your order page as soon as your payment is confirmed – before anything is handed over. Delivery is the same as any item: our staff teleport to you in-game and drop the loot. {{eta}} DonutSMP’s rules on real-money trading apply to boxes like everything else, and {{store}} is not affiliated with the server. Be honest with yourself: on average every box pays out **less** than buying the same items directly – you pay for the fun and the chance of a big pull. With that said:',
         ],
         list: [
-          '**Want money, cheaply:** none of them – buy a money pack. The Coin Crate is for fun.',
-          '**Want spawners and do not mind which:** Spawner Crate. Best average value per dollar in the store.',
-          '**Want variety on a small budget:** Mystery Box.',
-          '**Want a real Elytra chance under $15:** Elite Mystery Box (about 1 in 5).',
-          '**Want an Elytra and a pile of loot:** God Mystery Box – or buy the [Elytra](/product/elytra) outright for $28.49 if you only want the wings.',
-          '**Want everything guaranteed:** Legendary Crate.',
+          '**Want something specific:** buy it directly. It is always cheaper on average.',
+          '**Want money:** buy a money pack. The Coin Crate is for fun.',
+          '**Want to open something on a small budget:** Coin Crate, Spawner Crate or Mystery Box.',
+          '**Want the best jackpot odds:** Legendary Crate.',
+          '**Want an Elytra for sure:** buy the [Elytra](/product/elytra) outright for $28.49.',
         ],
       },
     ],
@@ -410,7 +409,7 @@ const raw: GuideInput[] = [
       },
       {
         q: 'What is the cheapest box with an Elytra chance?',
-        a: 'The Mystery Box at $3.99, but at about 3% per box you would spend far more than the Elytra’s $28.49 price chasing it. The Elite box at $8.99 (about 19%) is the sensible gamble.',
+        a: 'The Mystery Box at $3.99, but at roughly 1 in 300 boxes you would spend far more than the Elytra’s $28.49 price chasing it. The Legendary Crate has the best odds (about 1 in 5).',
       },
       {
         q: 'Can I choose what I get instead?',
@@ -457,7 +456,7 @@ const raw: GuideInput[] = [
       {
         heading: 'Route 3: Mystery boxes',
         paragraphs: [
-          'Several of our boxes have an Elytra in the pool. The [Elite Mystery Box](/product/elite-mystery-box) ($8.99) gives roughly a 19% chance per box, the [God Mystery Box](/product/god-mystery-box) ($19.99) about 55–60%, and the [Legendary Crate](/product/legendary-crate) ($34.99) includes one guaranteed alongside 50M and six more drops. Full odds and how they are calculated are in the [mystery box guide](/guides/donutsmp-mystery-boxes-explained).',
+          'Several of our boxes have an Elytra in the pool. The [Elite Mystery Box](/product/elite-mystery-box) ($8.99) has one in roughly 1 in 90 boxes, the [God Mystery Box](/product/god-mystery-box) ($19.99) about 1 in 19, and the [Legendary Crate](/product/legendary-crate) ($34.99) about 1 in 5 – long shots compared with buying it directly. Full odds and how they are calculated are in the [mystery box guide](/guides/donutsmp-mystery-boxes-explained).',
           'A box is the right choice if you want loot anyway and an Elytra would be a bonus. If the wings are the only thing you want, read on.',
         ],
       },

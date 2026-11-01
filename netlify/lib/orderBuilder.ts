@@ -137,6 +137,12 @@ function buildItems(quote: Quote, products: Product[]): OrderItem[] {
         const bp = byId.get(b.productId);
         return { name: bp ? (bp.kind === 'money' ? `${b.quantity * (bp.moneyMillions ?? 1)}M Money` : bp.name) : b.productId, qty: bp?.kind === 'money' ? 1 : b.quantity, image: bp?.image };
       });
+      // boxes inside a bundle are rolled like standalone boxes, so the fulfiller knows what to hand out
+      const rolled = (p.bundleItems ?? []).flatMap((b) => {
+        const bp = byId.get(b.productId);
+        return bp?.kind === 'box' ? Array.from({ length: Math.min(b.quantity * l.qty, 100) }, () => rollBox(bp)) : [];
+      });
+      if (rolled.length) item.rolled = rolled;
     }
     return item;
   });

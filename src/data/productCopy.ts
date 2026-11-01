@@ -481,28 +481,14 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'Coin Crate: a $1.99 DonutSMP mystery box that always pays money – 5M guaranteed, up to 100M. Public odds, rolled when you order, paid with /pay.',
     description:
-      'The Coin Crate is a DonutSMP mystery box that only contains money. For $1.99 you roll one result from a public table: 5M (40%), 10M (30%), 15M (15%), 25M (9%), 50M (5%) or 100M (1%). The worst case is still 5M. On average a crate pays about 13M, which is close to the straight-money rate – the small premium buys you the 6% shot at 50M or 100M.\n\n' +
+      'The Coin Crate is a DonutSMP mystery box that only contains money. For $1.99 you roll one result from a public table that runs from 5M up to 100M – the worst case is still 5M on your balance. Most crates land on 5M or 7M; 25M, 50M and 100M are the rare hits you open it for.\n\n' +
       'It is popular with players who like a bit of chance without the risk of getting an item they do not need: every outcome is coins on your balance. Buy up to 50 crates in one order if you want to roll a batch at once.\n\n' +
       'Drops are rolled server-side the moment you place the order and shown on your order page once your payment is confirmed – no hidden re-rolls. After payment our staff send the rolled amount to your username with /pay, usually within 5–30 minutes while we are online.',
-    bullets: [
-      'Money only – every roll pays out',
-      '5M guaranteed, 100M top prize (1%)',
-      'Odds published, drops rolled at order time',
-      'Paid to your balance with /pay',
-    ],
+    bullets: ['Money only – every roll pays out', '5M guaranteed, 100M top prize', 'Odds published, drops rolled at order time', 'Paid to your balance with /pay'],
     faq: [
-      {
-        q: 'What are the Coin Crate odds?',
-        a: '5M 40%, 10M 30%, 15M 15%, 25M 9%, 50M 5%, 100M 1%. One roll per crate. The same table is shown under \'What\'s inside?\' on the product page.',
-      },
-      {
-        q: 'When do I see what I won?',
-        a: 'Immediately. The roll happens when the order is created and the result appears on your order page. Payment then triggers delivery of that exact amount.',
-      },
-      {
-        q: 'Is the Coin Crate better value than a money pack?',
-        a: 'On average, no – it pays around 13M per $1.99 crate, slightly under what the fixed packs give you. You buy it for the chance at 25M, 50M or 100M, not for the floor.',
-      },
+      { q: 'What are the Coin Crate odds?', a: 'The exact chance of every amount is listed under \'What\'s inside?\' on the product page – that table is the one the server rolls from. One roll per crate.' },
+      { q: 'When do I see what I won?', a: 'Immediately. The roll happens when the order is created and the result appears on your order page. Payment then triggers delivery of that exact amount.' },
+      { q: 'Is the Coin Crate better value than a money pack?', a: 'No – on average a fixed money pack gives you more per dollar. You buy the crate for the chance at 25M, 50M or 100M, not for the floor.' },
     ],
   },
 
@@ -511,151 +497,78 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'Spawner Crate: $2.99 for two random spawner drops on DonutSMP – mostly skeleton spawners, with iron golem, creeper and blaze spawners in the pool.',
     description:
-      'The Spawner Crate is a DonutSMP mystery box filled only with spawners. Each crate rolls two different lines from this table: 5–12 Skeleton Spawners (50%), 13–24 Skeleton Spawners (20%), 4–10 Zombie Spawners (12%), 2–8 Iron Golem Spawners (10%), 2–6 Creeper Spawners (5%) and 2–5 Blaze Spawners (3%). The two drops are rolled without repeats, so you never get the same line twice.\n\n' +
-      'At $2.99 most rolls are worth more than the price: the common 5–12 skelly line alone is $2.15 to $5.16 at single prices, and you get a second line on top. The two-roll format is also a cheap way to add golems, creepers or blazes to an existing farm.\n\n' +
+      'The Spawner Crate is a DonutSMP mystery box filled only with spawners. Each crate rolls two different lines from a six-line table: two skeleton lines (small and large stacks), zombie, iron golem, creeper and blaze spawners. The two drops are rolled without repeats, so you never get the same line twice.\n\n' +
+      'Skeleton and zombie spawners make up most of the table; creepers and blazes are the rare pulls. If you need a fixed number of a specific spawner, buying it directly is cheaper – the crate is for the fun of the roll.\n\n' +
       'Drops are rolled server-side when the order is placed and listed on your order page once the payment is confirmed. After that, staff hand the spawners over in-game: join DonutSMP with your order username, accept the teleport and collect them. Usually within 5–30 minutes while online.',
-    bullets: [
-      'Two spawner drops per crate, no repeats',
-      'Two skeleton lines make up 70% of the table',
-      'Blaze, creeper and iron golem spawners in the pool',
-      'Odds public, rolled at order time',
-    ],
+    bullets: ['Two spawner drops per crate, no repeats', 'Skeleton and zombie spawners most common', 'Blaze, creeper and iron golem spawners in the pool', 'Odds public, rolled at order time'],
     faq: [
-      {
-        q: 'How many spawners will I get?',
-        a: 'Two rolled lines, each with its own range – for example 5–12 skeleton spawners plus 2–8 iron golem spawners. The exact quantities are rolled with the lines and shown on your order page.',
-      },
-      {
-        q: 'Can both rolls be skeleton spawners?',
-        a: 'Yes, if the 5–12 line and the 13–24 line are both drawn – that is the best common outcome, up to 36 skellies. A line is never drawn twice.',
-      },
-      {
-        q: 'How are the spawners delivered?',
-        a: 'In-game, by hand. Be online on DonutSMP with the username on your order, accept the teleport from our staff account and pick up the spawners.',
-      },
+      { q: 'How many spawners will I get?', a: 'Two rolled lines, each with its own quantity range. The ranges and chances are listed under \'What\'s inside?\', and the exact quantities you rolled are shown on your order page.' },
+      { q: 'Can both rolls be skeleton spawners?', a: 'Yes – the table has a small and a large skeleton line, and both can be drawn. A line is never drawn twice.' },
+      { q: 'How are the spawners delivered?', a: 'In-game, by hand. Be online on DonutSMP with the username on your order, accept the teleport from our staff account and pick up the spawners.' },
     ],
   },
 
   'mystery-box': {
     seoTitle: 'DonutSMP Mystery Box – $3.99, 3 Random Drops | DonutCoins',
     metaDescription:
-      'DonutSMP Mystery Box: $3.99 for three random drops – netherite, skeleton spawners, dragon heads, 10M money or an elytra. Public odds, rolled on order.',
+      'DonutSMP Mystery Box: $3.99 for three random drops – spawners, golden apples, totems, with rare netherite, dragon heads, 10M or an elytra. Public odds.',
     description:
-      'Our standard DonutSMP mystery box rolls three different lines from an eleven-line pool: Gilded Blackstone 1–32, Netherite Ingot 1–32, Netherite Block 1–2, Skeleton Spawner 1–15, Dragon Head 1–2, Enchanted Golden Apple 1–16, Nether Star 1–32, Deepslate Emerald Ore 1–20, Totem of Undying 1–8, 10M Money and a single Elytra. Price: $3.99 for three drops.\n\n' +
-      'The commons are useful rather than filler – skeleton spawners (about 16.5% per roll) and netherite ingots (12.8%) are things you would buy anyway. The rare end is where the fun is: a Dragon Head at about 2.8%, 10M money at 4.6% and the Elytra at roughly 0.9% per roll.\n\n' +
+      'Our standard DonutSMP mystery box rolls three different lines from an eleven-line pool: gilded blackstone, skeleton spawners, enchanted golden apples, nether stars, deepslate emerald ore and totems are the common pulls; a netherite ingot, a netherite block, a dragon head, 10M money and an Elytra are the rare ones. Price: $3.99 for three drops.\n\n' +
+      'Most boxes are a mix of commons. The rare end is where the fun is – an Elytra or dragon head is a long shot, and the exact chance of every line is published under \'What\'s inside?\'.\n\n' +
       'Every drop is rolled server-side when you place the order and listed on your order page after payment – what you see there is what you get. After payment, staff hand the items over in-game: log on with your order username, accept the teleport and collect. Usually within 5–30 minutes while we are online.',
-    bullets: [
-      'Three different drops per box',
-      'Skeleton spawners, netherite, dragon heads, 10M, elytra',
-      'Elytra odds about 0.9% per roll',
-      'Rolled on order, shown before delivery',
-      'Up to 50 boxes per order',
-    ],
+    bullets: ['Three different drops per box', 'Spawners, golden apples, totems and more', 'Rare shot at netherite, dragon heads, 10M or an elytra', 'Rolled on order, shown before delivery', 'Up to 50 boxes per order'],
     faq: [
-      {
-        q: 'What can I get from the DonutSMP Mystery Box?',
-        a: 'One of eleven lines per roll, three rolls: gilded blackstone, netherite ingots or blocks, skeleton spawners, dragon heads, enchanted golden apples, nether stars, deepslate emerald ore, totems, 10M money or an elytra. The full odds are under \'What\'s inside?\'.',
-      },
-      {
-        q: 'Can I get the same item twice in one box?',
-        a: 'No. The three rolls are drawn without replacement, so each box contains three different lines. Buy several boxes if you want more rolls.',
-      },
-      {
-        q: 'How is a mystery box delivered?',
-        a: 'Items are handed over in-game by staff after payment; a money line is sent with /pay. Join DonutSMP with the username on your order, accept the teleport and collect the drop.',
-      },
+      { q: 'What can I get from the DonutSMP Mystery Box?', a: 'One of eleven lines per roll, three rolls: gilded blackstone, skeleton spawners, enchanted golden apples, nether stars, deepslate emerald ore, totems, a netherite ingot or block, a dragon head, 10M money or an elytra. The full odds are under \'What\'s inside?\'.' },
+      { q: 'Can I get the same item twice in one box?', a: 'No. The three rolls are drawn without replacement, so each box contains three different lines. Buy several boxes if you want more rolls.' },
+      { q: 'How is a mystery box delivered?', a: 'Items are handed over in-game by staff after payment; a money line is sent with /pay. Join DonutSMP with the username on your order, accept the teleport and collect the drop.' },
     ],
   },
 
   'elite-mystery-box': {
     seoTitle: 'DonutSMP Elite Mystery Box – $8.99, 4 Drops | DonutCoins',
     metaDescription:
-      'Elite Mystery Box for DonutSMP: $8.99 for four drops with 4% elytra odds per roll, netherite blocks, dragon heads and 25M money. Rolled when you order.',
+      'Elite Mystery Box for DonutSMP: $8.99 for four drops – bigger stacks, iron golem spawners and a chance at netherite, dragon heads, 25M or an elytra.',
     description:
-      'The Elite Mystery Box steps up both the number of rolls and the odds. For $8.99 you get four different drops from a ten-line pool: Elytra (4%), Netherite Block 1–3 (10%), Netherite Ingot 1–20 (16%), Gilded Blackstone 1–45 (16%), Dragon Head 1–3 (6%), Nether Star 1–32 (14%), Enchanted Golden Apple 1–32 (12%), Deepslate Emerald Ore 1–20 (10%), Iron Golem Spawner 2–10 (8%) and 25M Money (4%).\n\n' +
-      'Compared with the standard Mystery Box, the elytra chance per roll is about four times higher, the money line is 25M instead of 10M, and the item ranges are wider – up to 45 gilded blackstone or 32 enchanted golden apples in a single line. There is no low-value filler line in this pool.\n\n' +
+      'The Elite Mystery Box steps up the number of rolls and the stack sizes. For $8.99 you get four different drops from a ten-line pool: gilded blackstone, nether stars, enchanted golden apples, deepslate emerald ore, iron golem spawners and netherite ingots, plus rare netherite blocks, dragon heads, 25M money and an Elytra.\n\n' +
+      'Compared with the standard Mystery Box you get a fourth roll, larger quantities per line, better elytra odds and 25M instead of 10M as the money line. The exact chance of every line is listed under \'What\'s inside?\'.\n\n' +
       'Drops are rolled server-side when the order is created and printed on your order page once it is paid. Staff then deliver in-game – teleport, drop, done – and send a money line with /pay. Usually within 5–30 minutes while we are online.',
-    bullets: [
-      'Four different drops per box',
-      'Elytra at 4% per roll, 25M money at 4%',
-      'Netherite blocks, dragon heads, golem spawners in the pool',
-      'Odds public, rolled on order',
-    ],
+    bullets: ['Four different drops per box', 'Bigger stacks than the standard box', 'Netherite, dragon heads, 25M and an elytra in the pool', 'Odds public, rolled on order'],
     faq: [
-      {
-        q: 'What are the elytra odds in the Elite Mystery Box?',
-        a: '4% per roll, and the box rolls four times without repeats – so the box-wide chance is noticeably higher than the per-roll figure. The standard Mystery Box sits at about 0.9% per roll.',
-      },
-      {
-        q: 'Elite or God box?',
-        a: 'The God Mystery Box ($19.99) rolls five lines with elytra at about 11% per roll and bigger ranges, but costs more than two Elite boxes. If you want more total rolls for the money, two Elite boxes give eight drops for $17.98.',
-      },
-      {
-        q: 'How are the drops delivered?',
-        a: 'In-game by our staff after payment: be online with your order username on DonutSMP, accept the teleport and pick up the items. A 25M money roll is sent with /pay.',
-      },
+      { q: 'What are the elytra odds in the Elite Mystery Box?', a: 'Better than in the standard Mystery Box, but still a rare pull. The exact per-roll chance is shown under \'What\'s inside?\'; the box rolls four times without repeats.' },
+      { q: 'Elite or God box?', a: 'The God Mystery Box ($19.99) rolls five lines from a stronger pool with the better elytra odds. If you simply want more total rolls for the money, two Elite boxes give eight drops for $17.98.' },
+      { q: 'How are the drops delivered?', a: 'In-game by our staff after payment: be online with your order username on DonutSMP, accept the teleport and pick up the items. A 25M money roll is sent with /pay.' },
     ],
   },
 
   'god-mystery-box': {
     seoTitle: 'DonutSMP God Mystery Box – $19.99, 5 Drops | DonutCoins',
     metaDescription:
-      'God Mystery Box for DonutSMP: $19.99 for five drops – elytra at about 11% per roll, 50M money, dragon heads, netherite blocks and blaze spawners.',
+      'God Mystery Box for DonutSMP: $19.99 for five drops – blaze spawners, heavy cores, netherite and a chance at dragon heads, 50M or an elytra.',
     description:
-      'The God Mystery Box is our highest-odds box short of a guarantee. For $19.99 it rolls five different lines from nine: Elytra (about 11%), Netherite Block 1–5 (15.6%), Gilded Blackstone 16–128 (15.6%), Deepslate Emerald Ore 4–20 (13.3%), Netherite Ingot 4–32 (15.6%), Dragon Head 1–4 (8.9%), Blaze Spawner 2–6 (6.7%), 50M Money (5.6%) and Heavy Core 1–2 (7.8%).\n\n' +
-      'Because five of the nine lines are drawn without repeats and only three of them are common or uncommon, at least two of your five drops are always rare or better. The minimum quantities are high too – no single gilded blackstone here, the line starts at 16 and the ingot line at 4.\n\n' +
+      'The God Mystery Box rolls five different lines from a nine-line top pool: gilded blackstone, deepslate emerald ore, blaze spawners, heavy cores and netherite ingots, plus rare netherite blocks, dragon heads, 50M money and an Elytra. Price: $19.99.\n\n' +
+      'It has the best elytra odds of the random boxes below the Legendary Crate and no single-item filler – every line comes in a proper stack. The exact chance of every line is published under \'What\'s inside?\'.\n\n' +
       'Like all our boxes, the drops are rolled server-side when you order and shown on your order page after payment, before delivery. Staff hand the items over in-game and send a 50M roll with /pay, usually within 5–30 minutes while we are online. Up to 25 boxes per order.',
-    bullets: [
-      'Five different drops per box',
-      'Elytra at about 11% per roll – highest of any random box',
-      'At least two drops are rare or better',
-      '50M money, dragon heads, blaze spawners in the pool',
-      'Rolled on order, visible before delivery',
-    ],
+    bullets: ['Five different drops per box', 'Blaze spawners, heavy cores and netherite in the pool', 'Chance at dragon heads, 50M or an elytra', 'Rolled on order, visible before delivery'],
     faq: [
-      {
-        q: 'What are the elytra odds in the God Mystery Box?',
-        a: 'About 11% on each of the five rolls (weight 10 of 90), drawn without repeats. If you want a certain elytra, the Legendary Crate ($34.99) guarantees one plus 50M.',
-      },
-      {
-        q: 'Is at least one rare drop really guaranteed?',
-        a: 'Yes. The pool has nine lines and only three are common or uncommon (gilded blackstone, deepslate emerald ore, netherite ingot). Five lines are drawn with no repeats, so at least two of them must be rare, epic or legendary.',
-      },
-      {
-        q: 'How do I receive the drops?',
-        a: 'After payment our staff deliver in-game: join DonutSMP with your order username, accept the teleport and collect the items. Money lines go to your balance with /pay. Everything is listed on the order page first.',
-      },
+      { q: 'What are the elytra odds in the God Mystery Box?', a: 'The per-roll chance is listed under \'What\'s inside?\' – the box rolls five times without repeats. If you want a certain elytra, buy one directly.' },
+      { q: 'What is in the pool?', a: 'Gilded blackstone, deepslate emerald ore, netherite ingots, blaze spawners, heavy cores, netherite blocks, dragon heads, 50M money and an Elytra. Five different lines per box.' },
+      { q: 'How do I receive the drops?', a: 'After payment our staff deliver in-game: join DonutSMP with your order username, accept the teleport and collect the items. Money lines go to your balance with /pay. Everything is listed on the order page first.' },
     ],
   },
 
   'legendary-crate': {
     seoTitle: 'DonutSMP Legendary Crate – $34.99 | DonutCoins',
     metaDescription:
-      'Legendary Crate: $34.99 for a guaranteed DonutSMP elytra and 50M money plus six more drops – dragon heads, netherite blocks, maxed armor or 100M.',
+      'Legendary Crate: $34.99 for six drops from our best pool – the highest elytra odds in the shop, maces, netherite armor, dragon heads and 100M money.',
     description:
-      'The Legendary Crate is the only DonutSMP mystery box with no bad outcome. Every crate guarantees an Elytra and 50M Money, then rolls six different lines from a nine-line pool: Dragon Head 1–5 (14%), Netherite Block 2–8 (16%), Blaze Spawner 4–12 (10%), Iron Golem Spawner 8–24 (14%), Heavy Core 1–4 (10%), Totem of Undying 8–32 (14%), 100M Money (4%), a maxed Netherite Armor Set (8%) and a Mace (10%).\n\n' +
-      'The elytra alone is $28.49 in our shop and 50M is $7.49, so $35.98 of the $34.99 is locked in before a single roll. The other six drops come from the top pool only – no filler lines.\n\n' +
+      'The Legendary Crate is our biggest DonutSMP mystery box. Every crate rolls six different lines from a ten-line pool: iron golem and blaze spawners, totems, heavy cores, maces and a maxed netherite armor set, plus rare netherite blocks, dragon heads, 100M money and an Elytra.\n\n' +
+      'It has the highest elytra odds of any box in the shop and no filler lines – every drop is a full stack or a finished item. The exact chance of every line is listed under \'What\'s inside?\'.\n\n' +
       'Rolls happen server-side when you order and the full list appears on your order page. After payment, staff hand the items over in-game and pay the money lines with /pay – usually within 5–30 minutes while online. Max 10 crates per order.',
-    bullets: [
-      'Elytra + 50M guaranteed in every crate',
-      'Six more drops from a top-tier pool, no filler',
-      '100M money at 4%, maxed netherite set at 8% per roll',
-      'Eight lines per crate in total',
-      'Max 10 per order',
-    ],
+    bullets: ['Six different drops per crate', 'Highest elytra odds in the shop', 'Maces, maxed netherite armor, spawners and 100M in the pool', 'Max 10 per order'],
     faq: [
-      {
-        q: 'What exactly is guaranteed in the Legendary Crate?',
-        a: 'An Elytra and 50M money, in every crate, no roll involved. The other six lines are random, drawn without repeats from the nine-line pool.',
-      },
-      {
-        q: 'How many drops do I get in total?',
-        a: 'Eight: the two guaranteed lines plus six rolled lines. Each rolled line has its own quantity range – for example 8–24 iron golem spawners or 8–32 totems – and the exact numbers are rolled with the line.',
-      },
-      {
-        q: 'How is the crate delivered?',
-        a: 'Items in-game by our staff (teleport, drop, collect), money by /pay to the username on your order. Everything is listed on the order page before delivery so you know what to expect.',
-      },
+      { q: 'Is anything guaranteed in the Legendary Crate?', a: 'Six different drops from the top pool, every time. Which six is random – the chance of each line is listed under \'What\'s inside?\'.' },
+      { q: 'How many drops do I get in total?', a: 'Six rolled lines, each with its own quantity range – for example a stack of iron golem spawners or totems. The exact numbers are rolled with the line and shown on your order page.' },
+      { q: 'How is the crate delivered?', a: 'Items in-game by our staff (teleport, drop, collect), money by /pay to the username on your order. Everything is listed on the order page before delivery so you know what to expect.' },
     ],
   },
 
@@ -1513,7 +1426,7 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'Rich Bundle for DonutSMP: 250M money, a God Mystery Box, an elytra and the full PvP Kit for $79.99 – about $89.96 separately, with 8% off at checkout.',
     description:
-      'The Rich Bundle is the whale order: 250M money, a God Mystery Box (five drops with roughly 11% elytra odds per roll), a guaranteed Elytra and the complete PvP Kit – maxed netherite set, sword, pickaxe and 8 totems – for $79.99. Bought as separate lines that is about $89.96, and the 8% spending discount for carts over $40 comes off on top.\n\n' +
+      'The Rich Bundle is the whale order: 250M money, a God Mystery Box (five drops from the top pool), a guaranteed Elytra and the complete PvP Kit – maxed netherite set, sword, pickaxe and 8 totems – for $79.99. Bought as separate lines that is about $89.96, and the 8% spending discount for carts over $40 comes off on top.\n\n' +
       'It is built for players who want to arrive on DonutSMP, or come back to it, already at the top: a balance that competes on /baltop, the gear to hold it, flight, and a box roll that can add a second elytra, dragon heads or another 50M.',
     bullets: [
       '250M + God Mystery Box + elytra + PvP Kit',
