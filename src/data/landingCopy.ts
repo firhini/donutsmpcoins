@@ -117,7 +117,7 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Why an Elytra costs what it costs on DonutSMP',
         paragraphs: [
-          'Elytras only come from End cities, and on a server as old and as busy as DonutSMP the reachable End has been stripped bare. Finding an unlooted ship means flying thousands of blocks out in the End – which already requires an Elytra – or paying someone who did. That scarcity is why an Elytra trades for more than a stack of netherite ingots on the auction house, and why $28.49 is the most expensive single item in our store outside boxes and bundles.',
+          'Elytras only come from End cities. On DonutSMP the End is hosted only on the NA East region and sits inside a world border, so the supply is finite, and on a server as old and as busy as this one the reachable End has been stripped bare. Finding an unlooted ship means flying thousands of blocks out in the End – which already requires an Elytra – or paying someone who did. That scarcity is why an Elytra trades for hundreds of millions of coins on the auction house, and why $28.49 is the most expensive single item in our store outside boxes and bundles.',
           'We price against the in-game auction house, not against other real-money sellers: when Elytras get cheaper in-game, our price follows. The price you lock at checkout is final either way.',
         ],
       },
@@ -138,7 +138,7 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Keeping your Elytra',
         paragraphs: [
-          'Three habits keep an Elytra alive on DonutSMP. First, Mending only works while the Elytra is equipped and you gain XP, so a quick lap past your skeleton farm after every flight keeps it topped up – an Elytra that breaks is a chestplate slot with no armor. Second, carry at least a stack of rockets and a totem; most Elytra losses are deaths mid-air, not durability. Third, store it in an Ender Chest when you are at your base and not flying, so a surprise raid does not take it.',
+          'Three habits keep an Elytra alive on DonutSMP. First, Mending only works while the Elytra is equipped and you gain XP, so a few minutes of collecting XP after every flight keeps it topped up – an Elytra that breaks is a chestplate slot with no armor. Second, carry at least a stack of rockets and a totem; most Elytra losses are deaths mid-air, not durability. Third, store it in an Ender Chest when you are at your base and not flying, so a surprise raid does not take it.',
           '[Creeper spawners](/product/creeper-spawner) ($0.69, $0.65 at 25+) are the long-term rocket supply most Elytra owners end up buying. As with everything we sell, DonutSMP\'s rules prohibit real-money trading – we deliver through normal gameplay and keep it discreet, but the risk is yours.',
         ],
       },
@@ -146,7 +146,7 @@ export const landingCopy: LandingCopy[] = [
     faq: [
       {
         q: 'How much is an Elytra on DonutSMP?',
-        a: 'In our store $28.49, with Unbreaking III and Mending included. Auction-house prices in-game move with every season; ours follows them and is fixed for your order once you check out.',
+        a: 'In our store $28.49, with Unbreaking III and Mending included. Auction-house prices in-game move constantly; ours follows them and is fixed for your order once you check out.',
       },
       {
         q: 'Does the Elytra come enchanted?',
@@ -154,7 +154,7 @@ export const landingCopy: LandingCopy[] = [
       },
       {
         q: 'Do I have to be online to receive it?',
-        a: 'Yes. An Elytra is an item, so you accept a teleport from our delivery account on DonutSMP and pick up the drop. Have a free inventory slot and be somewhere safe – your base rather than spawn.',
+        a: 'Yes. An Elytra is an item, so you accept a teleport from our delivery account on DonutSMP and pick up the drop. Have a free inventory slot and be somewhere safe – ideally your base.',
       },
       {
         q: 'Is buying an Elytra allowed on DonutSMP?',
@@ -172,37 +172,37 @@ export const landingCopy: LandingCopy[] = [
     title: 'DonutSMP Skeleton Spawner Price: $0.69–$0.89 and What a Farm Needs',
     seoTitle: 'DonutSMP Skeleton Spawner Price – from $0.69 | DonutCoins',
     metaDescription:
-      'Skeleton spawners for DonutSMP at $0.89 each, $0.69 at 250+ – in line with their ~18M in-game value. Every bulk tier, farm sizing and how delivery works.',
+      'Skeleton spawners for DonutSMP at $0.89 each, $0.69 at 250+. Every bulk tier, how spawners really work on the server, farm sizing and how delivery works.',
     intro:
-      'The skeleton spawner – "skelly" to anyone who has played DonutSMP for a week – is the item most players buy first and buy most of. This page gives the current prices with every bulk tier, explains why they match the in-game value, why skeleton farms are the server\'s default income, helps you work out how many spawners you actually need, and describes how a hundred spawners are handed over in-game by our staff.',
+      'The skeleton spawner – "skelly" to anyone who has played DonutSMP for a week – is the item most players buy first and buy most of. This page gives the current prices with every bulk tier, explains how we set them, how spawners actually work on DonutSMP and why skeletons are the server\'s default income, helps you work out how many spawners you actually need, and describes how a hundred spawners are handed over in-game by our staff.',
     sections: [
       {
         heading: 'Current skeleton spawner prices',
         paragraphs: [
           'A [skeleton spawner](/product/skeleton-spawner) is **$0.89** at DonutCoins. Bulk tiers apply automatically per line: $0.84 each from 25 spawners, $0.79 from 50, $0.74 from 100 and $0.69 from 250, up to 2,000 per line. The tier price applies to every spawner in the line, so 100 spawners cost $74.00, not a blend of rates – and 50 spawners ($39.50) cost less than 45 ($40.05).',
           'On top of the tiers, the cart-wide spending discount takes 5% off orders over $15, 8% over $40 and 12% over $100. A 64-spawner order is $50.56 at the 50+ tier, so the 8% discount applies; 250 spawners are $172.50 and get 12% off.',
-          'Why $0.89? Our spawner prices follow the in-game coin value. A skelly trades for about 18M coins on DonutSMP, and 18M money costs about the same at our $0.05 base rate, so buying the spawner and buying the coins to pay a player come out roughly even – the difference is that ours are in stock and handed over by staff. The same logic prices [iron golem spawners](/product/iron-golem-spawner) at $1.99 (about 41M coins) and [cow spawners](/product/cow-spawner) at $4.99 (around 100M).',
+          'Why $0.89? Our spawner prices follow what spawners go for in our own deals – about 18M coins for a skelly. Fan price trackers often show lower figures and player prices swing, so take it as our reference, not a server-wide fact. 18M money costs about the same at our $0.05 base rate, so buying the spawner and buying the coins to pay a player come out roughly even – the difference is that ours are in stock and handed over by staff. Since the June 2026 update the server no longer sells spawners, so every spawner, ours included, comes from player trades. The same logic prices [iron golem spawners](/product/iron-golem-spawner) at $1.99 (about 41M coins) and [cow spawners](/product/cow-spawner) at $4.99 (around 100M).',
         ],
       },
       {
         heading: 'Why skeleton spawners are the DonutSMP default',
         paragraphs: [
-          'Skeletons need nothing but darkness. They drop bones, arrows and the occasional bow; bones and arrows sell to the server shop in bulk, and the XP keeps Mending gear repaired. A skeleton farm is also the easiest spawner room to build: a dark box, water streams pushing mobs into a kill chamber, hoppers into chests.',
-          'Because nearly every established player runs one, skeleton spawners are the most liquid item on the auction house – there is always a buyer when you want to sell spawners back, and the price is predictable. [Iron golem spawners](/product/iron-golem-spawner) ($1.99) earn more when iron sells well and [blaze spawners](/product/blaze-spawner) ($0.89) give better XP, but the skelly is the safe default.',
+          'On DonutSMP spawners do not spawn mobs. A skeleton spawner generates bones and arrows straight into its own storage, which you open by right-clicking like a chest, and Shift + right-clicking another skelly onto it stacks them into a single block. No dark room, no water streams, no kill chamber – you collect the drops and sell them with `/sell` or fill buy orders on `/orders`, where bones are in steady demand.',
+          'Because so many established players run them, skeleton spawners are among the most traded items between players – there is usually a buyer when you want to sell spawners back, though prices move. [Iron golem spawners](/product/iron-golem-spawner) ($1.99) earn more when iron sells well and [blaze spawners](/product/blaze-spawner) ($0.89) produce blaze powder for brewers, but the skelly is the safe default.',
         ],
       },
       {
         heading: 'How many spawners do you need?',
         paragraphs: [
-          'A handful of spawners is a hobby; a room full of them is an income. Most players start at 15–25 spawners, which fits one compact room and leaves space to expand as the farm earns. 64 spawners – one stack, the Spawner Farm Bundle size – is the classic serious farm. Above 100, the limit is usually the kill chamber and hopper throughput, not the spawner count.',
-          'Server shop sell prices change between seasons, so we will not quote a per-hour income here. Run a single spawner for a day, sell what it produces, and multiply – that number tells you whether the next tier is worth it faster than any guide.',
+          'A handful of spawners is a hobby; a room full of them is an income. Most players start at 15–25 spawners and expand as the farm earns. 64 spawners – one stack, the Spawner Farm Bundle size – is the classic serious farm. Output per spawner shrinks as a single stack grows, so several separate stacks in different blocks produce more than one giant stack – spread big orders out.',
+          '/sell base prices can change with server updates (sell multipliers were removed in June 2026), so we will not quote a per-hour income here. Run a single spawner for a day, sell what it produces, and multiply – that number tells you whether the next tier is worth it faster than any guide.',
         ],
       },
       {
         heading: 'Delivery: how 100 spawners reach you',
         paragraphs: [
-          'Spawners are items, so they are handed over, not paid. After you pay and report the reference, join DonutSMP with the exact username from your order and accept the teleport request from our delivery account. Larger orders arrive in shulker boxes, so bring inventory space and pick a safe spot; your base is better than spawn. A member of our staff does this by hand, usually within 5–30 minutes while we are online.',
-          'DonutSMP\'s rules prohibit real-money trading; we deliver through normal gameplay and keep it discreet, but the risk is yours. Spawners can be mined back with a silk touch pickaxe on DonutSMP, which also means a found farm can be taken – hide it well.',
+          'Spawners are items, so they are handed over, not paid. After you pay and report the reference, join DonutSMP with the exact username from your order and accept the teleport request from our delivery account. Larger orders arrive in shulker boxes, so bring inventory space and pick a safe spot – your base is best. A member of our staff does this by hand, usually within 5–30 minutes while we are online.',
+          'DonutSMP\'s rules prohibit real-money trading; we deliver through normal gameplay and keep it discreet, but the risk is yours. There are no land claims on DonutSMP, so a farm that gets found can be raided – hide it well.',
         ],
       },
       {
@@ -219,7 +219,7 @@ export const landingCopy: LandingCopy[] = [
       },
       {
         q: 'Can I move skeleton spawners after placing them?',
-        a: 'Yes – they are normal spawner items, and on DonutSMP a silk touch pickaxe picks them up again. That is also why spawners are tradeable on the auction house.',
+        a: 'We cannot promise it. How – and whether – placed spawners can be picked back up on DonutSMP is not clearly documented, and some reports say stored drops are lost when a spawner is broken. Plan where your farm goes before you place it, and ask on Discord if you need current details.',
       },
       {
         q: 'How are spawners delivered on DonutSMP?',
@@ -274,7 +274,7 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Why the price changes and what is locked',
         paragraphs: [
-          'DonutSMP money is player-earned, so its real-world price follows the in-game economy: it drops when farms get cheaper or the server shop pays more, and spikes for a few days after a reset when everyone is broke. We also keep a reserve so orders ship immediately, and a very large order can nudge the price until the reserve is rebuilt. The price you see at checkout is locked for that order.',
+          'DonutSMP money is player-earned, so its real-world price follows the in-game economy: it drops when farms get cheaper or `/sell` pays more, and moves when big server updates change how money enters the game – as the June 2026 update did. The current season is declared permanent, so there are no map resets to plan around. We also keep a reserve so orders ship immediately, and a very large order can nudge the price until the reserve is rebuilt. The price you see at checkout is locked for that order.',
           'Delivery is manual – a member of our staff runs `/pay` to the username on your order, usually within 5–30 minutes while we are online, and big amounts can be split over several payments on request. DonutSMP\'s rules prohibit real-money trading, so buying is your own responsibility; DonutCoins is not affiliated with DonutSMP or Mojang.',
         ],
       },
@@ -306,7 +306,7 @@ export const landingCopy: LandingCopy[] = [
     metaDescription:
       'DonutSMP netherite delivered in-game: ingots from $2.89, blocks from $13.49, ancient debris from $0.52, god netherite armor $4.99 and maxed tools $0.99.',
     intro:
-      'Netherite is DonutSMP\'s hard currency: ingots and blocks hold value between seasons, and the god armor and tools made from it are what you fight in. DonutCoins sells the raw material – ancient debris, ingots and blocks – and the finished gear, all handed over in-game by our staff. This page lists the prices, explains when to buy blocks instead of ingots, and shows which kits and boxes include netherite.',
+      'Netherite is DonutSMP\'s hard currency: ingots and blocks hold value over time, and the god armor and tools made from it are what you fight in. DonutCoins sells the raw material – ancient debris, ingots and blocks – and the finished gear, all handed over in-game by our staff. This page lists the prices, explains when to buy blocks instead of ingots, and shows which kits and boxes include netherite.',
     sections: [
       {
         heading: 'Netherite prices on DonutSMP',
@@ -318,7 +318,7 @@ export const landingCopy: LandingCopy[] = [
         heading: 'Blocks vs ingots vs debris',
         paragraphs: [
           'Buy by the cheapest route to the netherite you need. A block is nine ingots: at $14.49 that is **$1.61 per ingot**, against $3.09 for loose ingots at the 9+ tier – so anyone who wants ingots in bulk should buy blocks and split them at a crafting table. Loose ingots make sense for small amounts, one to eight.',
-          'Ancient debris is for players who like smelting: four debris become four scrap, which with four gold ingots make one netherite ingot. At the 32+ tier that is $2.08 of debris per ingot plus your gold – cheaper than the $2.89 bulk ingot, and debris is also the item people hoard for the next season.',
+          'Ancient debris is for players who like smelting: four debris become four scrap, which with four gold ingots make one netherite ingot. At the 32+ tier that is $2.08 of debris per ingot plus your gold – cheaper than the $2.89 bulk ingot, and debris is also an item people hoard long-term.',
         ],
       },
       {
@@ -336,7 +336,7 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Delivery and storage',
         paragraphs: [
-          'Netherite is handed over in-game: after you pay and report the reference, join DonutSMP with the username on your order, accept the teleport from our delivery account and pick up the drop – shulkered for larger orders. Our staff do this manually, usually within 5–30 minutes while online. Netherite does not burn, but it can be looted: keep blocks in an Ender Chest or a claimed, hidden base.',
+          'Netherite is handed over in-game: after you pay and report the reference, join DonutSMP with the username on your order, accept the teleport from our delivery account and pick up the drop – shulkered for larger orders. Our staff do this manually, usually within 5–30 minutes while online. Netherite does not burn, but it can be looted: keep blocks in an Ender Chest or a well-hidden base – DonutSMP has no land claims.',
           'DonutSMP\'s rules prohibit real-money trading and buying is your own responsibility; DonutCoins is an independent store, not affiliated with DonutSMP or Mojang.',
         ],
       },

@@ -35,7 +35,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Buy DonutSMP money at $0.05 per million, dropping to $0.03 per 1M on bulk orders. Pick any amount; staff pay it to your balance with /pay within minutes.',
     description:
       'This is the flexible way to buy DonutSMP money: the quantity you enter is the number of millions, so 50 means 50M and 1000 means 1B. The base rate is $0.05 per 1M and bulk tiers kick in automatically – $0.04 from 100M and $0.03 from 1B. The lower rate applies to every million in the line, not just the ones above the threshold, so it pays to round up: 80M and 100M both cost $4.00, and 750M costs the same $30.00 as a full 1B.\n\n' +
-      'Money is what moves on DonutSMP. It buys spawners from other players, pays claim costs, funds shop slots and settles the odd ransom. Earning a few hundred million by hand takes days of farming; ordering it takes a couple of minutes.',
+      'Money is what moves on DonutSMP. It buys spawners and gear from other players, fills buy orders on /orders, pays bounties and settles the odd ransom. Earning a few hundred million by hand takes days of farming; ordering it takes a couple of minutes.',
     bullets: [
       'Any amount from 1M to 5B in a single line',
       'Bulk tiers: $0.04 from 100M, $0.03 from 1B',
@@ -65,7 +65,7 @@ export const productCopy: Record<string, ProductCopy> = {
       '10M DonutSMP money for $0.49 – just under the $0.05 per million base rate. Paid to your balance with /pay by our staff, usually within minutes.',
     description:
       'The 10M Money Pack is the cheapest way to try DonutCoins. For $0.49 you get ten million DonutSMP coins, which works out to $0.049 per 1M – a hair under the $0.05 base rate of the pick-your-amount listing, where 10M would cost $0.50.\n\n' +
-      'Ten million is a sensible first order: enough for a few claim blocks, hoppers and chests or a start on a shop, and small enough to test how fast we deliver before you commit to a bigger pack.\n\n' +
+      'Ten million is a sensible first order: enough for hoppers, chests and a first buy order or two, and small enough to test how fast we deliver before you commit to a bigger pack.\n\n' +
       'After payment, one of our staff sends the 10M to your username with /pay – usually within 5–30 minutes while we are online. No teleport, no meeting point; the money simply lands on your balance and the order page updates to delivered.',
     bullets: [
       '10,000,000 DonutSMP money for $0.49',
@@ -91,7 +91,7 @@ export const productCopy: Record<string, ProductCopy> = {
       '25M DonutSMP money for $1.19 – under $0.048 per million, about 5% below the base rate. Enough for a first skelly plus the build. Delivered by /pay.',
     description:
       'Twenty-five million DonutSMP money for $1.19 comes to just under $0.048 per 1M. Buying the same amount at the $0.05 base rate would be $1.25, so the pack saves you about 5% without needing to reach a bulk tier.\n\n' +
-      '25M is the amount many players spend setting up their first real income: one skeleton spawner – a skelly trades for about 18M coins on DonutSMP – plus the hoppers, chests and claim blocks to build around it. It is also a common ask in player trades, which makes it a convenient pack to have ready.\n\n' +
+      '25M is the amount many players spend setting up their first real income: one skeleton spawner bought from another player – about 18M coins in our own deals, while fan price trackers often list them lower – plus chests and storage for the bones it collects. It is also a common ask in player trades, which makes it a convenient pack to have ready.\n\n' +
       'Staff deliver by hand with /pay to the username on your order, typically within 5–30 minutes while we are online. There is nothing to pick up – the balance update and the server\'s chat confirmation are your receipt, and the order page shows the delivered status.',
     bullets: [
       '25,000,000 DonutSMP money for $1.19',
@@ -102,7 +102,7 @@ export const productCopy: Record<string, ProductCopy> = {
     faq: [
       {
         q: 'Is 25M enough to start a spawner farm on DonutSMP?',
-        a: 'For a first one, yes. A skeleton spawner trades for about 18M coins in-game, so 25M covers one skelly plus hoppers and chests. If you want the spawners themselves, our Skeleton Spawner listing is $0.89 each, priced at that same in-game value.',
+        a: 'For a first one, yes. In our own trades a skeleton spawner goes for about 18M coins (fan price trackers often show less), so 25M covers at least one skelly with change to spare. The server itself no longer sells spawners, so you buy them from other players. If you want the spawners themselves, our Skeleton Spawner listing is $0.89 each, priced at about that 18M.',
       },
       {
         q: 'Do I need to be online to receive 25M?',
@@ -117,7 +117,7 @@ export const productCopy: Record<string, ProductCopy> = {
       '50M DonutSMP money for $2.39 – under $0.048 per million, below the $0.05 base rate. Our most popular pack, paid to your balance with /pay within minutes.',
     description:
       'The 50M Money Pack is the sweet spot for most DonutSMP players: $2.39 for fifty million, which is just under $0.048 per 1M. On the pick-your-amount listing the same 50M costs $2.50 at the $0.05 base rate, so this pack is the cheapest way to get exactly 50M.\n\n' +
-      'Fifty million is enough to go from fresh spawn to a working base: two skeleton spawners at their in-game value of about 18M each, a claim and change left over for armor. It is the amount we recommend to anyone who wants a real head start rather than a top-up.\n\n' +
+      'Fifty million is enough to go from your first /rtp to a working base: two skeleton spawners at about 18M each – what they go for in our own deals – with change left over for armor. It is the amount we recommend to anyone who wants a real head start rather than a top-up.\n\n' +
       'Like every money order, it is delivered manually by our staff with /pay to the username you enter at checkout, usually within 5–30 minutes while we are online. The order page updates to delivered as soon as the payment has gone through in-game.',
     bullets: [
       '50,000,000 DonutSMP money for $2.39',
@@ -147,7 +147,7 @@ export const productCopy: Record<string, ProductCopy> = {
       '100M DonutSMP money for $3.79 – under $0.038 per million, 24% below the base rate. Hand-delivered to your balance with /pay by staff, usually within minutes.',
     description:
       'One hundred million DonutSMP money for $3.79 works out to just under $0.038 per 1M – 24% less than the $0.05 base rate, where 100M would be $5.00. It also beats the 100M bulk tier of the flexible listing ($0.04 per 1M, or $4.00), so if you want a round hundred, this is the pack to pick.\n\n' +
-      '100M changes how you play. At in-game values it buys about five skeleton spawners, two iron golem spawners or one cow spawner (worth around 100M coins on its own), and it puts you on the /baltop radar without weeks of grinding.',
+      '100M changes how you play. At the prices we see in our own spawner deals it covers about five skeleton spawners, two iron golem spawners or one cow spawner (around 100M coins on its own) – player prices vary, so compare before you trade – and it saves you weeks of grinding.',
     bullets: [
       '100,000,000 DonutSMP money for $3.79',
       'Under $0.038 per 1M – 24% below the base rate',
@@ -177,7 +177,7 @@ export const productCopy: Record<string, ProductCopy> = {
       '250M DonutSMP money for $9.49 – under $0.038 per million, 24% below the base rate. Delivered by staff with /pay, split into discreet portions on request.',
     description:
       'A quarter billion DonutSMP money for $9.49 is just under $0.038 per 1M. The same 250M would be $12.50 at the base rate and $10.00 on the flexible listing\'s 100M+ tier, so the pack is the cheapest way to get exactly 250M.\n\n' +
-      '250M is where the economy opens up: buying out a player\'s spawner stock, flipping items in /ah, funding a group base or simply sitting near the top of the balance board. Pair it with a few spawners or a crate and the cart passes the $15 spending threshold, so 5% comes off automatically at checkout.\n\n' +
+      '250M is where the economy opens up: buying out a player\'s spawner stock, flipping items in /ah, funding buy orders or kitting out a base for you and your friends. Pair it with a few spawners or a crate and the cart passes the $15 spending threshold, so 5% comes off automatically at checkout.\n\n' +
       'Our staff deliver it manually with /pay to your username – usually within 5–30 minutes while we are online. Amounts this size are often sent in two or three payments to keep the transfer discreet; every step shows on your order page, and the total is always the full 250M.',
     bullets: [
       '250,000,000 DonutSMP money for $9.49',
@@ -207,7 +207,7 @@ export const productCopy: Record<string, ProductCopy> = {
       '500M DonutSMP money for $18.99 – under $0.038 per million, 24% below the base rate. Delivered manually with /pay in discreet portions by our staff.',
     description:
       'Half a billion DonutSMP money for $18.99 comes to just under $0.038 per 1M – 24% below the $0.05 base rate (where 500M is $25.00) and under the flexible listing\'s 100M+ tier price of $20.00. At this size the order also passes the $15 threshold, so the 5% spending discount comes off automatically.\n\n' +
-      'Players buy 500M to skip the grind entirely: a fully stocked base, a spawner farm that prints money on its own, maxed gear for the whole group and a balance that holds its own in any trade. It is also the pack shop owners use to restock.',
+      'Players buy 500M to skip the grind entirely: a fully stocked base, a spawner farm that prints money on its own, maxed gear for the whole group and a balance that holds its own in any trade. It is also the pack auction-house flippers use to fund their buy orders.',
     bullets: [
       '500,000,000 DonutSMP money for $18.99',
       'Under $0.038 per 1M – 24% below the base rate',
@@ -237,7 +237,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'One billion DonutSMP money for $28.99 – about $0.029 per million, 42% below the base rate, plus the 5% spending discount. Hand-delivered by staff.',
     description:
       'One billion DonutSMP money – 1,000,000,000 – for $28.99. That is about $0.029 per 1M, 42% under the $0.05 base rate (1B would be $50.00 there) and cheaper than the flexible listing\'s top tier of $0.03, which prices 1B at $30.00. Carts of $15 or more also get the 5% spending discount, and 5% of what you pay comes back as store credit once the order is delivered.\n\n' +
-      'A billion is the whale pack. It is bought by players who want to dominate the balance board in one go, by groups pooling money for a mega-base, and by shop owners who need deep liquidity to buy up spawners and rare items at scale.',
+      'A billion is the whale pack. It is bought by players who want a serious balance in one go, by groups of friends pooling money for a mega-base, and by traders who need deep liquidity to buy up spawners and rare items at scale.',
     bullets: [
       '1,000,000,000 DonutSMP money for $28.99',
       'About $0.029 per 1M – our lowest rate',
@@ -265,16 +265,16 @@ export const productCopy: Record<string, ProductCopy> = {
   'skeleton-spawner': {
     seoTitle: 'DonutSMP Skeleton Spawner – $0.89 each | DonutCoins',
     metaDescription:
-      'Buy DonutSMP skeleton spawners for $0.89 each, down to $0.69 at 250+ – priced at the ~18M in-game value of a skelly. Handed over in-game by staff.',
+      'Buy DonutSMP skeleton spawners for $0.89 each, down to $0.69 at 250+. Bones and arrows collect inside – no mobs, no kill room. Handed over in-game by staff.',
     description:
-      'The skeleton spawner – the \'skelly\' – is the backbone of the DonutSMP economy. Skeletons drop bones and arrows that sell for steady money, and a stacked spawner room is one of the best XP sources on the server. Our skeleton spawner price starts at $0.89 each and drops with quantity: $0.84 from 25, $0.79 from 50, $0.74 from 100 and $0.69 from 250, up to 2,000 per line.\n\n' +
-      'The price follows the in-game value: a skelly trades for about 18M coins on DonutSMP, so one spawner here costs about the same as 18M money at our $0.05 base rate. What you skip is the search – no hunting for naturally generated spawners and no waiting for an /ah seller with enough stock. A row of 64 is a common starting goal; serious farms run several hundred.\n\n' +
+      'The skeleton spawner – the \'skelly\' – is the backbone of the DonutSMP economy. Spawners on DonutSMP do not spawn mobs at all: a skelly generates bones and arrows straight into its own storage, which you open like a chest, and Shift + right-clicking another skelly onto it stacks them into one block. Bones are in steady demand on /orders. Our skeleton spawner price starts at $0.89 each and drops with quantity: $0.84 from 25, $0.79 from 50, $0.74 from 100 and $0.69 from 250, up to 2,000 per line.\n\n' +
+      'The price follows what a skelly goes for in our own deals – about 18M coins – so one spawner here costs about the same as 18M money at our $0.05 base rate. Fan price trackers often list lower figures and player prices move, so treat that as our reference rather than an official value. What you skip is the search: since the June 2026 update the server no longer sells spawners, so every one changes hands between players. Several separate stacks produce more than one giant stack, which is why bigger farms spread their spawners over a few blocks.\n\n' +
       'Spawners are physical items, so delivery happens in-game: join DonutSMP with the username on your order, accept the teleport from our delivery account and pick up the drop – bigger orders come packed in shulker boxes. Staff usually hand over within 5–30 minutes while online.',
     bullets: [
       '$0.89 each, down to $0.69 at 250+',
-      'Priced at the in-game value – about 18M coins',
+      'Priced at about 18M coins – our own deal value',
       'Up to 2,000 spawners per line',
-      'Bones, arrows and XP that sell for steady money',
+      'Bones and arrows collect inside – no mobs to kill',
       'Handed over in-game, shulkered for big orders',
     ],
     faq: [
@@ -284,7 +284,11 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'Why is a skeleton spawner priced like 18M money?',
-        a: 'Because that is what it is worth on the server. Our spawner prices follow in-game coin values – a skelly trades for about 18M coins, an iron golem spawner for about 41M and a cow spawner for around 100M – so buying the spawner costs about the same as buying the money and finding a seller yourself.',
+        a: 'Because that is about what one goes for in our own trades. Our spawner prices follow the coin values we see in our deals – roughly 18M for a skelly, 41M for an iron golem spawner and 100M for a cow spawner. Public fan trackers often show lower numbers and prices swing, so compare before you buy; at our rate, the spawner costs about the same as that much money.',
+      },
+      {
+        q: 'Does DonutSMP still sell spawners?',
+        a: 'No. Spawners were taken out of the server shop and the Shard Shop in the June 2026 update, so no new ones enter the game – existing spawners only change hands between players. The ones we hand over are existing spawners from that player market.',
       },
       {
         q: 'How are spawners delivered?',
@@ -300,21 +304,21 @@ export const productCopy: Record<string, ProductCopy> = {
   'iron-golem-spawner': {
     seoTitle: 'DonutSMP Iron Golem Spawner – $1.99 | DonutCoins',
     metaDescription:
-      'Iron golem spawners for DonutSMP at $1.99 each – $1.89 from 25, $1.74 from 100 – in line with their ~41M in-game value. Delivered in-game by our staff.',
+      'Iron golem spawners for DonutSMP at $1.99 each – $1.89 from 25, $1.74 from 100 – about the 41M coins they fetch in our deals. Delivered in-game by staff.',
     description:
-      'Iron golem spawners turn a dark room into an iron factory. Each golem drops iron ingots and poppies, and because iron sells reliably and is used for everything from hoppers to anvils, a golem farm is one of the most dependable earners on DonutSMP. Price: $1.99 each, $1.89 from 25 and $1.74 from 100, up to 2,000 per line.\n\n' +
-      'The price follows the in-game market: an iron golem spawner trades for about 41M coins on DonutSMP, and $1.99 is slightly less than 41M money costs at our $0.05 base rate. Many players run golems next to their skeleton farm so the money keeps coming while they are off hunting bases. Golems are tough, so the kill area needs to be built right – but once it is, the output is hard to match with any manual method.',
+      'An iron golem spawner on DonutSMP is an iron factory in a single block: it never spawns a golem, it simply fills its own storage with iron ingots that you open like a chest and empty into /sell or your chests. Iron sells reliably and is used for everything from hoppers to anvils, so a golem stack is one of the most dependable earners on DonutSMP. Price: $1.99 each, $1.89 from 25 and $1.74 from 100, up to 2,000 per line.\n\n' +
+      'The price follows what an iron golem spawner goes for in our own deals – about 41M coins – and $1.99 is slightly less than 41M money costs at our $0.05 base rate. Player prices vary, so treat that as our reference, not a fixed server value. Many players stack golems next to their skeleton spawners so the money keeps coming while they are off hunting bases. There is no kill area to build: place the spawner, Shift + right-click more golem spawners onto it to stack them, and collect the iron.',
     bullets: [
       '$1.99 each, $1.74 at 100+',
-      'Priced at the in-game value – about 41M coins',
-      'Iron ingots and poppies that always sell',
-      'Pairs well with a skeleton farm',
+      'Priced at about 41M coins – our own deal value',
+      'Iron ingots that always sell',
+      'No golems, no kill area – drops collect inside',
       'Delivered in-game by staff, shulkered for bulk',
     ],
     faq: [
       {
         q: 'Iron golem or skeleton spawner – which earns more?',
-        a: 'Skeletons cost less – $0.89 against $1.99, matching in-game values of about 18M and 41M coins – and give XP; golems produce iron, which holds its sell value well. Most players run both. If you are starting out, grab skellies first and add golems once your farm is set up.',
+        a: 'Skeletons cost less – $0.89 against $1.99, matching the roughly 18M and 41M coins they go for in our deals – and bones are in steady demand on /orders; golems produce iron, which holds its sell value well. Most players run both. If you are starting out, grab skellies first and add golems later.',
       },
       {
         q: 'How many golem spawners do I need for a real farm?',
@@ -326,26 +330,30 @@ export const productCopy: Record<string, ProductCopy> = {
   'cow-spawner': {
     seoTitle: 'DonutSMP Cow Spawner – $4.99 each | DonutCoins',
     metaDescription:
-      'Cow spawners for DonutSMP at $4.99 each, $4.69 from 10 and $4.39 from 50 – priced at their ~100M in-game value. Leather and beef, handed over in-game.',
+      'Cow spawners for DonutSMP at $4.99 each, $4.69 from 10 and $4.39 from 50 – about the 100M coins they fetch in our deals. Raw beef, handed over in-game.',
     description:
-      'The cow spawner is one of the most valuable spawners on DonutSMP. Cows drop leather and raw beef – leather for books, bookshelves and item frames, beef as a food supply that never runs out – and a stacked cow room keeps both coming while you are busy elsewhere. Price: $4.99 each, $4.69 from 10 and $4.39 from 50, up to 500 per line.\n\n' +
-      'Like our other spawners, the price follows the in-game value: a cow spawner trades for around 100M coins on DonutSMP, and $4.99 is what 100M costs at our $0.05 base rate. Cows are passive mobs, so the spawn area is built like a lit animal pen rather than the dark box a skelly farm uses – plan the kill and collection system before you place them.\n\n' +
+      'The cow spawner is one of the priciest spawners we sell. On DonutSMP it produces raw beef – no leather – straight into its own storage, with no cows to herd or kill: open it like a chest to collect, and Shift + right-click more cow spawners onto it to stack them into one block. Beef is a food supply that never runs out and sells with /sell. Price: $4.99 each, $4.69 from 10 and $4.39 from 50, up to 500 per line.\n\n' +
+      'Like our other spawners, the price follows what a cow spawner goes for in our own deals – around 100M coins – and $4.99 is what 100M costs at our $0.05 base rate. Fan price trackers often list spawners lower and values move, so treat it as our reference rather than a server-wide price. Since the June 2026 update no new spawners enter the game, so cow spawners only come from other players – and they rarely come up for sale.\n\n' +
       'Spawners are handed over in-game by our staff: be online on DonutSMP with the username from your order, accept the teleport request and pick up the items. Larger quantities arrive in shulker boxes. Usually within 5–30 minutes while we are online.',
     bullets: [
       '$4.99 each, $4.39 at 50+',
-      'Priced at the in-game value – around 100M coins',
-      'Leather and beef on autopilot',
+      'Priced at about 100M coins – our own deal value',
+      'Raw beef collects inside – no mobs to farm',
       'Up to 500 per line',
       'Handed over in-game by real staff',
     ],
     faq: [
       {
         q: 'Why does a cow spawner cost more than a skelly?',
-        a: 'Because it is worth more in-game. Our spawner prices follow DonutSMP coin values: a cow spawner trades for around 100M coins, an iron golem spawner for about 41M and a skeleton spawner for about 18M – which is why they are $4.99, $1.99 and $0.89 here.',
+        a: 'Because it goes for more in our own trades: roughly 100M coins for a cow spawner, about 41M for an iron golem spawner and about 18M for a skeleton spawner – which is why they are $4.99, $1.99 and $0.89 here. Those are our deal values, not official prices; fan trackers often list lower figures.',
+      },
+      {
+        q: 'Does a cow spawner give leather?',
+        a: 'No. On DonutSMP a cow spawner produces raw beef only. If you need leather for books or item frames, you will have to get it elsewhere.',
       },
       {
         q: 'Can I get a cow spawner from a crate?',
-        a: 'Yes – it is the epic line of the Spawner Crate ($2.99, about one crate in 33) and one of the eleven lines in the Legendary Crate ($34.99, about one crate in six). Those are gambles; buying it here is the sure thing.',
+        a: 'Yes – from our own mystery crates (DonutSMP itself no longer has crates): it is the epic line of the Spawner Crate ($2.99, about one crate in 33) and one of the eleven lines in the Legendary Crate ($34.99, about one crate in six). Those are gambles; buying it here is the sure thing.',
       },
       {
         q: 'How are cow spawners delivered?',
@@ -357,21 +365,21 @@ export const productCopy: Record<string, ProductCopy> = {
   'zombie-spawner': {
     seoTitle: 'DonutSMP Zombie Spawner – $0.39 each | DonutCoins',
     metaDescription:
-      'Zombie spawners for DonutSMP at $0.39 each, $0.36 from 50. Cheap XP and rotten flesh for cleric trades. Handed over in-game by our staff within minutes.',
+      'Zombie spawners for DonutSMP at $0.39 each, $0.36 from 50. The cheapest spawner we sell – rotten flesh for cleric trades. Handed over in-game by our staff.',
     description:
-      'The zombie spawner is the budget XP machine. At $0.39 each – $0.36 from 50 – it is the cheapest spawner in our DonutSMP shop, and zombies are easy to farm with a simple drop-and-kill setup. Rotten flesh feeds cleric villagers for emeralds, and the occasional iron ingot, carrot and potato come as a bonus.\n\n' +
-      'Zombie farms are the usual first step for new players who want enchanting XP without buying bottles, and a cheap way to bulk out an existing spawner room. Up to 2,000 per line if you want a wall of them.\n\n' +
+      'The zombie spawner is the budget spawner. At $0.39 each – $0.36 from 50 – it is the cheapest spawner in our DonutSMP shop. Like every spawner on DonutSMP it does not spawn mobs: it fills its own storage with drops – mainly rotten flesh – which you open like a chest, and Shift + right-click stacks more zombie spawners into the same block. Rotten flesh feeds cleric villagers for emeralds.\n\n' +
+      'Zombie spawners are a cheap first spawner for new players and an easy way to bulk out an existing spawner room – up to 2,000 per line if you want a wall of them. They earn less than skeletons, so treat them as a starter rather than your main money maker.\n\n' +
       'Spawners are delivered in-game by our staff: be online on DonutSMP with the username on your order, accept the teleport request and collect the items. Large orders arrive in shulker boxes. Usually within 5–30 minutes while we are online.',
     bullets: [
       'Cheapest spawner: $0.39, $0.36 at 50+',
-      'Fast XP and rotten flesh for villager trades',
-      'Simple to farm – no special kill chamber',
+      'Rotten flesh for cleric villager trades',
+      'No mobs, no kill chamber – drops collect inside',
       'In-game handover by staff',
     ],
     faq: [
       {
         q: 'Why buy zombie spawners instead of skeletons?',
-        a: 'Price and simplicity. Zombies are melee only, so a basic drop chute works, and the spawner costs less. Skeletons earn more per hour from bones and arrows, which is why most farms end up with both.',
+        a: 'Price. A zombie spawner costs less than half a skelly. Skeletons earn more from bones and arrows, which are in steady demand on /orders, so most players only start with zombies on a tight budget and move to skellies later.',
       },
       {
         q: 'What is the minimum order?',
@@ -385,8 +393,8 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'Creeper spawners for DonutSMP at $0.69 each, $0.65 from 25. Gunpowder for firework rockets – the perfect partner for an elytra. Delivered in-game.',
     description:
-      'Creeper spawners exist for one reason on DonutSMP: gunpowder. Every creeper you farm is a step toward stacks of firework rockets, and if you fly an elytra for base hunting you burn through rockets fast. Gunpowder also sells well to other fliers. Price: $0.69 per spawner, $0.65 from 25, up to 1,000 per line.\n\n' +
-      'Creeper farms need a cat or a careful kill setup so nothing explodes, but once built they run unattended. A handful of spawners is enough for personal use; a few dozen will supply a whole group or a rocket shop.\n\n' +
+      'Creeper spawners exist for one reason on DonutSMP: gunpowder. Every creeper spawner is a step toward stacks of firework rockets, and if you fly an elytra for base hunting you burn through rockets fast. Gunpowder also sells well to other fliers. Price: $0.69 per spawner, $0.65 from 25, up to 1,000 per line.\n\n' +
+      'On DonutSMP spawners do not spawn mobs, so nothing ever explodes: the gunpowder simply collects inside the spawner, which you open like a chest, and Shift + right-click stacks more creeper spawners onto the same block. A handful of spawners is enough for personal use; a few dozen will supply a whole group or a rocket stall.\n\n' +
       'Like all items, these are handed over in-game by our staff. Join DonutSMP with the username on your order, accept the teleport from our delivery account and pick up the spawners – usually within 5–30 minutes while we are online.',
     bullets: [
       '$0.69 each, $0.65 at 25+',
@@ -409,25 +417,29 @@ export const productCopy: Record<string, ProductCopy> = {
   'blaze-spawner': {
     seoTitle: 'DonutSMP Blaze Spawner – $0.89 each | DonutCoins',
     metaDescription:
-      'Blaze spawners for DonutSMP at $0.89 each, $0.84 from 25. Blaze rods for brewing and the best XP on the server. Delivered in-game by staff within minutes.',
+      'Blaze spawners for DonutSMP at $0.89 each, $0.84 from 25. Blaze powder for brewing – no blazes, no kill chamber. Delivered in-game by staff within minutes.',
     description:
-      'Blaze spawners are the premium XP source on DonutSMP. Blazes give more experience per kill than any overworld mob and drop blaze rods, which feed brewing stands, fuel and the potion market. Each spawner is $0.89, or $0.84 from 25, with up to 1,000 per line.\n\n' +
-      'Players buy blaze spawners to level enchantments quickly, to mass-produce potions for PvP and to sell rods to brewers. Because blazes shoot fireballs, the farm needs a proper kill chamber, but the payoff is some of the fastest XP you can get without leaving your base.\n\n' +
+      'Blaze spawners are the brewer\'s spawner on DonutSMP. They produce blaze powder – not blaze rods – straight into the spawner\'s own storage, with no blazes to fight: open it like a chest and collect. Powder fuels brewing stands and goes into strength and other PvP potions. Each spawner is $0.89, or $0.84 from 25, with up to 1,000 per line.\n\n' +
+      'Players buy blaze spawners to mass-produce potions for PvP and to sell powder to brewers. Because no mobs spawn, there is no fire-proof kill chamber to build – place the spawner, Shift + right-click more blaze spawners onto it to stack them, and empty it whenever you need powder. Powder cannot be turned back into rods, so if you still need rods to craft brewing stands, get those separately.\n\n' +
       'Spawners are handed over in-game by our staff: be online on DonutSMP with the username from your order, accept the teleport request and pick up the items. Larger quantities arrive in shulker boxes. Usually within 5–30 minutes while we are online.',
     bullets: [
       '$0.89 each, $0.84 at 25+',
-      'Top-tier XP per kill',
-      'Blaze rods for brewing and resale',
+      'No blazes, no kill chamber – powder collects inside',
+      'Blaze powder for brewing and resale',
       'In-game handover by real staff',
     ],
     faq: [
       {
         q: 'Are blaze spawners worth it over skeletons?',
-        a: 'For XP, yes – blazes give far more per kill. For money, skeletons are the steadier pick – same $0.89 price, and their drops sell more reliably. If enchanting is your goal, blazes are the better buy.',
+        a: 'For money, skeletons are the steadier pick – same $0.89 price, and bones are in steady demand on /orders. Blaze spawners make sense if you brew a lot: blaze powder fuels every brewing stand and goes into strength potions.',
+      },
+      {
+        q: 'Do blaze spawners give blaze rods?',
+        a: 'No. On DonutSMP a blaze spawner produces blaze powder, not rods. Older guides that promise rods describe vanilla mob farms, not how spawners work on this server.',
       },
       {
         q: 'Do blaze spawners work outside the Nether?',
-        a: 'They are standard spawner items and spawn blazes wherever you place them in the dark. Build the chamber with fire resistance in mind.',
+        a: 'Yes. DonutSMP spawners do not spawn mobs – they generate blaze powder into their own storage – so you do not need a Nether-style spawning area or a fire-proof chamber.',
       },
     ],
   },
@@ -438,7 +450,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Buy a DonutSMP elytra with Unbreaking III and Mending for $28.49. Fly to bases, escape fights, skip the End grind – handed over in-game within minutes.',
     description:
       'The elytra is the most wanted item on DonutSMP, and for good reason: it turns hours of walking into minutes of flight, makes base hunting practical and gets you out of fights nobody else can escape. Ours comes with Unbreaking III and Mending for $28.49, so it repairs itself as you collect XP and will last as long as you do.\n\n' +
-      'Elytras are rare on the server because the End is picked clean and every ship has been looted. That scarcity is why player shops charge a fortune in coins – buying one here is often cheaper than grinding the money to pay a player.',
+      'Elytras are rare on the server because they only come from the End – hosted on the NA East region alone and inside a world border – and most of its ships were looted long ago. That scarcity is why player shops charge a fortune in coins – buying one here is often cheaper than grinding the money to pay a player.',
     bullets: [
       'Unbreaking III + Mending – self-repairing',
       '$28.49, usually cheaper than the player market',
@@ -774,7 +786,7 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'Heavy cores for DonutSMP at $1.29 each – the trial chamber vault drop needed to craft a mace. Buy one to craft or several to hold. Delivered in-game.',
     description:
-      'The heavy core is the rarest crafting ingredient in the game: it only comes from ominous vaults in trial chambers, and one core plus a breeze rod makes a mace. On DonutSMP, where maces decide fights, the core is both a crafting item and a trade item with a stable value. Price: $1.29 each, up to 64 per order.\n\n' +
+      'The heavy core is the rarest crafting ingredient in the game: it only comes from ominous vaults in trial chambers, and one core plus a breeze rod makes a mace. On DonutSMP, where maces are among the most prized PvP weapons, the core is both a crafting item and a trade item with a stable value. Price: $1.29 each, up to 64 per order.\n\n' +
       'Players buy heavy cores to craft their own mace with the enchantments they want, to hold as an investment, or to resell to PvP players who do not want to run trial chambers. It appears in the God Mystery Box and Legendary Crate pools too.',
     bullets: [
       '$1.29 each, up to 64 per order',
@@ -1145,7 +1157,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Netherite Armor Shulker for DonutSMP: six maxed netherite sets – Protection IV, Unbreaking III, Mending, Thorns III – for $18.99 instead of $29.94.',
     description:
       'Six complete god-tier netherite sets in one shulker box for $18.99. Every one of the 24 pieces carries Protection IV, Unbreaking III, Mending and Thorns III – the same spec as our single Netherite Armor Set, which costs $4.99, so the shulker saves you about $11 against six singles ($29.94).\n\n' +
-      'This is the group buy: gear a whole faction before a war, stock a player shop with sets that sell for coins, or keep five spares so a death on DonutSMP never slows you down. Orders of $15 or more also get the 5% spending discount at checkout.',
+      'This is the group buy: gear your whole crew before a war, stock a player shop with sets that sell for coins, or keep five spares so a death on DonutSMP never slows you down. Orders of $15 or more also get the 5% spending discount at checkout.',
     bullets: [
       '6 maxed netherite sets (24 pieces) in one shulker',
       'Protection IV, Unbreaking III, Mending, Thorns III',
@@ -1170,12 +1182,12 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'God netherite sword for DonutSMP – Sharpness V, Unbreaking III, Mending, Fire Aspect II, Looting III – for $0.99. Ready for PvP and mob farms.',
     description:
-      'A fully enchanted netherite sword for under a dollar: Sharpness V, Unbreaking III, Mending, Fire Aspect II and Looting III, for $0.99. It is the standard PvP blade on DonutSMP and the best tool for farming spawners, where Looting III multiplies the bones, rods and iron you sell.\n\n' +
-      'Players buy it to replace a sword lost in a fight, to equip a new alt or recruit, or in multiples because at this price it is cheaper than the XP and books to enchant one. Fire Aspect II also makes it a solid choice for killing golems and skeletons quickly in a farm.',
+      'A fully enchanted netherite sword for under a dollar: Sharpness V, Unbreaking III, Mending, Fire Aspect II and Looting III, for $0.99. It is the standard PvP blade on DonutSMP, and Looting III pays off on any mob you kill by hand – note that DonutSMP spawners do not spawn mobs, so Looting does nothing for spawner drops.\n\n' +
+      'Players buy it to replace a sword lost in a fight, to equip a new alt or recruit, or in multiples because at this price it is cheaper than the XP and books to enchant one. Fire Aspect II adds burn damage on every hit, which helps in a fight and when clearing mobs on a base-hunting trip.',
     bullets: [
       'Sharpness V, Unbreaking III, Mending, Fire Aspect II, Looting III',
       '$0.99 – cheaper than enchanting it yourself',
-      'PvP blade and spawner-farm tool in one',
+      'PvP blade with Looting for mob drops',
       'Up to 100 per order',
     ],
     faq: [
@@ -1243,13 +1255,13 @@ export const productCopy: Record<string, ProductCopy> = {
   mace: {
     seoTitle: 'DonutSMP Mace (Maxed) – $1.49 | DonutCoins',
     metaDescription:
-      'Maxed mace for DonutSMP – Density V, Wind Burst III, Mending, Unbreaking III – for $1.49. The one-hit weapon that rules PvP. Delivered in-game.',
+      'Maxed mace for DonutSMP – Density V, Wind Burst III, Mending, Unbreaking III – for $1.49. Huge smash damage from height. Delivered in-game.',
     description:
-      'The mace changed PvP on DonutSMP: fall from height, land a hit and the smash damage scales with the drop, enough to one-shot full netherite. Ours comes fully enchanted – Density V for extra damage per block fallen, Wind Burst III to launch yourself back up for the next hit, plus Mending and Unbreaking III – for $1.49.\n\n' +
+      'The mace is one of the most feared weapons on DonutSMP, even on a server where crystal PvP dominates: fall from height, land a hit and the smash damage scales with the drop, enough to wreck a fully armored player in one or two hits. Ours comes fully enchanted – Density V for extra damage per block fallen, Wind Burst III to launch yourself back up for the next hit, plus Mending and Unbreaking III – for $1.49.\n\n' +
       'Crafting one yourself means finding a heavy core in an ominous trial chamber vault, then enchanting a weapon that only takes books from the same chambers. Buying the finished mace is faster – the core alone is $1.29 and still needs a breeze rod and crafting.',
     bullets: [
       'Density V, Wind Burst III, Mending, Unbreaking III',
-      'One-shot potential against full netherite',
+      'Huge smash damage from height',
       '$1.49 – less than a heavy core',
       'Up to 64 per order',
     ],
@@ -1295,26 +1307,27 @@ export const productCopy: Record<string, ProductCopy> = {
   },
 
   'amethyst-pickaxe': {
-    seoTitle: 'DonutSMP Amethyst Pickaxe – $4.79 | DonutCoins',
+    seoTitle: 'DonutSMP Amethyst (Shard) Pickaxe – $4.79 | DonutCoins',
     metaDescription:
-      'The DonutSMP Amethyst Pickaxe – the server\'s custom ultra-fast pickaxe for base hunting and mining – for $4.79. Rare in-game, handed over by our staff.',
+      'The DonutSMP Amethyst Pickaxe, now called the Shard Pickaxe: mines 3×3 but self-destructs on a 1-day timer. $4.79, handed over in-game by our staff.',
     description:
-      'The Amethyst Pickaxe is a DonutSMP-exclusive item – a custom pickaxe that mines far faster than any vanilla tool. It is the base hunter\'s weapon of choice: tunneling through walls, stripping obsidian vaults and digging out hidden stashes in a fraction of the time a netherite pickaxe needs. We sell it for $4.79.\n\n' +
-      'Because it is a server custom item it cannot be crafted and only enters the economy through limited in-game sources, which is why it carries a \'Rare\' tag here and a steep price in coins on the player market. Many buyers pair it with an elytra and totems – which is exactly what the Basehunter Bundle does.',
+      'The Amethyst Pickaxe is DonutSMP\'s custom drill – the item the server now calls the Shard Pickaxe. Every swing mines a 3×3 area, nine blocks at once, with the speed and durability of a maxed netherite pickaxe, which makes it the fastest way to tunnel, strip out a hillside or dig into a hidden stash. We sell it for $4.79, up to 32 per order.\n\n' +
+      'Read this before you buy: the pickaxe has a built-in self-destruct timer of about one day (it used to be three), after which the item is gone. It is a tool for one intense mining or base-hunting session, not a permanent upgrade – plan to use it as soon as it is delivered. If you want a pickaxe that lasts, the Netherite Pickaxe (God) at $0.99 has Mending and keeps working. The timer is set by the server and can change, so ask on Discord for the current behaviour before ordering.\n\n' +
+      'On the server the Shard Pickaxe comes from the Shard Shop and is traded on /ah, so its coin price moves with shard prices. Many buyers pair it with an elytra and totems for a base-hunting run – which is exactly what the Basehunter Bundle does.',
     bullets: [
-      'DonutSMP custom pickaxe – ultra-fast mining',
-      'Base hunter\'s essential',
-      'Cannot be crafted – rare on the player market',
+      'DonutSMP custom Shard Pickaxe – 3×3 mining',
+      'Self-destructs after a 1-day timer – use it right away',
+      'Maxed-netherite speed and durability',
       '$4.79, up to 32 per order',
     ],
     faq: [
       {
         q: 'What does the Amethyst Pickaxe do on DonutSMP?',
-        a: 'It is a server-custom pickaxe that mines dramatically faster than a maxed netherite pickaxe. Players use it mainly for base hunting – breaking into claims, vaults and tunnels quickly.',
+        a: 'It is the server-custom pickaxe now called the Shard Pickaxe, or "the drill": every swing mines a 3×3 area, so tunnelling and digging into bases goes far faster than with a single-block pickaxe. DonutSMP has no land claims, which is why base hunters like it.',
       },
       {
-        q: 'Is it enchanted?',
-        a: 'It comes as the server issues it; the speed is built into the item rather than coming from Efficiency. Ask on Discord if you need the exact current stats before buying.',
+        q: 'Does the Amethyst Pickaxe last forever?',
+        a: 'No. It has a self-destruct timer of about one day (formerly three days), after which it disappears. Use it right after delivery. The timer is controlled by the server and can change, so ask on Discord for the current stats before ordering.',
       },
       {
         q: 'How is it delivered?',
@@ -1354,12 +1367,12 @@ export const productCopy: Record<string, ProductCopy> = {
       'A shulker of 27 maxed netherite swords for DonutSMP – Sharpness V, Fire Aspect II, Looting III, Mending – for $21.99 instead of $26.73 as singles.',
     description:
       'Twenty-seven god netherite swords in one shulker box for $21.99. Each sword carries Sharpness V, Unbreaking III, Mending, Fire Aspect II and Looting III – the same spec as our $0.99 single – so the shulker saves about $4.74 against 27 singles and qualifies for the 5% spending discount on carts of $15 or more.\n\n' +
-      'Swords in bulk are bought by player shops, by factions arming up for a war on DonutSMP, and by farm owners who hand out Looting III blades to everyone grinding their spawners. Twenty-seven is a full shulker, which also makes it the neat unit for reselling.',
+      'Swords in bulk are bought by player shops, by groups of friends arming up for a war on DonutSMP, and by crews who hand a Looting III blade to everyone on a mob-farm or base-hunting run. Twenty-seven is a full shulker, which also makes it the neat unit for reselling.',
     bullets: [
       '27 maxed netherite swords in one shulker',
       'Sharpness V, Fire Aspect II, Looting III, Mending, Unbreaking III',
       '$21.99 vs $26.73 for singles',
-      'Faction and shop stock',
+      'Group and shop stock',
     ],
     faq: [
       {
@@ -1379,8 +1392,8 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'DonutSMP Starter Bundle for $13.49: 20M money, 15 skeleton spawners and six diamond armor sets in one order. Money by /pay, items in-game.',
     description:
-      'The Starter Bundle is the fastest way to go from fresh spawn to self-sufficient on DonutSMP: 20M money, 15 Skeleton Spawners and a Diamond Armor Shulker (six full Protection IV sets) for $13.49 – about $14.84 as separate lines – one order, one checkout and one handover instead of three separate lines.\n\n' +
-      'The idea is simple. The spawners become your first farm and income, the money covers a claim, hoppers and chests to build it, and the armor keeps you alive while you set up. Fifteen skellies – around 270M coins\' worth at their in-game value – is enough to produce real bones-and-arrows money from day one.',
+      'The Starter Bundle is the fastest way to go from your first /rtp to self-sufficient on DonutSMP: 20M money, 15 Skeleton Spawners and a Diamond Armor Shulker (six full Protection IV sets) for $13.49 – about $14.84 as separate lines – one order, one checkout and one handover instead of three separate lines.\n\n' +
+      'The idea is simple. The spawners become your first farm and income, the money covers chests and building blocks around them, and the armor keeps you alive while you set up. Fifteen skellies – around 270M coins\' worth at the price we see in our own deals – stacked into one or two blocks produce real bones-and-arrows money from day one.',
     bullets: [
       '20M money + 15 skeleton spawners + 6 diamond sets',
       'One order, one handover for all three lines',
@@ -1408,8 +1421,8 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'Spawner Farm Bundle for DonutSMP: 64 skeleton spawners plus 10M money to build the farm, for $45.99 in one order. Spawners in-game, money by /pay.',
     description:
-      'A full stack of 64 Skeleton Spawners plus 10M money, for $45.99 – about $51.06 as separate lines. Sixty-four skellies is the classic DonutSMP farm size – one big spawner room, a drop chute, a kill platform – and the 10M pays for the hoppers, chests, water and claim blocks to build it.\n\n' +
-      'At about 18M coins per skelly in-game, the stack alone is worth more than 1B coins. Players buy this bundle when they are done with small farms and want an income that runs while they are offline. Bones sell steadily, arrows sell steadily, and the XP from 64 stacked spawners keeps every Mending tool and armor piece topped up. It is also the bundle to grab when a base raid wipes your old farm.',
+      'A full stack of 64 Skeleton Spawners plus 10M money, for $45.99 – about $51.06 as separate lines. Sixty-four skellies is the classic DonutSMP farm size, and there is no mob grinder to build: spawners here drop bones and arrows straight into their own storage. Spread them over a few separate stacks – several stacks produce more than one giant one – and use the 10M for chests, blocks and a well-hidden spot.\n\n' +
+      'At the roughly 18M coins a skelly goes for in our own deals, the stack alone is worth more than 1B coins – fan price trackers list lower values, so see that as our reference. Players buy this bundle when they are done with small farms and want an income that needs no grinding. Bones sell steadily on /orders, arrows sell too, and the spawners keep filling up while you play. It is also the bundle to grab when a base raid wipes your old farm.',
     bullets: [
       '64 skeleton spawners – a full stack',
       '10M money to build the farm',
@@ -1438,7 +1451,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Pro Bundle for DonutSMP: 50M money, an elytra with Unbreaking III and Mending and 16 skeleton spawners for $40.99 – about $45.23 as separate lines.',
     description:
       'The Pro Bundle packs the three things an established DonutSMP player wants into one order: 50M money, an Elytra (Unbreaking III + Mending) and 16 Skeleton Spawners, for $40.99, delivered together in one order – about $45.23 if you bought the parts separately, and the 8% spending discount comes off on top at checkout.\n\n' +
-      'It is the upgrade path after a starter farm: the elytra opens up base hunting and fast travel, the spawners double a small farm, and 50M is enough for a couple more spawners at in-game prices, a bigger claim or whatever the player market has on offer that week.',
+      'It is the upgrade path after a starter farm: the elytra opens up base hunting and fast travel, the spawners double a small farm, and 50M is enough for a couple more spawners at the prices we see in our deals, a stack of /ah gear or whatever the player market has on offer that week.',
     bullets: [
       '50M money + elytra + 16 skeleton spawners',
       'Elytra with Unbreaking III and Mending',
@@ -1467,7 +1480,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Basehunter Bundle for DonutSMP: elytra, Amethyst Pickaxe, 16 totems and 20M money for $33.99 – the full base-hunting loadout, delivered by our staff.',
     description:
       'Base hunting on DonutSMP needs four things: a way to get there, a way to get in, a way to survive and money to make the trip worth it. The Basehunter Bundle has all four – an Elytra (Unbreaking III + Mending), the server-custom Amethyst Pickaxe, 16 Totems of Undying and 20M money – for $33.99 instead of about $37.80 as separate lines. On its own that sits in the 5% spending tier ($32.29 at checkout).\n\n' +
-      'The elytra covers thousands of blocks in minutes, the Amethyst Pickaxe chews through walls and vaults faster than any netherite tool, sixteen totems mean traps and ambushes do not end the run, and the 20M buys rockets, food and whatever you cannot loot.',
+      'The elytra covers thousands of blocks in minutes, the Amethyst Pickaxe – the server\'s 3×3 Shard Pickaxe – digs into vaults far faster than a single-block tool, sixteen totems mean traps and ambushes do not end the run, and the 20M buys rockets, food and whatever you cannot loot. Plan the trip for the day of delivery: the pickaxe self-destructs after its 1-day timer.',
     bullets: [
       'Elytra + Amethyst Pickaxe + 16 totems + 20M',
       'Complete base-hunting loadout',
@@ -1481,7 +1494,7 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'What does the Amethyst Pickaxe do?',
-        a: 'It is a DonutSMP-exclusive pickaxe that mines far faster than a maxed netherite one, which is why base hunters use it to break into vaults and tunnels quickly.',
+        a: 'It is DonutSMP\'s custom Shard Pickaxe: it mines a 3×3 area per swing, which is why base hunters use it to break into vaults and tunnels quickly. It has a self-destruct timer of about one day, so use it right after delivery.',
       },
       {
         q: 'Do I need rockets?',
@@ -1496,7 +1509,7 @@ export const productCopy: Record<string, ProductCopy> = {
       'Rich Bundle for DonutSMP: 250M money, a God Mystery Box, an elytra and the full PvP Kit for $59.99 in one order, with 8% off at checkout.',
     description:
       'The Rich Bundle is the whale order: 250M money, a God Mystery Box (three drops from the top pool), a guaranteed Elytra and the complete PvP Kit – maxed netherite set, sword, pickaxe and 8 totems – for $59.99 (about $66.97 as separate lines), and the 8% spending discount for carts over $40 comes off on top.\n\n' +
-      'It is built for players who want to arrive on DonutSMP, or come back to it, already at the top: a balance that competes on /baltop, the gear to hold it, flight, and a box roll that can add a second elytra, dragon heads or another 250M.',
+      'It is built for players who want to arrive on DonutSMP, or come back to it, already set up: a big balance, the gear to protect it, flight, and a box roll that can add a second elytra, dragon heads or another 250M.',
     bullets: [
       '250M + God Mystery Box + elytra + PvP Kit',
       'Everything in one order and one checkout',
@@ -1526,8 +1539,8 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'Buy a ready-made DonutSMP starter base for $4.99: a hidden base with chests, a farm and a spawner room. Coordinates sent by Discord ticket. Limited stock.',
     description:
-      'A Starter Base is a small, hidden base on DonutSMP that we have already built and stocked: storage chests, a basic crop farm and a spawner room, in a quiet spot away from spawn. For $4.99 you skip the first evening of digging and start playing from a place that is actually safe.\n\n' +
-      'Bases are different from everything else in our DonutSMP shop because they cannot be handed over as items. After payment you open a ticket on our Discord with your order ID and we send you the coordinates and any notes about the layout. From then on it is yours – claim it, expand it, or strip it.\n\n' +
+      'A Starter Base is a small, hidden base on DonutSMP that we have already built and stocked: storage chests, a basic crop farm and a spawner room, in a quiet spot away from the busiest /rtp areas. For $4.99 you skip the first evening of digging and start playing from a hidden spot – on a semi-anarchy server no base is ever truly safe, but a quiet one buys you time.\n\n' +
+      'Bases are different from everything else in our DonutSMP shop because they cannot be handed over as items. After payment you open a ticket on our Discord with your order ID and we send you the coordinates and any notes about the layout. From then on it is yours – expand it, move it or strip it. DonutSMP has no land claims, so keep the coordinates to yourself.\n\n' +
       'Because every base is a real build on the live server, stock is limited and the listing shows as sold out whenever none are ready. One base per order; check back or ask on Discord if you want to be told when the next one is available.',
     bullets: [
       'Pre-built hidden base with chests, farm and spawner room',
@@ -1538,7 +1551,7 @@ export const productCopy: Record<string, ProductCopy> = {
     faq: [
       {
         q: 'How do I receive a base?',
-        a: 'Not in-game. After your payment is confirmed, open a ticket on our Discord with your order ID and we send the coordinates plus a short description of what is there. Claim the area as soon as you arrive.',
+        a: 'Not in-game. After your payment is confirmed, open a ticket on our Discord with your order ID and we send the coordinates plus a short description of what is there. DonutSMP has no land claims, so keep the location to yourself.',
       },
       {
         q: 'Why is the Starter Base sold out?',
@@ -1546,7 +1559,7 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'Is the base guaranteed to be untouched?',
-        a: 'We never resell the same coordinates twice. Once they are yours, keeping the base secret and claimed is up to you – claim it on arrival.',
+        a: 'We never resell the same coordinates twice. Once they are yours, keeping the base secret is up to you – there are no land claims on DonutSMP, so anyone who finds it can raid it.',
       },
     ],
   },
@@ -1572,7 +1585,7 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'How is a Loaded Base delivered?',
-        a: 'By coordinates in a Discord ticket, not in-game. Open the ticket with your order ID after paying; we reply with the location and notes. Claim it as soon as you arrive.',
+        a: 'By coordinates in a Discord ticket, not in-game. Open the ticket with your order ID after paying; we reply with the location and notes. There are no land claims on DonutSMP, so move what you care about and keep the location secret.',
       },
       {
         q: 'Can I get a refund if I do not like the base?',

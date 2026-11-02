@@ -35,7 +35,7 @@ export default function IrlTradeLanding() {
           {
             id: 'irl-faq-ban',
             q: 'What happens if I get banned?',
-            a: <p>A ban is between you and the server; we cannot refund a delivered order because of a later punishment. That is why we are upfront about the rules here and on every order.</p>,
+            a: <p>A ban – which for real-money trading on {server} can be permanent and come with a wipe – is between you and the server; we cannot refund a delivered order because of a later punishment. That is why we are upfront about the rules here and on every order.</p>,
           },
         ];
 
@@ -148,8 +148,8 @@ export default function IrlTradeLanding() {
 
       <h2 id="rules">Server rules and your risk</h2>
       <Callout tone="warn" title="Read this before you buy anywhere">
-        {server}'s rules prohibit trading in-game items or money for real-world value. Enforcement – warnings, balance resets, bans – is entirely the server's decision and can change
-        without notice. Buying from {store} or anyone else is at your own risk and your own responsibility. We are not affiliated with {server}, Mojang or Microsoft.
+        {server}'s rules prohibit trading in-game items or money for real-world value, even when both sides agree – only purchases from the official store are allowed. The server
+        has handed out permanent bans and balance/item wipes for it, including to players high on /baltop, and enforcement is entirely its decision and can change without notice. Buying from {store} or anyone else is at your own risk and your own responsibility. We are not affiliated with {server}, Mojang or Microsoft.
       </Callout>
       <p>
         What we do to keep the risk low: we deliver with ordinary player actions (/pay, teleports, item drops), we spread deliveries across accounts and times, we never mention

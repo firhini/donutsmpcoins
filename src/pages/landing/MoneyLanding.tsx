@@ -82,7 +82,7 @@ export default function MoneyLanding() {
       }
     >
       <p>
-        Money is the thing that gets you going on {server}: spawners, claims, shop slots, repairs, the occasional ransom. Grinding it takes days; buying it takes minutes. This page shows
+        Money is the thing that gets you going on {server}: spawners from other players, gear on the auction house, buy orders, bounties, the occasional ransom. Grinding it takes days; buying it takes minutes. This page shows
         the exact rates we charge right now, how the bulk tiers work and what happens after you pay – no marketing fog, just the numbers.
       </p>
 
@@ -225,10 +225,10 @@ export default function MoneyLanding() {
       </p>
       <ul>
         <li>
-          <strong>Supply from farms.</strong> When spawner farms get cheaper or the server buffs sell prices, money floods in and the real-world rate drops. Nerfs do the opposite.
+          <strong>Supply from farms.</strong> When spawner farms get cheaper or the server raises /sell prices, money floods in and the real-world rate drops. Nerfs do the opposite.
         </li>
         <li>
-          <strong>Resets and new seasons.</strong> Right after a reset everyone wants a head start and nobody has cash, so rates spike for a few days.
+          <strong>Big server updates.</strong> {server}'s current season is declared permanent, so there are no map resets – but large updates, like the June 2026 one that removed the old /shop, server spawner sales and sell multipliers, change how much money enters the game and move rates for a while.
         </li>
         <li>
           <strong>Our own stock.</strong> We keep a reserve so orders ship immediately. If a big order drains it, the price can tick up until the reserve is rebuilt.

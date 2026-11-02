@@ -30,7 +30,7 @@ export default function SpawnersLanding() {
           {
             id: 'sp-faq-silk',
             q: 'Can I move spawners after delivery?',
-            a: <p>Yes – they are normal spawner items. Place them, and pick them up again with a silk-touch pickaxe if the server allows it (it does on {server}).</p>,
+            a: <p>We cannot promise it. How – and whether – placed spawners can be picked back up on {server} is not clearly documented, and reports differ on whether a pickaxe enchantment is needed or stored drops are lost when one is broken. Pick the spot before you place them, and ask on Discord if you need the current details.</p>,
           },
           {
             id: 'sp-faq-stock',
@@ -84,9 +84,10 @@ export default function SpawnersLanding() {
       }
     >
       <p>
-        Spawners are the engine of a {server} base. A room full of skeleton spawners prints bones, arrows and XP while you are away; iron golems turn into iron blocks; blazes feed your
-        brewing stand and your sell chest. Mining them yourself with silk touch is slow and risky, and the in-game auction house is expensive and empty when you need it – which is
-        exactly why we stock them.
+        Spawners are the engine of a {server} base. They work differently from vanilla: a {server} spawner never spawns mobs – it fills its own storage with drops, which you open
+        like a chest, and Shift + right-click stacks more spawners of the same type into one block. Skeleton spawners give bones and arrows, iron golems iron ingots, blazes blaze
+        powder for your brewing stand. Since the June 2026 update the server no longer sells spawners at all, so every one changes hands between players – and finding a seller with
+        enough stock when you need it is exactly why we keep them in stock.
       </p>
 
       <h2 id="prices">Prices &amp; stock</h2>
@@ -137,42 +138,42 @@ export default function SpawnersLanding() {
 
       <h2 id="skellies">Skeletons vs the rest</h2>
       <p>
-        Most people buy skeleton spawners, and for good reason: a skeleton farm needs nothing but a dark room, a water stream and a kill chamber. Bones become bone meal for your crop
-        farms, arrows sell, and the XP is enough to keep a mending set alive forever. They are the cheapest spawner we sell and they come with the deepest bulk tiers because we move so
-        many.
+        Most people buy skeleton spawners, and for good reason: there is nothing to build around them – no dark room, no water stream, no kill chamber. Bones and arrows collect
+        inside the spawner, bones are in steady demand on buy orders and become bone meal for your crop farms, and arrows sell. They come with the deepest bulk tiers in our shop
+        because we move so many.
       </p>
       <div className="prose-grid">
         <div className="card">
           <h3>
             <Icon name="flame" size={16} /> Iron golem
           </h3>
-          <p>Iron is the universal currency for tools, anvils, hoppers and rails. A golem room pays for itself quickly, but each spawner costs more and needs a proper kill setup (lava blade or trapdoor crusher).</p>
+          <p>Iron is the universal currency for tools, anvils, hoppers and rails. The spawner fills up with iron ingots on its own – no golems to kill – but each one costs more than a skelly.</p>
         </div>
         <div className="card">
           <h3>
             <Icon name="flame" size={16} /> Blaze
           </h3>
-          <p>Top-tier XP and blaze rods for potions and fuel. Place them in a nether-proof room with a decent sword – blazes hit back and set things on fire.</p>
+          <p>Blaze powder – not rods – for brewing potions. No blazes spawn, so there is no fire-proof kill room to build; just open the spawner and collect.</p>
         </div>
         <div className="card">
           <h3>
             <Icon name="flame" size={16} /> Zombie
           </h3>
-          <p>The budget option: rotten flesh for cleric trades, iron and carrot drops, and XP comparable to skeletons. Great for a first farm.</p>
+          <p>The budget option: rotten flesh for cleric villager trades at the lowest price per spawner in our shop. Fine for a first spawner, but it earns less than a skelly.</p>
         </div>
         <div className="card">
           <h3>
             <Icon name="flame" size={16} /> Creeper
           </h3>
-          <p>Gunpowder for firework rockets – essential once you own an Elytra. Needs a cat-free, trapdoor-roofed room so creepers spawn and skeletons do not.</p>
+          <p>Gunpowder for firework rockets – essential once you own an Elytra. Nothing explodes: the gunpowder simply collects inside the spawner.</p>
         </div>
       </div>
 
       <h2 id="how-many">How many do you need?</h2>
       <p>
-        A single spawner is a nice start; a farm begins at around a dozen. Spawner caps and mob caps vary, but on most setups 16–32 skeleton spawners in one room saturate the kill
-        chamber. Beyond 64 you get more from building a second room elsewhere than from stacking. If you are planning a serious farm, check the bundles – they combine spawners with
-        the money you need to claim and build the room:
+        A single spawner is a nice start; a farm begins at around a dozen. Output per spawner shrinks as one stack grows, so several separate stacks in different blocks produce more
+        than one giant stack – spread big orders out. There are no land claims on {server}, so hide the room well. If you are planning a serious farm, check the bundles – they
+        combine spawners with money for building and gear:
       </p>
       {bundles.length > 0 && <ProductGrid products={bundles} columns={2} compact />}
       {crates.length > 0 && (
@@ -193,7 +194,7 @@ export default function SpawnersLanding() {
       </ol>
       <p>{config.delivery.etaText}</p>
       <Callout tone="warn" title="Keep the drop safe">
-        Do not accept deliveries at spawn or in a crowded area – other players can steal dropped items. Your base or a quiet chunk is best. We can also place items directly into a chest at your coordinates if you prefer.
+        Do not accept deliveries in a crowded area – other players can steal dropped items. Your base or a quiet chunk is best. We can also place items directly into a chest at your coordinates if you prefer.
       </Callout>
 
       <h2 id="faq">Spawner FAQ</h2>
@@ -215,17 +216,17 @@ export default function SpawnersLanding() {
 function useCase(id: string): string {
   switch (id) {
     case 'skeleton-spawner':
-      return 'XP, bones, arrows – the all-rounder';
+      return 'Bones & arrows – the all-rounder';
     case 'iron-golem-spawner':
       return 'Iron for everything';
     case 'cow-spawner':
-      return 'Leather & food – top value';
+      return 'Raw beef – high value';
     case 'zombie-spawner':
-      return 'Cheap XP, villager trades';
+      return 'Rotten flesh, budget pick';
     case 'creeper-spawner':
       return 'Gunpowder for rockets';
     case 'blaze-spawner':
-      return 'Best XP, blaze rods';
+      return 'Blaze powder for brewing';
     default:
       return 'Farms';
   }
