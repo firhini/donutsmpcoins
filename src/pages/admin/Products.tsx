@@ -4,7 +4,7 @@ import { Seo } from '../../components/ui/Seo';
 import { Icon } from '../../components/ui/Icons';
 import { Modal } from '../../components/ui/Modal';
 import { useToast } from '../../context/ToastContext';
-import { createProduct, deleteProduct, updateProduct, type CreateProductInput, type ProductPatch } from '../../lib/adminApi';
+import { createProduct, deleteProduct, resetProduct, updateProduct, type CreateProductInput, type ProductPatch } from '../../lib/adminApi';
 import { useAction } from '../../components/admin/hooks';
 import { useAdminProducts } from '../../components/admin/useProducts';
 import { ErrorBlock, PageHead } from '../../components/admin/Bits';
@@ -90,7 +90,7 @@ export default function Products() {
       confirmLabel: 'Delete',
       danger: true,
       onConfirm: async () => {
-        const ok = await run(`del:${p.id}`, () => deleteProduct(p.id), `${p.name} removed`);
+        const ok = await run(`del:${p.id}`, () => deleteProduct(p.id).then(() => true), `${p.name} removed`);
         if (ok !== undefined) {
           cat.setData((d) => (d ? { ...d, products: d.products.filter((x) => x.id !== p.id) } : d));
           void cat.reload(true);
@@ -197,6 +197,10 @@ export default function Products() {
                   busy={isBusy(`save:${p.id}`) || isBusy(`del:${p.id}`)}
                   onSave={(patch) => save(p, patch)}
                   onDelete={() => remove(p)}
+                  onReset={async () => {
+                    await run(`save:${p.id}`, () => resetProduct(p.id), `${p.name} reset to default`);
+                    void cat.reload(true);
+                  }}
                 />
               ))}
             </tbody>

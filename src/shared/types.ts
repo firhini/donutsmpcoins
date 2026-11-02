@@ -243,6 +243,9 @@ export interface Order {
   referralRewarded?: boolean;
   /** amount granted to the referrer (reverted on refund/cancel) */
   referralRewardCents?: number;
+  /** store credit given back after delivery (settings.cashback) */
+  cashbackCents?: number;
+  cashbackReversed?: boolean;
   /** applied store credit was returned (cancel/refund) */
   creditRestored?: boolean;
   /** reserved stock was given back (cancel/refund) */
@@ -517,6 +520,8 @@ export interface SiteSettings {
     requireGuild: boolean;
   };
   referral: { enabled: boolean; friendPercent: number; referrerPercent: number };
+  /** % of every paid order given back as store credit once it is delivered */
+  cashback: { enabled: boolean; percent: number };
   reviewRewardPercent: number;
   welcomeCoupon: { enabled: boolean; code: string; percent: number };
   currencies: CurrencyConfig[];
@@ -555,6 +560,7 @@ export interface PublicConfig {
   spinRequireLogin: boolean;
   spinRequireGuild: boolean;
   referral: SiteSettings['referral'];
+  cashback: SiteSettings['cashback'];
   reviewRewardPercent: number;
   welcomeCoupon: SiteSettings['welcomeCoupon'];
   currencies: CurrencyConfig[];

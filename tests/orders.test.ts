@@ -85,20 +85,20 @@ describe('GET /catalog, /config, /stats, /products/:id/odds', () => {
 
 describe('POST /quote', () => {
   it('prices the cart server-side with bulk tiers', async () => {
-    const res = await post<Quote>('/quote', { items: [{ productId: 'money-1m', qty: 50 }] });
+    const res = await post<Quote>('/quote', { items: [{ productId: 'money-1m', qty: 200 }] });
     expect(res.status).toBe(200);
-    expect(res.data.subtotalCents).toBe(850);
-    expect(res.data.lines[0]).toMatchObject({ unitPriceCents: 17, bulkApplied: true });
-    expect(res.data.totalCents).toBe(850);
-    expect(res.data.nextTier).toEqual({ minCents: 1500, percent: 5, missingCents: 650 });
+    expect(res.data.subtotalCents).toBe(800);
+    expect(res.data.lines[0]).toMatchObject({ unitPriceCents: 4, bulkApplied: true });
+    expect(res.data.totalCents).toBe(800);
+    expect(res.data.nextTier).toEqual({ minCents: 1500, percent: 5, missingCents: 700 });
   });
 
   it('looks up coupons and reports unknown ones', async () => {
     await lib.coupons.createCoupon({ code: 'TEST10', type: 'percent', value: 10, source: 'admin' });
-    const ok = await post<Quote>('/quote', { items: [{ productId: 'money-1m', qty: 50 }], discountCode: 'test10' });
+    const ok = await post<Quote>('/quote', { items: [{ productId: 'money-1m', qty: 200 }], discountCode: 'test10' });
     expect(ok.data.couponCode).toBe('TEST10');
-    expect(ok.data.couponDiscountCents).toBe(85);
-    expect(ok.data.totalCents).toBe(765);
+    expect(ok.data.couponDiscountCents).toBe(80);
+    expect(ok.data.totalCents).toBe(720);
     const bad = await post<Quote>('/quote', { items: [{ productId: 'money-1m', qty: 50 }], discountCode: 'NOPE' });
     expect(bad.data.couponDiscountCents).toBe(0);
     expect(bad.data.warnings).toContain('Unknown discount code.');
@@ -119,14 +119,14 @@ describe('POST /orders (manual payment)', () => {
     expect(order.id).toMatch(/^DC-[A-Z2-9]{6}$/);
     expect(order.status).toBe('awaiting_payment');
     expect(order.username).toBe('TestPlayer');
-    expect(order.totalCents).toBe(850);
+    expect(order.totalCents).toBe(800);
     expect(order.payment).toMatchObject({ methodId: 'paypal', type: 'manual', status: 'unpaid' });
-    expect(order.payment.instructions).toContain('$8.50');
+    expect(order.payment.instructions).toContain('$8.00');
     expect(order.payment.instructions).toContain(order.id);
     expect(order.payment.instructions).toContain('YourPayPalName');
-    expect(order.payment.payLink).toBe('https://paypal.me/YourPayPalName/8.50USD');
+    expect(order.payment.payLink).toBe('https://paypal.me/YourPayPalName/8.00USD');
     expect(order.timeline[0]).toMatchObject({ status: 'awaiting_payment' });
-    expect(order.items[0]).toMatchObject({ productId: 'money-1m', qty: 50, unitPriceCents: 17, lineTotalCents: 850, moneyMillions: 1 });
+    expect(order.items[0]).toMatchObject({ productId: 'money-1m', qty: 200, unitPriceCents: 4, lineTotalCents: 800, moneyMillions: 1 });
     expect(order.customerNote).toBe('hi there');
 
     // public view hides private fields but keeps a masked e-mail
@@ -172,9 +172,9 @@ describe('POST /orders (manual payment)', () => {
     expect(order.totalCents).toBe(0);
     expect(order.payment.type).toBe('free');
     expect(order.payment.status).toBe('paid');
-    expect(order.creditAppliedCents).toBe(180);
-    expect(order.quote.creditAppliedCents).toBe(180);
-    expect((await lib.credit.getCredit('CreditKing')).balanceCents).toBe(1820);
+    expect(order.creditAppliedCents).toBe(50);
+    expect(order.quote.creditAppliedCents).toBe(50);
+    expect((await lib.credit.getCredit('CreditKing')).balanceCents).toBe(1950);
   });
 
   it('rate limits order creation per IP (10 / 10 min)', async () => {
@@ -297,7 +297,7 @@ describe('POST /orders/:id/cancel', () => {
     const order = await createOrder({ username: 'Canceller', applyCredit: true });
     expect(order.status).toBe('awaiting_payment');
     expect(order.creditAppliedCents).toBe(500);
-    expect(order.totalCents).toBe(350);
+    expect(order.totalCents).toBe(300);
     expect((await lib.credit.getCredit('Canceller')).balanceCents).toBe(0);
 
     const res = await post<{ order: PublicOrder }>(`/orders/${order.id}/cancel`);

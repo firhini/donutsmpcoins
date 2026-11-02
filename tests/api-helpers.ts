@@ -106,7 +106,7 @@ export const post = <T = any>(apiPath: string, body?: unknown, opts?: CallOption
 export function orderBody(overrides: Record<string, unknown> = {}): Record<string, unknown> {
   return {
     username: 'TestPlayer',
-    items: [{ productId: 'money-1m', qty: 50 }],
+    items: [{ productId: 'money-1m', qty: 200 }],
     paymentMethodId: 'paypal',
     tosAccepted: true,
     ...overrides,

@@ -59,9 +59,9 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'All nine boxes at a glance',
         paragraphs: [
-          '[Coin Crate](/product/coin-crate) – $1.99, one money drop from 5M to 100M. [Mega Coin Crate](/product/mega-coin-crate) – $9.99, one money drop from 20M to 500M. [Spawner Crate](/product/spawner-crate) – $2.99, one spawner drop, up to a full stack of 32 skellies or blazes.',
+          '[Coin Crate](/product/coin-crate) – $1.99, one money drop from 10M to 250M. [Mega Coin Crate](/product/mega-coin-crate) – $9.99, one money drop from 60M to 1B. [Spawner Crate](/product/spawner-crate) – $2.99, one spawner drop, up to a full stack of 32 skellies or blazes.',
           '[Netherite Crate](/product/netherite-crate) – $5.99, one netherite drop up to a netherite block. [Elytra Crate](/product/elytra-crate) – $7.99, one drop with about a 1 in 12 Elytra chance. [Mystery Box](/product/mystery-box) – $3.99, two drops from an eleven-line pool.',
-          '[Elite Mystery Box](/product/elite-mystery-box) – $8.99, two drops with bigger stacks and 25M in the pool. [God Mystery Box](/product/god-mystery-box) – $19.99, three drops from a stronger pool with 50M in it. [Legendary Crate](/product/legendary-crate) – $34.99, three drops from our best pool with the highest jackpot odds.',
+          '[Elite Mystery Box](/product/elite-mystery-box) – $8.99, two drops with bigger stacks and 100M in the pool. [God Mystery Box](/product/god-mystery-box) – $19.99, three drops from a stronger pool with 250M in it. [Legendary Crate](/product/legendary-crate) – $34.99, three drops from our best pool with the highest jackpot odds.',
         ],
       },
       {
@@ -73,8 +73,8 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Is a mystery box worth it?',
         paragraphs: [
-          'Boxes are not a discount and we do not pretend they are: on average every box pays out less than buying the same items directly. An [Elytra](/product/elytra) is $28.49 on its own, 1M is $0.18 or less, a netherite block $14.49.',
-          'If you want a specific item, buy the item; if you enjoy the opening and would be happy with several outcomes, buy the box. The Coin Crate sits in between: every result is money, the floor is 5M and about 3% of crates pay 50M or more.',
+          'Boxes are not a discount and we do not pretend they are: on average every box pays out less than buying the same items directly. An [Elytra](/product/elytra) is $28.49 on its own, 1M is $0.05 or less, a netherite block $14.49.',
+          'If you want a specific item, buy the item; if you enjoy the opening and would be happy with several outcomes, buy the box. The Coin Crate sits in between: every result is money, the floor is 10M and about one crate in ten pays 50M or more – though a crate averages around 21M, less than the 25M pack costs to buy outright.',
         ],
       },
       {
@@ -129,16 +129,16 @@ export const landingCopy: LandingCopy[] = [
         ],
       },
       {
-        heading: 'Cheaper routes: bundles and boxes',
+        heading: 'Other routes: bundles and boxes',
         paragraphs: [
-          'If you want more than the Elytra, two bundles include one at a lower combined price. The [Pro Bundle](/product/pro-bundle) ($40.99) adds 50M money and 16 skeleton spawners – bought separately that is about $42.86 – and the [Rich Bundle](/product/rich-bundle) ($79.99) comes with 250M, a God Mystery Box and the full PvP Kit for roughly $10 less than its parts. The [Basehunter Bundle](/product/basehunter-bundle) ($37.99) pairs an Elytra with the Amethyst Pickaxe, 16 totems and 20M – about $2.40 below the price of the single items.',
+          'If you want more than the Elytra, three bundles include one in a single order and handover. The [Pro Bundle](/product/pro-bundle) ($33.99) adds 50M money and 16 skeleton spawners, the [Rich Bundle](/product/rich-bundle) ($59.99) comes with 250M, a God Mystery Box and the full PvP Kit, and the [Basehunter Bundle](/product/basehunter-bundle) ($33.99) pairs an Elytra with the Amethyst Pickaxe, 16 totems and 20M. Bundles are about convenience rather than savings – at current prices the single items add up to about the same or less, so compare before you buy.',
           'Random boxes are the gamble: the [Elite Mystery Box](/product/elite-mystery-box) ($8.99) contains an Elytra in roughly 1 in 95 boxes, the [Elytra Crate](/product/elytra-crate) ($7.99) in about 1 in 12 and the [Legendary Crate](/product/legendary-crate) ($34.99) in about 1 in 8. For the Elytra itself, buying it outright at $28.49 is always the safe choice.',
         ],
       },
       {
         heading: 'Keeping your Elytra',
         paragraphs: [
-          'Three habits keep an Elytra alive on a lifesteal server. First, Mending only works while the Elytra is equipped and you gain XP, so a quick lap past your skeleton farm after every flight keeps it topped up – an Elytra that breaks is a chestplate slot with no armor. Second, carry at least a stack of rockets and a totem; most Elytra losses are deaths mid-air, not durability. Third, store it in an Ender Chest when you are at your base and not flying, so a surprise raid does not take it.',
+          'Three habits keep an Elytra alive on DonutSMP. First, Mending only works while the Elytra is equipped and you gain XP, so a quick lap past your skeleton farm after every flight keeps it topped up – an Elytra that breaks is a chestplate slot with no armor. Second, carry at least a stack of rockets and a totem; most Elytra losses are deaths mid-air, not durability. Third, store it in an Ender Chest when you are at your base and not flying, so a surprise raid does not take it.',
           '[Creeper spawners](/product/creeper-spawner) ($0.69, $0.65 at 25+) are the long-term rocket supply most Elytra owners end up buying. As with everything we sell, DonutSMP\'s rules prohibit real-money trading – we deliver through normal gameplay and keep it discreet, but the risk is yours.',
         ],
       },
@@ -207,14 +207,14 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Alternatives: crates and bundles',
         paragraphs: [
-          'The [Spawner Crate](/product/spawner-crate) ($2.99) gives one spawner drop – mostly small stacks, with a rare full stack of 32 skeleton spawners. The [Starter Bundle](/product/starter-bundle) ($9.49) packs 15 skeleton spawners with 20M and a Diamond Armor Shulker, and the [Spawner Farm Bundle](/product/spawner-farm-bundle) ($25.99) is 64 skeleton spawners plus 10M in one order. For odd quantities or more than 2,000 spawners, message us on Discord for a quote.',
+          'The [Spawner Crate](/product/spawner-crate) ($2.99) gives one spawner drop – mostly small stacks, with a rare full stack of 32 skeleton spawners. The [Starter Bundle](/product/starter-bundle) ($6.99) packs 15 skeleton spawners with 20M and a Diamond Armor Shulker, and the [Spawner Farm Bundle](/product/spawner-farm-bundle) ($23.49) is 64 skeleton spawners plus 10M in one order. For odd quantities or more than 2,000 spawners, message us on Discord for a quote.',
         ],
       },
     ],
     faq: [
       {
         q: 'How much do 64 skeleton spawners cost?',
-        a: '$25.60 at the 50+ tier of $0.40 each, or $24.32 after the automatic 5% discount for carts over $15. The Spawner Farm Bundle offers the same 64 spawners with 10M money for $25.99.',
+        a: '$25.60 at the 50+ tier of $0.40 each, or $24.32 after the automatic 5% discount for carts over $15. The Spawner Farm Bundle offers the same 64 spawners with 10M money for $23.49.',
       },
       {
         q: 'Can I move skeleton spawners after placing them?',
@@ -240,33 +240,33 @@ export const landingCopy: LandingCopy[] = [
     title: 'DonutSMP Money Prices: What 1M to 1B Costs Right Now',
     seoTitle: 'DonutSMP Money Prices – 1M to 1B Compared | DonutCoins',
     metaDescription:
-      'DonutSMP money price list: $0.18 per 1M for any amount, bulk tiers to $0.13, packs from 10M ($1.69) to 1B ($114.99), discounts, coupons. Paid with /pay.',
+      'DonutSMP money price list: $0.05 per 1M for any amount, bulk tiers to $0.03, packs from 10M ($0.49) to 1B ($28.99), discounts, cashback. Paid with /pay.',
     intro:
       'This is the full price list for DonutSMP money at DonutCoins: the pick-your-amount rate with every bulk tier, the fixed packs from 10M to 1B, the discounts that stack on top, and worked examples so you can see what a given amount actually costs. Prices are in USD and come from the same catalog as the checkout. Money is paid to your in-game balance with /pay by our staff, usually within minutes.',
     sections: [
       {
         heading: 'Pick-your-amount rates',
         paragraphs: [
-          'The flexible [money product](/product/donutsmp-money) charges per million: **$0.18 per 1M** for any amount, $0.17 from 50M, $0.16 from 100M, $0.15 from 250M, $0.14 from 500M and $0.13 from 1B, up to 5B in one line. The tier applies to the whole line – 100M costs 100 × $0.16 = $16.00, not a blend. This is the right choice for odd amounts such as 37M ($6.66) or 120M ($19.20).',
+          'The flexible [money product](/product/donutsmp-money) charges per million: **$0.05 per 1M** for any amount, $0.04 from 100M and $0.03 from 1B, up to 5B in one line. The tier applies to the whole line – 100M costs 100 × $0.04 = $4.00, not a blend, so anything from 80M up is worth rounding to 100M. This is the right choice for odd amounts such as 37M ($1.85) or 120M ($4.80).',
         ],
       },
       {
         heading: 'Fixed packs: the cheapest per million',
         paragraphs: [
-          'At round numbers the fixed packs beat the flexible rate: [10M](/product/10m-money) for $1.69 (about $0.17 per 1M), [25M](/product/25m-money) for $3.99 ($0.16), [50M](/product/50m-money) for $7.49 ($0.15), [100M](/product/100m-money) for $13.99 ($0.14), [250M](/product/250m-money) for $32.99 ($0.13), [500M](/product/500m-money) for $61.99 ($0.124) and [1B](/product/1b-money) for $114.99 ($0.115). The 100M pack, for example, is $2.01 cheaper than 100 flexible millions.',
-          'Packs can be combined: 250M + 50M as two packs is $40.48, and because that cart is over $40 it gets 8% off, landing at $37.24 for 300M.',
+          'At round numbers the fixed packs are a little cheaper than the flexible rate: [10M](/product/10m-money) for $0.49 ($0.049 per 1M), [25M](/product/25m-money) for $1.19 (under $0.048), [50M](/product/50m-money) for $2.39 (under $0.048), [100M](/product/100m-money) for $3.79 (under $0.038), [250M](/product/250m-money) for $9.49 (under $0.038), [500M](/product/500m-money) for $18.99 (under $0.038) and [1B](/product/1b-money) for $28.99 ($0.029). The 100M pack, for example, is about 5% cheaper than 100 flexible millions at $4.00.',
+          'Packs can be combined, but bigger is cheaper per million: two 500M packs cost $37.98, while the 1B pack is $28.99. Buy the largest pack that covers what you need and top up with the flexible listing.',
         ],
       },
       {
         heading: 'Discounts that stack',
         paragraphs: [
-          'Three layers come off automatically or with a code. **Spending tiers:** 5% off carts over $15, 8% over $40, 12% over $100, applied to the whole cart. **One coupon per order:** the welcome code when it is enabled, a [daily spin](/spin) prize of 5–25% (the bigger ones carry a minimum order) or a review reward; alternatively a referral link gives a new customer 5%. **Store credit** from referrals or spin wins is applied last. The total discount is capped at 60%.',
+          'Three layers come off automatically or with a code, and a fourth comes back after delivery. **Spending tiers:** 5% off carts over $15, 8% over $40, 12% over $100, applied to the whole cart. **One coupon per order:** the welcome code when it is enabled, a [daily spin](/spin) prize of 5–25% (the bigger ones carry a minimum order) or a review reward; alternatively a referral link gives a new customer 5%. **Store credit** from referrals, spin wins or cashback is applied last – and every delivered order earns **5% cashback** as store credit for the next one. The total discount is capped at 60%.',
         ],
       },
       {
         heading: 'Worked examples',
         paragraphs: [
-          '50M: the pack is $7.49 – under the $15 threshold, so no tier discount; with a 5% welcome coupon $7.12. 250M: $32.99, 5% tier → $31.34, about $0.125 per million. 500M: $61.99, 8% tier → $57.03. 1B: $114.99, 12% tier → $101.19, about $0.10 per million; a 10% spin coupon on top of that brings it to $91.07.',
+          '50M: the pack is $2.39 – under the $15 threshold, so no tier discount; with a 5% welcome coupon $2.27. 250M: $9.49, also under $15 – $9.02 with the welcome coupon. 500M: $18.99, 5% tier → $18.04. 1B: $28.99, 5% tier → $27.54, under $0.028 per million. On every one of them, 5% of what you pay comes back as store credit after delivery.',
           'All examples use the default settings; a sale banner or changed tiers would show at checkout, and the cart always displays the exact total before you pay.',
         ],
       },
@@ -281,7 +281,7 @@ export const landingCopy: LandingCopy[] = [
     faq: [
       {
         q: 'Is there anything cheaper than the 1B pack?',
-        a: 'Not in the store – $114.99 for 1B is the lowest per-million price, and the 12% spending discount brings it to $101.19. For amounts beyond that, message us on Discord for a custom quote.',
+        a: 'Not in the store – $28.99 for 1B is the lowest per-million price, and the 5% spending discount brings it to $27.54. For amounts beyond that, message us on Discord for a custom quote.',
       },
       {
         q: 'Do the prices include fees?',
@@ -323,7 +323,7 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Netherite gear: armor and tools',
         paragraphs: [
-          'The finished gear is where netherite actually pays off on a lifesteal server. The $4.99 god set is a full suit with Protection IV, Unbreaking III, Mending and Thorns III; the [PvP Kit](/product/pvp-kit) ($8.49) adds a Sharpness V, Fire Aspect II, Looting III sword, an Efficiency V, Fortune III pickaxe and 8 totems. Crafting a set yourself costs four ingots – $13.16 at the single price, or 16 debris plus gold – before you have enchanted anything, which is why most of our netherite sales are gear rather than ingots.',
+          'The finished gear is where netherite actually pays off in PvP. The $4.99 god set is a full suit with Protection IV, Unbreaking III, Mending and Thorns III; the [PvP Kit](/product/pvp-kit) ($8.49) adds a Sharpness V, Fire Aspect II, Looting III sword, an Efficiency V, Fortune III pickaxe and 8 totems. Crafting a set yourself costs four ingots – $13.16 at the single price, or 16 debris plus gold – before you have enchanted anything, which is why most of our netherite sales are gear rather than ingots.',
         ],
       },
       {

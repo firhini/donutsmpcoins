@@ -8,15 +8,15 @@ import { rollBox } from '../netlify/lib/boxes';
  */
 // 0.6 of the regular price keeps a box profitable even during a 30% sale (≈86% of the sale price at shop prices)
 const MAX_PAYOUT_RATIO = 0.6;
-const MONEY_PER_M = 0.15; // bulk money price per 1M, in dollars
+const MONEY_PER_M = (findProduct('money-1m')?.priceCents ?? 5) / 100; // single-million shop price, in dollars
 
 const byName = new Map(products.map((p) => [p.name, p.priceCents / 100]));
 const EXTRA: Record<string, number> = { 'Netherite Armor Set (maxed)': (findProduct('netherite-armor-set')?.priceCents ?? 0) / 100 };
 
 
 function unitValue(name: string): number {
-  const money = name.match(/^(\d+)M Money/);
-  if (money) return Number(money[1]) * MONEY_PER_M;
+  const money = name.match(/^(\d+)([MB]) Money/);
+  if (money) return Number(money[1]) * (money[2] === 'B' ? 1000 : 1) * MONEY_PER_M;
   const base = name.replace(/\s*\(guaranteed\)$/, '');
   const v = EXTRA[base] ?? byName.get(base);
   if (v === undefined) throw new Error(`No shop price for box drop "${name}" – add the item to the catalog or to EXTRA`);

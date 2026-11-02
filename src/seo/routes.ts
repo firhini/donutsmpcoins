@@ -3,6 +3,7 @@
  * `page` is the source module of the lazy page (to inline its CSS in the static HTML).
  */
 import { products, categories } from '../data/catalog';
+import { wikiArticles } from '../data/wiki';
 import type { Category, Product } from '../shared/types';
 import { guides } from '../data/guides';
 import { landingCopy } from '../data/landingCopy';
@@ -31,6 +32,8 @@ export function seoRoutes(live?: { products?: Product[]; categories?: Category[]
     ...landingCopy.map((l) => ({ path: `/${l.slug}`, page: 'src/pages/LandingPage.tsx', changefreq: 'monthly' as const, priority: 0.8 })),
     { path: '/guides', page: 'src/pages/Guides.tsx', changefreq: 'weekly', priority: 0.8 },
     ...guides.map((g) => ({ path: `/guides/${g.slug}`, page: 'src/pages/GuidePage.tsx', changefreq: 'monthly' as const, priority: 0.8 })),
+    { path: '/wiki', page: 'src/pages/Wiki.tsx', changefreq: 'weekly', priority: 0.8 },
+    ...wikiArticles.map((a) => ({ path: `/wiki/${a.slug}`, page: 'src/pages/WikiPage.tsx', changefreq: 'monthly' as const, priority: 0.7 })),
     { path: '/spin', page: 'src/pages/Spin.tsx', changefreq: 'weekly', priority: 0.7 },
     { path: '/free', page: 'src/pages/Free.tsx', changefreq: 'weekly', priority: 0.7 },
     { path: '/giveaways', page: 'src/pages/Giveaways.tsx', changefreq: 'daily', priority: 0.6 },

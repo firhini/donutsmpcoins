@@ -34,19 +34,19 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
   money: {
     seoTitle: 'DonutSMP Money Packs 10M–1B & Bulk Prices | DonutCoins',
     metaDescription:
-      'Buy DonutSMP money from $0.18 per 1M, down to $0.13 in bulk, or fixed packs from 10M to 1B. Paid to your balance with /pay by real staff within minutes.',
+      'Buy DonutSMP money from $0.05 per 1M, down to $0.03 in bulk, or fixed packs from 10M to 1B. Paid to your balance with /pay by real staff within minutes.',
     intro:
-      'Buy DonutSMP money without the grind. Pick any amount in millions or grab a fixed pack from 10M to 1B, pay with PayPal, crypto or card, and our staff send the coins to your in-game balance with /pay. The base rate is $0.18 per 1M and drops automatically to $0.13 per 1M on large orders; the fixed packs are even cheaper per million at round numbers. No bots, no account access – just your username, an order ID and a payment confirmation in chat.',
+      'Buy DonutSMP money without the grind. Pick any amount in millions or grab a fixed pack from 10M to 1B, pay with PayPal, crypto or card, and our staff send the coins to your in-game balance with /pay. The base rate is $0.05 per 1M and drops automatically to $0.03 per 1M on large orders; the fixed packs are a little cheaper still at round numbers. No bots, no account access – just your username, an order ID and a payment confirmation in chat.',
     body: [
       'Money is the engine of the DonutSMP player economy. Spawners on the auction house, netherite, totems, claim blocks and shop slots are all priced in it, and the balance top is the server\'s scoreboard. Farming a few hundred million by hand takes days of AFK time; ordering it takes a couple of minutes at checkout. Most customers buy money first and spawners second, because the money funds the farm that keeps paying afterwards.',
-      'Prices work two ways. The pick-your-amount product charges $0.18 per 1M and steps down to $0.17 from 50M, $0.16 from 100M, $0.15 from 250M, $0.14 from 500M and $0.13 from 1B – the lower rate applies to every million in the line. Fixed packs are cheaper still at their size: 50M is $7.49, 100M is $13.99, 250M is $32.99 and 1B is $114.99, which works out to about $0.115 per million.',
-      'On top of that, carts over $15 get 5% off, over $40 get 8% and over $100 get 12%, applied automatically. You can add one coupon per order – the welcome code when it is enabled, a daily spin prize or a referral discount – and store credit on top. The total discount is capped at 60%, which you only reach by stacking a big spin coupon on a large order.',
+      'Prices work two ways. The pick-your-amount product charges $0.05 per 1M and steps down to $0.04 from 100M and $0.03 from 1B – the lower rate applies to every million in the line, so 100M ($4.00) costs less than 90M. Fixed packs are a little cheaper still at their size: 50M is $2.39, 100M is $3.79, 250M is $9.49 and 1B is $28.99, which works out to about $0.029 per million.',
+      'On top of that, carts over $15 get 5% off, over $40 get 8% and over $100 get 12%, applied automatically. You can add one coupon per order – the welcome code when it is enabled, a daily spin prize or a referral discount – and store credit on top, including the 5% cashback every delivered order earns. The total discount is capped at 60%, which you only reach by stacking a big spin coupon on a large order.',
       'Delivery is manual. After you pay and report the reference, a member of our staff logs on to DonutSMP and runs /pay to the exact username on your order – usually within 5–30 minutes while we are online, as shown by our Discord status. You see the server\'s own confirmation in chat and the order page switches to delivered. Very large amounts may arrive in several payments to keep things discreet. Nothing is automated and nobody asks for your password.',
     ],
     faq: [
       {
         q: 'How much does DonutSMP money cost?',
-        a: '$0.18 per million for any amount, falling to $0.13 per 1M from 1B upward. The fixed packs are the cheapest per million: 100M for $13.99, 500M for $61.99 and 1B for $114.99. Spending discounts of 5–12% come off on top of those prices.',
+        a: '$0.05 per million for any amount, $0.04 per 1M from 100M and $0.03 per 1M from 1B upward. The fixed packs are the cheapest per million: 100M for $3.79, 500M for $18.99 and 1B for $28.99. Spending discounts of 5–12% come off on top of those prices.',
       },
       {
         q: 'Do I need to be online to receive DonutSMP money?',
@@ -54,7 +54,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
       },
       {
         q: 'Can I buy an odd amount like 37M?',
-        a: 'Yes. On the pick-your-amount product the quantity is the number of millions, so 37 means 37M and costs 37 × $0.18 = $6.66. Bulk tiers apply automatically once a line reaches 50M, 100M, 250M, 500M or 1B.',
+        a: 'Yes. On the pick-your-amount product the quantity is the number of millions, so 37 means 37M and costs 37 × $0.05 = $1.85. Bulk tiers apply automatically once a line reaches 100M or 1B.',
       },
       {
         q: 'Is buying DonutSMP money against the rules?',
@@ -102,11 +102,11 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
     metaDescription:
       'DonutSMP mystery boxes from $1.99 with public odds: Coin and Mega Coin Crates, Spawner, Netherite and Elytra Crates, Mystery, Elite, God and Legendary boxes.',
     intro:
-      'Mystery boxes are the fun way to shop for DonutSMP loot: every box has a public drop table, the rolls happen on our server the moment you order, and the result is listed on your order page before it is handed over in-game. Nine boxes cover every budget – from the $1.99 Coin Crate that always pays between 5M and 100M to the $34.99 Legendary Crate with the best Elytra odds in the shop. The exact odds are shown under "What\'s inside?" on each box.',
+      'Mystery boxes are the fun way to shop for DonutSMP loot: every box has a public drop table, the rolls happen on our server the moment you order, and the result is listed on your order page before it is handed over in-game. Nine boxes cover every budget – from the $1.99 Coin Crate that always pays between 10M and 250M to the $34.99 Legendary Crate with the best Elytra odds in the shop. The exact odds are shown under "What\'s inside?" on each box.',
     body: [
       'Each line in a box has a weight; its chance on a single roll is that weight divided by the pool total. Boxes with several rolls draw without repeats, so a three-drop box always contains three different lines and the box-wide chance of any line is higher than the per-roll figure. There is no re-rolling and no hidden pool – what the page shows is what the server rolls.',
       'The Coin Crate ($1.99) and Mega Coin Crate ($9.99) are money only. The Spawner, Netherite and Elytra Crates give a single themed drop – the Elytra Crate has about a 1 in 12 Elytra chance for $7.99. The Mystery Box ($3.99) and Elite Mystery Box ($8.99) give two drops, the God Mystery Box ($19.99) three.',
-      'The Legendary Crate ($34.99) rolls three lines from our best pool of dragon heads, netherite blocks, blaze and iron golem spawners, heavy cores, totems, a maxed netherite armor set, a mace, an Elytra and a 100M money line. All box contents are delivered like normal items – teleport, drop, done – and money lines are paid to your balance with /pay.',
+      'The Legendary Crate ($34.99) rolls three lines from our best pool of dragon heads, netherite blocks, blaze and iron golem spawners, heavy cores, totems, a maxed netherite armor set, a mace, an Elytra and a 500M money line. All box contents are delivered like normal items – teleport, drop, done – and money lines are paid to your balance with /pay.',
       'Treat boxes as entertainment with a floor, not as a discount. If you simply want money, the money packs are cheaper per million than the Coin Crate; if you simply want an Elytra, buying it outright for $28.49 beats every random box. On average every box pays out less than buying its items directly – boxes make sense when you enjoy the opening.',
     ],
     faq: [
@@ -203,7 +203,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
     intro:
       'Fully enchanted tools and weapons for DonutSMP, ready to use the moment they land in your inventory. The god netherite sword (Sharpness V, Fire Aspect II, Looting III) and pickaxe (Efficiency V, Fortune III) are $0.99 each, the God Bow with Infinity is $0.89, the Mace with Density V and Wind Burst III is $1.49 and the Loyalty III trident is $1.89. Base hunters get the DonutSMP-exclusive Amethyst Pickaxe. The netherite sword, pickaxe, mace and Amethyst Pickaxe include Mending and Unbreaking III; the God Bow trades Mending for Infinity, and the trident has Mending without Unbreaking.',
     body: [
-      'On a lifesteal server the weapon decides the trade. The Mace with Density V and Wind Burst III is the current meta for one-shot plays from height, the Sharpness V sword with Fire Aspect II and Looting III handles everything else and doubles as a farming tool, and the Power V, Punch II, Flame, Infinity bow needs one arrow forever. The trident with Loyalty III, Channeling and Impaling V is the pick for rain fights and water.',
+      'In PvP on DonutSMP the weapon decides the trade. The Mace with Density V and Wind Burst III is the current meta for one-shot plays from height, the Sharpness V sword with Fire Aspect II and Looting III handles everything else and doubles as a farming tool, and the Power V, Punch II, Flame, Infinity bow needs one arrow forever. The trident with Loyalty III, Channeling and Impaling V is the pick for rain fights and water.',
       'Single tools are priced to be disposable: $0.99 for the sword or pickaxe, $0.89 for the bow, $1.49 for the mace and $1.89 for the trident. If you lose gear regularly, the 27-piece shulkers are cheaper per item – 27 maxed netherite pickaxes for $18.99 (about $0.70 each) and 27 maxed netherite swords for $21.99 (about $0.81 each). The Amethyst Pickaxe, DonutSMP\'s custom ultra-fast pickaxe, is $4.79.',
       'Tools are handed over in-game by our staff: accept the teleport from the delivery account, pick up the drop, done – usually within 5–30 minutes while we are online. Most tools here have Mending (the God Bow swaps it for Infinity), so a few minutes at an XP farm repairs a full fight\'s wear. Keep spares in an Ender Chest; the Basehunter Bundle pairs the Amethyst Pickaxe with an Elytra, 16 totems and 20M.',
     ],
@@ -229,25 +229,25 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
 
   // ───────────── BUNDLES ─────────────
   bundles: {
-    seoTitle: 'DonutSMP Bundles – Starter Packs from $9.49 | DonutCoins',
+    seoTitle: 'DonutSMP Bundles – Starter Packs from $6.99 | DonutCoins',
     metaDescription:
-      'DonutSMP bundles delivered in-game: Starter Bundle with 20M, 15 skeleton spawners and diamond armor $9.49, Pro Bundle with Elytra, Rich Bundle with 250M.',
+      'DonutSMP bundles delivered in-game: Starter Bundle with 20M, 15 skeleton spawners and diamond armor $6.99, Pro Bundle with Elytra, Rich Bundle with 250M.',
     intro:
-      'Bundles are the fastest way to go from fresh spawn to running farm on DonutSMP. Each one combines money, spawners and gear in a single order with one delivery: the Starter Bundle ($9.49) covers 20M, 15 skeleton spawners and a Diamond Armor Shulker; the Pro Bundle ($40.99) steps up to 50M, 16 spawners and an Elytra; the Rich Bundle ($79.99) brings 250M, a God Mystery Box, an Elytra and the full PvP Kit. Every item is listed before you buy.',
+      'Bundles are the fastest way to go from fresh spawn to running farm on DonutSMP. Each one combines money, spawners and gear in a single order with one delivery: the Starter Bundle ($6.99) covers 20M, 15 skeleton spawners and a Diamond Armor Shulker; the Pro Bundle ($33.99) steps up to 50M, 16 spawners and an Elytra; the Rich Bundle ($59.99) brings 250M, a God Mystery Box, an Elytra and the full PvP Kit. Every item is listed before you buy.',
     body: [
-      'Bundles are for new players who do not want to research what a first farm needs, returning players after a season reset, and anyone gifting a friend a head start. The Starter Bundle is enough to place a small skeleton farm, sell the first drops and buy more spawners with the 20M; the Spawner Farm Bundle (64 skeleton spawners plus 10M, $25.99) is the one-order farm for players who already have a base.',
-      'Bundle pricing is easy to check because every bundle lists its exact contents. The Rich Bundle\'s parts – a 250M pack, God Mystery Box, Elytra and PvP Kit – add up to about $89.96 bought separately, against $79.99 as a bundle, and the Starter and Pro bundles also come in under their parts. The Spawner Farm and Basehunter bundles are convenience sets; compare them with the single products if you only want part of the list.',
+      'Bundles are for new players who do not want to research what a first farm needs, returning players after a season reset, and anyone gifting a friend a head start. The Starter Bundle is enough to place a small skeleton farm, sell the first drops and buy more spawners with the 20M; the Spawner Farm Bundle (64 skeleton spawners plus 10M, $23.49) is the one-order farm for players who already have a base.',
+      'Bundle pricing is easy to check because every bundle lists its exact contents. Bundles are convenience sets: one order, one checkout and one handover instead of several lines. At current prices, the parts of most bundles cost about the same or less when bought as single products – compare them with the single listings before you buy, especially if you only want part of the list.',
       'Bundles are delivered in two parts because money and items travel differently: the money is paid with /pay to your balance, and the items are handed over through a teleport and drop, in shulkers where needed. Both happen in the same session, usually within 5–30 minutes while our staff are online. The order page lists every component, including the rolled contents of the God Mystery Box in the Rich Bundle.',
       'Discounts stack on bundles like on everything else: carts over $15 get 5% off, over $40 get 8% and over $100 get 12%, plus one coupon and any store credit. Buying is at your own risk under DonutSMP\'s rules on real-money trading – we deliver with normal player actions and keep it low-key, but enforcement is the server\'s call, and we are not affiliated with DonutSMP or Mojang.',
     ],
     faq: [
       {
         q: 'Which DonutSMP bundle should a new player buy?',
-        a: 'The Starter Bundle ($9.49): 20M to buy what the server shop offers, 15 skeleton spawners for a first farm and six diamond armor sets so dying is not expensive. Once the farm earns, upgrade with single spawners or the Pro Bundle.',
+        a: 'The Starter Bundle ($6.99): 20M to buy what the server shop offers, 15 skeleton spawners for a first farm and six diamond armor sets so dying is not expensive. Once the farm earns, upgrade with single spawners or the Pro Bundle.',
       },
       {
         q: 'Are bundles cheaper than buying the items separately?',
-        a: 'The Starter, Pro and Rich bundles are – the Rich Bundle saves about $10 against its parts. The Spawner Farm and Basehunter bundles are priced for convenience, so if you only want some of the contents, the single products can be the better deal.',
+        a: 'Not necessarily. Bundles are priced for convenience – everything in one order and one handover – and at current prices most of them cost about the same or more than their parts bought as single products. Check the single listings if price is what matters most.',
       },
       {
         q: 'Can I swap an item in a bundle?',
@@ -298,11 +298,11 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
 export const shopCopy: CategoryCopy = {
   seoTitle: 'DonutSMP Shop – Buy Money, Spawners & Items | DonutCoins',
   metaDescription:
-    'DonutSMP shop: money from $0.13 per 1M, skeleton spawners from $0.36, Elytra, mystery boxes, god armor, tools and bundles. Delivered in-game by staff.',
+    'DonutSMP shop: money from $0.03 per 1M, skeleton spawners from $0.36, Elytra, mystery boxes, god armor, tools and bundles. Delivered in-game by staff.',
   intro:
-    'DonutCoins is a shop for DonutSMP players who would rather play than grind. Browse eight categories – money, spawners and items, mystery boxes, investments, armor, tools and weapons, bundles and bases – with live prices in USD and estimates in your own currency. Everything is delivered in-game by our staff, by hand, usually within 5–30 minutes while we are online. Prices drop automatically with quantity, carts over $15 get an extra 5–12% off, and the daily spin hands out coupons and free coins.',
+    'DonutCoins is a shop for DonutSMP players who would rather play than grind. Browse eight categories – money, spawners and items, mystery boxes, investments, armor, tools and weapons, bundles and bases – with live prices in USD and estimates in your own currency. Everything is delivered in-game by our staff, by hand, usually within 5–30 minutes while we are online. Prices drop automatically with quantity, carts over $15 get an extra 5–12% off, delivered orders earn 5% back as store credit, and the daily spin hands out coupons and free coins.',
   body: [
-    'Start with money if you are new – 1M is $0.18 and the rate falls to $0.13 per million on big orders, with fixed packs from 10M ($1.69) to 1B ($114.99). Spawners are the second most popular buy: skeleton spawners from $0.36 at 250+, plus iron golems, zombies, creepers and blazes. The spawners category also holds the Elytra ($28.49), shulker boxes and totems of undying.',
+    'Start with money if you are new – 1M is $0.05 and the rate falls to $0.03 per million on big orders, with fixed packs from 10M ($0.49) to 1B ($28.99). Spawners are the second most popular buy: skeleton spawners from $0.36 at 250+, plus iron golems, zombies, creepers and blazes. The spawners category also holds the Elytra ($28.49), shulker boxes and totems of undying.',
     'For gear, the armor category has a full god netherite set for $4.99 and a Diamond Armor Shulker with six sets for $0.49; tools and weapons start at $0.89 for a God Bow and include the Mace and the DonutSMP Amethyst Pickaxe. Mystery boxes run from the $1.99 Coin Crate to the $34.99 Legendary Crate, all with public odds. Investments cover netherite, nether stars, enchanted golden apples and dragon heads.',
     'Ordering takes a minute: add to cart, enter your exact Java Edition username – we check it against Mojang – choose PayPal, crypto or card where enabled, and report your payment reference on the order page. A member of our staff then pays money with /pay and hands items over through a teleport. Track any order at /track with its ID; no account is needed.',
     'Two things we say on every page: DonutCoins is an independent, player-run store, not affiliated with DonutSMP, Mojang or Microsoft, and DonutSMP\'s rules prohibit real-money trading – we deliver with normal player actions and keep it discreet, but buying is your own responsibility. If you want to test us first, start with a small order; the refund policy covers non-delivery in full.',

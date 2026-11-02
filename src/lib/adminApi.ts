@@ -302,6 +302,10 @@ export async function createProduct(body: CreateProductInput): Promise<Product |
   return isObj(p) && typeof (p as Product).id === 'string' ? (p as Product) : null;
 }
 
+export async function resetProduct(id: string): Promise<void> {
+  await post<unknown>(`/admin/products/${encodeURIComponent(id)}/reset`, {});
+}
+
 export async function deleteProduct(id: string): Promise<void> {
   await del(`/admin/products/${encodeURIComponent(id)}`);
 }

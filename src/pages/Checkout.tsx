@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { gaEvent, track } from '../lib/track';
-import { isMoneyOnly } from '../lib/claim';
-import { ClaimTicket } from '../components/shop/ClaimTicket';
 import { Link, useNavigate } from 'react-router-dom';
 import type { CreateOrderRequest, PublicOrder, QuoteRequest } from '../shared/types';
 import { apiGet, apiPost, ApiClientError } from '../lib/api';
@@ -26,7 +24,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export default function Page() {
   const { lines, quote: localQuote, discountCode, referralCode, clear, setDiscountCode } = useCart();
-  const { config, currency, fmt, loading: storeLoading, productById } = useStore();
+  const { config, currency, fmt, loading: storeLoading } = useStore();
   const { toast } = useToast();
   const nav = useNavigate();
 
@@ -95,7 +93,6 @@ export default function Page() {
   }, [usernameOk, checkedName]);
 
   const items = useMemo(() => lines.map((l) => ({ productId: l.productId, qty: l.qty })), [lines]);
-  const cartMoneyOnly = useMemo(() => isMoneyOnly(lines.map((l) => ({ kind: l.product.kind, productId: l.productId })), productById), [lines, productById]);
   // with Discord login available, credit can only be spent by the player who proved the name on their account
   const creditLocked = !!(config.integrations.login ?? config.integrations.discordOAuth) && !(auth.user?.mcUsername && auth.user.mcUsername.toLowerCase() === checkedName.toLowerCase());
   const useCredit = applyCredit && !creditLocked && (credit ?? 0) > 0;
@@ -458,7 +455,6 @@ export default function Page() {
                   I accept the <Link to="/terms">Terms of Service</Link> and the <Link to="/refund-policy">Refund Policy</Link>. I understand these are virtual goods delivered in-game on {config.serverName}, I expressly request delivery to start as soon as my payment is confirmed, and I acknowledge that my right of withdrawal ends once delivery has begun.
                 </span>
               </label>
-              <ClaimTicket required={!cartMoneyOnly} stage="before" />
               {formErr && (
                 <div className="alert alert-danger" role="alert">
                   <Icon name="warning" size={18} /> {formErr}

@@ -29,7 +29,7 @@ export const faqGroups: FaqGroup[] = [
         id: 'how-to-order',
         top: true,
         q: 'How do I place an order?',
-        a: 'Add items to your cart, enter your **exact Minecraft username** at checkout and pick a payment method. You get an order ID and payment instructions right away. After you pay, **join our Discord and open a ticket with your order ID** – that is required to claim items (for money-only orders it is optional but faster). We then deliver in-game. Track everything at [/track](/track).',
+        a: 'Add items to your cart, enter your **exact Minecraft username** at checkout and pick a payment method. You get an order ID and payment instructions right away. After you pay, your order page shows exactly how to claim it – then we deliver in-game. Track everything at [/track](/track).',
       },
       {
         id: 'do-i-need-an-account',
@@ -54,7 +54,7 @@ export const faqGroups: FaqGroup[] = [
       {
         id: 'cheapest-money',
         q: 'What is the cheapest way to get DonutSMP money?',
-        a: 'Per million, the big fixed packs: **1B for $114.99** (about $0.115 per 1M), 500M for $61.99 and 100M for $13.99 beat the pick-your-amount rate of $0.18–$0.13. Then let the discounts stack – carts over $15 get 5% off, over $40 8% and over $100 12%, plus one coupon from the [daily spin](/spin) or the welcome code and any store credit. If you only need a few million, win them: the spin gives away 1M, 5M and 20M prizes every day. Full price list on [/donutsmp-money](/donutsmp-money).',
+        a: 'Per million, the big fixed packs: **1B for $28.99** (about $0.029 per 1M), 500M for $18.99 and 100M for $3.79 each beat the pick-your-amount price for the same amount ($0.05 per 1M, $0.04 from 100M, $0.03 from 1B). Then let the discounts stack – carts over $15 get 5% off, over $40 8% and over $100 12%, plus one coupon from the [daily spin](/spin) or the welcome code and any store credit – and 5% of every delivered order comes back as cashback credit. If you only need a few million, win them: the spin gives away 10M, 25M and 100M prizes every day. Full price list on [/donutsmp-money](/donutsmp-money).',
       },
       {
         id: 'out-of-stock',
@@ -77,7 +77,7 @@ export const faqGroups: FaqGroup[] = [
         id: 'how-long',
         top: true,
         q: 'How long does delivery take?',
-        a: '{{eta}} To claim, open a ticket in our Discord with your order ID – required for items, optional but faster for money. Deliveries are done manually by our staff, so there is no bot and no automation that can break. Our online status is shown on Discord; if nobody is online you will be served as soon as someone is back.',
+        a: '{{eta}} Deliveries are done manually by our staff, so there is no bot and no automation that can break. Our online status is shown on Discord; if nobody is online you will be served as soon as someone is back.',
       },
       {
         id: 'how-money-delivered',

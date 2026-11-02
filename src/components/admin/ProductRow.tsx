@@ -54,6 +54,7 @@ export function ProductRow({
   busy,
   onSave,
   onDelete,
+  onReset,
 }: {
   product: Product;
   categoryName: string;
@@ -62,6 +63,8 @@ export function ProductRow({
   busy: boolean;
   onSave: (patch: ProductPatch) => Promise<boolean>;
   onDelete: () => void;
+  /** drop admin edits of a built-in product (code defaults apply again) */
+  onReset?: () => void;
 }) {
   const [draft, setDraft] = useState<Draft>(() => toDraft(product));
   const dirty = !same(draft, toDraft(product));
@@ -92,7 +95,11 @@ export function ProductRow({
               <span className="badge" style={{ height: 18, fontSize: 9 }}>
                 {product.kind}
               </span>
-              {custom ? <span className="badge badge-pink" style={{ height: 18, fontSize: 9 }}>custom</span> : overridden ? <span className="badge badge-gold" style={{ height: 18, fontSize: 9 }}>edited</span> : null}
+              {custom ? <span className="badge badge-pink" style={{ height: 18, fontSize: 9 }}>custom</span> : overridden ? (
+                <button type="button" className="badge badge-gold" style={{ height: 18, fontSize: 9, cursor: 'pointer', border: 0 }} onClick={onReset} title="Undo all admin edits – use the default from the code">
+                  edited · reset
+                </button>
+              ) : null}
             </span>
           </div>
         </div>

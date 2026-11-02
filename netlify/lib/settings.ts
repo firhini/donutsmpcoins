@@ -86,6 +86,7 @@ export function toPublicConfig(settings: SiteSettings): PublicConfig {
     spinRequireLogin: settings.spin.requireLogin && integrations().login,
     spinRequireGuild: settings.spin.requireGuild && integrations().discordOAuth && !!process.env.DISCORD_GUILD_ID,
     referral: settings.referral,
+    cashback: settings.cashback,
     reviewRewardPercent: settings.reviewRewardPercent,
     welcomeCoupon: settings.welcomeCoupon,
     currencies: settings.currencies,

@@ -249,6 +249,8 @@ function validateSettingsPatch(body: unknown): Partial<SiteSettings> {
     numField(referral, 'friendPercent', 'Referral friend percent', 0, 100, true);
     numField(referral, 'referrerPercent', 'Referral referrer percent', 0, 100, true);
   }
+  const cashback = patch.cashback;
+  if (isObj(cashback)) numField(cashback, 'percent', 'Cashback percent', 0, 30, true);
   const welcome = patch.welcomeCoupon;
   if (isObj(welcome)) {
     numField(welcome, 'percent', 'Welcome coupon percent', 0, 100, true);
@@ -453,6 +455,15 @@ export const routes: Route[] = [
     o.deleted = o.deleted.filter((d) => d !== id);
     await saveOverrides(o);
     return json({ product }, 201);
+  }),
+  // drop every admin override of a built-in product so the code defaults apply again
+  admin('POST', '/admin/products/:id/reset', async ({ params }) => {
+    const id = params.id.trim();
+    const o = await getOverrides();
+    if (!o.overrides[id]) return json({ ok: true, id, reset: false });
+    delete o.overrides[id];
+    await saveOverrides(o);
+    return json({ ok: true, id, reset: true, product: (await getFullCatalog()).products.find((p) => p.id === id) ?? null });
   }),
   admin('DELETE', '/admin/products/:id', async ({ params }) => {
     const id = params.id.trim();

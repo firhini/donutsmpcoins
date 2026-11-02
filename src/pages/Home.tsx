@@ -50,7 +50,7 @@ export default function Home() {
   const visibleRest = showAll || cat !== 'all' || searching ? rest : rest.slice(0, INITIAL_VISIBLE);
   const activeCategory = cat === 'all' ? null : categories.find((c) => c.id === cat) ?? null;
 
-  const pills = buildPills(stats);
+  const pills = buildPills(stats, config.cashback?.enabled ? config.cashback.percent : 0);
   const tiers = [...config.spendingTiers].sort((a, b) => a.minCents - b.minCents);
   const faqVars = {
     store: config.storeName,
@@ -305,7 +305,7 @@ export default function Home() {
                 <Icon name="truck" size={22} />
               </span>
               <h3>Get it in-game</h3>
-              <p>Open a Discord ticket to claim – items by teleport, money via /pay.</p>
+              <p>Money via /pay, items handed over in-game.</p>
               <div className="hiw-note">
                 <Icon name="clock" size={14} /> {config.delivery.etaText}
               </div>
@@ -423,13 +423,14 @@ function formatTier(cents: number): string {
   return cents % 100 === 0 ? `$${cents / 100}` : `$${(cents / 100).toFixed(2)}`;
 }
 
-function buildPills(stats: ReturnType<typeof useStore>['stats']): { icon: string; label: string }[] {
+function buildPills(stats: ReturnType<typeof useStore>['stats'], cashback = 0): { icon: string; label: string }[] {
   const out: { icon: string; label: string }[] = [];
   if (stats && stats.ordersDelivered >= 50) out.push({ icon: 'check', label: `${stats.ordersDelivered.toLocaleString('en-US')} ${stats.ordersDelivered === 1 ? 'order' : 'orders'} delivered` });
   const reviewTotal = stats?.totalReviewCount ?? stats?.reviewCount ?? 0;
   const reviewAvg = stats?.totalAverageRating ?? stats?.averageRating ?? 0;
   if (stats && reviewTotal > 0) out.push({ icon: 'star', label: `${reviewAvg.toFixed(1)} ★ from ${reviewTotal} review${reviewTotal === 1 ? '' : 's'}` });
   const neutral = [
+    ...(cashback ? [{ icon: 'coin', label: `${cashback}% cashback on every order` }] : []),
     { icon: 'bolt', label: 'Fast in-game delivery' },
     { icon: 'shield', label: 'Secure checkout' },
     { icon: 'spin', label: 'Daily free spins' },

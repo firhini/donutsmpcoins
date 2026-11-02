@@ -51,7 +51,7 @@ const raw: GuideInput[] = [
       {
         heading: 'Why money matters on DonutSMP',
         paragraphs: [
-          'DonutSMP is a lifesteal survival server with a player-driven economy. Almost everything you want is priced in in-game money: spawners on the auction house, netherite, totems, even hearts if you are trading with the right people. A player with a few hundred million can set up a farm in an evening; a player with nothing spends that evening mining.',
+          'DonutSMP is a survival SMP with a player-driven economy. Almost everything you want is priced in in-game money: spawners on the auction house, netherite, totems, even hearts if you are trading with the right people. A player with a few hundred million can set up a farm in an evening; a player with nothing spends that evening mining.',
           'The methods below are ordered roughly from slowest-but-safest to fastest-but-riskiest. Most rich players use two or three of them at the same time, and every one of them gets easier once you have a little starting capital.',
         ],
       },
@@ -93,7 +93,7 @@ const raw: GuideInput[] = [
         heading: 'Method 5: Just buy it – what DonutSMP money costs',
         paragraphs: [
           'Every method above costs time – anywhere from a few hours for a crop farm to weeks for a serious spawner setup. If you would rather spend the evening playing, buying DonutSMP money is the shortcut, and the prices are smaller than most people expect.',
-          'At {{store}} the pick-your-amount option starts at **$0.18 per 1M** and drops automatically with volume: $0.17 from 50M, $0.16 from 100M, $0.15 from 250M, $0.14 from 500M and $0.13 from 1B. Fixed packs are a little cheaper for round amounts – a [50M pack](/product/50m-money) is $7.49 (about $0.15 per million), [100M](/product/100m-money) is $13.99 and [1B](/product/1b-money) is $114.99. On top of that, carts over $15 get 5% off, over $40 get 8% and over $100 get 12%.',
+          'At {{store}} the pick-your-amount option starts at **$0.05 per 1M** and drops automatically with volume: $0.04 from 100M and $0.03 from 1B. Fixed packs are a little cheaper for round amounts – a [50M pack](/product/50m-money) is $2.39 (just under $0.048 per million), [100M](/product/100m-money) is $3.79 and [1B](/product/1b-money) is $28.99. On top of that, carts over $15 get 5% off, over $40 get 8% and over $100 get 12%, and 5% of every delivered order comes back as store credit.',
           'Delivery is done by hand: a member of our staff logs in and runs `/pay` to the username on your order. {{eta}} There is no bot and no automation – slower in theory, more reliable in practice, because nothing breaks at 3am. You can follow the status on your order page.',
           'Two honest notes. DonutSMP’s rules prohibit trading in-game money for real currency; enforcement is the server’s decision and buying is your own responsibility. And {{store}} is an independent player-run store, not affiliated with DonutSMP, Mojang or Microsoft.',
         ],
@@ -119,7 +119,7 @@ const raw: GuideInput[] = [
       },
       {
         q: 'How much is 1M DonutSMP money worth in real money?',
-        a: 'At {{store}} it is $0.18 for a single million and as low as $0.13 per million at 1B. Fixed packs land in between – a 100M pack works out to about $0.14 per million.',
+        a: 'At {{store}} it is $0.05 for a single million and $0.03 per million at 1B on the flexible listing. Fixed packs are a little cheaper – a 100M pack works out to just under $0.038 per million and the 1B pack to about $0.029.',
       },
       {
         q: 'Can I get banned for buying DonutSMP money?',
@@ -158,7 +158,7 @@ const raw: GuideInput[] = [
         heading: 'Skeleton spawners – the default choice',
         paragraphs: [
           'The skeleton spawner is the DonutSMP workhorse. Skeletons drop bones and arrows, both of which sell in bulk, and they give decent XP for mending gear. Farms are easy to build: a dark room, water streams pushing mobs into a kill chamber, hoppers into chests. Because almost every rich player runs a skelly farm, auction house prices are predictable and there is always a buyer when you want to sell the spawners back.',
-          'In our store a [Skeleton Spawner](/product/skeleton-spawner) is **$0.43** on its own, $0.42 from 25, $0.40 from 50, $0.38 from 100 and $0.36 from 250 spawners. A full 64-spawner room is $25.60 at the 50+ rate, or you can take the [Spawner Farm Bundle](/product/spawner-farm-bundle) – 64 skellies plus 10M for building materials – at $25.99.',
+          'In our store a [Skeleton Spawner](/product/skeleton-spawner) is **$0.43** on its own, $0.42 from 25, $0.40 from 50, $0.38 from 100 and $0.36 from 250 spawners. A full 64-spawner room is $25.60 at the 50+ rate, or you can take the [Spawner Farm Bundle](/product/spawner-farm-bundle) – 64 skellies plus 10M for building materials – at $23.49.',
         ],
       },
       {
@@ -179,7 +179,7 @@ const raw: GuideInput[] = [
       {
         heading: 'Payback math: when does a spawner pay for itself?',
         paragraphs: [
-          'In real-money terms the question is simple: a skeleton spawner costs between $0.36 and $0.43, and 1M of in-game money costs $0.13 to $0.18. So one spawner is worth roughly 2.5M of bought money. If your farm sells for more than 2.5M per spawner over its lifetime – and a farm that runs for a few weeks does that comfortably – the spawner has paid for itself.',
+          'In real-money terms the question is simple: a skeleton spawner costs between $0.36 and $0.43, and 1M of in-game money costs $0.03 to $0.05. So one spawner is worth roughly 10M of bought money. If your farm sells for more than about 10M per spawner over its lifetime, the spawner has paid for itself – whether it does depends on sell prices and how long you keep the farm running. If all you want is the balance, buying money directly is now the cheaper shortcut; spawners make sense when you plan to play long enough for the farm to keep paying.',
           'In in-game terms, compare the auction house price of a spawner with what one spawner’s drops sell for per day in `/shop`. Sell prices change between seasons, so we will not quote one here; run a single spawner for a day, sell the output and multiply. Most players find that a well-built room pays back its spawner cost within one to two weeks of normal play.',
         ],
         list: [
@@ -285,7 +285,7 @@ const raw: GuideInput[] = [
         heading: 'How to protect yourself anywhere',
         paragraphs: ['These rules apply whether you buy from us, from another store or from a trader in a DM:'],
         list: [
-          'Start small. A 10M order for $1.69 tells you more about a seller than a hundred vouches.',
+          'Start small. A 10M order for $0.49 tells you more about a seller than a hundred vouches.',
           'Pay only to the details shown on the order page or the store’s own checkout – never to a “new address” sent in chat.',
           'Keep the order ID and payment reference until the order is delivered and you are happy.',
           'Use the Discord support channel for problems, quoting the order ID, rather than DMing whoever answers fastest.',
@@ -345,8 +345,8 @@ const raw: GuideInput[] = [
       {
         heading: 'Money crates – Coin Crate $1.99 and Mega Coin Crate $9.99',
         paragraphs: [
-          'The [Coin Crate](/product/coin-crate) is one money drop: 5M guaranteed, with 10M in about one crate in ten, 25M in one in 23 and rare 50M and 100M hits. The [Mega Coin Crate](/product/mega-coin-crate) is the big version: 20M guaranteed, 75M in about one crate in eleven, 150M in one in 33 and a 500M jackpot in roughly one in a hundred.',
-          'On average both pay less than the same money bought as a [money pack](/donutsmp-money) – you pay for the chance of a big hit. They are a fun flutter, not a money strategy.',
+          'The [Coin Crate](/product/coin-crate) is one money drop: 10M guaranteed, with 15M in about one crate in four, 25M in one in eight, 50M in one in 20, 100M in one in 25 and a 250M jackpot in roughly one in a hundred. The [Mega Coin Crate](/product/mega-coin-crate) is the big version: 60M guaranteed, 100M in about one crate in four, 200M in one in ten, 500M in one in 25 and a 1B jackpot in roughly one in a hundred.',
+          'On average both pay far less than the same money bought as a [money pack](/donutsmp-money) – a Coin Crate averages about 21M (the 25M pack is $1.19) and a Mega Coin Crate about 110M (the 100M pack is $3.79). You pay for the chance of a big hit. They are a fun flutter, not a money strategy.',
         ],
       },
       {
@@ -359,25 +359,25 @@ const raw: GuideInput[] = [
       {
         heading: 'Mystery Box – $3.99, 2 drops',
         paragraphs: [
-          'The [Mystery Box](/product/mystery-box) draws two different lines from an 11-line pool. Gilded blackstone, skeleton spawners, nether stars, golden apples, emerald ore and totems are the commons; a netherite ingot or 10M money show up in about one box in twenty, and a netherite block, dragon head or Elytra are rare jackpots (the Elytra is roughly one box in 200).',
+          'The [Mystery Box](/product/mystery-box) draws two different lines from an 11-line pool. Gilded blackstone, skeleton spawners, nether stars, golden apples, emerald ore and totems are the commons; a netherite ingot or 25M money show up in about one box in twenty, and a netherite block, dragon head or Elytra are rare jackpots (the Elytra is roughly one box in 200).',
         ],
       },
       {
         heading: 'Elite Mystery Box – $8.99, 2 drops',
         paragraphs: [
-          'The [Elite Mystery Box](/product/elite-mystery-box) draws two lines from a stronger pool with bigger stacks: golden apples, emerald ore, iron golem spawners, heavy cores and gilded blackstone, with a netherite ingot in more than one box in five. 25M money (about one in 26), a netherite block, a dragon head and an Elytra (each roughly one in 70–100) are the jackpots.',
+          'The [Elite Mystery Box](/product/elite-mystery-box) draws two lines from a stronger pool with bigger stacks: golden apples, emerald ore, iron golem spawners, heavy cores and gilded blackstone, with a netherite ingot in more than one box in five. 100M money (about one in 26), a netherite block, a dragon head and an Elytra (each roughly one in 70–100) are the jackpots.',
         ],
       },
       {
         heading: 'God Mystery Box – $19.99, 3 drops',
         paragraphs: [
-          'The [God Mystery Box](/product/god-mystery-box) draws three of nine lines: blaze spawners, heavy cores, gilded blackstone, emerald ore and netherite ingots are the usual drops. 50M money and a netherite block each land in about one box in 19, an Elytra in about one in 22 and a dragon head in about one in 28.',
+          'The [God Mystery Box](/product/god-mystery-box) draws three of nine lines: blaze spawners, heavy cores, gilded blackstone, emerald ore and netherite ingots are the usual drops. 250M money and a netherite block each land in about one box in 19, an Elytra in about one in 22 and a dragon head in about one in 28.',
         ],
       },
       {
         heading: 'Legendary Crate – $34.99, 3 drops',
         paragraphs: [
-          'The [Legendary Crate](/product/legendary-crate) draws three of ten lines from our best pool – maces, god armor sets, iron golem and blaze spawners, totems and netherite ingots. It has the best jackpot odds in the shop: a netherite block in about one crate in nine, an Elytra in about one in eight, a dragon head in about one in 13 and 100M money in about one in 22.',
+          'The [Legendary Crate](/product/legendary-crate) draws three of ten lines from our best pool – maces, god armor sets, iron golem and blaze spawners, totems and netherite ingots. It has the best jackpot odds in the shop: a netherite block in about one crate in nine, an Elytra in about one in eight, a dragon head in about one in 13 and 500M money in about one in 22.',
         ],
       },
       {
@@ -388,7 +388,7 @@ const raw: GuideInput[] = [
         list: [
           '**Want something specific:** buy it directly. It is always cheaper on average.',
           '**Want a cheap Elytra shot:** Elytra Crate – about 1 in 12 for $7.99.',
-          '**Want money with upside:** Coin Crate for fun, Mega Coin Crate for the 500M chance.',
+          '**Want money with upside:** Coin Crate for fun, Mega Coin Crate for the 1B chance – a plain money pack is always cheaper per million.',
           '**Want variety on a small budget:** Mystery Box.',
           '**Want the best jackpot odds overall:** Legendary Crate.',
         ],
@@ -460,7 +460,7 @@ const raw: GuideInput[] = [
         heading: 'Route 4: Buy it – $28.49',
         paragraphs: [
           'The [Elytra](/product/elytra) in our store is **$28.49** (down from $29.99) and comes with **Unbreaking III and Mending** already applied – the two enchantments that matter, because together they mean you never have to repair it as long as you pick up XP. Up to 20 per order.',
-          'It is also in two bundles: the [Pro Bundle](/product/pro-bundle) ($40.99) adds 50M and 16 skeleton spawners and works out cheaper than buying the three separately, and the [Basehunter Bundle](/product/basehunter-bundle) ($37.99) pairs the Elytra with an Amethyst Pickaxe, 16 totems and 20M in one order – everything you need to go hunting on day one.',
+          'It is also in two bundles: the [Pro Bundle](/product/pro-bundle) ($33.99) adds 50M and 16 skeleton spawners in one order and one handover, and the [Basehunter Bundle](/product/basehunter-bundle) ($33.99) pairs the Elytra with an Amethyst Pickaxe, 16 totems and 20M in one order – everything you need to go hunting on day one.',
           'Delivery is in-game by our staff: join DonutSMP with the username on your order, accept the teleport and take the drop. {{eta}} No bot, no account access – and, as with everything we sell, DonutSMP’s rules prohibit real-money trading, so the decision and the risk are yours. {{store}} is not affiliated with DonutSMP or Mojang.',
         ],
       },
@@ -476,7 +476,7 @@ const raw: GuideInput[] = [
         paragraphs: ['Once you have wings, the server opens up:'],
         list: [
           '**Base hunting.** Fly low over the surface looking for lit areas, unnatural shapes, tree-less patches and nether portals. The [base hunting guide](/guides/donutsmp-base-hunting-guide) goes deeper.',
-          '**Escaping fights.** Rocket straight up and away. On a lifesteal server this is worth more hearts than any armor piece.',
+          '**Escaping fights.** Rocket straight up and away. In a fight you cannot win, this is worth more than any armor piece.',
           '**Reaching untouched End cities** and far nether fortresses for more loot.',
           '**Moving spawners and shulkers** between bases without a tunnel anyone can follow.',
           '**Selling it later.** An Elytra you no longer need sells fast on the auction house – it is one of the few purchases that is also an asset.',
@@ -504,7 +504,7 @@ const raw: GuideInput[] = [
       },
       {
         q: 'What is cheaper – a God box or the Elytra?',
-        a: 'They cost about the same ($19.99 vs $28.49). The box gives an Elytra in roughly 55–60% of cases plus four other drops; buying the Elytra gives it with certainty. Pick based on whether you want the other loot.',
+        a: 'The box is cheaper ($19.99 vs $28.49), but it only contains an Elytra in about one box in 22 – the other drops are blaze spawners, heavy cores, netherite and the like. Buying the Elytra gives it with certainty. Pick based on whether you want the other loot.',
       },
     ],
     relatedProductIds: ['elytra', 'creeper-spawner', 'pro-bundle', 'basehunter-bundle'],
@@ -520,7 +520,7 @@ const raw: GuideInput[] = [
     title: 'DonutSMP Base Hunting Guide: Amethyst Pickaxe, Elytra and Tactics',
     seoTitle: 'DonutSMP Base Hunting Guide – Gear & Tactics | {{store}}',
     metaDescription:
-      'How base hunting works on DonutSMP: what hunters look for, the gear (Elytra, Amethyst Pickaxe, totems), honest odds and the Basehunter Bundle at $37.99.',
+      'How base hunting works on DonutSMP: what hunters look for, the gear (Elytra, Amethyst Pickaxe, totems), honest odds and the Basehunter Bundle at $33.99.',
     intro:
       'Base hunting is the DonutSMP endgame for a lot of players: fly out, find somebody’s hidden base, and leave with their spawners, netherite and shulkers. It is also where most of the server’s drama comes from. This guide is an honest look at how hunting actually works – what you are looking for, the gear that makes a difference, the tactics that find bases, and the part nobody advertises: most sessions find nothing.',
     sections: [
@@ -534,7 +534,7 @@ const raw: GuideInput[] = [
       {
         heading: 'The gear that matters',
         paragraphs: [
-          'Six things separate a hunter from a tourist. If you want all of them at once, the [Basehunter Bundle](/product/basehunter-bundle) packages the Elytra, the Amethyst Pickaxe, 16 totems and 20M for rockets and supplies in a single $37.99 order – the quickest way to go from zero to a first hunting session.',
+          'Six things separate a hunter from a tourist. If you want all of them at once, the [Basehunter Bundle](/product/basehunter-bundle) packages the Elytra, the Amethyst Pickaxe, 16 totems and 20M for rockets and supplies in a single $33.99 order – the quickest way to go from zero to a first hunting session.',
         ],
         list: [
           '**Elytra with Mending** – non-negotiable. You will cover tens of thousands of blocks per session. Ours is $28.49 with Unbreaking III and Mending ([Elytra](/product/elytra)).',
@@ -658,7 +658,7 @@ const raw: GuideInput[] = [
         paragraphs: ['One of these is a reason to slow down. Two or more is a reason to leave:'],
         list: [
           'The seller DMed you first, especially right after you posted in a public channel.',
-          'The price is far below everyone else’s – 100M for $5 does not exist.',
+          'The price is far below every established store’s – a deal that looks too good to be real is bait.',
           'Payment details change during the conversation (“use this one instead, the other is limited”).',
           'They want the full amount up front for a large order but refuse to split the first delivery.',
           'Urgency: “only 5 minutes”, “someone else is buying”, “price goes up tonight”.',
@@ -670,7 +670,7 @@ const raw: GuideInput[] = [
         paragraphs: [
           'A store is still a seller you pay first. The difference is structural. At {{store}} the money and items exist before you pay – stock levels on product pages are live. Every order has an ID, a locked price, a timeline and a payment reference you submitted yourself; you can open it at [/track](/track) any time without talking to anyone. Reviews can only be written from delivered orders and are tied to this domain rather than a Discord tag. And there is a published [refund policy](/refund-policy) that says what happens if we fail.',
           'Delivery is still done by real people – a staff member running `/pay` or teleporting to you with a shulker – but the record exists whether or not that person is online. {{eta}} If something goes wrong you have a page to show, not a DM thread with a deleted account.',
-          'Prices are also simply lower than most Discord sellers once you include bulk tiers: 1M is $0.18 and falls to $0.13 per million at 1B, skeleton spawners are $0.43 falling to $0.36 at 250+, and carts over $15, $40 and $100 get 5%, 8% and 12% off automatically.',
+          'Prices are also simply lower than most Discord sellers once you include bulk tiers: 1M is $0.05 and falls to $0.03 per million at 1B, skeleton spawners are $0.43 falling to $0.36 at 250+, and carts over $15, $40 and $100 get 5%, 8% and 12% off automatically.',
         ],
       },
       {

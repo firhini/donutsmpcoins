@@ -245,7 +245,6 @@ export default function Page() {
 
       <div className="od-layout">
         <div className="od-main">
-          {awaiting && <ClaimTicket required={!moneyOnly} stage="before" />}
           {awaiting && <PaymentPanel order={order} onChange={reload} />}
           {(order.status === 'paid' || order.status === 'delivering') && <DeliveryPanel order={order} />}
           {order.status === 'delivered' && <DeliveredPanel order={order} />}
@@ -754,7 +753,7 @@ function DeliveryPanel({ order }: { order: PublicOrder }) {
 }
 
 function DeliveredPanel({ order }: { order: PublicOrder }) {
-  const { config } = useStore();
+  const { config, fmt } = useStore();
   const deliveredAt = [...order.timeline].reverse().find((t) => t.status === 'delivered')?.at ?? order.updatedAt;
   return (
     <section className="card od-done">
@@ -766,6 +765,11 @@ function DeliveredPanel({ order }: { order: PublicOrder }) {
       <p className="text-2">
         Everything was handed over to <b>{order.username}</b> on {formatDate(deliveredAt)}. Thanks for shopping with {config.storeName}.
       </p>
+      {order.cashbackCents && !order.cashbackReversed ? (
+        <div className="cashback-row" style={{ justifyContent: 'center' }}>
+          <Icon name="coin" size={14} /> <strong>{fmt(order.cashbackCents)}</strong> cashback was added to {order.username}'s store credit – use it on your next order.
+        </div>
+      ) : null}
       <div className="od-done-actions">
         {order.reviewed ? (
           <span className="badge badge-green">

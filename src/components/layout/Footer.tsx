@@ -51,6 +51,7 @@ export function Footer() {
               <li><Link to="/track">Track your order</Link></li>
               <li><Link to="/faq">FAQ</Link></li>
               <li><Link to="/guides">Guides</Link></li>
+              <li><Link to="/wiki">DonutSMP Wiki</Link></li>
               <li><Link to="/donutsmp-money-prices">Money price guide</Link></li>
               <li><Link to="/reviews">Customer reviews</Link></li>
               <li><Link to="/donutsmp-irl-trade">DonutSMP IRL trading guide</Link></li>

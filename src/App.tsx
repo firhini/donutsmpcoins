@@ -35,6 +35,8 @@ const Reviews = lazyPage(() => import('./pages/Reviews'));
 const Account = lazyPage(() => import('./pages/Account'));
 const Guides = lazyPage(() => import('./pages/Guides'));
 const GuidePage = lazyPage(() => import('./pages/GuidePage'));
+const Wiki = lazyPage(() => import('./pages/Wiki'));
+const WikiPage = lazyPage(() => import('./pages/WikiPage'));
 const LandingPage = lazyPage(() => import('./pages/LandingPage'));
 // Admin (own layout)
 const Admin = lazyPage(() => import('./pages/admin/Admin'));
@@ -50,6 +52,8 @@ const PAGES: [path: string, page: PreloadablePage][] = [
   ['/donutsmp-irl-trade', IrlTradeLanding],
   ['/guides', Guides],
   ['/guides/:slug', GuidePage],
+  ['/wiki', Wiki],
+  ['/wiki/:slug', WikiPage],
   ...landingCopy.map((l): [string, PreloadablePage] => [`/${l.slug}`, LandingPage]),
   ['/faq', Faq],
   ['/terms', Terms],

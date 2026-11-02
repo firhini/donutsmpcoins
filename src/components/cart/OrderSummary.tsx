@@ -108,6 +108,11 @@ export function OrderSummary({
         </div>
       </div>
       {config.legal.priceNote && <p className="xs muted summary-pricenote">{config.legal.priceNote}</p>}
+      {config.cashback?.enabled && config.cashback.percent > 0 && total > 0 && (
+        <div className="cashback-row">
+          <Icon name="coin" size={14} /> +{fmt(Math.round((total * config.cashback.percent) / 100))} cashback as store credit after delivery
+        </div>
+      )}
       {savings > 0 && (
         <div className="summary-savings">
           <Icon name="sparkles" size={14} /> You save {fmt(savings)}

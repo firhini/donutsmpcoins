@@ -55,8 +55,8 @@ describe('productCopy', () => {
 
       it('seoTitle quotes the catalog price', () => {
         const price = `$${(p.priceCents / 100).toFixed(2)}`;
-        // money-1m advertises its best bulk rate instead of the base price
-        const expected = p.id === 'money-1m' ? '$0.13' : price;
+        // money-1m advertises its range down to the best bulk rate
+        const expected = p.id === 'money-1m' ? '$0.03' : price;
         expect(c.seoTitle).toContain(expected);
       });
     });

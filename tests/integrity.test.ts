@@ -18,14 +18,14 @@ describe('order integrity (review fixes)', () => {
   it('store credit cannot be spent twice by concurrent checkouts', async () => {
     await lib.credit.addCredit('Racer', 1000, 'test top-up');
     const results = await Promise.all(
-      Array.from({ length: 5 }, () => post<{ order: PublicOrder }>('/orders', orderBody({ username: 'Racer', items: [{ productId: 'money-1m', qty: 50 }], applyCredit: true }))),
+      Array.from({ length: 5 }, () => post<{ order: PublicOrder }>('/orders', orderBody({ username: 'Racer', items: [{ productId: 'money-1m', qty: 200 }], applyCredit: true }))),
     );
     const created = results.filter((r) => r.status === 201);
     const rejected = results.filter((r) => r.status === 409);
     expect(created.length).toBe(1);
     expect(rejected.length).toBe(4);
-    expect(created[0].data.order.creditAppliedCents).toBe(850);
-    expect((await lib.credit.getCredit('Racer')).balanceCents).toBe(150);
+    expect(created[0].data.order.creditAppliedCents).toBe(800);
+    expect((await lib.credit.getCredit('Racer')).balanceCents).toBe(200);
   });
 
   it('single-use coupons cannot be consumed by concurrent orders', async () => {

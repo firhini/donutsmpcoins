@@ -10,7 +10,7 @@ import type { Catalog, Category, Product } from '../shared/types';
 export const categories: Category[] = [
   { id: 'money', name: 'Money', slug: 'money', tagline: 'In-game cash, paid straight to your balance', icon: '/img/categories/money.svg', order: 1 },
   { id: 'spawners', name: 'Spawners & Items', slug: 'spawners', tagline: 'Skeleton spawners, iron golems, elytras & more', icon: '/img/categories/spawners.svg', order: 2 },
-  { id: 'mystery', name: 'Mystery Boxes', slug: 'mystery-boxes', tagline: 'Open a box, win up to an Elytra or 100M', icon: '/img/categories/mystery.svg', order: 3 },
+  { id: 'mystery', name: 'Mystery Boxes', slug: 'mystery-boxes', tagline: 'Open a box, win up to an Elytra or 1B', icon: '/img/categories/mystery.svg', order: 3 },
   { id: 'investments', name: 'Investments', slug: 'investments', tagline: 'Rare items that hold their value', icon: '/img/categories/investments.svg', order: 4 },
   { id: 'armor', name: 'Armor', slug: 'armor', tagline: 'Maxed diamond & netherite sets', icon: '/img/categories/armor.svg', order: 5 },
   { id: 'tools', name: 'Tools & Weapons', slug: 'tools-weapons', tagline: 'God tools, maces, tridents & stacks', icon: '/img/categories/tools.svg', order: 6 },
@@ -24,26 +24,23 @@ export const products: Product[] = [
   // ───────────── MONEY ─────────────
   P({
     id: 'money-1m', slug: 'donutsmp-money', name: '1M DonutSMP Money', categoryId: 'money', kind: 'money',
-    priceCents: 18, stock: null, unitLabel: 'per 1M', moneyMillions: 1, featured: true, sortOrder: 1,
+    priceCents: 5, stock: null, unitLabel: 'per 1M', moneyMillions: 1, featured: true, sortOrder: 1,
     tags: ['Fast', 'Popular'], image: '/img/products/money-1m.svg',
     shortDesc: 'Pick any amount – the quantity is the number of millions. Bulk prices kick in automatically.',
     description: 'In-game DonutSMP money paid directly to your balance with /pay. Choose the quantity in millions (e.g. 50 = 50M). The more you buy, the cheaper each million gets.',
     bulkPricing: [
-      { minQty: 50, priceCents: 17 },
-      { minQty: 100, priceCents: 16 },
-      { minQty: 250, priceCents: 15 },
-      { minQty: 500, priceCents: 14 },
-      { minQty: 1000, priceCents: 13 },
+      { minQty: 100, priceCents: 4 },
+      { minQty: 1000, priceCents: 3 },
     ],
     minQty: 1, maxQty: 5000,
   }),
-  P({ id: 'money-10m', slug: '10m-money', name: '10M Money Pack', categoryId: 'money', kind: 'money', priceCents: 169, compareAtCents: 180, stock: null, moneyMillions: 10, image: '/img/products/money-10m.svg', tags: ['Fast'], sortOrder: 2, shortDesc: 'A quick 10 million to get going.' }),
-  P({ id: 'money-25m', slug: '25m-money', name: '25M Money Pack', categoryId: 'money', kind: 'money', priceCents: 399, compareAtCents: 450, stock: null, moneyMillions: 25, image: '/img/products/money-25m.svg', tags: ['Fast'], sortOrder: 3, shortDesc: 'Enough for a full spawner farm.' }),
-  P({ id: 'money-50m', slug: '50m-money', name: '50M Money Pack', categoryId: 'money', kind: 'money', priceCents: 749, compareAtCents: 900, stock: null, moneyMillions: 50, image: '/img/products/money-50m.svg', tags: ['Fast', 'Best value'], sortOrder: 4, featured: true, shortDesc: 'Our most popular pack.' }),
-  P({ id: 'money-100m', slug: '100m-money', name: '100M Money Pack', categoryId: 'money', kind: 'money', priceCents: 1399, compareAtCents: 1800, stock: null, moneyMillions: 100, image: '/img/products/money-100m.svg', tags: ['Fast', 'Hot'], sortOrder: 5, shortDesc: 'Become a top balance overnight.' }),
-  P({ id: 'money-250m', slug: '250m-money', name: '250M Money Pack', categoryId: 'money', kind: 'money', priceCents: 3299, compareAtCents: 4500, stock: null, moneyMillions: 250, image: '/img/products/money-250m.svg', tags: ['Fast'], sortOrder: 6 }),
-  P({ id: 'money-500m', slug: '500m-money', name: '500M Money Pack', categoryId: 'money', kind: 'money', priceCents: 6199, compareAtCents: 9000, stock: null, moneyMillions: 500, image: '/img/products/money-500m.svg', tags: ['Fast'], sortOrder: 7 }),
-  P({ id: 'money-1b', slug: '1b-money', name: '1B Money Pack', categoryId: 'money', kind: 'money', priceCents: 11499, compareAtCents: 18000, stock: null, moneyMillions: 1000, image: '/img/products/money-1b.svg', tags: ['Fast', 'Whale'], sortOrder: 8, shortDesc: 'One billion. Yes, really.' }),
+  P({ id: 'money-10m', slug: '10m-money', name: '10M Money Pack', categoryId: 'money', kind: 'money', priceCents: 49, stock: null, moneyMillions: 10, image: '/img/products/money-10m.svg', tags: ['Fast'], sortOrder: 2, shortDesc: 'A quick 10 million to get going.' }),
+  P({ id: 'money-25m', slug: '25m-money', name: '25M Money Pack', categoryId: 'money', kind: 'money', priceCents: 119, stock: null, moneyMillions: 25, image: '/img/products/money-25m.svg', tags: ['Fast'], sortOrder: 3, shortDesc: 'Enough for a full spawner farm.' }),
+  P({ id: 'money-50m', slug: '50m-money', name: '50M Money Pack', categoryId: 'money', kind: 'money', priceCents: 239, stock: null, moneyMillions: 50, image: '/img/products/money-50m.svg', tags: ['Fast', 'Best value'], sortOrder: 4, featured: true, shortDesc: 'Our most popular pack.' }),
+  P({ id: 'money-100m', slug: '100m-money', name: '100M Money Pack', categoryId: 'money', kind: 'money', priceCents: 379, stock: null, moneyMillions: 100, image: '/img/products/money-100m.svg', tags: ['Fast', 'Hot'], sortOrder: 5, shortDesc: 'Become a top balance overnight.' }),
+  P({ id: 'money-250m', slug: '250m-money', name: '250M Money Pack', categoryId: 'money', kind: 'money', priceCents: 949, stock: null, moneyMillions: 250, image: '/img/products/money-250m.svg', tags: ['Fast'], sortOrder: 6 }),
+  P({ id: 'money-500m', slug: '500m-money', name: '500M Money Pack', categoryId: 'money', kind: 'money', priceCents: 1899, stock: null, moneyMillions: 500, image: '/img/products/money-500m.svg', tags: ['Fast'], sortOrder: 7 }),
+  P({ id: 'money-1b', slug: '1b-money', name: '1B Money Pack', categoryId: 'money', kind: 'money', priceCents: 2899, stock: null, moneyMillions: 1000, image: '/img/products/money-1b.svg', tags: ['Fast', 'Whale'], sortOrder: 8, shortDesc: 'One billion. Yes, really.' }),
 
   // ───────────── SPAWNERS & ITEMS ─────────────
   P({
@@ -66,14 +63,14 @@ export const products: Product[] = [
   P({
     id: 'coin-crate', slug: 'coin-crate', name: 'Coin Crate', categoryId: 'mystery', kind: 'box', priceCents: 199, stock: null, boxRolls: 1,
     tags: ['Money only'], image: '/img/products/coin-crate.svg', sortOrder: 1, maxQty: 50,
-    shortDesc: 'One money drop – 5M guaranteed, up to 100M.',
+    shortDesc: 'One money drop – 10M guaranteed, up to 250M.',
     contents: [
-      { name: '5M Money', min: 1, max: 1, weight: 6200, rarity: 'common' },
-      { name: '7M Money', min: 1, max: 1, weight: 2200, rarity: 'common' },
-      { name: '10M Money', min: 1, max: 1, weight: 1000, rarity: 'uncommon' },
-      { name: '25M Money', min: 1, max: 1, weight: 440, rarity: 'rare' },
-      { name: '50M Money', min: 1, max: 1, weight: 120, rarity: 'epic' },
-      { name: '100M Money', min: 1, max: 1, weight: 40, rarity: 'legendary' },
+      { name: '10M Money', min: 1, max: 1, weight: 5300, rarity: 'common' },
+      { name: '15M Money', min: 1, max: 1, weight: 2500, rarity: 'common' },
+      { name: '25M Money', min: 1, max: 1, weight: 1200, rarity: 'uncommon' },
+      { name: '50M Money', min: 1, max: 1, weight: 500, rarity: 'rare' },
+      { name: '100M Money', min: 1, max: 1, weight: 400, rarity: 'epic' },
+      { name: '250M Money', min: 1, max: 1, weight: 100, rarity: 'legendary' },
     ],
   }),
   P({
@@ -102,7 +99,7 @@ export const products: Product[] = [
       { name: 'Deepslate Emerald Ore', min: 1, max: 2, weight: 1200, rarity: 'common' },
       { name: 'Totem of Undying', min: 2, max: 4, weight: 1000, rarity: 'uncommon' },
       { name: 'Netherite Ingot', min: 1, max: 1, weight: 220, rarity: 'rare' },
-      { name: '10M Money', min: 1, max: 1, weight: 220, rarity: 'rare' },
+      { name: '25M Money', min: 1, max: 1, weight: 220, rarity: 'rare' },
       { name: 'Netherite Block', min: 1, max: 1, weight: 40, rarity: 'epic' },
       { name: 'Dragon Head', min: 1, max: 1, weight: 30, rarity: 'epic' },
       { name: 'Elytra', min: 1, max: 1, weight: 20, rarity: 'legendary' },
@@ -138,7 +135,7 @@ export const products: Product[] = [
   P({
     id: 'elite-mystery-box', slug: 'elite-mystery-box', name: 'Elite Mystery Box', categoryId: 'mystery', kind: 'box', priceCents: 899, stock: null, boxRolls: 2,
     image: '/img/products/elite-mystery-box.svg', sortOrder: 6, maxQty: 50,
-    shortDesc: 'Two drops from a stronger pool – netherite, iron golems, 25M or an Elytra.',
+    shortDesc: 'Two drops from a stronger pool – netherite, iron golems, 100M or an Elytra.',
     contents: [
       { name: 'Gilded Blackstone', min: 2, max: 4, weight: 1600, rarity: 'common' },
       { name: 'Enchanted Golden Apple', min: 2, max: 5, weight: 1600, rarity: 'common' },
@@ -146,7 +143,7 @@ export const products: Product[] = [
       { name: 'Iron Golem Spawner', min: 3, max: 6, weight: 1400, rarity: 'uncommon', productId: 'iron-golem-spawner' },
       { name: 'Heavy Core', min: 1, max: 1, weight: 1200, rarity: 'uncommon' },
       { name: 'Netherite Ingot', min: 1, max: 1, weight: 1000, rarity: 'rare' },
-      { name: '25M Money', min: 1, max: 1, weight: 150, rarity: 'epic' },
+      { name: '100M Money', min: 1, max: 1, weight: 150, rarity: 'epic' },
       { name: 'Netherite Block', min: 1, max: 1, weight: 60, rarity: 'epic' },
       { name: 'Dragon Head', min: 1, max: 1, weight: 40, rarity: 'epic' },
       { name: 'Elytra', min: 1, max: 1, weight: 40, rarity: 'legendary' },
@@ -155,26 +152,26 @@ export const products: Product[] = [
   P({
     id: 'mega-coin-crate', slug: 'mega-coin-crate', name: 'Mega Coin Crate', categoryId: 'mystery', kind: 'box', priceCents: 999, stock: null, boxRolls: 1,
     tags: ['New', 'Money only'], image: '/img/products/mega-coin-crate.svg', sortOrder: 7, maxQty: 25,
-    shortDesc: 'One big money drop – 20M guaranteed, up to 500M.',
+    shortDesc: 'One big money drop – 60M guaranteed, up to 1B.',
     contents: [
-      { name: '20M Money', min: 1, max: 1, weight: 6500, rarity: 'common' },
-      { name: '40M Money', min: 1, max: 1, weight: 2200, rarity: 'uncommon' },
-      { name: '75M Money', min: 1, max: 1, weight: 900, rarity: 'rare' },
-      { name: '150M Money', min: 1, max: 1, weight: 300, rarity: 'epic' },
-      { name: '500M Money', min: 1, max: 1, weight: 100, rarity: 'legendary' },
+      { name: '60M Money', min: 1, max: 1, weight: 6200, rarity: 'common' },
+      { name: '100M Money', min: 1, max: 1, weight: 2300, rarity: 'uncommon' },
+      { name: '200M Money', min: 1, max: 1, weight: 1000, rarity: 'rare' },
+      { name: '500M Money', min: 1, max: 1, weight: 400, rarity: 'epic' },
+      { name: '1B Money', min: 1, max: 1, weight: 100, rarity: 'legendary' },
     ],
   }),
   P({
     id: 'god-mystery-box', slug: 'god-mystery-box', name: 'God Mystery Box', categoryId: 'mystery', kind: 'box', priceCents: 1999, stock: null, boxRolls: 3,
     tags: ['Hot'], image: '/img/products/god-mystery-box.svg', sortOrder: 8, maxQty: 25,
-    shortDesc: 'Three drops from the top pool – blaze spawners, netherite, 50M, dragon heads or an Elytra.',
+    shortDesc: 'Three drops from the top pool – blaze spawners, netherite, 250M, dragon heads or an Elytra.',
     contents: [
       { name: 'Blaze Spawner', min: 2, max: 4, weight: 1800, rarity: 'uncommon', productId: 'blaze-spawner' },
       { name: 'Heavy Core', min: 1, max: 2, weight: 1800, rarity: 'uncommon' },
       { name: 'Gilded Blackstone', min: 3, max: 6, weight: 1800, rarity: 'common' },
       { name: 'Deepslate Emerald Ore', min: 3, max: 6, weight: 1600, rarity: 'common' },
       { name: 'Netherite Ingot', min: 1, max: 1, weight: 1200, rarity: 'rare' },
-      { name: '50M Money', min: 1, max: 1, weight: 120, rarity: 'epic' },
+      { name: '250M Money', min: 1, max: 1, weight: 120, rarity: 'epic' },
       { name: 'Netherite Block', min: 1, max: 1, weight: 120, rarity: 'epic' },
       { name: 'Dragon Head', min: 1, max: 1, weight: 80, rarity: 'epic' },
       { name: 'Elytra', min: 1, max: 1, weight: 100, rarity: 'legendary' },
@@ -183,7 +180,7 @@ export const products: Product[] = [
   P({
     id: 'legendary-crate', slug: 'legendary-crate', name: 'Legendary Crate', categoryId: 'mystery', kind: 'box', priceCents: 3499, stock: null, boxRolls: 3,
     tags: ['Best odds'], image: '/img/products/legendary-crate.svg', sortOrder: 9, maxQty: 10,
-    shortDesc: 'Three drops from our best pool – the highest Elytra and 100M odds in the shop.',
+    shortDesc: 'Three drops from our best pool – the highest Elytra odds in the shop and a 500M jackpot.',
     contents: [
       { name: 'Mace', min: 1, max: 1, weight: 1600, rarity: 'uncommon' },
       { name: 'Netherite Armor Set (God)', min: 1, max: 1, weight: 1500, rarity: 'rare' },
@@ -194,7 +191,7 @@ export const products: Product[] = [
       { name: 'Netherite Block', min: 1, max: 1, weight: 300, rarity: 'epic' },
       { name: 'Dragon Head', min: 1, max: 1, weight: 200, rarity: 'epic' },
       { name: 'Elytra', min: 1, max: 1, weight: 350, rarity: 'legendary' },
-      { name: '100M Money', min: 1, max: 1, weight: 120, rarity: 'legendary' },
+      { name: '500M Money', min: 1, max: 1, weight: 120, rarity: 'legendary' },
     ],
   }),
 
@@ -250,27 +247,27 @@ export const products: Product[] = [
 
   // ───────────── BUNDLES ─────────────
   P({
-    id: 'starter-bundle', slug: 'starter-bundle', name: 'Starter Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 949, compareAtCents: 1054, stock: null, tags: ['Best value'], image: '/img/products/starter-bundle.svg', sortOrder: 1, maxQty: 20,
+    id: 'starter-bundle', slug: 'starter-bundle', name: 'Starter Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 699, stock: null, tags: ['Best value'], image: '/img/products/starter-bundle.svg', sortOrder: 1, maxQty: 20,
     shortDesc: '20M + 15 Skeleton Spawners + Diamond Armor Shulker.',
     bundleItems: [{ productId: 'money-1m', quantity: 20 }, { productId: 'skeleton-spawner', quantity: 15 }, { productId: 'diamond-armor-shulker', quantity: 1 }],
   }),
   P({
-    id: 'spawner-farm-bundle', slug: 'spawner-farm-bundle', name: 'Spawner Farm Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 2599, compareAtCents: 2740, stock: null, tags: ['New'], image: '/img/products/spawner-farm-bundle.svg', sortOrder: 2, maxQty: 20,
+    id: 'spawner-farm-bundle', slug: 'spawner-farm-bundle', name: 'Spawner Farm Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 2349, stock: null, tags: ['New'], image: '/img/products/spawner-farm-bundle.svg', sortOrder: 2, maxQty: 20,
     shortDesc: '64 Skeleton Spawners + 10M to build the farm.',
     bundleItems: [{ productId: 'skeleton-spawner', quantity: 64 }, { productId: 'money-1m', quantity: 10 }],
   }),
   P({
-    id: 'pro-bundle', slug: 'pro-bundle', name: 'Pro Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 4099, compareAtCents: 4387, stock: null, tags: ['Popular'], image: '/img/products/pro-bundle.svg', sortOrder: 3, maxQty: 20,
+    id: 'pro-bundle', slug: 'pro-bundle', name: 'Pro Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 3399, stock: null, tags: ['Popular'], image: '/img/products/pro-bundle.svg', sortOrder: 3, maxQty: 20,
     shortDesc: '50M + 16 Skeleton Spawners + Elytra.',
     bundleItems: [{ productId: 'money-1m', quantity: 50 }, { productId: 'skeleton-spawner', quantity: 16 }, { productId: 'elytra', quantity: 1 }],
   }),
   P({
-    id: 'basehunter-bundle', slug: 'basehunter-bundle', name: 'Basehunter Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 3799, compareAtCents: 4040, stock: null, image: '/img/products/basehunter-bundle.svg', sortOrder: 4, maxQty: 20,
+    id: 'basehunter-bundle', slug: 'basehunter-bundle', name: 'Basehunter Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 3399, stock: null, image: '/img/products/basehunter-bundle.svg', sortOrder: 4, maxQty: 20,
     shortDesc: '20M + Elytra + Amethyst Pickaxe + 16 Totems.',
     bundleItems: [{ productId: 'money-1m', quantity: 20 }, { productId: 'elytra', quantity: 1 }, { productId: 'amethyst-pickaxe', quantity: 1 }, { productId: 'totem', quantity: 16 }],
   }),
   P({
-    id: 'rich-bundle', slug: 'rich-bundle', name: 'Rich Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 7999, compareAtCents: 10347, stock: null, tags: ['Whale'], image: '/img/products/rich-bundle.svg', sortOrder: 5, maxQty: 10,
+    id: 'rich-bundle', slug: 'rich-bundle', name: 'Rich Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 5999, stock: null, tags: ['Whale'], image: '/img/products/rich-bundle.svg', sortOrder: 5, maxQty: 10,
     shortDesc: '250M + God Mystery Box + Elytra + PvP Kit.',
     bundleItems: [{ productId: 'money-1m', quantity: 250 }, { productId: 'god-mystery-box', quantity: 1 }, { productId: 'elytra', quantity: 1 }, { productId: 'pvp-kit', quantity: 1 }],
   }),

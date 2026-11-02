@@ -39,6 +39,7 @@ const fallbackConfig: PublicConfig = {
   spinRequireLogin: false,
   spinRequireGuild: false,
   referral: defaultSettings.referral,
+  cashback: defaultSettings.cashback,
   reviewRewardPercent: defaultSettings.reviewRewardPercent,
   welcomeCoupon: defaultSettings.welcomeCoupon,
   currencies: defaultSettings.currencies,

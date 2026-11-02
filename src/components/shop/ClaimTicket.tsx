@@ -4,30 +4,10 @@ import { CopyButton } from '../cart/CopyButton';
 
 /**
  * How to claim an order: items need a Discord ticket (required), money is paid with /pay but a ticket makes it faster.
- * `stage` = before payment (heads-up) or after payment (call to action).
  */
-export function ClaimTicket({ orderId, username, required, stage = 'paid' }: { orderId?: string; username?: string; required: boolean; stage?: 'before' | 'paid' }) {
+export function ClaimTicket({ orderId, username, required }: { orderId?: string; username?: string; required: boolean }) {
   const { config } = useStore();
   const ticketUrl = config.discordTicketUrl;
-
-  if (stage === 'before') {
-    return (
-      <div className={`claim-note ${required ? 'is-required' : ''}`} role="note">
-        <Icon name="discord" size={18} />
-        <span>
-          {required ? (
-            <>
-              <strong>Required after payment:</strong> join our Discord and <strong>open a ticket</strong> to claim your items.
-            </>
-          ) : (
-            <>
-              <strong>Money</strong> is sent with /pay after payment – <strong>open a Discord ticket</strong> to get it faster.
-            </>
-          )}
-        </span>
-      </div>
-    );
-  }
 
   return (
     <section className={`card claim ${required ? 'is-required' : ''}`} aria-labelledby="claim-title">

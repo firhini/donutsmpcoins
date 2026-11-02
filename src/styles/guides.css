@@ -202,3 +202,14 @@
     padding: var(--sp-5);
   }
 }
+
+.wiki-cat {
+  margin-top: var(--sp-8);
+}
+.wiki-cat > h2 {
+  margin-bottom: var(--sp-4);
+}
+.guide-card h3 {
+  font-size: var(--fs-lg);
+  margin: 0 0 6px;
+}

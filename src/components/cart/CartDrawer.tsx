@@ -16,7 +16,7 @@ import '../../styles/cart.css';
  */
 export function CartDrawer() {
   const { isOpen, close, lines, quote } = useCart();
-  const { products, fmt } = useStore();
+  const { products, fmt, config } = useStore();
   const panelRef = useRef<HTMLDivElement>(null);
   const lastFocus = useRef<Element | null>(null);
   const closeRef = useRef(close);
@@ -122,6 +122,11 @@ export function CartDrawer() {
                   <span>Total</span>
                   <strong>{fmt(quote.totalCents)}</strong>
                 </div>
+                {config.cashback?.enabled && config.cashback.percent > 0 && quote.totalCents > 0 && (
+                  <div className="cashback-row">
+                    <Icon name="coin" size={14} /> You get <strong>{fmt(Math.round((quote.totalCents * config.cashback.percent) / 100))}</strong> back as store credit
+                  </div>
+                )}
               </div>
               <div className="cd-actions">
                 <Link to="/checkout" className="btn btn-primary btn-lg btn-block" onClick={close}>

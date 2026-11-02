@@ -30,15 +30,15 @@ export interface ProductCopy {
 export const productCopy: Record<string, ProductCopy> = {
   // ───────────── MONEY ─────────────
   'money-1m': {
-    seoTitle: 'DonutSMP Money – Any Amount, $0.13–0.18 per 1M | DonutCoins',
+    seoTitle: 'DonutSMP Money – Any Amount, $0.03–0.05 per 1M | DonutCoins',
     metaDescription:
-      'Buy DonutSMP money at $0.18 per million, dropping to $0.13 per 1M on bulk orders. Pick any amount; staff pay it to your balance with /pay within minutes.',
+      'Buy DonutSMP money at $0.05 per million, dropping to $0.03 per 1M on bulk orders. Pick any amount; staff pay it to your balance with /pay within minutes.',
     description:
-      'This is the flexible way to buy DonutSMP money: the quantity you enter is the number of millions, so 50 means 50M and 1000 means 1B. The base rate is $0.18 per 1M and bulk tiers kick in automatically – $0.17 from 50M, $0.16 from 100M, $0.15 from 250M, $0.14 from 500M and $0.13 from 1B. The lower rate applies to every million in the line, not just the ones above the threshold.\n\n' +
+      'This is the flexible way to buy DonutSMP money: the quantity you enter is the number of millions, so 50 means 50M and 1000 means 1B. The base rate is $0.05 per 1M and bulk tiers kick in automatically – $0.04 from 100M and $0.03 from 1B. The lower rate applies to every million in the line, not just the ones above the threshold, so it pays to round up: 80M and 100M both cost $4.00, and 750M costs the same $30.00 as a full 1B.\n\n' +
       'Money is what moves on DonutSMP. It buys spawners from other players, pays claim costs, funds shop slots and settles the odd ransom. Earning a few hundred million by hand takes days of farming; ordering it takes a couple of minutes.',
     bullets: [
       'Any amount from 1M to 5B in a single line',
-      'Bulk tiers from $0.17 down to $0.13 per 1M',
+      'Bulk tiers: $0.04 from 100M, $0.03 from 1B',
       'Paid straight to your balance with /pay',
       'No bot, no password – a real person delivers',
       'Price locked at checkout, even if rates move',
@@ -50,7 +50,7 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'Is pick-your-amount cheaper than the fixed packs?',
-        a: 'For round amounts the fixed packs are slightly cheaper (50M is $7.49 as a pack versus $8.50 here at the 50M tier). For odd amounts like 37M or 320M this listing is the better deal, because the bulk tier applies to every million.',
+        a: 'For round amounts the fixed packs are slightly cheaper (50M is $2.39 as a pack versus $2.50 here, 1B is $28.99 versus $30.00). For odd amounts like 37M or 320M this listing is the better deal, because the bulk tier applies to every million.',
       },
       {
         q: 'Can I get banned for buying DonutSMP money?',
@@ -60,16 +60,16 @@ export const productCopy: Record<string, ProductCopy> = {
   },
 
   'money-10m': {
-    seoTitle: 'Buy 10M DonutSMP Money – $1.69 | DonutCoins',
+    seoTitle: 'Buy 10M DonutSMP Money – $0.49 | DonutCoins',
     metaDescription:
-      '10M DonutSMP money for $1.69 – about $0.17 per million, under the base rate. Paid to your balance with /pay by our staff, usually within minutes.',
+      '10M DonutSMP money for $0.49 – just under the $0.05 per million base rate. Paid to your balance with /pay by our staff, usually within minutes.',
     description:
-      'The 10M Money Pack is the cheapest way to try DonutCoins. For $1.69 you get ten million DonutSMP coins, which works out to roughly $0.17 per 1M – a little under the $0.18 base rate of the pick-your-amount listing, where 10M would cost $1.80.\n\n' +
-      'Ten million is a sensible first order: enough for a handful of skeleton spawners from the player market, a few claim blocks or a start on a shop, and small enough to test how fast we deliver before you commit to a bigger pack.\n\n' +
+      'The 10M Money Pack is the cheapest way to try DonutCoins. For $0.49 you get ten million DonutSMP coins, which works out to $0.049 per 1M – a hair under the $0.05 base rate of the pick-your-amount listing, where 10M would cost $0.50.\n\n' +
+      'Ten million is a sensible first order: enough for a few claim blocks, hoppers and chests or a start on a shop, and small enough to test how fast we deliver before you commit to a bigger pack.\n\n' +
       'After payment, one of our staff sends the 10M to your username with /pay – usually within 5–30 minutes while we are online. No teleport, no meeting point; the money simply lands on your balance and the order page updates to delivered.',
     bullets: [
-      '10,000,000 DonutSMP money for $1.69',
-      'About $0.17 per 1M – below the base rate',
+      '10,000,000 DonutSMP money for $0.49',
+      'Just under the $0.05 per 1M base rate',
       'Delivered via /pay to your exact username',
       'Ideal first order to test our delivery',
     ],
@@ -80,22 +80,22 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'Can I buy several 10M packs at once?',
-        a: 'Yes. Two 10M packs cost $3.38, though the 25M pack at $3.99 gives you more money for only a little extra. For sizes in between, use the pick-your-amount listing.',
+        a: 'Yes. Two 10M packs cost $0.98, though the 25M pack at $1.19 gives you more money for only a little extra. For sizes in between, use the pick-your-amount listing.',
       },
     ],
   },
 
   'money-25m': {
-    seoTitle: 'Buy 25M DonutSMP Money – $3.99 | DonutCoins',
+    seoTitle: 'Buy 25M DonutSMP Money – $1.19 | DonutCoins',
     metaDescription:
-      '25M DonutSMP money for $3.99 – under $0.16 per million, 11% below the base rate. Enough for a first spawner farm. Delivered by /pay within minutes.',
+      '25M DonutSMP money for $1.19 – under $0.048 per million, about 5% below the base rate. Enough for a first spawner farm. Delivered by /pay within minutes.',
     description:
-      'Twenty-five million DonutSMP money for $3.99 comes to just under $0.16 per 1M. Buying the same amount at the $0.18 base rate would be $4.50, so the pack saves you about 11% without needing to reach a bulk tier.\n\n' +
+      'Twenty-five million DonutSMP money for $1.19 comes to just under $0.048 per 1M. Buying the same amount at the $0.05 base rate would be $1.25, so the pack saves you about 5% without needing to reach a bulk tier.\n\n' +
       '25M is the amount most players spend setting up their first real income: a row of skeleton spawners, hoppers and chests, plus a cushion for claims. It is also a common ask in player trades, which makes it a convenient pack to have ready.\n\n' +
       'Staff deliver by hand with /pay to the username on your order, typically within 5–30 minutes while we are online. There is nothing to pick up – the balance update and the server\'s chat confirmation are your receipt, and the order page shows the delivered status.',
     bullets: [
-      '25,000,000 DonutSMP money for $3.99',
-      'Under $0.16 per 1M – 11% below base rate',
+      '25,000,000 DonutSMP money for $1.19',
+      'Under $0.048 per 1M – about 5% below base rate',
       'Enough to fund a first spawner farm',
       'Hand-delivered with /pay, no teleport needed',
     ],
@@ -112,23 +112,23 @@ export const productCopy: Record<string, ProductCopy> = {
   },
 
   'money-50m': {
-    seoTitle: 'Buy 50M DonutSMP Money – $7.49 | DonutCoins',
+    seoTitle: 'Buy 50M DonutSMP Money – $2.39 | DonutCoins',
     metaDescription:
-      '50M DonutSMP money for $7.49 – about $0.15 per million, 17% below the base rate. Our most popular pack, paid to your balance with /pay within minutes.',
+      '50M DonutSMP money for $2.39 – under $0.048 per million, below the $0.05 base rate. Our most popular pack, paid to your balance with /pay within minutes.',
     description:
-      'The 50M Money Pack is the sweet spot for most DonutSMP players: $7.49 for fifty million, which is roughly $0.15 per 1M. At the $0.18 base rate the same amount would cost $9.00, and even the 50M bulk tier on pick-your-amount comes to $8.50, so this pack is the cheapest way to get exactly 50M.\n\n' +
+      'The 50M Money Pack is the sweet spot for most DonutSMP players: $2.39 for fifty million, which is just under $0.048 per 1M. On the pick-your-amount listing the same 50M costs $2.50 at the $0.05 base rate, so this pack is the cheapest way to get exactly 50M.\n\n' +
       'Fifty million is enough to go from fresh spawn to a working base: spawners, a claim, an elytra from a player shop and change left over for armor. It is the amount we recommend to anyone who wants a real head start rather than a top-up.\n\n' +
       'Like every money order, it is delivered manually by our staff with /pay to the username you enter at checkout, usually within 5–30 minutes while we are online. The order page updates to delivered as soon as the payment has gone through in-game.',
     bullets: [
-      '50,000,000 DonutSMP money for $7.49',
-      'About $0.15 per 1M – cheaper than the 50M bulk tier',
+      '50,000,000 DonutSMP money for $2.39',
+      'Under $0.048 per 1M – below the base rate',
       'Our most popular money pack',
       'Delivered to your balance by /pay',
     ],
     faq: [
       {
         q: 'Why is the 50M pack cheaper than 50 × 1M?',
-        a: 'Fixed packs are our round-number deals. The pick-your-amount listing charges $0.17 per 1M at the 50M tier ($8.50), while this pack is $7.49. For odd amounts the flexible listing still wins because its tiers apply to every million.',
+        a: 'Fixed packs are our round-number deals. The pick-your-amount listing charges $0.05 per 1M below 100M ($2.50 for 50M), while this pack is $2.39. For odd amounts the flexible listing still wins because its tiers apply to every million.',
       },
       {
         q: 'Can you split 50M across two usernames?',
@@ -142,18 +142,18 @@ export const productCopy: Record<string, ProductCopy> = {
   },
 
   'money-100m': {
-    seoTitle: 'Buy 100M DonutSMP Money – $13.99 | DonutCoins',
+    seoTitle: 'Buy 100M DonutSMP Money – $3.79 | DonutCoins',
     metaDescription:
-      '100M DonutSMP money for $13.99 – $0.14 per million, 22% below the base rate. Hand-delivered to your balance with /pay by staff, usually within minutes.',
+      '100M DonutSMP money for $3.79 – under $0.038 per million, 24% below the base rate. Hand-delivered to your balance with /pay by staff, usually within minutes.',
     description:
-      'One hundred million DonutSMP money for $13.99 works out to $0.14 per 1M – 22% less than the $0.18 base rate, where 100M would be $18.00. It also beats the 100M bulk tier of the flexible listing ($0.16 per 1M, or $16.00), so if you want a round hundred, this is the pack to pick.\n\n' +
+      'One hundred million DonutSMP money for $3.79 works out to just under $0.038 per 1M – 24% less than the $0.05 base rate, where 100M would be $5.00. It also beats the 100M bulk tier of the flexible listing ($0.04 per 1M, or $4.00), so if you want a round hundred, this is the pack to pick.\n\n' +
       '100M changes how you play. It covers a full spawner farm with room to expand, a maxed netherite set from a player shop and a comfortable reserve for claims and trades, and it puts you on the /baltop radar without weeks of grinding.',
     bullets: [
-      '100,000,000 DonutSMP money for $13.99',
-      '$0.14 per 1M – 22% below the base rate',
-      'Beats the flexible listing\'s 100M tier ($16.00)',
+      '100,000,000 DonutSMP money for $3.79',
+      'Under $0.038 per 1M – 24% below the base rate',
+      'Beats the flexible listing\'s 100M tier ($4.00)',
       'Paid to your balance with /pay by real staff',
-      'Add a Mace ($1.49) and the cart passes $15 for 5% off',
+      '5% back as store credit once it is delivered',
     ],
     faq: [
       {
@@ -166,23 +166,23 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'Do spending discounts apply to this pack?',
-        a: 'Carts of $15 or more get 5% off automatically, $40 gets 8% and $100 gets 12% (default tiers). On its own this pack is just under the first threshold; adding any small item pushes it over.',
+        a: 'Carts of $15 or more get 5% off automatically, $40 gets 8% and $100 gets 12% (default tiers). On its own this pack is well under the first threshold, but every delivered order earns 5% back as store credit.',
       },
     ],
   },
 
   'money-250m': {
-    seoTitle: 'Buy 250M DonutSMP Money – $32.99 | DonutCoins',
+    seoTitle: 'Buy 250M DonutSMP Money – $9.49 | DonutCoins',
     metaDescription:
-      '250M DonutSMP money for $32.99 – about $0.13 per million, 27% below the base rate. Delivered by staff with /pay, split into discreet portions on request.',
+      '250M DonutSMP money for $9.49 – under $0.038 per million, 24% below the base rate. Delivered by staff with /pay, split into discreet portions on request.',
     description:
-      'A quarter billion DonutSMP money for $32.99 is roughly $0.13 per 1M. The same 250M would be $45.00 at the base rate and $37.50 on the flexible listing\'s 250M tier, so the pack saves you between $4.50 and $12 depending on what you compare it to.\n\n' +
-      '250M is where the economy opens up: buying out a player\'s spawner stock, flipping items in /ah, funding a group base or simply sitting near the top of the balance board. It also pushes a single order past the $15 spending threshold, so 5% comes off automatically at checkout.\n\n' +
+      'A quarter billion DonutSMP money for $9.49 is just under $0.038 per 1M. The same 250M would be $12.50 at the base rate and $10.00 on the flexible listing\'s 100M+ tier, so the pack is the cheapest way to get exactly 250M.\n\n' +
+      '250M is where the economy opens up: buying out a player\'s spawner stock, flipping items in /ah, funding a group base or simply sitting near the top of the balance board. Pair it with a few spawners or a crate and the cart passes the $15 spending threshold, so 5% comes off automatically at checkout.\n\n' +
       'Our staff deliver it manually with /pay to your username – usually within 5–30 minutes while we are online. Amounts this size are often sent in two or three payments to keep the transfer discreet; every step shows on your order page, and the total is always the full 250M.',
     bullets: [
-      '250,000,000 DonutSMP money for $32.99',
-      'About $0.13 per 1M – 27% below the base rate',
-      'Automatically earns the 5% spending discount',
+      '250,000,000 DonutSMP money for $9.49',
+      'Under $0.038 per 1M – 24% below the base rate',
+      'Cheaper than 250M on the flexible listing ($10.00)',
       'Delivered by /pay, split on request',
     ],
     faq: [
@@ -191,8 +191,8 @@ export const productCopy: Record<string, ProductCopy> = {
         a: 'Often two or three. Staff decide based on how busy the server is and what keeps the transfer discreet; the order page lists each payment, and you always receive the full amount.',
       },
       {
-        q: 'How much does the 250M pack cost after discounts?',
-        a: 'With the default 5% spending discount on carts of $15+, 250M on its own comes to about $31.34 before any coupon. A welcome or spin coupon can stack on top (one coupon per order).',
+        q: 'Do discounts apply to the 250M pack?',
+        a: 'On its own it is under the $15 spending threshold, so no tier discount – but a welcome or spin coupon works (one coupon per order), and 5% of what you pay comes back as store credit after delivery.',
       },
       {
         q: 'Is buying this much DonutSMP money risky?',
@@ -202,16 +202,16 @@ export const productCopy: Record<string, ProductCopy> = {
   },
 
   'money-500m': {
-    seoTitle: 'Buy 500M DonutSMP Money – $61.99 | DonutCoins',
+    seoTitle: 'Buy 500M DonutSMP Money – $18.99 | DonutCoins',
     metaDescription:
-      '500M DonutSMP money for $61.99 – about $0.12 per million, 31% below the base rate. Delivered manually with /pay in discreet portions by our staff.',
+      '500M DonutSMP money for $18.99 – under $0.038 per million, 24% below the base rate. Delivered manually with /pay in discreet portions by our staff.',
     description:
-      'Half a billion DonutSMP money for $61.99 comes to about $0.12 per 1M – 31% below the $0.18 base rate (where 500M is $90.00) and well under the flexible listing\'s 500M tier of $70.00. At this size the order also qualifies for the 8% spending discount on carts of $40 or more.\n\n' +
+      'Half a billion DonutSMP money for $18.99 comes to just under $0.038 per 1M – 24% below the $0.05 base rate (where 500M is $25.00) and under the flexible listing\'s 100M+ tier price of $20.00. At this size the order also passes the $15 threshold, so the 5% spending discount comes off automatically.\n\n' +
       'Players buy 500M to skip the grind entirely: a fully stocked base, a spawner farm that prints money on its own, maxed gear for the whole group and a balance that holds its own in any trade. It is also the pack shop owners use to restock.',
     bullets: [
-      '500,000,000 DonutSMP money for $61.99',
-      'About $0.12 per 1M – 31% below the base rate',
-      'Qualifies for the 8% spending discount ($40+)',
+      '500,000,000 DonutSMP money for $18.99',
+      'Under $0.038 per 1M – 24% below the base rate',
+      'Qualifies for the 5% spending discount ($15+)',
       'Sent in discreet portions by real staff',
       'Delivery schedule of your choice',
     ],
@@ -222,7 +222,7 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'What is the final price with the spending discount?',
-        a: 'With the default 8% tier applied to carts of $40 or more, 500M comes to roughly $57.03 before any coupon. Store credit from referrals can be applied on top.',
+        a: 'With the default 5% tier applied to carts of $15 or more, 500M comes to about $18.04 before any coupon. Store credit from referrals or cashback can be applied on top.',
       },
       {
         q: 'Can I pay for 500M with crypto?',
@@ -232,16 +232,16 @@ export const productCopy: Record<string, ProductCopy> = {
   },
 
   'money-1b': {
-    seoTitle: 'Buy 1B DonutSMP Money – $114.99 | DonutCoins',
+    seoTitle: 'Buy 1B DonutSMP Money – $28.99 | DonutCoins',
     metaDescription:
-      'One billion DonutSMP money for $114.99 – about $0.115 per million, 36% below the base rate, plus the 12% spending discount. Hand-delivered by staff.',
+      'One billion DonutSMP money for $28.99 – about $0.029 per million, 42% below the base rate, plus the 5% spending discount. Hand-delivered by staff.',
     description:
-      'One billion DonutSMP money – 1,000,000,000 – for $114.99. That is about $0.115 per 1M, 36% under the $0.18 base rate (1B would be $180.00 there) and cheaper than the flexible listing\'s top tier of $0.13, which prices 1B at $130.00. Carts of $100 or more also get the 12% spending discount.\n\n' +
+      'One billion DonutSMP money – 1,000,000,000 – for $28.99. That is about $0.029 per 1M, 42% under the $0.05 base rate (1B would be $50.00 there) and cheaper than the flexible listing\'s top tier of $0.03, which prices 1B at $30.00. Carts of $15 or more also get the 5% spending discount, and 5% of what you pay comes back as store credit once the order is delivered.\n\n' +
       'A billion is the whale pack. It is bought by players who want to dominate the balance board in one go, by groups pooling money for a mega-base, and by shop owners who need deep liquidity to buy up spawners and rare items at scale.',
     bullets: [
-      '1,000,000,000 DonutSMP money for $114.99',
-      'About $0.115 per 1M – our lowest rate',
-      '12% spending discount applies automatically',
+      '1,000,000,000 DonutSMP money for $28.99',
+      'About $0.029 per 1M – our lowest rate',
+      '5% spending discount applies automatically',
       'Delivered in multiple /pay transfers by staff',
       'Custom delivery schedule on request',
     ],
@@ -252,7 +252,7 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'What does 1B cost after the spending discount?',
-        a: 'With the default 12% tier for carts of $100+, the pack comes to about $101.19 before coupons. That is roughly $0.10 per million.',
+        a: 'With the default 5% tier for carts of $15+, the pack comes to about $27.54 before coupons – under $0.028 per million.',
       },
       {
         q: 'Need more than 1B?',
@@ -287,7 +287,7 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'Do you sell a spawner-only bundle?',
-        a: 'Yes – the Spawner Farm Bundle has 64 skeleton spawners plus 10M for $25.99, and the Spawner Crate rolls two random spawner drops for $2.99.',
+        a: 'Yes – the Spawner Farm Bundle has 64 skeleton spawners plus 10M for $23.49, and the Spawner Crate rolls two random spawner drops for $2.99.',
       },
     ],
   },
@@ -419,7 +419,7 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'Can I get an elytra cheaper?',
-        a: 'The Mystery Box, Elite Mystery Box and God Mystery Box all have an elytra in their drop pools, and the Legendary Crate guarantees one plus 50M for $34.99. Those are gambles or bigger spends; the standalone listing is the sure thing.',
+        a: 'The Mystery Box, Elite Mystery Box and God Mystery Box all have an elytra in their drop pools, and the Legendary Crate ($34.99) has the best odds at about one crate in eight. Those are gambles or bigger spends; the standalone listing is the sure thing.',
       },
     ],
   },
@@ -477,16 +477,16 @@ export const productCopy: Record<string, ProductCopy> = {
 
   // ───────────── MYSTERY BOXES ─────────────
   'coin-crate': {
-    seoTitle: 'DonutSMP Coin Crate – $1.99, Win 5M to 100M | DonutCoins',
+    seoTitle: 'DonutSMP Coin Crate – $1.99, Win 10M to 250M | DonutCoins',
     metaDescription:
-      'Coin Crate: a $1.99 DonutSMP mystery box with one money drop – 5M guaranteed, up to 100M. Public odds, rolled when you order, paid with /pay.',
+      'Coin Crate: a $1.99 DonutSMP mystery box with one money drop – 10M guaranteed, up to 250M. Public odds, rolled when you order, paid with /pay.',
     description:
-      'The Coin Crate is our cheapest DonutSMP mystery box and it only contains money. For $1.99 you get one drop from a public table that runs from 5M up to 100M – the worst case is still 5M on your balance. Roughly one crate in ten pays 10M, one in 23 pays 25M, and the 50M and 100M lines are the rare hits you open it for.\n\n' +
+      'The Coin Crate is our cheapest DonutSMP mystery box and it only contains money. For $1.99 you get one drop from a public table that runs from 10M up to 250M – the worst case is still 10M on your balance. Roughly one crate in four pays 15M, one in eight pays 25M, one in twenty pays 50M, one in twenty-five pays 100M, and about one in a hundred hits the 250M jackpot.\n\n' +
       'Every outcome is coins, so there is no item you do not need. Drops are rolled server-side the moment you place the order and shown on your order page once your payment is confirmed – no hidden re-rolls. Staff then send the amount to your username with /pay, usually within 5–30 minutes while we are online.',
-    bullets: ['One money drop per crate', '5M guaranteed, 100M top prize', 'Odds published, rolled at order time', 'Paid to your balance with /pay'],
+    bullets: ['One money drop per crate', '10M guaranteed, 250M top prize', 'Odds published, rolled at order time', 'Paid to your balance with /pay'],
     faq: [
       { q: 'What are the Coin Crate odds?', a: 'The exact chance of every amount is listed under \'What\'s inside?\' on the product page – that table is the one the server rolls from.' },
-      { q: 'Is the Coin Crate better value than a money pack?', a: 'No – on average a fixed money pack gives you more per dollar. You buy the crate for the chance at 25M, 50M or 100M.' },
+      { q: 'Is the Coin Crate better value than a money pack?', a: 'No – a crate pays about 21M on average, while the 25M pack costs $1.19 outright. You buy the crate for the chance at 50M, 100M or 250M.' },
       { q: 'When do I see what I won?', a: 'The roll happens when the order is created and the result appears on your order page as soon as the payment is confirmed.' },
     ],
   },
@@ -508,13 +508,13 @@ export const productCopy: Record<string, ProductCopy> = {
   'mystery-box': {
     seoTitle: 'DonutSMP Mystery Box – $3.99, 2 Random Drops | DonutCoins',
     metaDescription:
-      'DonutSMP Mystery Box: $3.99 for two random drops – spawners, golden apples, totems, with a rare shot at netherite, dragon heads, 10M or an elytra.',
+      'DonutSMP Mystery Box: $3.99 for two random drops – spawners, golden apples, totems, with a rare shot at netherite, dragon heads, 25M or an elytra.',
     description:
-      'Our classic DonutSMP mystery box gives you two different drops from an eleven-line pool. Gilded blackstone, skeleton spawners, nether stars, enchanted golden apples, deepslate emerald ore and totems are the common pulls; a netherite ingot or 10M money show up in about one box in twenty, and a netherite block, a dragon head or an Elytra are the rare jackpots.\n\n' +
+      'Our classic DonutSMP mystery box gives you two different drops from an eleven-line pool. Gilded blackstone, skeleton spawners, nether stars, enchanted golden apples, deepslate emerald ore and totems are the common pulls; a netherite ingot or 25M money show up in about one box in twenty, and a netherite block, a dragon head or an Elytra are the rare jackpots.\n\n' +
       'Most boxes are two useful commons – it is the cheapest way to try your luck at the big lines. Every drop is rolled server-side when you place the order and listed on your order page after payment, so what you see there is exactly what you get. Staff hand the items over in-game after payment, usually within 5–30 minutes while we are online.',
-    bullets: ['Two different drops per box', 'Spawners, golden apples, totems and more', 'Rare shot at netherite, a dragon head, 10M or an elytra', 'Rolled on order, shown before delivery'],
+    bullets: ['Two different drops per box', 'Spawners, golden apples, totems and more', 'Rare shot at netherite, a dragon head, 25M or an elytra', 'Rolled on order, shown before delivery'],
     faq: [
-      { q: 'What can I get from the Mystery Box?', a: 'Two of eleven lines: gilded blackstone, skeleton spawners, nether stars, golden apples, emerald ore, totems, a netherite ingot or block, a dragon head, 10M money or an elytra. The full odds are under \'What\'s inside?\'.' },
+      { q: 'What can I get from the Mystery Box?', a: 'Two of eleven lines: gilded blackstone, skeleton spawners, nether stars, golden apples, emerald ore, totems, a netherite ingot or block, a dragon head, 25M money or an elytra. The full odds are under \'What\'s inside?\'.' },
       { q: 'Can I get the same item twice in one box?', a: 'No. The two drops are drawn without repeats, so each box contains two different lines.' },
       { q: 'How is a mystery box delivered?', a: 'Items are handed over in-game by staff after payment; a money line is sent with /pay. Join DonutSMP with your order username and accept the teleport.' },
     ],
@@ -551,11 +551,11 @@ export const productCopy: Record<string, ProductCopy> = {
   'elite-mystery-box': {
     seoTitle: 'DonutSMP Elite Mystery Box – $8.99, 2 Drops | DonutCoins',
     metaDescription:
-      'Elite Mystery Box for DonutSMP: $8.99 for two drops from a stronger pool – iron golem spawners, heavy cores, netherite, 25M money or an elytra.',
+      'Elite Mystery Box for DonutSMP: $8.99 for two drops from a stronger pool – iron golem spawners, heavy cores, netherite, 100M money or an elytra.',
     description:
       'The Elite Mystery Box gives you two different drops from a ten-line pool with bigger stacks than the classic box: gilded blackstone, golden apples, emerald ore, iron golem spawners and heavy cores are the usual results, and a netherite ingot lands in more than one box in five.\n\n' +
-      'The jackpot lines – 25M money, a netherite block, a dragon head and an Elytra – are rare, so treat them as a bonus. Every drop is rolled server-side when the order is created and printed on your order page once it is paid. Staff then deliver in-game and send a money line with /pay, usually within 5–30 minutes while we are online.',
-    bullets: ['Two different drops per box', 'Bigger stacks than the classic box', 'Netherite, 25M, dragon heads and an elytra in the pool', 'Odds public, rolled on order'],
+      'The jackpot lines – 100M money, a netherite block, a dragon head and an Elytra – are rare, so treat them as a bonus. Every drop is rolled server-side when the order is created and printed on your order page once it is paid. Staff then deliver in-game and send a money line with /pay, usually within 5–30 minutes while we are online.',
+    bullets: ['Two different drops per box', 'Bigger stacks than the classic box', 'Netherite, 100M, dragon heads and an elytra in the pool', 'Odds public, rolled on order'],
     faq: [
       { q: 'Elite or God box?', a: 'The God Mystery Box ($19.99) rolls three drops from a stronger pool with better jackpot odds. The Elite box is the cheaper two-drop option.' },
       { q: 'How are the drops delivered?', a: 'In-game by our staff after payment: be online with your order username on DonutSMP, accept the teleport and pick up the items. Money is sent with /pay.' },
@@ -563,15 +563,15 @@ export const productCopy: Record<string, ProductCopy> = {
   },
 
   'mega-coin-crate': {
-    seoTitle: 'DonutSMP Mega Coin Crate – $9.99, 20M to 500M | DonutCoins',
+    seoTitle: 'DonutSMP Mega Coin Crate – $9.99, 60M to 1B | DonutCoins',
     metaDescription:
-      'Mega Coin Crate: $9.99 for one big DonutSMP money drop – 20M guaranteed, with chances at 75M, 150M and a 500M jackpot. Paid to your balance with /pay.',
+      'Mega Coin Crate: $9.99 for one big DonutSMP money drop – 60M guaranteed, with chances at 200M, 500M and a 1B jackpot. Paid to your balance with /pay.',
     description:
-      'The Mega Coin Crate is the high-stakes version of the Coin Crate. For $9.99 you get one money drop: 20M is guaranteed, about one crate in five pays 40M, one in eleven pays 75M, one in thirty-three pays 150M and roughly one in a hundred hits the 500M jackpot.\n\n' +
-      'Every outcome is money on your balance, nothing else. If you simply want a fixed amount, a money pack is cheaper per million – the crate is for the chance at a big balance jump. The drop is rolled when you order, shown on your order page after payment and sent to your username with /pay, usually within 5–30 minutes while we are online.',
-    bullets: ['One big money drop per crate', '20M guaranteed', 'Chances at 75M, 150M and 500M', 'Paid to your balance with /pay'],
+      'The Mega Coin Crate is the high-stakes version of the Coin Crate. For $9.99 you get one money drop: 60M is guaranteed, about one crate in four pays 100M, one in ten pays 200M, one in twenty-five pays 500M and roughly one in a hundred hits the 1B jackpot.\n\n' +
+      'Every outcome is money on your balance, nothing else. If you simply want a fixed amount, a money pack is far cheaper per million – the crate averages about 110M, while the 100M pack alone costs $3.79. The crate is for the chance at a big balance jump. The drop is rolled when you order, shown on your order page after payment and sent to your username with /pay, usually within 5–30 minutes while we are online.',
+    bullets: ['One big money drop per crate', '60M guaranteed', 'Chances at 200M, 500M and 1B', 'Paid to your balance with /pay'],
     faq: [
-      { q: 'What are the Mega Coin Crate odds?', a: 'Listed under \'What\'s inside?\' on the product page: 20M, 40M, 75M, 150M or 500M, one drop per crate.' },
+      { q: 'What are the Mega Coin Crate odds?', a: 'Listed under \'What\'s inside?\' on the product page: 60M, 100M, 200M, 500M or 1B, one drop per crate.' },
       { q: 'How is the money delivered?', a: 'Our staff send the rolled amount with /pay to the Minecraft username on your order, usually within 5–30 minutes while we are online.' },
     ],
   },
@@ -579,11 +579,11 @@ export const productCopy: Record<string, ProductCopy> = {
   'god-mystery-box': {
     seoTitle: 'DonutSMP God Mystery Box – $19.99, 3 Drops | DonutCoins',
     metaDescription:
-      'God Mystery Box for DonutSMP: $19.99 for three drops from the top pool – blaze spawners, heavy cores, netherite and chances at 50M or an elytra.',
+      'God Mystery Box for DonutSMP: $19.99 for three drops from the top pool – blaze spawners, heavy cores, netherite and chances at 250M or an elytra.',
     description:
       'The God Mystery Box rolls three different lines from a nine-line top pool. Blaze spawners, heavy cores, gilded blackstone, deepslate emerald ore and netherite ingots are the usual drops – every line comes as a proper stack, there is no single-item filler.\n\n' +
-      'The jackpots are 50M money and a netherite block (each about one box in nineteen), an Elytra (about one in twenty-two) and a dragon head (about one in twenty-eight). Drops are rolled server-side when you order and shown on your order page after payment, before delivery. Staff hand the items over in-game and send money with /pay, usually within 5–30 minutes while we are online.',
-    bullets: ['Three different drops per box', 'Blaze spawners, heavy cores and netherite', 'Chances at 50M, a netherite block or an elytra', 'Rolled on order, visible before delivery'],
+      'The jackpots are 250M money and a netherite block (each about one box in nineteen), an Elytra (about one in twenty-two) and a dragon head (about one in twenty-eight). Drops are rolled server-side when you order and shown on your order page after payment, before delivery. Staff hand the items over in-game and send money with /pay, usually within 5–30 minutes while we are online.',
+    bullets: ['Three different drops per box', 'Blaze spawners, heavy cores and netherite', 'Chances at 250M, a netherite block or an elytra', 'Rolled on order, visible before delivery'],
     faq: [
       { q: 'What are the elytra odds in the God Mystery Box?', a: 'About one box in twenty-two. The per-drop chance of every line is listed under \'What\'s inside?\'.' },
       { q: 'How do I receive the drops?', a: 'After payment our staff deliver in-game: join DonutSMP with your order username, accept the teleport and collect the items. Money lines go to your balance with /pay.' },
@@ -593,11 +593,11 @@ export const productCopy: Record<string, ProductCopy> = {
   'legendary-crate': {
     seoTitle: 'DonutSMP Legendary Crate – $34.99, 3 Top Drops | DonutCoins',
     metaDescription:
-      'Legendary Crate: $34.99 for three drops from our best DonutSMP pool – maces, god armor, spawners and the highest elytra and 100M odds in the shop.',
+      'Legendary Crate: $34.99 for three drops from our best DonutSMP pool – maces, god armor, spawners, the top elytra odds in the shop and a 500M jackpot.',
     description:
       'The Legendary Crate is our biggest DonutSMP mystery box. Every crate rolls three different lines from a ten-line pool: maces, god netherite armor sets, iron golem and blaze spawners, totems and netherite ingots are the usual drops.\n\n' +
-      'It also has the best jackpot odds in the shop: a netherite block in about one crate in nine, a dragon head in about one in thirteen, an Elytra in about one in eight and 100M money in about one in twenty-two. Rolls happen server-side when you order and the full list appears on your order page. After payment, staff hand the items over in-game and pay money lines with /pay, usually within 5–30 minutes while we are online.',
-    bullets: ['Three different drops per crate', 'Highest elytra and 100M odds in the shop', 'Maces, god armor and spawners in the pool', 'Max 10 per order'],
+      'It also has the best jackpot odds in the shop: a netherite block in about one crate in nine, a dragon head in about one in thirteen, an Elytra in about one in eight and 500M money in about one in twenty-two. Rolls happen server-side when you order and the full list appears on your order page. After payment, staff hand the items over in-game and pay money lines with /pay, usually within 5–30 minutes while we are online.',
+    bullets: ['Three different drops per crate', 'Highest elytra odds in the shop, 500M jackpot', 'Maces, god armor and spawners in the pool', 'Max 10 per order'],
     faq: [
       { q: 'Is anything guaranteed in the Legendary Crate?', a: 'Three different drops from the top pool, every time. Which three is random – the chance of each line is listed under \'What\'s inside?\'.' },
       { q: 'How is the crate delivered?', a: 'Items in-game by our staff (teleport, drop, collect), money by /pay to the username on your order, everything listed on the order page first.' },
@@ -1338,15 +1338,15 @@ export const productCopy: Record<string, ProductCopy> = {
 
   // ───────────── BUNDLES ─────────────
   'starter-bundle': {
-    seoTitle: 'DonutSMP Starter Bundle – $9.49 | DonutCoins',
+    seoTitle: 'DonutSMP Starter Bundle – $6.99 | DonutCoins',
     metaDescription:
-      'DonutSMP Starter Bundle for $9.49: 20M money, 15 skeleton spawners and six diamond armor sets – about $10.54 separately. Money by /pay, items in-game.',
+      'DonutSMP Starter Bundle for $6.99: 20M money, 15 skeleton spawners and six diamond armor sets in one order. Money by /pay, items in-game.',
     description:
-      'The Starter Bundle is the fastest way to go from fresh spawn to self-sufficient on DonutSMP: 20M money, 15 Skeleton Spawners and a Diamond Armor Shulker (six full Protection IV sets) for $9.49. Bought separately those three lines cost about $10.54.\n\n' +
+      'The Starter Bundle is the fastest way to go from fresh spawn to self-sufficient on DonutSMP: 20M money, 15 Skeleton Spawners and a Diamond Armor Shulker (six full Protection IV sets) for $6.99 – about $7.94 as separate lines – one order, one checkout and one handover instead of three separate lines.\n\n' +
       'The idea is simple. The spawners become your first farm and income, the money covers a claim, hoppers and chests to build it, and the armor keeps you alive while you set up. Fifteen skellies is enough to produce real bones-and-arrows money from day one, and the 20M gives you room to buy more from players as you grow.',
     bullets: [
       '20M money + 15 skeleton spawners + 6 diamond sets',
-      '$9.49 – about $10.54 separately',
+      'One order, one handover for all three lines',
       'Everything a new player needs on day one',
       'Money by /pay, items handed over in-game',
     ],
@@ -1361,17 +1361,17 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'Is this bundle a good first order?',
-        a: 'Yes – it is what we recommend to anyone starting out, and at $9.49 it is a low-risk way to test our delivery before a bigger money pack.',
+        a: 'Yes – it is what we recommend to anyone starting out, and at $6.99 it is a low-risk way to test our delivery before a bigger money pack.',
       },
     ],
   },
 
   'spawner-farm-bundle': {
-    seoTitle: 'DonutSMP Spawner Farm Bundle – $25.99 | DonutCoins',
+    seoTitle: 'DonutSMP Spawner Farm Bundle – $23.49 | DonutCoins',
     metaDescription:
-      'Spawner Farm Bundle for DonutSMP: 64 skeleton spawners plus 10M money to build the farm, for $25.99 in one order. Spawners in-game, money by /pay.',
+      'Spawner Farm Bundle for DonutSMP: 64 skeleton spawners plus 10M money to build the farm, for $23.49 in one order. Spawners in-game, money by /pay.',
     description:
-      'A full stack of 64 Skeleton Spawners plus 10M money, for $25.99. Sixty-four skellies is the classic DonutSMP farm size – one big spawner room, a drop chute, a kill platform – and the 10M pays for the hoppers, chests, water and claim blocks to build it.\n\n' +
+      'A full stack of 64 Skeleton Spawners plus 10M money, for $23.49. Sixty-four skellies is the classic DonutSMP farm size – one big spawner room, a drop chute, a kill platform – and the 10M pays for the hoppers, chests, water and claim blocks to build it.\n\n' +
       'Players buy this bundle when they are done with small farms and want an income that runs while they are offline. Bones sell steadily, arrows sell steadily, and the XP from 64 stacked spawners keeps every Mending tool and armor piece topped up. It is also the bundle to grab when a base raid wipes your old farm.',
     bullets: [
       '64 skeleton spawners – a full stack',
@@ -1386,7 +1386,7 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'Is the bundle cheaper than buying the parts?',
-        a: 'At current prices it is roughly on par: 64 skellies at the 50+ tier plus 10M come to about $27.40 as separate lines, versus $25.99 here. The bundle comes in under the price of the parts, and the 5% spending discount applies either way.',
+        a: 'Yes: 64 skellies at the 50+ tier plus 10M come to about $26.10 as separate lines, versus $23.49 here – and the 5% spending discount still comes off at checkout.',
       },
       {
         q: 'How much money does a 64-spawner farm make?',
@@ -1396,17 +1396,17 @@ export const productCopy: Record<string, ProductCopy> = {
   },
 
   'pro-bundle': {
-    seoTitle: 'DonutSMP Pro Bundle – $40.99 | DonutCoins',
+    seoTitle: 'DonutSMP Pro Bundle – $33.99 | DonutCoins',
     metaDescription:
-      'Pro Bundle for DonutSMP: 50M money, an elytra with Unbreaking III and Mending and 16 skeleton spawners for $40.99 – with the 8% spending discount.',
+      'Pro Bundle for DonutSMP: 50M money, an elytra with Unbreaking III and Mending and 16 skeleton spawners for $33.99 – about $37.87 as separate lines.',
     description:
-      'The Pro Bundle packs the three things an established DonutSMP player wants into one order: 50M money, an Elytra (Unbreaking III + Mending) and 16 Skeleton Spawners, for $40.99. As separate lines – the 50M pack, the elytra and 16 skellies – that is about $42.86, and because the cart passes $40 the 8% spending discount comes off automatically at checkout.\n\n' +
+      'The Pro Bundle packs the three things an established DonutSMP player wants into one order: 50M money, an Elytra (Unbreaking III + Mending) and 16 Skeleton Spawners, for $33.99, delivered together in one order – about $37.87 if you bought the parts separately, and the 5% spending discount comes off on top at checkout.\n\n' +
       'It is the upgrade path after a starter farm: the elytra opens up base hunting and fast travel, the spawners double a small farm, and 50M is enough to buy maxed gear, a bigger claim or whatever the player market has on offer that week.',
     bullets: [
       '50M money + elytra + 16 skeleton spawners',
       'Elytra with Unbreaking III and Mending',
       '8% spending discount at checkout',
-      '$40.99 – about $42.86 as separate lines',
+      'One order, delivered together by real staff',
     ],
     faq: [
       {
@@ -1415,7 +1415,7 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'What does it cost with the spending discount?',
-        a: 'With the default 8% tier for carts of $40+, the bundle comes to about $37.71 before any coupon.',
+        a: 'With the default 5% tier for carts of $15+, the bundle comes to about $32.29 before any coupon.',
       },
       {
         q: 'Do I need to be online for the whole delivery?',
@@ -1425,11 +1425,11 @@ export const productCopy: Record<string, ProductCopy> = {
   },
 
   'basehunter-bundle': {
-    seoTitle: 'DonutSMP Basehunter Bundle – $37.99 | DonutCoins',
+    seoTitle: 'DonutSMP Basehunter Bundle – $33.99 | DonutCoins',
     metaDescription:
-      'Basehunter Bundle for DonutSMP: elytra, Amethyst Pickaxe, 16 totems and 20M money for $37.99 – the full base-hunting loadout, delivered by our staff.',
+      'Basehunter Bundle for DonutSMP: elytra, Amethyst Pickaxe, 16 totems and 20M money for $33.99 – the full base-hunting loadout, delivered by our staff.',
     description:
-      'Base hunting on DonutSMP needs four things: a way to get there, a way to get in, a way to survive and money to make the trip worth it. The Basehunter Bundle has all four – an Elytra (Unbreaking III + Mending), the server-custom Amethyst Pickaxe, 16 Totems of Undying and 20M money – for $37.99. On its own that sits in the 5% spending tier ($36.09 at checkout); add any $2 item to pass $40 and get 8% off the whole cart.\n\n' +
+      'Base hunting on DonutSMP needs four things: a way to get there, a way to get in, a way to survive and money to make the trip worth it. The Basehunter Bundle has all four – an Elytra (Unbreaking III + Mending), the server-custom Amethyst Pickaxe, 16 Totems of Undying and 20M money – for $33.99 instead of about $37.80 as separate lines. On its own that sits in the 5% spending tier ($32.29 at checkout).\n\n' +
       'The elytra covers thousands of blocks in minutes, the Amethyst Pickaxe chews through walls and vaults faster than any netherite tool, sixteen totems mean traps and ambushes do not end the run, and the 20M buys rockets, food and whatever you cannot loot.',
     bullets: [
       'Elytra + Amethyst Pickaxe + 16 totems + 20M',
@@ -1454,15 +1454,15 @@ export const productCopy: Record<string, ProductCopy> = {
   },
 
   'rich-bundle': {
-    seoTitle: 'DonutSMP Rich Bundle – $79.99 | DonutCoins',
+    seoTitle: 'DonutSMP Rich Bundle – $59.99 | DonutCoins',
     metaDescription:
-      'Rich Bundle for DonutSMP: 250M money, a God Mystery Box, an elytra and the full PvP Kit for $79.99 – about $89.96 separately, with 8% off at checkout.',
+      'Rich Bundle for DonutSMP: 250M money, a God Mystery Box, an elytra and the full PvP Kit for $59.99 in one order, with 8% off at checkout.',
     description:
-      'The Rich Bundle is the whale order: 250M money, a God Mystery Box (five drops from the top pool), a guaranteed Elytra and the complete PvP Kit – maxed netherite set, sword, pickaxe and 8 totems – for $79.99. Bought as separate lines that is about $89.96, and the 8% spending discount for carts over $40 comes off on top.\n\n' +
-      'It is built for players who want to arrive on DonutSMP, or come back to it, already at the top: a balance that competes on /baltop, the gear to hold it, flight, and a box roll that can add a second elytra, dragon heads or another 50M.',
+      'The Rich Bundle is the whale order: 250M money, a God Mystery Box (three drops from the top pool), a guaranteed Elytra and the complete PvP Kit – maxed netherite set, sword, pickaxe and 8 totems – for $59.99 (about $66.97 as separate lines), and the 8% spending discount for carts over $40 comes off on top.\n\n' +
+      'It is built for players who want to arrive on DonutSMP, or come back to it, already at the top: a balance that competes on /baltop, the gear to hold it, flight, and a box roll that can add a second elytra, dragon heads or another 250M.',
     bullets: [
       '250M + God Mystery Box + elytra + PvP Kit',
-      '$79.99 – about $89.96 as separate lines',
+      'Everything in one order and one checkout',
       '8% spending discount at checkout',
       'Box drops rolled on order, visible on the order page',
       'Delivered in stages by real staff',
@@ -1470,7 +1470,7 @@ export const productCopy: Record<string, ProductCopy> = {
     faq: [
       {
         q: 'What is the final price after discounts?',
-        a: 'With the default 8% tier for carts of $40 or more, the bundle comes to about $73.59 before any coupon. Referral credit and one coupon can be applied on top.',
+        a: 'With the default 8% tier for carts of $40 or more, the bundle comes to about $55.19 before any coupon. Referral credit and one coupon can be applied on top.',
       },
       {
         q: 'Is the elytra in the bundle separate from the box?',

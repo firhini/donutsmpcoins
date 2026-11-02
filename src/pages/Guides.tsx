@@ -70,6 +70,9 @@ export default function Guides() {
           <Link to="/donutsmp-irl-trade" className="btn btn-secondary btn-sm">
             <Icon name="shield" size={14} /> IRL trading
           </Link>
+          <Link to="/wiki" className="btn btn-secondary btn-sm">
+            <Icon name="list" size={14} /> DonutSMP wiki
+          </Link>
           <Link to="/faq" className="btn btn-ghost btn-sm">
             FAQ
           </Link>

@@ -74,7 +74,8 @@ export function pushTimeline(o: Order, status: TimelineEntry['status'], note?: s
 /**
  * Transition an order's status. Handles side effects:
  *  - paid: referral reward to referrer (once), Discord notification
- *  - delivered: Discord notification
+ *  - delivered: Discord notification, cashback store credit (once)
+ *  - refunded: cashback taken back
  */
 const PAID_LIKE = new Set<OrderStatus>(['paid', 'delivering', 'delivered']);
 class NoTransition extends Error {}
@@ -120,6 +121,8 @@ export async function setOrderStatus(o: Order, status: OrderStatus, note?: strin
       next.couponRestored = o.couponRestored ?? stored.couponRestored;
       next.referralRewarded = o.referralRewarded || stored.referralRewarded;
       next.referralRewardCents = o.referralRewardCents ?? stored.referralRewardCents;
+      next.cashbackCents = o.cashbackCents ?? stored.cashbackCents;
+      next.cashbackReversed = o.cashbackReversed || stored.cashbackReversed;
       next.reviewed = o.reviewed || stored.reviewed;
       if (o.payment.providerId) next.payment.providerId = o.payment.providerId;
       if (o.payment.providerUrl) next.payment.providerUrl = o.payment.providerUrl;
@@ -158,6 +161,29 @@ export async function setOrderStatus(o: Order, status: OrderStatus, note?: strin
       }
     } catch (err) {
       console.warn('[orders] referral reward failed', err);
+    }
+  }
+
+  if (status === 'delivered' && !o.cashbackCents && o.totalCents > 0) {
+    try {
+      const settings = await getSettings();
+      const cashback = settings.cashback?.enabled ? Math.round((o.totalCents * (settings.cashback.percent ?? 0)) / 100) : 0;
+      if (cashback > 0) {
+        await addCredit(o.username, cashback, `Cashback ${settings.cashback.percent}% (${o.id})`, o.id);
+        o.cashbackCents = cashback;
+        await saveOrder(o);
+      }
+    } catch (err) {
+      console.warn('[orders] cashback failed', err);
+    }
+  }
+  if (status === 'refunded' && o.cashbackCents && !o.cashbackReversed) {
+    try {
+      await addCredit(o.username, -o.cashbackCents, `Cashback reversed (${o.id} refunded)`, o.id);
+      o.cashbackReversed = true;
+      await saveOrder(o);
+    } catch (err) {
+      console.warn('[orders] cashback reversal failed', err);
     }
   }
 
