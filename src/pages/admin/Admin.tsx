@@ -19,6 +19,8 @@ import Reviews from './Reviews';
 import Giveaways from './Giveaways';
 import Settings from './Settings';
 import Credit from './Credit';
+import Analytics from './Analytics';
+import Users from './Users';
 import '../../styles/admin.css';
 
 type AuthState = 'checking' | 'anonymous' | 'authed';
@@ -94,6 +96,8 @@ export default function Admin() {
         <Route index element={<Dashboard />} />
         <Route path="orders" element={<Orders />} />
         <Route path="orders/:id" element={<OrderDetail />} />
+        <Route path="analytics" element={<Analytics />} />
+        <Route path="users" element={<Users />} />
         <Route path="products" element={<Products />} />
         <Route path="coupons" element={<Coupons />} />
         <Route path="reviews" element={<Reviews />} />

@@ -8,10 +8,13 @@ import { routes as socialRoutes } from './social';
 import { routes as adminRoutes } from './admin';
 import { routes as authRoutes } from './auth';
 import { routes as discordBotRoutes } from './discordBot';
+import { routes as trackRoutes } from './track';
+import { routes as adminStatsRoutes } from './adminStats';
 
 /** Order matters: first match wins. Admin routes are prefixed with /admin. */
 export const routes: Route[] = [
   ...catalogRoutes,
+  ...trackRoutes,
   ...authRoutes,
   ...discordBotRoutes,
   ...mcRoutes,
@@ -19,5 +22,6 @@ export const routes: Route[] = [
   ...paymentRoutes,
   ...promoRoutes,
   ...socialRoutes,
+  ...adminStatsRoutes,
   ...adminRoutes,
 ];

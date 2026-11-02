@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { storageGet, storageSet } from '../../lib/device';
+import { clickLabel, track, trackPageView } from '../../lib/track';
 
 const KEY = 'dc_consent';
 declare global {
@@ -53,6 +54,21 @@ export function Analytics() {
   useEffect(() => {
     if (id && choice === 'accepted') loadGa(id);
   }, [id, choice]);
+
+  // cookieless first-party statistics (no consent needed – nothing is stored on the device)
+  useEffect(() => {
+    trackPageView(pathname);
+  }, [pathname]);
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      const el = (e.target as Element | null)?.closest?.('a,button,[data-track]');
+      if (!el || el.closest('.consent')) return;
+      const label = clickLabel(el, window.location.pathname);
+      if (label) track(/login/i.test(label) ? 'login_click' : 'click', label);
+    };
+    document.addEventListener('click', onClick, { capture: true });
+    return () => document.removeEventListener('click', onClick, { capture: true });
+  }, []);
 
   useEffect(() => {
     if (id && choice === 'accepted' && window.gtag) {

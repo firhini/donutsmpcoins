@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import type { OrderIndexEntry } from '../../shared/types';
 import { Seo } from '../../components/ui/Seo';
 import { Icon } from '../../components/ui/Icons';
-import { getDashboard, listOrders } from '../../lib/adminApi';
+import { getAnalytics, getDashboard, listOrders } from '../../lib/adminApi';
 import { useAdminQuery } from '../../components/admin/hooks';
 import { Avatar, ErrorBlock, PageHead, Panel } from '../../components/admin/Bits';
 import { DataTable, type Column } from '../../components/admin/DataTable';
@@ -38,6 +38,7 @@ export default function Dashboard() {
     return [...reported, ...paid.orders].slice(0, 8);
   }, []);
 
+  const today = useAdminQuery(() => getAnalytics(1), []);
   const d = dash.data;
   const loading = dash.loading && !d;
   /** tile text: "…" while loading, "—" when the API failed, otherwise the number */
@@ -135,6 +136,8 @@ export default function Dashboard() {
 
         <div className="adm-stack">
           <div className="adm-tiles" style={{ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' }}>
+            <Tile label="Visitors today" icon="users" tone="blue" value={today.data ? String(today.data.totals.visitors) : today.loading ? '…' : '—'} to="/admin/analytics" sub={today.data ? `${today.data.totals.addToCart} added to cart` : 'see Analytics'} />
+            <Tile label="Accounts" icon="user" tone="violet" value={today.data ? String(today.data.totals.users) : today.loading ? '…' : '—'} to="/admin/users" sub={today.data ? `${today.data.totals.signups} new today` : 'Discord + Google'} />
             <Tile label="Pending reviews" icon="star" tone="gold" value={num(d?.pendingReviews)} to="/admin/reviews" sub="to approve" />
             <Tile label="Active giveaways" icon="trophy" tone="pink" value={num(d?.activeGiveaways)} to="/admin/giveaways" sub="running" />
           </div>

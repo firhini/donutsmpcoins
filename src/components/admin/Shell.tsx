@@ -8,6 +8,8 @@ import { normalizeOrderId } from './adminUtils';
 const NAV: { to: string; label: string; icon: string; end?: boolean; countKey?: 'orders' }[] = [
   { to: '/admin', label: 'Dashboard', icon: 'home', end: true },
   { to: '/admin/orders', label: 'Orders', icon: 'package', countKey: 'orders' },
+  { to: '/admin/analytics', label: 'Analytics', icon: 'chart' },
+  { to: '/admin/users', label: 'Users', icon: 'users' },
   { to: '/admin/products', label: 'Products', icon: 'box' },
   { to: '/admin/coupons', label: 'Coupons & gifts', icon: 'ticket' },
   { to: '/admin/reviews', label: 'Reviews', icon: 'star' },

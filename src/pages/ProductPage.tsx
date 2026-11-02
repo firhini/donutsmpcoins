@@ -14,6 +14,7 @@ import { ProductGrid } from '../components/shop/ProductGrid';
 import { BoxContents } from '../components/shop/BoxContents';
 import { QtyStepper } from '../components/shop/QtyStepper';
 import { SaleBanner } from '../components/shop/SaleBanner';
+import { track } from '../lib/track';
 import { badgeClassForTag, bulkTable, discountPercent, hasContents, isMillionsProduct, linePrice, stockState } from '../components/shop/productUtils';
 import NotFound from './NotFound';
 import '../styles/shop.css';
@@ -29,6 +30,7 @@ export default function ProductPage() {
 
   useEffect(() => {
     if (product) setQty(isMillionsProduct(product) ? Math.max(product.minQty ?? 1, 50) : product.minQty ?? 1);
+    if (product) track('product_view', product.id);
     setAdded(false);
   }, [product?.id]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => () => {

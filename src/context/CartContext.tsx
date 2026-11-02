@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { gaEvent, track } from '../lib/track';
 import type { CartLineInput, Product, Quote } from '../shared/types';
 import { clampQty, computeQuote } from '../shared/pricing';
 import { storageGet, storageSet } from '../lib/device';
@@ -101,6 +102,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
         if (existing) return cur.map((l) => (l.productId === productId ? { ...l, qty: nextQty } : l));
         return [...cur, { productId, qty: nextQty }];
       });
+      track('add_to_cart', productId, { qty });
+      gaEvent('add_to_cart', { currency: 'USD', value: (p.priceCents * qty) / 100, items: [{ item_id: p.id, item_name: p.name, price: p.priceCents / 100, quantity: qty }] });
       if (!opts?.silent) toast(`${qty > 1 ? `${qty}× ` : ''}${p.name} added to cart`, 'gold');
       if (opts?.open !== false) setOpen(true);
     },

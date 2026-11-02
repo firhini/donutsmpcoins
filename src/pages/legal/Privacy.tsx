@@ -119,6 +119,11 @@ export default function Privacy() {
           <strong>Google (login).</strong> If you use “Login with Google”, Google shares your account id, name and profile picture with us (no e-mail address). The login happens on
           Google's site under Google's privacy policy; you can remove access any time at myaccount.google.com → Security → Third-party connections.
         </li>
+        <li>
+          <strong>Visitor statistics (our own, no cookies).</strong> To see which pages and buttons help players we count page views, clicks on buttons and links, products added to
+          the cart and started checkouts. Nothing is stored on your device. Each day we form a one-way hash from your hashed IP address and browser type to count unique visitors;
+          it changes every day, so you cannot be recognised across days, and we keep only daily totals plus your country and device type – no profile of you.
+        </li>
         {GA_ENABLED && (
           <li>
             <strong>Google Analytics 4.</strong> Only after you click “Accept” in the cookie notice. It records page views and interactions with IP anonymisation; Google processes this

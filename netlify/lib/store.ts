@@ -19,6 +19,7 @@ export type StoreName =
   | 'catalog'
   | 'ratelimit'
   | 'users'
+  | 'analytics'
   | 'misc';
 
 const DATA_DIR = path.resolve(process.cwd(), '.data');

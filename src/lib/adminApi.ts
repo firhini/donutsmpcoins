@@ -430,3 +430,55 @@ export function registerDiscordCommands(): Promise<{ registered: string[] }> {
 export function runDiscordSetup(): Promise<{ ok: boolean; done: boolean; created: string[]; channels: number }> {
   return adminCall('/admin/discord/setup', { method: 'POST', body: {} });
 }
+
+// ───────────────────────── analytics / users ─────────────────────────
+
+export interface CountRow {
+  key: string;
+  count: number;
+}
+export interface AnalyticsDay {
+  date: string;
+  visitors: number;
+  pageViews: number;
+  addToCart: number;
+  checkouts: number;
+  orders: number;
+  paidOrders: number;
+  revenueCents: number;
+  signups: number;
+}
+export interface AdminAnalytics {
+  days: number;
+  series: AnalyticsDay[];
+  totals: { visitors: number; pageViews: number; productViews: number; addToCart: number; checkouts: number; orders: number; paidOrders: number; revenueCents: number; signups: number; users: number };
+  pages: CountRow[];
+  clicks: CountRow[];
+  referrers: CountRow[];
+  productViews: CountRow[];
+  cartAdds: CountRow[];
+  devices: CountRow[];
+  countries: CountRow[];
+}
+export interface AdminUserRow {
+  id: string;
+  provider: 'discord' | 'google';
+  username: string;
+  displayName: string;
+  avatarUrl: string;
+  mcUsername?: string;
+  inGuild?: boolean;
+  createdAt: string;
+  lastLoginAt: string;
+  logins: number;
+  orders: number;
+  prizes: number;
+  creditCents: number;
+}
+
+export async function getAnalytics(days = 14): Promise<AdminAnalytics> {
+  return unwrap<AdminAnalytics>(await get(`/admin/analytics?days=${days}`), 'analytics');
+}
+export async function getUsers(): Promise<{ total: number; users: AdminUserRow[] }> {
+  return unwrap<{ total: number; users: AdminUserRow[] }>(await get('/admin/users'), 'users');
+}

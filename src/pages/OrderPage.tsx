@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
+import { gaEvent } from '../lib/track';
 import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom';
 import type { OrderItem, OrderPayment, PublicOrder } from '../shared/types';
 import { formatUsd } from '../shared/pricing';
@@ -103,6 +104,18 @@ export default function Page() {
   useEffect(() => {
     if (!order) return;
     rememberOrder({ id: order.id, createdAt: order.createdAt, totalCents: order.totalCents, username: order.username });
+  }, [order]);
+  // GA4 purchase once per paid order and browser (only sent when GA was accepted)
+  useEffect(() => {
+    if (!order || !['paid', 'delivering', 'delivered'].includes(order.status) || order.totalCents <= 0) return;
+    const key = `dc_ga_purchase_${order.id}`;
+    try {
+      if (localStorage.getItem(key)) return;
+      localStorage.setItem(key, '1');
+    } catch {
+      return;
+    }
+    gaEvent('purchase', { transaction_id: order.id, currency: 'USD', value: order.totalCents / 100, items: order.items.map((i) => ({ item_id: i.productId, item_name: i.name, price: i.unitPriceCents / 100, quantity: i.qty })) });
   }, [order]);
   useEffect(() => {
     if (order?.status !== 'delivered') return;

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
+import { gaEvent, track } from '../lib/track';
 import { Link, useNavigate } from 'react-router-dom';
 import type { CreateOrderRequest, PublicOrder, QuoteRequest } from '../shared/types';
 import { apiGet, apiPost, ApiClientError } from '../lib/api';
@@ -45,6 +46,11 @@ export default function Page() {
   const [summaryOpen, setSummaryOpen] = useState(false);
   const [touched, setTouched] = useState(false);
 
+  useEffect(() => {
+    if (!lines.length) return;
+    track('begin_checkout');
+    gaEvent('begin_checkout', { currency: 'USD', value: localQuote.totalCents / 100, items: lines.map((l) => ({ item_id: l.productId, item_name: l.product.name, quantity: l.qty })) });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => storageSet(USERNAME_KEY, username), [username]);
   useEffect(() => storageSet(EMAIL_KEY, email), [email]);
   useEffect(() => {
@@ -160,6 +166,7 @@ export default function Page() {
       };
       const { order } = await apiPost<{ order: PublicOrder }>('/orders', body);
       rememberOrder({ id: order.id, createdAt: order.createdAt, totalCents: order.totalCents, username: order.username });
+      track('order_created', order.id);
       setPlacedId(order.id);
       clear();
       setDiscountCode('');
