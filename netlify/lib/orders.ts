@@ -56,7 +56,7 @@ const ROLLS_HIDDEN = new Set<OrderStatus>(['awaiting_payment', 'cancelled']);
 
 export function toPublicOrder(o: Order): PublicOrder {
   // the order page is reachable by anyone who has the id – never expose who the buyer is on Discord
-  const { ipHash, deviceId, adminNote, email, discordUserId, discordUsername, ...rest } = o;
+  const { ipHash, deviceId, sessionId, adminNote, email, discordUserId, discordUsername, ...rest } = o;
   const items = ROLLS_HIDDEN.has(o.status) ? rest.items.map((i) => (i.rolled ? { ...i, rolled: undefined } : i)) : rest.items;
   return { ...rest, items, emailMasked: email ? maskEmail(email) : undefined };
 }

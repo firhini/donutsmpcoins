@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
-import { gaEvent, track } from '../lib/track';
+import { gaEvent, journeySessionId, track } from '../lib/track';
 import { Link, useNavigate } from 'react-router-dom';
 import type { CreateOrderRequest, PublicOrder, QuoteRequest } from '../shared/types';
 import { apiGet, apiPost, ApiClientError } from '../lib/api';
@@ -163,6 +163,7 @@ export default function Page() {
         tosAccepted: true,
         customerNote: note.trim().slice(0, 200) || undefined,
         deviceId: getDeviceId(),
+        sessionId: journeySessionId(),
       };
       const { order } = await apiPost<{ order: PublicOrder }>('/orders', body);
       rememberOrder({ id: order.id, createdAt: order.createdAt, totalCents: order.totalCents, username: order.username });

@@ -1,6 +1,6 @@
 import { afterAll, describe, expect, it } from 'vitest';
 // api-helpers MUST be imported first – it relocates the file store before loading the API.
-import { call, cleanupTestData, get, post } from './api-helpers';
+import { call, cleanupTestData, get, lib, orderBody, post } from './api-helpers';
 
 afterAll(() => cleanupTestData());
 
@@ -44,5 +44,45 @@ describe('cookieless analytics', () => {
     const u = await get<any>('/admin/users', { headers: { authorization: `Bearer ${token}` } });
     expect(u.status).toBe(200);
     expect(u.data.users.find((x: { id: string }) => x.id === '700000000000000001')).toMatchObject({ provider: 'discord', username: 'statsguy' });
+  });
+});
+
+describe('visitor journeys (cookie consent)', () => {
+  it('records a consented visit, links the order and attributes the sale to its source', async () => {
+    const sid = 'abc123def456ghi789jk';
+    const ua = { 'user-agent': 'Mozilla/5.0 (Windows NT 10.0) Chrome/120', 'content-type': 'application/json' };
+    const src = { ref: 'youtube.com', creator: 'BigTuber', landing: '/' };
+    const send = (events: unknown[]) => call('POST', '/t', undefined, { headers: ua, rawBody: JSON.stringify({ events, sid, src }), ip: '10.9.1.1' });
+    await send([{ e: 'pv', v: '/' }, { e: 'click', v: 'home › Shop now' }]);
+    await send([{ e: 'product_view', v: 'elytra-crate' }, { e: 'add_to_cart', v: 'elytra-crate', qty: 1 }, { e: 'begin_checkout' }]);
+
+    const order = await post<{ order: { id: string } }>('/orders', orderBody({ username: 'JourneyGuy', sessionId: sid }), { ip: '10.9.1.2' });
+    expect(order.status).toBe(201);
+    const id = order.data.order.id;
+    expect((order.data.order as Record<string, unknown>).sessionId).toBeUndefined(); // never public
+    const stored = (await lib.orders.getOrder(id))!;
+    expect(stored.sessionId).toBe(sid);
+    await lib.orders.setOrderStatus(stored, 'paid', 'test');
+
+    const token = await adminToken();
+    const auth = { headers: { authorization: `Bearer ${token}` } };
+    const detail = await get<any>(`/admin/sessions/${sid}`, auth);
+    expect(detail.status).toBe(200);
+    expect(detail.data.session.sourceLabel).toBe('creator: BigTuber');
+    expect(detail.data.session.events.map((e: { e: string }) => e.e)).toEqual(['pv', 'click', 'product_view', 'add_to_cart', 'begin_checkout']);
+    expect(detail.data.orders.map((o: { id: string }) => o.id)).toEqual([id]);
+
+    const list = await get<any>('/admin/sessions?days=1', auth);
+    expect(list.data.sessions.find((s: { id: string }) => s.id === sid)).toMatchObject({ source: 'creator: BigTuber', pages: 1, cartAdds: 1, orders: 1 });
+    const stats = await get<any>('/admin/analytics?days=1', auth);
+    expect(stats.data.sources.find((r: { source: string }) => r.source === 'creator: BigTuber')).toMatchObject({ visits: 1, orders: 1 });
+    expect((await get('/admin/sessions?days=1')).status).toBe(401);
+  });
+
+  it('ignores invalid session ids', async () => {
+    await call('POST', '/t', undefined, { headers: { 'content-type': 'application/json', 'user-agent': 'Mozilla/5.0' }, rawBody: JSON.stringify({ events: [{ e: 'pv', v: '/' }], sid: '../../etc' }), ip: '10.9.1.3' });
+    const token = await adminToken();
+    const r = await get<any>('/admin/sessions/..%2F..%2Fetc', { headers: { authorization: `Bearer ${token}` } });
+    expect(r.status).toBe(404);
   });
 });

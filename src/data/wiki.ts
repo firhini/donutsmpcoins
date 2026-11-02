@@ -6,10 +6,11 @@
  * donutsmp.wiki, autumn 2026). DonutSMP changes often – when a detail could not be confirmed
  * by more than one source it is either left out or phrased as "check in-game".
  */
+export type WikiCategory = 'Getting started' | 'Economy' | 'Items & gear' | 'Farms & spawners' | 'PvP & combat' | 'Server & rules';
 export interface WikiSection { heading: string; paragraphs: string[]; list?: string[] }
 export interface WikiArticle {
   slug: string;
-  category: 'Getting started' | 'Economy' | 'Items & gear' | 'Farms & spawners' | 'Server & rules';
+  category: WikiCategory;
   title: string;
   seoTitle: string;
   metaDescription: string;

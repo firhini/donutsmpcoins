@@ -5,7 +5,7 @@
  * recognised across days.
  */
 import { createHash } from 'node:crypto';
-import { kvGet, kvUpdate } from './store';
+import { kvDelete, kvGet, kvUpdate } from './store';
 
 export const EVENT_NAMES = ['pv', 'click', 'add_to_cart', 'begin_checkout', 'order_created', 'product_view', 'login_click'] as const;
 export type EventName = (typeof EVENT_NAMES)[number];
@@ -117,4 +117,121 @@ export function sanitizeEvents(raw: unknown): TrackEvent[] {
     });
   }
   return out;
+}
+
+// ───────────────────────── per-visitor journeys (only with cookie consent) ─────────────────────────
+
+export interface SessionSource {
+  /** referring site of the first page view, e.g. google.com, discord.com */
+  ref?: string;
+  /** utm_source / utm_campaign or ?ref= creator code from the landing URL */
+  src?: string;
+  campaign?: string;
+  creator?: string;
+  landing?: string;
+}
+export interface JourneyEvent {
+  /** ms since session start */
+  t: number;
+  e: EventName;
+  v?: string;
+}
+export interface Session {
+  id: string;
+  startedAt: string;
+  lastAt: string;
+  source: SessionSource;
+  device: string;
+  country?: string;
+  events: JourneyEvent[];
+  orderIds: string[];
+  /** logged-in account, when there is one */
+  userId?: string;
+}
+
+export const SESSION_ID_RE = /^[a-z0-9]{16,40}$/;
+const MAX_JOURNEY = 300;
+
+export function sanitizeSource(raw: unknown): SessionSource {
+  const o = (raw && typeof raw === 'object' ? raw : {}) as Record<string, unknown>;
+  const clean = (v: unknown, max: number) => (typeof v === 'string' ? v.replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, max) || undefined : undefined);
+  const ref = clean(o.ref, 80);
+  return {
+    ref: ref && /^[a-z0-9.-]+$/i.test(ref) ? ref.toLowerCase() : undefined,
+    src: clean(o.src, 40)?.toLowerCase(),
+    campaign: clean(o.campaign, 60),
+    creator: clean(o.creator, 32),
+    landing: clean(o.landing, 120),
+  };
+}
+
+/** Human label for where a visit came from: creator code > utm_source > referring site > direct. */
+export function sourceLabel(s: SessionSource | undefined): string {
+  if (!s) return 'unknown';
+  if (s.creator) return `creator: ${s.creator}`;
+  if (s.src) return `utm: ${s.src}${s.campaign ? ` / ${s.campaign}` : ''}`;
+  if (s.ref) return s.ref.replace(/^www\./, '');
+  return 'direct';
+}
+
+export async function recordJourney(sid: string, events: TrackEvent[], meta: { device: string; country?: string; source: SessionSource; userId?: string }, now = new Date()): Promise<void> {
+  if (!SESSION_ID_RE.test(sid) || meta.device === 'bot' || !events.length) return;
+  let created = false;
+  await kvUpdate<Session>('analytics', `sess:${sid}`, (cur) => {
+    const s: Session = cur ?? { id: sid, startedAt: now.toISOString(), lastAt: now.toISOString(), source: meta.source, device: meta.device, country: meta.country, events: [], orderIds: [] };
+    created = !cur;
+    const start = new Date(s.startedAt).getTime();
+    for (const ev of events) {
+      if (s.events.length >= MAX_JOURNEY) break;
+      s.events.push({ t: Math.max(0, now.getTime() - start), e: ev.e, v: ev.e === 'pv' ? normalizePath(ev.v ?? '/') : ev.v });
+    }
+    s.lastAt = now.toISOString();
+    if (meta.userId) s.userId = meta.userId;
+    return s;
+  });
+  if (created) {
+    await kvUpdate<string[]>('analytics', `sessidx:${day(now)}`, (cur) => {
+      const list = cur ?? [];
+      if (!list.includes(sid) && list.length < 5000) list.push(sid);
+      return list;
+    });
+  }
+}
+
+export async function linkOrderToSession(sid: string, orderId: string): Promise<void> {
+  if (!SESSION_ID_RE.test(sid)) return;
+  await kvUpdate<Session>('analytics', `sess:${sid}`, (cur) => {
+    if (!cur) throw new Error('no session');
+    if (!cur.orderIds.includes(orderId)) cur.orderIds.push(orderId);
+    return cur;
+  }).catch(() => undefined);
+}
+
+export async function getSession(sid: string): Promise<Session | null> {
+  return SESSION_ID_RE.test(sid) ? kvGet<Session>('analytics', `sess:${sid}`) : null;
+}
+
+/** Sessions started in the last `days` days, newest first (capped). */
+export async function recentSessions(days: number, cap = 400, now = new Date()): Promise<Session[]> {
+  const dates = Array.from({ length: days }, (_, i) => day(new Date(now.getTime() - i * 86400000)));
+  const ids = (await Promise.all(dates.map((d) => kvGet<string[]>('analytics', `sessidx:${d}`)))).flatMap((l) => [...(l ?? [])].reverse()).slice(0, cap);
+  const list = await Promise.all(ids.map((id) => kvGet<Session>('analytics', `sess:${id}`)));
+  return list.filter((s): s is Session => !!s).sort((a, b) => b.startedAt.localeCompare(a.startedAt));
+}
+
+/** Journeys are kept for 90 days: drop the day indexes (and their sessions) from 91–100 days ago. */
+export const JOURNEY_RETENTION_DAYS = 90;
+export async function purgeOldJourneys(now = new Date()): Promise<number> {
+  let removed = 0;
+  for (let d = JOURNEY_RETENTION_DAYS + 1; d <= JOURNEY_RETENTION_DAYS + 10; d++) {
+    const key = `sessidx:${day(new Date(now.getTime() - d * 86400000))}`;
+    const ids = await kvGet<string[]>('analytics', key);
+    if (!ids) continue;
+    for (const id of ids) {
+      await kvDelete('analytics', `sess:${id}`).catch(() => undefined);
+      removed++;
+    }
+    await kvDelete('analytics', key);
+  }
+  return removed;
 }

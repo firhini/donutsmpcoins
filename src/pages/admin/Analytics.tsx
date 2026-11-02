@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Seo } from '../../components/ui/Seo';
 import { Icon } from '../../components/ui/Icons';
-import { getAnalytics, type AnalyticsDay, type CountRow } from '../../lib/adminApi';
+import { getAnalytics, getSessions, type AnalyticsDay, type CountRow } from '../../lib/adminApi';
+import { Journey } from '../../components/admin/Journey';
 import { useAdminQuery } from '../../components/admin/hooks';
 import { ErrorBlock, PageHead, Panel } from '../../components/admin/Bits';
 import { usd } from '../../components/admin/adminUtils';
@@ -44,6 +45,8 @@ function Top({ rows, nameOf, empty = 'No data yet.' }: { rows: CountRow[]; nameO
 export default function Analytics() {
   const [days, setDays] = useState(14);
   const q = useAdminQuery(() => getAnalytics(days), [days]);
+  const sessions = useAdminQuery(() => getSessions(Math.min(days, 30)), [days]);
+  const [open, setOpen] = useState<string | null>(null);
   const { products } = useStore();
   const productName = (id: string) => products.find((p) => p.id === id)?.name ?? id;
   const d = q.data;
@@ -76,6 +79,7 @@ export default function Analytics() {
           ['Paid orders', t?.paidOrders, 'check', 'green', t ? `${pct(t.paidOrders, t.visitors)} conversion` : ''],
           ['Revenue', t ? usd(t.revenueCents) : undefined, 'dollar', 'gold', `last ${days === 1 ? 'day' : `${days} days`}`],
           ['New accounts', t?.signups, 'user', 'blue', t ? `${t.users} accounts in total` : ''],
+          ['Cookie consent', d?.consent ? pct(d.consent.accepted, d.consent.accepted + d.consent.declined) : undefined, 'shield', 'violet', d?.consent ? `${d.consent.accepted} accepted · ${d.consent.declined} declined` : ''],
         ].map(([label, value, icon, tone, sub]) => (
           <div key={label as string} className={`adm-tile adm-tile-${tone}`}>
             <div className="adm-tile-label">
@@ -107,6 +111,60 @@ export default function Analytics() {
                 </div>
               ))}
             </div>
+          </Panel>
+
+          <Panel title="Sales by source" icon="dollar" sub="Which site, creator code (?ref=) or utm link brought buyers – visitors who accepted cookies only.">
+            {d.sources && d.sources.length > 0 ? (
+              <table className="an-sources">
+                <thead>
+                  <tr>
+                    <th>Source</th>
+                    <th className="num">Visits</th>
+                    <th className="num">Paid orders</th>
+                    <th className="num">Revenue</th>
+                    <th className="num">Conversion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {d.sources.map((r) => (
+                    <tr key={r.source}>
+                      <td>{r.source}</td>
+                      <td className="num">{r.visits}</td>
+                      <td className="num">{r.orders}</td>
+                      <td className="num">{usd(r.revenueCents)}</td>
+                      <td className="num">{pct(r.orders, r.visits)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <p className="muted small">No tracked visits yet – they appear once visitors accept cookies.</p>
+            )}
+          </Panel>
+
+          <Panel title="Visitor journeys" icon="users" sub="Every click of visitors who accepted cookies – newest first. Click one to see the full path.">
+            {sessions.data && sessions.data.length > 0 ? (
+              <div className="an-sessions">
+                {sessions.data.slice(0, 60).map((s) => (
+                  <div key={s.id} className="an-session">
+                    <button type="button" onClick={() => setOpen(open === s.id ? null : s.id)} aria-expanded={open === s.id}>
+                      <span>
+                        <strong>{s.source}</strong> · {s.pages} pages · {s.clicks} clicks{s.cartAdds ? ` · ${s.cartAdds}× cart` : ''}
+                        <div className="sub">
+                          {new Date(s.startedAt).toLocaleString()} · {Math.round(s.durationSec / 60)} min · {s.device}
+                          {s.country ? ` · ${s.country}` : ''}
+                          {s.loggedIn ? ' · logged in' : ''}
+                        </div>
+                      </span>
+                      <span>{s.paidCents > 0 ? <span className="badge badge-green">bought {usd(s.paidCents)}</span> : s.orders > 0 ? <span className="badge badge-gold">ordered</span> : null}</span>
+                    </button>
+                    {open === s.id && <Journey sessionId={s.id} />}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="muted small">{sessions.loading ? 'Loading…' : 'No tracked visits yet.'}</p>
+            )}
           </Panel>
 
           <div className="adm-cols">

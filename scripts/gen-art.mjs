@@ -412,6 +412,7 @@ const HEADS = {
   skeleton: { map: ['SSSSSSSS', 'SSSSSSSS', 'SKKSSKKS', 'SKKSSKKS', 'SSSSSSSS', 'SSSKKSSS', 'SSSSSSSS', 'SkSkSkSk'], pal: { S: '#e6e8ee', K: '#2a2d36', k: '#b9bcc6' }, glow: '#d8dce6', tint: '#9aa0ad' },
   'iron-golem': { map: ['IIIIIIII', 'IIIIIIII', 'IKRIIRKI', 'IIIIIIII', 'IIIiiIII', 'IIIiiIII', 'IIIiiIII', 'IIIIIIII'], pal: { I: '#c9ccd3', i: '#8e939d', K: '#2b2e36', R: '#ef4444' }, glow: '#c8cdd8', tint: '#aab0bd' },
   zombie: { map: ['ZZZZZZZZ', 'ZZZZZZZZ', 'ZKKZZKKZ', 'ZZZZZZZZ', 'ZZZzzZZZ', 'ZZZZZZZZ', 'ZZzZZzZZ', 'ZZZZZZZZ'], pal: { Z: '#3fa34d', z: '#2f7f3b', K: '#101a12' }, glow: '#4ade80', tint: '#4ade80' },
+  cow: { map: ['BBWWWWBB', 'BWWWWWWB', 'BKWWWWKB', 'BWWWWWWB', 'BBBBBBBB', 'BPPPPPPB', 'BPKPPKPB', 'BPPPPPPB'], pal: { B: '#4a2f1d', W: '#efe7dc', K: '#151010', P: '#d9a6a0' }, glow: '#d6a06a', tint: '#a0703f' },
   creeper: { map: ['CCCCCCCC', 'CCCCCCCC', 'CKKCCKKC', 'CKKCCKKC', 'CCCKKCCC', 'CCKKKKCC', 'CCKKKKCC', 'CCKCCKCC'], pal: { C: '#5cc96a', c: '#3f9b4c', K: '#0f1a10' }, glow: '#5df07a', tint: '#5df07a' },
   blaze: { map: ['BBYYYYBB', 'BYYYYYYB', 'YYKYYKYY', 'YYYYYYYY', 'YYYYYYYY', 'BYYYYYYB', 'BBYYYYBB', '..BBBB..'], pal: { B: '#f59e0b', Y: '#fde047', K: '#3a2200' }, glow: '#ff9d2e', tint: '#ff9d2e' },
 };
@@ -692,6 +693,7 @@ const money = {
 const spawners = {
   'skeleton-spawner': (S) => { frame(S, { glowColor: '#d8dce6', glowOpacity: 0.42 }); S.add(spawnerCube(S, 'skeleton')); },
   'iron-golem-spawner': (S) => { frame(S, { glowColor: '#c8cdd8', glowOpacity: 0.42 }); S.add(spawnerCube(S, 'iron-golem')); },
+  'cow-spawner': (S) => { frame(S, { glowColor: '#d6a06a', glowOpacity: 0.45 }); S.add(spawnerCube(S, 'cow')); },
   'zombie-spawner': (S) => { frame(S, { glowColor: '#4ade80', glowOpacity: 0.45 }); S.add(spawnerCube(S, 'zombie')); },
   'creeper-spawner': (S) => { frame(S, { glowColor: '#5df07a', glowOpacity: 0.5 }); S.add(spawnerCube(S, 'creeper')); },
   'blaze-spawner': (S) => { frame(S, { glowColor: '#ff9d2e', glowOpacity: 0.55 }); S.add(spawnerCube(S, 'blaze')); S.add(embers('blaze', 14, { cy: 130, spread: 100 })); },

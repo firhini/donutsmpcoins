@@ -237,6 +237,8 @@ export interface Order {
   customerNote?: string;
   adminNote?: string;
   ipHash?: string;
+  /** analytics session (only when the buyer accepted cookies) */
+  sessionId?: string;
   deviceId?: string;
   reviewed?: boolean;
   /** store-credit reward already granted to referrer */
@@ -259,7 +261,7 @@ export interface Order {
 }
 
 /** What the public order page is allowed to see */
-export type PublicOrder = Omit<Order, 'ipHash' | 'deviceId' | 'adminNote' | 'email' | 'discordUserId' | 'discordUsername'> & {
+export type PublicOrder = Omit<Order, 'ipHash' | 'deviceId' | 'sessionId' | 'adminNote' | 'email' | 'discordUserId' | 'discordUsername'> & {
   emailMasked?: string;
 };
 
@@ -601,6 +603,8 @@ export interface CreateOrderRequest {
   displayCurrency?: string;
   tosAccepted: boolean;
   customerNote?: string;
+  /** analytics journey (only after cookie consent) */
+  sessionId?: string;
   deviceId?: string;
 }
 

@@ -463,6 +463,27 @@ export interface AdminAnalytics {
   cartAdds: CountRow[];
   devices: CountRow[];
   countries: CountRow[];
+  sources?: { source: string; visits: number; orders: number; revenueCents: number }[];
+  consent?: { accepted: number; declined: number; trackedVisits: number };
+}
+export interface SessionRow {
+  id: string;
+  startedAt: string;
+  durationSec: number;
+  source: string;
+  landing?: string;
+  device: string;
+  country?: string;
+  pages: number;
+  clicks: number;
+  cartAdds: number;
+  orders: number;
+  paidCents: number;
+  loggedIn: boolean;
+}
+export interface SessionDetail {
+  session: { id: string; startedAt: string; lastAt: string; sourceLabel: string; source: { ref?: string; src?: string; campaign?: string; creator?: string; landing?: string }; device: string; country?: string; events: { t: number; e: string; v?: string }[]; orderIds: string[]; userId?: string };
+  orders: OrderIndexEntry[];
 }
 export interface AdminUserRow {
   id: string;
@@ -485,4 +506,11 @@ export async function getAnalytics(days = 14): Promise<AdminAnalytics> {
 }
 export async function getUsers(): Promise<{ total: number; users: AdminUserRow[] }> {
   return unwrap<{ total: number; users: AdminUserRow[] }>(await get('/admin/users'), 'users');
+}
+
+export async function getSessions(days = 7): Promise<SessionRow[]> {
+  return unwrapList<SessionRow>(await get(`/admin/sessions?days=${days}`), 'sessions');
+}
+export async function getSessionDetail(id: string): Promise<SessionDetail> {
+  return (await get(`/admin/sessions/${encodeURIComponent(id)}`)) as SessionDetail;
 }

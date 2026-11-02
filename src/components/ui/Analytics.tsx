@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { storageGet, storageSet } from '../../lib/device';
-import { clickLabel, track, trackPageView } from '../../lib/track';
+import { clickLabel, startJourney, track, trackPageView } from '../../lib/track';
 
 const KEY = 'dc_consent';
 declare global {
@@ -80,6 +80,7 @@ export function Analytics() {
   const decide = (c: 'accepted' | 'declined') => {
     track('click', `consent › ${c}`);
     storageSet(KEY, c);
+    if (c === 'accepted') startJourney(window.location.pathname);
     setChoice(c);
   };
   return (
@@ -89,8 +90,8 @@ export function Analytics() {
         <div className="consent-text">
           <strong id="consent-title">🍪 Help us make DonutCoins better?</strong>
           <span>
-            With your OK we use Google Analytics to see which pages and deals players like. No ads, we never sell data – and you can say no, the shop works exactly the
-            same. <Link to="/privacy">Privacy policy</Link>
+            With your OK we remember your visit (pages and buttons, via an ID on your device) and use Google Analytics, so we can see which deals players like and make the
+            shop better. No ads, we never sell data – and you can say no, the shop works exactly the same. <Link to="/privacy">Privacy policy</Link>
           </span>
         </div>
         <div className="consent-actions">

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Journey } from '../../components/admin/Journey';
 import { Link, useParams } from 'react-router-dom';
 import type { Order, OrderStatus, PaymentStatus, RolledContent } from '../../shared/types';
 import { Seo } from '../../components/ui/Seo';
@@ -191,6 +192,10 @@ export default function OrderDetail() {
           </Panel>
 
           {/* timeline */}
+          <Panel title="How this customer bought" icon="users" sub={order.sessionId ? 'Their path through the store before ordering.' : undefined}>
+            {order.sessionId ? <Journey sessionId={order.sessionId} /> : <p className="muted small">No journey – the customer did not accept cookies.</p>}
+          </Panel>
+
           <Panel title="Timeline" icon="clock">
             <ul className="adm-timeline">
               {[...order.timeline].reverse().map((t, i) => (

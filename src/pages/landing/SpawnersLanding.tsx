@@ -218,6 +218,8 @@ function useCase(id: string): string {
       return 'XP, bones, arrows – the all-rounder';
     case 'iron-golem-spawner':
       return 'Iron for everything';
+    case 'cow-spawner':
+      return 'Leather & food – top value';
     case 'zombie-spawner':
       return 'Cheap XP, villager trades';
     case 'creeper-spawner':

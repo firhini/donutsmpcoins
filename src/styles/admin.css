@@ -1613,3 +1613,79 @@ a.adm-tile:hover {
   color: var(--text-3);
   text-align: right;
 }
+
+/* ───────── visitor journeys ───────── */
+.journey-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.journey-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+  max-height: 420px;
+  overflow: auto;
+}
+.journey-list li {
+  display: grid;
+  grid-template-columns: 44px 16px 1fr;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+.journey-list li:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.03);
+}
+.journey-t {
+  color: var(--text-3);
+  font-size: 12px;
+}
+.an-sessions {
+  display: grid;
+  gap: 6px;
+}
+.an-session {
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+}
+.an-session > button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 12px;
+  padding: 10px 12px;
+  text-align: left;
+  background: none;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+}
+.an-session .sub {
+  font-size: 12px;
+  color: var(--text-3);
+}
+.an-session .journey {
+  padding: 0 12px 12px;
+}
+.an-sources {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.an-sources th,
+.an-sources td {
+  padding: 7px 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.an-sources td.num,
+.an-sources th.num {
+  text-align: right;
+}

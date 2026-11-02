@@ -4,6 +4,7 @@
  * only sends product ids and quantities.
  */
 import { z } from 'zod';
+import { SESSION_ID_RE, linkOrderToSession } from '../lib/analytics';
 import type { Order } from '../../src/shared/types';
 import type { Route } from '../lib/http';
 import { currentUser } from './auth';
@@ -51,6 +52,7 @@ const createOrderSchema = z.object({
   tosAccepted: z.boolean().optional(),
   customerNote: optionalText(500),
   deviceId: optionalText(80),
+  sessionId: optionalText(40),
 });
 
 const FIELD_LABELS: Record<string, string> = {
@@ -143,9 +145,11 @@ export const routes: Route[] = [
         deviceId: body.deviceId,
         ipHash,
         source: 'checkout',
+        sessionId: body.sessionId && SESSION_ID_RE.test(body.sessionId) ? body.sessionId : undefined,
         discordUserId: user && user.provider !== 'google' ? user.id : undefined,
         discordUsername: user && user.provider !== 'google' ? user.username : undefined,
       });
+      if (order.sessionId) await linkOrderToSession(order.sessionId, order.id);
       if (user) {
         await linkOrder(user.id, order.id).catch(() => undefined);
         if (!user.mcUsername) await updateUser(user.id, { mcUsername: order.username }).catch(() => undefined);

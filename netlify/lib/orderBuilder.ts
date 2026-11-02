@@ -26,6 +26,7 @@ export interface BuildOrderInput {
   displayCurrency?: string;
   customerNote?: string;
   deviceId?: string;
+  sessionId?: string;
   ipHash?: string;
   source?: Order['source'];
   /** Discord account of the buyer (from the session cookie) */
@@ -212,6 +213,7 @@ export async function buildOrder(input: BuildOrderInput): Promise<Order> {
     customerNote: input.customerNote?.trim().slice(0, 500) || undefined,
     ipHash: input.ipHash,
     deviceId: input.deviceId,
+    sessionId: input.sessionId,
     source: input.source ?? 'checkout',
     discordUserId: input.discordUserId,
     discordUsername: input.discordUsername,

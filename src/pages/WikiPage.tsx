@@ -67,8 +67,9 @@ function WikiArticleView({ a }: { a: WikiArticle }) {
         </span>
       </p>
 
-      {a.sections.map((s) => (
+      {a.sections.map((s, si) => (
         <section key={s.heading}>
+          {si === 2 && a.shopLinks.length > 0 && <WikiShopBox links={a.shopLinks} />}
           <h2 id={sectionId(s.heading)}>{renderRich(s.heading, vars)}</h2>
           {s.paragraphs.map((p, i) => (
             <p key={i}>{renderRich(p, vars)}</p>
@@ -108,5 +109,30 @@ function WikiArticleView({ a }: { a: WikiArticle }) {
         out of date, tell us on Discord.
       </Callout>
     </ContentPage>
+  );
+}
+
+/** In-article call to action: the article's shop links plus the store's perks. */
+function WikiShopBox({ links }: { links: WikiArticle['shopLinks'] }) {
+  const { config } = useStore();
+  const perks = [
+    config.welcomeCoupon.enabled && config.welcomeCoupon.code ? `${config.welcomeCoupon.percent}% off your first order with ${config.welcomeCoupon.code}` : null,
+    config.cashback?.enabled && config.cashback.percent > 0 ? `${config.cashback.percent}% cashback on every order` : null,
+    'delivered in-game by real staff',
+  ].filter(Boolean);
+  return (
+    <aside className="wiki-shopbox" aria-label="Shop">
+      <div>
+        <strong>Rather skip the grind?</strong>
+        <span>{perks.join(' · ')}</span>
+      </div>
+      <div className="wiki-shopbox-links">
+        {links.map((l, i) => (
+          <Link key={l.to} to={l.to} className={`btn btn-sm ${i === 0 ? 'btn-primary' : 'btn-secondary'}`} data-track={`wiki cta ${l.label}`}>
+            {l.label}
+          </Link>
+        ))}
+      </div>
+    </aside>
   );
 }

@@ -124,6 +124,12 @@ export default function Privacy() {
           the cart and started checkouts. Nothing is stored on your device. Each day we form a one-way hash from your hashed IP address and browser type to count unique visitors;
           it changes every day, so you cannot be recognised across days, and we keep only daily totals plus your country and device type – no profile of you.
         </li>
+        <li>
+          <strong>Visit history (only after “Accept”).</strong> If you accept cookies, your browser keeps a random visit ID and where you came from (referring site, campaign
+          link or creator code) in local storage. With it we record the pages you open, the buttons you click, products added to the cart and – if you order – which order
+          came from that visit. This shows us which pages and partners lead to purchases. It is not used for ads, not shared, and deleted after 90 days. Choosing “Only
+          necessary” or clearing the site data stops it.
+        </li>
         {GA_ENABLED && (
           <li>
             <strong>Google Analytics 4.</strong> Only after you click “Accept” in the cookie notice. It records page views and interactions with IP anonymisation; Google processes this

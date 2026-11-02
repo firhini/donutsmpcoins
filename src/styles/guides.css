@@ -213,3 +213,30 @@
   font-size: var(--fs-lg);
   margin: 0 0 6px;
 }
+
+.wiki-shopbox {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: var(--sp-5) 0;
+  padding: 14px 16px;
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(255, 194, 51, 0.35);
+  background: linear-gradient(120deg, rgba(255, 194, 51, 0.1), rgba(255, 94, 168, 0.08));
+}
+.wiki-shopbox > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.wiki-shopbox > div:first-child span {
+  font-size: 13px;
+  color: var(--text-2);
+}
+.wiki-shopbox-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
