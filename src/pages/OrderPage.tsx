@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { gaEvent } from '../lib/track';
+import { isMoneyOnly } from '../lib/claim';
+import { ClaimTicket } from '../components/shop/ClaimTicket';
 import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom';
 import type { OrderItem, OrderPayment, PublicOrder } from '../shared/types';
 import { formatUsd } from '../shared/pricing';
@@ -32,7 +34,7 @@ export default function Page() {
   const [params, setParams] = useSearchParams();
   const loc = useLocation();
   const justPlaced = !!(loc.state as { placed?: boolean } | null)?.placed;
-  const { config, fmt } = useStore();
+  const { config, fmt, productById } = useStore();
   const [order, setOrder] = useState<PublicOrder | null>(null);
   const [err, setErr] = useState<{ status: number; message: string } | null>(null);
   const [loading, setLoading] = useState(true);
@@ -129,6 +131,7 @@ export default function Page() {
     fireConfetti({ count: 160 });
   }, [order?.status, order?.id]);
 
+  const moneyOnly = useMemo(() => (order ? isMoneyOnly(order.items, productById) : true), [order, productById]);
   const boxItems = useMemo(() => (order?.items ?? []).filter((i) => (i.kind === 'box' || i.kind === 'bundle') && i.rolled && i.rolled.length > 0), [order]);
   const title = `Order ${id} | ${config.storeName}`;
 
@@ -240,6 +243,8 @@ export default function Page() {
 
       <div className="od-layout">
         <div className="od-main">
+          {(order.status === 'paid' || order.status === 'delivering') && <ClaimTicket orderId={order.id} username={order.username} required={!moneyOnly} />}
+          {awaiting && <ClaimTicket required={!moneyOnly} stage="before" />}
           {awaiting && <PaymentPanel order={order} onChange={reload} />}
           {(order.status === 'paid' || order.status === 'delivering') && <DeliveryPanel order={order} />}
           {order.status === 'delivered' && <DeliveredPanel order={order} />}
@@ -741,7 +746,7 @@ function DeliveryPanel({ order }: { order: PublicOrder }) {
         </li>
       </ol>
       <a href={config.discordInvite} target="_blank" rel="noreferrer" className="btn btn-discord">
-        <Icon name="discord" size={16} /> Ping us on Discord when you are online
+        <Icon name="discord" size={16} /> Open a ticket on Discord to claim
       </a>
     </section>
   );

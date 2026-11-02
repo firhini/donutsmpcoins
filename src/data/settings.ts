@@ -166,8 +166,8 @@ export const defaultSettings: SiteSettings = {
     { code: 'JPY', symbol: '¥', rate: 150 },
   ],
   delivery: {
-    moneyText: 'Money is paid to your in-game balance with /pay – stay online on DonutSMP and watch for the payment in chat.',
-    itemText: 'Items are handed over in-game: join DonutSMP with the username from your order, accept the teleport request from our delivery account and pick up the drop.',
+    moneyText: 'Money is paid to your in-game balance with /pay – you can simply wait, but opening a ticket in our Discord gets it to you faster.',
+    itemText: 'Required: join our Discord and open a ticket with your order ID to claim. Then stay online on DonutSMP with the username from your order, accept the teleport request from our delivery account and pick up the drop.',
     staffUsername: '',
     etaText: 'Usually within 5–30 minutes while we are online (see Discord status).',
   },

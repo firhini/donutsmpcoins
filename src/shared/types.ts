@@ -565,6 +565,8 @@ export interface PublicConfig {
   /** which integrations are configured on the server */
   integrations: { stripe: boolean; paypal: boolean; nowpayments: boolean; discord: boolean; discordOAuth: boolean; googleOAuth?: boolean; login?: boolean };
   paypalClientId?: string;
+  /** direct link to the Discord ticket channel (set once the bot ran /setup) */
+  discordTicketUrl?: string;
 }
 
 export interface SiteStats {

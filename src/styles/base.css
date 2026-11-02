@@ -855,3 +855,102 @@ p {
   flex: 1;
   min-width: 0;
 }
+
+/* ───────── claim via Discord ticket ───────── */
+.claim-note {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  background: rgba(88, 101, 242, 0.1);
+  border: 1px solid rgba(88, 101, 242, 0.35);
+  font-size: var(--fs-sm);
+  color: var(--text-1);
+}
+.claim-note svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: #8b95ff;
+}
+.claim-note.is-required {
+  background: rgba(88, 101, 242, 0.18);
+  border-color: rgba(88, 101, 242, 0.7);
+}
+.claim {
+  padding: var(--sp-5);
+  border: 1px solid rgba(88, 101, 242, 0.45);
+  background: radial-gradient(500px 160px at 0% 0%, rgba(88, 101, 242, 0.25), transparent 70%), var(--surface-1, #141722);
+}
+.claim.is-required {
+  border-color: #5865f2;
+  box-shadow: 0 0 40px -14px rgba(88, 101, 242, 0.9);
+}
+.claim-head {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.claim-head h2 {
+  margin: 2px 0 4px;
+  font-size: var(--fs-xl, 1.35rem);
+}
+.claim-icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #5865f2;
+  color: #fff;
+}
+.claim-tag {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a5adff;
+}
+.claim.is-required .claim-tag {
+  color: #fecaca;
+}
+.claim-steps {
+  list-style: none;
+  margin: var(--sp-4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.claim-steps li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  background: rgba(255, 255, 255, 0.04);
+}
+.claim-steps li > span {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(88, 101, 242, 0.3);
+  font-weight: 800;
+}
+.claim-steps li > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.claim-code {
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(255, 194, 51, 0.15);
+  color: var(--gold-400);
+  font-weight: 800;
+}

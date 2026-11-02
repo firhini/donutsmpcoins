@@ -305,7 +305,7 @@ export default function Home() {
                 <Icon name="truck" size={22} />
               </span>
               <h3>Get it in-game</h3>
-              <p>Money via /pay, items by teleport.</p>
+              <p>Open a Discord ticket to claim – items by teleport, money via /pay.</p>
               <div className="hiw-note">
                 <Icon name="clock" size={14} /> {config.delivery.etaText}
               </div>

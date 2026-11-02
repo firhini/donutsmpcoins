@@ -693,7 +693,7 @@ export async function handleInteraction(i: Interaction): Promise<object> {
     await kvSet('misc', key, { channelId: ch.id });
     await discordApi('POST', `/channels/${ch.id}/messages`, {
       content: `<@${uid}>${staff ? ` <@&${staff}>` : ''}`,
-      embeds: [{ title: '🎫 Ticket opened', color: COLOR.blurple, description: 'Tell us what you need. If it is about an order, post your **order ID** (DC-XXXXXX). Staff will answer here.' }],
+      embeds: [{ title: '🎫 Ticket opened', color: COLOR.blurple, description: 'Claiming an order? Post your **order ID** (DC-XXXXXX) and your **Minecraft name**, then stay online on the server – staff will deliver and answer here.\n\nAnything else: just tell us what you need.' }],
       components: [row(btn('Close ticket', 'ticket:close', 4, '🔒'))],
       allowed_mentions: { users: [uid], roles: staff ? [staff] : [] },
     });

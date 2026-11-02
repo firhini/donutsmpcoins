@@ -15,13 +15,15 @@ import { BoxContents } from '../components/shop/BoxContents';
 import { QtyStepper } from '../components/shop/QtyStepper';
 import { SaleBanner } from '../components/shop/SaleBanner';
 import { track } from '../lib/track';
+import { isMoneyOnly } from '../lib/claim';
+import { ClaimTicket } from '../components/shop/ClaimTicket';
 import { badgeClassForTag, bulkTable, discountPercent, hasContents, isMillionsProduct, linePrice, stockState } from '../components/shop/productUtils';
 import NotFound from './NotFound';
 import '../styles/shop.css';
 
 export default function ProductPage() {
   const { slug = '' } = useParams<{ slug: string }>();
-  const { config, products, categories, productBySlug, fmt, loading } = useStore();
+  const { config, products, categories, productBySlug, productById, fmt, loading } = useStore();
   const { add } = useCart();
   const product = productBySlug(slug);
   const [qty, setQty] = useState(1);
@@ -283,6 +285,7 @@ export default function ProductPage() {
               <Icon name="truck" size={16} /> Delivery
             </h2>
             <p className="small text-2">{deliveryText}</p>
+            <ClaimTicket required={!isMoneyOnly([{ kind: product.kind, productId: product.id }], productById)} stage="before" />
             <p className="xs muted" style={{ marginTop: 8 }}>
               <Icon name="clock" size={12} /> {config.delivery.etaText}
             </p>

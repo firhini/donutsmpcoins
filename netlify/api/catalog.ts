@@ -2,6 +2,7 @@
  * Public catalog routes: catalog, config, live stats and mystery-box odds.
  */
 import type { Review, ReviewStats, SiteStats } from '../../src/shared/types';
+import { getBotState } from '../lib/discordBot';
 import type { Route } from '../lib/http';
 import { HttpError, json } from '../lib/http';
 import { getCatalog, getOverrides } from '../lib/catalog';
@@ -58,7 +59,11 @@ export const routes: Route[] = [
   {
     method: 'GET',
     path: '/config',
-    handler: async () => json(toPublicConfig(await getSettings())),
+    handler: async () => {
+      const [settings, bot] = await Promise.all([getSettings(), getBotState().catch(() => null)]);
+      const ticket = bot?.guildId && bot.channels?.ticket ? `https://discord.com/channels/${bot.guildId}/${bot.channels.ticket}` : undefined;
+      return json({ ...toPublicConfig(settings), discordTicketUrl: ticket });
+    },
   },
   {
     method: 'GET',

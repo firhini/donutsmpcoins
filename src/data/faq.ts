@@ -29,7 +29,7 @@ export const faqGroups: FaqGroup[] = [
         id: 'how-to-order',
         top: true,
         q: 'How do I place an order?',
-        a: 'Add items to your cart, enter your **exact Minecraft username** at checkout and pick a payment method. You get an order ID and payment instructions right away. After you pay, tell us the reference on your order page – we confirm the payment and deliver in-game. Track everything at [/track](/track).',
+        a: 'Add items to your cart, enter your **exact Minecraft username** at checkout and pick a payment method. You get an order ID and payment instructions right away. After you pay, **join our Discord and open a ticket with your order ID** – that is required to claim items (for money-only orders it is optional but faster). We then deliver in-game. Track everything at [/track](/track).',
       },
       {
         id: 'do-i-need-an-account',
@@ -77,7 +77,7 @@ export const faqGroups: FaqGroup[] = [
         id: 'how-long',
         top: true,
         q: 'How long does delivery take?',
-        a: '{{eta}} Deliveries are done manually by our staff, so there is no bot and no automation that can break. Our online status is shown on Discord; if nobody is online you will be served as soon as someone is back.',
+        a: '{{eta}} To claim, open a ticket in our Discord with your order ID – required for items, optional but faster for money. Deliveries are done manually by our staff, so there is no bot and no automation that can break. Our online status is shown on Discord; if nobody is online you will be served as soon as someone is back.',
       },
       {
         id: 'how-money-delivered',
