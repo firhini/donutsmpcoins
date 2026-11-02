@@ -100,13 +100,13 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
   mystery: {
     seoTitle: 'DonutSMP Mystery Boxes & Crates – Shop All 6 | DonutCoins',
     metaDescription:
-      'DonutSMP mystery boxes from $1.99 with public odds: Coin Crate (5M–100M), Spawner Crate, Mystery, Elite and God boxes and the Legendary Crate – every drop table listed.',
+      'DonutSMP mystery boxes from $1.99 with public odds: Coin and Mega Coin Crates, Spawner, Netherite and Elytra Crates, Mystery, Elite, God and Legendary boxes.',
     intro:
-      'Mystery boxes are the fun way to shop for DonutSMP loot: every box has a public drop table, the rolls happen on our server the moment you order, and the result is listed on your order page before it is handed over in-game. Six boxes cover every budget – from the $1.99 Coin Crate that always pays between 5M and 100M to the $34.99 Legendary Crate with the best Elytra odds in the shop. The exact odds are shown under "What\'s inside?" on each box.',
+      'Mystery boxes are the fun way to shop for DonutSMP loot: every box has a public drop table, the rolls happen on our server the moment you order, and the result is listed on your order page before it is handed over in-game. Nine boxes cover every budget – from the $1.99 Coin Crate that always pays between 5M and 100M to the $34.99 Legendary Crate with the best Elytra odds in the shop. The exact odds are shown under "What\'s inside?" on each box.',
     body: [
-      'Each line in a box has a weight; its chance on a single roll is that weight divided by the pool total. Boxes with several rolls draw without repeats, so a three-roll box always contains three different lines and the box-wide chance of any line is higher than the per-roll figure. There is no re-rolling and no hidden pool – what the page shows is what the server rolls.',
-      'The Coin Crate ($1.99) is money only and always pays at least 5M. The Spawner Crate ($2.99) draws two spawner lines and contains skeleton spawners in about 9 of 10 crates. The Mystery Box ($3.99) rolls three times, the Elite Mystery Box ($8.99) four times and the God Mystery Box ($19.99) five times – each with an Elytra as a rare jackpot line.',
-      'The Legendary Crate ($34.99) rolls six lines from our best pool of dragon heads, netherite blocks, blaze and iron golem spawners, heavy cores, totems, a maxed netherite armor set, a mace, an Elytra and a 100M money line. All box contents are delivered like normal items – teleport, drop, done – and money lines are paid to your balance with /pay.',
+      'Each line in a box has a weight; its chance on a single roll is that weight divided by the pool total. Boxes with several rolls draw without repeats, so a three-drop box always contains three different lines and the box-wide chance of any line is higher than the per-roll figure. There is no re-rolling and no hidden pool – what the page shows is what the server rolls.',
+      'The Coin Crate ($1.99) and Mega Coin Crate ($9.99) are money only. The Spawner, Netherite and Elytra Crates give a single themed drop – the Elytra Crate has about a 1 in 12 Elytra chance for $7.99. The Mystery Box ($3.99) and Elite Mystery Box ($8.99) give two drops, the God Mystery Box ($19.99) three.',
+      'The Legendary Crate ($34.99) rolls three lines from our best pool of dragon heads, netherite blocks, blaze and iron golem spawners, heavy cores, totems, a maxed netherite armor set, a mace, an Elytra and a 100M money line. All box contents are delivered like normal items – teleport, drop, done – and money lines are paid to your balance with /pay.',
       'Treat boxes as entertainment with a floor, not as a discount. If you simply want money, the money packs are cheaper per million than the Coin Crate; if you simply want an Elytra, buying it outright for $28.49 beats every random box. On average every box pays out less than buying its items directly – boxes make sense when you enjoy the opening.',
     ],
     faq: [
@@ -116,7 +116,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
       },
       {
         q: 'Which mystery box has the best Elytra odds?',
-        a: 'The Legendary Crate ($34.99) – about 1 in 5 crates. The God Mystery Box ($19.99) lands one in about 1 in 19 boxes, the Elite Mystery Box ($8.99) in about 1 in 90 and the standard Mystery Box ($3.99) in about 1 in 300. If you want one for sure, buy the Elytra directly.',
+        a: 'Per dollar, the Elytra Crate ($7.99) – about 1 in 12 crates. The Legendary Crate ($34.99) lands one in about 1 in 8, the God Mystery Box ($19.99) in about 1 in 22. If you want one for sure, buy the Elytra directly.',
       },
       {
         q: 'Can I get the same item twice in one box?',

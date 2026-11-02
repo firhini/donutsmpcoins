@@ -40,7 +40,7 @@ export function MoneyCalculator({ initial = 100, title = 'Money calculator' }: {
   const table = bulkTable(product);
   const nextTier = table.find((t) => t.minQty > millions);
   const tier = spendingTierFor(line.totalCents, config.spendingTiers);
-  const sale = config.sale.enabled ? config.sale.percent : 0;
+  const sale = product.salePercent ?? 0;
 
   const set = (n: number) => {
     const v = Math.max(min, Math.min(max, Math.floor(Number.isFinite(n) ? n : min)));
@@ -152,7 +152,7 @@ export function MoneyCalculator({ initial = 100, title = 'Money calculator' }: {
             <li>
               <Icon name="tag" size={14} />
               <span>
-                {config.sale.label || 'Sale'}: extra <strong className="pink-text">{sale}% off</strong> at checkout
+                {config.sale.label || 'Sale'}: <strong className="pink-text">{sale}% off</strong> already included
               </span>
             </li>
           )}

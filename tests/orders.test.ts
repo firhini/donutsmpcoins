@@ -73,7 +73,7 @@ describe('GET /catalog, /config, /stats, /products/:id/odds', () => {
   it('computes box odds', async () => {
     const res = await get<{ odds: { name: string; percent: number }[]; rolls: number }>('/products/mystery-box/odds');
     expect(res.status).toBe(200);
-    expect(res.data.rolls).toBe(3);
+    expect(res.data.rolls).toBe(2);
     const elytra = res.data.odds.find((o) => o.name === 'Elytra');
     expect(elytra?.percent).toBeGreaterThan(0);
     expect(elytra?.percent).toBeLessThan(5);
@@ -220,7 +220,7 @@ describe('POST /orders (manual payment)', () => {
     expect(visible.data.order.items.find((i) => i.productId === 'mystery-box')!.rolled).toHaveLength(2);
     const pool = defaultProducts.find((p) => p.id === 'mystery-box')!.contents!;
     for (const roll of box.rolled!) {
-      expect(roll).toHaveLength(3);
+      expect(roll).toHaveLength(2);
       for (const drop of roll) {
         const line = pool.find((c) => c.name === drop.name)!;
         expect(line).toBeDefined();
@@ -232,7 +232,7 @@ describe('POST /orders (manual payment)', () => {
     }
 
     const crate = order.items.find((i) => i.productId === 'legendary-crate')!;
-    expect(crate.rolled![0]).toHaveLength(6);
+    expect(crate.rolled![0]).toHaveLength(3);
 
     const kit = order.items.find((i) => i.productId === 'pvp-kit')!;
     expect(kit.contents?.map((c) => c.name)).toContain('Totem of Undying');
@@ -242,7 +242,7 @@ describe('POST /orders (manual payment)', () => {
     // a box inside a bundle is rolled too – one God Mystery Box per Rich Bundle
     const rich = order.items.find((i) => i.productId === 'rich-bundle')!;
     expect(rich.rolled).toHaveLength(2);
-    expect(rich.rolled![0]).toHaveLength(5);
+    expect(rich.rolled![0]).toHaveLength(3);
   });
 });
 

@@ -6,11 +6,13 @@ import { rollBox } from '../netlify/lib/boxes';
  * Guard against loss-making mystery boxes: on average a box must pay out clearly less than its price,
  * valued at our own shop prices. (A box once rolled ~10× its price in items.)
  */
-const MAX_PAYOUT_RATIO = 0.8;
+// 0.6 of the regular price keeps a box profitable even during a 30% sale (≈86% of the sale price at shop prices)
+const MAX_PAYOUT_RATIO = 0.6;
 const MONEY_PER_M = 0.15; // bulk money price per 1M, in dollars
 
 const byName = new Map(products.map((p) => [p.name, p.priceCents / 100]));
 const EXTRA: Record<string, number> = { 'Netherite Armor Set (maxed)': (findProduct('netherite-armor-set')?.priceCents ?? 0) / 100 };
+
 
 function unitValue(name: string): number {
   const money = name.match(/^(\d+)M Money/);
@@ -29,6 +31,7 @@ describe('mystery box payout', () => {
       let total = 0;
       for (let i = 0; i < N; i++) for (const d of rollBox(box)) total += unitValue(d.name) * d.qty;
       const ratio = total / N / (box.priceCents / 100);
+      console.log(`${box.name.padEnd(18)} $${(box.priceCents / 100).toFixed(2)} → avg payout ${(ratio * 100).toFixed(0)}%`);
       expect(ratio, `${box.name}: average payout ${(ratio * 100).toFixed(0)}% of price`).toBeLessThanOrEqual(MAX_PAYOUT_RATIO);
     });
   }

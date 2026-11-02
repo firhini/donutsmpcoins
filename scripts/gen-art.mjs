@@ -722,6 +722,25 @@ const boxes = {
     S.add(spriteC(S, { map: HEADS.skeleton.map, palette: HEADS.skeleton.pal, cx: 100, cy: 160, scale: 4.5 }));
     S.add(sparkle(46, 66, 9, '#99f6e4'), sparkle(214, 72, 8, '#fff'));
   },
+  'netherite-crate': (S) => {
+    frame(S, { glowColor: '#a78bfa', glowOpacity: 0.5 });
+    S.add(isoCube(S, { cx: 128, cy: 130, L: 80, tex: metalCrateTex('#2d272d', '#4a4048', '#a78bfa') }));
+    S.add(spriteC(S, { map: INGOT, palette: INGOT_PAL, cx: 98, cy: 166, scale: 5 }));
+    S.add(sparkle(46, 66, 9, '#ddd6fe'), sparkle(214, 72, 8, '#fff'));
+  },
+  'elytra-crate': (S) => {
+    frame(S, { glowColor: '#d946ef', glowOpacity: 0.58 });
+    S.add(giftBox(S, { body: '#3b2f52', ribbon: '#d946ef', ribbonL: '#f5d0fe', trim: '#9b8ac4', glyph: null, cy: 140 }));
+    S.add(spriteC(S, { map: ELYTRA, palette: ELYTRA_PAL, cx: 128, cy: 74, scale: 5 }));
+    S.add(sparkle(44, 60, 11, '#f5d0fe'), sparkle(216, 70, 9, '#fff'), sparkle(206, 196, 7, '#f5d0fe'));
+  },
+  'mega-coin-crate': (S) => {
+    frame(S, { glowColor: GOLD.m, glowOpacity: 0.65, glowRx: 110 });
+    S.add(crate(S, { cx: 128, cy: 138, L: 80, plank: '#e0b04a', seam: '#8a5200', brace: '#ffd36b' }));
+    S.add(moneyBag(S, { cx: 92, cy: 158, scale: 4.6 }));
+    S.add(coinFace(S, { cx: 176, cy: 76, r: 22 }), coinLying(S, { cx: 196, cy: 200, r: 18, h: 6 }));
+    S.add(sparkle(46, 66, 11, '#fff'), sparkle(214, 120, 8, '#ffe28a'), sparkle(128, 40, 7, '#fff'));
+  },
   'mystery-box': (S) => {
     frame(S, { glowColor: '#ff5ea8', glowOpacity: 0.58 });
     S.add(giftBox(S, { body: '#ff4f9e', ribbon: '#ffe08a', ribbonL: '#fff6cc', glyphColor: '#fff', cy: 134 }));

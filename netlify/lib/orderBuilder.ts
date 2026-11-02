@@ -4,7 +4,7 @@
  *  - spin wheel free items, gift-code redemption, giveaways, admin (free orders)
  */
 import type { CartLineInput, Order, OrderItem, PaymentMethodConfig, Product, Quote } from '../../src/shared/types';
-import { computeQuote } from '../../src/shared/pricing';
+import { applySale, computeQuote } from '../../src/shared/pricing';
 import { getCatalog, getFullCatalog, decrementStock, restoreStock } from './catalog';
 import { getSettings, usablePaymentMethods, renderTemplate } from './settings';
 import { getCoupon, consumeCoupon, unconsumeCoupon, normalizeCode } from './coupons';
@@ -85,8 +85,9 @@ export async function serverQuote(input: ServerQuoteInput): Promise<{ quote: Quo
     creditAvailableCents = (await getCredit(username)).balanceCents;
   }
 
-  const quote = computeQuote(catalog.products, input.items, {
-    salePercent: settings.sale.enabled ? settings.sale.percent : 0,
+  // a running sale is baked into the product prices (same helper as the storefront)
+  const products = applySale(catalog.products, settings.sale);
+  const quote = computeQuote(products, input.items, {
     tiers: settings.spendingTiers,
     coupon,
     couponCode: input.discountCode?.trim() || undefined,
@@ -104,7 +105,7 @@ export async function serverQuote(input: ServerQuoteInput): Promise<{ quote: Quo
     quote.warnings = quote.warnings.filter((w) => w !== 'Unknown discount code.');
     quote.warnings.push(...welcomeWarnings);
   }
-  return { quote, products: catalog.products };
+  return { quote, products };
 }
 
 /** True when the player already has an open or completed order (welcome code is first-order only). */

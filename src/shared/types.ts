@@ -81,6 +81,9 @@ export interface Product {
   minQty?: number;
   maxQty?: number;
   hidden?: boolean;
+  /** set by applySale() while a sale covers this product (never stored) */
+  salePercent?: number;
+  saleEndsAt?: string;
   deliveryNote?: string;
 }
 
@@ -499,7 +502,8 @@ export interface SiteSettings {
   supportEmail?: string;
   legal: LegalSettings;
   announcement: { enabled: boolean; text: string; link?: string };
-  sale: { enabled: boolean; percent: number; label: string; endsAt?: string };
+  /** time-limited sale; categoryIds empty/missing = every product */
+  sale: { enabled: boolean; percent: number; label: string; endsAt?: string; categoryIds?: CategoryId[] };
   spendingTiers: SpendingTier[];
   paymentMethods: PaymentMethodConfig[];
   spin: {

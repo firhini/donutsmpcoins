@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import type { Catalog, Category, CurrencyConfig, Product, PublicConfig, SiteStats } from '../shared/types';
 import { apiGet } from '../lib/api';
-import { formatMoney } from '../shared/pricing';
+import { applySale, formatMoney, saleActive } from '../shared/pricing';
 import { defaultCatalog } from '../data/catalog';
 import { defaultSettings } from '../data/settings';
 import { storageGet, storageSet } from '../lib/device';
@@ -116,23 +116,33 @@ export function StoreProvider({ children, initial }: { children: ReactNode; init
   }, []);
   const fmt = useCallback((cents: number) => formatMoney(cents, currency), [currency]);
 
+  // re-check once a minute while a timed sale runs, so prices switch back the moment it ends
+  const [now, setNow] = useState(() => Date.now());
+  const timedSale = saleActive(config.sale) && !!config.sale.endsAt;
+  useEffect(() => {
+    if (!timedSale) return;
+    const t = setInterval(() => setNow(Date.now()), 60_000);
+    return () => clearInterval(t);
+  }, [timedSale]);
+  const products = useMemo(() => applySale(catalog.products, config.sale, new Date(now)), [catalog.products, config.sale, now]);
+
   const value = useMemo<StoreApi>(
     () => ({
       config,
-      catalog,
-      products: catalog.products,
+      catalog: { ...catalog, products },
+      products,
       categories: [...catalog.categories].sort((a, b) => a.order - b.order),
       stats,
       loading,
       error,
       refresh,
-      productById: (id) => catalog.products.find((p) => p.id === id),
-      productBySlug: (slug) => catalog.products.find((p) => p.slug === slug),
+      productById: (id) => products.find((p) => p.id === id),
+      productBySlug: (slug) => products.find((p) => p.slug === slug),
       currency,
       setCurrency,
       fmt,
     }),
-    [config, catalog, stats, loading, error, refresh, currency, setCurrency, fmt],
+    [config, catalog, products, stats, loading, error, refresh, currency, setCurrency, fmt],
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

@@ -128,11 +128,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const quote = useMemo(
     () =>
-      computeQuote(products, items, {
-        salePercent: config.sale.enabled ? config.sale.percent : 0,
-        tiers: config.spendingTiers,
-      }),
-    [products, items, config.sale, config.spendingTiers],
+      // a running sale is already baked into the store's product prices (applySale)
+      computeQuote(products, items, { tiers: config.spendingTiers }),
+    [products, items, config.spendingTiers],
   );
 
   const value = useMemo<CartApi>(

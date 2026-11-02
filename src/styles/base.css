@@ -778,3 +778,80 @@ p {
   justify-content: center;
   gap: 10px;
 }
+
+/* ───────── running sale ───────── */
+.sale-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  font-weight: 700;
+  color: #fde68a;
+  font-variant-numeric: tabular-nums;
+}
+.sale-hero .sale-timer {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(253, 230, 138, 0.35);
+}
+.sale-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  padding: 10px 16px;
+  border-radius: var(--r-md);
+  background: linear-gradient(135deg, #ffc233, #ff9d2e);
+  color: #1a1206;
+  font-weight: 800;
+}
+@media (max-width: 640px) {
+  .sale-hero {
+    flex-wrap: wrap;
+  }
+  .sale-hero-cta {
+    width: 100%;
+    justify-content: center;
+  }
+}
+.sale-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  background: rgba(255, 94, 168, 0.1);
+  border: 1px solid rgba(255, 94, 168, 0.4);
+  font-size: var(--fs-sm);
+}
+.sale-strip .sale-timer {
+  margin-top: 0;
+  margin-left: auto;
+}
+.sale-strip-pct {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--pink-500, #ff4f9a);
+  color: #fff;
+  font-weight: 800;
+}
+
+.box-deal.sale-hero {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  border-radius: var(--r-xl);
+  border: 1px solid rgba(217, 70, 239, 0.45);
+  background: radial-gradient(400px 120px at 10% 50%, rgba(217, 70, 239, 0.28), transparent 70%), linear-gradient(120deg, rgba(139, 92, 246, 0.18), rgba(255, 94, 168, 0.12));
+}
+.sale-hero > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}

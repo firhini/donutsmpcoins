@@ -112,7 +112,7 @@ export const faqGroups: FaqGroup[] = [
       {
         id: 'box-odds',
         q: 'How do mystery box odds work?',
-        a: 'Every line in a box has a weight, and its chance on one roll is that weight divided by the total of the pool – click **What\'s inside?** on any box to see the percentages. Boxes with several rolls draw without repeats, so a three-roll box always has three different lines and your chance of any given line is higher than the single-roll figure. Lines marked guaranteed are in every box. The roll happens on our server when you order and the result is written to your order page before delivery.',
+        a: 'Every line in a box has a weight, and its chance on one roll is that weight divided by the total of the pool – click **What\'s inside?** on any box to see the percentages. Boxes with several rolls draw without repeats, so a three-drop box always has three different lines and your chance of any given line is higher than the single-roll figure. The roll happens on our server when you order and the result is written to your order page before delivery.',
       },
     ],
   },

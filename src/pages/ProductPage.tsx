@@ -13,6 +13,7 @@ import { ProductImage } from '../components/shop/ProductImage';
 import { ProductGrid } from '../components/shop/ProductGrid';
 import { BoxContents } from '../components/shop/BoxContents';
 import { QtyStepper } from '../components/shop/QtyStepper';
+import { SaleBanner } from '../components/shop/SaleBanner';
 import { badgeClassForTag, bulkTable, discountPercent, hasContents, isMillionsProduct, linePrice, stockState } from '../components/shop/productUtils';
 import NotFound from './NotFound';
 import '../styles/shop.css';
@@ -147,6 +148,7 @@ export default function ProductPage() {
             {perMillion !== null && <span className="muted">≈ {fmt(perMillion)} per 1M</span>}
             {off && <span className="badge badge-pink">Save {off}%</span>}
           </div>
+          {product.salePercent ? <SaleBanner variant="strip" /> : null}
           {product.shortDesc && <p className="pp-lead">{product.shortDesc}</p>}
           {copy?.bullets?.length ? (
             <ul className="pp-bullets">

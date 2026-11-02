@@ -239,7 +239,11 @@ function validateSettingsPatch(body: unknown): Partial<SiteSettings> {
   }
   // nested numeric fields – a bad type here would corrupt every quote
   const sale = patch.sale;
-  if (isObj(sale)) numField(sale, 'percent', 'Sale percent', 0, 90, true);
+  if (isObj(sale)) {
+    numField(sale, 'percent', 'Sale percent', 0, 90, true);
+    if (sale.categoryIds !== undefined && (!Array.isArray(sale.categoryIds) || sale.categoryIds.some((c) => !CATEGORY_IDS.includes(c as CategoryId))))
+      throw new HttpError(400, 'Sale categories must be known category ids.', 'validation');
+  }
   const referral = patch.referral;
   if (isObj(referral)) {
     numField(referral, 'friendPercent', 'Referral friend percent', 0, 100, true);

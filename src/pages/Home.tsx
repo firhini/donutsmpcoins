@@ -5,6 +5,8 @@ import { useStore } from '../context/StoreContext';
 import { Seo } from '../components/ui/Seo';
 import { organizationSchema, websiteSchema } from '../seo/schema';
 import { Icon } from '../components/ui/Icons';
+import { SaleBanner } from '../components/shop/SaleBanner';
+import { saleActive } from '../shared/pricing';
 import { CategoryHotbar, type HotbarValue } from '../components/shop/CategoryHotbar';
 import { ProductGrid } from '../components/shop/ProductGrid';
 import { MoneyCalculator } from '../components/shop/MoneyCalculator';
@@ -21,7 +23,7 @@ import '../styles/home.css';
 const INITIAL_VISIBLE = 12;
 
 export default function Home() {
-  const { config, products, categories, stats, loading } = useStore();
+  const { config, products, categories, stats, loading, fmt, productById } = useStore();
   const [cat, setCat] = useState<HotbarValue>('all');
   const [q, setQ] = useState('');
   const [showAll, setShowAll] = useState(false);
@@ -150,15 +152,19 @@ export default function Home() {
 
       {/* ───────── mystery box deal ───────── */}
       <section className="container box-deal-wrap">
-        <Link to="/shop/mystery-boxes" className="box-deal">
-          <img src="/img/products/god-mystery-box.svg" alt="" width={84} height={84} loading="lazy" decoding="async" />
-          <div>
-            <span className="box-deal-tag">Mystery Box Sale</span>
-            <strong>Up to 33% off every box</strong>
-            <span className="muted">Elytra, 100M jackpots, god gear – open yours now.</span>
-          </div>
-          <Icon name="arrowRight" size={20} className="arrow" />
-        </Link>
+        {saleActive(config.sale) ? (
+          <SaleBanner />
+        ) : (
+          <Link to="/product/elytra-crate" className="box-deal">
+            <img src="/img/products/elytra-crate.svg" alt="" width={84} height={84} loading="lazy" decoding="async" />
+            <div>
+              <span className="box-deal-tag">New: Elytra Crate</span>
+              <strong>About 1 in 12 crates is an Elytra</strong>
+              <span className="muted">One drop for {fmt(productById('elytra-crate')?.priceCents ?? 799)} – nine mystery boxes from $1.99.</span>
+            </div>
+            <Icon name="arrowRight" size={20} className="arrow" />
+          </Link>
+        )}
       </section>
 
       {/* ───────── store ───────── */}
@@ -177,14 +183,6 @@ export default function Home() {
             </Link>
           </div>
 
-          {config.sale.enabled && config.sale.percent > 0 && (
-            <div className="sale-banner">
-              <Icon name="tag" size={16} />
-              <span>
-                <strong>{config.sale.label || 'Sale'}:</strong> {config.sale.percent}% off everything is applied automatically at checkout.
-              </span>
-            </div>
-          )}
 
           <CategoryHotbar
             value={cat}

@@ -1,5 +1,5 @@
 /** Simple text/toggle sections: store identity, announcement bar, sale, delivery texts, stats + maintenance. */
-import type { SiteSettings } from '../../../shared/types';
+import type { CategoryId, SiteSettings } from '../../../shared/types';
 import { Field, NumberInput, PercentInput, TextArea, TextInput, Toggle } from '../Field';
 import { SectionCard, type SaveFn } from './SectionCard';
 import { isoToLocalInput, localInputToIso } from '../adminUtils';
@@ -134,18 +134,29 @@ interface SaleDraft {
   percent: number | undefined;
   label: string;
   endsAtLocal: string;
+  categoryIds: CategoryId[];
 }
 
+const SALE_CATEGORIES: { id: CategoryId; name: string }[] = [
+  { id: 'mystery', name: 'Mystery boxes' },
+  { id: 'money', name: 'Money' },
+  { id: 'spawners', name: 'Spawners & items' },
+  { id: 'bundles', name: 'Bundles' },
+  { id: 'investments', name: 'Investments' },
+  { id: 'armor', name: 'Armor' },
+  { id: 'tools', name: 'Tools & weapons' },
+];
+
 export function SaleSection({ settings, onSave }: { settings: SiteSettings; onSave: SaveFn }) {
-  const value: SaleDraft = { enabled: settings.sale.enabled, percent: settings.sale.percent, label: settings.sale.label, endsAtLocal: isoToLocalInput(settings.sale.endsAt) };
+  const value: SaleDraft = { enabled: settings.sale.enabled, percent: settings.sale.percent, label: settings.sale.label, endsAtLocal: isoToLocalInput(settings.sale.endsAt), categoryIds: settings.sale.categoryIds ?? [] };
   return (
     <SectionCard<SaleDraft>
       id="sale"
-      title="Site-wide sale"
+      title="Timed sale"
       icon="percent"
-      sub="Applies to every product before coupons. Discounts are capped at 60% in total."
+      sub="Lowers the shown prices (old price crossed out) with a live countdown – ends automatically. Only discount from prices you really charged before."
       value={value}
-      toPatch={(d) => ({ sale: { enabled: d.enabled, percent: Math.max(0, Math.min(90, Math.round(d.percent ?? 0))), label: d.label.trim() || 'Sale', endsAt: localInputToIso(d.endsAtLocal) ?? '' } })}
+      toPatch={(d) => ({ sale: { enabled: d.enabled, percent: Math.max(0, Math.min(90, Math.round(d.percent ?? 0))), label: d.label.trim() || 'Sale', endsAt: localInputToIso(d.endsAtLocal) ?? '', categoryIds: d.categoryIds } })}
       validate={(d) => (d.enabled && !(d.percent && d.percent > 0) ? 'Set a percentage above 0 or disable the sale.' : null)}
       onSave={onSave}
     >
@@ -163,6 +174,20 @@ export function SaleSection({ settings, onSave }: { settings: SiteSettings; onSa
               <TextInput id="sa-end" type="datetime-local" value={d.endsAtLocal} onChange={(e) => set({ ...d, endsAtLocal: e.target.value })} />
             </Field>
           </div>
+          <Field label="Applies to" hint="Nothing ticked = every product.">
+            <div className="row wrap" style={{ gap: 14 }}>
+              {SALE_CATEGORIES.map((c) => (
+                <label key={c.id} className="row" style={{ gap: 6 }}>
+                  <input
+                    type="checkbox"
+                    checked={d.categoryIds.includes(c.id)}
+                    onChange={(e) => set({ ...d, categoryIds: e.target.checked ? [...d.categoryIds, c.id] : d.categoryIds.filter((x) => x !== c.id) })}
+                  />
+                  {c.name}
+                </label>
+              ))}
+            </div>
+          </Field>
         </div>
       )}
     </SectionCard>

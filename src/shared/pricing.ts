@@ -9,6 +9,40 @@ import type {
 
 export const MAX_TOTAL_DISCOUNT_PERCENT = 60;
 
+type SaleSettings = { enabled: boolean; percent: number; label?: string; endsAt?: string; categoryIds?: string[] };
+
+/** True while the sale is switched on, has a percentage and has not ended yet. */
+export function saleActive(sale: SaleSettings | undefined, now: Date = new Date()): boolean {
+  if (!sale?.enabled || !(sale.percent > 0)) return false;
+  if (sale.endsAt) {
+    const end = new Date(sale.endsAt).getTime();
+    if (Number.isFinite(end) && end <= now.getTime()) return false;
+  }
+  return true;
+}
+
+/**
+ * Bake a running sale into product prices (client display AND server quotes use this, so they always agree).
+ * The regular price becomes the strike-through price; bulk tiers are reduced by the same percentage.
+ */
+export function applySale(products: Product[], sale: SaleSettings | undefined, now: Date = new Date()): Product[] {
+  if (!sale || !saleActive(sale, now)) return products;
+  const pct = Math.min(90, Math.round(sale.percent));
+  const scope = sale.categoryIds?.length ? new Set(sale.categoryIds) : null;
+  const cut = (c: number) => Math.max(1, Math.round((c * (100 - pct)) / 100));
+  return products.map((p) => {
+    if (scope && !scope.has(p.categoryId)) return p;
+    return {
+      ...p,
+      priceCents: cut(p.priceCents),
+      compareAtCents: p.priceCents,
+      bulkPricing: p.bulkPricing?.map((t) => ({ ...t, priceCents: cut(t.priceCents) })),
+      salePercent: pct,
+      saleEndsAt: sale.endsAt || undefined,
+    };
+  });
+}
+
 /** Unit price for a product at a given quantity (bulk tiers applied). */
 export function unitPriceCents(product: Product, qty: number): { price: number; bulk: boolean } {
   let price = product.priceCents;
