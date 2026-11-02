@@ -45,12 +45,13 @@ export const products: Product[] = [
   // ───────────── SPAWNERS & ITEMS ─────────────
   P({
     id: 'skeleton-spawner', slug: 'skeleton-spawner', name: 'Skeleton Spawner', categoryId: 'spawners', kind: 'item',
-    priceCents: 43, stock: null, featured: true, tags: ['Fast', 'Popular'], image: '/img/products/skeleton-spawner.svg', sortOrder: 1,
+    priceCents: 89, stock: null, featured: true, tags: ['Fast', 'Popular'], image: '/img/products/skeleton-spawner.svg', sortOrder: 1,
     shortDesc: 'The classic "skelly" – bones, arrows and XP on autopilot.',
-    bulkPricing: [{ minQty: 25, priceCents: 42 }, { minQty: 50, priceCents: 40 }, { minQty: 100, priceCents: 38 }, { minQty: 250, priceCents: 36 }],
+    bulkPricing: [{ minQty: 25, priceCents: 84 }, { minQty: 50, priceCents: 79 }, { minQty: 100, priceCents: 74 }, { minQty: 250, priceCents: 69 }],
     maxQty: 2000,
   }),
-  P({ id: 'iron-golem-spawner', slug: 'iron-golem-spawner', name: 'Iron Golem Spawner', categoryId: 'spawners', kind: 'item', priceCents: 45, stock: null, tags: ['Fast'], image: '/img/products/iron-golem-spawner.svg', sortOrder: 2, shortDesc: 'Iron throughput you cannot farm by hand.', bulkPricing: [{ minQty: 25, priceCents: 43 }, { minQty: 100, priceCents: 40 }], maxQty: 2000 }),
+  P({ id: 'iron-golem-spawner', slug: 'iron-golem-spawner', name: 'Iron Golem Spawner', categoryId: 'spawners', kind: 'item', priceCents: 199, stock: null, tags: ['Fast'], image: '/img/products/iron-golem-spawner.svg', sortOrder: 2, shortDesc: 'Iron throughput you cannot farm by hand.', bulkPricing: [{ minQty: 25, priceCents: 189 }, { minQty: 100, priceCents: 174 }], maxQty: 2000 }),
+  P({ id: 'cow-spawner', slug: 'cow-spawner', name: 'Cow Spawner', categoryId: 'spawners', kind: 'item', priceCents: 499, stock: null, tags: ['New'], image: '/img/products/cow-spawner.svg', sortOrder: 3, shortDesc: 'Leather and food on autopilot – one of the most valuable spawners on the server.', bulkPricing: [{ minQty: 10, priceCents: 469 }, { minQty: 50, priceCents: 439 }], maxQty: 500 }),
   P({ id: 'zombie-spawner', slug: 'zombie-spawner', name: 'Zombie Spawner', categoryId: 'spawners', kind: 'item', priceCents: 39, stock: null, image: '/img/products/zombie-spawner.svg', sortOrder: 3, shortDesc: 'Cheap XP and rotten flesh for villager trades.', bulkPricing: [{ minQty: 50, priceCents: 36 }], maxQty: 2000 }),
   P({ id: 'creeper-spawner', slug: 'creeper-spawner', name: 'Creeper Spawner', categoryId: 'spawners', kind: 'item', priceCents: 69, stock: null, image: '/img/products/creeper-spawner.svg', sortOrder: 4, shortDesc: 'Gunpowder for rockets – pairs well with an Elytra.', bulkPricing: [{ minQty: 25, priceCents: 65 }], maxQty: 1000 }),
   P({ id: 'blaze-spawner', slug: 'blaze-spawner', name: 'Blaze Spawner', categoryId: 'spawners', kind: 'item', priceCents: 89, stock: null, tags: ['New'], image: '/img/products/blaze-spawner.svg', sortOrder: 5, shortDesc: 'Blaze rods, brewing and some of the best XP on the server.', bulkPricing: [{ minQty: 25, priceCents: 84 }], maxQty: 1000 }),
@@ -76,15 +77,16 @@ export const products: Product[] = [
   P({
     id: 'spawner-crate', slug: 'spawner-crate', name: 'Spawner Crate', categoryId: 'mystery', kind: 'box', priceCents: 299, stock: null, boxRolls: 1,
     tags: ['Spawners'], image: '/img/products/spawner-crate.svg', sortOrder: 2, maxQty: 50,
-    shortDesc: 'One spawner drop – up to a full stack of 32 skellies or a set of blazes.',
+    shortDesc: 'One spawner drop – zombies to iron golems, with a shot at a cow spawner or 10 skellies.',
     contents: [
-      { name: 'Skeleton Spawner', min: 2, max: 4, weight: 4500, rarity: 'common', productId: 'skeleton-spawner' },
-      { name: 'Zombie Spawner', min: 2, max: 5, weight: 2000, rarity: 'common', productId: 'zombie-spawner' },
-      { name: 'Iron Golem Spawner', min: 2, max: 4, weight: 1500, rarity: 'uncommon', productId: 'iron-golem-spawner' },
-      { name: 'Creeper Spawner', min: 1, max: 3, weight: 800, rarity: 'uncommon', productId: 'creeper-spawner' },
-      { name: 'Skeleton Spawner', min: 8, max: 12, weight: 700, rarity: 'rare', productId: 'skeleton-spawner' },
-      { name: 'Blaze Spawner', min: 2, max: 5, weight: 400, rarity: 'epic', productId: 'blaze-spawner' },
-      { name: 'Skeleton Spawner', min: 32, max: 32, weight: 100, rarity: 'legendary', productId: 'skeleton-spawner' },
+      { name: 'Zombie Spawner', min: 2, max: 4, weight: 3000, rarity: 'common', productId: 'zombie-spawner' },
+      { name: 'Skeleton Spawner', min: 1, max: 1, weight: 2500, rarity: 'common', productId: 'skeleton-spawner' },
+      { name: 'Creeper Spawner', min: 1, max: 2, weight: 1500, rarity: 'uncommon', productId: 'creeper-spawner' },
+      { name: 'Skeleton Spawner', min: 2, max: 2, weight: 1200, rarity: 'uncommon', productId: 'skeleton-spawner' },
+      { name: 'Iron Golem Spawner', min: 1, max: 1, weight: 800, rarity: 'rare', productId: 'iron-golem-spawner' },
+      { name: 'Blaze Spawner', min: 2, max: 3, weight: 500, rarity: 'rare', productId: 'blaze-spawner' },
+      { name: 'Cow Spawner', min: 1, max: 1, weight: 300, rarity: 'epic', productId: 'cow-spawner' },
+      { name: 'Skeleton Spawner', min: 10, max: 10, weight: 100, rarity: 'legendary', productId: 'skeleton-spawner' },
     ],
   }),
   P({
@@ -93,7 +95,7 @@ export const products: Product[] = [
     shortDesc: 'Two random drops – with a shot at netherite, a dragon head or an Elytra.',
     contents: [
       { name: 'Gilded Blackstone', min: 1, max: 1, weight: 1800, rarity: 'common' },
-      { name: 'Skeleton Spawner', min: 1, max: 3, weight: 1800, rarity: 'common', productId: 'skeleton-spawner' },
+      { name: 'Skeleton Spawner', min: 1, max: 1, weight: 1800, rarity: 'common', productId: 'skeleton-spawner' },
       { name: 'Nether Star', min: 3, max: 6, weight: 1600, rarity: 'common' },
       { name: 'Enchanted Golden Apple', min: 1, max: 3, weight: 1400, rarity: 'uncommon' },
       { name: 'Deepslate Emerald Ore', min: 1, max: 2, weight: 1200, rarity: 'common' },
@@ -140,7 +142,7 @@ export const products: Product[] = [
       { name: 'Gilded Blackstone', min: 2, max: 4, weight: 1600, rarity: 'common' },
       { name: 'Enchanted Golden Apple', min: 2, max: 5, weight: 1600, rarity: 'common' },
       { name: 'Deepslate Emerald Ore', min: 2, max: 4, weight: 1400, rarity: 'common' },
-      { name: 'Iron Golem Spawner', min: 3, max: 6, weight: 1400, rarity: 'uncommon', productId: 'iron-golem-spawner' },
+      { name: 'Iron Golem Spawner', min: 1, max: 2, weight: 1400, rarity: 'uncommon', productId: 'iron-golem-spawner' },
       { name: 'Heavy Core', min: 1, max: 1, weight: 1200, rarity: 'uncommon' },
       { name: 'Netherite Ingot', min: 1, max: 1, weight: 1000, rarity: 'rare' },
       { name: '100M Money', min: 1, max: 1, weight: 150, rarity: 'epic' },
@@ -184,10 +186,11 @@ export const products: Product[] = [
     contents: [
       { name: 'Mace', min: 1, max: 1, weight: 1600, rarity: 'uncommon' },
       { name: 'Netherite Armor Set (God)', min: 1, max: 1, weight: 1500, rarity: 'rare' },
-      { name: 'Iron Golem Spawner', min: 4, max: 8, weight: 1500, rarity: 'uncommon', productId: 'iron-golem-spawner' },
+      { name: 'Iron Golem Spawner', min: 2, max: 3, weight: 1500, rarity: 'uncommon', productId: 'iron-golem-spawner' },
       { name: 'Blaze Spawner', min: 3, max: 6, weight: 1400, rarity: 'rare', productId: 'blaze-spawner' },
       { name: 'Totem of Undying', min: 4, max: 8, weight: 1400, rarity: 'common' },
       { name: 'Netherite Ingot', min: 2, max: 3, weight: 900, rarity: 'rare' },
+      { name: 'Cow Spawner', min: 1, max: 1, weight: 500, rarity: 'epic', productId: 'cow-spawner' },
       { name: 'Netherite Block', min: 1, max: 1, weight: 300, rarity: 'epic' },
       { name: 'Dragon Head', min: 1, max: 1, weight: 200, rarity: 'epic' },
       { name: 'Elytra', min: 1, max: 1, weight: 350, rarity: 'legendary' },
@@ -247,17 +250,17 @@ export const products: Product[] = [
 
   // ───────────── BUNDLES ─────────────
   P({
-    id: 'starter-bundle', slug: 'starter-bundle', name: 'Starter Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 699, stock: null, tags: ['Best value'], image: '/img/products/starter-bundle.svg', sortOrder: 1, maxQty: 20,
+    id: 'starter-bundle', slug: 'starter-bundle', name: 'Starter Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 1349, stock: null, tags: ['Best value'], image: '/img/products/starter-bundle.svg', sortOrder: 1, maxQty: 20,
     shortDesc: '20M + 15 Skeleton Spawners + Diamond Armor Shulker.',
     bundleItems: [{ productId: 'money-1m', quantity: 20 }, { productId: 'skeleton-spawner', quantity: 15 }, { productId: 'diamond-armor-shulker', quantity: 1 }],
   }),
   P({
-    id: 'spawner-farm-bundle', slug: 'spawner-farm-bundle', name: 'Spawner Farm Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 2349, stock: null, tags: ['New'], image: '/img/products/spawner-farm-bundle.svg', sortOrder: 2, maxQty: 20,
+    id: 'spawner-farm-bundle', slug: 'spawner-farm-bundle', name: 'Spawner Farm Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 4599, stock: null, tags: ['New'], image: '/img/products/spawner-farm-bundle.svg', sortOrder: 2, maxQty: 20,
     shortDesc: '64 Skeleton Spawners + 10M to build the farm.',
     bundleItems: [{ productId: 'skeleton-spawner', quantity: 64 }, { productId: 'money-1m', quantity: 10 }],
   }),
   P({
-    id: 'pro-bundle', slug: 'pro-bundle', name: 'Pro Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 3399, stock: null, tags: ['Popular'], image: '/img/products/pro-bundle.svg', sortOrder: 3, maxQty: 20,
+    id: 'pro-bundle', slug: 'pro-bundle', name: 'Pro Bundle', categoryId: 'bundles', kind: 'bundle', priceCents: 4099, stock: null, tags: ['Popular'], image: '/img/products/pro-bundle.svg', sortOrder: 3, maxQty: 20,
     shortDesc: '50M + 16 Skeleton Spawners + Elytra.',
     bundleItems: [{ productId: 'money-1m', quantity: 50 }, { productId: 'skeleton-spawner', quantity: 16 }, { productId: 'elytra', quantity: 1 }],
   }),

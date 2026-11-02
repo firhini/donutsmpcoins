@@ -53,13 +53,13 @@ export const landingCopy: LandingCopy[] = [
         heading: 'How a DonutSMP mystery box is rolled',
         paragraphs: [
           'Each line in a box\'s drop table has a weight. On a single roll, the chance of a line is its weight divided by the total weight of the pool – that is the percentage you see under **What\'s inside?** on every box page. Boxes with more than one drop draw without repeats, so a two-drop box always contains two different lines.',
-          'The quantity within a line (for example 1–3 skeleton spawners) is rolled within the stated range. Nothing is re-rolled; the server records the result on your order the moment it is created.',
+          'The quantity within a line (for example 2–4 zombie spawners) is rolled within the stated range. Nothing is re-rolled; the server records the result on your order the moment it is created.',
         ],
       },
       {
         heading: 'All nine boxes at a glance',
         paragraphs: [
-          '[Coin Crate](/product/coin-crate) – $1.99, one money drop from 10M to 250M. [Mega Coin Crate](/product/mega-coin-crate) – $9.99, one money drop from 60M to 1B. [Spawner Crate](/product/spawner-crate) – $2.99, one spawner drop, up to a full stack of 32 skellies or blazes.',
+          '[Coin Crate](/product/coin-crate) – $1.99, one money drop from 10M to 250M. [Mega Coin Crate](/product/mega-coin-crate) – $9.99, one money drop from 60M to 1B. [Spawner Crate](/product/spawner-crate) – $2.99, one spawner drop, with a cow spawner or 10 skellies as the jackpots.',
           '[Netherite Crate](/product/netherite-crate) – $5.99, one netherite drop up to a netherite block. [Elytra Crate](/product/elytra-crate) – $7.99, one drop with about a 1 in 12 Elytra chance. [Mystery Box](/product/mystery-box) – $3.99, two drops from an eleven-line pool.',
           '[Elite Mystery Box](/product/elite-mystery-box) – $8.99, two drops with bigger stacks and 100M in the pool. [God Mystery Box](/product/god-mystery-box) – $19.99, three drops from a stronger pool with 250M in it. [Legendary Crate](/product/legendary-crate) – $34.99, three drops from our best pool with the highest jackpot odds.',
         ],
@@ -131,7 +131,7 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Other routes: bundles and boxes',
         paragraphs: [
-          'If you want more than the Elytra, three bundles include one in a single order and handover. The [Pro Bundle](/product/pro-bundle) ($33.99) adds 50M money and 16 skeleton spawners, the [Rich Bundle](/product/rich-bundle) ($59.99) comes with 250M, a God Mystery Box and the full PvP Kit, and the [Basehunter Bundle](/product/basehunter-bundle) ($33.99) pairs an Elytra with the Amethyst Pickaxe, 16 totems and 20M. Bundles are about convenience rather than savings – at current prices the single items add up to about the same or less, so compare before you buy.',
+          'If you want more than the Elytra, three bundles include one in a single order and handover. The [Pro Bundle](/product/pro-bundle) ($40.99) adds 50M money and 16 skeleton spawners, the [Rich Bundle](/product/rich-bundle) ($59.99) comes with 250M, a God Mystery Box and the full PvP Kit, and the [Basehunter Bundle](/product/basehunter-bundle) ($33.99) pairs an Elytra with the Amethyst Pickaxe, 16 totems and 20M. At current prices each costs less than its parts bought separately – about $4.24 less for the Pro Bundle, $6.98 for the Rich Bundle and $3.81 for the Basehunter Bundle.',
           'Random boxes are the gamble: the [Elite Mystery Box](/product/elite-mystery-box) ($8.99) contains an Elytra in roughly 1 in 95 boxes, the [Elytra Crate](/product/elytra-crate) ($7.99) in about 1 in 12 and the [Legendary Crate](/product/legendary-crate) ($34.99) in about 1 in 8. For the Elytra itself, buying it outright at $28.49 is always the safe choice.',
         ],
       },
@@ -169,31 +169,32 @@ export const landingCopy: LandingCopy[] = [
   // ─────────────────────────────────────────────────────────────
   {
     slug: 'donutsmp-skeleton-spawner',
-    title: 'DonutSMP Skeleton Spawner Price: $0.36–$0.43 and What a Farm Needs',
-    seoTitle: 'DonutSMP Skeleton Spawner Price – from $0.36 | DonutCoins',
+    title: 'DonutSMP Skeleton Spawner Price: $0.69–$0.89 and What a Farm Needs',
+    seoTitle: 'DonutSMP Skeleton Spawner Price – from $0.69 | DonutCoins',
     metaDescription:
-      'Skeleton spawners for DonutSMP at $0.43 each, $0.36 at 250+. Every bulk tier, how many spawners a farm needs, what they produce and how delivery works.',
+      'Skeleton spawners for DonutSMP at $0.89 each, $0.69 at 250+ – in line with their ~18M in-game value. Every bulk tier, farm sizing and how delivery works.',
     intro:
-      'The skeleton spawner – "skelly" to anyone who has played DonutSMP for a week – is the item most players buy first and buy most of. This page gives the current prices with every bulk tier, explains why skeleton farms are the server\'s default income, helps you work out how many spawners you actually need, and describes how a hundred spawners are handed over in-game by our staff.',
+      'The skeleton spawner – "skelly" to anyone who has played DonutSMP for a week – is the item most players buy first and buy most of. This page gives the current prices with every bulk tier, explains why they match the in-game value, why skeleton farms are the server\'s default income, helps you work out how many spawners you actually need, and describes how a hundred spawners are handed over in-game by our staff.',
     sections: [
       {
         heading: 'Current skeleton spawner prices',
         paragraphs: [
-          'A [skeleton spawner](/product/skeleton-spawner) is **$0.43** at DonutCoins. Bulk tiers apply automatically per line: $0.42 each from 25 spawners, $0.40 from 50, $0.38 from 100 and $0.36 from 250, up to 2,000 per line. The tier price applies to every spawner in the line, so 100 spawners cost $38.00, not a blend of rates.',
-          'On top of the tiers, the cart-wide spending discount takes 5% off orders over $15, 8% over $40 and 12% over $100. A 64-spawner order is $25.60 at the 50+ tier and $24.32 after the 5% discount; 250 spawners are $90.00 and $82.80 after 8%.',
+          'A [skeleton spawner](/product/skeleton-spawner) is **$0.89** at DonutCoins. Bulk tiers apply automatically per line: $0.84 each from 25 spawners, $0.79 from 50, $0.74 from 100 and $0.69 from 250, up to 2,000 per line. The tier price applies to every spawner in the line, so 100 spawners cost $74.00, not a blend of rates – and 50 spawners ($39.50) cost less than 45 ($40.05).',
+          'On top of the tiers, the cart-wide spending discount takes 5% off orders over $15, 8% over $40 and 12% over $100. A 64-spawner order is $50.56 at the 50+ tier, so the 8% discount applies; 250 spawners are $172.50 and get 12% off.',
+          'Why $0.89? Our spawner prices follow the in-game coin value. A skelly trades for about 18M coins on DonutSMP, and 18M money costs about the same at our $0.05 base rate, so buying the spawner and buying the coins to pay a player come out roughly even – the difference is that ours are in stock and handed over by staff. The same logic prices [iron golem spawners](/product/iron-golem-spawner) at $1.99 (about 41M coins) and [cow spawners](/product/cow-spawner) at $4.99 (around 100M).',
         ],
       },
       {
         heading: 'Why skeleton spawners are the DonutSMP default',
         paragraphs: [
           'Skeletons need nothing but darkness. They drop bones, arrows and the occasional bow; bones and arrows sell to the server shop in bulk, and the XP keeps Mending gear repaired. A skeleton farm is also the easiest spawner room to build: a dark box, water streams pushing mobs into a kill chamber, hoppers into chests.',
-          'Because nearly every established player runs one, skeleton spawners are the most liquid item on the auction house – there is always a buyer when you want to sell spawners back, and the price is predictable. [Iron golem spawners](/product/iron-golem-spawner) ($0.45) earn more when iron sells well and [blaze spawners](/product/blaze-spawner) ($0.89) give better XP, but the skelly is the safe default.',
+          'Because nearly every established player runs one, skeleton spawners are the most liquid item on the auction house – there is always a buyer when you want to sell spawners back, and the price is predictable. [Iron golem spawners](/product/iron-golem-spawner) ($1.99) earn more when iron sells well and [blaze spawners](/product/blaze-spawner) ($0.89) give better XP, but the skelly is the safe default.',
         ],
       },
       {
         heading: 'How many spawners do you need?',
         paragraphs: [
-          'A handful of spawners is a hobby; a room full of them is an income. Most players start at 15–25 spawners, which fits one compact room and pays for its own expansion within a week or two of normal play. 64 spawners – one stack, the Spawner Farm Bundle size – is the classic serious farm. Above 100, the limit is usually the kill chamber and hopper throughput, not the spawner count.',
+          'A handful of spawners is a hobby; a room full of them is an income. Most players start at 15–25 spawners, which fits one compact room and leaves space to expand as the farm earns. 64 spawners – one stack, the Spawner Farm Bundle size – is the classic serious farm. Above 100, the limit is usually the kill chamber and hopper throughput, not the spawner count.',
           'Server shop sell prices change between seasons, so we will not quote a per-hour income here. Run a single spawner for a day, sell what it produces, and multiply – that number tells you whether the next tier is worth it faster than any guide.',
         ],
       },
@@ -207,14 +208,14 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Alternatives: crates and bundles',
         paragraphs: [
-          'The [Spawner Crate](/product/spawner-crate) ($2.99) gives one spawner drop – mostly small stacks, with a rare full stack of 32 skeleton spawners. The [Starter Bundle](/product/starter-bundle) ($6.99) packs 15 skeleton spawners with 20M and a Diamond Armor Shulker, and the [Spawner Farm Bundle](/product/spawner-farm-bundle) ($23.49) is 64 skeleton spawners plus 10M in one order. For odd quantities or more than 2,000 spawners, message us on Discord for a quote.',
+          'The [Spawner Crate](/product/spawner-crate) ($2.99) gives one spawner drop – mostly zombies or a single skelly, with a cow spawner in about one crate in 33 and 10 skeleton spawners in roughly one in a hundred. The [Starter Bundle](/product/starter-bundle) ($13.49) packs 15 skeleton spawners with 20M and a Diamond Armor Shulker, and the [Spawner Farm Bundle](/product/spawner-farm-bundle) ($45.99) is 64 skeleton spawners plus 10M in one order – about $5.07 less than the parts. For odd quantities or more than 2,000 spawners, message us on Discord for a quote.',
         ],
       },
     ],
     faq: [
       {
         q: 'How much do 64 skeleton spawners cost?',
-        a: '$25.60 at the 50+ tier of $0.40 each, or $24.32 after the automatic 5% discount for carts over $15. The Spawner Farm Bundle offers the same 64 spawners with 10M money for $23.49.',
+        a: '$50.56 at the 50+ tier of $0.79 each – and since that is over $40, the automatic 8% spending discount comes off on top. The Spawner Farm Bundle offers the same 64 spawners with 10M money for $45.99.',
       },
       {
         q: 'Can I move skeleton spawners after placing them?',
@@ -229,7 +230,7 @@ export const landingCopy: LandingCopy[] = [
         a: '2,000 skeleton spawners per line through the store. For more, or for a mixed spawner package, message us on Discord and we will quote a price.',
       },
     ],
-    productIds: ['skeleton-spawner', 'spawner-crate', 'spawner-farm-bundle', 'starter-bundle', 'iron-golem-spawner', 'blaze-spawner'],
+    productIds: ['skeleton-spawner', 'spawner-crate', 'spawner-farm-bundle', 'starter-bundle', 'iron-golem-spawner', 'cow-spawner', 'blaze-spawner'],
   },
 
   // ─────────────────────────────────────────────────────────────

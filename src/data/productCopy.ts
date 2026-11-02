@@ -88,21 +88,21 @@ export const productCopy: Record<string, ProductCopy> = {
   'money-25m': {
     seoTitle: 'Buy 25M DonutSMP Money – $1.19 | DonutCoins',
     metaDescription:
-      '25M DonutSMP money for $1.19 – under $0.048 per million, about 5% below the base rate. Enough for a first spawner farm. Delivered by /pay within minutes.',
+      '25M DonutSMP money for $1.19 – under $0.048 per million, about 5% below the base rate. Enough for a first skelly plus the build. Delivered by /pay.',
     description:
       'Twenty-five million DonutSMP money for $1.19 comes to just under $0.048 per 1M. Buying the same amount at the $0.05 base rate would be $1.25, so the pack saves you about 5% without needing to reach a bulk tier.\n\n' +
-      '25M is the amount most players spend setting up their first real income: a row of skeleton spawners, hoppers and chests, plus a cushion for claims. It is also a common ask in player trades, which makes it a convenient pack to have ready.\n\n' +
+      '25M is the amount many players spend setting up their first real income: one skeleton spawner – a skelly trades for about 18M coins on DonutSMP – plus the hoppers, chests and claim blocks to build around it. It is also a common ask in player trades, which makes it a convenient pack to have ready.\n\n' +
       'Staff deliver by hand with /pay to the username on your order, typically within 5–30 minutes while we are online. There is nothing to pick up – the balance update and the server\'s chat confirmation are your receipt, and the order page shows the delivered status.',
     bullets: [
       '25,000,000 DonutSMP money for $1.19',
       'Under $0.048 per 1M – about 5% below base rate',
-      'Enough to fund a first spawner farm',
+      'Covers a first skeleton spawner plus the build',
       'Hand-delivered with /pay, no teleport needed',
     ],
     faq: [
       {
         q: 'Is 25M enough to start a spawner farm on DonutSMP?',
-        a: 'For a modest one, yes. Player prices for spawners vary, but 25M usually covers a handful of skeleton spawners plus hoppers and chests. If you want the spawners themselves, our Skeleton Spawner listing starts at $0.43 each.',
+        a: 'For a first one, yes. A skeleton spawner trades for about 18M coins in-game, so 25M covers one skelly plus hoppers and chests. If you want the spawners themselves, our Skeleton Spawner listing is $0.89 each, priced at that same in-game value.',
       },
       {
         q: 'Do I need to be online to receive 25M?',
@@ -117,7 +117,7 @@ export const productCopy: Record<string, ProductCopy> = {
       '50M DonutSMP money for $2.39 – under $0.048 per million, below the $0.05 base rate. Our most popular pack, paid to your balance with /pay within minutes.',
     description:
       'The 50M Money Pack is the sweet spot for most DonutSMP players: $2.39 for fifty million, which is just under $0.048 per 1M. On the pick-your-amount listing the same 50M costs $2.50 at the $0.05 base rate, so this pack is the cheapest way to get exactly 50M.\n\n' +
-      'Fifty million is enough to go from fresh spawn to a working base: spawners, a claim, an elytra from a player shop and change left over for armor. It is the amount we recommend to anyone who wants a real head start rather than a top-up.\n\n' +
+      'Fifty million is enough to go from fresh spawn to a working base: two skeleton spawners at their in-game value of about 18M each, a claim and change left over for armor. It is the amount we recommend to anyone who wants a real head start rather than a top-up.\n\n' +
       'Like every money order, it is delivered manually by our staff with /pay to the username you enter at checkout, usually within 5–30 minutes while we are online. The order page updates to delivered as soon as the payment has gone through in-game.',
     bullets: [
       '50,000,000 DonutSMP money for $2.39',
@@ -147,7 +147,7 @@ export const productCopy: Record<string, ProductCopy> = {
       '100M DonutSMP money for $3.79 – under $0.038 per million, 24% below the base rate. Hand-delivered to your balance with /pay by staff, usually within minutes.',
     description:
       'One hundred million DonutSMP money for $3.79 works out to just under $0.038 per 1M – 24% less than the $0.05 base rate, where 100M would be $5.00. It also beats the 100M bulk tier of the flexible listing ($0.04 per 1M, or $4.00), so if you want a round hundred, this is the pack to pick.\n\n' +
-      '100M changes how you play. It covers a full spawner farm with room to expand, a maxed netherite set from a player shop and a comfortable reserve for claims and trades, and it puts you on the /baltop radar without weeks of grinding.',
+      '100M changes how you play. At in-game values it buys about five skeleton spawners, two iron golem spawners or one cow spawner (worth around 100M coins on its own), and it puts you on the /baltop radar without weeks of grinding.',
     bullets: [
       '100,000,000 DonutSMP money for $3.79',
       'Under $0.038 per 1M – 24% below the base rate',
@@ -263,15 +263,16 @@ export const productCopy: Record<string, ProductCopy> = {
 
   // ───────────── SPAWNERS & ITEMS ─────────────
   'skeleton-spawner': {
-    seoTitle: 'DonutSMP Skeleton Spawner – $0.43 each | DonutCoins',
+    seoTitle: 'DonutSMP Skeleton Spawner – $0.89 each | DonutCoins',
     metaDescription:
-      'Buy DonutSMP skeleton spawners for $0.43 each, down to $0.36 at 250+. Bones, arrows and XP on autopilot. Handed over in-game by staff within minutes.',
+      'Buy DonutSMP skeleton spawners for $0.89 each, down to $0.69 at 250+ – priced at the ~18M in-game value of a skelly. Handed over in-game by staff.',
     description:
-      'The skeleton spawner – the \'skelly\' – is the backbone of the DonutSMP economy. Skeletons drop bones and arrows that sell for steady money, and a stacked spawner room is one of the best XP sources on the server. Our skeleton spawner price starts at $0.43 each and drops with quantity: $0.42 from 25, $0.40 from 50, $0.38 from 100 and $0.36 from 250, up to 2,000 per line.\n\n' +
-      'Players buy skellies to build or expand a farm without spending days hunting for naturally generated spawners or overpaying in /ah. A row of 64 is a common starting goal; serious farms run several hundred.\n\n' +
+      'The skeleton spawner – the \'skelly\' – is the backbone of the DonutSMP economy. Skeletons drop bones and arrows that sell for steady money, and a stacked spawner room is one of the best XP sources on the server. Our skeleton spawner price starts at $0.89 each and drops with quantity: $0.84 from 25, $0.79 from 50, $0.74 from 100 and $0.69 from 250, up to 2,000 per line.\n\n' +
+      'The price follows the in-game value: a skelly trades for about 18M coins on DonutSMP, so one spawner here costs about the same as 18M money at our $0.05 base rate. What you skip is the search – no hunting for naturally generated spawners and no waiting for an /ah seller with enough stock. A row of 64 is a common starting goal; serious farms run several hundred.\n\n' +
       'Spawners are physical items, so delivery happens in-game: join DonutSMP with the username on your order, accept the teleport from our delivery account and pick up the drop – bigger orders come packed in shulker boxes. Staff usually hand over within 5–30 minutes while online.',
     bullets: [
-      '$0.43 each, down to $0.36 at 250+',
+      '$0.89 each, down to $0.69 at 250+',
+      'Priced at the in-game value – about 18M coins',
       'Up to 2,000 spawners per line',
       'Bones, arrows and XP that sell for steady money',
       'Handed over in-game, shulkered for big orders',
@@ -279,7 +280,11 @@ export const productCopy: Record<string, ProductCopy> = {
     faq: [
       {
         q: 'What is the DonutSMP skeleton spawner price right now?',
-        a: '$0.43 each at single quantity. Bulk tiers apply automatically: 25+ at $0.42, 50+ at $0.40, 100+ at $0.38 and 250+ at $0.36 per spawner. A full stack of 64 costs $25.60.',
+        a: '$0.89 each at single quantity. Bulk tiers apply automatically: 25+ at $0.84, 50+ at $0.79, 100+ at $0.74 and 250+ at $0.69 per spawner. A full stack of 64 costs $50.56.',
+      },
+      {
+        q: 'Why is a skeleton spawner priced like 18M money?',
+        a: 'Because that is what it is worth on the server. Our spawner prices follow in-game coin values – a skelly trades for about 18M coins, an iron golem spawner for about 41M and a cow spawner for around 100M – so buying the spawner costs about the same as buying the money and finding a seller yourself.',
       },
       {
         q: 'How are spawners delivered?',
@@ -287,20 +292,21 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'Do you sell a spawner-only bundle?',
-        a: 'Yes – the Spawner Farm Bundle has 64 skeleton spawners plus 10M for $23.49, and the Spawner Crate rolls two random spawner drops for $2.99.',
+        a: 'Yes – the Spawner Farm Bundle has 64 skeleton spawners plus 10M for $45.99, and the Spawner Crate rolls one random spawner drop for $2.99.',
       },
     ],
   },
 
   'iron-golem-spawner': {
-    seoTitle: 'DonutSMP Iron Golem Spawner – $0.45 | DonutCoins',
+    seoTitle: 'DonutSMP Iron Golem Spawner – $1.99 | DonutCoins',
     metaDescription:
-      'Iron golem spawners for DonutSMP at $0.45 each – $0.43 from 25, $0.40 from 100. Iron ingots and poppies on autopilot, delivered in-game by our staff.',
+      'Iron golem spawners for DonutSMP at $1.99 each – $1.89 from 25, $1.74 from 100 – in line with their ~41M in-game value. Delivered in-game by our staff.',
     description:
-      'Iron golem spawners turn a dark room into an iron factory. Each golem drops iron ingots and poppies, and because iron sells reliably and is used for everything from hoppers to anvils, a golem farm is one of the most dependable earners on DonutSMP. Price: $0.45 each, $0.43 from 25 and $0.40 from 100, up to 2,000 per line.\n\n' +
-      'Many players run golems next to their skeleton farm so the money keeps coming while they are off hunting bases. Golems are tough, so the kill area needs to be built right – but once it is, the output is hard to match with any manual method.',
+      'Iron golem spawners turn a dark room into an iron factory. Each golem drops iron ingots and poppies, and because iron sells reliably and is used for everything from hoppers to anvils, a golem farm is one of the most dependable earners on DonutSMP. Price: $1.99 each, $1.89 from 25 and $1.74 from 100, up to 2,000 per line.\n\n' +
+      'The price follows the in-game market: an iron golem spawner trades for about 41M coins on DonutSMP, and $1.99 is slightly less than 41M money costs at our $0.05 base rate. Many players run golems next to their skeleton farm so the money keeps coming while they are off hunting bases. Golems are tough, so the kill area needs to be built right – but once it is, the output is hard to match with any manual method.',
     bullets: [
-      '$0.45 each, $0.40 at 100+',
+      '$1.99 each, $1.74 at 100+',
+      'Priced at the in-game value – about 41M coins',
       'Iron ingots and poppies that always sell',
       'Pairs well with a skeleton farm',
       'Delivered in-game by staff, shulkered for bulk',
@@ -308,11 +314,42 @@ export const productCopy: Record<string, ProductCopy> = {
     faq: [
       {
         q: 'Iron golem or skeleton spawner – which earns more?',
-        a: 'Skeletons are cheaper and give XP; golems produce iron, which holds its sell value well. Most players run both. If you are starting out, grab skellies first and add golems once your farm is set up.',
+        a: 'Skeletons cost less – $0.89 against $1.99, matching in-game values of about 18M and 41M coins – and give XP; golems produce iron, which holds its sell value well. Most players run both. If you are starting out, grab skellies first and add golems once your farm is set up.',
       },
       {
         q: 'How many golem spawners do I need for a real farm?',
-        a: 'Even 8–16 produce a noticeable stream of iron. The bulk tier at 25 brings the price to $0.43, and 100 or more cost $0.40 each.',
+        a: 'Even 8–16 produce a noticeable stream of iron. The bulk tier at 25 brings the price to $1.89, and 100 or more cost $1.74 each.',
+      },
+    ],
+  },
+
+  'cow-spawner': {
+    seoTitle: 'DonutSMP Cow Spawner – $4.99 each | DonutCoins',
+    metaDescription:
+      'Cow spawners for DonutSMP at $4.99 each, $4.69 from 10 and $4.39 from 50 – priced at their ~100M in-game value. Leather and beef, handed over in-game.',
+    description:
+      'The cow spawner is one of the most valuable spawners on DonutSMP. Cows drop leather and raw beef – leather for books, bookshelves and item frames, beef as a food supply that never runs out – and a stacked cow room keeps both coming while you are busy elsewhere. Price: $4.99 each, $4.69 from 10 and $4.39 from 50, up to 500 per line.\n\n' +
+      'Like our other spawners, the price follows the in-game value: a cow spawner trades for around 100M coins on DonutSMP, and $4.99 is what 100M costs at our $0.05 base rate. Cows are passive mobs, so the spawn area is built like a lit animal pen rather than the dark box a skelly farm uses – plan the kill and collection system before you place them.\n\n' +
+      'Spawners are handed over in-game by our staff: be online on DonutSMP with the username from your order, accept the teleport request and pick up the items. Larger quantities arrive in shulker boxes. Usually within 5–30 minutes while we are online.',
+    bullets: [
+      '$4.99 each, $4.39 at 50+',
+      'Priced at the in-game value – around 100M coins',
+      'Leather and beef on autopilot',
+      'Up to 500 per line',
+      'Handed over in-game by real staff',
+    ],
+    faq: [
+      {
+        q: 'Why does a cow spawner cost more than a skelly?',
+        a: 'Because it is worth more in-game. Our spawner prices follow DonutSMP coin values: a cow spawner trades for around 100M coins, an iron golem spawner for about 41M and a skeleton spawner for about 18M – which is why they are $4.99, $1.99 and $0.89 here.',
+      },
+      {
+        q: 'Can I get a cow spawner from a crate?',
+        a: 'Yes – it is the epic line of the Spawner Crate ($2.99, about one crate in 33) and one of the eleven lines in the Legendary Crate ($34.99, about one crate in six). Those are gambles; buying it here is the sure thing.',
+      },
+      {
+        q: 'How are cow spawners delivered?',
+        a: 'By hand, in-game. Join DonutSMP with the username on your order, accept the teleport from our staff account and collect the spawners. Keep inventory space free – bigger orders come in shulker boxes.',
       },
     ],
   },
@@ -386,7 +423,7 @@ export const productCopy: Record<string, ProductCopy> = {
     faq: [
       {
         q: 'Are blaze spawners worth it over skeletons?',
-        a: 'For XP, yes – blazes give far more per kill. For money, skeletons are cheaper and their drops sell more steadily. If enchanting is your goal, blazes are the better buy.',
+        a: 'For XP, yes – blazes give far more per kill. For money, skeletons are the steadier pick – same $0.89 price, and their drops sell more reliably. If enchanting is your goal, blazes are the better buy.',
       },
       {
         q: 'Do blaze spawners work outside the Nether?',
@@ -494,13 +531,13 @@ export const productCopy: Record<string, ProductCopy> = {
   'spawner-crate': {
     seoTitle: 'DonutSMP Spawner Crate – $2.99, 1 Spawner Drop | DonutCoins',
     metaDescription:
-      'Spawner Crate: $2.99 for one DonutSMP spawner drop – skeleton, zombie, iron golem, creeper or blaze spawners, with a rare full stack of 32 skellies.',
+      'Spawner Crate: $2.99 for one DonutSMP spawner drop – zombie, skeleton, creeper, iron golem or blaze, with a rare cow spawner or 10 skellies on top.',
     description:
-      'The Spawner Crate is a DonutSMP mystery box filled only with spawners. Each crate gives you one drop from a seven-line table: small stacks of skeleton, zombie or iron golem spawners are the common results, creepers and a bigger skeleton stack are the uncommon ones, and blaze spawners or a full 32-stack of skeleton spawners are the jackpots.\n\n' +
+      'The Spawner Crate is a DonutSMP mystery box filled only with spawners. Each crate gives you one drop from an eight-line table: 2–4 zombie spawners or a single skeleton spawner are the common results, 1–2 creepers or a pair of skellies the uncommon ones, and an iron golem spawner (about one crate in 12) or 2–3 blaze spawners (about one in 20) the rare pulls. The jackpots are a cow spawner in about one crate in 33 and a stack of 10 skeleton spawners in roughly one in a hundred.\n\n' +
       'If you need an exact number of one spawner type, buying it directly is cheaper – the crate is for the fun of the roll. The drop is rolled on our server when you order and listed on your order page after payment. Staff then hand the spawners over in-game: join DonutSMP with your order username, accept the teleport and collect them, usually within 5–30 minutes while we are online.',
-    bullets: ['One spawner drop per crate', 'Skeleton, zombie, iron golem and creeper spawners', 'Jackpots: blaze spawners or 32 skellies', 'Odds public, rolled at order time'],
+    bullets: ['One spawner drop per crate', 'Zombie, skeleton, creeper, iron golem and blaze spawners', 'Jackpots: a cow spawner or 10 skellies', 'Odds public, rolled at order time'],
     faq: [
-      { q: 'How many spawners will I get?', a: 'One rolled line with its own quantity range – from 2 skeleton spawners up to a full stack of 32. The ranges and chances are listed under \'What\'s inside?\'.' },
+      { q: 'How many spawners will I get?', a: 'One rolled line with its own quantity – from a single skeleton spawner up to a stack of 10 skellies, or one cow spawner. The ranges and chances are listed under \'What\'s inside?\'.' },
       { q: 'How are the spawners delivered?', a: 'In-game, by hand. Be online on DonutSMP with the username on your order, accept the teleport from our staff account and pick up the spawners.' },
     ],
   },
@@ -510,11 +547,11 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'DonutSMP Mystery Box: $3.99 for two random drops – spawners, golden apples, totems, with a rare shot at netherite, dragon heads, 25M or an elytra.',
     description:
-      'Our classic DonutSMP mystery box gives you two different drops from an eleven-line pool. Gilded blackstone, skeleton spawners, nether stars, enchanted golden apples, deepslate emerald ore and totems are the common pulls; a netherite ingot or 25M money show up in about one box in twenty, and a netherite block, a dragon head or an Elytra are the rare jackpots.\n\n' +
+      'Our classic DonutSMP mystery box gives you two different drops from an eleven-line pool. Gilded blackstone, a skeleton spawner, nether stars, enchanted golden apples, deepslate emerald ore and totems are the common pulls; a netherite ingot or 25M money show up in about one box in twenty, and a netherite block, a dragon head or an Elytra are the rare jackpots.\n\n' +
       'Most boxes are two useful commons – it is the cheapest way to try your luck at the big lines. Every drop is rolled server-side when you place the order and listed on your order page after payment, so what you see there is exactly what you get. Staff hand the items over in-game after payment, usually within 5–30 minutes while we are online.',
     bullets: ['Two different drops per box', 'Spawners, golden apples, totems and more', 'Rare shot at netherite, a dragon head, 25M or an elytra', 'Rolled on order, shown before delivery'],
     faq: [
-      { q: 'What can I get from the Mystery Box?', a: 'Two of eleven lines: gilded blackstone, skeleton spawners, nether stars, golden apples, emerald ore, totems, a netherite ingot or block, a dragon head, 25M money or an elytra. The full odds are under \'What\'s inside?\'.' },
+      { q: 'What can I get from the Mystery Box?', a: 'Two of eleven lines: gilded blackstone, a skeleton spawner, nether stars, golden apples, emerald ore, totems, a netherite ingot or block, a dragon head, 25M money or an elytra. The full odds are under \'What\'s inside?\'.' },
       { q: 'Can I get the same item twice in one box?', a: 'No. The two drops are drawn without repeats, so each box contains two different lines.' },
       { q: 'How is a mystery box delivered?', a: 'Items are handed over in-game by staff after payment; a money line is sent with /pay. Join DonutSMP with your order username and accept the teleport.' },
     ],
@@ -595,9 +632,9 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'Legendary Crate: $34.99 for three drops from our best DonutSMP pool – maces, god armor, spawners, the top elytra odds in the shop and a 500M jackpot.',
     description:
-      'The Legendary Crate is our biggest DonutSMP mystery box. Every crate rolls three different lines from a ten-line pool: maces, god netherite armor sets, iron golem and blaze spawners, totems and netherite ingots are the usual drops.\n\n' +
-      'It also has the best jackpot odds in the shop: a netherite block in about one crate in nine, a dragon head in about one in thirteen, an Elytra in about one in eight and 500M money in about one in twenty-two. Rolls happen server-side when you order and the full list appears on your order page. After payment, staff hand the items over in-game and pay money lines with /pay, usually within 5–30 minutes while we are online.',
-    bullets: ['Three different drops per crate', 'Highest elytra odds in the shop, 500M jackpot', 'Maces, god armor and spawners in the pool', 'Max 10 per order'],
+      'The Legendary Crate is our biggest DonutSMP mystery box. Every crate rolls three different lines from an eleven-line pool: maces, god netherite armor sets, iron golem and blaze spawners, totems and netherite ingots are the usual drops, and a cow spawner turns up in about one crate in six.\n\n' +
+      'It also has the best jackpot odds in the shop: a netherite block in about one crate in ten, a dragon head in about one in fourteen, an Elytra in about one in eight and 500M money in about one in twenty-three. Rolls happen server-side when you order and the full list appears on your order page. After payment, staff hand the items over in-game and pay money lines with /pay, usually within 5–30 minutes while we are online.',
+    bullets: ['Three different drops per crate', 'Highest elytra odds in the shop, 500M jackpot', 'Maces, god armor and spawners, including a cow spawner', 'Max 10 per order'],
     faq: [
       { q: 'Is anything guaranteed in the Legendary Crate?', a: 'Three different drops from the top pool, every time. Which three is random – the chance of each line is listed under \'What\'s inside?\'.' },
       { q: 'How is the crate delivered?', a: 'Items in-game by our staff (teleport, drop, collect), money by /pay to the username on your order, everything listed on the order page first.' },
@@ -1338,12 +1375,12 @@ export const productCopy: Record<string, ProductCopy> = {
 
   // ───────────── BUNDLES ─────────────
   'starter-bundle': {
-    seoTitle: 'DonutSMP Starter Bundle – $6.99 | DonutCoins',
+    seoTitle: 'DonutSMP Starter Bundle – $13.49 | DonutCoins',
     metaDescription:
-      'DonutSMP Starter Bundle for $6.99: 20M money, 15 skeleton spawners and six diamond armor sets in one order. Money by /pay, items in-game.',
+      'DonutSMP Starter Bundle for $13.49: 20M money, 15 skeleton spawners and six diamond armor sets in one order. Money by /pay, items in-game.',
     description:
-      'The Starter Bundle is the fastest way to go from fresh spawn to self-sufficient on DonutSMP: 20M money, 15 Skeleton Spawners and a Diamond Armor Shulker (six full Protection IV sets) for $6.99 – about $7.94 as separate lines – one order, one checkout and one handover instead of three separate lines.\n\n' +
-      'The idea is simple. The spawners become your first farm and income, the money covers a claim, hoppers and chests to build it, and the armor keeps you alive while you set up. Fifteen skellies is enough to produce real bones-and-arrows money from day one, and the 20M gives you room to buy more from players as you grow.',
+      'The Starter Bundle is the fastest way to go from fresh spawn to self-sufficient on DonutSMP: 20M money, 15 Skeleton Spawners and a Diamond Armor Shulker (six full Protection IV sets) for $13.49 – about $14.84 as separate lines – one order, one checkout and one handover instead of three separate lines.\n\n' +
+      'The idea is simple. The spawners become your first farm and income, the money covers a claim, hoppers and chests to build it, and the armor keeps you alive while you set up. Fifteen skellies – around 270M coins\' worth at their in-game value – is enough to produce real bones-and-arrows money from day one.',
     bullets: [
       '20M money + 15 skeleton spawners + 6 diamond sets',
       'One order, one handover for all three lines',
@@ -1361,22 +1398,22 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'Is this bundle a good first order?',
-        a: 'Yes – it is what we recommend to anyone starting out, and at $6.99 it is a low-risk way to test our delivery before a bigger money pack.',
+        a: 'Yes – it is what we recommend to anyone starting out: at $13.49 it costs less than its parts and covers income, building money and armor in one order. If you only want to test our delivery first, the 10M pack is $0.49.',
       },
     ],
   },
 
   'spawner-farm-bundle': {
-    seoTitle: 'DonutSMP Spawner Farm Bundle – $23.49 | DonutCoins',
+    seoTitle: 'DonutSMP Spawner Farm Bundle – $45.99 | DonutCoins',
     metaDescription:
-      'Spawner Farm Bundle for DonutSMP: 64 skeleton spawners plus 10M money to build the farm, for $23.49 in one order. Spawners in-game, money by /pay.',
+      'Spawner Farm Bundle for DonutSMP: 64 skeleton spawners plus 10M money to build the farm, for $45.99 in one order. Spawners in-game, money by /pay.',
     description:
-      'A full stack of 64 Skeleton Spawners plus 10M money, for $23.49. Sixty-four skellies is the classic DonutSMP farm size – one big spawner room, a drop chute, a kill platform – and the 10M pays for the hoppers, chests, water and claim blocks to build it.\n\n' +
-      'Players buy this bundle when they are done with small farms and want an income that runs while they are offline. Bones sell steadily, arrows sell steadily, and the XP from 64 stacked spawners keeps every Mending tool and armor piece topped up. It is also the bundle to grab when a base raid wipes your old farm.',
+      'A full stack of 64 Skeleton Spawners plus 10M money, for $45.99 – about $51.06 as separate lines. Sixty-four skellies is the classic DonutSMP farm size – one big spawner room, a drop chute, a kill platform – and the 10M pays for the hoppers, chests, water and claim blocks to build it.\n\n' +
+      'At about 18M coins per skelly in-game, the stack alone is worth more than 1B coins. Players buy this bundle when they are done with small farms and want an income that runs while they are offline. Bones sell steadily, arrows sell steadily, and the XP from 64 stacked spawners keeps every Mending tool and armor piece topped up. It is also the bundle to grab when a base raid wipes your old farm.',
     bullets: [
       '64 skeleton spawners – a full stack',
       '10M money to build the farm',
-      '5% spending discount applies at checkout',
+      '8% spending discount applies at checkout',
       'Spawners shulkered, money by /pay',
     ],
     faq: [
@@ -1386,7 +1423,7 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'Is the bundle cheaper than buying the parts?',
-        a: 'Yes: 64 skellies at the 50+ tier plus 10M come to about $26.10 as separate lines, versus $23.49 here – and the 5% spending discount still comes off at checkout.',
+        a: 'Yes: 64 skellies at the 50+ tier ($50.56) plus 10M come to about $51.06 as separate lines, versus $45.99 here – and the 8% spending discount for carts over $40 still comes off at checkout.',
       },
       {
         q: 'How much money does a 64-spawner farm make?',
@@ -1396,12 +1433,12 @@ export const productCopy: Record<string, ProductCopy> = {
   },
 
   'pro-bundle': {
-    seoTitle: 'DonutSMP Pro Bundle – $33.99 | DonutCoins',
+    seoTitle: 'DonutSMP Pro Bundle – $40.99 | DonutCoins',
     metaDescription:
-      'Pro Bundle for DonutSMP: 50M money, an elytra with Unbreaking III and Mending and 16 skeleton spawners for $33.99 – about $37.87 as separate lines.',
+      'Pro Bundle for DonutSMP: 50M money, an elytra with Unbreaking III and Mending and 16 skeleton spawners for $40.99 – about $45.23 as separate lines.',
     description:
-      'The Pro Bundle packs the three things an established DonutSMP player wants into one order: 50M money, an Elytra (Unbreaking III + Mending) and 16 Skeleton Spawners, for $33.99, delivered together in one order – about $37.87 if you bought the parts separately, and the 5% spending discount comes off on top at checkout.\n\n' +
-      'It is the upgrade path after a starter farm: the elytra opens up base hunting and fast travel, the spawners double a small farm, and 50M is enough to buy maxed gear, a bigger claim or whatever the player market has on offer that week.',
+      'The Pro Bundle packs the three things an established DonutSMP player wants into one order: 50M money, an Elytra (Unbreaking III + Mending) and 16 Skeleton Spawners, for $40.99, delivered together in one order – about $45.23 if you bought the parts separately, and the 8% spending discount comes off on top at checkout.\n\n' +
+      'It is the upgrade path after a starter farm: the elytra opens up base hunting and fast travel, the spawners double a small farm, and 50M is enough for a couple more spawners at in-game prices, a bigger claim or whatever the player market has on offer that week.',
     bullets: [
       '50M money + elytra + 16 skeleton spawners',
       'Elytra with Unbreaking III and Mending',
@@ -1415,7 +1452,7 @@ export const productCopy: Record<string, ProductCopy> = {
       },
       {
         q: 'What does it cost with the spending discount?',
-        a: 'With the default 5% tier for carts of $15+, the bundle comes to about $32.29 before any coupon.',
+        a: 'With the default 8% tier for carts of $40 or more, the bundle comes to about $37.71 before any coupon.',
       },
       {
         q: 'Do I need to be online for the whole delivery?',

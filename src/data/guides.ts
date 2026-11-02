@@ -34,6 +34,8 @@ export interface Guide {
 type GuideInput = Omit<Guide, 'readingMinutes'>;
 
 const UPDATED = '2026-10-11';
+/** guides touched by the November 2026 spawner/bundle repricing */
+const REPRICED = '2026-11-02';
 
 const raw: GuideInput[] = [
   // ─────────────────────────────────────────────────────────────
@@ -58,8 +60,8 @@ const raw: GuideInput[] = [
       {
         heading: 'Method 1: Spawner farms – the reliable grind',
         paragraphs: [
-          'Spawner farms are the backbone of the DonutSMP economy. A skeleton spawner drops bones and arrows, both of which the server shop buys in bulk, and the XP is a welcome side effect for mending your gear. One spawner is pocket change; sixty-four spawners in a dark room with a water-and-hopper collection system is a steady income while you stand still.',
-          'Spawners can be picked up with a silk touch pickaxe when you find them in dungeons and mineshafts, which is free but slow. The faster route is buying them: on the auction house in-game, or from a store like {{store}} where a [Skeleton Spawner](/product/skeleton-spawner) is $0.43 each and drops to $0.36 at 250+. Iron golem spawners ($0.45) produce iron, which sells well and never goes out of fashion; blaze spawners ($0.89) give rods for brewing and some of the best XP on the server.',
+          'Spawner farms are the backbone of the DonutSMP economy. A skeleton spawner drops bones and arrows, both of which the server shop buys in bulk, and the XP is a welcome side effect for mending your gear. One spawner’s output is pocket change; sixty-four spawners in a dark room with a water-and-hopper collection system is a steady income while you stand still.',
+          'Spawners can be picked up with a silk touch pickaxe when you find them in dungeons and mineshafts, which is free but slow. The faster route is buying them: on the auction house in-game, or from a store like {{store}} where a [Skeleton Spawner](/product/skeleton-spawner) is $0.89 each – priced at its in-game value of about 18M coins – and drops to $0.69 at 250+. Iron golem spawners ($1.99) produce iron, which sells well and never goes out of fashion; blaze spawners ($0.89) give rods for brewing and some of the best XP on the server.',
           'The main cost is not the spawners – it is building a base that does not get found. Keep the farm small at first, expand with the profit, and read our [spawners guide](/guides/donutsmp-spawners-guide) for the payback math.',
         ],
       },
@@ -71,7 +73,7 @@ const raw: GuideInput[] = [
         ],
         list: [
           'Start with one crop farm that runs on its own and sell the output daily.',
-          'Reinvest the first few million into a handful of skeleton spawners.',
+          'Save the first 18M or so for a skeleton spawner – that is what a skelly is worth in-game.',
           'Only build giant farms once you have a hidden base – a visible farm is a free farm for somebody else.',
         ],
       },
@@ -108,7 +110,7 @@ const raw: GuideInput[] = [
           '**Some money, lots of time:** a 32–64 spawner farm in a hidden base, selling output every day.',
           '**Some money, little time:** auction house flipping in the evenings.',
           '**Geared up and bored:** base hunting with an elytra and a friend on voice.',
-          '**Want to skip the grind:** buy 25M–100M, build the farm immediately and let it pay for itself.',
+          '**Want to skip the grind:** buy the spawners or the money directly, build the farm immediately and let it pay for itself.',
         ],
       },
     ],
@@ -132,7 +134,7 @@ const raw: GuideInput[] = [
     ],
     relatedProductIds: ['money-1m', 'money-50m', 'skeleton-spawner', 'starter-bundle'],
     relatedGuides: ['donutsmp-spawners-guide', 'buying-donutsmp-money-safely', 'donutsmp-base-hunting-guide'],
-    updatedAt: UPDATED,
+    updatedAt: REPRICED,
   },
 
   // ─────────────────────────────────────────────────────────────
@@ -140,10 +142,10 @@ const raw: GuideInput[] = [
   // ─────────────────────────────────────────────────────────────
   {
     slug: 'donutsmp-spawners-guide',
-    title: 'DonutSMP Spawners Explained: Skeleton, Iron Golem, Blaze & More',
+    title: 'DonutSMP Spawners Explained: Skeleton, Iron Golem, Cow, Blaze & More',
     seoTitle: 'DonutSMP Spawners Guide – Types, Prices & Farms | {{store}}',
     metaDescription:
-      'What every DonutSMP spawner produces, what it costs (skeleton spawners from $0.36 in bulk), payback math and where to place a farm so it does not get raided.',
+      'What every DonutSMP spawner produces, what it costs (skeleton spawners from $0.69 in bulk, priced at in-game value), payback math and safe farm placement.',
     intro:
       'Spawners are how money gets made on DonutSMP. Everything else – flipping, hunting, trading – moves money that somebody’s spawner farm created first. This guide explains what each spawner type actually produces, what it costs in our store, how the payback math works and where to put a farm so you get to keep it.',
     sections: [
@@ -158,14 +160,21 @@ const raw: GuideInput[] = [
         heading: 'Skeleton spawners – the default choice',
         paragraphs: [
           'The skeleton spawner is the DonutSMP workhorse. Skeletons drop bones and arrows, both of which sell in bulk, and they give decent XP for mending gear. Farms are easy to build: a dark room, water streams pushing mobs into a kill chamber, hoppers into chests. Because almost every rich player runs a skelly farm, auction house prices are predictable and there is always a buyer when you want to sell the spawners back.',
-          'In our store a [Skeleton Spawner](/product/skeleton-spawner) is **$0.43** on its own, $0.42 from 25, $0.40 from 50, $0.38 from 100 and $0.36 from 250 spawners. A full 64-spawner room is $25.60 at the 50+ rate, or you can take the [Spawner Farm Bundle](/product/spawner-farm-bundle) – 64 skellies plus 10M for building materials – at $23.49.',
+          'In our store a [Skeleton Spawner](/product/skeleton-spawner) is **$0.89** on its own, $0.84 from 25, $0.79 from 50, $0.74 from 100 and $0.69 from 250 spawners – in line with the roughly 18M coins a skelly is worth in-game. A full 64-spawner room is $50.56 at the 50+ rate, or you can take the [Spawner Farm Bundle](/product/spawner-farm-bundle) – 64 skellies plus 10M for building materials – at $45.99.',
         ],
       },
       {
         heading: 'Iron golem spawners',
         paragraphs: [
           'Iron golems drop iron ingots and the occasional poppy. Iron is the most useful bulk resource in the game – hoppers, rails, anvils, armor for alts – and it sells consistently because other players always need it. Golem farms need more space per spawner than skeleton farms and the kill mechanism has to handle a mob with 100 health points, so budget for a lava blade or a proper drop design.',
-          'An [Iron Golem Spawner](/product/iron-golem-spawner) is $0.45 each, $0.43 from 25 and $0.40 from 100. They also sit in the Elite Mystery Box and Legendary Crate pools if you prefer a gamble.',
+          'An [Iron Golem Spawner](/product/iron-golem-spawner) is $1.99 each, $1.89 from 25 and $1.74 from 100, matching an in-game value of about 41M coins. They also sit in the Elite Mystery Box and Legendary Crate pools if you prefer a gamble.',
+        ],
+      },
+      {
+        heading: 'Cow spawners – the premium pick',
+        paragraphs: [
+          'Cows drop leather and raw beef. Leather turns into books, bookshelves and item frames, and beef is a food supply you never have to think about again. Cows are passive mobs, so the spawn area is lit rather than dark – build it like an animal pen with a kill and collection system, not like a skelly box.',
+          'A [Cow Spawner](/product/cow-spawner) is one of the most valuable spawners on the server – it trades for around 100M coins in-game – and costs $4.99 here, $4.69 from 10 and $4.39 from 50. It is also the epic line of the [Spawner Crate](/product/spawner-crate) and sits in the Legendary Crate pool.',
         ],
       },
       {
@@ -179,8 +188,8 @@ const raw: GuideInput[] = [
       {
         heading: 'Payback math: when does a spawner pay for itself?',
         paragraphs: [
-          'In real-money terms the question is simple: a skeleton spawner costs between $0.36 and $0.43, and 1M of in-game money costs $0.03 to $0.05. So one spawner is worth roughly 10M of bought money. If your farm sells for more than about 10M per spawner over its lifetime, the spawner has paid for itself – whether it does depends on sell prices and how long you keep the farm running. If all you want is the balance, buying money directly is now the cheaper shortcut; spawners make sense when you plan to play long enough for the farm to keep paying.',
-          'In in-game terms, compare the auction house price of a spawner with what one spawner’s drops sell for per day in `/shop`. Sell prices change between seasons, so we will not quote one here; run a single spawner for a day, sell the output and multiply. Most players find that a well-built room pays back its spawner cost within one to two weeks of normal play.',
+          'In real-money terms the comparison is simple, because our spawner prices follow the in-game value. A skeleton spawner is $0.89 and a skelly trades for about 18M coins – and 18M money costs about the same at our $0.05 base rate. An iron golem spawner ($1.99) matches about 41M coins and a cow spawner ($4.99) around 100M. Buying the spawner or buying the money to pay a player therefore costs roughly the same; the spawner has paid for itself once its drops have sold for more than its coin value – about 18M for a skelly. Whether that happens depends on sell prices and how long you keep the farm running.',
+          'In in-game terms, compare the auction house price of a spawner with what one spawner’s drops sell for per day in `/shop`. Sell prices change between seasons, so we will not quote one here; run a single spawner for a day, sell the output and divide its coin value by that number – the result is how many days it needs to earn itself back.',
         ],
         list: [
           'Build the collection system before you place the spawners – lost drops are lost money.',
@@ -210,7 +219,7 @@ const raw: GuideInput[] = [
       },
       {
         q: 'How many skeleton spawners do I need for a good farm?',
-        a: 'Anything from 16 upwards is a real farm. 64 is the classic room size and the point where the bulk price drops to $0.40. Past 100–150 spawners, time spent standing at the farm becomes the bottleneck, not spawner count.',
+        a: 'Anything from 16 upwards is a real farm. 64 is the classic room size, and from 50 spawners the bulk price drops to $0.79. Past 100–150 spawners, time spent standing at the farm becomes the bottleneck, not spawner count.',
       },
       {
         q: 'Can spawners be stolen?',
@@ -223,7 +232,7 @@ const raw: GuideInput[] = [
     ],
     relatedProductIds: ['skeleton-spawner', 'iron-golem-spawner', 'blaze-spawner', 'spawner-farm-bundle'],
     relatedGuides: ['how-to-get-money-on-donutsmp', 'donutsmp-mystery-boxes-explained', 'donutsmp-base-hunting-guide'],
-    updatedAt: UPDATED,
+    updatedAt: REPRICED,
   },
 
   // ─────────────────────────────────────────────────────────────
@@ -338,7 +347,7 @@ const raw: GuideInput[] = [
         heading: 'How a box is rolled',
         paragraphs: [
           'Every box has a public drop table – click “What’s inside?” on any box – where each line has a **weight**. The chance of a line on a single roll is its weight divided by the total weight of the pool. A box with several drops draws its lines **without repeats**: once a line is drawn it is removed, so you never get the same line twice in one box.',
-          'Lines marked guaranteed are always included and do not use up a roll. The quantity of an item is random within the range shown (1–3 skeleton spawners, for example). Rolls happen on our server the moment you order, the result is written to your order page, and our staff hand over exactly what was rolled. There is no re-rolling and no staff discretion.',
+          'Lines marked guaranteed are always included and do not use up a roll. The quantity of an item is random within the range shown (2–4 zombie spawners, for example). Rolls happen on our server the moment you order, the result is written to your order page, and our staff hand over exactly what was rolled. There is no re-rolling and no staff discretion.',
           'Because rolls are drawn without repeats, the chance of seeing a specific line somewhere in the box is higher than the single-roll percentage. The per-box figures below come from simulating the exact roll logic our server uses.',
         ],
       },
@@ -352,14 +361,14 @@ const raw: GuideInput[] = [
       {
         heading: 'Single-drop crates – Spawner, Netherite and Elytra',
         paragraphs: [
-          'The [Spawner Crate](/product/spawner-crate) ($2.99) gives one spawner drop: small stacks of skeleton, zombie or iron golem spawners most of the time, creepers in about one crate in 13, blazes in one in 25 and a rare full stack of 32 skeleton spawners.',
+          'The [Spawner Crate](/product/spawner-crate) ($2.99) gives one spawner drop: 2–4 zombie spawners or a single skeleton spawner most of the time, creepers or a pair of skellies in about one crate in four, an iron golem spawner in about one in 12 and 2–3 blazes in about one in 20. The jackpots are a [Cow Spawner](/product/cow-spawner) in about one crate in 33 and 10 skeleton spawners in roughly one in a hundred.',
           'The [Netherite Crate](/product/netherite-crate) ($5.99) gives one netherite drop – debris, an ingot or a god sword usually, a full god armor set in about one crate in twelve and a netherite block in about one in 55. The [Elytra Crate](/product/elytra-crate) ($7.99) has the best Elytra odds per dollar: about **one crate in twelve** is an Elytra, the rest are totems, a god bow, a mace, a trident or a netherite armor set.',
         ],
       },
       {
         heading: 'Mystery Box – $3.99, 2 drops',
         paragraphs: [
-          'The [Mystery Box](/product/mystery-box) draws two different lines from an 11-line pool. Gilded blackstone, skeleton spawners, nether stars, golden apples, emerald ore and totems are the commons; a netherite ingot or 25M money show up in about one box in twenty, and a netherite block, dragon head or Elytra are rare jackpots (the Elytra is roughly one box in 200).',
+          'The [Mystery Box](/product/mystery-box) draws two different lines from an 11-line pool. Gilded blackstone, a skeleton spawner, nether stars, golden apples, emerald ore and totems are the commons; a netherite ingot or 25M money show up in about one box in twenty, and a netherite block, dragon head or Elytra are rare jackpots (the Elytra is roughly one box in 200).',
         ],
       },
       {
@@ -377,7 +386,7 @@ const raw: GuideInput[] = [
       {
         heading: 'Legendary Crate – $34.99, 3 drops',
         paragraphs: [
-          'The [Legendary Crate](/product/legendary-crate) draws three of ten lines from our best pool – maces, god armor sets, iron golem and blaze spawners, totems and netherite ingots. It has the best jackpot odds in the shop: a netherite block in about one crate in nine, an Elytra in about one in eight, a dragon head in about one in 13 and 500M money in about one in 22.',
+          'The [Legendary Crate](/product/legendary-crate) draws three of eleven lines from our best pool – maces, god armor sets, iron golem and blaze spawners, totems, netherite ingots and a cow spawner (about one crate in six). It has the best jackpot odds in the shop: a netherite block in about one crate in ten, an Elytra in about one in eight, a dragon head in about one in 14 and 500M money in about one in 23.',
         ],
       },
       {
@@ -414,7 +423,7 @@ const raw: GuideInput[] = [
     ],
     relatedProductIds: ['elytra-crate', 'mystery-box', 'mega-coin-crate', 'legendary-crate'],
     relatedGuides: ['donutsmp-elytra-guide', 'donutsmp-spawners-guide', 'buying-donutsmp-money-safely'],
-    updatedAt: UPDATED,
+    updatedAt: REPRICED,
   },
 
   // ─────────────────────────────────────────────────────────────
@@ -460,7 +469,7 @@ const raw: GuideInput[] = [
         heading: 'Route 4: Buy it – $28.49',
         paragraphs: [
           'The [Elytra](/product/elytra) in our store is **$28.49** (down from $29.99) and comes with **Unbreaking III and Mending** already applied – the two enchantments that matter, because together they mean you never have to repair it as long as you pick up XP. Up to 20 per order.',
-          'It is also in two bundles: the [Pro Bundle](/product/pro-bundle) ($33.99) adds 50M and 16 skeleton spawners in one order and one handover, and the [Basehunter Bundle](/product/basehunter-bundle) ($33.99) pairs the Elytra with an Amethyst Pickaxe, 16 totems and 20M in one order – everything you need to go hunting on day one.',
+          'It is also in two bundles: the [Pro Bundle](/product/pro-bundle) ($40.99) adds 50M and 16 skeleton spawners in one order and one handover, and the [Basehunter Bundle](/product/basehunter-bundle) ($33.99) pairs the Elytra with an Amethyst Pickaxe, 16 totems and 20M in one order – everything you need to go hunting on day one.',
           'Delivery is in-game by our staff: join DonutSMP with the username on your order, accept the teleport and take the drop. {{eta}} No bot, no account access – and, as with everything we sell, DonutSMP’s rules prohibit real-money trading, so the decision and the risk are yours. {{store}} is not affiliated with DonutSMP or Mojang.',
         ],
       },
@@ -509,7 +518,7 @@ const raw: GuideInput[] = [
     ],
     relatedProductIds: ['elytra', 'creeper-spawner', 'pro-bundle', 'basehunter-bundle'],
     relatedGuides: ['donutsmp-base-hunting-guide', 'donutsmp-mystery-boxes-explained', 'donutsmp-spawners-guide'],
-    updatedAt: UPDATED,
+    updatedAt: REPRICED,
   },
 
   // ─────────────────────────────────────────────────────────────
@@ -670,7 +679,7 @@ const raw: GuideInput[] = [
         paragraphs: [
           'A store is still a seller you pay first. The difference is structural. At {{store}} the money and items exist before you pay – stock levels on product pages are live. Every order has an ID, a locked price, a timeline and a payment reference you submitted yourself; you can open it at [/track](/track) any time without talking to anyone. Reviews can only be written from delivered orders and are tied to this domain rather than a Discord tag. And there is a published [refund policy](/refund-policy) that says what happens if we fail.',
           'Delivery is still done by real people – a staff member running `/pay` or teleporting to you with a shulker – but the record exists whether or not that person is online. {{eta}} If something goes wrong you have a page to show, not a DM thread with a deleted account.',
-          'Prices are also simply lower than most Discord sellers once you include bulk tiers: 1M is $0.05 and falls to $0.03 per million at 1B, skeleton spawners are $0.43 falling to $0.36 at 250+, and carts over $15, $40 and $100 get 5%, 8% and 12% off automatically.',
+          'Prices are also published and tiered: 1M is $0.05 and falls to $0.03 per million at 1B, spawners are priced at their in-game coin value (a skeleton spawner is $0.89, falling to $0.69 at 250+), and carts over $15, $40 and $100 get 5%, 8% and 12% off automatically.',
         ],
       },
       {
@@ -700,7 +709,7 @@ const raw: GuideInput[] = [
     ],
     relatedProductIds: ['money-1m', 'money-25m', 'skeleton-spawner', 'mystery-box'],
     relatedGuides: ['buying-donutsmp-money-safely', 'how-to-get-money-on-donutsmp', 'donutsmp-mystery-boxes-explained'],
-    updatedAt: UPDATED,
+    updatedAt: REPRICED,
   },
 ];
 

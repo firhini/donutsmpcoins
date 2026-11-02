@@ -65,21 +65,21 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
 
   // ───────────── SPAWNERS & ITEMS ─────────────
   spawners: {
-    seoTitle: 'Buy DonutSMP Spawners – Skeleton from $0.36 | DonutCoins',
+    seoTitle: 'DonutSMP Spawners – Skeleton $0.89, Cow $4.99 | DonutCoins',
     metaDescription:
-      'DonutSMP spawners delivered in-game by hand: skeleton spawners from $0.36, iron golem from $0.40, blaze from $0.84, plus Elytra, shulker boxes and totems.',
+      'DonutSMP spawners at in-game value, handed over by staff: skeleton from $0.69, iron golem from $1.74, cow from $4.39, plus blaze, creeper, zombie and Elytra.',
     intro:
-      'Spawners are the best long-term buy on DonutSMP: a skeleton spawner farm pays you every hour you are online. This category has the five spawner types players actually use – skeleton, iron golem, zombie, creeper and blaze – plus the items that go with them: the Elytra (Unbreaking III + Mending), shulker boxes and totems of undying. Skeleton spawners start at $0.43 each and drop to $0.36 at 250 or more. Everything is handed over in-game by our staff, usually within minutes.',
+      'Spawners are the best long-term buy on DonutSMP: a skeleton spawner farm pays you every hour you are online. This category has the six spawner types players actually use – skeleton, iron golem, cow, zombie, creeper and blaze – plus the items that go with them: the Elytra (Unbreaking III + Mending), shulker boxes and totems of undying. Spawner prices follow their in-game coin value: a skeleton spawner is worth about 18M coins on the server and costs $0.89 here (down to $0.69 at 250 or more), an iron golem spawner is worth about 41M and a cow spawner around 100M. Everything is handed over in-game by our staff, usually within minutes.',
     body: [
-      'A skeleton spawner is the DonutSMP standard for a reason: bones, arrows and XP with nothing to feed, and it stacks cleanly into farms that sell to the server shop while you AFK. Iron golem spawners give iron for the shop and for builds, zombies are the cheap XP option, creepers turn into rocket fuel for your Elytra, and blaze spawners cover brewing and some of the fastest XP on the server.',
-      'Prices depend on quantity. Skeleton spawners are $0.43 each, $0.42 at 25+, $0.40 at 50+, $0.38 at 100+ and $0.36 at 250+. Iron golem spawners are $0.45 ($0.40 at 100+), zombies $0.39 ($0.36 at 50+), creepers $0.69 ($0.65 at 25+) and blazes $0.89 ($0.84 at 25+). An Elytra is $28.49, a shulker box $0.29 and a totem of undying $0.25, with 64 totems at $0.19 each.',
+      'A skeleton spawner is the DonutSMP standard for a reason: bones, arrows and XP with nothing to feed, and it stacks cleanly into farms that sell to the server shop while you AFK. Iron golem spawners give iron for the shop and for builds, cow spawners leather and an endless food supply, zombies are the cheap XP option, creepers turn into rocket fuel for your Elytra, and blaze spawners cover brewing and some of the fastest XP on the server.',
+      'Prices depend on quantity. Skeleton spawners are $0.89 each, $0.84 at 25+, $0.79 at 50+, $0.74 at 100+ and $0.69 at 250+. Iron golem spawners are $1.99 ($1.89 at 25+, $1.74 at 100+), cow spawners $4.99 ($4.69 at 10+, $4.39 at 50+), zombies $0.39 ($0.36 at 50+), creepers $0.69 ($0.65 at 25+) and blazes $0.89 ($0.84 at 25+). An Elytra is $28.49, a shulker box $0.29 and a totem of undying $0.25, with 64 totems at $0.19 each.',
       'Items cannot be sent with a command, so delivery is a hand-off. Join DonutSMP with the username on your order, accept the teleport request from our delivery account and pick up the drop – spawners come in shulker boxes for larger orders. Make sure you have inventory space and are somewhere safe. Our staff do this manually, usually within 5–30 minutes while online, and the order page shows every step.',
-      'Watch the tier edges: 45 skeleton spawners cost $18.90 but 50 cost $20.00 – five more spawners for $1.10. The Spawner Farm Bundle pairs 64 skeleton spawners with 10M for the build, and the Pro Bundle adds an Elytra. Spawners can be mined back with a silk touch pickaxe on DonutSMP, so a hidden farm is a movable asset – and also what base hunters look for, so place it carefully.',
+      'Watch the tier edges: 45 skeleton spawners cost $40.05 but 50 cost $39.50 – five more spawners for less money. The Spawner Farm Bundle pairs 64 skeleton spawners with 10M for the build, and the Pro Bundle adds an Elytra. Spawners can be mined back with a silk touch pickaxe on DonutSMP, so a hidden farm is a movable asset – and also what base hunters look for, so place it carefully.',
     ],
     faq: [
       {
         q: 'How much is a skeleton spawner on DonutSMP?',
-        a: 'In our store a skeleton spawner is $0.43, dropping to $0.42 at 25+, $0.40 at 50+, $0.38 at 100+ and $0.36 at 250+. A full 64-spawner room is therefore $25.60 at the 50+ tier, before the 5% spending discount for carts over $15 (8% from $40).',
+        a: 'In our store a skeleton spawner is $0.89 – in line with the roughly 18M coins it is worth in-game – dropping to $0.84 at 25+, $0.79 at 50+, $0.74 at 100+ and $0.69 at 250+. A full 64-spawner room is therefore $50.56 at the 50+ tier, before the 8% spending discount for carts over $40.',
       },
       {
         q: 'How are spawners delivered?',
@@ -87,7 +87,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
       },
       {
         q: 'Which spawner is best for making money on DonutSMP?',
-        a: 'Skeleton spawners are the safe default: cheap, easy to farm and always sellable on the auction house. Iron golem spawners earn well when iron sells high, and blaze spawners give the best XP. Server shop prices change between seasons, so check /shop before you commit to one type.',
+        a: 'Skeleton spawners are the safe default: affordable, easy to farm and always sellable on the auction house. Iron golem spawners earn well when iron sells high, cow spawners are the premium pick at around 100M coins in-game, and blaze spawners give the best XP. Server shop prices change between seasons, so check /shop before you commit to one type.',
       },
       {
         q: 'Do the bulk prices combine across spawner types?',
@@ -106,7 +106,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
     body: [
       'Each line in a box has a weight; its chance on a single roll is that weight divided by the pool total. Boxes with several rolls draw without repeats, so a three-drop box always contains three different lines and the box-wide chance of any line is higher than the per-roll figure. There is no re-rolling and no hidden pool – what the page shows is what the server rolls.',
       'The Coin Crate ($1.99) and Mega Coin Crate ($9.99) are money only. The Spawner, Netherite and Elytra Crates give a single themed drop – the Elytra Crate has about a 1 in 12 Elytra chance for $7.99. The Mystery Box ($3.99) and Elite Mystery Box ($8.99) give two drops, the God Mystery Box ($19.99) three.',
-      'The Legendary Crate ($34.99) rolls three lines from our best pool of dragon heads, netherite blocks, blaze and iron golem spawners, heavy cores, totems, a maxed netherite armor set, a mace, an Elytra and a 500M money line. All box contents are delivered like normal items – teleport, drop, done – and money lines are paid to your balance with /pay.',
+      'The Legendary Crate ($34.99) rolls three lines from our best pool of dragon heads, netherite blocks, blaze, iron golem and cow spawners, totems, a maxed netherite armor set, a mace, an Elytra and a 500M money line. All box contents are delivered like normal items – teleport, drop, done – and money lines are paid to your balance with /pay.',
       'Treat boxes as entertainment with a floor, not as a discount. If you simply want money, the money packs are cheaper per million than the Coin Crate; if you simply want an Elytra, buying it outright for $28.49 beats every random box. On average every box pays out less than buying its items directly – boxes make sense when you enjoy the opening.',
     ],
     faq: [
@@ -229,25 +229,25 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
 
   // ───────────── BUNDLES ─────────────
   bundles: {
-    seoTitle: 'DonutSMP Bundles – Starter Packs from $6.99 | DonutCoins',
+    seoTitle: 'DonutSMP Bundles – Starter Packs from $13.49 | DonutCoins',
     metaDescription:
-      'DonutSMP bundles delivered in-game: Starter Bundle with 20M, 15 skeleton spawners and diamond armor $6.99, Pro Bundle with Elytra, Rich Bundle with 250M.',
+      'DonutSMP bundles delivered in-game: Starter Bundle with 20M, 15 skeleton spawners and diamond armor $13.49, Pro Bundle with Elytra, Rich Bundle with 250M.',
     intro:
-      'Bundles are the fastest way to go from fresh spawn to running farm on DonutSMP. Each one combines money, spawners and gear in a single order with one delivery: the Starter Bundle ($6.99) covers 20M, 15 skeleton spawners and a Diamond Armor Shulker; the Pro Bundle ($33.99) steps up to 50M, 16 spawners and an Elytra; the Rich Bundle ($59.99) brings 250M, a God Mystery Box, an Elytra and the full PvP Kit. Every item is listed before you buy.',
+      'Bundles are the fastest way to go from fresh spawn to running farm on DonutSMP. Each one combines money, spawners and gear in a single order with one delivery: the Starter Bundle ($13.49) covers 20M, 15 skeleton spawners and a Diamond Armor Shulker; the Pro Bundle ($40.99) steps up to 50M, 16 spawners and an Elytra; the Rich Bundle ($59.99) brings 250M, a God Mystery Box, an Elytra and the full PvP Kit. Every item is listed before you buy.',
     body: [
-      'Bundles are for new players who do not want to research what a first farm needs, returning players after a season reset, and anyone gifting a friend a head start. The Starter Bundle is enough to place a small skeleton farm, sell the first drops and buy more spawners with the 20M; the Spawner Farm Bundle (64 skeleton spawners plus 10M, $23.49) is the one-order farm for players who already have a base.',
-      'Bundle pricing is easy to check because every bundle lists its exact contents. Bundles are convenience sets: one order, one checkout and one handover instead of several lines. At current prices, the parts of most bundles cost about the same or less when bought as single products – compare them with the single listings before you buy, especially if you only want part of the list.',
+      'Bundles are for new players who do not want to research what a first farm needs, returning players after a season reset, and anyone gifting a friend a head start. The Starter Bundle is enough to place a small skeleton farm, sell the first drops and buy more spawners with the 20M; the Spawner Farm Bundle (64 skeleton spawners plus 10M, $45.99) is the one-order farm for players who already have a base.',
+      'Bundle pricing is easy to check because every bundle lists its exact contents. At current prices every bundle costs less than its parts bought as single products – the Starter Bundle by about $1.35, the Spawner Farm Bundle by about $5.07, the Pro Bundle by about $4.24 and the Rich Bundle by about $6.98 – and you get one order, one checkout and one handover instead of several lines. If you only want part of the list, the single listings are still the better buy.',
       'Bundles are delivered in two parts because money and items travel differently: the money is paid with /pay to your balance, and the items are handed over through a teleport and drop, in shulkers where needed. Both happen in the same session, usually within 5–30 minutes while our staff are online. The order page lists every component, including the rolled contents of the God Mystery Box in the Rich Bundle.',
       'Discounts stack on bundles like on everything else: carts over $15 get 5% off, over $40 get 8% and over $100 get 12%, plus one coupon and any store credit. Buying is at your own risk under DonutSMP\'s rules on real-money trading – we deliver with normal player actions and keep it low-key, but enforcement is the server\'s call, and we are not affiliated with DonutSMP or Mojang.',
     ],
     faq: [
       {
         q: 'Which DonutSMP bundle should a new player buy?',
-        a: 'The Starter Bundle ($6.99): 20M to buy what the server shop offers, 15 skeleton spawners for a first farm and six diamond armor sets so dying is not expensive. Once the farm earns, upgrade with single spawners or the Pro Bundle.',
+        a: 'The Starter Bundle ($13.49): 20M to buy what the server shop offers, 15 skeleton spawners for a first farm and six diamond armor sets so dying is not expensive. Once the farm earns, upgrade with single spawners or the Pro Bundle.',
       },
       {
         q: 'Are bundles cheaper than buying the items separately?',
-        a: 'Not necessarily. Bundles are priced for convenience – everything in one order and one handover – and at current prices most of them cost about the same or more than their parts bought as single products. Check the single listings if price is what matters most.',
+        a: 'Yes, at current prices. Each bundle costs less than its parts bought as single products at their bulk tiers – from about $1.35 less for the Starter Bundle to about $6.98 less for the Rich Bundle – and everything comes in one order and one handover. If you only want part of a bundle, buy the single products instead.',
       },
       {
         q: 'Can I swap an item in a bundle?',
@@ -271,7 +271,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
       'Building hidden takes hours of digging, and the first mistake is usually fatal. A pre-made base skips the exposed phase – you travel to the coordinates, claim what needs claiming and start using the farm the same evening. Bases are placed far from spawn and away from the routes base hunters usually cover, and each one is sold to a single buyer and then removed from the store.',
       'The Starter Base has a storage room with chests, a crop or mob farm and a spawner room ready for the spawners you bring; the Loaded Base comes with stocked storage and a spawner farm already running. The product page states what the storage holds at the time of listing. We do not promise loot beyond that description, and nothing is added after the sale.',
       'Delivery works differently from items. After payment our staff open a Discord ticket with you, send the coordinates and, if you want, meet you there once. From that moment the base is yours – we leave and do not return. A base is a location, not an item: it can be found, raided or griefed by other players, and DonutSMP\'s rules on real-money trading apply as with everything we sell.',
-      'Change what you can when you move in – rebuild the entrance, move the storage, add your own claim – so the layout no longer matches what the builder knew. Bring your own spawners (skeleton spawners are $0.36–$0.43 each) to fill the spawner room, and keep valuables in an Ender Chest until you trust the spot. If both bases show sold out, ask on Discord for the next batch.',
+      'Change what you can when you move in – rebuild the entrance, move the storage, add your own claim – so the layout no longer matches what the builder knew. Bring your own spawners (skeleton spawners are $0.69–$0.89 each) to fill the spawner room, and keep valuables in an Ender Chest until you trust the spot. If both bases show sold out, ask on Discord for the next batch.',
     ],
     faq: [
       {
@@ -298,11 +298,11 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
 export const shopCopy: CategoryCopy = {
   seoTitle: 'DonutSMP Shop – Buy Money, Spawners & Items | DonutCoins',
   metaDescription:
-    'DonutSMP shop: money from $0.03 per 1M, skeleton spawners from $0.36, Elytra, mystery boxes, god armor, tools and bundles. Delivered in-game by staff.',
+    'DonutSMP shop: money from $0.03 per 1M, spawners at in-game value, Elytra, mystery boxes, god armor, tools and bundles. Delivered in-game by staff.',
   intro:
     'DonutCoins is a shop for DonutSMP players who would rather play than grind. Browse eight categories – money, spawners and items, mystery boxes, investments, armor, tools and weapons, bundles and bases – with live prices in USD and estimates in your own currency. Everything is delivered in-game by our staff, by hand, usually within 5–30 minutes while we are online. Prices drop automatically with quantity, carts over $15 get an extra 5–12% off, delivered orders earn 5% back as store credit, and the daily spin hands out coupons and free coins.',
   body: [
-    'Start with money if you are new – 1M is $0.05 and the rate falls to $0.03 per million on big orders, with fixed packs from 10M ($0.49) to 1B ($28.99). Spawners are the second most popular buy: skeleton spawners from $0.36 at 250+, plus iron golems, zombies, creepers and blazes. The spawners category also holds the Elytra ($28.49), shulker boxes and totems of undying.',
+    'Start with money if you are new – 1M is $0.05 and the rate falls to $0.03 per million on big orders, with fixed packs from 10M ($0.49) to 1B ($28.99). Spawners are the second most popular buy, priced at their in-game coin value: skeleton spawners from $0.69 at 250+, iron golems from $1.74 and cow spawners from $4.39, plus zombies, creepers and blazes. The spawners category also holds the Elytra ($28.49), shulker boxes and totems of undying.',
     'For gear, the armor category has a full god netherite set for $4.99 and a Diamond Armor Shulker with six sets for $0.49; tools and weapons start at $0.89 for a God Bow and include the Mace and the DonutSMP Amethyst Pickaxe. Mystery boxes run from the $1.99 Coin Crate to the $34.99 Legendary Crate, all with public odds. Investments cover netherite, nether stars, enchanted golden apples and dragon heads.',
     'Ordering takes a minute: add to cart, enter your exact Java Edition username – we check it against Mojang – choose PayPal, crypto or card where enabled, and report your payment reference on the order page. A member of our staff then pays money with /pay and hands items over through a teleport. Track any order at /track with its ID; no account is needed.',
     'Two things we say on every page: DonutCoins is an independent, player-run store, not affiliated with DonutSMP, Mojang or Microsoft, and DonutSMP\'s rules prohibit real-money trading – we deliver with normal player actions and keep it discreet, but buying is your own responsibility. If you want to test us first, start with a small order; the refund policy covers non-delivery in full.',
