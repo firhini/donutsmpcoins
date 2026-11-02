@@ -26,7 +26,7 @@ export const wikiMoreB: WikiArticle[] = [
       {
         heading: 'Cow spawners on DonutSMP',
         paragraphs: [
-          'Like every DonutSMP spawner, a cow spawner does not spawn cows. It generates drops and stores them inside the block, and you right-click it to take them out. Both community wikis list **raw beef** as the output. Neither lists leather, so do not count on it – open the storage of your own spawner to see exactly what it produces.',
+          'Like every DonutSMP spawner, a cow spawner does not spawn cows. It generates drops and stores them inside the block, and you right-click it to take them out. Donutpedia and the Fandom wiki agree that the output is **raw beef only – no leather**. Open the storage of your own spawner to see exactly what it holds.',
           'Cow spawners stack like the others: sneak and right-click a placed cow spawner with another one in your hand. A stack produces more from a single block, which keeps the farm room tiny and easy to hide. See [how spawners work](/wiki/donutsmp-spawners-explained) for storage and moving tips.',
         ],
       },
@@ -34,7 +34,7 @@ export const wikiMoreB: WikiArticle[] = [
         heading: 'Why cow spawners are so valuable',
         paragraphs: [
           'Spawners left the Shard Shop in 2026, and according to the community wikis no new ones are created, so the number of cow spawners on the server can only stay the same or shrink. Demand, on the other hand, keeps growing as new players join and want a passive income source that never runs out.',
-          'Price data from our own trading put a cow spawner at roughly **100M** in-game money in November 2026. Treat that as a snapshot: spawner prices move with updates and supply, so compare recent auction house sales before buying or selling.',
+          'In our own trading we have seen cow spawners change hands for roughly **100M** in-game money (November 2026). That is what we see, not an official figure – prices vary a lot and public fan trackers report different numbers, so compare recent player trades before buying or selling.',
         ],
         list: [
           '**Food for everyone** – cooked beef (steak) restores 8 hunger and 12.8 saturation, one of the best common foods in the game.',
@@ -59,7 +59,7 @@ export const wikiMoreB: WikiArticle[] = [
           'Fence a small pen and keep 10–20 cows in it. Since 1.21.5 cows come in temperate, warm and cold variants, but they all drop the same items.',
           'Breed the herd every 5 minutes with wheat, then kill adults with a Looting III sword while leaving a few breeders.',
           'Put hoppers under a one-block kill spot, or collect by hand.',
-          'Do not pack the pen too tightly: more than 24 mobs in one block space take cramming damage, and DonutSMP also enforces server entity limits.',
+          'Do not pack the pen too tightly: more than 24 mobs in one block space take cramming damage, and community wikis report farm and entity limits on DonutSMP, so keep herds modest.',
         ],
       },
       {
@@ -113,7 +113,7 @@ export const wikiMoreB: WikiArticle[] = [
       {
         heading: 'How a vanilla creeper farm works (Java 1.21)',
         paragraphs: [
-          'Creepers spawn on solid blocks at **light level 0** in most Overworld biomes, in groups of four. A Java creeper is 1.7 blocks tall, drops 0–2 gunpowder (more with Looting) and gives 5 XP when killed by a player. Hostile mobs only spawn more than 24 blocks from the player and despawn quickly beyond 128 blocks, so farms are built around an AFK spot.',
+          'Creepers spawn on solid blocks at **light level 0** in most Overworld biomes, in groups of four. A Java creeper is 1.7 blocks tall, drops 0–2 gunpowder (more with Looting) and gives 5 XP when killed by a player. Hostile mobs only spawn more than 24 blocks from the player and despawn instantly beyond 128 blocks, so farms are built around an AFK spot.',
           'A classic design:',
         ],
         list: [
@@ -127,7 +127,7 @@ export const wikiMoreB: WikiArticle[] = [
         heading: 'Tips and troubleshooting',
         paragraphs: [
           'If the farm is slow, light up or fill in caves within 128 blocks of your AFK spot, because every dark cave space competes for the same mob cap. Creepers flee from cats and ocelots within 6 blocks, which some designs use to push them off platforms. A creeper killed by a skeleton\'s arrow drops a music disc, a fun bonus but not a reliable income.',
-          'On DonutSMP, community notes say hopper speeds are not vanilla, and the server enforces entity limits, so test a small version of any redstone farm before building big. If you only want gunpowder for rockets, a creeper spawner is much simpler – there is one in our store at [creeper spawner](/product/creeper-spawner). Real-money trading is against DonutSMP rules and at your own risk.',
+          'Community wikis report block and farm limits on DonutSMP – including on hoppers and creeper farms since the June 2026 update – but the exact numbers are unconfirmed, so test a small version of any farm before building big. If you only want gunpowder for rockets, a creeper spawner is much simpler – there is one in our store at [creeper spawner](/product/creeper-spawner). Real-money trading is against DonutSMP rules and at your own risk.',
         ],
       },
     ],
@@ -157,8 +157,8 @@ export const wikiMoreB: WikiArticle[] = [
       {
         heading: 'Blaze spawners on DonutSMP',
         paragraphs: [
-          'DonutSMP blaze spawners produce drops instead of mobs and store them inside the block, like every other spawner type on the server. The community wikis disagree on the exact drop: Donutpedia says the blaze spawner produces **blaze powder** only, while donutsmp.wiki lists **blaze rods**. Open the storage of the spawner you are buying – or ask the seller for a screenshot of its contents – before you pay.',
-          'Either way, powder is what you actually burn in brewing. One blaze rod crafts into two blaze powder, so rods are the more flexible item, but a powder-only spawner still covers fuel and Strength potions.',
+          'DonutSMP blaze spawners produce drops instead of mobs and store them inside the block, like every other spawner type on the server – no blazes appear, so nothing burns. Donutpedia and the Fandom wiki agree that the output is **blaze powder, not blaze rods**. (One wiki lists rods but flags its own list as unverified.)',
+          'Powder is what you actually burn in brewing and what Strength potions and eyes of ender need, so a blaze spawner covers all of that. Powder cannot be turned back into rods, though: the rod for a brewing stand still has to come from a real blaze in a Nether fortress.',
         ],
       },
       {
@@ -188,17 +188,18 @@ export const wikiMoreB: WikiArticle[] = [
           'Leave a gap at foot height where you can hit the blazes without them shooting you.',
           'Use a sword with Looting III and Sweeping Edge, and put hoppers under the chamber to catch rods.',
           'Stay within 16 blocks of the spawner – it only runs while a player is that close.',
+          'This is vanilla behaviour. The community wikis do not document whether naturally generated fortress spawners on DonutSMP still spawn blazes, so check before you build; spawners you buy or trade never spawn mobs.',
         ],
       },
       {
         heading: 'Safety in the Nether',
         paragraphs: [
-          'Fortresses are dangerous on DonutSMP because other players visit them too. Carry fire resistance, a shield against fireballs and only the gear you need. If you would rather skip fortress building, blaze spawners are traded between players, and you can find one in our store at [blaze spawner](/product/blaze-spawner) – real-money trading is against DonutSMP rules and at your own risk.',
+          'The Nether is hosted only on the NA East region, so every player who wants blazes ends up in the same dimension, and fortresses are dangerous because other players visit them too. Carry fire resistance, a shield against fireballs and only the gear you need. If you would rather skip fortress building, blaze spawners are traded between players, and you can find one in our store at [blaze spawner](/product/blaze-spawner) – real-money trading is against DonutSMP rules and at your own risk.',
         ],
       },
     ],
     faq: [
-      { q: 'Do DonutSMP blaze spawners give rods or powder?', a: 'The community wikis disagree. Check the spawner\'s storage before buying; either item works for brewing fuel and Strength potions.' },
+      { q: 'Do DonutSMP blaze spawners give rods or powder?', a: 'Blaze powder, not rods, according to Donutpedia and the Fandom wiki. Powder covers brewing fuel and Strength potions; rods for brewing stands still come from fortress blazes.' },
       { q: 'Why does my blaze farm drop no rods?', a: 'Blaze rods only drop when a player or tamed wolf kills the blaze. Fully automatic kills give no rods.' },
       { q: 'How much XP does a blaze give?', a: 'Each blaze killed by a player or tamed wolf drops 10 XP, which makes blaze farms good for Mending repairs.' },
     ],
@@ -223,14 +224,14 @@ export const wikiMoreB: WikiArticle[] = [
       {
         heading: 'Zombie spawners on DonutSMP',
         paragraphs: [
-          'A DonutSMP zombie spawner generates zombie drops into its storage instead of spawning zombies. That mostly means **rotten flesh**, and donutsmp.wiki notes that zombie spawners have no widely used production role compared with skeleton or iron golem spawners. Rotten flesh still has a use: novice cleric villagers buy 32 of it for one emerald.',
+          'Like every DonutSMP spawner, a zombie spawner would generate drops into its storage instead of spawning zombies. The zombie spawner is not in the drop tables the community wikis agree on, so expect zombie loot – mostly **rotten flesh** – and open the storage to confirm before you rely on it. Rotten flesh still has a use: novice cleric villagers buy 32 of it for one emerald.',
           'Some players report that the spawner menu also lets you collect stored experience. That is not confirmed by the community wikis, so check the menu of your own spawner before buying one for XP.',
         ],
       },
       {
         heading: 'How a vanilla zombie XP farm works (Java 1.21)',
         paragraphs: [
-          'Zombie spawners are found in dungeons. A spawner only runs while a player is within 16 blocks, and in Java 1.21 it only spawns zombies in darkness. Each zombie killed by a player gives 5 XP and drops rotten flesh, with a small chance of iron, a carrot or a potato. A standard build:',
+          'In vanilla, zombie spawners are found in dungeons. Whether naturally generated dungeon spawners on DonutSMP still spawn mobs is not documented, so check before you build – spawners bought or traded on the server never do. A vanilla spawner only runs while a player is within 16 blocks, and in Java 1.21 it only spawns zombies in darkness. Each zombie killed by a player gives 5 XP and drops rotten flesh, with a small chance of iron, a carrot or a potato. A standard build:',
         ],
         list: [
           'Dig out the room around the spawner and keep it unlit.',
@@ -243,7 +244,7 @@ export const wikiMoreB: WikiArticle[] = [
       {
         heading: 'Other good XP sources',
         paragraphs: [
-          'The fastest XP farms in vanilla are enderman farms in the outer End, where endermen spawn in huge numbers and give 5 XP each. Blaze farms give 10 XP per kill – see the [blaze farm guide](/wiki/blaze-farm-blaze-rods) – and gold farms in the Nether combine XP with gold, covered in the [gold farm guide](/wiki/gold-xp-farm-piglins). On DonutSMP the End and Nether are shared and busy, so expect competition and keep an eye on other players.',
+          'The fastest XP farms in vanilla are enderman farms in the outer End, where endermen spawn in huge numbers and give 5 XP each. Blaze farms give 10 XP per kill – see the [blaze farm guide](/wiki/blaze-farm-blaze-rods) – and gold farms in the Nether combine XP with gold, covered in the [gold farm guide](/wiki/gold-xp-farm-piglins). On DonutSMP the End and Nether are hosted only on the NA East region and shared by everyone, so expect competition and keep an eye on other players.',
         ],
       },
       {
@@ -305,7 +306,7 @@ export const wikiMoreB: WikiArticle[] = [
       {
         heading: 'Vanilla gold farm designs',
         paragraphs: [
-          'Large gold farms are usually built above a Nether wastes biome with many dark spawning platforms, often on the Nether roof where nothing else competes for spawns. The player stands in a safe AFK spot, angers the piglins and lets them walk into a drop or a damage block. DonutSMP has allowed bedrock breaking in the Overworld, but community notes do not confirm Nether roof access, so check the rules before building up there.',
+          'Large gold farms are usually built above a Nether wastes biome with many dark spawning platforms, often on the Nether roof where nothing else competes for spawns. The player stands in a safe AFK spot, angers the piglins and lets them walk into a drop or a damage block. Whether the Nether roof is reachable on DonutSMP is not documented, and the Nether runs only on the NA East region, so check in-game before planning a roof farm.',
           'A smaller option is a **portal farm** in the Overworld. Nether portal blocks occasionally spawn zombified piglins – more often on harder difficulty – so stacked portal frames over a kill chamber produce a slow but steady trickle of gold.',
         ],
       },
@@ -324,8 +325,8 @@ export const wikiMoreB: WikiArticle[] = [
       {
         heading: 'Server limits and practical tips',
         paragraphs: [
-          'DonutSMP enforces entity limits and, according to community notes, runs non-vanilla hopper speeds, so big redstone farms may behave differently than in singleplayer. Build a small test section first. The Nether is also shared and heavily used, so a farm near a common portal will not stay secret.',
-          'Spawners avoid all of this. Zombified piglin spawners are sold on the auction house and in our [DonutSMP spawners](/donutsmp-spawners) shop; real-money trading is against DonutSMP rules and at your own risk.',
+          'Community wikis report block and farm limits on DonutSMP (for example on hoppers), though the exact numbers are unconfirmed, so big farms may behave differently than in singleplayer. Build a small test section first. The Nether is also shared and heavily used, so a farm near a common portal will not stay secret.',
+          'Spawners avoid all of this. No new spawners enter the game, so zombified piglin spawners only change hands between players – and they are in our [DonutSMP spawners](/donutsmp-spawners) shop; real-money trading is against DonutSMP rules and at your own risk.',
         ],
       },
     ],
@@ -358,7 +359,7 @@ export const wikiMoreB: WikiArticle[] = [
         list: [
           '**Breeding** – villagers breed when they have enough food (bread, carrots, potatoes or beetroot) and there are free beds nearby.',
           '**Curing zombie villagers** – throw a splash potion of Weakness and feed a golden apple. Cured villagers give big permanent discounts.',
-          '**Moving them** – boats and minecarts carry villagers. Community notes say that since June 2026, entities can follow you through portals on DonutSMP when you travel in a supported vehicle such as a boat, which helps move them long distances.',
+          '**Moving them** – boats and minecarts carry villagers, and a villager in a boat or minecart can be pushed or ridden to your hall. Over long distances it is usually easier to breed or cure villagers on site.',
         ],
       },
       {
@@ -456,7 +457,7 @@ export const wikiMoreB: WikiArticle[] = [
       {
         heading: 'Selling crops on DonutSMP',
         paragraphs: [
-          'Bulk crops usually sell close to base price, so volume matters more than any single sale. Use `/sell` for instant money, fill player orders when they pay more and keep some output for villager emeralds. Community notes say DonutSMP hoppers do not run at vanilla speed, so test collection with a small module before scaling up.',
+          'Bulk crops usually sell close to base price, so volume matters more than any single sale. Use `/sell` for instant money (sell multipliers were removed in June 2026, so everyone gets the same base price), fill player orders when they pay more and keep some output for villager emeralds. Community wikis report hopper and farm limits on DonutSMP, so test collection with a small module before scaling up.',
           'Crop farms are a solid start, but money builds faster with more income sources. Some players also buy in-game money from third-party stores such as [DonutSMP money](/donutsmp-money); real-money trading is against DonutSMP rules and at your own risk.',
         ],
       },
@@ -597,7 +598,7 @@ export const wikiMoreB: WikiArticle[] = [
       {
         heading: 'Mace tips for DonutSMP',
         paragraphs: [
-          'Maces are traded on the DonutSMP auction house, and community notes do not list any special restriction on them – but combat settings change, so check `/rules` and recent announcements. A shield blocks a mace hit just like any other melee attack, and missing a smash often means taking full fall damage, so practise drops away from crystals first.',
+          'Maces are traded on the DonutSMP auction house, and the Shard Shop has listed a mace with Density and Wind Burst (shard prices change, so check in-game). No special restriction on maces is documented – but combat settings change, so check `/rules` and recent announcements. A shield blocks a mace hit just like any other melee attack, and missing a smash often means taking full fall damage, so practise drops away from crystals first.',
           'If you want one without farming trial chambers, the [mace](/product/mace) is in our store, along with other gear in [tools and weapons](/shop/tools-weapons). Real-money trading is against DonutSMP rules and at your own risk.',
         ],
       },
@@ -686,16 +687,16 @@ export const wikiMoreB: WikiArticle[] = [
     title: 'PvP on DonutSMP: Crystals, Totems, Pots and Combat Basics',
     seoTitle: 'DonutSMP PvP Guide: Crystals, Totems & Pots',
     metaDescription:
-      'How PvP works on DonutSMP: crystal and anchor basics, totems, golden apples, potions, what is blocked in combat and why not to log out mid-fight.',
-    summary: 'Crystal PvP basics, totems, golden apples and pots, plus what changes while you are in combat on DonutSMP.',
+      'How PvP works on DonutSMP: open PvP with no claims, crystal and anchor basics, totems, golden apples, potions and why not to log out mid-fight.',
+    summary: 'Crystal PvP basics, totems, golden apples and pots, plus what to assume about combat logging on DonutSMP.',
     intro:
-      'PvP on DonutSMP is fast and expensive. Most fights are crystal fights, gear is lost on death, and players with bounties attract attention. This page explains the basics every new fighter needs: how crystals and anchors work, how to manage totems and healing, and what the server changes while you are in combat.',
+      'PvP on DonutSMP is fast and expensive. Most fights are crystal fights, gear is lost on death, and players with bounties attract attention. This page explains the basics every new fighter needs: how crystals and anchors work, how to manage totems and healing, and what to assume about combat logging.',
     sections: [
       {
         heading: 'How PvP works on DonutSMP',
         paragraphs: [
-          'DonutSMP is semi-anarchy, so outside protected areas other players can attack you and take your items when you die. The community wikis agree that **crystal PvP** is the dominant fighting style rather than a niche one, so plan your gear around explosions – see [best armor enchantments](/wiki/best-armor-enchantments).',
-          'The old `/duel` command and the duel area at spawn were removed on June 2, 2026, according to donutsmp.wiki, so most practice now happens in the open world or with friends you trust.',
+          'DonutSMP is a semi-anarchy server with open PvP everywhere – there are no land claims or safe zones, so other players can attack you and take your items when you die. It is not a lifesteal server: you lose items, not hearts. The community wikis agree that **crystal PvP** is the dominant fighting style rather than a niche one, so plan your gear around explosions – see [best armor enchantments](/wiki/best-armor-enchantments).',
+          'Duels and the spawn lobbies were removed in the June 2026 update. One fan wiki says duels were turned into an RTP queue that drops you into the overworld with an opponent, but that is unconfirmed, so check in-game. Most practice now happens in the open world or with friends you trust.',
         ],
       },
       {
@@ -720,8 +721,8 @@ export const wikiMoreB: WikiArticle[] = [
       {
         heading: 'Combat state and logging out',
         paragraphs: [
-          'The server tracks when you are in combat. According to donutsmp.wiki, Quick Buy cannot be used during a fight and the shard pickaxe is intentionally unavailable in combat. Thrown ender pearls normally disappear when you die; since June 2026 a setting in the General settings menu lets you keep them.',
-          'Never log out or disconnect to escape a fight. Assume it costs you your items, and check `/rules` in-game for the current combat-logging rule, since the exact timer and penalty can change.',
+          'No reliable source documents DonutSMP\'s exact combat-tag rules – which commands or menus are blocked mid-fight, or for how long. Assume that teleports and menus may be restricted while you are in combat, and look through `/settings` for combat-related options.',
+          'Never log out or disconnect to escape a fight. Assume it costs you your items, and check `/rules` in-game for the current combat-logging rule, since the exact timer and penalty are not documented and can change.',
         ],
       },
       {
@@ -735,7 +736,7 @@ export const wikiMoreB: WikiArticle[] = [
     faq: [
       { q: 'Is crystal PvP allowed on DonutSMP?', a: 'Yes. Crystal PvP is the main form of combat on DonutSMP. Macros and advantage mods are still banned.' },
       { q: 'What happens if I log out during a fight?', a: 'Do not do it. Treat combat logging as losing your items and check `/rules` for the current penalty.' },
-      { q: 'Does DonutSMP still have /duel?', a: 'No. The duel command and the duel area at spawn were removed on June 2, 2026, according to the community wiki.' },
+      { q: 'Does DonutSMP still have /duel?', a: 'The duel command and spawn duel area were removed in the June 2026 update. One fan wiki says duels became an RTP queue; check in-game for the current state.' },
     ],
     related: ['totems-pvp-gear', 'potions-brewing-guide', 'best-armor-enchantments', 'donutsmp-rules'],
     shopLinks: [

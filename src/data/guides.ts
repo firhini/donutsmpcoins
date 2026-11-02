@@ -36,6 +36,8 @@ type GuideInput = Omit<Guide, 'readingMinutes'>;
 const UPDATED = '2026-10-11';
 /** guides touched by the November 2026 spawner/bundle repricing */
 const REPRICED = '2026-11-02';
+/** guides fact-checked against the post-June-2026 server state */
+const FACTCHECKED = '2026-11-03';
 
 const raw: GuideInput[] = [
   // ─────────────────────────────────────────────────────────────
@@ -46,41 +48,41 @@ const raw: GuideInput[] = [
     title: 'How to Get Money on DonutSMP Fast (2026 Guide)',
     seoTitle: 'How to Get Money on DonutSMP Fast – 2026 Guide | {{store}}',
     metaDescription:
-      'Legit ways to make money on DonutSMP – spawner farms, shop selling, auction flipping, base hunting – plus what buying DonutSMP money costs per 1M in 2026.',
+      'Legit ways to make money on DonutSMP – spawners, /sell and orders, auction flipping, base hunting – plus what buying DonutSMP money costs per 1M in 2026.',
     intro:
-      'Money on DonutSMP buys the things that actually move you forward: spawners, god gear, netherite, a place on the balance top. This guide walks through the in-game methods that still work in 2026 – spawner farms, selling to the shop, flipping the auction house and base hunting – with honest notes on how long each one takes. At the end we cover the shortcut: what buying DonutSMP money costs per million and how delivery works.',
+      'Money on DonutSMP buys the things that actually move you forward: spawners, god gear, netherite, a place on the balance top. This guide walks through the in-game methods that still work after the June 2026 update – spawners, selling with `/sell` and player orders, flipping the auction house and base hunting – with honest notes on how long each one takes. At the end we cover the shortcut: what buying DonutSMP money costs per million and how delivery works.',
     sections: [
       {
         heading: 'Why money matters on DonutSMP',
         paragraphs: [
-          'DonutSMP is a survival SMP with a player-driven economy. Almost everything you want is priced in in-game money: spawners on the auction house, netherite, totems, even hearts if you are trading with the right people. A player with a few hundred million can set up a farm in an evening; a player with nothing spends that evening mining.',
+          'DonutSMP is a semi-anarchy survival SMP with open PvP, no land claims and a player-driven economy. Almost everything you want is priced in in-game money: spawners from other players, netherite, elytras, totems. A player with a few hundred million can set up a farm in an evening; a player with nothing spends that evening mining.',
           'The methods below are ordered roughly from slowest-but-safest to fastest-but-riskiest. Most rich players use two or three of them at the same time, and every one of them gets easier once you have a little starting capital.',
         ],
       },
       {
         heading: 'Method 1: Spawner farms – the reliable grind',
         paragraphs: [
-          'Spawner farms are the backbone of the DonutSMP economy. A skeleton spawner drops bones and arrows, both of which the server shop buys in bulk, and the XP is a welcome side effect for mending your gear. One spawner’s output is pocket change; sixty-four spawners in a dark room with a water-and-hopper collection system is a steady income while you stand still.',
-          'Spawners can be picked up with a silk touch pickaxe when you find them in dungeons and mineshafts, which is free but slow. The faster route is buying them: on the auction house in-game, or from a store like {{store}} where a [Skeleton Spawner](/product/skeleton-spawner) is $0.89 each – priced at its in-game value of about 18M coins – and drops to $0.69 at 250+. Iron golem spawners ($1.99) produce iron, which sells well and never goes out of fashion; blaze spawners ($0.89) give rods for brewing and some of the best XP on the server.',
-          'The main cost is not the spawners – it is building a base that does not get found. Keep the farm small at first, expand with the profit, and read our [spawners guide](/guides/donutsmp-spawners-guide) for the payback math.',
+          'Spawners are the backbone of the DonutSMP economy, but they do not work like vanilla ones: no mobs spawn. A skeleton spawner fills an internal storage with bones and arrows, which you open like a chest and sell with `/sell` or into player orders for bones. One spawner’s output is pocket change; dozens stacked into a few blocks (sneak and right-click to stack) are a steady income with no kill room and no mob farm to build.',
+          'Since the June 2026 update no new spawners enter the game – the server stopped selling them – so the only way to get one is from another player: a direct trade in-game, or a store like {{store}} where a [Skeleton Spawner](/product/skeleton-spawner) is $0.89 each and drops to $0.69 at 250+. We price it on what we see skellies trade for in our own deals – about 18M coins – but prices vary and public trackers often show different numbers. Iron golem spawners ($1.99) produce iron ingots, which sell well and never go out of fashion; blaze spawners ($0.89) produce blaze powder for brewing.',
+          'The main cost is not the spawners – it is building a base that does not get found, because there are no claims to protect it. Keep the farm small at first, expand with the profit, and read our [spawners guide](/guides/donutsmp-spawners-guide) for the payback math.',
         ],
       },
       {
-        heading: 'Method 2: Selling to the server shop',
+        heading: 'Method 2: Selling with /sell and player orders',
         paragraphs: [
-          'DonutSMP has a server shop that buys common items at a fixed rate. The sell prices change between seasons, so check `/shop` before you commit to anything, but the principle is always the same: automate a farm for whatever currently pays best per hour of your time.',
-          'Sugar cane, cactus, pumpkin and melon farms need no mobs and almost no attention. Villager-based setups (rotten flesh from zombie spawners traded to clerics, for example) turn junk into emeralds. The numbers per hour are lower than a big spawner room, but the startup cost is close to zero, which is why this is where most new players should begin.',
+          'DonutSMP buys common items through `/sell`, a drag-in menu that pays fixed server base prices – `/worth` shows the price of an item and `/sellhistory` your past sales. Sell multipliers were removed in June 2026 and base prices change with updates, so check `/worth` and the buy orders in `/orders` before you commit to anything. The principle stays the same: automate a farm for whatever currently pays best per hour of your time.',
+          'Sugar cane, cactus, pumpkin and melon farms need no mobs and almost no attention. Villager-based setups (rotten flesh traded to cleric villagers, for example) turn junk into emeralds. The numbers per hour are lower than a big spawner room, but the startup cost is close to zero, which is why this is where most new players should begin.',
         ],
         list: [
           'Start with one crop farm that runs on its own and sell the output daily.',
-          'Save the first 18M or so for a skeleton spawner – that is what a skelly is worth in-game.',
+          'Save up for a first skeleton spawner – in our own trading we see skellies go for around 18M, but prices vary, so check recent trades.',
           'Only build giant farms once you have a hidden base – a visible farm is a free farm for somebody else.',
         ],
       },
       {
         heading: 'Method 3: Auction house flipping',
         paragraphs: [
-          'The auction house (`/ah`) is where impatient players sell to patient ones. People list netherite, spawners, elytras and enchanted gear below market value because they want cash now. If you know the real value of items – and you will after a week of watching – you can buy low, relist, and keep the difference.',
+          'The auction house (`/ah`) is where impatient players sell to patient ones. People list netherite, elytras, shard tools and enchanted gear below market value because they want cash now. If you know the real value of items – and you will after a week of watching – you can buy low, relist, and keep the difference.',
           'Flipping scales with capital. With 5M you can flip a few cheap listings a day; with 200M you can clear out a whole category for an evening. It is also the method most exposed to risk: prices crash after big base raids, and a listing that looked cheap can sit unsold for days. Never put more than half your balance into flips.',
         ],
       },
@@ -88,7 +90,7 @@ const raw: GuideInput[] = [
         heading: 'Method 4: Base hunting',
         paragraphs: [
           'Base hunting means finding other players’ bases and taking what is inside. It is the highest-variance method on the server: one loaded base can be worth more than a month of farming, and a hundred empty chunks are worth nothing. You need an elytra, stacks of rockets, totems and a lot of patience.',
-          'It is also the method that makes you a target. Hunters get hunted, and the gear you bring is the gear you can lose. We cover routes, tools and the Amethyst Pickaxe in the [base hunting guide](/guides/donutsmp-base-hunting-guide).',
+          'It is also the method that makes you a target. Hunters get hunted, and the gear you bring is the gear you can lose. We cover routes, tools and the Shard Pickaxe (formerly the Amethyst Pickaxe) in the [base hunting guide](/guides/donutsmp-base-hunting-guide).',
         ],
       },
       {
@@ -97,7 +99,7 @@ const raw: GuideInput[] = [
           'Every method above costs time – anywhere from a few hours for a crop farm to weeks for a serious spawner setup. If you would rather spend the evening playing, buying DonutSMP money is the shortcut, and the prices are smaller than most people expect.',
           'At {{store}} the pick-your-amount option starts at **$0.05 per 1M** and drops automatically with volume: $0.04 from 100M and $0.03 from 1B. Fixed packs are a little cheaper for round amounts – a [50M pack](/product/50m-money) is $2.39 (just under $0.048 per million), [100M](/product/100m-money) is $3.79 and [1B](/product/1b-money) is $28.99. On top of that, carts over $15 get 5% off, over $40 get 8% and over $100 get 12%, and 5% of every delivered order comes back as store credit.',
           'Delivery is done by hand: a member of our staff logs in and runs `/pay` to the username on your order. {{eta}} There is no bot and no automation – slower in theory, more reliable in practice, because nothing breaks at 3am. You can follow the status on your order page.',
-          'Two honest notes. DonutSMP’s rules prohibit trading in-game money for real currency; enforcement is the server’s decision and buying is your own responsibility. And {{store}} is an independent player-run store, not affiliated with DonutSMP, Mojang or Microsoft.',
+          'Two honest notes. DonutSMP’s rules prohibit trading in-game money for real currency; enforcement is the server’s decision, has included permanent bans and wipes, and buying is your own responsibility. And {{store}} is an independent player-run store, not affiliated with DonutSMP, Mojang or Microsoft.',
         ],
       },
       {
@@ -106,8 +108,8 @@ const raw: GuideInput[] = [
           'Pick the row that sounds like you. The pattern is always the same: a small amount of money, invested in something that produces more money, compounds faster than any single grinding session.',
         ],
         list: [
-          '**New player, no money:** crop farm plus the server shop, then your first skeleton spawners.',
-          '**Some money, lots of time:** a 32–64 spawner farm in a hidden base, selling output every day.',
+          '**New player, no money:** crop farm plus `/sell` and orders, then your first skeleton spawners.',
+          '**Some money, lots of time:** 32–64 spawners in a hidden base, emptying and selling their storage every day.',
           '**Some money, little time:** auction house flipping in the evenings.',
           '**Geared up and bored:** base hunting with an elytra and a friend on voice.',
           '**Want to skip the grind:** buy the spawners or the money directly, build the farm immediately and let it pay for itself.',
@@ -117,7 +119,7 @@ const raw: GuideInput[] = [
     faq: [
       {
         q: 'What is the fastest legit way to get money on DonutSMP?',
-        a: 'For most players it is a skeleton spawner farm. Nothing else produces sellable items around the clock without you being there. Base hunting can be faster, but only on the sessions where you actually find something.',
+        a: 'For most players it is skeleton spawners. Nothing else turns out sellable bones and arrows with so little effort – no mobs, no kill room, just open the storage and sell. Base hunting can be faster, but only on the sessions where you actually find something.',
       },
       {
         q: 'How much is 1M DonutSMP money worth in real money?',
@@ -125,7 +127,7 @@ const raw: GuideInput[] = [
       },
       {
         q: 'Can I get banned for buying DonutSMP money?',
-        a: 'DonutSMP’s rules forbid real-money trading and the server can enforce that however it chooses. We deliver with ordinary /pay commands and keep it discreet, but the risk is yours. Read the [safe buying guide](/guides/buying-donutsmp-money-safely) before you order anywhere.',
+        a: 'DonutSMP’s rules forbid real-money trading and the server can enforce that however it chooses – permanent bans and wipes have hit even top baltop players. We deliver with ordinary /pay commands and keep it discreet, but the risk is yours. Read the [safe buying guide](/guides/buying-donutsmp-money-safely) before you order anywhere.',
       },
       {
         q: 'Do I need to be online to receive money?',
@@ -134,7 +136,7 @@ const raw: GuideInput[] = [
     ],
     relatedProductIds: ['money-1m', 'money-50m', 'skeleton-spawner', 'starter-bundle'],
     relatedGuides: ['donutsmp-spawners-guide', 'buying-donutsmp-money-safely', 'donutsmp-base-hunting-guide'],
-    updatedAt: REPRICED,
+    updatedAt: FACTCHECKED,
   },
 
   // ─────────────────────────────────────────────────────────────
@@ -145,69 +147,69 @@ const raw: GuideInput[] = [
     title: 'DonutSMP Spawners Explained: Skeleton, Iron Golem, Cow, Blaze & More',
     seoTitle: 'DonutSMP Spawners Guide – Types, Prices & Farms | {{store}}',
     metaDescription:
-      'What every DonutSMP spawner produces, what it costs (skeleton spawners from $0.69 in bulk, priced at in-game value), payback math and safe farm placement.',
+      'What every DonutSMP spawner produces, what it costs (skeleton spawners from $0.69 in bulk), how stacking works, payback math and safe placement.',
     intro:
       'Spawners are how money gets made on DonutSMP. Everything else – flipping, hunting, trading – moves money that somebody’s spawner farm created first. This guide explains what each spawner type actually produces, what it costs in our store, how the payback math works and where to put a farm so you get to keep it.',
     sections: [
       {
         heading: 'How spawners work on DonutSMP',
         paragraphs: [
-          'A spawner spawns its mob whenever a player is within range and the conditions are right – darkness for hostile mobs, space for golems. Mobs drop items when killed, and most of those items can be sold to the server shop or to other players. On DonutSMP spawners can be mined with a silk touch pickaxe, so they are a tradeable item: you can move them, stack them in one room and buy or sell them on the auction house.',
-          'That last point is what makes them an investment rather than a grind. A spawner you buy today still has resale value next month, as long as the server has not reset. Money you spend on spawners is money you can get back; money you spend on rockets is gone.',
+          'DonutSMP spawners are not vanilla spawners. They **do not spawn mobs** – instead they generate the mob’s drops into an internal storage, which you open by right-clicking it like a chest. Sneak and right-click a placed spawner with another of the same type to stack them into one block. Output per stack has diminishing returns, so several separate stacks in different blocks beat one giant stack. Whether a stored-XP button exists and whether Silk Touch is needed to pick a spawner up are not confirmed by the community wikis – check in-game.',
+          'Supply is what makes them an investment. Since the June 2026 update the server no longer sells spawners and no new ones enter the game, so every spawner changes hands between players – one fan wiki says they cannot be listed on `/ah`, so most deals are direct trades. DrDonut has declared Season 2 permanent, so a spawner you buy today keeps its resale value as long as nobody raids it. Money you spend on spawners is money you can get back; money you spend on rockets is gone.',
         ],
       },
       {
         heading: 'Skeleton spawners – the default choice',
         paragraphs: [
-          'The skeleton spawner is the DonutSMP workhorse. Skeletons drop bones and arrows, both of which sell in bulk, and they give decent XP for mending gear. Farms are easy to build: a dark room, water streams pushing mobs into a kill chamber, hoppers into chests. Because almost every rich player runs a skelly farm, auction house prices are predictable and there is always a buyer when you want to sell the spawners back.',
-          'In our store a [Skeleton Spawner](/product/skeleton-spawner) is **$0.89** on its own, $0.84 from 25, $0.79 from 50, $0.74 from 100 and $0.69 from 250 spawners – in line with the roughly 18M coins a skelly is worth in-game. A full 64-spawner room is $50.56 at the 50+ rate, or you can take the [Spawner Farm Bundle](/product/spawner-farm-bundle) – 64 skellies plus 10M for building materials – at $45.99.',
+          'The skeleton spawner is the DonutSMP workhorse. It fills its storage with bones and arrows, and bones are in steady demand on `/orders`, so the output always sells. There is nothing to build: no dark room, no water streams, no kill chamber – a hidden room with your stacks and a chest is enough. Because almost every rich player owns skellies, there is always a buyer when you want to sell the spawners back.',
+          'In our store a [Skeleton Spawner](/product/skeleton-spawner) is **$0.89** on its own, $0.84 from 25, $0.79 from 50, $0.74 from 100 and $0.69 from 250 spawners – in line with the roughly 18M coins we see skellies trade for in our own deals (prices vary, and public trackers often show different figures). A full 64-spawner room is $50.56 at the 50+ rate, or you can take the [Spawner Farm Bundle](/product/spawner-farm-bundle) – 64 skellies plus 10M for building materials – at $45.99.',
         ],
       },
       {
         heading: 'Iron golem spawners',
         paragraphs: [
-          'Iron golems drop iron ingots and the occasional poppy. Iron is the most useful bulk resource in the game – hoppers, rails, anvils, armor for alts – and it sells consistently because other players always need it. Golem farms need more space per spawner than skeleton farms and the kill mechanism has to handle a mob with 100 health points, so budget for a lava blade or a proper drop design.',
-          'An [Iron Golem Spawner](/product/iron-golem-spawner) is $1.99 each, $1.89 from 25 and $1.74 from 100, matching an in-game value of about 41M coins. They also sit in the Elite Mystery Box and Legendary Crate pools if you prefer a gamble.',
+          'An iron golem spawner fills its storage with iron ingots – no golems appear, so there is no 100-health mob to kill and no lava blade to build. Iron is the most useful bulk resource in the game – hoppers, rails, anvils, armor – and it sells consistently because other players always need it.',
+          'An [Iron Golem Spawner](/product/iron-golem-spawner) is $1.99 each, $1.89 from 25 and $1.74 from 100, matching the roughly 41M coins we see in our own trading (prices vary). They also sit in the Elite Mystery Box and Legendary Crate pools if you prefer a gamble.',
         ],
       },
       {
         heading: 'Cow spawners – the premium pick',
         paragraphs: [
-          'Cows drop leather and raw beef. Leather turns into books, bookshelves and item frames, and beef is a food supply you never have to think about again. Cows are passive mobs, so the spawn area is lit rather than dark – build it like an animal pen with a kill and collection system, not like a skelly box.',
-          'A [Cow Spawner](/product/cow-spawner) is one of the most valuable spawners on the server – it trades for around 100M coins in-game – and costs $4.99 here, $4.69 from 10 and $4.39 from 50. It is also the epic line of the [Spawner Crate](/product/spawner-crate) and sits in the Legendary Crate pool.',
+          'A cow spawner fills its storage with raw beef – **no leather**, according to the community wikis, so leather still has to come from a vanilla cow pen. Beef is a food supply you never have to think about again, and it sells through `/sell` and player orders. No cows spawn, so there is no pen, no lighting and no kill system to build.',
+          'A [Cow Spawner](/product/cow-spawner) is one of the most sought-after spawners we trade – in our own deals it goes for around 100M coins, though prices vary – and costs $4.99 here, $4.69 from 10 and $4.39 from 50. It is also the epic line of the [Spawner Crate](/product/spawner-crate) and sits in the Legendary Crate pool.',
         ],
       },
       {
         heading: 'Blaze, creeper and zombie spawners',
         paragraphs: [
-          '**Blaze spawners** ($0.89, $0.84 from 25) give blaze rods, which means blaze powder for brewing and eyes of ender, plus some of the best XP per kill on the server. Blazes set things on fire, so build the farm out of non-flammable blocks and keep your standing spot behind a wall.',
-          '**Creeper spawners** ($0.69, $0.65 from 25) are the gunpowder source every elytra user eventually wants. Gunpowder turns into firework rockets, and a base hunter burns through stacks of them per session. Creepers need a room with no cats and a kill method that does not let them explode next to your hoppers.',
-          '**Zombie spawners** ($0.39, $0.36 from 50) are the cheapest spawner we sell. Rotten flesh is nearly worthless to the shop but cleric villagers trade it for emeralds, and the XP is as good as a skeleton’s. If you want a cheap XP farm next to your enchanting setup, this is it.',
+          '**Blaze spawners** ($0.89, $0.84 from 25) produce **blaze powder, not rods** – fuel for brewing stands, Strength potions and eyes of ender. Nothing spawns and nothing burns, so the spawner can sit in any room; the rod for a brewing stand itself still comes from a fortress blaze.',
+          '**Creeper spawners** ($0.69, $0.65 from 25) are the gunpowder source every elytra user eventually wants. Gunpowder turns into firework rockets, and a base hunter burns through stacks of them per session. No creepers appear, so nothing explodes next to your storage.',
+          '**Zombie spawners** ($0.39, $0.36 from 50) are the cheapest spawner we sell. They are not in the drop tables the community wikis agree on, so expect zombie loot – mostly rotten flesh – and check the storage in-game. Rotten flesh is nearly worthless to `/sell`, but cleric villagers trade it for emeralds.',
         ],
       },
       {
         heading: 'Payback math: when does a spawner pay for itself?',
         paragraphs: [
-          'In real-money terms the comparison is simple, because our spawner prices follow the in-game value. A skeleton spawner is $0.89 and a skelly trades for about 18M coins – and 18M money costs about the same at our $0.05 base rate. An iron golem spawner ($1.99) matches about 41M coins and a cow spawner ($4.99) around 100M. Buying the spawner or buying the money to pay a player therefore costs roughly the same; the spawner has paid for itself once its drops have sold for more than its coin value – about 18M for a skelly. Whether that happens depends on sell prices and how long you keep the farm running.',
-          'In in-game terms, compare the auction house price of a spawner with what one spawner’s drops sell for per day in `/shop`. Sell prices change between seasons, so we will not quote one here; run a single spawner for a day, sell the output and divide its coin value by that number – the result is how many days it needs to earn itself back.',
+          'In real-money terms the comparison is simple, because our spawner prices follow the in-game value. A skeleton spawner is $0.89 and in our own trading a skelly goes for about 18M coins – and 18M money costs about the same at our $0.05 base rate. An iron golem spawner ($1.99) matches about 41M coins and a cow spawner ($4.99) around 100M in the same deals – prices vary, so treat these as our observations, not official values. Buying the spawner or buying the money to pay a player therefore costs roughly the same; the spawner has paid for itself once its drops have sold for more than its coin value – about 18M for a skelly. Whether that happens depends on sell prices and how long you keep the farm running.',
+          'In in-game terms, compare what players currently pay for a spawner with what one spawner’s drops sell for per day through `/sell` or `/orders`. Base prices change with updates, so we will not quote one here; run a single spawner for a day, sell the output and divide its coin value by that number – the result is how many days it needs to earn itself back.',
         ],
         list: [
-          'Build the collection system before you place the spawners – lost drops are lost money.',
-          'Stack spawners close together so a single standing spot keeps all of them active.',
+          'Open and empty the storage regularly, and check in-game what happens when it fills up – lost drops are lost money.',
+          'Spread big counts over several stacks in separate blocks; one giant stack has diminishing returns. Whether you must stay nearby for spawners to produce is not documented, so test it.',
           'Sell output daily rather than hoarding; prices rarely go up by waiting.',
         ],
       },
       {
         heading: 'Where to place a spawner farm',
         paragraphs: [
-          'The number one way players lose spawner farms is not nerfs – it is other players finding the base. Build far from spawn, underground, and avoid straight tunnels that lead from the surface. Do not build directly under a surface structure you also use. Never share coordinates in public chat, even as a joke.',
+          'The number one way players lose spawners is not nerfs – it is other players finding the base. There are no land claims, and bases near `/rtp` landing spots are usually found within days to weeks. Build far out, underground, and avoid straight tunnels that lead from the surface. Do not build directly under a surface structure you also use. Never share coordinates in public chat, even as a joke.',
           'If you want to skip the search entirely, the [Spawner Farm Bundle](/product/spawner-farm-bundle) ships 64 spawners and 10M at once, and our [base hunting guide](/guides/donutsmp-base-hunting-guide) explains exactly what hunters look for – read it, then build the opposite.',
         ],
       },
       {
         heading: 'Delivery of spawners',
         paragraphs: [
-          'Spawners are handed over in-game by our staff: join DonutSMP with the username from your order, accept the teleport request from the delivery account and pick up the shulker. {{eta}} There is no bot. Have inventory space ready and be somewhere safe – nobody wants to receive 64 spawners in the middle of spawn.',
+          'Spawners are handed over in-game by our staff: join DonutSMP with the username from your order, accept the teleport request from the delivery account and pick up the shulker. {{eta}} There is no bot. Have inventory space ready and be somewhere safe – nobody wants to receive 64 spawners in the middle of a crystal fight.',
           'As with everything on this site: DonutSMP’s rules prohibit real-money trading, enforcement is the server’s call, and {{store}} is not affiliated with DonutSMP or Mojang. Buy at your own discretion.',
         ],
       },
@@ -215,15 +217,15 @@ const raw: GuideInput[] = [
     faq: [
       {
         q: 'Which spawner makes the most money on DonutSMP?',
-        a: 'Per spawner, skeleton and iron golem spawners are the most consistent earners because their drops always sell. Blaze spawners are better for XP and brewing than for raw cash.',
+        a: 'Per spawner, skeleton and iron golem spawners are the most consistent earners because their drops always sell. Blaze spawners give blaze powder and are better for brewing than for raw cash.',
       },
       {
         q: 'How many skeleton spawners do I need for a good farm?',
-        a: 'Anything from 16 upwards is a real farm. 64 is the classic room size, and from 50 spawners the bulk price drops to $0.79. Past 100–150 spawners, time spent standing at the farm becomes the bottleneck, not spawner count.',
+        a: 'Anything from 16 upwards is a real farm. 64 is the classic room size, and from 50 spawners the bulk price drops to $0.79. Because output per stack has diminishing returns, spread large counts over several separate stacks.',
       },
       {
         q: 'Can spawners be stolen?',
-        a: 'Yes – anyone with a silk touch pickaxe who finds your base can mine them. Hidden base placement matters more than the spawner count.',
+        a: 'Yes. There are no land claims on DonutSMP, so anyone who finds your base can break and take them (whether Silk Touch is needed is not documented – assume it is no obstacle). Hidden base placement matters more than the spawner count.',
       },
       {
         q: 'Do you sell spawners in bulk?',
@@ -232,7 +234,7 @@ const raw: GuideInput[] = [
     ],
     relatedProductIds: ['skeleton-spawner', 'iron-golem-spawner', 'blaze-spawner', 'spawner-farm-bundle'],
     relatedGuides: ['how-to-get-money-on-donutsmp', 'donutsmp-mystery-boxes-explained', 'donutsmp-base-hunting-guide'],
-    updatedAt: REPRICED,
+    updatedAt: FACTCHECKED,
   },
 
   // ─────────────────────────────────────────────────────────────
@@ -275,7 +277,7 @@ const raw: GuideInput[] = [
       {
         heading: 'What DonutSMP’s rules say – and what that means for you',
         paragraphs: [
-          'DonutSMP’s rules prohibit trading in-game items, money or accounts for real-world value. Enforcement can be anything from a warning to a balance reset or a ban, and it can change without notice. We cannot prevent it, insure against it or refund a delivered order because of it, and we do not pretend otherwise.',
+          'DonutSMP’s rules prohibit trading in-game items, money or accounts for real-world value. Enforcement ranges from warnings to permanent bans and data wipes – several top baltop players have been banned for it – and it can change without notice. We cannot prevent it, insure against it or refund a delivered order because of it, and we do not pretend otherwise.',
           'What we do: deliver with ordinary player actions, spread deliveries across accounts and times, never mention the store or money in game chat, and ask you not to either. What we are not: affiliated with, endorsed by or connected to DonutSMP, Mojang or Microsoft in any way. Buying is your decision and your responsibility.',
         ],
       },
@@ -328,7 +330,7 @@ const raw: GuideInput[] = [
     ],
     relatedProductIds: ['money-10m', 'money-50m', 'money-100m', 'starter-bundle'],
     relatedGuides: ['donutsmp-irl-trading-discord', 'how-to-get-money-on-donutsmp', 'donutsmp-spawners-guide'],
-    updatedAt: UPDATED,
+    updatedAt: FACTCHECKED,
   },
 
   // ─────────────────────────────────────────────────────────────
@@ -436,26 +438,26 @@ const raw: GuideInput[] = [
     metaDescription:
       'Every way to get an Elytra on DonutSMP – End cities, the auction house, mystery boxes or buying one for $28.49 – plus rockets, enchantments and base hunting.',
     intro:
-      'An Elytra changes how you play DonutSMP. Without one you walk, boat and nether-tunnel; with one, the whole map is twenty minutes away and base hunting becomes possible. This guide covers every way to get an Elytra on the server, what each route costs in time or money, which enchantments matter, how to keep it fueled with rockets and what players actually do once they have wings.',
+      'An Elytra changes how you play DonutSMP. Without one you walk, boat and nether-tunnel; with one, distant regions are a short flight away and base hunting becomes possible. This guide covers every way to get an Elytra on the server, what each route costs in time or money, which enchantments matter, how to keep it fueled with rockets and what players actually do once they have wings.',
     sections: [
       {
         heading: 'Why the Elytra matters on DonutSMP',
         paragraphs: [
-          'DonutSMP’s world is big and the valuable things – other players’ bases, untouched End cities, far-out spawner rooms – are far from spawn. An Elytra with a stack of rockets turns a two-hour trek into a short flight, and it is the only reliable way to leave a fight you are losing. It is also a status item: on a lifesteal server, the player who can leave at will is the player who keeps their hearts.',
-          'That is why Elytras hold their value. They are rarely on the auction house for long and the price barely moves between seasons.',
+          'DonutSMP’s world is big – the overworld border sits around ±225,000 blocks – and the valuable things – other players’ bases, untouched End cities, far-out spawner rooms – are far from the busy `/rtp` areas. An Elytra with a stack of rockets turns a two-hour trek into a short flight, and it is the only reliable way to leave a fight you are losing. It is also a status item: on a semi-anarchy server with open PvP, the player who can leave at will is the player who keeps their gear.',
+          'That is why Elytras hold their value. They only come from the End, so the supply inside the border is finite; they rarely sit on the auction house for long, and fan trackers put them at several hundred million coins in autumn 2026.',
         ],
       },
       {
         heading: 'Route 1: End cities (free, slow, dangerous)',
         paragraphs: [
-          'The vanilla way. Kill the Ender Dragon or use an existing portal, find an End city with a ship, and take the Elytra from the item frame. On a busy public server the problem is not the shulkers – it is that every End city near the main island was looted months ago. Expect a long crossing over the void on end-stone bridges, several thousand blocks out, often alongside other players doing the same thing with worse intentions.',
+          'The vanilla way. On DonutSMP the End is hosted only on the NA East region; travel through a stronghold portal, find an End city with a ship, and take the Elytra from the item frame. On a busy public server the problem is not the shulkers – it is that every End city near the main island was looted months ago. Expect a long crossing over the void on end-stone bridges, several thousand blocks out, often alongside other players doing the same thing with worse intentions.',
           'If you do find one, bring shulker shells home too; a [shulker box](/product/shulker-box) is $0.29 in our store, which tells you roughly how players value them.',
         ],
       },
       {
         heading: 'Route 2: Auction house and player trades',
         paragraphs: [
-          'Elytras appear on `/ah` and in trade channels fairly regularly, usually from base hunters who found more than one. In-game prices are high – it is one of the few items most players will pay a premium for – and you need to check durability and enchantments before buying. An unenchanted, half-broken Elytra is a very different item from a Mending one.',
+          'Elytras appear on `/ah` and in trade channels fairly regularly, usually from base hunters who found more than one. In-game prices are high – it is the top investment item on the server – and you need to check durability and enchantments before buying. An unenchanted, half-broken Elytra is a very different item from a Mending one.',
         ],
       },
       {
@@ -469,14 +471,14 @@ const raw: GuideInput[] = [
         heading: 'Route 4: Buy it – $28.49',
         paragraphs: [
           'The [Elytra](/product/elytra) in our store is **$28.49** (down from $29.99) and comes with **Unbreaking III and Mending** already applied – the two enchantments that matter, because together they mean you never have to repair it as long as you pick up XP. Up to 20 per order.',
-          'It is also in two bundles: the [Pro Bundle](/product/pro-bundle) ($40.99) adds 50M and 16 skeleton spawners in one order and one handover, and the [Basehunter Bundle](/product/basehunter-bundle) ($33.99) pairs the Elytra with an Amethyst Pickaxe, 16 totems and 20M in one order – everything you need to go hunting on day one.',
+          'It is also in two bundles: the [Pro Bundle](/product/pro-bundle) ($40.99) adds 50M and 16 skeleton spawners in one order and one handover, and the [Basehunter Bundle](/product/basehunter-bundle) ($33.99) pairs the Elytra with an Amethyst (Shard) Pickaxe, 16 totems and 20M in one order – everything you need to go hunting on day one.',
           'Delivery is in-game by our staff: join DonutSMP with the username on your order, accept the teleport and take the drop. {{eta}} No bot, no account access – and, as with everything we sell, DonutSMP’s rules prohibit real-money trading, so the decision and the risk are yours. {{store}} is not affiliated with DonutSMP or Mojang.',
         ],
       },
       {
         heading: 'Keeping it in the air: rockets and gunpowder',
         paragraphs: [
-          'An Elytra without rockets is a glider. Firework rockets are paper plus gunpowder, and a serious session burns through a stack or two. The sustainable answer is a [Creeper Spawner](/product/creeper-spawner) ($0.69, $0.65 from 25) – creepers drop gunpowder, and a small creeper farm keeps you flying indefinitely. Paper comes from the sugar cane farm you probably already have.',
+          'An Elytra without rockets is a glider. Firework rockets are paper plus gunpowder, and a serious session burns through a stack or two. The sustainable answer is a [Creeper Spawner](/product/creeper-spawner) ($0.69, $0.65 from 25) – it fills its storage with gunpowder without spawning a single creeper, and a small stack keeps you flying indefinitely. Paper comes from the sugar cane farm you probably already have.',
           'Carry rockets in two stacks across the hotbar and never fly on your last few – the walk home from 10,000 blocks out is not fun.',
         ],
       },
@@ -494,14 +496,14 @@ const raw: GuideInput[] = [
       {
         heading: 'Protecting the one you have',
         paragraphs: [
-          'Keep Mending on it and keep your XP bar moving – the spawner farm you were going to build anyway takes care of that. Carry a [Totem of Undying](/product/totem-of-undying) ($0.25, $0.19 from 64) whenever you fly; most Elytra deaths are a rocket mistimed into a wall. And remember that your inventory drops on death: the Elytra is the first thing a killer picks up.',
+          'Keep Mending on it and keep your XP bar moving – a vanilla XP farm or a stack of bottles o’ enchanting takes care of that. Carry a [Totem of Undying](/product/totem-of-undying) ($0.25, $0.19 from 64) whenever you fly; most Elytra deaths are a rocket mistimed into a wall. And remember that your inventory drops on death: the Elytra is the first thing a killer picks up.',
         ],
       },
     ],
     faq: [
       {
         q: 'How much does an Elytra cost on DonutSMP?',
-        a: 'In our store, $28.49 with Unbreaking III and Mending. In-game prices on the auction house vary by season and are usually among the highest of any single item.',
+        a: 'In our store, $28.49 with Unbreaking III and Mending. In-game prices move a lot – fan trackers showed roughly 300–370M coins in autumn 2026 – and are usually the highest of any single item.',
       },
       {
         q: 'Is the Elytra enchanted?',
@@ -518,7 +520,7 @@ const raw: GuideInput[] = [
     ],
     relatedProductIds: ['elytra', 'creeper-spawner', 'pro-bundle', 'basehunter-bundle'],
     relatedGuides: ['donutsmp-base-hunting-guide', 'donutsmp-mystery-boxes-explained', 'donutsmp-spawners-guide'],
-    updatedAt: REPRICED,
+    updatedAt: FACTCHECKED,
   },
 
   // ─────────────────────────────────────────────────────────────
@@ -526,29 +528,29 @@ const raw: GuideInput[] = [
   // ─────────────────────────────────────────────────────────────
   {
     slug: 'donutsmp-base-hunting-guide',
-    title: 'DonutSMP Base Hunting Guide: Amethyst Pickaxe, Elytra and Tactics',
+    title: 'DonutSMP Base Hunting Guide: Shard Pickaxe, Elytra and Tactics',
     seoTitle: 'DonutSMP Base Hunting Guide – Gear & Tactics | {{store}}',
     metaDescription:
-      'How base hunting works on DonutSMP: what hunters look for, the gear (Elytra, Amethyst Pickaxe, totems), honest odds and the Basehunter Bundle at $33.99.',
+      'How base hunting works on DonutSMP: what hunters look for, the gear (Elytra, Shard Pickaxe, totems), honest odds and the Basehunter Bundle at $33.99.',
     intro:
       'Base hunting is the DonutSMP endgame for a lot of players: fly out, find somebody’s hidden base, and leave with their spawners, netherite and shulkers. It is also where most of the server’s drama comes from. This guide is an honest look at how hunting actually works – what you are looking for, the gear that makes a difference, the tactics that find bases, and the part nobody advertises: most sessions find nothing.',
     sections: [
       {
         heading: 'What base hunting is (and is not)',
         paragraphs: [
-          'On DonutSMP players build bases in the wild and hide them, because raiding is part of the game. Base hunting is the search for those bases. It is allowed within the server’s rules – it is a survival server with PvP and griefing – which is more than can be said for most of what people argue about on Discord.',
-          'What it is not is reliable income. A loaded base can set you up for a season; ten empty sessions in a row are normal. Treat it as a high-variance activity funded by your farm, not as the farm itself.',
+          'On DonutSMP players build bases in the wild and hide them, because raiding is part of the game. Base hunting is the search for those bases. It is allowed within the server’s rules – DonutSMP is a semi-anarchy survival server with open PvP and no land claims, and raiding and stealing are part of the culture – which is more than can be said for most of what people argue about on Discord.',
+          'What it is not is reliable income. A loaded base can set you up for months; ten empty sessions in a row are normal. Treat it as a high-variance activity funded by your farm, not as the farm itself.',
         ],
       },
       {
         heading: 'The gear that matters',
         paragraphs: [
-          'Six things separate a hunter from a tourist. If you want all of them at once, the [Basehunter Bundle](/product/basehunter-bundle) packages the Elytra, the Amethyst Pickaxe, 16 totems and 20M for rockets and supplies in a single $33.99 order – the quickest way to go from zero to a first hunting session.',
+          'Six things separate a hunter from a tourist. If you want all of them at once, the [Basehunter Bundle](/product/basehunter-bundle) packages the Elytra, the Amethyst (Shard) Pickaxe, 16 totems and 20M for rockets and supplies in a single $33.99 order – the quickest way to go from zero to a first hunting session.',
         ],
         list: [
           '**Elytra with Mending** – non-negotiable. You will cover tens of thousands of blocks per session. Ours is $28.49 with Unbreaking III and Mending ([Elytra](/product/elytra)).',
           '**Rockets – a lot.** Two or three stacks per session. A creeper spawner farm is the long-term supply.',
-          '**Amethyst Pickaxe** – the [DonutSMP custom pickaxe](/product/amethyst-pickaxe) ($4.79) built for fast tunneling. When you find a base you want to be in and out before the owner logs on, and a normal maxed netherite pickaxe is slow by comparison.',
+          '**Shard Pickaxe** – the [DonutSMP custom pickaxe](/product/amethyst-pickaxe) ($4.79), formerly called the Amethyst Pickaxe and nicknamed “the drill”. It mines a 3×3 area at max-netherite speed, so you are in and out before the owner logs on. It carries a self-destruct timer (one day, according to the community wikis), so use it soon after you get it.',
           '**Totems of Undying** – stack them. A hunter who dies loses the loot and the Elytra. $0.25 each, $0.19 from 64 ([Totems](/product/totem-of-undying)).',
           '**Shulker boxes** – empty, to carry what you find. $0.29 each, $0.25 from 27.',
           '**Decent armor** – a maxed [netherite set](/product/netherite-armor-set) ($4.99) or the [PvP Kit](/product/pvp-kit) ($8.49) if you expect a fight. Do not hunt in your best gear if you cannot afford to lose it.',
@@ -562,7 +564,7 @@ const raw: GuideInput[] = [
         list: [
           '**Light.** Torches, lanterns and glowstone in the middle of nowhere at night. Fly at night with brightness turned up.',
           '**Missing trees and broken terrain.** Players clear areas, take wood and dig straight down. A neat circle of missing trees is a flag.',
-          '**Nether portals.** A portal far from spawn means somebody travels there. Follow the overworld side.',
+          '**Nether portals.** A lone portal in the wild means somebody travels there. Follow the overworld side.',
           '**Straight lines.** Tunnels, cobblestone paths, water channels – nature does not make straight lines.',
           '**Signs of recent activity.** Harvested crops, trampled farmland, a boat left on a shore.',
           '**Nether tunnels.** Every block in the nether is eight in the overworld, and a long tunnel in the nether usually leads straight to a base entrance.',
@@ -571,7 +573,7 @@ const raw: GuideInput[] = [
       {
         heading: 'Tactics once you find one',
         paragraphs: [
-          'Do not rush in. Check the tab list for the owner and anyone who might be their friend. Enter from an unexpected side with the Amethyst Pickaxe rather than through their door. Take spawners first – they are the highest value per slot and the hardest to replace – then shulkers, then whatever netherite and totems are in chests.',
+          'Do not rush in. Check the tab list for the owner and anyone who might be their friend. Enter from an unexpected side with the Shard Pickaxe rather than through their door. Take spawners first – they are the highest value per slot and the hardest to replace – then shulkers, then whatever netherite and totems are in chests.',
           'Load everything into shulkers as you go so a death does not scatter forty stacks on the floor. Leave the way you came, fly in a direction that is not toward your own base, and only head home after a detour. Players have lost their own base by flying straight back from a raid with a tail.',
         ],
       },
@@ -592,24 +594,24 @@ const raw: GuideInput[] = [
     faq: [
       {
         q: 'What is the Amethyst Pickaxe on DonutSMP?',
-        a: 'A custom DonutSMP pickaxe that mines far faster than a standard maxed netherite pickaxe, which makes it the tool of choice for breaking into bases quickly. It is $4.79 in our store and part of the Basehunter Bundle.',
+        a: 'The old name of the Shard Pickaxe (“the drill”): a custom DonutSMP pickaxe that mines 3×3 at max-netherite speed and self-destructs after a timer (one day per the community wikis). In-game it comes from the Shard Shop; it is $4.79 in our store and part of the Basehunter Bundle.',
       },
       {
         q: 'Is base hunting against the rules?',
-        a: 'Raiding and griefing are part of DonutSMP’s survival gameplay. What is against the rules is cheating – x-ray, hacked clients, freecam – which is also how most hunters who get banned got banned.',
+        a: 'Raiding and griefing are part of DonutSMP’s survival gameplay. What is against the rules is cheating – x-ray, hacked clients, freecam, seed finding – which is also how most hunters who get banned got banned.',
       },
       {
-        q: 'How far from spawn are most bases?',
-        a: 'Far enough that walking is impractical – which is exactly why hunting needs an Elytra. Grid-search in bands at increasing distance from spawn rather than flying randomly.',
+        q: 'How far out are most bases?',
+        a: 'Far enough that walking is impractical – the overworld border is around ±225,000 blocks, and bases near `/rtp` landing spots tend to be found within days or weeks. Grid-search in bands at increasing distance from the RTP areas rather than flying randomly.',
       },
       {
         q: 'What should I take first from a base?',
-        a: 'Spawners, with a silk touch pickaxe. They are the most valuable items per inventory slot and the ones the owner cannot easily replace.',
+        a: 'Spawners – bring a Silk Touch pickaxe to be safe, since how they drop is not documented. They are the most valuable items per inventory slot and the ones the owner cannot easily replace.',
       },
     ],
     relatedProductIds: ['basehunter-bundle', 'amethyst-pickaxe', 'elytra', 'totem'],
     relatedGuides: ['donutsmp-elytra-guide', 'donutsmp-spawners-guide', 'how-to-get-money-on-donutsmp'],
-    updatedAt: UPDATED,
+    updatedAt: FACTCHECKED,
   },
 
   // ─────────────────────────────────────────────────────────────
@@ -679,13 +681,13 @@ const raw: GuideInput[] = [
         paragraphs: [
           'A store is still a seller you pay first. The difference is structural. At {{store}} the money and items exist before you pay – stock levels on product pages are live. Every order has an ID, a locked price, a timeline and a payment reference you submitted yourself; you can open it at [/track](/track) any time without talking to anyone. Reviews can only be written from delivered orders and are tied to this domain rather than a Discord tag. And there is a published [refund policy](/refund-policy) that says what happens if we fail.',
           'Delivery is still done by real people – a staff member running `/pay` or teleporting to you with a shulker – but the record exists whether or not that person is online. {{eta}} If something goes wrong you have a page to show, not a DM thread with a deleted account.',
-          'Prices are also published and tiered: 1M is $0.05 and falls to $0.03 per million at 1B, spawners are priced at their in-game coin value (a skeleton spawner is $0.89, falling to $0.69 at 250+), and carts over $15, $40 and $100 get 5%, 8% and 12% off automatically.',
+          'Prices are also published and tiered: 1M is $0.05 and falls to $0.03 per million at 1B, spawners are priced on what we see them trade for in-game (a skeleton spawner is $0.89, falling to $0.69 at 250+), and carts over $15, $40 and $100 get 5%, 8% and 12% off automatically.',
         ],
       },
       {
         heading: 'The rules reminder',
         paragraphs: [
-          'None of this makes real-money trading allowed on DonutSMP. The server’s rules prohibit it, enforcement is at the server’s discretion, and nobody – store or stranger – can promise you will not be punished. Buy only what you are willing to lose to a ban, keep it out of game chat, and understand that {{store}} is an independent store with no connection to DonutSMP, Mojang or Microsoft.',
+          'None of this makes real-money trading allowed on DonutSMP. The server’s rules prohibit it, enforcement is at the server’s discretion and has included permanent bans and data wipes, and nobody – store or stranger – can promise you will not be punished. Buy only what you are willing to lose to a ban, keep it out of game chat, and understand that {{store}} is an independent store with no connection to DonutSMP, Mojang or Microsoft.',
         ],
       },
     ],
@@ -709,7 +711,7 @@ const raw: GuideInput[] = [
     ],
     relatedProductIds: ['money-1m', 'money-25m', 'skeleton-spawner', 'mystery-box'],
     relatedGuides: ['buying-donutsmp-money-safely', 'how-to-get-money-on-donutsmp', 'donutsmp-mystery-boxes-explained'],
-    updatedAt: REPRICED,
+    updatedAt: FACTCHECKED,
   },
 ];
 

@@ -97,7 +97,7 @@ export const faqGroups: FaqGroup[] = [
       {
         id: 'offline-delivery',
         q: 'What if I am not online when you deliver?',
-        a: 'Money can be paid while you are offline on most setups; items need you online. We will ping you on Discord (if you joined) or wait until you are on. Orders never expire after payment.',
+        a: 'Money can often be paid while you are offline; items need you online. We will ping you on Discord (if you joined) or wait until you are on. Orders never expire after payment.',
       },
       {
         id: 'delivery-speed',
@@ -107,7 +107,7 @@ export const faqGroups: FaqGroup[] = [
       {
         id: 'need-online',
         q: 'Do I need to be online for delivery?',
-        a: 'For **items, spawners and box drops – yes**: you accept a teleport from our delivery account and pick up the drop, so you need to be on {{server}} with the username from your order and have inventory space. For **money – usually not**, because `/pay` reaches an offline balance on most setups, though being online lets you see the confirmation in chat. Tell us on Discord when you are on and we will time the delivery.',
+        a: 'For **items, spawners and box drops – yes**: you accept a teleport from our delivery account and pick up the drop, so you need to be on {{server}} with the username from your order and have inventory space. For **money – usually not**, because `/pay` can normally reach your balance while you are offline, though being online lets you see the confirmation in chat. Tell us on Discord when you are on and we will time the delivery.',
       },
       {
         id: 'box-odds',
@@ -226,7 +226,7 @@ export const faqGroups: FaqGroup[] = [
       {
         id: 'ban-risk',
         q: 'Can I get banned for buying DonutSMP money?',
-        a: 'It is possible. {{server}}\'s rules prohibit real-money trading, and the server decides how to enforce that – warnings, balance resets or bans. We reduce the footprint: deliveries use ordinary `/pay`, teleports and drops, large amounts can be split over time, we never advertise in-game and we never touch your account. But we cannot make it risk-free, and a punishment after delivery is not a refund reason. Read the [IRL trading guide](/donutsmp-irl-trade) before you order.',
+        a: 'It is possible. {{server}}\'s rules prohibit real-money trading, and the server decides how to enforce that – from warnings up to permanent bans and data wipes, which have hit even top baltop players. We reduce the footprint: deliveries use ordinary `/pay`, teleports and drops, large amounts can be split over time, we never advertise in-game and we never touch your account. But we cannot make it risk-free, and a punishment after delivery is not a refund reason. Read the [IRL trading guide](/donutsmp-irl-trade) before you order.',
       },
     ],
   },
