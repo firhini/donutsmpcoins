@@ -4,7 +4,8 @@
  *  - spin wheel free items, gift-code redemption, giveaways, admin (free orders)
  */
 import type { CartLineInput, Order, OrderItem, PaymentMethodConfig, Product, Quote } from '../../src/shared/types';
-import { applySale, computeQuote } from '../../src/shared/pricing';
+import { releaseDeal, reserveDeal } from './dailyDeal';
+import { applyDailyDeal, applySale, computeQuote } from '../../src/shared/pricing';
 import { getCatalog, getFullCatalog, decrementStock, restoreStock } from './catalog';
 import { getSettings, usablePaymentMethods, renderTemplate } from './settings';
 import { getCoupon, consumeCoupon, unconsumeCoupon, normalizeCode } from './coupons';
@@ -87,7 +88,8 @@ export async function serverQuote(input: ServerQuoteInput): Promise<{ quote: Quo
   }
 
   // a running sale is baked into the product prices (same helper as the storefront)
-  const products = applySale(catalog.products, settings.sale);
+  // free orders (prizes/gifts) ignore deal prices and limits
+  const products = input.includeHidden ? applySale(catalog.products, settings.sale) : applyDailyDeal(applySale(catalog.products, settings.sale), settings.dailyDeal);
   const quote = computeQuote(products, input.items, {
     tiers: settings.spendingTiers,
     coupon,
@@ -219,12 +221,25 @@ export async function buildOrder(input: BuildOrderInput): Promise<Order> {
     discordUsername: input.discordUsername,
   };
 
+  // daily deal: at most `maxPerPlayer` units per player and day at the deal price
+  const dealProduct = input.free ? undefined : products.find((p) => p.dailyDeal && quote.lines.some((l) => l.productId === p.id));
+  const dealLine = dealProduct ? quote.lines.find((l) => l.productId === dealProduct.id) : undefined;
+  if (dealProduct?.dailyDeal && dealLine) {
+    // the deal's own UTC day (it ends at the next midnight)
+    order.dealUsage = { date: new Date(new Date(dealProduct.dailyDeal.endsAt).getTime() - 86_400_000).toISOString().slice(0, 10), productId: dealProduct.id, qty: dealLine.qty, ipHash: input.ipHash };
+  }
+
   // side effects – each step is atomic; later failures roll earlier steps back
   const stockLines = quote.lines.map((l) => ({ productId: l.productId, qty: l.qty }));
+  let dealTaken = false;
   let creditTaken = false;
   let couponTaken = false;
   let stockTaken = false;
   try {
+    if (order.dealUsage && dealProduct?.dailyDeal) {
+      await reserveDeal(order.dealUsage.date, order.dealUsage.productId, username, input.ipHash, order.dealUsage.qty, dealProduct.dailyDeal.maxPerPlayer);
+      dealTaken = true;
+    }
     if (!input.free && quote.creditAppliedCents > 0) {
       await debitCredit(username, quote.creditAppliedCents, 'Applied to order', id);
       creditTaken = true;
@@ -238,6 +253,7 @@ export async function buildOrder(input: BuildOrderInput): Promise<Order> {
     await saveNewOrder(order);
   } catch (err) {
     if (stockTaken) await restoreStock(stockLines).catch(() => undefined);
+    if (dealTaken && order.dealUsage) await releaseDeal(order.dealUsage.date, order.dealUsage.productId, username, input.ipHash, order.dealUsage.qty).catch(() => undefined);
     if (couponTaken && quote.couponCode) await unconsumeCoupon(quote.couponCode).catch(() => undefined);
     if (creditTaken) await addCredit(username, quote.creditAppliedCents, 'Order failed – credit returned', id).catch(() => undefined);
     throw err;

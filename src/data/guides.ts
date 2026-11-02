@@ -503,7 +503,7 @@ const raw: GuideInput[] = [
     faq: [
       {
         q: 'How much does an Elytra cost on DonutSMP?',
-        a: 'In our store, $28.49 with Unbreaking III and Mending. In-game prices move a lot – fan trackers showed roughly 300–370M coins in autumn 2026 – and are usually the highest of any single item.',
+        a: 'In our store, $28.49 with Unbreaking III and Mending. In-game prices move a lot – in our own trading an Elytra goes for around 700M coins (November 2026), fan trackers listed less a few months earlier – and they are usually the highest of any single item.',
       },
       {
         q: 'Is the Elytra enchanted?',

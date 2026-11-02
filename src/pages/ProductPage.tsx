@@ -14,6 +14,7 @@ import { ProductGrid } from '../components/shop/ProductGrid';
 import { BoxContents } from '../components/shop/BoxContents';
 import { QtyStepper } from '../components/shop/QtyStepper';
 import { SaleBanner } from '../components/shop/SaleBanner';
+import { Countdown } from '../components/free/Countdown';
 import { track } from '../lib/track';
 import { badgeClassForTag, bulkTable, discountPercent, hasContents, isMillionsProduct, linePrice, stockState } from '../components/shop/productUtils';
 import NotFound from './NotFound';
@@ -167,6 +168,15 @@ export default function ProductPage() {
             {off && <span className="badge badge-pink">Save {off}%</span>}
           </div>
           {product.salePercent ? <SaleBanner variant="strip" /> : null}
+          {product.dailyDeal ? (
+            <div className="sale-strip" role="status">
+              <span className="sale-strip-pct">DEAL</span>
+              <span>
+                <strong>Deal of the day</strong> – max {product.dailyDeal.maxPerPlayer} per player
+              </span>
+              <DealTimer to={product.dailyDeal.endsAt} />
+            </div>
+          ) : null}
           {product.shortDesc && <p className="pp-lead">{product.shortDesc}</p>}
           {copy?.bullets?.length ? (
             <ul className="pp-bullets">
@@ -359,4 +369,15 @@ function kindLabel(kind: string): string {
     default:
       return 'Item';
   }
+}
+
+/** Countdown only after hydration (the static HTML cannot know the visitor's clock). */
+function DealTimer({ to }: { to: string }) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  return (
+    <span className="sale-timer">
+      <Icon name="clock" size={14} /> Ends in {mounted ? <Countdown to={to} /> : '…'}
+    </span>
+  );
 }

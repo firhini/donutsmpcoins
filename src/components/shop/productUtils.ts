@@ -5,7 +5,7 @@ import { clampQty, unitPriceCents } from '../../shared/pricing';
 export function badgeClassForTag(tag: string): string {
   const t = tag.trim().toLowerCase();
   if (t === 'instant' || t === 'fast') return 'badge badge-green';
-  if (t === 'hot') return 'badge badge-red';
+  if (t === 'hot' || t === 'deal of the day') return 'badge badge-red';
   if (t === 'new') return 'badge badge-blue';
   if (t === 'popular' || t === 'best value') return 'badge badge-gold';
   if (t === 'whale') return 'badge badge-violet';

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { DailyDealSection } from '../../components/admin/SettingsSections/DailyDealSection';
 import { useLocation } from 'react-router-dom';
 import type { SiteSettings } from '../../shared/types';
 import { defaultSettings } from '../../data/settings';
@@ -19,6 +20,7 @@ const JUMP: { id: string; label: string }[] = [
   { id: 'legal', label: 'Legal' },
   { id: 'announcement', label: 'Announcement' },
   { id: 'sale', label: 'Sale' },
+  { id: 'deal', label: 'Daily deal' },
   { id: 'tiers', label: 'Tiers' },
   { id: 'payments', label: 'Payments' },
   { id: 'spin', label: 'Spin' },
@@ -88,6 +90,7 @@ export default function Settings() {
           <LegalSection settings={settings} onSave={save} />
           <AnnouncementSection settings={settings} onSave={save} />
           <SaleSection settings={settings} onSave={save} />
+          <DailyDealSection settings={settings} onSave={save} />
           <TiersSection settings={settings} onSave={save} />
           <PaymentMethodsSection settings={settings} onSave={save} />
           <SpinSection settings={settings} onSave={save} />

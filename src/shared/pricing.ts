@@ -21,6 +21,37 @@ export function saleActive(sale: SaleSettings | undefined, now: Date = new Date(
   return true;
 }
 
+const DAY_MS = 86_400_000;
+
+/** Today's deal (UTC day) from the rotation pool, or null when switched off/empty. */
+export function dealOfTheDay(deal: { enabled: boolean; maxPerPlayer: number; pool: { productId: string; priceCents: number }[] } | undefined, now: Date = new Date()) {
+  if (!deal?.enabled || !deal.pool?.length) return null;
+  const dayIndex = Math.floor(now.getTime() / DAY_MS);
+  const pick = deal.pool[dayIndex % deal.pool.length];
+  return { ...pick, date: new Date(dayIndex * DAY_MS).toISOString().slice(0, 10), endsAt: new Date((dayIndex + 1) * DAY_MS).toISOString(), maxPerPlayer: Math.max(1, Math.round(deal.maxPerPlayer || 3)) };
+}
+
+/** Apply today's deal price to its product (regular price becomes the strike-through, max quantity = per-player limit). */
+export function applyDailyDeal(products: Product[], deal: Parameters<typeof dealOfTheDay>[0], now: Date = new Date()): Product[] {
+  const d = dealOfTheDay(deal, now);
+  if (!d) return products;
+  return products.map((p) =>
+    p.id !== d.productId || p.hidden || d.priceCents >= p.priceCents
+      ? p
+      : {
+          ...p,
+          priceCents: d.priceCents,
+          compareAtCents: p.priceCents,
+          bulkPricing: undefined,
+          minQty: 1,
+          maxQty: Math.min(p.maxQty ?? d.maxPerPlayer, d.maxPerPlayer),
+          salePercent: undefined,
+          saleEndsAt: undefined,
+          dailyDeal: { endsAt: d.endsAt, maxPerPlayer: d.maxPerPlayer, regularCents: p.priceCents },
+        },
+  );
+}
+
 /**
  * Bake a running sale into product prices (client display AND server quotes use this, so they always agree).
  * The regular price becomes the strike-through price; bulk tiers are reduced by the same percentage.

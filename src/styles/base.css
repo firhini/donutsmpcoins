@@ -952,3 +952,112 @@ p {
 .cashback-row svg {
   color: var(--gold-400);
 }
+
+/* ───────── deal of the day ───────── */
+.deal {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 18px;
+  align-items: center;
+  padding: 22px 22px 20px;
+  border-radius: var(--r-xl);
+  border: 2px solid rgba(255, 194, 51, 0.7);
+  background: radial-gradient(480px 180px at 0% 0%, rgba(255, 194, 51, 0.22), transparent 70%), linear-gradient(135deg, #1b1630, #121521);
+  box-shadow: 0 0 50px -14px rgba(255, 194, 51, 0.7);
+}
+.deal-badge {
+  position: absolute;
+  top: -13px;
+  left: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffc233, #ff9d2e);
+  color: #1a1206;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.deal-img {
+  position: relative;
+  display: block;
+  width: 132px;
+}
+.deal-off {
+  position: absolute;
+  top: 0;
+  right: -6px;
+  padding: 3px 9px;
+  border-radius: 8px;
+  background: #e11d48;
+  color: #fff;
+  font-weight: 900;
+  font-size: 15px;
+  transform: rotate(6deg);
+}
+.deal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.deal-body h2 {
+  margin: 0;
+  font-size: clamp(1.25rem, 3.6vw, 1.6rem);
+}
+.deal-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+}
+.deal-price strong {
+  font-size: 2rem;
+  color: var(--gold-400);
+}
+.deal-price s {
+  color: var(--text-3);
+}
+.deal-limit {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fecaca;
+}
+.deal-timer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+.deal-next {
+  color: var(--text-3);
+}
+.deal-cta {
+  align-self: flex-start;
+}
+@media (max-width: 520px) {
+  .deal {
+    grid-template-columns: 96px 1fr;
+    gap: 12px;
+    padding: 20px 14px 16px;
+  }
+  .deal-img {
+    width: 96px;
+  }
+  .deal-cta {
+    grid-column: 1 / -1;
+    align-self: stretch;
+    width: 100%;
+    justify-content: center;
+  }
+}
+.deal-compact {
+  margin-bottom: var(--sp-4);
+}

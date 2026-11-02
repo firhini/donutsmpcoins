@@ -1,4 +1,5 @@
 import type { Order, OrderIndexEntry, OrderStatus, PublicOrder, TimelineEntry } from '../../src/shared/types';
+import { releaseDeal } from './dailyDeal';
 import { kvGet, kvSet, kvUpdate } from './store';
 import { nowIso } from './http';
 import { COLORS, notifyDiscord, siteUrl } from './discord';
@@ -56,7 +57,7 @@ const ROLLS_HIDDEN = new Set<OrderStatus>(['awaiting_payment', 'cancelled']);
 
 export function toPublicOrder(o: Order): PublicOrder {
   // the order page is reachable by anyone who has the id – never expose who the buyer is on Discord
-  const { ipHash, deviceId, sessionId, adminNote, email, discordUserId, discordUsername, ...rest } = o;
+  const { ipHash, deviceId, sessionId, dealUsage, adminNote, email, discordUserId, discordUsername, ...rest } = o;
   const items = ROLLS_HIDDEN.has(o.status) ? rest.items.map((i) => (i.rolled ? { ...i, rolled: undefined } : i)) : rest.items;
   return { ...rest, items, emailMasked: email ? maskEmail(email) : undefined };
 }
@@ -234,6 +235,16 @@ export async function releaseOrder(o: Order): Promise<void> {
       changed = true;
     } catch (err) {
       console.warn('[orders] credit restore failed', err);
+    }
+  }
+  // a cancelled deal order frees the player's daily-deal allowance again (same day only)
+  if (o.dealUsage && !o.dealReleased && o.dealUsage.date === new Date().toISOString().slice(0, 10)) {
+    try {
+      await releaseDeal(o.dealUsage.date, o.dealUsage.productId, o.username, o.dealUsage.ipHash, o.dealUsage.qty);
+      o.dealReleased = true;
+      changed = true;
+    } catch (err) {
+      console.warn('[orders] deal release failed', err);
     }
   }
   if (!o.stockRestored) {

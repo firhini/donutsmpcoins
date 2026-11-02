@@ -153,6 +153,19 @@ export const defaultSettings: SiteSettings = {
   reviewRewardPercent: 5,
   welcomeCoupon: { enabled: true, code: 'WELCOME5', percent: 5 },
   cashback: { enabled: true, percent: 5 },
+  // deal prices sit just above the in-game buying cost (≈ €8.50 per 1B coins); max 3 per player per day
+  dailyDeal: {
+    enabled: true,
+    maxPerPlayer: 3,
+    pool: [
+      { productId: 'elytra', priceCents: 1099 },
+      { productId: 'money-100m', priceCents: 179 },
+      { productId: 'cow-spawner', priceCents: 179 },
+      { productId: 'money-250m', priceCents: 399 },
+      { productId: 'iron-golem-spawner', priceCents: 79 },
+      { productId: 'skeleton-spawner', priceCents: 39 },
+    ],
+  },
   currencies: [
     { code: 'USD', symbol: '$', rate: 1 },
     { code: 'EUR', symbol: '€', rate: 0.92 },

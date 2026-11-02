@@ -249,6 +249,17 @@ function validateSettingsPatch(body: unknown): Partial<SiteSettings> {
     numField(referral, 'friendPercent', 'Referral friend percent', 0, 100, true);
     numField(referral, 'referrerPercent', 'Referral referrer percent', 0, 100, true);
   }
+  const deal = patch.dailyDeal;
+  if (isObj(deal)) {
+    numField(deal, 'maxPerPlayer', 'Daily deal max per player', 1, 20, true);
+    if (deal.pool !== undefined) {
+      if (!Array.isArray(deal.pool) || deal.pool.length > 60) throw new HttpError(400, 'Daily deal pool must be a list (max 60).', 'validation');
+      for (const r of deal.pool) {
+        if (!isObj(r) || typeof r.productId !== 'string' || !r.productId) throw new HttpError(400, 'Every daily deal needs a product.', 'validation');
+        numField(r, 'priceCents', 'Daily deal price', 1, 100_000_000, true, true);
+      }
+    }
+  }
   const cashback = patch.cashback;
   if (isObj(cashback)) numField(cashback, 'percent', 'Cashback percent', 0, 30, true);
   const welcome = patch.welcomeCoupon;

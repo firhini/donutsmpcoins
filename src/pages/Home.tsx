@@ -6,6 +6,7 @@ import { Seo } from '../components/ui/Seo';
 import { organizationSchema, websiteSchema } from '../seo/schema';
 import { Icon } from '../components/ui/Icons';
 import { SaleBanner } from '../components/shop/SaleBanner';
+import { DealOfTheDay } from '../components/shop/DealOfTheDay';
 import { saleActive } from '../shared/pricing';
 import { CategoryHotbar, type HotbarValue } from '../components/shop/CategoryHotbar';
 import { ProductGrid } from '../components/shop/ProductGrid';
@@ -123,6 +124,11 @@ export default function Home() {
             <DeliveryLog />
           </div>
         </div>
+      </section>
+
+      {/* ───────── deal of the day ───────── */}
+      <section className="container deal-wrap">
+        <DealOfTheDay />
       </section>
 
       {/* ───────── mystery box deal ───────── */}

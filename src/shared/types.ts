@@ -81,6 +81,8 @@ export interface Product {
   minQty?: number;
   maxQty?: number;
   hidden?: boolean;
+  /** set by applyDailyDeal() for today's deal product (never stored) */
+  dailyDeal?: { endsAt: string; maxPerPlayer: number; regularCents: number };
   /** set by applySale() while a sale covers this product (never stored) */
   salePercent?: number;
   saleEndsAt?: string;
@@ -252,6 +254,9 @@ export interface Order {
   creditRestored?: boolean;
   /** reserved stock was given back (cancel/refund) */
   stockRestored?: boolean;
+  /** units bought at today's daily-deal price (released again if the order is cancelled that day) */
+  dealUsage?: { date: string; productId: string; qty: number; ipHash?: string };
+  dealReleased?: boolean;
   /** consumed coupon use was given back (cancel/refund) */
   couponRestored?: boolean;
   source?: 'checkout' | 'redeem' | 'spin' | 'giveaway' | 'admin';
@@ -261,7 +266,7 @@ export interface Order {
 }
 
 /** What the public order page is allowed to see */
-export type PublicOrder = Omit<Order, 'ipHash' | 'deviceId' | 'sessionId' | 'adminNote' | 'email' | 'discordUserId' | 'discordUsername'> & {
+export type PublicOrder = Omit<Order, 'ipHash' | 'deviceId' | 'sessionId' | 'dealUsage' | 'adminNote' | 'email' | 'discordUserId' | 'discordUsername'> & {
   emailMasked?: string;
 };
 
@@ -500,6 +505,14 @@ export interface LegalSettings {
   extra: string;
 }
 
+export interface DailyDealSettings {
+  enabled: boolean;
+  /** how many units one player may buy at the deal price per day */
+  maxPerPlayer: number;
+  /** rotation pool – day N (UTC) shows pool[N % length] */
+  pool: { productId: string; priceCents: number }[];
+}
+
 export interface SiteSettings {
   storeName: string;
   tagline: string;
@@ -524,6 +537,8 @@ export interface SiteSettings {
   referral: { enabled: boolean; friendPercent: number; referrerPercent: number };
   /** % of every paid order given back as store credit once it is delivered */
   cashback: { enabled: boolean; percent: number };
+  /** one heavily discounted product per day (UTC), rotating through the pool, limited per player */
+  dailyDeal: DailyDealSettings;
   reviewRewardPercent: number;
   welcomeCoupon: { enabled: boolean; code: string; percent: number };
   currencies: CurrencyConfig[];
@@ -563,6 +578,7 @@ export interface PublicConfig {
   spinRequireGuild: boolean;
   referral: SiteSettings['referral'];
   cashback: SiteSettings['cashback'];
+  dailyDeal: DailyDealSettings;
   reviewRewardPercent: number;
   welcomeCoupon: SiteSettings['welcomeCoupon'];
   currencies: CurrencyConfig[];

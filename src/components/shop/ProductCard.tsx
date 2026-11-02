@@ -34,7 +34,7 @@ export function ProductCard({ product, compact = false, eager = false }: { produ
 
   const line = linePrice(product, qty);
   const bulk = lowestBulkTier(product);
-  const tags = (product.tags ?? []).slice(0, 3);
+  const tags = product.dailyDeal ? ['Deal of the day', ...((product.tags ?? []).slice(0, 3)).filter((t) => t !== 'Deal of the day')].slice(0, 3) : (product.tags ?? []).slice(0, 3);
   const perMillion = product.kind === 'money' && !millions && product.moneyMillions ? Math.round(product.priceCents / product.moneyMillions) : null;
 
   const onAdd = () => {

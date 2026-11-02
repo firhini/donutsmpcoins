@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import type { Catalog, Category, CurrencyConfig, Product, PublicConfig, SiteStats } from '../shared/types';
 import { apiGet } from '../lib/api';
-import { applySale, formatMoney, saleActive } from '../shared/pricing';
+import { applyDailyDeal, applySale, dealOfTheDay, formatMoney, saleActive } from '../shared/pricing';
 import { defaultCatalog } from '../data/catalog';
 import { defaultSettings } from '../data/settings';
 import { storageGet, storageSet } from '../lib/device';
@@ -40,6 +40,7 @@ const fallbackConfig: PublicConfig = {
   spinRequireGuild: false,
   referral: defaultSettings.referral,
   cashback: defaultSettings.cashback,
+  dailyDeal: defaultSettings.dailyDeal,
   reviewRewardPercent: defaultSettings.reviewRewardPercent,
   welcomeCoupon: defaultSettings.welcomeCoupon,
   currencies: defaultSettings.currencies,
@@ -119,13 +120,13 @@ export function StoreProvider({ children, initial }: { children: ReactNode; init
 
   // re-check once a minute while a timed sale runs, so prices switch back the moment it ends
   const [now, setNow] = useState(() => Date.now());
-  const timedSale = saleActive(config.sale) && !!config.sale.endsAt;
+  const timedSale = (saleActive(config.sale) && !!config.sale.endsAt) || !!dealOfTheDay(config.dailyDeal);
   useEffect(() => {
     if (!timedSale) return;
     const t = setInterval(() => setNow(Date.now()), 60_000);
     return () => clearInterval(t);
   }, [timedSale]);
-  const products = useMemo(() => applySale(catalog.products, config.sale, new Date(now)), [catalog.products, config.sale, now]);
+  const products = useMemo(() => applyDailyDeal(applySale(catalog.products, config.sale, new Date(now)), config.dailyDeal, new Date(now)), [catalog.products, config.sale, config.dailyDeal, now]);
 
   const value = useMemo<StoreApi>(
     () => ({
