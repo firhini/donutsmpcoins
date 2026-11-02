@@ -27,6 +27,8 @@ export interface WikiArticle {
 }
 
 const UPDATED = '2026-11-02';
+/** Articles corrected in the November 2026 fact-check. */
+const FACTCHECKED = '2026-11-03';
 
 const baseArticles: WikiArticle[] = [
   // ───────────────────────────────────────────── Getting started
@@ -52,15 +54,15 @@ const baseArticles: WikiArticle[] = [
       {
         heading: 'What kind of server is DonutSMP?',
         paragraphs: [
-          'DonutSMP is a survival SMP founded by the YouTuber DrDonut. It is often described as **semi-anarchy**: there are rules against cheats, exploits and real-money trading, but raiding and base hunting are a normal part of the game, and combat is dominated by crystal PvP.',
+          'DonutSMP is a **semi-anarchy** survival SMP founded by the YouTuber DrDonut. There are rules against cheats, exploits and real-money trading, but there are **no land claims**: raiding and base hunting are a normal part of the game, PvP is open everywhere and combat is dominated by crystal PvP. It is not a lifesteal server – there are no hearts to win or lose.',
           'Everyone starts with an empty balance. The economy runs on in-game **money**, earned by selling to the server, filling player orders and trading on the auction house, plus a secondary currency called **shards**. See [DonutSMP money and economy](/wiki/donutsmp-money-economy) for the basics.',
         ],
       },
       {
         heading: 'Regions and random teleport',
         paragraphs: [
-          'The overworld is split across several regions hosted in different parts of the world, so players in North America, Europe, Asia and Oceania can get a lower ping. Each region owns a slice of the map. According to the community wiki, the Nether and the End are hosted on the US East region, so expect higher ping there if you live far away.',
-          'Use `/rtp` to random-teleport into the wild (the exact options change with updates – check `/help` in-game). From there, walk or fly well away from your landing point before building – see [base protection](/wiki/donutsmp-base-protection).',
+          'The overworld is split across several regions hosted in different parts of the world, so players in North America, Europe, Asia and Oceania can get a lower ping. Each region owns a slice of the shared map. According to the community wikis, the Nether and the End are hosted only on the NA East region, so expect higher ping there if you live far away.',
+          'Use `/rtp` to random-teleport into the wild; its menu (or `/rtp <region>`) is also where you pick a region. Teleports are instant since the June 2026 update, but the menu changes from time to time – check `/help` in-game. From there, walk or fly well away from your landing point before building – see [base protection](/wiki/donutsmp-base-protection).',
         ],
       },
       {
@@ -85,7 +87,7 @@ const baseArticles: WikiArticle[] = [
       { label: 'Starter bundles', to: '/shop/bundles' },
       { label: 'Browse the shop', to: '/shop' },
     ],
-    updatedAt: UPDATED,
+    updatedAt: FACTCHECKED,
   },
   {
     slug: 'donutsmp-commands',
@@ -110,7 +112,7 @@ const baseArticles: WikiArticle[] = [
           '`/worth <item>` – shows the server base price of an item.',
           '`/ah` – opens the auction house. `/ah <search>` searches it, and `/ah sell <price>` lists the item in your hand.',
           '`/orders` – opens player buy orders. `/order <search>` searches them.',
-          '`/shop` – the Quick Buy menu.',
+          '`/shop` – the old fixed-price shop was removed in June 2026; according to fan wikis it later returned as a "Quick Buy" menu for auction listings. Check in-game what it opens.',
           '`/shards [player]` – shows a shard balance.',
         ],
       },
@@ -119,7 +121,7 @@ const baseArticles: WikiArticle[] = [
         paragraphs: ['Travel commands are what keep a base safe, so learn them early:'],
         list: [
           '`/rtp` – random teleport into the wild (options change with updates – check `/help`).',
-          '`/sethome`, `/home [name]`, `/delhome <name>` – set, use and delete homes. The number of homes depends on your rank.',
+          '`/sethome`, `/home [name]`, `/delhome <name>` – set, use and delete homes. Players without a rank get 3 homes; store ranks raise the limit.',
           '`/tpa <player>` – ask to teleport to a player. `/tpahere <player>` asks them to come to you.',
           '`/tpaccept`, `/tpadeny`, `/tpacancel` – answer or cancel requests.',
           '`/tpauto` – automatically accepts incoming requests. Leave it off unless you know what you are doing; it is an easy way to bring a base hunter home.',
@@ -140,7 +142,7 @@ const baseArticles: WikiArticle[] = [
       {
         heading: 'Commands that changed in 2026',
         paragraphs: [
-          'Many guides written before mid-2026 still mention commands such as `/team`, `/warp`, `/sellmulti` or AFK-zone commands. The June 2026 updates removed or reworked a number of these features, and some were partly brought back later. Treat old command lists with care and use `/help` as the source of truth.',
+          'Many guides written before mid-2026 still mention commands that no longer exist. The early-June 2026 update removed `/team` (replaced by `/friend`), `/warp` and the crates, `/sellmulti`, `/afk` and the AFK lobby, `/spawn` and the spawn lobbies, duels, `/fly` and `/hide`, and made `/rtp` and home teleports instant instead of having a warm-up. A follow-up update later that month brought some things back, such as passive shards. Treat old command lists with care and use `/help` as the source of truth.',
           'Command aliases can also differ: some lists write `/auction` instead of `/ah`, or `/teleport` instead of `/tpa`. Both styles have appeared on the server over time.',
         ],
       },
@@ -155,7 +157,7 @@ const baseArticles: WikiArticle[] = [
       { label: 'DonutSMP money', to: '/shop/money' },
       { label: 'Frequently asked questions', to: '/faq' },
     ],
-    updatedAt: UPDATED,
+    updatedAt: FACTCHECKED,
   },
 
   {
@@ -173,24 +175,24 @@ const baseArticles: WikiArticle[] = [
         heading: 'How the membership works',
         paragraphs: [
           'The ranks are sold as **30-day subscriptions** on the official DonutSMP store, which is linked from the server website and from `/buy` and `/ranks` in-game. Each payment gives the chosen tier for 30 days. You can check how long you have left in-game.',
-          'There are three tiers: **Donut+**, **Donut++** and **Donut+++**, each including more than the one below. Prices and exact perks have been changed several times in 2026, so always check the store page itself rather than an old video.',
+          'There are three tiers: **Donut+**, **Donut++** and **Donut+++**, each including more than the one below. Donut++ and Donut+++ were added in June 2026, and prices were changed again mid-June (the community wikis list Donut++ at $9.99 and Donut+++ at $14.99 a month). Always check the store page itself rather than an old video.',
         ],
       },
       {
         heading: 'Typical perks',
-        paragraphs: ['The perks focus on convenience and capacity. Depending on the tier, they include:'],
+        paragraphs: ['The perks focus on convenience and capacity. According to the community wikis (autumn 2026), the limits look like this:'],
         list: [
-          '**More homes** – extra `/sethome` slots on top of the default allowance.',
-          '**More auction house and order slots**, so you can list and buy more at once.',
-          '**Higher placement in the player list** and a visible rank.',
-          '**Priority features** on the top tier, such as faster chunk generation.',
+          '**No rank** – 3 homes, 18 auction house slots and 18 order slots.',
+          '**Donut+** – 9 homes, 45 auction house and 45 order slots.',
+          '**Donut++** – 27 homes, 90 auction house and 90 order slots.',
+          '**Donut+++** – 90 homes, 90 auction house and order slots, plus priority chunk generation.',
         ],
       },
       {
         heading: 'What ranks do not give',
         paragraphs: [
-          'Ranks do not give money, spawners or gear, and they do not protect your base. Passive shards are now earned by every player regardless of rank – a perk that used to be tied to Donut+ – so a rank is not needed for [shards](/wiki/donutsmp-shards) either.',
-          'Content creators who make DonutSMP videos or streams can apply for the **Media** rank, which comes with membership perks. The requirements are listed in-game.',
+          'Ranks do not give money, spawners or gear, and they do not protect your base – DonutSMP has no land claims for anyone. Passive shards are now earned by every player regardless of rank – a perk that used to be tied to Donut+ – so a rank is not needed for [shards](/wiki/donutsmp-shards) either.',
+          'Content creators who make DonutSMP videos or streams can apply for the **Media** rank, which the community wikis describe as a free 90-day rank with Donut+++-level perks. The view and viewer requirements are listed in-game under `/media`.',
         ],
       },
       {
@@ -211,7 +213,7 @@ const baseArticles: WikiArticle[] = [
       { label: 'Free rewards', to: '/free' },
       { label: 'Daily spin', to: '/spin' },
     ],
-    updatedAt: UPDATED,
+    updatedAt: FACTCHECKED,
   },
 
   // ───────────────────────────────────────────── Economy
@@ -229,7 +231,7 @@ const baseArticles: WikiArticle[] = [
       {
         heading: 'Where money comes from',
         paragraphs: [
-          'There are three main ways money enters your balance. The first is selling to the server with `/sell`: you drop items into the menu and receive the server-defined **base price** for each one. This is instant and needs no buyer, but base prices are usually the lowest price you can get.',
+          'There are three main ways money enters your balance. The first is selling to the server with `/sell`: you drop items into the menu and receive the server-defined **base price** for each one. This is instant and needs no buyer, but base prices are usually the lowest price you can get. The old per-category sell multipliers (`/sellmulti`) were removed in June 2026, so everyone gets the same base price.',
           'The second is **orders**. Other players post requests for items they want and the money they will pay. If you have the items, you fill the order and get paid. The third is the **auction house** (`/ah`), where you list an item at your own asking price and wait for a buyer. See [auction house and selling](/wiki/donutsmp-auction-house) for a deeper look.',
           'Most income ultimately comes from production: mining, farming and, above all, [spawners](/wiki/donutsmp-spawners-explained), which generate drops you can sell.',
         ],
@@ -256,7 +258,7 @@ const baseArticles: WikiArticle[] = [
         heading: 'Spending money wisely',
         paragraphs: [
           'Early on, the best spend is usually anything that increases your income: tools that mine faster, a first spawner, or materials for a farm. Gear can be lost to PvP and bases can be raided, so many experienced players keep part of their wealth as money rather than items.',
-          'Some players also buy DonutSMP money from third-party stores, including ours at [DonutSMP money](/donutsmp-money). Be aware that real-money trading is against DonutSMP rules and is done at the buyer\'s own risk – read [server rules](/wiki/donutsmp-rules) first.',
+          'Some players also buy DonutSMP money from third-party stores, including ours at [DonutSMP money](/donutsmp-money). Be aware that real-money trading is against DonutSMP rules and is done at the buyer\'s own risk – DonutSMP has handed out permanent bans and wipes for it, including to baltop players. Read [server rules](/wiki/donutsmp-rules) first.',
         ],
       },
     ],
@@ -270,7 +272,7 @@ const baseArticles: WikiArticle[] = [
       { label: 'DonutSMP money', to: '/donutsmp-money' },
       { label: 'Guide: how to get money', to: '/guides/how-to-get-money-on-donutsmp' },
     ],
-    updatedAt: UPDATED,
+    updatedAt: FACTCHECKED,
   },
   {
     slug: 'donutsmp-shards',
@@ -293,14 +295,14 @@ const baseArticles: WikiArticle[] = [
       {
         heading: 'What happened to the AFK zone?',
         paragraphs: [
-          'Older guides describe an AFK area that paid shards while you stood still, plus shards for player kills. Both were removed. In June 2026 a large update removed the AFK lobby and crates, and for a short time shards could only be bought. After player feedback, a follow-up update in the same month brought back a passive shard reward for everyone based on playtime.',
+          'Older guides describe an AFK area (`/afk`) that paid 1 shard per minute while you stood still, plus 10 shards per player kill. Both were removed. The update of 2–3 June 2026 removed the AFK lobby, kill shards and crates, and for about two weeks shards could only be bought. After player protests, a follow-up update around 17 June brought back a passive shard reward for everyone based on playtime.',
           'Because the system has moved this often, check the shard rate shown in-game or in the official Discord announcements before planning around it.',
         ],
       },
       {
         heading: 'What the Shard Shop sells',
         paragraphs: [
-          'The Shard Shop sells premium items such as special shard tools, max-enchanted netherite weapons and tools, and enchanted armor pieces. Some shard items are temporary and expire after a set time, so read the item description before you spend.',
+          'The Shard Shop sells premium items such as special shard tools, a mace, max-enchanted netherite weapons and tools, and enchanted armor pieces. The best known is the **Shard Pickaxe** ("the drill", formerly the Amethyst Pickaxe), which mines 3×3 but self-destructs after one day. Shard prices have changed more than once in 2026, so read the item description and price in-game before you spend.',
           'Two things the Shard Shop used to sell are no longer available there:',
         ],
         list: [
@@ -326,7 +328,7 @@ const baseArticles: WikiArticle[] = [
       { label: 'Spawners', to: '/shop/spawners' },
       { label: 'Tools & weapons', to: '/shop/tools-weapons' },
     ],
-    updatedAt: UPDATED,
+    updatedAt: FACTCHECKED,
   },
   {
     slug: 'donutsmp-auction-house',
@@ -350,13 +352,13 @@ const baseArticles: WikiArticle[] = [
         heading: 'Filling buy orders',
         paragraphs: [
           '`/orders` shows what other players want to buy and how much they pay per item. If you have the items, you can fill the order directly. `/order <search>` finds orders for a specific item.',
-          'Orders often pay more than base price for useful building and redstone items, but someone else may fill an order before you. Read each request carefully – similar-sounding items are not always interchangeable. You can also create your own orders to buy items in bulk.',
+          'Orders often pay more than base price for useful building and redstone items, but someone else may fill an order before you. Read each request carefully – similar-sounding items are not always interchangeable. You can also create your own orders to buy items in bulk; according to the community wikis an order runs for about 24 hours and you then have a long window to claim what was delivered.',
         ],
       },
       {
         heading: 'Listing on the auction house',
         paragraphs: [
-          'Hold the item and type `/ah sell <price>`, then check the confirmation screen shows the right item and amount before confirming. Your listing appears when other players open `/ah` or search with `/ah <search>`. The number of listing slots you have depends on your rank.',
+          'Hold the item and type `/ah sell <price>`, then check the confirmation screen shows the right item and amount before confirming. Your listing appears when other players open `/ah` or search with `/ah <search>`. Players without a rank have 18 listing slots; store ranks raise this – see [ranks](/wiki/donutsmp-ranks).',
           'The listing price is only an asking price – an item that does not sell earns nothing. Search first to see what similar items are listed at so you do not undercut yourself by accident.',
         ],
       },
@@ -375,14 +377,14 @@ const baseArticles: WikiArticle[] = [
     faq: [
       { q: 'How do I sell on the DonutSMP auction house?', a: 'Hold the item, type `/ah sell <price>` and confirm. It will show up for other players under `/ah`.' },
       { q: 'What is the difference between /sell and /ah?', a: '`/sell` sells instantly to the server at a fixed base price. `/ah` lets you set your own price, but you have to wait for a player to buy it.' },
-      { q: 'How many auction house slots do I get?', a: 'It depends on your rank – higher store ranks get more listing and order slots. Check the in-game menu for your current limit.' },
+      { q: 'How many auction house slots do I get?', a: 'According to the community wikis: 18 without a rank, 45 with Donut+ and 90 with Donut++ or Donut+++, for both listings and orders. Check the in-game menu for your current limit.' },
     ],
     related: ['donutsmp-money-economy', 'donutsmp-commands', 'donutsmp-shards'],
     shopLinks: [
       { label: 'Investment items', to: '/shop/investments' },
       { label: 'DonutSMP money', to: '/shop/money' },
     ],
-    updatedAt: UPDATED,
+    updatedAt: FACTCHECKED,
   },
 
   // ───────────────────────────────────────────── Farms & spawners
@@ -392,7 +394,7 @@ const baseArticles: WikiArticle[] = [
     title: 'How Spawners Work on DonutSMP',
     seoTitle: 'How Spawners Work on DonutSMP',
     metaDescription:
-      'How DonutSMP spawners differ from vanilla: no mobs, drops stored inside, stacking, safe mining, the main types and how to get one in 2026.',
+      'How DonutSMP spawners differ from vanilla: no mobs, drops stored inside, stacking, what each type drops and why they are only player-traded in 2026.',
     summary: 'DonutSMP spawners make drops instead of mobs. How storage, stacking and spawner trading work today.',
     intro:
       'Spawners are the backbone of the DonutSMP economy, but they do not work like the monster spawners you find in vanilla dungeons. On DonutSMP a spawner produces mob drops directly, without spawning any mobs, which keeps the server from lagging. This page explains how they work, how to stack them and how to get one today.',
@@ -407,7 +409,7 @@ const baseArticles: WikiArticle[] = [
       {
         heading: 'Stacking spawners',
         paragraphs: [
-          'Spawners of the same type can be stacked into a single block by sneaking (shift) and right-clicking a placed spawner with another one in your hand. A stack produces more than a single spawner while taking up one block, which is why large farms can fit into a tiny room.',
+          'Spawners of the same type can be stacked into a single block by sneaking (shift) and right-clicking a placed spawner with another one in your hand. A stack produces more than a single spawner while taking up one block, which is why large farms can fit into a tiny room. Community calculations suggest output per spawner drops off in very large stacks, so several medium stacks in separate blocks tend to beat one giant stack.',
           'Stacking also concentrates value. One stacked block can hold a fortune, and base hunters know it. Never share farm coordinates and never accept teleport requests from strangers to your farm.',
         ],
       },
@@ -418,23 +420,23 @@ const baseArticles: WikiArticle[] = [
           '**Skeleton** – bones and arrows. The most popular type; see [skeleton spawner farms](/wiki/skeleton-spawner-farm).',
           '**Iron Golem** – iron ingots. See [iron golem farms](/wiki/iron-golem-farm).',
           '**Zombified Piglin** – gold nuggets.',
-          '**Blaze** – blaze drops for brewing.',
+          '**Blaze** – blaze powder (not blaze rods), used for brewing.',
           '**Creeper** – gunpowder, useful for rockets.',
           '**Spider** – string and spider eyes.',
-          '**Pig and Cow** – raw meat.',
+          '**Pig** – raw porkchops. **Cow** – raw beef only, no leather.',
         ],
       },
       {
         heading: 'How to get a spawner in 2026',
         paragraphs: [
-          'Spawners used to be bought with shards, but they were removed from the Shard Shop in 2026 and, according to the community wiki, no new spawners are currently created by the server. That means every spawner now comes from another player – through the auction house, orders or a direct trade. Since supply is fixed, prices are set entirely by the player market.',
-          'Before buying, confirm the exact spawner type in its name and lore, and use the auction house rather than a pay-first deal. Some players also buy spawners from third-party stores such as [our spawner shop](/donutsmp-spawners); remember that real-money trading breaks DonutSMP rules and is at your own risk.',
+          'Spawners used to come from the Shard Shop, the Gold crate and the old `/shop`, but the June 2026 update removed every server source. No new spawners enter the game, so every spawner now comes from another player. Since supply is fixed, prices are set entirely by the player market and vary a lot – check `/ah` and `/orders` before you buy.',
+          'Before buying, confirm the exact spawner type in its name and lore, and never pay the full amount first to a stranger. One fan wiki reports that spawners cannot be listed on the auction house and must be traded directly, so check in-game which route works. Some players also buy spawners from third-party stores such as [our spawner shop](/donutsmp-spawners); remember that real-money trading breaks DonutSMP rules and is at your own risk.',
         ],
       },
       {
         heading: 'Moving a spawner safely',
         paragraphs: [
-          'Community guides report that you need a **Silk Touch** pickaxe to pick up a placed spawner, and that anything still stored inside is lost when it breaks. Always empty the storage first, and test with a single spawner before moving a valuable stack.',
+          'How breaking and picking up a placed spawner works on the live server is not well documented. Some guides say you need a **Silk Touch** pickaxe, others that sneaking while breaking takes part of a stack, and that stored drops (and any stored XP) are lost when it breaks – none of this is confirmed by a reliable DonutSMP source. Always empty the storage first, and test with a single spawner before moving a valuable stack.',
         ],
       },
     ],
@@ -448,7 +450,7 @@ const baseArticles: WikiArticle[] = [
       { label: 'DonutSMP spawners', to: '/donutsmp-spawners' },
       { label: 'Spawners guide', to: '/guides/donutsmp-spawners-guide' },
     ],
-    updatedAt: UPDATED,
+    updatedAt: FACTCHECKED,
   },
   {
     slug: 'skeleton-spawner-farm',
@@ -468,7 +470,7 @@ const baseArticles: WikiArticle[] = [
           'The best skeleton farm on DonutSMP is therefore not about redstone at all. It comes down to three things:',
         ],
         list: [
-          '**Count** – more stacked spawners means more output.',
+          '**Count** – more spawners means more output; spread big numbers over a few separate stacks rather than one giant block.',
           '**Collection** – empty storage regularly so production is not wasted.',
           '**Secrecy** – a hidden location, no shared coordinates, and no unknown visitors.',
         ],
@@ -496,7 +498,7 @@ const baseArticles: WikiArticle[] = [
       {
         heading: 'Getting skeleton spawners',
         paragraphs: [
-          'In vanilla, spawners cannot be mined with Silk Touch, so you build around the one you find. On DonutSMP spawners are items you can buy, trade and stack, but they are no longer sold by the Shard Shop, so they come from other players. You can also find them in our store at [skeleton spawner](/product/skeleton-spawner) – note that real-money trading is against DonutSMP rules and at the buyer\'s risk.',
+          'In vanilla, spawners cannot be mined with Silk Touch, so you build around the one you find. On DonutSMP spawners are items you can trade and stack, but since June 2026 the server no longer sells them anywhere, so they only come from other players and prices vary a lot – check `/ah` and `/orders`. You can also find them in our store at [skeleton spawner](/product/skeleton-spawner) – note that real-money trading is against DonutSMP rules and at the buyer\'s risk.',
         ],
       },
     ],
@@ -510,7 +512,7 @@ const baseArticles: WikiArticle[] = [
       { label: 'Skeleton spawner', to: '/product/skeleton-spawner' },
       { label: 'All spawners', to: '/shop/spawners' },
     ],
-    updatedAt: UPDATED,
+    updatedAt: FACTCHECKED,
   },
   {
     slug: 'iron-golem-farm',
@@ -589,7 +591,7 @@ const baseArticles: WikiArticle[] = [
         heading: 'Where elytras come from',
         paragraphs: [
           'Elytras only generate in **End ships**, which spawn next to some End cities in the outer End islands. Each End ship holds one elytra in an item frame. To get there you kill the Ender Dragon (or use a gateway that is already open) and throw an ender pearl into an End gateway to reach the outer islands.',
-          'On DonutSMP the End is shared by a huge number of players, and the community wiki notes that it is hosted on the US East region. End cities close to the main island are usually looted already, so expect to travel far – or buy an elytra from another player on the auction house.',
+          'On DonutSMP the End is shared by a huge number of players, and the community wikis note that it is hosted only on the NA East region. Because the world has a border, the number of End ships – and therefore elytras – is finite, which is why they are among the most valuable items on the server. End cities close to the main island are usually looted already, so expect to travel far – or buy an elytra from another player on the auction house.',
         ],
       },
       {
@@ -629,7 +631,7 @@ const baseArticles: WikiArticle[] = [
       { label: 'Elytra guide', to: '/guides/donutsmp-elytra-guide' },
       { label: 'Elytra crate', to: '/product/elytra-crate' },
     ],
-    updatedAt: UPDATED,
+    updatedAt: FACTCHECKED,
   },
   {
     slug: 'netherite-ancient-debris',
@@ -647,7 +649,7 @@ const baseArticles: WikiArticle[] = [
         paragraphs: [
           'Ancient debris only generates in the Nether. It is most common low down, roughly between **Y 8 and Y 22**, and many players strip-mine around **Y 15**. It is rarely exposed to air, so you have to dig for it.',
           'Debris has very high blast resistance, which makes explosions a fast way to uncover it: TNT clears netherrack around it, and beds explode when used in the Nether. Bed mining is dangerous, so wear armor, keep fire resistance handy and never use a bed near lava you are standing beside.',
-          'On DonutSMP the Nether is shared and heavily used, so expect areas near common portals to be mined out. Use `/rtp` and travel far before starting.',
+          'On DonutSMP the Nether is shared by every region (it runs on NA East) and heavily used, so expect areas near common portals to be mined out. Travel far from busy portals before starting.',
         ],
       },
       {
@@ -670,7 +672,7 @@ const baseArticles: WikiArticle[] = [
         heading: 'Why netherite is worth it',
         paragraphs: [
           'Netherite armor has more toughness than diamond and each piece adds knockback resistance, which helps in crystal PvP. Netherite items also float in lava and do not burn, so you have a chance to recover them after dying in the Nether.',
-          'Maxed netherite gear is also one of the most traded items on the auction house. You can find armor and tools in our [armor shop](/shop/armor) as well; real-money trading is against DonutSMP rules and at your own risk.',
+          'Maxed netherite gear is also one of the most traded items on the auction house, and the Shard Shop sells max-enchanted netherite pieces for [shards](/wiki/donutsmp-shards). You can find armor and tools in our [armor shop](/shop/armor) as well; real-money trading is against DonutSMP rules and at your own risk.',
         ],
       },
     ],
@@ -685,7 +687,7 @@ const baseArticles: WikiArticle[] = [
       { label: 'Armor', to: '/shop/armor' },
       { label: 'Tools & weapons', to: '/shop/tools-weapons' },
     ],
-    updatedAt: UPDATED,
+    updatedAt: FACTCHECKED,
   },
   {
     slug: 'totems-pvp-gear',
@@ -814,7 +816,7 @@ const baseArticles: WikiArticle[] = [
       'How base hunters find bases on DonutSMP and practical ways to protect yours: location, hiding spawners, teleport habits, coordinates and keeping backups.',
     summary: 'How base hunters find bases on DonutSMP and the habits that keep your spawners and stash hidden.',
     intro:
-      'Base hunting is a core part of DonutSMP. The server is semi-anarchy, so if someone finds your base they can usually take what is inside, and community wiki authors note that most bases are found sooner or later. You cannot make a base impossible to find, but you can make it far less likely and limit what you lose.',
+      'Base hunting is a core part of DonutSMP. The server is semi-anarchy and has no land claims, so if someone finds your base they can usually take what is inside, and community wiki authors note that most bases are found sooner or later. You cannot make a base impossible to find, but you can make it far less likely and limit what you lose.',
     sections: [
       {
         heading: 'How bases get found',
@@ -832,7 +834,7 @@ const baseArticles: WikiArticle[] = [
         heading: 'Choosing a location',
         paragraphs: [
           'Travel well away from where `/rtp` dropped you before building, and do not build next to a Nether portal. Underground bases leave much less to see from above. Keep your entrance small and ordinary-looking, and avoid lighting the surface.',
-          'Remember that only a handful of homes are available to each player, depending on rank. Use them for the base itself and a safe fallback, not for every location you visit.',
+          'Players without a rank only get 3 homes (ranks raise the limit). Use them for the base itself and a safe fallback, not for every location you visit. Expect griefers too: during the August 2026 "flood" event, players used flying machines to flood large areas with water.',
         ],
       },
       {
@@ -862,7 +864,7 @@ const baseArticles: WikiArticle[] = [
       { label: 'Base hunting guide', to: '/guides/donutsmp-base-hunting-guide' },
       { label: 'Spawners', to: '/shop/spawners' },
     ],
-    updatedAt: UPDATED,
+    updatedAt: FACTCHECKED,
   },
   {
     slug: 'donutsmp-rules',
@@ -882,7 +884,7 @@ const baseArticles: WikiArticle[] = [
         ],
         list: [
           'Movement mods and inventory mods.',
-          'Health indicators, radar, ESP and freecam.',
+          'Health indicators, radar, ESP, freecam, x-ray and Baritone-style pathing bots.',
           'Auto place or easy place features.',
           'Macros, scripts, auto clickers, mouse tweaks and scrollers.',
           'Crafting modifications.',
@@ -898,7 +900,7 @@ const baseArticles: WikiArticle[] = [
       {
         heading: 'Real-money and cross-server trading',
         paragraphs: [
-          'DonutSMP rules prohibit **IRL (real-money) trading** – buying or selling items, money, accounts or services for real money outside official DonutSMP channels – even when both players agree. Cross-server trading and external gambling are banned too.',
+          'DonutSMP rules prohibit **IRL (real-money) trading** – buying or selling items, money, accounts or services for real money outside official DonutSMP channels – even when both players agree. Cross-server trading and external gambling are banned too. This is enforced hard: the community wikis document permanent bans and wipes for IRL trading, including several players at the top of baltop.',
           'Third-party stores that sell DonutSMP items, including this one, are not part of DonutSMP and not affiliated with it. Buying from them is against DonutSMP rules and is done at the buyer\'s own risk. If you want to understand the risks first, read [buying money safely](/guides/buying-donutsmp-money-safely) and our page on [IRL trading](/donutsmp-irl-trade).',
         ],
       },
@@ -911,22 +913,22 @@ const baseArticles: WikiArticle[] = [
       {
         heading: 'Does the DonutSMP map reset?',
         paragraphs: [
-          'According to the community wiki, the current world is Season 2; Season 1 ended because of economy inflation and duplication. No regular reset schedule has been announced, so treat your base and items as long-term – and watch the official Discord announcements for any change.',
+          'According to the community wikis, the current world is Season 2; Season 1 ended because of economy inflation and duplication. DrDonut has declared Season 2 permanent, so there is no reset schedule. The overworld border sits at roughly ±225,000 blocks; a much larger expansion has been talked about for a long time but was still not live in late October 2026. Watch the official Discord announcements for any change.',
         ],
       },
     ],
     faq: [
-      { q: 'Is real-money trading allowed on DonutSMP?', a: 'No. Real-money (IRL) trading outside official DonutSMP channels is against the rules and can lead to punishment.' },
+      { q: 'Is real-money trading allowed on DonutSMP?', a: 'No. Real-money (IRL) trading outside official DonutSMP channels is against the rules and has led to permanent bans and wipes.' },
       { q: 'How many alt accounts can I use on DonutSMP?', a: 'The rules allow at most five accounts per player.' },
       { q: 'Are mods allowed on DonutSMP?', a: 'Only mods that give no advantage. Hacked clients, radar, freecam, health indicators, macros and inventory or movement mods are banned.' },
-      { q: 'Will DonutSMP reset the map?', a: 'The current world is Season 2 and no reset schedule has been announced. Follow the official Discord for news.' },
+      { q: 'Will DonutSMP reset the map?', a: 'No reset is planned: DrDonut has declared the current Season 2 world permanent. Follow the official Discord for news.' },
     ],
     related: ['donutsmp-base-protection', 'donutsmp-ip-how-to-join', 'donutsmp-money-economy'],
     shopLinks: [
       { label: 'IRL trading explained', to: '/donutsmp-irl-trade' },
       { label: 'Buying money safely', to: '/guides/buying-donutsmp-money-safely' },
     ],
-    updatedAt: UPDATED,
+    updatedAt: FACTCHECKED,
   },
 ];
 

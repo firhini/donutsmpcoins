@@ -5,7 +5,8 @@
  * Server-specific facts were cross-checked against the community wikis (donutsmp.wiki and
  * Donutpedia, autumn 2026), including their summaries of the June 2026 update notes. Anything
  * only one unofficial source mentioned is attributed or phrased as "check in-game". Spawner values
- * are typical player-market values from daily trading in early November 2026.
+ * vary a lot between sources: the figures quoted are what we see in our own trading (early November
+ * 2026) and are labelled as such, next to the much lower fan-tracker averages.
  */
 import type { WikiArticle } from './wiki';
 
@@ -22,7 +23,7 @@ export const wikiMoreA: WikiArticle[] = [
       'A step-by-step DonutSMP beginner guide for your first hour, day and week: /rtp, homes, first money, safe storage and saving up for a first spawner.',
     summary: 'A step-by-step plan for your first hour, first day and first week on DonutSMP, from /rtp to a steady income.',
     intro:
-      'DonutSMP throws you into a huge, crowded world with an empty balance, no protection and plenty of players who would happily take your stuff. The good news is that the first week follows a fairly predictable path. This guide breaks it into small steps so you always know what to do next, and which mistakes cost new players the most.',
+      'DonutSMP throws you into a huge, crowded world with an empty balance, no land claims and plenty of players who would happily take your stuff. The good news is that the first week follows a fairly predictable path. This guide breaks it into small steps so you always know what to do next, and which mistakes cost new players the most.',
     sections: [
       {
         heading: 'Before you join',
@@ -51,15 +52,15 @@ export const wikiMoreA: WikiArticle[] = [
       {
         heading: 'Days two to four: your first income',
         paragraphs: [
-          'Now you need something that produces money while you play. Good beginner options need no capital: mining and selling ores, a simple crop farm, or filling water and lava buckets, which usually sell for more than empty ones. Compare three ways to sell before dumping everything into `/sell`: the server base price, player requests in `/orders`, and listings on `/ah`.',
+          'Now you need something that produces money while you play. Good beginner options need no capital: mining and selling ores, a simple crop farm, or filling water and lava buckets – compare their `/worth` and order prices with empty ones. Compare three ways to sell before dumping everything into `/sell`: the server base price, player requests in `/orders`, and listings on `/ah`.',
           'Your shard balance also grows on its own – every player earns one shard for every 10 minutes of playtime, so check `/shards` now and then. See [making money fast](/wiki/donutsmp-make-money-fast) for methods ranked by stage.',
         ],
       },
       {
         heading: 'Days five to seven: your first spawner',
         paragraphs: [
-          'Most players aim for a first **skeleton spawner** by the end of the week. Spawners on DonutSMP generate drops without spawning mobs and stack into one block, so even one makes steady, sellable output. In early November 2026 a skeleton spawner typically traded for around 18M coins on the player market – see [spawner values](/wiki/donutsmp-spawner-values) for how to check the current price.',
-          'Buy through the auction house rather than a pay-first deal, and read the item name and lore before confirming. If you would rather skip the grind, spawners and money are also sold in our store; that is against DonutSMP rules and at your own risk.',
+          'Most players aim for a first **skeleton spawner** by the end of the week. Spawners on DonutSMP generate drops without spawning mobs and stack into one block, so even one makes steady, sellable output. The server no longer sells spawners, so you buy one from another player, and prices vary a lot between sources and over time – check `/ah` and see [spawner values](/wiki/donutsmp-spawner-values).',
+          'Never pay the full amount first to a stranger, and read the item name and lore before confirming. If you would rather skip the grind, spawners and money are also sold in our store; that is against DonutSMP rules and at your own risk.',
         ],
       },
       {
@@ -99,8 +100,8 @@ export const wikiMoreA: WikiArticle[] = [
       {
         heading: 'Joining on each edition',
         paragraphs: [
-          'On **Java**, add `donutsmp.net` in the multiplayer list – no port needed. According to the community wiki, the server announced support for the latest Minecraft Java version during the June 2026 updates, so an up-to-date launcher is the safest choice.',
-          'On **Bedrock** (Windows, mobile, consoles), add `donutsmp.net` with port `19132`. Bedrock client support was updated in June 2026 as well. If you cannot connect, check that you typed the Bedrock port and not the Java one. Both editions need a genuine account; cracked clients cannot join.',
+          'On **Java**, add `donutsmp.net` in the multiplayer list – no port needed. The proxy accepts a very wide range of client versions, but the server uses features from Java 1.21.6 and later, such as dialog menus, so a current release is the safest choice.',
+          'On **Bedrock** (Windows, mobile, consoles), add `donutsmp.net` with port `19132` and keep your game up to date. If you cannot connect, check that you typed the Bedrock port and not the Java one. Both editions need a genuine account; cracked clients cannot join.',
         ],
       },
       {
@@ -115,9 +116,9 @@ export const wikiMoreA: WikiArticle[] = [
         paragraphs: ['A few differences matter in practice:'],
         list: [
           '**Combat** – crystal PvP is the main fighting style and relies on fast hotbar and offhand swaps. Touch controls and controllers make this harder, so keyboard and mouse on Java is usually easier.',
-          '**Menus** – server menus are designed for Java and can look or behave slightly differently on Bedrock. Read confirmation screens carefully before buying or listing.',
+          '**Menus** – since June 2026 many server menus use Java\'s dialog screens, which can look or behave slightly differently on Bedrock. Read confirmation screens carefully before buying or listing.',
           '**Mods** – the client mod rules mainly concern Java players. Anything that gives an advantage, such as radar, freecam or auto-clickers, is banned on every edition.',
-          '**Voice chat** – proximity voice chat uses Simple Voice Chat, a Java mod, so Bedrock players generally cannot use it.',
+          '**Voice chat** – DonutSMP has proximity voice chat, which on Java servers relies on a client mod, so Bedrock players generally cannot use it. Check the official Discord for the current setup.',
         ],
       },
       {
@@ -172,7 +173,7 @@ export const wikiMoreA: WikiArticle[] = [
         list: [
           '**How do I make money?** Sell with `/sell`, fill player `/orders` and list on `/ah`. Later, spawners give steady income. See [making money fast](/wiki/donutsmp-make-money-fast).',
           '**What are shards?** A second currency earned at one shard per 10 minutes of playtime, with no rank needed, and spent in the Shard Shop. They cannot be sent with `/pay`. See [shards](/wiki/donutsmp-shards).',
-          '**How much is a spawner worth?** It depends on the type and the day. In early November 2026 a skeleton spawner typically traded around 18M coins – see [spawner values](/wiki/donutsmp-spawner-values).',
+          '**How much is a spawner worth?** It depends on the type and the day, and sources disagree a lot – check `/ah` before you trade. See [spawner values](/wiki/donutsmp-spawner-values).',
         ],
       },
       {
@@ -188,7 +189,7 @@ export const wikiMoreA: WikiArticle[] = [
         heading: 'Rules and safety',
         paragraphs: ['What gets players banned or robbed:'],
         list: [
-          '**Is raiding allowed?** Yes, base hunting is part of the game. Cheats used to find bases are not. Read [base protection](/wiki/donutsmp-base-protection).',
+          '**Is raiding allowed?** Yes. There are no land claims and base hunting is part of the game. Cheats used to find bases, such as x-ray, are not. Read [base protection](/wiki/donutsmp-base-protection).',
           '**Which mods are allowed?** Only mods that give no advantage. Radar, freecam, health indicators, macros and similar mods are banned – see [rules](/wiki/donutsmp-rules).',
           '**Will staff refund a scam?** Generally no. Most in-game scams are not against the rules, so prevention is everything: never pay first, and learn the [common scams](/wiki/donutsmp-scams).',
         ],
@@ -196,7 +197,7 @@ export const wikiMoreA: WikiArticle[] = [
     ],
     faq: [
       { q: 'Is DonutSMP free to play?', a: 'Yes. You need a genuine Minecraft account, but joining is free. Ranks on the official store are optional 30-day subscriptions.' },
-      { q: 'Does DonutSMP reset the map?', a: 'The current world is Season 2, described as permanent, and no reset schedule has been announced.' },
+      { q: 'Does DonutSMP reset the map?', a: 'No reset is planned. DrDonut has declared the current Season 2 world permanent.' },
       { q: 'Is buying DonutSMP money allowed?', a: 'No. Real-money trading outside official channels breaks the rules and is at the buyer\'s risk. See [real-money trading risks](/wiki/donutsmp-real-money-trading-risks).' },
     ],
     related: ['donutsmp-beginner-guide', 'donutsmp-commands', 'donutsmp-rules', 'donutsmp-money-economy'],
@@ -214,27 +215,28 @@ export const wikiMoreA: WikiArticle[] = [
     title: 'DonutSMP Spawner and Item Values in Coins (Price Guide)',
     seoTitle: 'DonutSMP Spawner Values & Price Guide (2026)',
     metaDescription:
-      'Typical DonutSMP spawner values in coins for skeleton, iron golem and cow spawners, why prices move, and how to check any item price yourself with /ah.',
-    summary: 'Typical player-market values for popular DonutSMP spawners and how to check what any item is worth today.',
+      'DonutSMP spawner values in coins for skeleton, iron golem and cow spawners, why sources disagree so much, and how to check any price yourself with /ah.',
+    summary: 'Why DonutSMP spawner prices differ so much between sources, what we see in our own trading, and how to check any price.',
     intro:
-      'Ask ten DonutSMP players what a spawner is worth and you will get ten answers, because prices are set by players, not by the server. This page lists typical market values for the most traded spawners as of early November 2026 and, more importantly, shows you how to check the current price of any item yourself before you buy or sell.',
+      'Ask ten DonutSMP players what a spawner is worth and you will get ten answers, because prices are set by players, not by the server. This page explains why spawner prices vary so much between sources and over time, shares what we see in our own trading in early November 2026 and, more importantly, shows you how to check the current price of any item yourself before you buy or sell.',
     sections: [
       {
-        heading: 'Typical spawner values (November 2026)',
+        heading: 'Spawner values: why the numbers disagree',
         paragraphs: [
-          'These are typical player-market values seen in daily trading in early November 2026. They move with supply and demand, so treat them as a starting point, not a fixed price:',
+          'Spawner prices vary a lot between sources and over time. Fan price trackers built on guest votes showed skeleton spawners at only around 1.3–1.4M coins in October 2026, while a fan wiki put the average near 8M in the same month. The figures below are **what we see in our own trading** in early November 2026 – not an official or universal price:',
         ],
         list: [
-          '**Skeleton spawner** – about **18M** coins each. The most traded type; bones and arrows always have buyers.',
-          '**Iron Golem spawner** – about **41M** coins each. Produces iron ingots for hoppers, buckets and storage.',
-          '**Cow spawner** – about **100M** coins each.',
+          '**Skeleton spawner** – around **18M** coins each in our trades. The most valued type; bones (and arrows) always have buyers on `/orders`.',
+          '**Iron Golem spawner** – around **41M** coins each in our trades. Produces iron ingots for hoppers, buckets and storage.',
+          '**Cow spawner** – around **100M** coins each in our trades. It produces raw beef only, no leather.',
+          'Whatever the source, check `/ah` and recent trades yourself before you buy or sell.',
         ],
       },
       {
         heading: 'Why spawner prices move',
         paragraphs: [
-          'According to the community wikis, no new spawners are currently created by the server – they were removed from the Shard Shop and crates are gone. Supply is therefore closed, and prices depend on how many existing spawners players are willing to sell. A big base raid or an inactive player selling out can flood the market for a few days; heavy buying can push it up just as fast.',
-          'Server changes matter too. The value of a spawner depends on what its output earns, so a change to `/sell` prices – such as the temporary 3× sell multiplier announced in June 2026 – affects what players will pay. Talk of the planned world border expansion has also driven speculation, but no date has been confirmed.',
+          'Since the June 2026 update no new spawners enter the game – the server stopped selling them in the Shard Shop and `/shop`, and crates are gone. Supply is therefore closed, and prices depend on how many existing spawners players are willing to sell. A big base raid or an inactive player selling out can flood the market for a few days; heavy buying can push it up just as fast.',
+          'Server changes matter too. The value of a spawner depends on what its output earns, so a change to `/sell` prices affects what players will pay – the June 2026 update removed sell multipliers, and one fan wiki reports that `/sell` prices were raised again later that month (unconfirmed). Talk of the planned world border expansion has also driven speculation, but it was still not live in late October 2026 and has no date.',
         ],
       },
       {
@@ -244,7 +246,7 @@ export const wikiMoreA: WikiArticle[] = [
           '`/ah <search>` – the current asking prices. Look at several listings, not just the cheapest.',
           '`/order <search>` – what buyers are offering right now. The gap between orders and listings shows the real range.',
           '`/worth <item>` – the server base price, the floor for items `/sell` accepts.',
-          '**DonutStats** – an independent community site (not official) with auction data and price history. Check the timestamp.',
+          '**DonutStats** and similar trackers – independent community sites (not official) with auction data and price history. Check the timestamp, and remember they disagree with each other.',
         ],
       },
       {
@@ -257,13 +259,13 @@ export const wikiMoreA: WikiArticle[] = [
       {
         heading: 'Buying or selling a spawner safely',
         paragraphs: [
-          'Use the auction house so the server handles the swap, and read the item name and lore before confirming. Avoid pay-first deals with strangers. Spawners are also sold in our [spawner shop](/donutsmp-spawners); real-money trading is against DonutSMP rules and at the buyer\'s risk.',
+          'Read the item name and lore before confirming, and avoid paying the full amount first to a stranger. One fan wiki reports that spawners cannot be listed on the auction house, so direct trades are common – split big trades into small steps. Spawners are also sold in our [spawner shop](/donutsmp-spawners); real-money trading is against DonutSMP rules and at the buyer\'s risk.',
         ],
       },
     ],
     faq: [
-      { q: 'How much is a skeleton spawner worth on DonutSMP?', a: 'Around 18M coins each in early November 2026. Check `/ah skeleton spawner` for today\'s listings, as prices move.' },
-      { q: 'How much is an iron golem spawner worth?', a: 'Typically about 41M coins each in early November 2026, depending on supply and demand.' },
+      { q: 'How much is a skeleton spawner worth on DonutSMP?', a: 'Sources disagree: fan trackers showed about 1.3–8M in October 2026, while we see around 18M in our own trading. Check `/ah` and recent trades for today\'s price.' },
+      { q: 'How much is an iron golem spawner worth?', a: 'In our own trading, around 41M coins each in early November 2026. Prices vary a lot between sources and over time, so check `/ah` yourself.' },
       { q: 'How do I check what an item is worth on DonutSMP?', a: 'Compare `/ah <search>` listings with `/order <search>` offers and the base price from `/worth <item>`.' },
     ],
     related: ['donutsmp-spawners-explained', 'donutsmp-auction-flipping', 'skeleton-spawner-farm', 'iron-golem-farm'],
@@ -280,7 +282,7 @@ export const wikiMoreA: WikiArticle[] = [
     title: 'How to Flip Items on the DonutSMP Auction House',
     seoTitle: 'DonutSMP Auction House Flipping Guide',
     metaDescription:
-      'How to flip items on the DonutSMP auction house: finding underpriced listings, unit prices, how 2026 sell routing changed margins, and managing risk.',
+      'How to flip items on the DonutSMP auction house: finding underpriced listings, unit prices, how the 2026 market changes affect margins, and managing risk.',
     summary: 'Buy low, sell high: how auction house flipping works on DonutSMP and how to do it without losing money.',
     intro:
       'Flipping means buying an item below its usual price and reselling it for more. On DonutSMP it is one of the few money methods that needs no farm and no base – just starting capital, patience and good price knowledge. It is also easy to lose money doing it. This guide covers where margins come from, how the 2026 market changes affect flippers and how to keep risk under control.',
@@ -299,9 +301,9 @@ export const wikiMoreA: WikiArticle[] = [
       {
         heading: 'How the 2026 market changes flipping',
         paragraphs: [
-          'According to the community wiki\'s summary of the June 2026 update notes, the market is now more connected than before. `/sell` checks matching orders first and sends items to a higher-paying order when one exists. An auction listing can fill a higher-paying order automatically, and a new order can automatically buy matching listings at or below its price.',
-          'For flippers this means the easy gaps between orders and listings close faster, often instantly. The remaining margins come from items that need judgement – enchanted gear, spawners and rarer items where no exact order exists – and from timing, such as buying during a sell-off.',
-          '`/shop` also became **Quick Buy**, which buys the cheapest matching auction listing for you. It can spend up to three times the price it showed, with a warning above that, so read confirmation screens before accepting.',
+          'The June 2026 updates changed the market a lot: sell multipliers, crates and server spawner sales were removed. One community wiki\'s summary of the update notes also says `/sell`, orders and listings are now linked – items can go to a higher-paying order automatically, and a new order can buy matching listings at or below its price. We could not confirm this from a second source, so test it with cheap items first.',
+          'If it works that way for you, the easy gaps between orders and listings close faster, often instantly. The remaining margins come from items that need judgement – enchanted gear, spawners and rarer items where no exact order exists – and from timing, such as buying during a sell-off.',
+          'After being removed in early June, `/shop` reportedly came back as a **Quick Buy** menu that buys the cheapest matching auction listing for you. Its exact rules are not well documented, and the price can change between viewing and buying, so read confirmation screens before accepting.',
         ],
       },
       {
@@ -325,9 +327,9 @@ export const wikiMoreA: WikiArticle[] = [
       },
     ],
     faq: [
-      { q: 'Is flipping worth it on DonutSMP?', a: 'It can be, but it needs starting capital and price knowledge. Margins on simple items close quickly since orders and listings were linked in 2026.' },
+      { q: 'Is flipping worth it on DonutSMP?', a: 'It can be, but it needs starting capital and price knowledge. Margins on simple bulk items tend to be thin, since many players watch the same orders and listings.' },
       { q: 'Does the DonutSMP auction house charge a tax?', a: 'The community wikis list no fixed tax. Check the listing confirmation screen for any cost before you confirm.' },
-      { q: 'What items are best to flip?', a: 'Items that need judgement – enchanted gear, spawners and rare items – since simple bulk items are matched to orders automatically.' },
+      { q: 'What items are best to flip?', a: 'Items that need judgement – enchanted gear, spawners and rare items – since prices of simple bulk items are easy for everyone to compare.' },
     ],
     related: ['donutsmp-auction-house', 'donutsmp-spawner-values', 'donutsmp-make-money-fast', 'donutsmp-money-economy'],
     shopLinks: [
@@ -358,7 +360,7 @@ export const wikiMoreA: WikiArticle[] = [
         paragraphs: ['With an empty balance, use methods that need no starting money:'],
         list: [
           '**1. Fill player orders.** `/orders` often pays more than base price for useful blocks and redstone items, and you only need the items.',
-          '**2. Filled buckets.** Water and lava buckets usually sell for more than empty ones, and lava is plentiful in the Nether.',
+          '**2. Filled buckets.** Water and lava buckets can sell for more than empty ones – compare `/worth` and `/orders` – and lava is plentiful in the Nether.',
           '**3. Mining and selling.** Ores and stone sell through `/sell`; compare `/worth` with current orders first.',
           '**4. A simple crop farm.** Slow alone, but it keeps producing while you do the other three.',
         ],
@@ -367,7 +369,7 @@ export const wikiMoreA: WikiArticle[] = [
         heading: 'Mid game: a few million to around 100M',
         paragraphs: ['Once you have capital, put it into things that produce more money:'],
         list: [
-          '**1. Your first spawners.** A skeleton spawner typically traded around 18M coins in early November 2026 and keeps producing sellable drops. Stack more of the same type as income grows.',
+          '**1. Your first spawners.** A skeleton spawner keeps producing sellable bones and arrows. Prices vary a lot between sources (we see around 18M in our own trading; fan trackers show far less), so check `/ah` first. Add more of the same type as income grows.',
           '**2. Order flipping.** Create your own buy orders for bulk items below auction prices, then list them on `/ah`. It works best on cheap, high-volume items.',
           '**3. Crafting up.** Turn raw output into what players need – iron into hoppers and buckets, bones into bone meal – and sell where the price is highest.',
         ],
@@ -376,7 +378,7 @@ export const wikiMoreA: WikiArticle[] = [
         heading: 'Late game: 100M and up',
         paragraphs: ['With serious capital, the fastest growth comes from scale and market knowledge:'],
         list: [
-          '**1. Large stacked spawner farms.** More expensive types like iron golem (about 41M) or cow spawners (about 100M) in a well-hidden base. See [spawner values](/wiki/donutsmp-spawner-values).',
+          '**1. Large stacked spawner farms.** More expensive types like iron golem or cow spawners in a well-hidden base – in our own trading around 41M and 100M, but prices vary widely. See [spawner values](/wiki/donutsmp-spawner-values).',
           '**2. Auction house flipping.** Spawners and enchanted gear during sell-offs. Read [auction flipping](/wiki/donutsmp-auction-flipping) first.',
           '**3. Base hunting.** High variance but potentially huge. Needs an elytra, rockets and totems – and makes you a target too.',
         ],
@@ -384,7 +386,7 @@ export const wikiMoreA: WikiArticle[] = [
       {
         heading: 'Methods to avoid',
         paragraphs: [
-          'Some "fast money" ideas cost far more than they make. Player-run gambling games are built so the host wins on average – in the popular dispenser "paper game", ties go to the host, which gives the house roughly an 11% edge. Duping and exploits lead to bans and data wipes, and pay-first deals with strangers are the most common way new players lose everything.',
+          'Some "fast money" ideas cost far more than they make. Player-run gambling games are built so the host wins on average – in the usual rules of the popular dispenser "paper game", ties go to the host, which gives the house roughly an 11% edge. Duping and exploits lead to bans and data wipes, real-money trading has led to permanent bans, and pay-first deals with strangers are the most common way new players lose everything.',
           'Some players skip the early grind by buying coins from a store such as ours at [DonutSMP money](/donutsmp-money). Real-money trading is against DonutSMP rules and at the buyer\'s risk – read [real-money trading risks](/wiki/donutsmp-real-money-trading-risks) first.',
         ],
       },
@@ -416,7 +418,7 @@ export const wikiMoreA: WikiArticle[] = [
         heading: 'Are crates still on DonutSMP?',
         paragraphs: [
           'No. According to the community wikis, crates and crate keys were removed in the large update at the start of June 2026, together with the AFK lobby, spawn lobbies and the `/warp` command. The community wiki now lists crates as an archived, historical feature.',
-          'Earlier in 2026, the Shard Shop had already stopped selling Gold and Amethyst keys and raised the prices of the remaining keys, before the whole system went.',
+          'Earlier in 2026, the Shard Shop had already stopped selling Gold and Amethyst keys; by late February only Prime (2,000 shards) and Crimson (2,500 shards) keys were left, before the whole system went. The hourly key-all went with it.',
         ],
       },
       {
@@ -435,16 +437,16 @@ export const wikiMoreA: WikiArticle[] = [
       {
         heading: 'Where keys came from',
         paragraphs: [
-          'Keys were not physical items but a resource stored on your account. Players received them from the hourly key-all, bought them on the official store, or, at times, bought them with shards. Since keys were account-bound, they could not be traded as items – and none can be obtained now.',
+          'Keys were not physical items but a resource stored on your account. Players received them from the hourly key-all, bought them on the official store, or, at times, bought them with shards. Since keys were account-bound, they could not be traded as items – and none can be obtained now. One fan wiki says leftover keys were converted into shards; we could not confirm that.',
         ],
       },
       {
         heading: 'Where to get the same rewards today',
         paragraphs: ['Everything crates used to give is still in the game through other routes:'],
         list: [
-          '**Spawners** – traded between players on `/ah`, through orders and direct trades. See [spawner values](/wiki/donutsmp-spawner-values).',
+          '**Spawners** – no new ones enter the game; existing spawners are traded between players. See [spawner values](/wiki/donutsmp-spawner-values).',
           '**Netherite gear** – crafted yourself (see [netherite](/wiki/netherite-ancient-debris)) or bought from players.',
-          '**Premium shard items** – the Shard Shop still sells shard tools and enchanted gear. See [shards](/wiki/donutsmp-shards).',
+          '**Amethyst tools** – the old Amethyst Pickaxe is now the **Shard Pickaxe** (3×3 mining, self-destructs after one day), sold in the Shard Shop alongside other shard tools and enchanted gear. See [shards](/wiki/donutsmp-shards).',
         ],
       },
       {
@@ -457,7 +459,7 @@ export const wikiMoreA: WikiArticle[] = [
     ],
     faq: [
       { q: 'Can you still open crates on DonutSMP?', a: 'No. Crates and crate keys were removed in the June 2026 update.' },
-      { q: 'What was in the Gold crate?', a: 'The Gold crate let you choose one spawner. Spawners are now traded between players instead.' },
+      { q: 'What was in the Gold crate?', a: 'The Gold crate let you choose one spawner. No new spawners enter the game now, so they are only traded between players.' },
       { q: 'Can I buy DonutSMP crate keys?', a: 'No. Keys no longer exist, so any offer to sell them is a scam.' },
     ],
     related: ['donutsmp-shards', 'donutsmp-spawner-values', 'donutsmp-scams'],
@@ -498,14 +500,14 @@ export const wikiMoreA: WikiArticle[] = [
       {
         heading: 'Independent stats sites',
         paragraphs: [
-          'Sites such as **DonutStats** (`donutstats.net`) collect public data into leaderboards for money, kills, deaths, playtime, shards, mob kills and more, plus price history for auction items. They are independent community projects, not official DonutSMP services. Data can lag behind the server, so check the timestamp, and a missing player is not proof that they stopped playing.',
+          'Sites such as **DonutStats** (`donutstats.net`) use the official DonutSMP API (players get a key with `/api`) to collect data into leaderboards for money, kills, deaths, playtime, shards, mob kills and more, plus price history for auction items. They are independent community projects, not official DonutSMP services. Data can lag behind the server, so check the timestamp, and a missing player is not proof that they stopped playing.',
         ],
       },
       {
         heading: 'Why baltop numbers jump',
         paragraphs: [
-          'Balances at the top move fast. Large spawner sales, flipping and player-run gambling games move huge sums between a few players. According to Donutpedia, gambling pushed the number of billionaires so high at one point that 1B coins only ranked around 11,000th. Big swings usually reflect money changing hands, not new money being created.',
-          'The rules allow DonutSMP to suspend accounts and remove items for real-money trading or duping, so balances built that way can disappear overnight.',
+          'Balances at the top move fast. Large spawner sales, flipping and player-run gambling games move huge sums between a few players. According to Donutpedia, inflation pushed the number of billionaires so high at one point that 1B coins only ranked around 11,000th. Big swings usually reflect money changing hands, not new money being created.',
+          'DonutSMP wipes dupers and has permanently banned and wiped players for real-money trading, including several well-known baltop names, so balances built that way can disappear overnight.',
         ],
       },
       {
@@ -543,7 +545,7 @@ export const wikiMoreA: WikiArticle[] = [
         heading: 'What the rules say',
         paragraphs: [
           'DonutSMP prohibits buying or selling accounts, items, currency, services or access for real money outside official DonutSMP channels, unless DonutSMP authorises it in writing. The rule applies **even when both players agree**. Cross-server trading and external gambling are banned too.',
-          'Possible consequences listed in the rules include account suspension or termination and removal of virtual items, and penalties can extend to linked accounts. Third-party stores, including this one, are not part of DonutSMP and not affiliated with it.',
+          'Possible consequences listed in the rules include account suspension or termination and removal of virtual items, and penalties can extend to linked accounts. In practice the community wikis document permanent bans plus wipes for IRL trading, including players at the top of baltop. Third-party stores, including this one, are not part of DonutSMP and not affiliated with it.',
         ],
       },
       {
@@ -576,7 +578,7 @@ export const wikiMoreA: WikiArticle[] = [
       },
     ],
     faq: [
-      { q: 'Can you get banned for buying DonutSMP money?', a: 'Real-money trading breaks DonutSMP rules, and the rules allow suspensions and item removal. The risk is the buyer\'s.' },
+      { q: 'Can you get banned for buying DonutSMP money?', a: 'Yes. Real-money trading breaks DonutSMP rules and has led to permanent bans and wipes, even for baltop players. The risk is the buyer\'s.' },
       { q: 'Is the official DonutSMP store allowed?', a: 'Yes. Ranks and shards bought on the official store are the rule-compliant way to spend real money.' },
       { q: 'Should a seller ever need my password?', a: 'No. Delivering in-game money only needs your username. Anyone asking for a password or login code is a scammer.' },
     ],
@@ -671,7 +673,7 @@ export const wikiMoreA: WikiArticle[] = [
       {
         heading: 'What happened to /team?',
         paragraphs: [
-          'DonutSMP used to have teams of up to 50 members with a shared team home, team chat and permissions set by the owner. According to the community wikis, teams were removed in the large update at the start of June 2026, together with `/team home`. Some solo players used a one-person team just for an extra home slot, and that trick is gone too.',
+          'DonutSMP used to have teams with a shared team home and team chat. According to the community wikis, teams were removed in the large update at the start of June 2026, together with `/team home`, and replaced by a friends and following system. There are no land claims either, so nothing in the game locks a shared base to a group.',
           'Old guides and videos that tell you to type `/team create` no longer apply. If a team feature ever returns, `/help` will show it.',
         ],
       },
@@ -737,13 +739,13 @@ export const wikiMoreA: WikiArticle[] = [
           '**Discord:** `discord.gg/donutsmp` – also linked from `/discord` in-game.',
           '**Support portal:** `support.donutsmp.net`',
           '**Store:** `store.donutsmp.net` – ranks and shards.',
-          '**Account verification:** `verify.donutsmp.net` with the in-game `/link` command.',
+          '**Account linking:** the in-game `/link <code>` command, using the code the support portal gives you.',
         ],
       },
       {
         heading: 'How to get support',
         paragraphs: [
-          'Account, moderation and purchase problems go through the support portal. You sign in with Discord or Google and link your Minecraft account by running the in-game link command with your code. The portal itself estimates that most tickets are answered within 24–48 hours.',
+          'Account, moderation and purchase problems – including ban appeals – go through the support portal. You link your Minecraft account by running `/link <code>` in-game with the code the portal shows you. Response times vary, so give staff a few days before opening a duplicate ticket.',
           'A good ticket includes your Minecraft username, a clear description, the approximate date and time, and only the evidence needed. Never post passwords, IP addresses or payment details in public channels.',
         ],
       },
@@ -760,7 +762,7 @@ export const wikiMoreA: WikiArticle[] = [
         list: [
           'Someone claiming to be staff who messages you first about a ban, a prize or "suspicious activity".',
           'Requests for your password, a linking or verification code, or session files.',
-          'Requests to screenshare while you log in or link an account – the official team has warned against this.',
+          'Requests to screenshare while you log in or link an account.',
           'Free ranks, shards, crate keys or money in exchange for "verifying" on an outside website.',
           'Pressure to act fast before an offer "expires".',
         ],
@@ -823,7 +825,7 @@ export const wikiMoreA: WikiArticle[] = [
       {
         heading: 'Gambling hosts',
         paragraphs: [
-          'Player-run games such as the dispenser "paper game" ask you to pay the host first. Even when the host pays out honestly, the game favours them: with two random numbers from 1 to 9 and ties going to the host, you win only 36 of 81 outcomes, about 44%. A dishonest host can simply keep the bet. Gambling on outside sites is also against the rules.',
+          'Player-run games such as the dispenser "paper game" ask you to pay the host first. Even when the host pays out honestly, the game favours them: under the usual rules, with two random numbers from 1 to 9 and ties going to the host, you win only 36 of 81 outcomes, about 44%. A dishonest host can simply keep the bet. Gambling on outside sites is also against the rules.',
         ],
       },
       {
@@ -883,34 +885,34 @@ export const wikiMoreA: WikiArticle[] = [
         heading: 'Overworld, Nether and End',
         paragraphs: [
           'The Nether and the End are hosted only on the **NA East** region, so players in Europe, Asia and Oceania have higher ping there. Plan important End trips, such as hunting for an [elytra](/wiki/donutsmp-elytra), at times when you can live with the lag.',
-          'Because every player shares the same Nether and End, areas near common portals and End cities close to the main island are usually looted. Travel far for ancient debris and End ships. The community wiki also reports that June 2026 updates allowed breaking bedrock and access below the bedrock layer in the overworld.',
+          'Because every player shares the same Nether and End, areas near common portals and End cities close to the main island are usually looted. Travel far for ancient debris and End ships. Elytras from End ships are finite inside the border, which is a big part of why they are so valuable.',
         ],
       },
       {
         heading: 'Random teleport and coordinates',
         paragraphs: [
-          '`/rtp` sends you to a random location in the wild. Its menu was simplified in June 2026, so check in-game how region selection currently looks. A random destination is not guaranteed to be safe, so arrive prepared.',
+          '`/rtp` sends you to a random location in the wild, and its menu or `/rtp <region>` is how you choose a region. Since June 2026 the teleport is instant, with a short cooldown (reported as 15 seconds). The menu has changed several times, so check in-game how it looks now. A random destination is not guaranteed to be safe, so arrive prepared.',
           'Coordinates are sensitive information on a semi-anarchy server. Do not share them, and remember that trying to find or use the world seed is against the rules.',
         ],
       },
       {
         heading: 'World border expansion',
         paragraphs: [
-          'In June 2026 the DonutSMP team described a planned **world border expansion** and preparation work such as entity capacity and chunk-generation stability. As of autumn 2026 no date or final size has been confirmed, so treat predictions you see online as speculation.',
+          'The overworld border currently sits at roughly **±225,000 blocks**. A much larger **world border expansion** (often quoted as ±30,000,000) has been planned for a long time, but it was still not live in late October 2026 and has no confirmed date – predictions online range from "two weeks" to "within two years", so treat them as speculation.',
           'An expansion would open fresh terrain with unlooted structures, which could change the supply of some items. Spawners would not be affected under the current rules, since no new ones are created. See [spawner values](/wiki/donutsmp-spawner-values) for how prices react, and our [spawners](/donutsmp-spawners) page if you are looking to buy.',
         ],
       },
       {
         heading: 'Seasons and map resets',
         paragraphs: [
-          'The current world is **Season 2**. Season 1 ended because of economy inflation and duplication. Season 2 is described as permanent, and no reset schedule has been announced, so treat your base and items as long-term and watch the official Discord for any change.',
+          'The current world is **Season 2**. Season 1 ended because of economy inflation and duplication. DrDonut has declared Season 2 permanent, so no reset is planned, so treat your base and items as long-term and watch the official Discord for any change.',
         ],
       },
     ],
     faq: [
       { q: 'What regions does DonutSMP have?', a: 'Six overworld regions: NA East, NA West, EU Central, EU West, Asia and Oceania.' },
       { q: 'Where are the DonutSMP Nether and End hosted?', a: 'Both are hosted on the NA East region, so players far from the US East coast have higher ping there.' },
-      { q: 'Is DonutSMP going to reset?', a: 'Season 2 is described as permanent and no reset has been announced. Follow the official Discord for news.' },
+      { q: 'Is DonutSMP going to reset?', a: 'No reset is planned: DrDonut has declared Season 2 permanent. Follow the official Discord for news.' },
     ],
     related: ['donutsmp-ip-how-to-join', 'donutsmp-base-protection', 'donutsmp-elytra', 'donutsmp-rules'],
     shopLinks: [
