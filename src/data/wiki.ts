@@ -57,7 +57,7 @@ export const wikiArticles: WikiArticle[] = [
         heading: 'Regions and random teleport',
         paragraphs: [
           'The overworld is split across several regions hosted in different parts of the world, so players in North America, Europe, Asia and Oceania can get a lower ping. Each region owns a slice of the map. According to the community wiki, the Nether and the End are hosted on the US East region, so expect higher ping there if you live far away.',
-          'Use `/rtp` to random-teleport into the wild. Running it without a region opens a menu where you pick one. From there, walk or fly well away from your landing point before building – see [base protection](/wiki/donutsmp-base-protection).',
+          'Use `/rtp` to random-teleport into the wild (the exact options change with updates – check `/help` in-game). From there, walk or fly well away from your landing point before building – see [base protection](/wiki/donutsmp-base-protection).',
         ],
       },
       {
@@ -115,7 +115,7 @@ export const wikiArticles: WikiArticle[] = [
         heading: 'Teleporting and homes',
         paragraphs: ['Travel commands are what keep a base safe, so learn them early:'],
         list: [
-          '`/rtp [region]` – random teleport into the wild; without a region a selection menu opens.',
+          '`/rtp` – random teleport into the wild (options change with updates – check `/help`).',
           '`/sethome`, `/home [name]`, `/delhome <name>` – set, use and delete homes. The number of homes depends on your rank.',
           '`/tpa <player>` – ask to teleport to a player. `/tpahere <player>` asks them to come to you.',
           '`/tpaccept`, `/tpadeny`, `/tpacancel` – answer or cancel requests.',

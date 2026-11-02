@@ -161,9 +161,9 @@ export const wikiMoreA: WikiArticle[] = [
         heading: 'Joining and accounts',
         paragraphs: ['The basics before you log in:'],
         list: [
-          '**What is the IP?** `donutsmp.net` for Java and Bedrock; Bedrock uses port `19132`. See [how to join](/wiki/donutsmp-ip-how-to-join).',
+          '**What is the IP?** `donutsmp.net` for both Java and Bedrock. Java needs no port; Bedrock uses port `19132`. Beware of look-alike addresses on server lists. See [how to join](/wiki/donutsmp-ip-how-to-join).',
           '**Can I play on Bedrock or console?** Yes, both editions share one world. Consoles need a workaround to add custom servers – see [Java vs Bedrock](/wiki/donutsmp-java-vs-bedrock).',
-          '**How many accounts may I use?** The rules allow at most five accounts per player.',
+          '**How many accounts may I use?** The rules allow at most five accounts per player, and punishments can extend to linked accounts. Cracked accounts cannot join at all.',
         ],
       },
       {
@@ -171,7 +171,7 @@ export const wikiMoreA: WikiArticle[] = [
         paragraphs: ['How the economy works for a new player:'],
         list: [
           '**How do I make money?** Sell with `/sell`, fill player `/orders` and list on `/ah`. Later, spawners give steady income. See [making money fast](/wiki/donutsmp-make-money-fast).',
-          '**What are shards?** A second currency earned at one shard per 10 minutes of playtime and spent in the Shard Shop. See [shards](/wiki/donutsmp-shards).',
+          '**What are shards?** A second currency earned at one shard per 10 minutes of playtime, with no rank needed, and spent in the Shard Shop. They cannot be sent with `/pay`. See [shards](/wiki/donutsmp-shards).',
           '**How much is a spawner worth?** It depends on the type and the day. In early November 2026 a skeleton spawner typically traded around 18M coins – see [spawner values](/wiki/donutsmp-spawner-values).',
         ],
       },
@@ -179,7 +179,7 @@ export const wikiMoreA: WikiArticle[] = [
         heading: 'Gameplay',
         paragraphs: ['Features that work differently from other servers:'],
         list: [
-          '**Do spawners spawn mobs?** No. They generate drops into their own storage – see [how spawners work](/wiki/donutsmp-spawners-explained).',
+          '**Do spawners spawn mobs?** No. They generate drops into their own storage, which you empty by right-clicking, and spawners of one type stack into a single block – see [how spawners work](/wiki/donutsmp-spawners-explained).',
           '**Are there teams or clans?** The `/team` system was removed in June 2026. The friends system replaced it – see [teams and friends](/wiki/donutsmp-teams-friends).',
           '**Can I still open crates?** No. Crates and crate keys were removed in 2026 – see [crates and keys](/wiki/donutsmp-crates-keys).',
         ],
@@ -190,7 +190,7 @@ export const wikiMoreA: WikiArticle[] = [
         list: [
           '**Is raiding allowed?** Yes, base hunting is part of the game. Cheats used to find bases are not. Read [base protection](/wiki/donutsmp-base-protection).',
           '**Which mods are allowed?** Only mods that give no advantage. Radar, freecam, health indicators, macros and similar mods are banned – see [rules](/wiki/donutsmp-rules).',
-          '**Will staff refund a scam?** Generally no. Most in-game scams are not against the rules, so learn the [common scams](/wiki/donutsmp-scams).',
+          '**Will staff refund a scam?** Generally no. Most in-game scams are not against the rules, so prevention is everything: never pay first, and learn the [common scams](/wiki/donutsmp-scams).',
         ],
       },
     ],
@@ -407,7 +407,7 @@ export const wikiMoreA: WikiArticle[] = [
     title: 'DonutSMP Crates and Keys: What Happened to Them',
     seoTitle: 'DonutSMP Crates & Keys (Removed in 2026)',
     metaDescription:
-      'Are there still crates on DonutSMP? How crates and crate keys used to work, why they were removed in 2026, and where to get spawners and gear instead today.',
+      'Are there still crates on DonutSMP? How crates and crate keys used to work, why they were removed in 2026, and where to get spawners and gear today.',
     summary: 'DonutSMP crates and keys were removed in 2026. How they worked, and where players get the same rewards now.',
     intro:
       'Many older videos show players opening crates at spawn for spawners, netherite and amethyst tools. If you are looking for those crates today, you will not find them: crates and crate keys were removed from DonutSMP in 2026. This page explains how the system used to work, what replaced it and how to avoid scams built around "crate keys".',
@@ -498,7 +498,7 @@ export const wikiMoreA: WikiArticle[] = [
       {
         heading: 'Independent stats sites',
         paragraphs: [
-          'Sites such as **DonutStats** collect public data into leaderboards for money, kills, deaths, playtime, shards, mob kills and more, plus price history for auction items. They are independent community projects, not official DonutSMP services. Data can lag behind the server, so check the timestamp, and a missing player is not proof that they stopped playing.',
+          'Sites such as **DonutStats** (`donutstats.net`) collect public data into leaderboards for money, kills, deaths, playtime, shards, mob kills and more, plus price history for auction items. They are independent community projects, not official DonutSMP services. Data can lag behind the server, so check the timestamp, and a missing player is not proof that they stopped playing.',
         ],
       },
       {
@@ -511,7 +511,7 @@ export const wikiMoreA: WikiArticle[] = [
       {
         heading: 'Should you chase baltop?',
         paragraphs: [
-          'A high rank is visible to everyone, including scammers and players looking for bounty targets. Many wealthy players keep a large part of their wealth in items or spread across a hidden base for that reason. If you want to grow your balance, focus on income first – see [making money fast](/wiki/donutsmp-make-money-fast).',
+          'A high rank is visible to everyone, including scammers and players looking for bounty targets. Many wealthy players keep a large part of their wealth in items or spread across a hidden base for that reason. If you want to grow your balance, focus on steady income first rather than the leaderboard itself – see [making money fast](/wiki/donutsmp-make-money-fast).',
           'Some players boost their balance with coins bought from a store such as [DonutSMP money](/donutsmp-money); that breaks DonutSMP rules and is at the buyer\'s risk.',
         ],
       },
