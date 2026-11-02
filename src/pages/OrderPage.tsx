@@ -239,11 +239,12 @@ export default function Page() {
         </div>
       </header>
 
+      {(order.status === 'paid' || order.status === 'delivering') && <ClaimTicket orderId={order.id} username={order.username} required={!moneyOnly} />}
+
       <StatusTimeline status={order.status} paymentStatus={order.payment.status} timeline={order.timeline} />
 
       <div className="od-layout">
         <div className="od-main">
-          {(order.status === 'paid' || order.status === 'delivering') && <ClaimTicket orderId={order.id} username={order.username} required={!moneyOnly} />}
           {awaiting && <ClaimTicket required={!moneyOnly} stage="before" />}
           {awaiting && <PaymentPanel order={order} onChange={reload} />}
           {(order.status === 'paid' || order.status === 'delivering') && <DeliveryPanel order={order} />}

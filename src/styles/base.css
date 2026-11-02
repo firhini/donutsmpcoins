@@ -954,3 +954,6 @@ p {
   color: var(--gold-400);
   font-weight: 800;
 }
+.claim {
+  margin-bottom: var(--sp-4);
+}
