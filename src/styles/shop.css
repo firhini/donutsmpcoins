@@ -1373,3 +1373,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+@media (max-width: 1023px) {
+  .pp-sticky {
+    padding-bottom: calc(62px + env(safe-area-inset-bottom));
+  }
+}

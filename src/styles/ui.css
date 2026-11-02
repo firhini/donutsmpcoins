@@ -512,3 +512,9 @@
     opacity: 0;
   }
 }
+/* keep buttons clear of Netlify's floating "Powered by Netlify" badge (bottom-right, injected by the host) */
+@media (max-width: 520px) {
+  .consent.consent-sheet {
+    padding-bottom: calc(68px + env(safe-area-inset-bottom));
+  }
+}
