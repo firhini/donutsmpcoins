@@ -111,7 +111,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="hero-visual fade-up" style={{ animationDelay: '120ms' }}>
+          <div className="hero-visual">
             <div className="hero-orb" aria-hidden="true" />
             <span className="hero-coin a" aria-hidden="true">
               +1M

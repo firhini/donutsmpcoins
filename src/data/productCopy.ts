@@ -521,7 +521,7 @@ export const productCopy: Record<string, ProductCopy> = {
   },
 
   'netherite-crate': {
-    seoTitle: 'DonutSMP Netherite Crate – $5.99, 1 Netherite Drop | DonutCoins',
+    seoTitle: 'DonutSMP Netherite Crate – $5.99 Netherite Drop | DonutCoins',
     metaDescription:
       'Netherite Crate for DonutSMP: $5.99 for one netherite drop – ancient debris, ingots, a god sword or armor set, with a rare netherite block jackpot.',
     description:

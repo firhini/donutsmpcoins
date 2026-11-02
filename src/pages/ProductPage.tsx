@@ -210,7 +210,7 @@ export default function ProductPage() {
               {stock.low && <span className="badge badge-red">only {product.stock} left</span>}
             </div>
             <div className="pp-trust">
-              <span className="pp-pay" aria-label="Card, Apple Pay, Google Pay or crypto">
+              <span className="pp-pay" role="img" aria-label="Card, Apple Pay, Google Pay or crypto">
                 {['visa', 'mastercard', 'applepay', 'googlepay', 'bitcoin'].map((m) => (
                   <img key={m} src={`/img/payments/${m}.svg`} alt="" width={34} height={22} loading="lazy" />
                 ))}

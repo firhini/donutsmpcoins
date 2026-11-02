@@ -834,7 +834,7 @@ p {
 .sale-strip-pct {
   padding: 2px 8px;
   border-radius: 6px;
-  background: var(--pink-500, #ff4f9a);
+  background: #c2185b;
   color: #fff;
   font-weight: 800;
 }

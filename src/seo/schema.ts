@@ -47,6 +47,7 @@ export function organizationSchema(config: PublicConfig) {
     currenciesAccepted: 'USD',
     paymentAccepted: 'PayPal, Credit Card, Cryptocurrency',
     areaServed: 'Worldwide',
+    hasMerchantReturnPolicy: RETURN_POLICY,
   };
 }
 
@@ -80,6 +81,26 @@ export function faqSchema(faq: { q: string; a: string }[]) {
   };
 }
 
+/** In-game delivery: free, handed over within the same day. */
+const DIGITAL_DELIVERY = {
+  '@type': 'OfferShippingDetails',
+  shippingRate: { '@type': 'MonetaryAmount', value: '0', currency: 'USD' },
+  shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'US' },
+  deliveryTime: {
+    '@type': 'ShippingDeliveryTime',
+    handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 1, unitCode: 'DAY' },
+    transitTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 0, unitCode: 'DAY' },
+  },
+};
+
+/** Delivered in-game goods cannot be returned (see /refund-policy – refunds only for non-delivery). */
+const RETURN_POLICY = {
+  '@type': 'MerchantReturnPolicy',
+  applicableCountry: 'US',
+  returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+  merchantReturnLink: absUrl('/refund-policy'),
+};
+
 export function productSchema(p: Product, config: PublicConfig, category?: Category, description?: string) {
   const inStock = p.stock === null || p.stock === undefined || p.stock > 0;
   const lowest = p.bulkPricing?.length ? Math.min(p.priceCents, ...p.bulkPricing.map((b) => b.priceCents)) : p.priceCents;
@@ -94,6 +115,7 @@ export function productSchema(p: Product, config: PublicConfig, category?: Categ
           availability: inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
           url: absUrl(`/product/${p.slug}`),
           seller: organizationRef(config),
+          ...(p.saleEndsAt ? { priceValidUntil: p.saleEndsAt.slice(0, 10) } : {}),
         }
       : {
           '@type': 'Offer',
@@ -103,7 +125,9 @@ export function productSchema(p: Product, config: PublicConfig, category?: Categ
           url: absUrl(`/product/${p.slug}`),
           itemCondition: 'https://schema.org/NewCondition',
           seller: organizationRef(config),
-          shippingDetails: { '@type': 'OfferShippingDetails', shippingRate: { '@type': 'MonetaryAmount', value: '0', currency: 'USD' }, shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'US' } },
+          ...(p.saleEndsAt ? { priceValidUntil: p.saleEndsAt.slice(0, 10) } : {}),
+          shippingDetails: DIGITAL_DELIVERY,
+          hasMerchantReturnPolicy: RETURN_POLICY,
         };
   return {
     '@context': ctx,
