@@ -27,6 +27,22 @@ export default function ProductPage() {
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
   const timer = useRef<number | null>(null);
+  // mobile: show a sticky "Add to cart" bar once the main buy box has scrolled out of view
+  const buyRef = useRef<HTMLDivElement | null>(null);
+  const [buyVisible, setBuyVisible] = useState(true);
+  useEffect(() => {
+    const check = () => {
+      const el = buyRef.current;
+      setBuyVisible(!el || el.getBoundingClientRect().bottom > 0);
+    };
+    check();
+    window.addEventListener('scroll', check, { passive: true });
+    window.addEventListener('resize', check);
+    return () => {
+      window.removeEventListener('scroll', check);
+      window.removeEventListener('resize', check);
+    };
+  }, [product?.id]);
 
   useEffect(() => {
     if (product) setQty(isMillionsProduct(product) ? Math.max(product.minQty ?? 1, 50) : product.minQty ?? 1);
@@ -162,7 +178,7 @@ export default function ProductPage() {
             </ul>
           ) : null}
 
-          <div className="pp-buy">
+          <div className="pp-buy" ref={buyRef}>
             <div className="pp-buy-row">
               <QtyStepper value={qty} onChange={setQty} min={minQty} max={maxQty} step={millions ? 5 : 1} suffix={millions ? 'M' : undefined} label={millions ? 'Millions' : 'Quantity'} size="lg" disabled={stock.soldOut} />
               <button type="button" className={`btn btn-lg ${added ? 'btn-success' : 'btn-primary'}`} onClick={onAdd} disabled={stock.soldOut}>
@@ -193,12 +209,34 @@ export default function ProductPage() {
               {line.savingsCents > 0 && <span className="badge badge-green">bulk: you save {fmt(line.savingsCents)}</span>}
               {stock.low && <span className="badge badge-red">only {product.stock} left</span>}
             </div>
+            <div className="pp-trust">
+              <span className="pp-pay" aria-label="Card, Apple Pay, Google Pay or crypto">
+                {['visa', 'mastercard', 'applepay', 'googlepay', 'bitcoin'].map((m) => (
+                  <img key={m} src={`/img/payments/${m}.svg`} alt="" width={34} height={22} loading="lazy" />
+                ))}
+              </span>
+              <span>
+                <Icon name="bolt" size={13} /> Delivered in-game, usually in 5–30 min
+              </span>
+            </div>
             {maxQty < Infinity && !stock.soldOut && (
               <span className="xs muted">
                 Max {millions ? formatMillions(maxQty) : maxQty} per order – need more? Ask on Discord for a custom quote.
               </span>
             )}
           </div>
+          {!buyVisible && !stock.soldOut && (
+            <div className="pp-sticky only-mobile" role="region" aria-label="Quick buy">
+              <div>
+                <strong>{fmt(line.totalCents)}</strong>
+                {product.compareAtCents && product.compareAtCents > product.priceCents ? <s className="muted">{fmt(product.compareAtCents * line.qty)}</s> : null}
+                <span className="xs muted">{millions ? formatMillions(line.qty) : `${line.qty}× ${product.name}`}</span>
+              </div>
+              <button type="button" className={`btn ${added ? 'btn-success' : 'btn-primary'}`} onClick={onAdd} data-track="sticky add to cart">
+                <Icon name={added ? 'check' : 'cart'} size={16} /> {added ? 'Added' : 'Add to cart'}
+              </button>
+            </div>
+          )}
 
           {table.length > 1 && (
             <div className="pp-block">

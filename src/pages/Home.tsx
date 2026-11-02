@@ -27,6 +27,7 @@ export default function Home() {
   const [cat, setCat] = useState<HotbarValue>('all');
   const [q, setQ] = useState('');
   const [showAll, setShowAll] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const counts = useMemo(() => {
     const c: Partial<Record<HotbarValue, number>> = { all: products.length };
@@ -88,6 +89,20 @@ export default function Home() {
                 </Link>
               )}
             </div>
+            {config.welcomeCoupon.enabled && config.welcomeCoupon.code && (
+              <button
+                type="button"
+                className="hero-welcome"
+                data-track="copy welcome code"
+                onClick={() => {
+                  void navigator.clipboard?.writeText(config.welcomeCoupon.code).catch(() => undefined);
+                  setCopied(true);
+                }}
+              >
+                <Icon name="ticket" size={16} /> First order? <strong>{config.welcomeCoupon.percent}% off</strong> with code <code>{config.welcomeCoupon.code}</code>
+                <span className="hero-welcome-copy">{copied ? 'Copied ✓' : 'Copy'}</span>
+              </button>
+            )}
             <div className="hero-pills">
               {pills.map((p) => (
                 <span key={p.label} className="pill">
@@ -106,46 +121,6 @@ export default function Home() {
             </span>
             <Mascot className="hero-mascot" size={220} />
             <DeliveryLog />
-          </div>
-        </div>
-      </section>
-
-      {/* ───────── free stuff strip ───────── */}
-      <section className="free-strip">
-        <div className="container">
-          <div className="home-free-grid">
-            <Link to="/spin" className="free-card card hover">
-              <span className="free-icon">
-                <Icon name="spin" size={22} />
-              </span>
-              <div>
-                <strong>Daily free spin</strong>
-                <span>Coupons, store credit or free coins – one spin every {config.spinCooldownHours}h.</span>
-              </div>
-              <Icon name="arrowRight" size={18} className="arrow" />
-            </Link>
-            <Link to="/referral" className="free-card card hover pink">
-              <span className="free-icon">
-                <Icon name="users" size={22} />
-              </span>
-              <div>
-                <strong>Refer a friend</strong>
-                <span>
-                  They get {config.referral.friendPercent}% off, you earn {config.referral.referrerPercent}% credit.
-                </span>
-              </div>
-              <Icon name="arrowRight" size={18} className="arrow" />
-            </Link>
-            <Link to="/giveaways" className="free-card card hover violet">
-              <span className="free-icon">
-                <Icon name="gift" size={22} />
-              </span>
-              <div>
-                <strong>Giveaways</strong>
-                <span>Enter with your username – winners are drawn at random.</span>
-              </div>
-              <Icon name="arrowRight" size={18} className="arrow" />
-            </Link>
           </div>
         </div>
       </section>
@@ -243,6 +218,46 @@ export default function Home() {
               </button>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* ───────── free stuff strip ───────── */}
+      <section className="free-strip">
+        <div className="container">
+          <div className="home-free-grid">
+            <Link to="/spin" className="free-card card hover">
+              <span className="free-icon">
+                <Icon name="spin" size={22} />
+              </span>
+              <div>
+                <strong>Daily free spin</strong>
+                <span>Coupons, store credit or free coins – one spin every {config.spinCooldownHours}h.</span>
+              </div>
+              <Icon name="arrowRight" size={18} className="arrow" />
+            </Link>
+            <Link to="/referral" className="free-card card hover pink">
+              <span className="free-icon">
+                <Icon name="users" size={22} />
+              </span>
+              <div>
+                <strong>Refer a friend</strong>
+                <span>
+                  They get {config.referral.friendPercent}% off, you earn {config.referral.referrerPercent}% credit.
+                </span>
+              </div>
+              <Icon name="arrowRight" size={18} className="arrow" />
+            </Link>
+            <Link to="/giveaways" className="free-card card hover violet">
+              <span className="free-icon">
+                <Icon name="gift" size={22} />
+              </span>
+              <div>
+                <strong>Giveaways</strong>
+                <span>Enter with your username – winners are drawn at random.</span>
+              </div>
+              <Icon name="arrowRight" size={18} className="arrow" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -410,7 +425,7 @@ function formatTier(cents: number): string {
 
 function buildPills(stats: ReturnType<typeof useStore>['stats']): { icon: string; label: string }[] {
   const out: { icon: string; label: string }[] = [];
-  if (stats && stats.ordersDelivered > 0) out.push({ icon: 'check', label: `${stats.ordersDelivered.toLocaleString('en-US')} ${stats.ordersDelivered === 1 ? 'order' : 'orders'} delivered` });
+  if (stats && stats.ordersDelivered >= 50) out.push({ icon: 'check', label: `${stats.ordersDelivered.toLocaleString('en-US')} ${stats.ordersDelivered === 1 ? 'order' : 'orders'} delivered` });
   const reviewTotal = stats?.totalReviewCount ?? stats?.reviewCount ?? 0;
   const reviewAvg = stats?.totalAverageRating ?? stats?.averageRating ?? 0;
   if (stats && reviewTotal > 0) out.push({ icon: 'star', label: `${reviewAvg.toFixed(1)} ★ from ${reviewTotal} review${reviewTotal === 1 ? '' : 's'}` });

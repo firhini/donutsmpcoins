@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { storageGet, storageSet } from '../../lib/device';
 import { clickLabel, track, trackPageView } from '../../lib/track';
 
@@ -78,19 +78,29 @@ export function Analytics() {
 
   if (!id || !ready || choice) return null;
   const decide = (c: 'accepted' | 'declined') => {
+    track('click', `consent › ${c}`);
     storageSet(KEY, c);
     setChoice(c);
   };
   return (
-    <div className="consent" role="dialog" aria-label="Cookie consent">
-      <span>We use Google Analytics to see which pages help players. No ads, no selling data.</span>
-      <div className="row">
-        <button type="button" className="btn btn-secondary btn-sm" onClick={() => decide('declined')}>
-          No thanks
-        </button>
-        <button type="button" className="btn btn-primary btn-sm" onClick={() => decide('accepted')}>
-          Accept
-        </button>
+    <div className="consent-backdrop">
+      <div className="consent consent-sheet" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+        <img src="/img/brand/mascot.svg" alt="" width={64} height={64} className="consent-mascot" />
+        <div className="consent-text">
+          <strong id="consent-title">🍪 Help us make DonutCoins better?</strong>
+          <span>
+            With your OK we use Google Analytics to see which pages and deals players like. No ads, we never sell data – and you can say no, the shop works exactly the
+            same. <Link to="/privacy">Privacy policy</Link>
+          </span>
+        </div>
+        <div className="consent-actions">
+          <button type="button" className="btn btn-secondary btn-lg" onClick={() => decide('declined')}>
+            Only necessary
+          </button>
+          <button type="button" className="btn btn-primary btn-lg" onClick={() => decide('accepted')}>
+            Accept
+          </button>
+        </div>
       </div>
     </div>
   );
