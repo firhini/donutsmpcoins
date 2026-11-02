@@ -6,6 +6,9 @@
  * donutsmp.wiki, autumn 2026). DonutSMP changes often – when a detail could not be confirmed
  * by more than one source it is either left out or phrased as "check in-game".
  */
+import { wikiMoreA } from './wikiMoreA';
+import { wikiMoreB } from './wikiMoreB';
+
 export type WikiCategory = 'Getting started' | 'Economy' | 'Items & gear' | 'Farms & spawners' | 'PvP & combat' | 'Server & rules';
 export interface WikiSection { heading: string; paragraphs: string[]; list?: string[] }
 export interface WikiArticle {
@@ -25,7 +28,7 @@ export interface WikiArticle {
 
 const UPDATED = '2026-11-02';
 
-export const wikiArticles: WikiArticle[] = [
+const baseArticles: WikiArticle[] = [
   // ───────────────────────────────────────────── Getting started
   {
     slug: 'donutsmp-ip-how-to-join',
@@ -926,5 +929,8 @@ export const wikiArticles: WikiArticle[] = [
     updatedAt: UPDATED,
   },
 ];
+
+/** All wiki articles: the core set plus the economy/server (A) and farms/gear/PvP (B) batches. */
+export const wikiArticles: WikiArticle[] = [...baseArticles, ...wikiMoreA, ...wikiMoreB];
 
 export function wikiBySlug(slug: string): WikiArticle | undefined { return wikiArticles.find((a) => a.slug === slug); }

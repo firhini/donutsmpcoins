@@ -8,14 +8,14 @@ import { wikiArticles, type WikiArticle } from '../data/wiki';
 import '../styles/content.css';
 import '../styles/guides.css';
 
-const ORDER: WikiArticle['category'][] = ['Getting started', 'Economy', 'Farms & spawners', 'Items & gear', 'Server & rules'];
+const ORDER: WikiArticle['category'][] = ['Getting started', 'Economy', 'Farms & spawners', 'Items & gear', 'PvP & combat', 'Server & rules'];
 
 /** /wiki – DonutSMP wiki index, grouped by category. */
 export default function Wiki() {
   const { config } = useStore();
   const server = config.serverName;
   const title = `${server} Wiki – Commands, Economy & Farms | ${config.storeName}`;
-  const description = `The ${server} wiki: how to join, commands, money and shards, auction house, spawners, farms, elytra, netherite, PvP gear and the server rules.`;
+  const description = `The ${server} wiki: ${wikiArticles.length} guides on joining, commands, money, shards, spawner values, farms, enchantments, PvP and the server rules.`;
   const jsonLd = [
     breadcrumbSchema([
       { name: 'Home', path: '/' },

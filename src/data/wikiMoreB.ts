@@ -279,7 +279,7 @@ export const wikiMoreB: WikiArticle[] = [
     title: 'Gold and XP Farms in the Nether: Piglins and Bartering',
     seoTitle: 'Gold & XP Farm Guide: Piglins and Bartering',
     metaDescription:
-      'Zombified piglin spawners on DonutSMP, how a vanilla Nether gold and XP farm works in Java 1.21, portal farms and how piglin bartering turns gold into pearls.',
+      'Zombified piglin spawners on DonutSMP, how a vanilla Nether gold and XP farm works in Java 1.21, portal farms and piglin bartering for pearls.',
     summary: 'Gold for netherite and bartering: piglin spawners on DonutSMP, vanilla gold farms and what piglins trade.',
     intro:
       'Gold is needed for netherite ingots, golden apples and piglin bartering, and gold farms are also among the best XP farms in the game. This page covers zombified piglin spawners on DonutSMP, how vanilla gold farms work in Java 1.21 and how bartering turns gold into ender pearls and other useful items.',
@@ -473,5 +473,481 @@ export const wikiMoreB: WikiArticle[] = [
     ],
     updatedAt: UPDATED,
   },
-  // @@PART2@@
+  // ───────────────────────────────────────────── Items & gear
+  {
+    slug: 'best-armor-enchantments',
+    category: 'Items & gear',
+    title: 'Best Armor Enchantments in 1.21: Protection, Blast Protection and More',
+    seoTitle: 'Best Armor Enchantments in Minecraft 1.21',
+    metaDescription:
+      'The best armor enchantments for Java 1.21: Protection vs Blast Protection for crystal PvP, Thorns, Swift Sneak, Feather Falling and full sets.',
+    summary: 'Which armor enchantments to use in 1.21, how Protection and Blast Protection really stack, and full sets for PvP.',
+    intro:
+      'Armor enchantments decide how many crystals you survive and how often you need to repair. The choice between Protection and Blast Protection matters more on DonutSMP than on most servers, because crystal PvP is the main way people fight. This guide explains how the protection enchantments work in Java 1.21 and gives a recommended set for each slot.',
+    sections: [
+      {
+        heading: 'How the protection enchantments stack',
+        paragraphs: [
+          'Only one protection type can go on each piece: Protection, Blast Protection, Fire Protection and Projectile Protection are mutually exclusive. Each gives "protection points", every point removes 4% of the matching damage, and the total is capped at **20 points (80%)** after armor and toughness have done their part.',
+        ],
+        list: [
+          '**Protection** – 1 point per level against almost all damage. Protection IV on all four pieces gives 16 points, a 64% cut to everything.',
+          '**Blast Protection** – 2 points per level, but only against explosions. It also reduces explosion knockback.',
+          '**Fire Protection** and **Projectile Protection** – 2 points per level against fire or projectiles.',
+          '**Feather Falling** (boots only) – 3 points per level against fall damage, stacking with Protection.',
+        ],
+      },
+      {
+        heading: 'Protection vs Blast Protection for crystal PvP',
+        paragraphs: [
+          'Because explosions count for both, mixing is the usual answer. Three pieces of Protection IV plus one piece of Blast Protection IV reaches 12 + 8 = **20 points against explosions** – the full 80% cap – while still giving 48% against swords, arrows and everything else. Four Protection IV pieces give a balanced 64% against all damage.',
+          'Most players put Blast Protection on the leggings or helmet and keep Protection on the chestplate, since that slot is often swapped for an elytra. Full Blast Protection only makes sense for pure crystal fights, because it leaves you weak to swords and maces.',
+        ],
+      },
+      {
+        heading: 'The best enchantments for each piece',
+        paragraphs: ['Every piece should have **Unbreaking III** and **Mending**. On top of that:'],
+        list: [
+          '**Helmet** – Protection IV (or Blast Protection IV), Respiration III, Aqua Affinity.',
+          '**Chestplate** – Protection IV. Thorns III is optional.',
+          '**Leggings** – Protection IV or Blast Protection IV, plus **Swift Sneak III**, which raises sneaking speed from 30% to 75% of walking speed. It only comes from ancient city chests.',
+          '**Boots** – Protection IV, Feather Falling IV, Depth Strider III (or Frost Walker II), and Soul Speed III if you have it.',
+        ],
+      },
+      {
+        heading: 'Is Thorns worth it?',
+        paragraphs: [
+          'Thorns gives each piece a 15% chance per level to hurt an attacker for 1–5 damage. The catch is durability: every time it triggers, that piece loses 2 extra durability. In long fights that adds up quickly, so many PvP players leave it off, or only use it on a chestplate with Mending and plenty of experience bottles.',
+          'Avoid Curse of Binding on PvP armor – it stops you swapping a chestplate for an elytra – and Curse of Vanishing on anything you might want to recover.',
+        ],
+      },
+      {
+        heading: 'Netherite and putting it together',
+        paragraphs: [
+          'Netherite armor has more toughness than diamond and each piece adds 10% knockback resistance, which keeps you on your feet in crystal fights. Enchant diamond gear first and upgrade it afterwards – see [netherite and ancient debris](/wiki/netherite-ancient-debris) – and combine books in a smart order to avoid "Too Expensive", as covered in the [enchanting guide](/wiki/donutsmp-enchanting-mending).',
+          'Maxed sets take a lot of books and levels. Ready-made sets are also in our [armor shop](/shop/armor); buying with real money is against DonutSMP rules and at your own risk.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'Is Protection or Blast Protection better?', a: 'Protection protects against everything; Blast Protection only against explosions but twice as strongly. For crystal PvP, three Protection IV pieces plus one Blast Protection IV piece hit the 80% cap against explosions.' },
+      { q: 'Where do you get Swift Sneak?', a: 'Only from chests in ancient cities in the deep dark. It goes on leggings.' },
+      { q: 'Does Thorns damage your armor?', a: 'Yes. Each time Thorns triggers, the piece loses 2 extra durability, reduced by Unbreaking.' },
+    ],
+    related: ['totems-pvp-gear', 'donutsmp-enchanting-mending', 'sword-axe-mace-enchantments'],
+    shopLinks: [
+      { label: 'Armor', to: '/shop/armor' },
+      { label: 'Netherite armor set', to: '/product/netherite-armor-set' },
+    ],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: 'sword-axe-mace-enchantments',
+    category: 'PvP & combat',
+    title: 'Best Sword, Axe and Mace Enchantments plus a Mace Guide',
+    seoTitle: 'Best Sword, Axe & Mace Enchantments (1.21)',
+    metaDescription:
+      'Best melee enchantments for Java 1.21: sword and axe setups, how to get a mace, smash attack damage, and Density vs Breach vs Wind Burst explained.',
+    summary: 'The best melee enchants in 1.21 and a full mace guide: smash damage, Density, Breach and Wind Burst.',
+    intro:
+      'Crystals do most of the damage on DonutSMP, but melee weapons finish fights, break shields and punish players who get too close. Since 1.21 there is also the mace, which can deal huge damage from a fall. This page covers the best enchantments for swords and axes and explains how the mace works in Java 1.21.',
+    sections: [
+      {
+        heading: 'Sword enchantments',
+        paragraphs: [
+          'A netherite sword deals 8 damage with an attack speed of 1.6. The standard PvP setup:',
+        ],
+        list: [
+          '**Sharpness V** – +3 damage on every hit. Smite and Bane of Arthropods are exclusive with it and only help against certain mobs.',
+          '**Sweeping Edge III** – stronger sweep attacks, good for mob farms.',
+          '**Fire Aspect II** – sets targets on fire; skip it if you also farm and want raw drops.',
+          '**Looting III** – more mob drops, essential for farms.',
+          '**Knockback** – situational. It can push enemies out of your combo range.',
+          '**Unbreaking III** and **Mending** on every weapon.',
+        ],
+      },
+      {
+        heading: 'Axe enchantments',
+        paragraphs: [
+          'A netherite axe deals 10 damage but attacks slower (1.0). Its key strength is that hitting a blocking player **disables their shield for 5 seconds**, which is why PvP players keep one on the hotbar. Use Sharpness V, Efficiency V, Unbreaking III and Mending. Axes cannot take Looting, Fire Aspect or Knockback in survival, so a sword stays your farming weapon.',
+        ],
+      },
+      {
+        heading: 'How the mace works',
+        paragraphs: [
+          'The mace is crafted from a **heavy core** and a **breeze rod**. Heavy cores come only from ominous vaults in trial chambers, opened with ominous trial keys, so maces are rare. A normal hit deals 6 damage, but after falling at least 1.5 blocks you perform a **smash attack**:',
+        ],
+        list: [
+          '+4 damage per block for the first 3 blocks fallen.',
+          '+2 damage per block for the next 5 blocks.',
+          '+1 damage per block after that, with no upper limit.',
+          'A smash hit cancels your own fall damage and knocks back other entities within about 2.5 blocks.',
+        ],
+      },
+      {
+        heading: 'Density, Breach and Wind Burst',
+        paragraphs: ['These three mace-only enchantments change how you play it:'],
+        list: [
+          '**Density (max V)** – adds 0.5 damage per block fallen per level to smash attacks. Best for long drops with an elytra, pearls or wind charges.',
+          '**Breach (max IV)** – reduces the target\'s armor effectiveness by 15% per level. Best against fully armored netherite players. Density and Breach are mutually exclusive, and both exclude Smite and Bane.',
+          '**Wind Burst (max III)** – after a smash hit, launches you back up so you can chain another smash. It only comes from ominous vault loot and does not protect you from fall damage on a miss.',
+          'A mace can also take Unbreaking, Mending and Fire Aspect. Repair it with breeze rods – each restores 25% durability in an anvil.',
+        ],
+      },
+      {
+        heading: 'Mace tips for DonutSMP',
+        paragraphs: [
+          'Maces are traded on the DonutSMP auction house, and community notes do not list any special restriction on them – but combat settings change, so check `/rules` and recent announcements. A shield blocks a mace hit just like any other melee attack, and missing a smash often means taking full fall damage, so practise drops away from crystals first.',
+          'If you want one without farming trial chambers, the [mace](/product/mace) is in our store, along with other gear in [tools and weapons](/shop/tools-weapons). Real-money trading is against DonutSMP rules and at your own risk.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'Is Density or Breach better on a mace?', a: 'Density is better for big falls and unarmored targets; Breach is better against players in full netherite. You can only have one of them.' },
+      { q: 'How do you get a mace in 1.21?', a: 'Craft it from a heavy core, found in ominous vaults in trial chambers, and a breeze rod.' },
+      { q: 'Why carry an axe in PvP?', a: 'Hitting a blocking player with an axe disables their shield for 5 seconds.' },
+    ],
+    related: ['best-armor-enchantments', 'donutsmp-pvp-guide', 'trident-bow-crossbow-guide'],
+    shopLinks: [
+      { label: 'Mace', to: '/product/mace' },
+      { label: 'Tools & weapons', to: '/shop/tools-weapons' },
+    ],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: 'trident-bow-crossbow-guide',
+    category: 'Items & gear',
+    title: 'Trident, Bow and Crossbow Guide: Enchantments and Uses',
+    seoTitle: 'Trident, Bow & Crossbow Enchantment Guide',
+    metaDescription:
+      'How to get a trident, Loyalty vs Riptide vs Channeling, the best bow and crossbow enchantments in Java 1.21, tipped arrows and ranged PvP tips.',
+    summary: 'Getting a trident, choosing Riptide or Loyalty, and the best bow and crossbow enchants for ranged combat.',
+    intro:
+      'Ranged weapons rarely win a crystal fight on their own, but they control space, knock players off ledges and turn travel into an advantage. The trident is also a strong melee weapon and, with Riptide, a movement tool. This guide covers how to get each weapon and which enchantments to put on it in Java 1.21.',
+    sections: [
+      {
+        heading: 'Getting a trident',
+        paragraphs: [
+          'Tridents cannot be crafted. They only drop from **drowned** that are holding one, with an 8.5% chance when you kill them (plus 1% per Looting level). Drowned spawn in rivers and oceans, so a drowned farm or a lot of night-time hunting is the usual route. A trident deals 9 damage in melee and 8 when thrown, and has 250 durability.',
+        ],
+      },
+      {
+        heading: 'Trident enchantments',
+        paragraphs: ['Choose between the three main options based on how you use it:'],
+        list: [
+          '**Loyalty III** – the trident flies back after a throw. Best for combat.',
+          '**Riptide III** – throwing launches you instead, but only in water or rain. Combined with an elytra in the rain it is extremely fast travel. Riptide cannot be combined with Loyalty or Channeling.',
+          '**Channeling** – summons lightning on the target during thunderstorms. Lightning can turn creepers into charged creepers and villagers into witches.',
+          '**Impaling V** – in Java it only adds damage against aquatic mobs, so it does little in PvP.',
+          '**Unbreaking III** and **Mending** on any trident you keep.',
+        ],
+      },
+      {
+        heading: 'Best bow enchantments',
+        paragraphs: [
+          'A fully charged bow with **Power V** deals 150% more damage than an unenchanted one. A typical "god bow" adds **Punch II** for knockback, **Flame** for fire damage and **Unbreaking III**, plus either **Infinity** or **Mending** – the two cannot be combined. Infinity saves arrows; Mending keeps the bow alive forever. Most PvP players pick Mending and carry arrows.',
+        ],
+      },
+      {
+        heading: 'Crossbow enchantments',
+        paragraphs: ['Crossbows load once and stay loaded, so you can carry one ready to fire:'],
+        list: [
+          '**Quick Charge III** – much faster loading.',
+          '**Multishot** – fires three projectiles at once; it is exclusive with **Piercing**, which lets arrows pass through several targets.',
+          'Crossbows can fire **firework rockets**, which explode on impact; rockets crafted with more firework stars deal more damage.',
+          'Add **Unbreaking III** and **Mending**.',
+        ],
+      },
+      {
+        heading: 'Arrows and ranged PvP tips',
+        paragraphs: [
+          'Tipped arrows are crafted from 8 arrows around a lingering potion and apply that effect on hit – Slowness, Weakness and Poison are common choices. Spectral arrows make the target glow so you can track them. Wind charges, dropped by breezes in trial chambers, launch you or your opponent and pair well with a [mace](/wiki/sword-axe-mace-enchantments).',
+          'On DonutSMP, a Punch bow is most useful for knocking players out of position or off a cliff, and a crossbow with rockets is a strong opener. A ready-enchanted [trident](/product/trident) and [god bow](/product/god-bow) are in our store; real-money trading is against DonutSMP rules and at your own risk.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'Can you craft a trident?', a: 'No. Tridents only drop from drowned that hold one, at an 8.5% chance per kill plus 1% per Looting level.' },
+      { q: 'Can a bow have Mending and Infinity?', a: 'No, they are mutually exclusive. Most players choose Mending and carry arrows.' },
+      { q: 'Does Riptide work without rain?', a: 'Only in water. Riptide needs you to be in water or standing in rain.' },
+    ],
+    related: ['sword-axe-mace-enchantments', 'donutsmp-pvp-guide', 'donutsmp-elytra'],
+    shopLinks: [
+      { label: 'Trident', to: '/product/trident' },
+      { label: 'God bow', to: '/product/god-bow' },
+    ],
+    updatedAt: UPDATED,
+  },
+
+  // ───────────────────────────────────────────── PvP & combat
+  {
+    slug: 'donutsmp-pvp-guide',
+    category: 'PvP & combat',
+    title: 'PvP on DonutSMP: Crystals, Totems, Pots and Combat Basics',
+    seoTitle: 'DonutSMP PvP Guide: Crystals, Totems & Pots',
+    metaDescription:
+      'How PvP works on DonutSMP: crystal and anchor basics, totems, golden apples, potions, what is blocked in combat and why not to log out mid-fight.',
+    summary: 'Crystal PvP basics, totems, golden apples and pots, plus what changes while you are in combat on DonutSMP.',
+    intro:
+      'PvP on DonutSMP is fast and expensive. Most fights are crystal fights, gear is lost on death, and players with bounties attract attention. This page explains the basics every new fighter needs: how crystals and anchors work, how to manage totems and healing, and what the server changes while you are in combat.',
+    sections: [
+      {
+        heading: 'How PvP works on DonutSMP',
+        paragraphs: [
+          'DonutSMP is semi-anarchy, so outside protected areas other players can attack you and take your items when you die. The community wikis agree that **crystal PvP** is the dominant fighting style rather than a niche one, so plan your gear around explosions – see [best armor enchantments](/wiki/best-armor-enchantments).',
+          'The old `/duel` command and the duel area at spawn were removed on June 2, 2026, according to donutsmp.wiki, so most practice now happens in the open world or with friends you trust.',
+        ],
+      },
+      {
+        heading: 'Crystals and respawn anchors',
+        paragraphs: [
+          'End crystals can only be placed on **obsidian or bedrock** and explode with great force when hit. Good crystal players place obsidian quickly, put the crystal where the blast reaches the enemy but not themselves and use blocks as cover. Respawn anchors are the other explosive: charged with glowstone and used outside the Nether, an anchor explodes, which players use when crystals are awkward to place.',
+          'Explosions hit everyone nearby, including you. Practise distance and timing before you bring valuable gear.',
+        ],
+      },
+      {
+        heading: 'Totems, apples and potions',
+        paragraphs: ['Your survival loop in a fight looks like this:'],
+        list: [
+          '**Totem of undying in the offhand** – it only works when held. After it pops, swap in a new one immediately. See [totems and PvP gear](/wiki/totems-pvp-gear).',
+          '**Golden apples** – Regeneration II for 5 seconds and Absorption for 2 minutes.',
+          '**Enchanted golden apples** – Regeneration II for 20 seconds, Absorption IV for 2 minutes, plus Resistance and Fire Resistance for 5 minutes. They cannot be crafted, so they are rare and valuable.',
+          '**Splash potions** – Healing II, Strength II, Swiftness II, Fire Resistance and Turtle Master. See the [brewing guide](/wiki/potions-brewing-guide).',
+          '**Experience bottles** – repair Mending armor mid-fight.',
+          '**Ender pearls** – the main escape tool.',
+        ],
+      },
+      {
+        heading: 'Combat state and logging out',
+        paragraphs: [
+          'The server tracks when you are in combat. According to donutsmp.wiki, Quick Buy cannot be used during a fight and the shard pickaxe is intentionally unavailable in combat. Thrown ender pearls normally disappear when you die; since June 2026 a setting in the General settings menu lets you keep them.',
+          'Never log out or disconnect to escape a fight. Assume it costs you your items, and check `/rules` in-game for the current combat-logging rule, since the exact timer and penalty can change.',
+        ],
+      },
+      {
+        heading: 'Fair play and staying alive',
+        paragraphs: [
+          'Hacked clients, macros, auto clickers, health indicators and other advantage mods are banned, and crystal PvP does not make an exception – see [DonutSMP rules](/wiki/donutsmp-rules). Before a fight, leave valuables at home, check your durability, and keep a bounty in mind: players can put money on your head with `/bounty add`.',
+          'Building a full kit takes time. Ready-made [PvP kits](/product/pvp-kit) and [totems of undying](/product/totem-of-undying) are in our store; real-money trading is against DonutSMP rules and at your own risk.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'Is crystal PvP allowed on DonutSMP?', a: 'Yes. Crystal PvP is the main form of combat on DonutSMP. Macros and advantage mods are still banned.' },
+      { q: 'What happens if I log out during a fight?', a: 'Do not do it. Treat combat logging as losing your items and check `/rules` for the current penalty.' },
+      { q: 'Does DonutSMP still have /duel?', a: 'No. The duel command and the duel area at spawn were removed on June 2, 2026, according to the community wiki.' },
+    ],
+    related: ['totems-pvp-gear', 'potions-brewing-guide', 'best-armor-enchantments', 'donutsmp-rules'],
+    shopLinks: [
+      { label: 'PvP kit', to: '/product/pvp-kit' },
+      { label: 'Totem of undying', to: '/product/totem-of-undying' },
+      { label: 'Enchanted golden apple', to: '/product/enchanted-golden-apple' },
+    ],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: 'potions-brewing-guide',
+    category: 'PvP & combat',
+    title: 'Potions and Brewing Guide for PvP and Exploring',
+    seoTitle: 'Potions & Brewing Guide for PvP (Java 1.21)',
+    metaDescription:
+      'How to brew potions in Java 1.21: brewing stand setup, every key recipe with durations, splash vs lingering, and the best potions for PvP and exploring.',
+    summary: 'Brewing basics, the potions that matter for PvP and exploring, their ingredients and how long they last.',
+    intro:
+      'A few potions can turn a lost fight into a win and make dangerous trips safe. Brewing them yourself is cheap once you have nether wart and blaze powder. This guide covers the brewing stand, the recipes that matter, and which potions to carry for PvP and for exploring in Java 1.21.',
+    sections: [
+      {
+        heading: 'Brewing basics',
+        paragraphs: [
+          'Craft a brewing stand from 1 blaze rod and 3 cobblestone, blackstone or cobbled deepslate. It brews up to three bottles at once and burns **blaze powder** as fuel – one powder lasts 20 brews. Almost every potion starts the same way:',
+        ],
+        list: [
+          'Fill glass bottles with water.',
+          'Add **nether wart** to make awkward potions. Nether wart grows on soul sand and is found in Nether fortresses.',
+          'Add the effect ingredient, such as blaze powder for Strength.',
+          'Optionally modify it: **redstone** extends the duration, **glowstone** raises the level, a **fermented spider eye** corrupts the effect, **gunpowder** makes it a splash potion and **dragon\'s breath** turns a splash potion into a lingering one.',
+        ],
+      },
+      {
+        heading: 'PvP potions',
+        paragraphs: ['Durations are for the drinkable versions in Java 1.21:'],
+        list: [
+          '**Strength** (blaze powder) – 3:00, 8:00 extended, or Strength II for 1:30.',
+          '**Swiftness** (sugar) – 3:00, 8:00 extended, or Speed II for 1:30.',
+          '**Healing** (glistering melon slice) – instant health; Healing II heals more.',
+          '**Regeneration** (ghast tear) – 0:45, 1:30 extended, or Regeneration II for 0:22.',
+          '**Fire Resistance** (magma cream) – 3:00 or 8:00; also protects against fire aspect and lava.',
+          '**Turtle Master** (turtle shell) – Slowness IV and Resistance III for 0:20, or 0:40 extended.',
+          '**Harming** – fermented spider eye on Healing or Poison. Splash it on enemies.',
+        ],
+      },
+      {
+        heading: 'Exploring potions',
+        paragraphs: ['For trips into the Nether, End and oceans:'],
+        list: [
+          '**Fire Resistance** – the most important potion for ancient debris mining and fortresses.',
+          '**Night Vision** (golden carrot) – 3:00 or 8:00, perfect for caves and underwater.',
+          '**Water Breathing** (pufferfish) – 3:00 or 8:00 for ocean monuments.',
+          '**Slow Falling** (phantom membrane) – 1:30 or 4:00, a lifesaver in the End.',
+          '**Invisibility** – fermented spider eye on Night Vision. Armor stays visible, so it is better for scouting than fighting.',
+          'The 1.21 potions **Wind Charged**, **Weaving**, **Oozing** and **Infested** use a breeze rod, cobweb, slime block or stone and last 3:00. They are niche, but fun in PvP.',
+        ],
+      },
+      {
+        heading: 'Splash, lingering and potion tips',
+        paragraphs: [
+          'Splash potions keep the same duration as the drinkable version but apply instantly, which is why PvP players use splash Healing, Strength and Swiftness. Lingering potions leave a cloud that applies a quarter of the duration and are used to craft tipped arrows. Remember that Healing hurts undead mobs and Harming heals them.',
+          'Brewing in bulk needs a lot of blaze powder, so a blaze spawner or farm pays off quickly – see the [blaze farm guide](/wiki/blaze-farm-blaze-rods). A [blaze spawner](/product/blaze-spawner) and ready-made [PvP kits](/product/pvp-kit) are also in our store; real-money trading is against DonutSMP rules and at your own risk.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'How long does one blaze powder last in a brewing stand?', a: 'One blaze powder fuels 20 brewing operations, each of which can brew up to three bottles.' },
+      { q: 'Do splash potions last as long as normal potions?', a: 'In Java, yes – splash potions keep the full duration. Lingering potions apply only a quarter of it.' },
+      { q: 'What is the best potion for PvP?', a: 'Strength II and splash Healing II are the core pair, with Swiftness and Fire Resistance as support.' },
+    ],
+    related: ['blaze-farm-blaze-rods', 'donutsmp-pvp-guide', 'totems-pvp-gear'],
+    shopLinks: [
+      { label: 'Blaze spawner', to: '/product/blaze-spawner' },
+      { label: 'PvP kit', to: '/product/pvp-kit' },
+    ],
+    updatedAt: UPDATED,
+  },
+
+  // ───────────────────────────────────────────── Storage & utility gear
+  {
+    slug: 'shulker-boxes-ender-chest-storage',
+    category: 'Items & gear',
+    title: 'Shulker Boxes, Ender Chests and Keeping Loot Safe',
+    seoTitle: 'Shulker Boxes & Ender Chests: Safe Storage',
+    metaDescription:
+      'How shulker boxes and ender chests work in Java 1.21, how to get shulker shells, and storage habits that keep your loot safe from DonutSMP base hunters.',
+    summary: 'How shulker boxes and ender chests work, and storage habits that keep your loot away from base hunters.',
+    intro:
+      'On DonutSMP a chest is only as safe as its location, and base hunters find most locations eventually. Shulker boxes and ender chests are the two tools that change that. Shulker boxes let you move a whole chest of items in one slot, and your ender chest holds items no raider can open. This page explains both and how to combine them.',
+    sections: [
+      {
+        heading: 'How shulker boxes work',
+        paragraphs: [
+          'A shulker box holds 27 stacks, like a chest, but **keeps its contents when broken** – you pick it up as a single item with everything still inside. That makes it the standard way to carry, trade and store large amounts of items.',
+        ],
+        list: [
+          'Craft one from **2 shulker shells and a chest**.',
+          'Dye it any of 16 colours and rename it in an anvil to keep storage organised.',
+          'Shulker boxes cannot be put inside other shulker boxes.',
+          'Bundles (1.21.2 and later) hold small mixed items in one slot and fit inside shulker boxes.',
+        ],
+      },
+      {
+        heading: 'Getting shulker shells',
+        paragraphs: [
+          'Shells only drop from **shulkers**, which live in End cities in the outer End islands. Each shulker has about a 50% chance to drop a shell, and Looting raises it. On DonutSMP the End is shared by a lot of players, so cities near the main island are usually cleared out – expect to fly far, ideally with an [elytra](/wiki/donutsmp-elytra). Many players simply buy boxes on the auction house instead.',
+        ],
+      },
+      {
+        heading: 'How ender chests work',
+        paragraphs: [
+          'An ender chest is crafted from 8 obsidian and an eye of ender. Every ender chest anywhere in the world opens the **same personal inventory**, and only you can see your own contents. If someone breaks an ender chest at your base, they get obsidian (or the chest with Silk Touch), never your items.',
+          'Your ender chest contents are not dropped when you die. Combined with shulker boxes, that means 27 boxes of 27 stacks each – 729 stacks of private storage that no base hunter can take.',
+        ],
+      },
+      {
+        heading: 'Keeping loot safe from base hunters',
+        paragraphs: ['A few habits protect most of your wealth:'],
+        list: [
+          'Keep your most valuable items in shulker boxes inside your ender chest, not in base chests.',
+          'Carry a Silk Touch pickaxe and an ender chest so you can stash loot anywhere.',
+          'Do not carry full shulker boxes into fights – they drop on death like any other item.',
+          'Split the rest across a few small, hidden stashes rather than one chest room.',
+          'Keep part of your wealth as money, which cannot be raided.',
+        ],
+      },
+      {
+        heading: 'Planning your storage',
+        paragraphs: [
+          'Sort shulker boxes by colour – one for PvP restocks, one for building blocks, one for farm output – and label them. Keep a spare kit box in your ender chest so a raided base or a lost fight does not leave you starting from zero.',
+          'For more on hiding a base, read [base protection](/wiki/donutsmp-base-protection) and our [base hunting guide](/guides/donutsmp-base-hunting-guide). Ready-made [shulker boxes](/product/shulker-box) are also in our store; real-money trading is against DonutSMP rules and at your own risk.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'Can base hunters steal from my ender chest?', a: 'No. Ender chest contents belong only to you. Breaking your ender chest only gives the raider obsidian or an empty ender chest.' },
+      { q: 'Do shulker boxes keep items when broken?', a: 'Yes. A broken shulker box drops as one item with all its contents inside.' },
+      { q: 'Can you put a shulker box inside a shulker box?', a: 'No, shulker boxes cannot be nested. Put them inside your ender chest instead.' },
+    ],
+    related: ['donutsmp-base-protection', 'donutsmp-elytra', 'beacon-guide'],
+    shopLinks: [
+      { label: 'Shulker box', to: '/product/shulker-box' },
+      { label: 'Base hunting guide', to: '/guides/donutsmp-base-hunting-guide' },
+    ],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: 'beacon-guide',
+    category: 'Items & gear',
+    title: 'Beacons: Pyramid Setup, Powers and the Wither',
+    seoTitle: 'Beacon Guide: Pyramid, Powers & Wither',
+    metaDescription:
+      'How to get a beacon in Java 1.21: beating the Wither, pyramid sizes, range, the best powers like Haste II, and beacons vs DonutSMP base hunters.',
+    summary: 'Getting a nether star, building the pyramid and choosing powers – plus why a beacon beam can give your base away.',
+    intro:
+      'A beacon gives everyone nearby a permanent buff, from Haste II for fast mining to Strength for fights and Regeneration at home. Getting one means beating the Wither, and building a full pyramid takes a lot of metal. This page covers each step in Java 1.21 and what to watch out for on DonutSMP.',
+    sections: [
+      {
+        heading: 'Getting a nether star',
+        paragraphs: [
+          'A beacon is crafted from a **nether star**, 5 glass and 3 obsidian. The only source of nether stars is the **Wither**. To summon it, place 4 soul sand or soul soil in a T shape and put 3 wither skeleton skulls on top. Wither skeletons spawn in Nether fortresses and drop a skull 2.5% of the time, plus 1% per Looting level.',
+          'The Wither destroys blocks and fires exploding skulls, so fight it far away from your base. Bring netherite armor, a Smite or Sharpness sword, milk for the Wither effect, healing potions and golden apples.',
+        ],
+      },
+      {
+        heading: 'Building the pyramid',
+        paragraphs: [
+          'A beacon must sit on a pyramid of iron, gold, emerald, diamond or netherite blocks, and the types can be mixed. The beacon also needs a clear path to the sky; only transparent blocks such as glass may be above it.',
+        ],
+        list: [
+          '**Level 1** – 3×3 base, 9 blocks, range about 20 blocks.',
+          '**Level 2** – adds a 5×5 layer, 34 blocks in total, range 30.',
+          '**Level 3** – adds a 7×7 layer, 83 blocks in total, range 40.',
+          '**Level 4** – adds a 9×9 layer, 164 blocks in total, range 50.',
+        ],
+      },
+      {
+        heading: 'Choosing powers',
+        paragraphs: [
+          'Activate a beacon by inserting one iron ingot, gold ingot, emerald, diamond or netherite ingot and choosing a power. The payment is only spent when you set or change the power; the beacon runs forever after that.',
+        ],
+        list: [
+          'Level 1 unlocks **Speed** and **Haste**. Level 2 adds **Resistance** and **Jump Boost**. Level 3 adds **Strength**.',
+          'Level 4 unlocks a secondary power: **Regeneration**, or level II of your primary power.',
+          '**Haste II** with an Efficiency V diamond or netherite pickaxe mines stone instantly, the favourite setup for big digs.',
+          'Resistance and Regeneration are good choices for a base you defend.',
+        ],
+      },
+      {
+        heading: 'Beacons and base security on DonutSMP',
+        paragraphs: [
+          'A beacon beam shoots straight into the sky and can be seen from far away, which makes it an easy target for base hunters flying overhead. Covering it with solid blocks switches the beacon off, so many players only place a beacon temporarily – for example during a big dig – and pick it up again afterwards. The pyramid itself is also loot: 164 iron or diamond blocks are worth raiding.',
+          'Do not use netherite blocks for the pyramid unless you have plenty – iron works exactly the same. Save netherite for gear, and check [netherite and ancient debris](/wiki/netherite-ancient-debris) for the smithing upgrade.',
+        ],
+      },
+      {
+        heading: 'Where netherite fits in',
+        paragraphs: [
+          'Netherite ingots are the most valuable beacon payment but give no better effect than an iron ingot. Their real value is the smithing upgrade from diamond to netherite gear. If you need ingots or blocks for that, [netherite ingots](/product/netherite-ingot) and [netherite blocks](/product/netherite-block) are in our store; real-money trading is against DonutSMP rules and at your own risk.',
+        ],
+      },
+    ],
+    faq: [
+      { q: 'How many blocks does a full beacon pyramid need?', a: '164 blocks of iron, gold, emerald, diamond or netherite for a level 4 beacon.' },
+      { q: 'Does a beacon use up fuel?', a: 'No. You pay one ingot, emerald or diamond when choosing a power, and the beacon then runs indefinitely.' },
+      { q: 'Can a beacon work underground?', a: 'Only if every block between the beacon and the sky is transparent, such as glass. Solid blocks above switch it off.' },
+    ],
+    related: ['netherite-ancient-debris', 'shulker-boxes-ender-chest-storage', 'donutsmp-base-protection'],
+    shopLinks: [
+      { label: 'Netherite block', to: '/product/netherite-block' },
+      { label: 'Netherite ingot', to: '/product/netherite-ingot' },
+    ],
+    updatedAt: UPDATED,
+  },
 ];
