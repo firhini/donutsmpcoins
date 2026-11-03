@@ -46,11 +46,12 @@ export const routes: Route[] = [
     if (!stripeConfigured()) return json({ configured: false });
     const stripe = getStripe();
     const limit = Math.min(100, Math.max(1, Number(url.searchParams.get('limit')) || 60));
-    const [sessions, intents, disputes, balance] = await Promise.all([
+    const [sessions, intents, disputes, balance, txns] = await Promise.all([
       stripe.checkout.sessions.list({ limit }),
       stripe.paymentIntents.list({ limit, expand: ['data.latest_charge'] }),
       stripe.disputes.list({ limit: 20 }),
       stripe.balance.retrieve(),
+      stripe.balanceTransactions.list({ limit }),
     ]);
     return json({
       configured: true,
@@ -84,6 +85,8 @@ export const routes: Route[] = [
       }),
       disputes: disputes.data.map((d) => ({ id: d.id, created: iso(d.created), amount: d.amount, currency: d.currency, reason: d.reason, status: d.status })),
       balance: { available: balance.available, pending: balance.pending },
+      // when each payment becomes available for payout
+      balanceTransactions: txns.data.map((t) => ({ created: iso(t.created), availableOn: iso(t.available_on), status: t.status, type: t.type, amount: t.amount, fee: t.fee, net: t.net, currency: t.currency })),
     });
   }),
   admin('GET', '/admin/analytics', async ({ url }) => {
