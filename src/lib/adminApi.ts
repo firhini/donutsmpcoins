@@ -3,6 +3,7 @@
  * Every call sends the bearer token from lib/api.ts. A 401 clears the token and
  * broadcasts ADMIN_UNAUTHORIZED_EVENT so the admin shell can fall back to the login screen.
  */
+import { markInternal } from './track';
 import { api, ApiClientError, getAdminToken, setAdminToken } from './api';
 import type {
   Catalog,
@@ -190,6 +191,7 @@ export async function adminLogin(password: string, remember: boolean): Promise<{
   // NOT via adminCall: a wrong password is a 401 here and must not trigger the logout broadcast.
   const res = await api<{ token: string; expiresAt: string }>('/admin/login', { method: 'POST', body: { password } });
   setAdminToken(res.token, remember);
+  markInternal();
   return res;
 }
 

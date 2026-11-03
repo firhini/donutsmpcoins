@@ -65,9 +65,9 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
 
   // ───────────── SPAWNERS & ITEMS ─────────────
   spawners: {
-    seoTitle: 'DonutSMP Spawners – Skeleton $0.89, Cow $4.99 | DonutCoins',
+    seoTitle: 'DonutSMP Spawner Prices – Skeleton 18M Coins | DonutCoins',
     metaDescription:
-      'DonutSMP spawners at player-market prices, handed over by staff: skeleton from $0.69, iron golem from $1.74, cow from $4.39, plus blaze, creeper and zombie.',
+      'How much is a spawner on DonutSMP? Skeleton ~18M coins ($0.89 here), iron golem ~41M ($1.99), cow ~100M ($4.99). Handed over in-game by our staff.',
     intro:
       'Spawners are the best long-term buy on DonutSMP: a skeleton spawner keeps filling up with bones and arrows you can sell. This category has the six spawner types players actually use – skeleton, iron golem, cow, zombie, creeper and blaze – plus the items that go with them: the Elytra (Unbreaking III + Mending), shulker boxes and totems of undying. Spawner prices follow what they go for in our own deals: about 18M coins for a skeleton spawner, which costs $0.89 here (down to $0.69 at 250 or more), about 41M for an iron golem spawner and around 100M for a cow spawner – fan price trackers often list lower values. Since the June 2026 update the server no longer sells spawners, so every one changes hands between players. Everything is handed over in-game by our staff, usually within minutes.',
     body: [
@@ -98,7 +98,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
 
   // ───────────── MYSTERY BOXES ─────────────
   mystery: {
-    seoTitle: 'DonutSMP Mystery Boxes & Crates – Shop All 6 | DonutCoins',
+    seoTitle: 'DonutSMP Mystery Boxes – All 9 with Real Odds | DonutCoins',
     metaDescription:
       'DonutSMP mystery boxes from $1.99 with public odds: Coin and Mega Coin Crates, Spawner, Netherite and Elytra Crates, Mystery, Elite, God and Legendary boxes.',
     intro:

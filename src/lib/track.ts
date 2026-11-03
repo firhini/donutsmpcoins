@@ -88,8 +88,27 @@ function flush() {
   void fetch('/api/t', { method: 'POST', body, headers: { 'content-type': 'application/json' }, keepalive: true }).catch(() => undefined);
 }
 
+const INTERNAL_KEY = 'dc_internal';
+
+/** This browser belongs to the shop owner (set on admin login) – keep it out of all statistics. */
+export function isInternal(): boolean {
+  try {
+    return typeof window !== 'undefined' && window.localStorage.getItem(INTERNAL_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+export function markInternal() {
+  try {
+    window.localStorage.setItem(INTERNAL_KEY, '1');
+  } catch {
+    /* storage blocked – nothing to do */
+  }
+}
+
 function enabled(): boolean {
-  return typeof window !== 'undefined' && !window.location.pathname.startsWith('/admin') && !/^(localhost|127\.)/.test(window.location.hostname);
+  return typeof window !== 'undefined' && !window.location.pathname.startsWith('/admin') && !/^(localhost|127\.)/.test(window.location.hostname) && !isInternal();
 }
 
 export function track(e: EventName, v?: string, extra?: Omit<Ev, 'e' | 'v'>) {

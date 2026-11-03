@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { storageGet, storageSet } from '../../lib/device';
-import { clickLabel, startJourney, track, trackPageView } from '../../lib/track';
+import { clickLabel, isInternal, startJourney, track, trackPageView } from '../../lib/track';
 
 const KEY = 'dc_consent';
 declare global {
@@ -52,7 +52,7 @@ export function Analytics() {
   }, []);
 
   useEffect(() => {
-    if (id && choice === 'accepted') loadGa(id);
+    if (id && choice === 'accepted' && !isInternal()) loadGa(id);
   }, [id, choice]);
 
   // cookieless first-party statistics (no consent needed – nothing is stored on the device)

@@ -107,12 +107,12 @@ export const landingCopy: LandingCopy[] = [
   // ─────────────────────────────────────────────────────────────
   {
     slug: 'donutsmp-elytra',
-    title: 'Buy a DonutSMP Elytra – Price, Enchantments and Delivery',
-    seoTitle: 'Buy DonutSMP Elytra – Price, Odds & Delivery | DonutCoins',
+    title: 'How Much Is an Elytra on DonutSMP? Price in Coins and Dollars',
+    seoTitle: 'How Much Is an Elytra on DonutSMP? ~700M Coins | DonutCoins',
     metaDescription:
-      'DonutSMP Elytra (Unbreaking III + Mending) for $28.49, delivered in-game by staff. Why it costs so much, bundles and boxes with an Elytra, keeping yours.',
+      'An Elytra on DonutSMP trades for around 700M coins (Nov 2026). Here it costs $28.49 with Unbreaking III + Mending, handed over in-game by our staff.',
     intro:
-      'An Elytra is the single most useful item on DonutSMP: it turns a base hunt from an hour of walking into five minutes of flying and makes escaping a fight possible at all. Ours comes with Unbreaking III and Mending for $28.49 and is handed over in-game by our staff. This page explains why the price is what it is, how delivery works, which bundles and boxes include an Elytra, and how to keep yours.',
+      'Short answer: an Elytra on DonutSMP goes for around 700M coins in player trades right now (November 2026), and here it costs $28.49 with Unbreaking III and Mending. An Elytra is the single most useful item on DonutSMP: it turns a base hunt from an hour of walking into five minutes of flying and makes escaping a fight possible at all. Ours comes with Unbreaking III and Mending for $28.49 and is handed over in-game by our staff. This page explains why the price is what it is, how delivery works, which bundles and boxes include an Elytra, and how to keep yours.',
     sections: [
       {
         heading: 'Why an Elytra costs what it costs on DonutSMP',
@@ -169,10 +169,10 @@ export const landingCopy: LandingCopy[] = [
   // ─────────────────────────────────────────────────────────────
   {
     slug: 'donutsmp-skeleton-spawner',
-    title: 'DonutSMP Skeleton Spawner Price: $0.69–$0.89 and What a Farm Needs',
-    seoTitle: 'DonutSMP Skeleton Spawner Price – from $0.69 | DonutCoins',
+    title: 'How Much Is a Skeleton Spawner on DonutSMP? (~18M Coins, $0.89)',
+    seoTitle: 'DonutSMP Skeleton Spawner Price – 18M / $0.89 | DonutCoins',
     metaDescription:
-      'Skeleton spawners for DonutSMP at $0.89 each, $0.69 at 250+. Every bulk tier, how spawners really work on the server, farm sizing and how delivery works.',
+      'A skeleton spawner on DonutSMP trades for about 18M coins. Here: $0.89 each, $0.69 at 250+. Every bulk tier, how spawners work and how delivery works.',
     intro:
       'The skeleton spawner – "skelly" to anyone who has played DonutSMP for a week – is the item most players buy first and buy most of. This page gives the current prices with every bulk tier, explains how we set them, how spawners actually work on DonutSMP and why skeletons are the server\'s default income, helps you work out how many spawners you actually need, and describes how a hundred spawners are handed over in-game by our staff.',
     sections: [
