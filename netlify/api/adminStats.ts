@@ -4,6 +4,7 @@
  *   GET /admin/users               every player who logged in (Discord / Google)
  *   GET /admin/sessions?days=7     visitor journeys (only visitors who accepted cookies)
  *   GET /admin/sessions/:id        one journey with its orders
+ *   GET /admin/stripe/insights     read-only Stripe overview: checkout sessions, payment attempts, declines, disputes
  */
 import type { OrderStatus, UserProfile } from '../../src/shared/types';
 import type { Handler, Route } from '../lib/http';
@@ -14,6 +15,7 @@ import { listOrderIndex } from '../lib/orders';
 import { kvGet, kvList } from '../lib/store';
 import { getCredit } from '../lib/credit';
 import { avatarUrl, isGoogleId } from '../lib/users';
+import { getStripe, stripeConfigured } from '../lib/payments/stripe';
 
 const PAID = new Set<OrderStatus>(['paid', 'delivering', 'delivered']);
 
@@ -36,7 +38,54 @@ async function loadUsers(): Promise<UserProfile[]> {
   return users.filter((u): u is UserProfile => !!u && typeof u.id === 'string');
 }
 
+const iso = (t?: number | null) => (t ? new Date(t * 1000).toISOString() : null);
+
 export const routes: Route[] = [
+  // read-only Stripe overview so the admin can see why card payments did or didn't go through
+  admin('GET', '/admin/stripe/insights', async ({ url }) => {
+    if (!stripeConfigured()) return json({ configured: false });
+    const stripe = getStripe();
+    const limit = Math.min(100, Math.max(1, Number(url.searchParams.get('limit')) || 60));
+    const [sessions, intents, disputes, balance] = await Promise.all([
+      stripe.checkout.sessions.list({ limit }),
+      stripe.paymentIntents.list({ limit, expand: ['data.latest_charge'] }),
+      stripe.disputes.list({ limit: 20 }),
+      stripe.balance.retrieve(),
+    ]);
+    return json({
+      configured: true,
+      sessions: sessions.data.map((s) => ({
+        id: s.id,
+        orderId: s.metadata?.orderId || s.client_reference_id,
+        created: iso(s.created),
+        status: s.status,
+        paymentStatus: s.payment_status,
+        amount: s.amount_total,
+        currency: s.currency,
+        paymentIntent: typeof s.payment_intent === 'string' ? s.payment_intent : s.payment_intent?.id ?? null,
+        country: s.customer_details?.address?.country ?? null,
+      })),
+      intents: intents.data.map((pi) => {
+        const ch = pi.latest_charge && typeof pi.latest_charge === 'object' ? pi.latest_charge : null;
+        const card = ch?.payment_method_details?.card;
+        return {
+          id: pi.id,
+          created: iso(pi.created),
+          status: pi.status,
+          amount: pi.amount,
+          currency: pi.currency,
+          error: pi.last_payment_error ? { code: pi.last_payment_error.code, decline: pi.last_payment_error.decline_code, message: pi.last_payment_error.message } : null,
+          outcome: ch?.outcome ? { type: ch.outcome.type, reason: ch.outcome.reason, risk: ch.outcome.risk_level, score: ch.outcome.risk_score, network: ch.outcome.network_status, message: ch.outcome.seller_message } : null,
+          method: ch?.payment_method_details?.type ?? null,
+          card: card ? { brand: card.brand, country: card.country, wallet: card.wallet?.type ?? null, threeDS: card.three_d_secure?.result ?? null } : null,
+          refunded: ch?.amount_refunded ?? 0,
+          disputed: ch?.disputed ?? false,
+        };
+      }),
+      disputes: disputes.data.map((d) => ({ id: d.id, created: iso(d.created), amount: d.amount, currency: d.currency, reason: d.reason, status: d.status })),
+      balance: { available: balance.available, pending: balance.pending },
+    });
+  }),
   admin('GET', '/admin/analytics', async ({ url }) => {
     const days = Math.max(1, Math.min(90, Number.parseInt(url.searchParams.get('days') ?? '14', 10) || 14));
     const [stats, idx, users] = await Promise.all([getDays(days), listOrderIndex(), loadUsers()]);
