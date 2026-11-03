@@ -85,13 +85,13 @@ export function Analytics() {
   };
   return (
     <div className="consent-backdrop">
-      <div className="consent consent-sheet" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+      <div className="consent consent-sheet" role="dialog" aria-labelledby="consent-title">
         <img src="/img/brand/mascot.svg" alt="" width={64} height={64} className="consent-mascot" />
         <div className="consent-text">
-          <strong id="consent-title">🍪 Help us make DonutCoins better?</strong>
+          <strong id="consent-title">🍪 Cookies okay?</strong>
           <span>
-            With your OK we remember your visit (pages and buttons, via an ID on your device) and use Google Analytics, so we can see which deals players like and make the
-            shop better. No ads, we never sell data – and you can say no, the shop works exactly the same. <Link to="/privacy">Privacy policy</Link>
+            With your OK we remember your visit (an ID on your device) and use Google Analytics to see which deals players like. No ads, never sold – saying no changes
+            nothing. <Link to="/privacy">Privacy policy</Link>
           </span>
         </div>
         <div className="consent-actions">

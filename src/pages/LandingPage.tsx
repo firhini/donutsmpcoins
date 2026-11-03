@@ -20,7 +20,7 @@ export default function LandingPage() {
 }
 
 function Landing({ landing }: { landing: LandingCopy }) {
-  const { config, productById } = useStore();
+  const { config, productById, fmt } = useStore();
   const vars = { store: config.storeName, server: config.serverName, eta: config.delivery.etaText };
   const products = landing.productIds.map((id) => productById(id)).filter((p): p is NonNullable<typeof p> => !!p);
   const toc = [...landing.sections.map((s) => ({ id: sectionId(s.heading), label: s.heading })), ...(landing.faq.length ? [{ id: 'faq', label: 'FAQ' }] : [])];
@@ -33,6 +33,20 @@ function Landing({ landing }: { landing: LandingCopy }) {
       lead={renderRich(landing.intro, vars)}
       crumbs={[{ label: landing.title }]}
       toc={toc}
+      cta={
+        products.length ? (
+          <>
+            <Link to={`/product/${products[0].slug}`} className="btn btn-primary btn-lg">
+              <Icon name="cart" size={18} /> {products[0].name} · {fmt(products[0].priceCents)}
+            </Link>
+            {products.length > 1 && (
+              <a href="#buy" className="btn btn-secondary btn-lg">
+                See all {products.length}
+              </a>
+            )}
+          </>
+        ) : undefined
+      }
       faq={landing.faq.map((f) => ({ q: f.q, a: renderRich(f.a, vars) }))}
       aside={
         products.length ? (
@@ -56,7 +70,7 @@ function Landing({ landing }: { landing: LandingCopy }) {
         </section>
       ))}
       {products.length > 0 && (
-        <section className="landing-products">
+        <section className="landing-products" id="buy">
           <h2>Buy it here</h2>
           <div className="grid grid-3">
             {products.slice(0, 6).map((p) => (

@@ -27,6 +27,7 @@ export function ContentPage({
   toc,
   updated,
   aside,
+  cta,
   children,
   wide = false,
   faq,
@@ -44,6 +45,8 @@ export function ContentPage({
   updated?: string;
   /** extra aside content under the TOC */
   aside?: ReactNode;
+  /** buy buttons right under the lead, so visitors from search see a way to buy without scrolling */
+  cta?: ReactNode;
   children: ReactNode;
   wide?: boolean;
   /** questions shown on the page – also emitted as FAQPage structured data */
@@ -76,6 +79,7 @@ export function ContentPage({
         {eyebrow && <div className="eyebrow">{eyebrow}</div>}
         <h1>{title}</h1>
         {lead && <p className="lead">{lead}</p>}
+        {cta && <div className="content-cta">{cta}</div>}
         {updated && <p className="muted small content-updated">Last updated: {updated}</p>}
       </header>
       <div className={`content-layout ${toc || aside ? 'has-aside' : ''}`}>

@@ -16,6 +16,27 @@
 .content-updated {
   margin-top: 10px;
 }
+.content-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+@media (max-width: 520px) {
+  .content-cta .btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+  .content-head h1 {
+    font-size: 1.85rem;
+  }
+  .content-head .lead {
+    font-size: 1.02rem;
+  }
+  .content-head {
+    margin-bottom: var(--sp-6);
+  }
+}
 .content-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);

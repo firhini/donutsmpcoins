@@ -62,6 +62,18 @@ export default function MoneyLanding() {
       lead={`In-game cash for ${server}, from ${fmt(bestRate)} per million at the top bulk tier. Pick any amount, pay the way you like, and our staff send it to your balance with /pay.`}
       crumbs={[{ label: `${server} money` }]}
       toc={TOC}
+      cta={
+        unit && (
+          <>
+            <Link to={`/product/${unit.slug}`} className="btn btn-primary btn-lg">
+              <Icon name="coin" size={18} /> Buy money · from {fmt(bestRate)}/1M
+            </Link>
+            <a href="#prices" className="btn btn-secondary btn-lg">
+              See all packs
+            </a>
+          </>
+        )
+      }
       aside={
         unit && (
           <div className="card pad">

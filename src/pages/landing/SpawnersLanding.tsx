@@ -64,6 +64,18 @@ export default function SpawnersLanding() {
       lead={`Live prices and stock for every spawner we sell, from ${fmt(cheapest)} each in bulk. Handed over in-game by our staff, usually within minutes.`}
       crumbs={[{ label: `${server} spawners` }]}
       toc={TOC}
+      cta={
+        <>
+          {skelly && (
+            <Link to={`/product/${skelly.slug}`} className="btn btn-primary btn-lg">
+              <Icon name="cart" size={18} /> {skelly.name} · {fmt(skelly.priceCents)}
+            </Link>
+          )}
+          <Link to="/shop/spawners" className="btn btn-secondary btn-lg">
+            All spawners
+          </Link>
+        </>
+      }
       aside={
         skelly && (
           <div className="card pad">

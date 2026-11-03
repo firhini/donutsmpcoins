@@ -49,6 +49,16 @@ export default function IrlTradeLanding() {
       lead={`Real-money trading on ${server} is everywhere – in Discord DMs, on marketplaces, in chat. Most of it works. Some of it is a scam. Here is how to tell the difference, written by people who sell for a living.`}
       crumbs={[{ label: 'IRL trading guide' }]}
       toc={TOC}
+      cta={
+        <>
+          <Link to="/shop" className="btn btn-primary btn-lg">
+            <Icon name="cart" size={18} /> Browse the store
+          </Link>
+          <Link to="/donutsmp-money" className="btn btn-secondary btn-lg">
+            Money prices
+          </Link>
+        </>
+      }
     >
       <h2 id="what">What IRL trading is</h2>
       <p>
