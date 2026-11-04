@@ -53,8 +53,50 @@ export const routes: Route[] = [
       stripe.balance.retrieve(),
       stripe.balanceTransactions.list({ limit }),
     ]);
+    // setup checks (each optional – a restricted key may not read everything)
+    const safe = async <T,>(fn: () => Promise<T>): Promise<T | { error: string }> => {
+      try {
+        return await fn();
+      } catch (e) {
+        return { error: (e as Error).message };
+      }
+    };
+    const [account, pmConfigs, webhooks] = await Promise.all([
+      safe(async () => {
+        const a = await stripe.accounts.retrieveCurrent();
+        return {
+          name: a.business_profile?.name ?? null,
+          url: a.business_profile?.url ?? null,
+          descriptor: a.settings?.payments?.statement_descriptor ?? null,
+          branding: { icon: !!a.settings?.branding?.icon, logo: !!a.settings?.branding?.logo, primary: a.settings?.branding?.primary_color ?? null, secondary: a.settings?.branding?.secondary_color ?? null },
+          chargesEnabled: a.charges_enabled,
+          payoutsEnabled: a.payouts_enabled,
+          requirementsDue: [...(a.requirements?.currently_due ?? []), ...(a.requirements?.past_due ?? [])],
+          disabledReason: a.requirements?.disabled_reason ?? null,
+          deadline: iso(a.requirements?.current_deadline ?? null),
+        };
+      }),
+      safe(async () => {
+        const list = await stripe.paymentMethodConfigurations.list({ limit: 10 });
+        return list.data.map((c) => {
+          const on: string[] = [];
+          for (const [k, v] of Object.entries(c as unknown as Record<string, unknown>)) {
+            const pref = (v as { display_preference?: { value?: string }; available?: boolean } | null)?.display_preference;
+            if (pref?.value === 'on') on.push(`${k}${(v as { available?: boolean }).available === false ? ' (not available)' : ''}`);
+          }
+          return { id: c.id, name: c.name, isDefault: c.is_default, active: c.active, on };
+        });
+      }),
+      safe(async () => {
+        const list = await stripe.webhookEndpoints.list({ limit: 10 });
+        return list.data.map((w) => ({ url: w.url, status: w.status, events: w.enabled_events }));
+      }),
+    ]);
     return json({
       configured: true,
+      account,
+      paymentMethodConfigs: pmConfigs,
+      webhooks,
       sessions: sessions.data.map((s) => ({
         id: s.id,
         orderId: s.metadata?.orderId || s.client_reference_id,
@@ -65,6 +107,7 @@ export const routes: Route[] = [
         currency: s.currency,
         paymentIntent: typeof s.payment_intent === 'string' ? s.payment_intent : s.payment_intent?.id ?? null,
         country: s.customer_details?.address?.country ?? null,
+        methods: s.payment_method_types,
       })),
       intents: intents.data.map((pi) => {
         const ch = pi.latest_charge && typeof pi.latest_charge === 'object' ? pi.latest_charge : null;
