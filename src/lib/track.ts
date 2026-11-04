@@ -139,7 +139,9 @@ export function trackPageView(path: string) {
       const r = document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, '') : '';
       if (r && r !== window.location.hostname.replace(/^www\./, '')) ref = r;
       const q = new URLSearchParams(window.location.search);
-      src = q.get('utm_source') ?? undefined;
+      // Google Ads auto-tagging adds ?gclid=… – count those visits as "google-ads" even without utm tags
+      const paid = q.has('gclid') || q.has('gbraid') || q.has('wbraid');
+      src = q.get('utm_source') ?? (paid ? 'google-ads' : undefined);
       firstTouch = { ref, src, campaign: q.get('utm_campaign') ?? undefined, creator: q.get('ref') ?? undefined, landing: path };
     } catch {
       /* ignore */
