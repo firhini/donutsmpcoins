@@ -116,7 +116,7 @@ export const categoryCopy: Record<CategoryId, CategoryCopy> = {
       },
       {
         q: 'Which mystery box has the best Elytra odds?',
-        a: 'Per dollar, the Elytra Crate ($7.99) – about 1 in 12 crates. The Legendary Crate ($34.99) lands one in about 1 in 8, the God Mystery Box ($19.99) in about 1 in 22. If you want one for sure, buy the Elytra directly.',
+        a: 'Per dollar, the Elytra Crate ($7.99) – about 1 in 12 crates. The Legendary Crate ($34.99) lands one in about 1 in 8, the God Mystery Box ($19.99) in about 1 in 27. If you want one for sure, buy the Elytra directly.',
       },
       {
         q: 'Can I get the same item twice in one box?',

@@ -370,19 +370,19 @@ const raw: GuideInput[] = [
       {
         heading: 'Mystery Box – $3.99, 2 drops',
         paragraphs: [
-          'The [Mystery Box](/product/mystery-box) draws two different lines from an 11-line pool. Gilded blackstone, a skeleton spawner, nether stars, golden apples, emerald ore and totems are the commons; a netherite ingot or 25M money show up in about one box in twenty, and a netherite block, dragon head or Elytra are rare jackpots (the Elytra is roughly one box in 200).',
+          'The [Mystery Box](/product/mystery-box) draws two different lines from a 12-line pool. A skeleton spawner, 10M money, totems and golden apples are the commons; creeper spawners and 25M money come next, an iron golem spawner or netherite ingot shows up in about one box in eight, and 100M money, a netherite block, dragon head or Elytra are rare jackpots (the Elytra is roughly one box in 200).',
         ],
       },
       {
         heading: 'Elite Mystery Box – $8.99, 2 drops',
         paragraphs: [
-          'The [Elite Mystery Box](/product/elite-mystery-box) draws two lines from a stronger pool with bigger stacks: golden apples, emerald ore, iron golem spawners, heavy cores and gilded blackstone, with a netherite ingot in more than one box in five. 100M money (about one in 26), a netherite block, a dragon head and an Elytra (each roughly one in 70–100) are the jackpots.',
+          'The [Elite Mystery Box](/product/elite-mystery-box) draws two lines from a stronger pool with bigger stacks: 25M money, skeleton and iron golem spawners, golden apples, totems and heavy cores, with netherite ingots in about one box in six. 100M money (about one in 29), a netherite block, a dragon head and an Elytra (each roughly one in 75–105) are the jackpots.',
         ],
       },
       {
         heading: 'God Mystery Box – $19.99, 3 drops',
         paragraphs: [
-          'The [God Mystery Box](/product/god-mystery-box) draws three of nine lines: blaze spawners, heavy cores, gilded blackstone, emerald ore and netherite ingots are the usual drops. 250M money and a netherite block each land in about one box in 19, an Elytra in about one in 22 and a dragon head in about one in 28.',
+          'The [God Mystery Box](/product/god-mystery-box) draws three of ten lines: blaze and iron golem spawners, heavy cores, 50M money, totems and netherite ingots are the usual drops. 250M money and a netherite block each land in about one box in 22, an Elytra in about one in 27 and a dragon head in about one in 33.',
         ],
       },
       {
@@ -463,7 +463,7 @@ const raw: GuideInput[] = [
       {
         heading: 'Route 3: Mystery boxes',
         paragraphs: [
-          'Several of our boxes have an Elytra in the pool. The [Elytra Crate](/product/elytra-crate) ($7.99) gives one in about every 12 crates, the [God Mystery Box](/product/god-mystery-box) ($19.99) about 1 in 22 and the [Legendary Crate](/product/legendary-crate) ($34.99) about 1 in 8 – still gambles compared with buying it directly. Full odds and how they are calculated are in the [mystery box guide](/guides/donutsmp-mystery-boxes-explained).',
+          'Several of our boxes have an Elytra in the pool. The [Elytra Crate](/product/elytra-crate) ($7.99) gives one in about every 12 crates, the [God Mystery Box](/product/god-mystery-box) ($19.99) about 1 in 27 and the [Legendary Crate](/product/legendary-crate) ($34.99) about 1 in 8 – still gambles compared with buying it directly. Full odds and how they are calculated are in the [mystery box guide](/guides/donutsmp-mystery-boxes-explained).',
           'A box is the right choice if you want loot anyway and an Elytra would be a bonus. If the wings are the only thing you want, read on.',
         ],
       },

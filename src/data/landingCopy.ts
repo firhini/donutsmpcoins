@@ -67,7 +67,7 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Elytra odds, box by box',
         paragraphs: [
-          'Because multi-roll boxes draw without repeats, the chance of seeing a line somewhere in the box is higher than its per-roll percentage. Simulating the server\'s exact roll logic gives roughly these box-wide Elytra odds: Mystery Box about **1 in 200**, Elite Mystery Box about **1 in 95**, God Mystery Box about **1 in 22**, Legendary Crate about **1 in 8** and the Elytra Crate about **1 in 12** – the cheapest shot per dollar. If you want an Elytra for certain, [buy one directly](/product/elytra).',
+          'Because multi-roll boxes draw without repeats, the chance of seeing a line somewhere in the box is higher than its per-roll percentage. Simulating the server\'s exact roll logic gives roughly these box-wide Elytra odds: Mystery Box about **1 in 200**, Elite Mystery Box about **1 in 105**, God Mystery Box about **1 in 27**, Legendary Crate about **1 in 8** and the Elytra Crate about **1 in 12** – the cheapest shot per dollar. If you want an Elytra for certain, [buy one directly](/product/elytra).',
         ],
       },
       {
@@ -132,7 +132,7 @@ export const landingCopy: LandingCopy[] = [
         heading: 'Other routes: bundles and boxes',
         paragraphs: [
           'If you want more than the Elytra, three bundles include one in a single order and handover. The [Pro Bundle](/product/pro-bundle) ($40.99) adds 50M money and 16 skeleton spawners, the [Rich Bundle](/product/rich-bundle) ($59.99) comes with 250M, a God Mystery Box and the full PvP Kit, and the [Basehunter Bundle](/product/basehunter-bundle) ($33.99) pairs an Elytra with the Amethyst Pickaxe, 16 totems and 20M. At current prices each costs less than its parts bought separately – about $4.24 less for the Pro Bundle, $6.98 for the Rich Bundle and $3.81 for the Basehunter Bundle.',
-          'Random boxes are the gamble: the [Elite Mystery Box](/product/elite-mystery-box) ($8.99) contains an Elytra in roughly 1 in 95 boxes, the [Elytra Crate](/product/elytra-crate) ($7.99) in about 1 in 12 and the [Legendary Crate](/product/legendary-crate) ($34.99) in about 1 in 8. For the Elytra itself, buying it outright at $28.49 is always the safe choice.',
+          'Random boxes are the gamble: the [Elite Mystery Box](/product/elite-mystery-box) ($8.99) contains an Elytra in roughly 1 in 105 boxes, the [Elytra Crate](/product/elytra-crate) ($7.99) in about 1 in 12 and the [Legendary Crate](/product/legendary-crate) ($34.99) in about 1 in 8. For the Elytra itself, buying it outright at $28.49 is always the safe choice.',
         ],
       },
       {

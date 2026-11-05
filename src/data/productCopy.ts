@@ -559,11 +559,11 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'DonutSMP Mystery Box: $3.99 for two random drops – spawners, golden apples, totems, with a rare shot at netherite, dragon heads, 25M or an elytra.',
     description:
-      'Our classic DonutSMP mystery box gives you two different drops from an eleven-line pool. Gilded blackstone, a skeleton spawner, nether stars, enchanted golden apples, deepslate emerald ore and totems are the common pulls; a netherite ingot or 25M money show up in about one box in twenty, and a netherite block, a dragon head or an Elytra are the rare jackpots.\n\n' +
+      'Our classic DonutSMP mystery box gives you two different drops from a twelve-line pool. A skeleton spawner, 10M money, totems and enchanted golden apples are the common pulls; creeper spawners and 25M money come next, an iron golem spawner or a netherite ingot shows up in about one box in eight, and 100M money, a netherite block, a dragon head or an Elytra are the rare jackpots.\n\n' +
       'Most boxes are two useful commons – it is the cheapest way to try your luck at the big lines. Every drop is rolled server-side when you place the order and listed on your order page after payment, so what you see there is exactly what you get. Staff hand the items over in-game after payment, usually within 5–30 minutes while we are online.',
     bullets: ['Two different drops per box', 'Spawners, golden apples, totems and more', 'Rare shot at netherite, a dragon head, 25M or an elytra', 'Rolled on order, shown before delivery'],
     faq: [
-      { q: 'What can I get from the Mystery Box?', a: 'Two of eleven lines: gilded blackstone, a skeleton spawner, nether stars, golden apples, emerald ore, totems, a netherite ingot or block, a dragon head, 25M money or an elytra. The full odds are under \'What\'s inside?\'.' },
+      { q: 'What can I get from the Mystery Box?', a: 'Two of twelve lines: a skeleton spawner, 10M or 25M money, totems, golden apples, creeper or iron golem spawners, a netherite ingot or block, 100M money, a dragon head or an elytra. The full odds are under \'What\'s inside?\'.' },
       { q: 'Can I get the same item twice in one box?', a: 'No. The two drops are drawn without repeats, so each box contains two different lines.' },
       { q: 'How is a mystery box delivered?', a: 'Items are handed over in-game by staff after payment; a money line is sent with /pay. Join DonutSMP with your order username and accept the teleport.' },
     ],
@@ -602,7 +602,7 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'Elite Mystery Box for DonutSMP: $8.99 for two drops from a stronger pool – iron golem spawners, heavy cores, netherite, 100M money or an elytra.',
     description:
-      'The Elite Mystery Box gives you two different drops from a ten-line pool with bigger stacks than the classic box: gilded blackstone, golden apples, emerald ore, iron golem spawners and heavy cores are the usual results, and a netherite ingot lands in more than one box in five.\n\n' +
+      'The Elite Mystery Box gives you two different drops from an eleven-line pool with bigger stacks than the classic box: 25M money, skeleton and iron golem spawners, golden apples, totems and heavy cores are the usual results, and netherite ingots land in about one box in six.\n\n' +
       'The jackpot lines – 100M money, a netherite block, a dragon head and an Elytra – are rare, so treat them as a bonus. Every drop is rolled server-side when the order is created and printed on your order page once it is paid. Staff then deliver in-game and send a money line with /pay, usually within 5–30 minutes while we are online.',
     bullets: ['Two different drops per box', 'Bigger stacks than the classic box', 'Netherite, 100M, dragon heads and an elytra in the pool', 'Odds public, rolled on order'],
     faq: [
@@ -630,11 +630,11 @@ export const productCopy: Record<string, ProductCopy> = {
     metaDescription:
       'God Mystery Box for DonutSMP: $19.99 for three drops from the top pool – blaze spawners, heavy cores, netherite and chances at 250M or an elytra.',
     description:
-      'The God Mystery Box rolls three different lines from a nine-line top pool. Blaze spawners, heavy cores, gilded blackstone, deepslate emerald ore and netherite ingots are the usual drops – every line comes as a proper stack, there is no single-item filler.\n\n' +
-      'The jackpots are 250M money and a netherite block (each about one box in nineteen), an Elytra (about one in twenty-two) and a dragon head (about one in twenty-eight). Drops are rolled server-side when you order and shown on your order page after payment, before delivery. Staff hand the items over in-game and send money with /pay, usually within 5–30 minutes while we are online.',
+      'The God Mystery Box rolls three different lines from a ten-line top pool. Blaze and iron golem spawners, heavy cores, 50M money, a stack of totems and netherite ingots are the usual drops – every line comes as a proper stack, there is no single-item filler.\n\n' +
+      'The jackpots are 250M money and a netherite block (each about one box in twenty-two), an Elytra (about one in twenty-seven) and a dragon head (about one in thirty-three). Drops are rolled server-side when you order and shown on your order page after payment, before delivery. Staff hand the items over in-game and send money with /pay, usually within 5–30 minutes while we are online.',
     bullets: ['Three different drops per box', 'Blaze spawners, heavy cores and netherite', 'Chances at 250M, a netherite block or an elytra', 'Rolled on order, visible before delivery'],
     faq: [
-      { q: 'What are the elytra odds in the God Mystery Box?', a: 'About one box in twenty-two. The per-drop chance of every line is listed under \'What\'s inside?\'.' },
+      { q: 'What are the elytra odds in the God Mystery Box?', a: 'About one box in twenty-seven. The per-drop chance of every line is listed under \'What\'s inside?\'.' },
       { q: 'How do I receive the drops?', a: 'After payment our staff deliver in-game: join DonutSMP with your order username, accept the teleport and collect the items. Money lines go to your balance with /pay.' },
     ],
   },
