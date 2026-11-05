@@ -104,6 +104,7 @@ export const products: Product[] = [
       { name: '25M Money', min: 1, max: 1, weight: 220, rarity: 'rare' },
       { name: 'Netherite Block', min: 1, max: 1, weight: 40, rarity: 'epic' },
       { name: 'Dragon Head', min: 1, max: 1, weight: 30, rarity: 'epic' },
+      { name: '100M Money', min: 1, max: 1, weight: 25, rarity: 'epic' },
       { name: 'Elytra', min: 1, max: 1, weight: 20, rarity: 'legendary' },
     ],
   }),

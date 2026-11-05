@@ -16,6 +16,13 @@ import '../../styles/shop.css';
 /**
  * Storefront product card. Exported for other builders (cart upsells, free-stuff pages…).
  */
+const TIER: Record<string, number> = { legendary: 0, epic: 1, rare: 2, uncommon: 3, common: 4 };
+/** The rarest line of a box (shown on the card – its real chance is in "What's inside?"). */
+function topDrop(p: Product) {
+  const pool = (p.contents ?? []).filter((c) => (c.weight ?? 1) > 0);
+  return [...pool].sort((a, b) => TIER[a.rarity ?? 'common'] - TIER[b.rarity ?? 'common'] || (a.weight ?? 1) - (b.weight ?? 1))[0];
+}
+
 export function ProductCard({ product, compact = false, eager = false }: { product: Product; compact?: boolean; eager?: boolean }) {
   const { add } = useCart();
   const { fmt } = useStore();
@@ -33,6 +40,7 @@ export function ProductCard({ product, compact = false, eager = false }: { produ
   }, []);
 
   const line = linePrice(product, qty);
+  const top = product.kind === 'box' ? topDrop(product) : undefined;
   const bulk = lowestBulkTier(product);
   const tags = product.dailyDeal ? ['Deal of the day', ...((product.tags ?? []).slice(0, 3)).filter((t) => t !== 'Deal of the day')].slice(0, 3) : (product.tags ?? []).slice(0, 3);
   const perMillion = product.kind === 'money' && !millions && product.moneyMillions ? Math.round(product.priceCents / product.moneyMillions) : null;
@@ -74,6 +82,11 @@ export function ProductCard({ product, compact = false, eager = false }: { produ
         <h3 className="pcard-name">
           <Link to={`/product/${product.slug}`}>{product.name}</Link>
         </h3>
+        {product.kind === 'box' && top && (
+          <p className="pcard-topdrop">
+            <Icon name="sparkles" size={12} /> Top drop: <strong className={`rarity-${top.rarity ?? 'common'}`}>{top.name}</strong>
+          </p>
+        )}
         {product.shortDesc && <p className="pcard-desc">{product.shortDesc}</p>}
         {hasContents(product) && (
           <button type="button" className="pcard-inside" onClick={() => setInside(true)}>

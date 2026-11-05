@@ -73,7 +73,7 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Is a mystery box worth it?',
         paragraphs: [
-          'Boxes are not a discount and we do not pretend they are: on average every box pays out less than buying the same items directly. An [Elytra](/product/elytra) is $28.49 on its own, 1M is $0.05 or less, a netherite block $14.49.',
+          'Boxes are about the opening: every box always pays out, and the rare lines are where the fun is – Elytras, netherite blocks, dragon heads and big money drops. If you want one specific item for sure, buy it directly: an [Elytra](/product/elytra) is $28.49 on its own, 1M is $0.05 or less, a netherite block $14.49.',
           'If you want a specific item, buy the item; if you enjoy the opening and would be happy with several outcomes, buy the box. The Coin Crate sits in between: every result is money, the floor is 10M and about one crate in ten pays 50M or more – though a crate averages around 21M, less than the 25M pack costs to buy outright.',
         ],
       },
