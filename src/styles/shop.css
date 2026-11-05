@@ -1455,3 +1455,120 @@
 .pcard-topdrop strong {
   font-weight: 800;
 }
+
+/* ── box drops as item tiles (rarity-coloured, best first) ── */
+.drop-grid {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 8px;
+}
+.drop-grid-top {
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  margin-bottom: 12px;
+}
+.drop-tile {
+  --tone: var(--rarity-common);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 6px 8px;
+  border-radius: 12px;
+  text-align: center;
+  background: radial-gradient(120% 90% at 50% 0%, color-mix(in srgb, var(--tone) 22%, transparent), transparent 70%), var(--bg-2);
+  border: 1px solid color-mix(in srgb, var(--tone) 35%, var(--border-1));
+  border-bottom: 3px solid var(--tone);
+  overflow: hidden;
+}
+.drop-tile img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 4px 10px color-mix(in srgb, var(--tone) 45%, transparent));
+}
+.drop-tile-big {
+  padding: 12px 8px 10px;
+  box-shadow: 0 0 26px -10px var(--tone);
+}
+.drop-tile-big img {
+  width: 64px;
+  height: 64px;
+}
+.drop-name {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-1);
+}
+.drop-name b {
+  color: var(--tone);
+}
+.drop-pct {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+.drop-tier {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tone);
+}
+.rarity-tile-common { --tone: var(--rarity-common); }
+.rarity-tile-uncommon { --tone: var(--rarity-uncommon); }
+.rarity-tile-rare { --tone: var(--rarity-rare); }
+.rarity-tile-epic { --tone: var(--rarity-epic); }
+.rarity-tile-legendary { --tone: var(--rarity-legendary); }
+.rarity-tile-legendary.drop-tile-big {
+  animation: drop-shine 2.4s ease-in-out infinite;
+}
+@keyframes drop-shine {
+  50% {
+    box-shadow: 0 0 34px -6px var(--tone);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rarity-tile-legendary.drop-tile-big {
+    animation: none;
+  }
+}
+
+/* box cards: strip of the best drops instead of text */
+.pcard-drops {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 4px 0 0;
+}
+.pcard-drop {
+  --tone: var(--rarity-common);
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--tone) 16%, var(--bg-2));
+  border: 1px solid color-mix(in srgb, var(--tone) 55%, transparent);
+}
+.pcard-drop img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.pcard-drops-more {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-3);
+  margin-left: 2px;
+}

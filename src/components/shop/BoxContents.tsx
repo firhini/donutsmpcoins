@@ -1,17 +1,10 @@
-import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import type { BoxContent, Product } from '../../shared/types';
 import { formatMillions } from '../../shared/pricing';
 import { useStore } from '../../context/StoreContext';
 import { Icon } from '../ui/Icons';
+import { dropImage, shortDropName, sortedDrops } from './dropArt';
 
-const RARITY_ORDER: Record<NonNullable<BoxContent['rarity']>, number> = {
-  legendary: 0,
-  epic: 1,
-  rare: 2,
-  uncommon: 3,
-  common: 4,
-};
 
 function rangeLabel(min: number, max: number): string {
   return min === max ? `${min}×` : `${min}–${max}×`;
@@ -32,7 +25,7 @@ function percentLabel(pct: number): string {
  *  - bundle → bundleItems resolved to catalog products (money lines as "50M Money")
  */
 export function BoxContents({ product, compact = false }: { product: Product; compact?: boolean }) {
-  const { productById, fmt } = useStore();
+  const { productById, fmt, products } = useStore();
 
   if (product.kind === 'box') {
     const pool = product.contents ?? [];
@@ -41,15 +34,28 @@ export function BoxContents({ product, compact = false }: { product: Product; co
     const total = random.reduce((s, c) => s + (c.weight ?? 1), 0) || 1;
     const rolls = Math.max(1, product.boxRolls ?? 3);
     const pctOf = (c: BoxContent) => ((c.weight ?? 1) / total) * 100;
-    // best drops first (rarest tier, then rarest line) – every line keeps its real chance
-    const sorted = [...random].sort((a, b) => RARITY_ORDER[a.rarity ?? 'common'] - RARITY_ORDER[b.rarity ?? 'common'] || (a.weight ?? 1) - (b.weight ?? 1));
+    // best drops first – every tile keeps its real per-drop chance
+    const sorted = sortedDrops(product);
     const top = sorted.filter((c) => c.rarity === 'legendary' || c.rarity === 'epic').slice(0, 3);
+    const rest = sorted.filter((c) => !top.includes(c));
+
+    const tile = (c: BoxContent, key: string, big = false) => (
+      <li key={key} className={`drop-tile rarity-tile-${c.rarity ?? 'common'} ${big ? 'drop-tile-big' : ''}`}>
+        {big && <span className="drop-tier">{c.rarity === 'legendary' ? 'Jackpot' : 'Epic'}</span>}
+        <img src={dropImage(c, products)} alt="" loading="lazy" decoding="async" draggable={false} />
+        <span className="drop-name">
+          {c.min > 1 || c.max > 1 ? <b>{rangeLabel(c.min, c.max)} </b> : null}
+          {shortDropName(c.name)}
+        </span>
+        <span className="drop-pct">{percentLabel(pctOf(c))}</span>
+      </li>
+    );
 
     return (
       <div className={`boxc ${compact ? 'boxc-compact' : ''}`}>
         <div className="boxc-head">
           <span className="badge badge-violet">
-            <Icon name="box" size={12} /> Opens {rolls} random {rolls === 1 ? 'drop' : 'drops'}
+            <Icon name="box" size={12} /> {rolls} {rolls === 1 ? 'drop' : 'drops'} per box
           </span>
           {guaranteed.length > 0 && (
             <span className="badge badge-gold">
@@ -57,59 +63,12 @@ export function BoxContents({ product, compact = false }: { product: Product; co
             </span>
           )}
         </div>
-        {top.length > 0 && (
-          <div className="boxc-top" aria-label="Top drops">
-            {top.map((c, i) => (
-              <div key={`t-${i}`} className={`boxc-top-item rarity-glow-${c.rarity}`}>
-                <span className="boxc-top-tier">{c.rarity === 'legendary' ? 'Jackpot' : 'Epic'}</span>
-                <strong className={`rarity-${c.rarity}`}>
-                  {c.min > 1 || c.max > 1 ? `${rangeLabel(c.min, c.max)} ` : ''}
-                  {c.name}
-                </strong>
-                <span className="boxc-top-pct">{percentLabel(pctOf(c))} per drop</span>
-              </div>
-            ))}
-          </div>
-        )}
-        <ul className="boxc-list">
-          {guaranteed.map((c, i) => (
-            <li key={`g-${i}`} className="boxc-row boxc-guaranteed">
-              <span className={`boxc-dot rarity-bg-${c.rarity ?? 'common'}`} aria-hidden="true" />
-              <span className={`boxc-name rarity-${c.rarity ?? 'common'}`}>{c.name}</span>
-              <span className="boxc-qty">{rangeLabel(c.min, c.max)}</span>
-              <span className="boxc-chance boxc-chance-g">Guaranteed</span>
-            </li>
-          ))}
-          {sorted.map((c, i) => {
-            const pct = pctOf(c);
-            const tier = c.rarity ?? 'common';
-            const prev = i > 0 ? (sorted[i - 1].rarity ?? 'common') : null;
-            return (
-              <Fragment key={`r-${i}`}>
-                {prev !== tier && !compact && (
-                  <li className="boxc-tier-label" aria-hidden="true">
-                    {tier}
-                  </li>
-                )}
-                <li className="boxc-row">
-                  <span className={`boxc-dot rarity-bg-${tier}`} aria-hidden="true" />
-                  <span className={`boxc-name rarity-${tier}`}>{c.name}</span>
-                  <span className="boxc-qty">{rangeLabel(c.min, c.max)}</span>
-                  <span className="boxc-chance">
-                    <span className="boxc-bar" aria-hidden="true">
-                      <i style={{ width: `${Math.max(3, Math.min(100, pct))}%` }} />
-                    </span>
-                    {percentLabel(pct)}
-                  </span>
-                </li>
-              </Fragment>
-            );
-          })}
-        </ul>
+        {guaranteed.length > 0 && <ul className="drop-grid drop-grid-top">{guaranteed.map((c, i) => tile(c, `g-${i}`, false))}</ul>}
+        {top.length > 0 && <ul className="drop-grid drop-grid-top">{top.map((c, i) => tile(c, `t-${i}`, true))}</ul>}
+        <ul className="drop-grid">{rest.map((c, i) => tile(c, `r-${i}`))}</ul>
         {!compact && (
           <p className="boxc-foot">
-            Every possible drop and its exact chance is listed – no hidden pool. Your box is rolled on our server the moment you order, the result shows on your order page and our
-            staff hand it over in-game. Chances apply per drop; a box with several drops never repeats a line.
+            Chance per drop, every line listed. Rolled the moment you order, shown on your order page, handed over in-game by our staff. No repeats inside one box.
           </p>
         )}
       </div>
