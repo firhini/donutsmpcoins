@@ -44,10 +44,6 @@ export function BoxContents({ product, compact = false }: { product: Product; co
     // best drops first (rarest tier, then rarest line) – every line keeps its real chance
     const sorted = [...random].sort((a, b) => RARITY_ORDER[a.rarity ?? 'common'] - RARITY_ORDER[b.rarity ?? 'common'] || (a.weight ?? 1) - (b.weight ?? 1));
     const top = sorted.filter((c) => c.rarity === 'legendary' || c.rarity === 'epic').slice(0, 3);
-    // honest headline odds: chance that a box contains at least one rare-or-better drop
-    const rarePlus = random.filter((c) => RARITY_ORDER[c.rarity ?? 'common'] <= RARITY_ORDER.rare).reduce((s, c) => s + (c.weight ?? 1), 0) / total;
-    const hitRare = 1 - Math.pow(1 - rarePlus, rolls);
-    const oneIn = hitRare > 0 ? Math.max(1, Math.round(1 / hitRare)) : 0;
 
     return (
       <div className={`boxc ${compact ? 'boxc-compact' : ''}`}>
@@ -60,7 +56,6 @@ export function BoxContents({ product, compact = false }: { product: Product; co
               <Icon name="check" size={12} /> {guaranteed.length} guaranteed
             </span>
           )}
-          {oneIn > 0 && <span className="boxc-note">About 1 in {oneIn} boxes contains a Rare or better drop</span>}
         </div>
         {top.length > 0 && (
           <div className="boxc-top" aria-label="Top drops">
