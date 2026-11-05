@@ -3,8 +3,9 @@
  * (POST /api/mc/validate → Mojang) and avatar URLs.
  */
 import { api, ApiClientError } from './api';
+import { MC_USERNAME_RE, isBedrockName, mcNameProblem } from '../shared/mcName';
 
-export const MC_USERNAME_RE = /^[A-Za-z0-9_]{3,16}$/;
+export { MC_USERNAME_RE };
 
 export type UsernameStatus = 'invalid' | 'valid' | 'notfound' | 'unverified';
 
@@ -14,6 +15,8 @@ export interface UsernameCheck {
   name?: string;
   uuid?: string;
   message: string;
+  /** Bedrock player (".Gamertag") – no Mojang account to check */
+  bedrock?: boolean;
 }
 
 interface McValidateResponse {
@@ -32,12 +35,7 @@ export function isValidUsernameSyntax(name: string): boolean {
 
 /** Human readable syntax problem, or null when the name looks fine. */
 export function usernameSyntaxError(name: string): string | null {
-  const n = name.trim();
-  if (!n) return 'Enter your Minecraft username.';
-  if (n.length < 3) return 'Usernames have at least 3 characters.';
-  if (n.length > 16) return 'Usernames have at most 16 characters.';
-  if (!/^[A-Za-z0-9_]+$/.test(n)) return 'Only letters, numbers and underscores are allowed.';
-  return null;
+  return mcNameProblem(name);
 }
 
 const cache = new Map<string, UsernameCheck>();
@@ -51,6 +49,8 @@ export async function validateUsername(name: string, signal?: AbortSignal): Prom
   const n = name.trim();
   const syntax = usernameSyntaxError(n);
   if (syntax) return { status: 'invalid', message: syntax };
+  // Bedrock names cannot be checked against Mojang – the syntax is all we can verify
+  if (isBedrockName(n)) return { status: 'valid', name: n, bedrock: true, message: `Bedrock player – we deliver to ${n}` };
   const key = n.toLowerCase();
   const hit = cache.get(key);
   if (hit) return hit;

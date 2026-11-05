@@ -2,6 +2,7 @@
  * Minecraft username validation against the Mojang profile API, with a
  * per-name cache so the checkout can re-check names for free.
  */
+import { isBedrockName } from '../../src/shared/mcName';
 import type { Route } from '../lib/http';
 import { getIp, hashIp, json, readJson, requireUsername } from '../lib/http';
 import { rateLimit } from '../lib/ratelimit';
@@ -26,7 +27,7 @@ interface CacheEntry {
 const MOJANG = 'https://api.mojang.com/users/profiles/minecraft/';
 const FOUND_TTL_MS = 24 * 60 * 60 * 1000; // a found account stays found
 const NOT_FOUND_TTL_MS = 60 * 60 * 1000; // typos / brand-new accounts: re-check after an hour
-const NOT_FOUND_REASON = 'No Minecraft (Java Edition) account with this name was found – check the spelling.';
+const NOT_FOUND_REASON = 'No Minecraft Java account with this name was found – check the spelling. Playing on Bedrock (phone, console, Windows)? Choose Bedrock.';
 
 /** 8-4-4-4-12 formatting for the undashed uuid Mojang returns. */
 function dashUuid(raw: string): string {
@@ -70,6 +71,8 @@ export const routes: Route[] = [
     handler: async ({ req, context }) => {
       const body = await readJson<{ username?: unknown }>(req);
       const username = requireUsername(body.username);
+      // Bedrock players (".Gamertag") have no Mojang account to look up
+      if (isBedrockName(username)) return json({ valid: true, name: username, bedrock: true });
       const cacheKey = `mc:${username.toLowerCase()}`;
 
       const cached = await kvGet<CacheEntry>('misc', cacheKey);

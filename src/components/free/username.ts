@@ -1,23 +1,24 @@
 import { useCallback, useEffect, useState } from 'react';
 import { storageGet, storageSet } from '../../lib/device';
+import { MC_USERNAME_RE, isBedrockName, mcNameProblem } from '../../shared/mcName';
 
-/** Minecraft Java usernames: 3–16 chars, letters, digits, underscore. */
-export const MC_USERNAME_RE = /^[A-Za-z0-9_]{3,16}$/;
+/** Java names (3–16 letters, digits, _) and Bedrock names (".Gamertag"). */
+export { MC_USERNAME_RE };
 
 export const USERNAME_KEY = 'dc_username';
 
 /** Returns a human readable problem with the username, or null when it is valid. */
 export function usernameProblem(name: string): string | null {
-  const n = name.trim();
-  if (!n) return 'Enter your Minecraft username.';
-  if (n.length < 3) return 'Usernames have at least 3 characters.';
-  if (n.length > 16) return 'Usernames have at most 16 characters.';
-  if (!MC_USERNAME_RE.test(n)) return 'Only letters, numbers and underscores are allowed.';
-  return null;
+  return mcNameProblem(name);
 }
 
 export function isValidUsername(name: string): boolean {
   return MC_USERNAME_RE.test(name.trim());
+}
+
+/** Bedrock players have no Java skin to preview. */
+export function hasJavaAvatar(name: string): boolean {
+  return !isBedrockName(name);
 }
 
 export function avatarUrl(name: string, size = 48): string {

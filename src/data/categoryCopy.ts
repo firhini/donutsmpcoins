@@ -304,7 +304,7 @@ export const shopCopy: CategoryCopy = {
   body: [
     'Start with money if you are new – 1M is $0.05 and the rate falls to $0.03 per million on big orders, with fixed packs from 10M ($0.49) to 1B ($28.99). Spawners are the second most popular buy, priced at what they go for in our own deals: skeleton spawners from $0.69 at 250+, iron golems from $1.74 and cow spawners from $4.39, plus zombies, creepers and blazes. The spawners category also holds the Elytra ($28.49), shulker boxes and totems of undying.',
     'For gear, the armor category has a full god netherite set for $4.99 and a Diamond Armor Shulker with six sets for $0.49; tools and weapons start at $0.89 for a God Bow and include the Mace and the DonutSMP Amethyst Pickaxe. Mystery boxes run from the $1.99 Coin Crate to the $34.99 Legendary Crate, all with public odds. Investments cover netherite, nether stars, enchanted golden apples and dragon heads.',
-    'Ordering takes a minute: add to cart, enter your exact Java Edition username – we check it against Mojang – choose PayPal, crypto or card where enabled, and report your payment reference on the order page. A member of our staff then pays money with /pay and hands items over through a teleport. Track any order at /track with its ID; no account is needed.',
+    'Ordering takes a minute: add to cart, enter your exact in-game name – Java names are checked against Mojang, Bedrock players pick Bedrock and type their gamertag – choose PayPal, crypto or card where enabled, and report your payment reference on the order page. A member of our staff then pays money with /pay and hands items over through a teleport. Track any order at /track with its ID; no account is needed.',
     'Two things we say on every page: DonutCoins is an independent, player-run store, not affiliated with DonutSMP, Mojang or Microsoft, and DonutSMP\'s rules prohibit real-money trading – we deliver with normal player actions and keep it discreet, but buying is your own responsibility. If you want to test us first, start with a small order; the refund policy covers non-delivery in full.',
   ],
   faq: [
@@ -318,11 +318,11 @@ export const shopCopy: CategoryCopy = {
     },
     {
       q: 'Which payment methods does the DonutSMP shop accept?',
-      a: 'PayPal and Litecoin are on by default; card, Apple Pay and Google Pay through Stripe, PayPal Checkout, other coins and gift cards appear at checkout when they are enabled. Prices are in USD, with estimates in EUR, GBP and other currencies in the header.',
+      a: 'Card, Apple Pay and Google Pay through Stripe, plus crypto (BTC, ETH, LTC, USDT and more) through NOWPayments. Prices are in USD, with estimates in EUR, GBP and other currencies in the header.',
     },
     {
       q: 'Do you deliver to Bedrock players?',
-      a: 'Orders need a Java Edition username (3–16 characters) that we validate against Mojang, and deliveries go to that account on DonutSMP. If you join through a Bedrock account, contact us on Discord before ordering so we can check whether delivery is possible.',
+      a: 'Both. At checkout choose Java or Bedrock. Java names (3–16 characters) are validated against Mojang; Bedrock players type their gamertag and we deliver to it with the dot DonutSMP adds in front (e.g. .Steve_123). Deliveries go to exactly that name on DonutSMP.',
     },
   ],
 };

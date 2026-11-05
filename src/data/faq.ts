@@ -64,7 +64,7 @@ export const faqGroups: FaqGroup[] = [
       {
         id: 'bedrock-players',
         q: 'Do you deliver to Bedrock players?',
-        a: 'Orders need a **Java Edition username** – 3 to 16 characters, letters, numbers and underscores – which we validate against Mojang at checkout, and money and items go to that account on {{server}}. Bedrock names with a dot prefix do not pass that check. If you play {{server}} through a Bedrock account, ask us on Discord before paying and we will tell you whether delivery to your name is possible.',
+        a: 'Both work. At checkout pick **Java** or **Bedrock**. Java names (3 to 16 letters, numbers and underscores) are checked against Mojang. Bedrock players type their gamertag – on {{server}} Bedrock names start with a dot and spaces become underscores (e.g. **.Steve_123**), and we add the dot for you. Money and items go to exactly that name on {{server}}, so check it matches the TAB list in-game.',
       },
     ],
   },

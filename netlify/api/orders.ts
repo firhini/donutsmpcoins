@@ -4,6 +4,7 @@
  * only sends product ids and quantities.
  */
 import { z } from 'zod';
+import { MC_NAME_RULES } from '../../src/shared/mcName';
 import { SESSION_ID_RE, linkOrderToSession } from '../lib/analytics';
 import type { Order } from '../../src/shared/types';
 import type { Route } from '../lib/http';
@@ -41,7 +42,7 @@ const quoteSchema = z.object({
 });
 
 const createOrderSchema = z.object({
-  username: z.string('Please enter your Minecraft username.').trim().regex(MC_USERNAME_RE, 'Minecraft usernames are 3–16 letters, numbers or underscores.'),
+  username: z.string('Please enter your Minecraft username.').trim().regex(MC_USERNAME_RE, MC_NAME_RULES),
   email: optionalText(120),
   items: z.array(lineSchema, 'Your cart is empty.').min(1, 'Your cart is empty.').max(20, 'Too many different items in one order (max 20).'),
   discountCode: optionalText(40),

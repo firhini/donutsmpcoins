@@ -1,6 +1,6 @@
 import { useEffect, useId, useState } from 'react';
 import { Icon } from '../ui/Icons';
-import { avatarUrl, isValidUsername, usernameProblem } from './username';
+import { avatarUrl, hasJavaAvatar, isValidUsername, usernameProblem } from './username';
 
 interface Props {
   value: string;
@@ -20,7 +20,7 @@ interface Props {
 
 /**
  * Minecraft username field with a live avatar preview (mc-heads.net).
- * Validation follows the Java edition rules: 3–16 chars, A–Z, 0–9 and "_".
+ * Java names (3–16 chars, A–Z, 0–9, "_") and Bedrock names (".Gamertag") are accepted.
  */
 export function UsernameInput({ value, onChange, label = 'Minecraft username', hint, error, validate = true, placeholder = 'e.g. Notch', disabled, autoFocus, size = 'md', id }: Props) {
   const autoId = useId();
@@ -32,7 +32,7 @@ export function UsernameInput({ value, onChange, label = 'Minecraft username', h
   // debounce the avatar preview so we do not hammer the avatar API while typing
   useEffect(() => {
     const name = value.trim();
-    if (!isValidUsername(name)) {
+    if (!isValidUsername(name) || !hasJavaAvatar(name)) {
       setPreview('');
       return;
     }
@@ -66,17 +66,17 @@ export function UsernameInput({ value, onChange, label = 'Minecraft username', h
           id={inputId}
           className={`input ${problem ? 'error' : ''} ${valid ? 'success' : ''}`}
           value={value}
-          onChange={(e) => onChange(e.target.value.replace(/\s+/g, ''))}
+          onChange={(e) => onChange(e.target.value.replace(/\s+/g, value.trim().startsWith('.') ? '_' : ''))}
           onBlur={() => setTouched(true)}
           placeholder={placeholder}
-          maxLength={16}
+          maxLength={17}
           autoComplete="off"
           autoCapitalize="off"
           spellCheck={false}
           disabled={disabled}
           autoFocus={autoFocus}
           aria-invalid={problem ? 'true' : undefined}
-          aria-describedby={problem ? `${inputId}-err` : hint ? `${inputId}-hint` : undefined}
+          aria-describedby={problem ? `${inputId}-err` : `${inputId}-hint`}
         />
         {valid && (
           <span className="uname-ok" aria-hidden="true">
@@ -88,11 +88,11 @@ export function UsernameInput({ value, onChange, label = 'Minecraft username', h
         <div className="err" id={`${inputId}-err`} role="alert">
           {problem}
         </div>
-      ) : hint ? (
+      ) : (
         <div className="hint" id={`${inputId}-hint`}>
-          {hint}
+          {hint ?? 'Bedrock player (phone, console, Windows)? Type a dot first, e.g. .Steve_123'}
         </div>
-      ) : null}
+      )}
     </div>
   );
 }

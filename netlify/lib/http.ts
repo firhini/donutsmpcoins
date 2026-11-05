@@ -1,3 +1,4 @@
+import { MC_NAME_MAX, MC_NAME_RULES, MC_USERNAME_RE } from '../../src/shared/mcName';
 import type { Context } from '@netlify/functions';
 import { createHash, scryptSync } from 'node:crypto';
 
@@ -155,11 +156,12 @@ export function optionalString(v: unknown, name: string, max = 500): string | un
   return requireString(v, name, { min: 0, max });
 }
 
-export const MC_USERNAME_RE = /^[A-Za-z0-9_]{3,16}$/;
+export { MC_USERNAME_RE } from '../../src/shared/mcName';
 
+/** Java (3–16 letters, digits, _) or Bedrock (".Gamertag") player name. */
 export function requireUsername(v: unknown): string {
-  const s = requireString(v, 'Minecraft username', { min: 3, max: 16 });
-  if (!MC_USERNAME_RE.test(s)) throw new HttpError(400, 'Minecraft usernames are 3–16 letters, numbers or underscores.', 'validation');
+  const s = requireString(v, 'Minecraft username', { min: 2, max: MC_NAME_MAX });
+  if (!MC_USERNAME_RE.test(s)) throw new HttpError(400, MC_NAME_RULES, 'validation');
   return s;
 }
 

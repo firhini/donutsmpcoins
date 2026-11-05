@@ -6,6 +6,7 @@ import { apiGet, apiPost, ApiClientError } from '../lib/api';
 import { useAuth } from '../context/AuthContext';
 import { getDeviceId, storageGet, storageSet } from '../lib/device';
 import { avatarUrl } from '../lib/mc';
+import { isBedrockName, toBedrockName } from '../shared/mcName';
 import { createNowPaymentsInvoice, createStripeSession, redirectToPayment } from '../lib/payments';
 import { useCart } from '../context/CartContext';
 import { useStore } from '../context/StoreContext';
@@ -33,6 +34,23 @@ export default function Page() {
   useEffect(() => {
     if (auth.user?.mcUsername) setUsername((u) => (u.trim() ? u : auth.user!.mcUsername!));
   }, [auth.user?.mcUsername]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Java or Bedrock (Bedrock names get DonutSMP's "." prefix)
+  const [edition, setEdition] = useState<'java' | 'bedrock'>(() => (isBedrockName(storageGet<string>(USERNAME_KEY, '')) ? 'bedrock' : 'java'));
+  useEffect(() => {
+    if (isBedrockName(username) && edition !== 'bedrock') setEdition('bedrock');
+  }, [username]); // eslint-disable-line react-hooks/exhaustive-deps
+  const switchEdition = (next: 'java' | 'bedrock') => {
+    setEdition(next);
+    setUsername((u) => (next === 'bedrock' ? toBedrockName(u) : u.replace(/^\./, '').slice(0, 16)));
+  };
+  const onNameInput = (raw: string) => {
+    if (edition === 'bedrock') setUsername(toBedrockName(raw));
+    else if (raw.trim().startsWith('.')) {
+      // typed a Bedrock name into the Java field – switch for them
+      setEdition('bedrock');
+      setUsername(toBedrockName(raw));
+    } else setUsername(raw.replace(/\s/g, '').slice(0, 16));
+  };
   const uname = useUsernameCheck(username);
   const [email, setEmail] = useState(() => storageGet<string>(EMAIL_KEY, ''));
   const [credit, setCredit] = useState<number | null>(null);
@@ -244,7 +262,7 @@ export default function Page() {
     );
   }
 
-  const avatarName = uname.status === 'valid' ? uname.name ?? '' : '';
+  const avatarName = uname.status === 'valid' && !isBedrockName(uname.name ?? '') ? uname.name ?? '' : '';
   const userState = uname.status;
 
   return (
@@ -297,23 +315,34 @@ export default function Page() {
             </header>
             <div className="co-step-body">
               <div className="field">
+                <div className="co-edition" role="radiogroup" aria-label="Minecraft edition">
+                  <button type="button" role="radio" aria-checked={edition === 'java'} className={`co-edition-btn ${edition === 'java' ? 'active' : ''}`} onClick={() => switchEdition('java')}>
+                    <strong>Java</strong>
+                    <span>PC / Mac</span>
+                  </button>
+                  <button type="button" role="radio" aria-checked={edition === 'bedrock'} className={`co-edition-btn ${edition === 'bedrock' ? 'active' : ''}`} onClick={() => switchEdition('bedrock')}>
+                    <strong>Bedrock</strong>
+                    <span>Phone, console, Windows</span>
+                  </button>
+                </div>
                 <label className="label" htmlFor="co-user">
-                  Minecraft username <span className="req">*</span>
+                  {edition === 'bedrock' ? 'Bedrock gamertag' : 'Minecraft username'} <span className="req">*</span>
                 </label>
-                <div className={`co-user is-${userState}`}>
+                <div className={`co-user is-${userState} ${edition === 'bedrock' ? 'is-bedrock' : ''}`}>
                   <span className="co-user-avatar" aria-hidden="true">
                     {avatarName ? <img src={avatarUrl(avatarName, 64)} alt="" width={36} height={36} /> : <Icon name="user" size={18} />}
                   </span>
+                  {edition === 'bedrock' && <span className="co-user-dot" aria-hidden="true">.</span>}
                   <input
                     id="co-user"
                     className="input"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value.replace(/\s/g, '').slice(0, 16))}
-                    placeholder="Your in-game name"
+                    value={edition === 'bedrock' ? username.replace(/^\./, '') : username}
+                    onChange={(e) => onNameInput(e.target.value)}
+                    placeholder={edition === 'bedrock' ? 'Your gamertag, e.g. Steve 123' : 'Your in-game name'}
                     autoComplete="username"
                     autoCapitalize="none"
                     spellCheck={false}
-                    maxLength={16}
+                    maxLength={edition === 'bedrock' ? 20 : 16}
                     aria-invalid={userState === 'invalid' || userState === 'notfound'}
                     aria-describedby="co-user-msg"
                   />
@@ -325,12 +354,20 @@ export default function Page() {
                   </span>
                 </div>
                 <p id="co-user-msg" className={`co-user-msg is-${userState}`} aria-live="polite">
-                  {userState === 'idle' && 'Java Edition name, 3–16 characters. Double-check it – deliveries go to exactly this account.'}
-                  {userState === 'valid' && (
-                    <>
-                      <strong>{uname.name}</strong> found – looking good.
-                    </>
-                  )}
+                  {userState === 'idle' &&
+                    (edition === 'bedrock'
+                      ? 'Your Xbox/Bedrock gamertag. On DonutSMP Bedrock names start with a dot and spaces become _ – we add that for you.'
+                      : 'Java Edition name, 3–16 characters. Double-check it – deliveries go to exactly this account.')}
+                  {userState === 'valid' &&
+                    (isBedrockName(uname.name ?? '') ? (
+                      <>
+                        We deliver to <strong>{uname.name}</strong> – check it matches your name in-game (TAB list).
+                      </>
+                    ) : (
+                      <>
+                        <strong>{uname.name}</strong> found – looking good.
+                      </>
+                    ))}
                   {userState !== 'idle' && userState !== 'valid' && uname.message}
                 </p>
               </div>
