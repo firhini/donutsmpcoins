@@ -107,8 +107,9 @@ export const routes: Route[] = [
     handler: async ({ req, context }) => {
       const body = parse(quoteSchema, await readJson(req));
       // generous, but stops coupon brute-forcing through the quote endpoint
-      await rateLimit(`quote:${hashIp(getIp(req, context))}`, 60, 60);
-      const { quote } = await serverQuote(body);
+      const ipHash = hashIp(getIp(req, context));
+      await rateLimit(`quote:${ipHash}`, 60, 60);
+      const { quote } = await serverQuote({ ...body, ipHash });
       return json(quote);
     },
   },

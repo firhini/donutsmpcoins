@@ -4,8 +4,8 @@
  *  - spin wheel free items, gift-code redemption, giveaways, admin (free orders)
  */
 import type { CartLineInput, Order, OrderItem, PaymentMethodConfig, Product, Quote } from '../../src/shared/types';
-import { releaseDeal, reserveDeal } from './dailyDeal';
-import { applyDailyDeal, applySale, computeQuote } from '../../src/shared/pricing';
+import { dealUsed, releaseDeal, reserveDeal } from './dailyDeal';
+import { applyDailyDeal, applySale, computeQuote, dealOfTheDay } from '../../src/shared/pricing';
 import { getCatalog, getFullCatalog, decrementStock, restoreStock } from './catalog';
 import { getSettings, usablePaymentMethods, renderTemplate } from './settings';
 import { getCoupon, consumeCoupon, unconsumeCoupon, normalizeCode } from './coupons';
@@ -46,6 +46,8 @@ export interface ServerQuoteInput {
   applyCredit?: boolean;
   /** free orders (spin / gift / admin) may contain products hidden from the public shop */
   includeHidden?: boolean;
+  /** hashed IP – the daily deal limit also counts per connection */
+  ipHash?: string;
 }
 
 /** Server-side quote with coupon / referral / credit lookups. */
@@ -90,7 +92,15 @@ export async function serverQuote(input: ServerQuoteInput): Promise<{ quote: Quo
   // a running sale is baked into the product prices (same helper as the storefront)
   // free orders (prizes/gifts) ignore deal prices and limits
   const products = input.includeHidden ? applySale(catalog.products, settings.sale) : applyDailyDeal(applySale(catalog.products, settings.sale), settings.dailyDeal);
+  // how many deal units this player may still get today (the rest of the line is priced normally)
+  let dealAllowance: Record<string, number> | undefined;
+  const deal = input.includeHidden ? null : dealOfTheDay(settings.dailyDeal);
+  if (deal && (username || input.ipHash) && input.items.some((i) => i.productId === deal.productId)) {
+    const used = await dealUsed(deal.date, deal.productId, username, input.ipHash).catch(() => 0);
+    dealAllowance = { [deal.productId]: Math.max(0, deal.maxPerPlayer - used) };
+  }
   const quote = computeQuote(products, input.items, {
+    dealAllowance,
     tiers: settings.spendingTiers,
     coupon,
     couponCode: input.discountCode?.trim() || undefined,
@@ -168,6 +178,7 @@ export async function buildOrder(input: BuildOrderInput): Promise<Order> {
     username,
     applyCredit: input.free ? false : input.applyCredit,
     includeHidden: !!input.free,
+    ipHash: input.ipHash,
   });
   if (!quote.lines.length) throw new HttpError(400, quote.warnings[0] || 'No purchasable items in cart.', 'validation');
 
@@ -223,10 +234,10 @@ export async function buildOrder(input: BuildOrderInput): Promise<Order> {
 
   // daily deal: at most `maxPerPlayer` units per player and day at the deal price
   const dealProduct = input.free ? undefined : products.find((p) => p.dailyDeal && quote.lines.some((l) => l.productId === p.id));
-  const dealLine = dealProduct ? quote.lines.find((l) => l.productId === dealProduct.id) : undefined;
+  const dealLine = dealProduct ? quote.lines.find((l) => l.productId === dealProduct.id && (l.dealQty ?? 0) > 0) : undefined;
   if (dealProduct?.dailyDeal && dealLine) {
     // the deal's own UTC day (it ends at the next midnight)
-    order.dealUsage = { date: new Date(new Date(dealProduct.dailyDeal.endsAt).getTime() - 86_400_000).toISOString().slice(0, 10), productId: dealProduct.id, qty: dealLine.qty, ipHash: input.ipHash };
+    order.dealUsage = { date: new Date(new Date(dealProduct.dailyDeal.endsAt).getTime() - 86_400_000).toISOString().slice(0, 10), productId: dealProduct.id, qty: dealLine.dealQty ?? dealLine.qty, ipHash: input.ipHash };
   }
 
   // side effects – each step is atomic; later failures roll earlier steps back

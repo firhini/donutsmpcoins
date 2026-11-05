@@ -82,7 +82,7 @@ export interface Product {
   maxQty?: number;
   hidden?: boolean;
   /** set by applyDailyDeal() for today's deal product (never stored) */
-  dailyDeal?: { endsAt: string; maxPerPlayer: number; regularCents: number };
+  dailyDeal?: { endsAt: string; maxPerPlayer: number; regularCents: number; regularBulk?: BulkTier[] };
   /** set by applySale() while a sale covers this product (never stored) */
   salePercent?: number;
   saleEndsAt?: string;
@@ -111,6 +111,8 @@ export interface QuoteLine {
   lineTotalCents: number;
   bulkApplied: boolean;
   kind: ProductKind;
+  /** units of this line sold at today's deal price (the rest at the regular price) */
+  dealQty?: number;
 }
 
 export interface Quote {

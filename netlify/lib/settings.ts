@@ -1,3 +1,4 @@
+import { STRIPE_MIN_CENTS } from './payments/stripe';
 import type { PublicConfig, SiteSettings, PaymentMethodConfig } from '../../src/shared/types';
 import { defaultSettings } from '../../src/data/settings';
 import { kvGet, kvSet } from './store';
@@ -56,6 +57,8 @@ export function usablePaymentMethods(settings: SiteSettings): PaymentMethodConfi
   return settings.paymentMethods
     .filter((m) => m.enabled)
     .filter((m) => m.type === 'manual' || (m.type === 'stripe' && integ.stripe) || (m.type === 'paypal' && integ.paypal) || (m.type === 'nowpayments' && integ.nowpayments))
+    // cards have a hard floor at Stripe – show and enforce it up front instead of failing after the order exists
+    .map((m) => (m.type === 'stripe' ? { ...m, minCents: Math.max(m.minCents ?? 0, STRIPE_MIN_CENTS) } : m))
     .sort((a, b) => (a.sortOrder ?? 99) - (b.sortOrder ?? 99));
 }
 

@@ -42,12 +42,12 @@ export function applyDailyDeal(products: Product[], deal: Parameters<typeof deal
           ...p,
           priceCents: d.priceCents,
           compareAtCents: p.priceCents,
+          // the first `maxPerPlayer` units are at the deal price, every further unit at the regular (bulk) price
           bulkPricing: undefined,
           minQty: 1,
-          maxQty: Math.min(p.maxQty ?? d.maxPerPlayer, d.maxPerPlayer),
           salePercent: undefined,
           saleEndsAt: undefined,
-          dailyDeal: { endsAt: d.endsAt, maxPerPlayer: d.maxPerPlayer, regularCents: p.priceCents },
+          dailyDeal: { endsAt: d.endsAt, maxPerPlayer: d.maxPerPlayer, regularCents: p.priceCents, regularBulk: p.bulkPricing },
         },
   );
 }
@@ -112,6 +112,8 @@ export function clampQty(product: Product, qty: number): number {
 }
 
 export interface QuoteOptions {
+  /** deal units a player may still buy today, per product id (server knows; storefront assumes the full limit) */
+  dealAllowance?: Record<string, number>;
   salePercent?: number;
   tiers?: SpendingTier[];
   coupon?: Coupon | null;
@@ -159,6 +161,27 @@ export function computeQuote(products: Product[], items: CartLineInput[], opts: 
     }
     const qty = clampQty(p, it.qty);
     if (qty <= 0) continue;
+    if (p.dailyDeal) {
+      // deal of the day: first N units at the deal price, the rest at the regular price (bulk tiers by total qty)
+      const allowance = Math.max(0, Math.min(p.dailyDeal.maxPerPlayer, opts.dealAllowance?.[p.id] ?? p.dailyDeal.maxPerPlayer));
+      const dealQty = Math.min(qty, allowance);
+      const restQty = qty - dealQty;
+      const regular = unitPriceCents({ ...p, priceCents: p.dailyDeal.regularCents, bulkPricing: p.dailyDeal.regularBulk }, qty);
+      const lineTotal = dealQty * p.priceCents + restQty * regular.price;
+      lines.push({
+        productId: p.id,
+        name: p.name,
+        image: p.image,
+        qty,
+        unitPriceCents: restQty ? Math.round(lineTotal / qty) : p.priceCents,
+        basePriceCents: p.dailyDeal.regularCents,
+        lineTotalCents: lineTotal,
+        bulkApplied: restQty > 0 && regular.bulk,
+        kind: p.kind,
+        dealQty,
+      });
+      continue;
+    }
     const { price, bulk } = unitPriceCents(p, qty);
     lines.push({
       productId: p.id,

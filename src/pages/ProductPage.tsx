@@ -172,7 +172,7 @@ export default function ProductPage() {
             <div className="sale-strip" role="status">
               <span className="sale-strip-pct">DEAL</span>
               <span>
-                <strong>Deal of the day</strong> – max {product.dailyDeal.maxPerPlayer} per player
+                <strong>Deal of the day</strong> – first {product.dailyDeal.maxPerPlayer} per player at this price, more at the regular price
               </span>
               <DealTimer to={product.dailyDeal.endsAt} />
             </div>

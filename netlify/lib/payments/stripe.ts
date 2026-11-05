@@ -8,8 +8,11 @@ import { HttpError } from '../http';
 import { siteUrl } from '../discord';
 import { ProviderError, itemsSummary } from './common';
 
-/** Stripe refuses charges below $0.50 (USD). */
-export const STRIPE_MIN_CENTS = 50;
+/**
+ * Smallest card order. Stripe's floor is 0.50 in the account's settlement currency (EUR here),
+ * so $0.50–0.54 is converted below €0.50 and refused – 60¢ leaves room for exchange-rate swings.
+ */
+export const STRIPE_MIN_CENTS = 60;
 
 let client: Stripe | null = null;
 let clientKey = '';

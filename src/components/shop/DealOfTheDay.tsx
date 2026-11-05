@@ -37,7 +37,7 @@ export function DealOfTheDay({ compact = false }: { compact?: boolean }) {
         <div className="deal-price">
           <strong>{fmt(product.priceCents)}</strong>
           <s>{fmt(regular)}</s>
-          <span className="deal-limit">max {product.dailyDeal.maxPerPlayer} per player</span>
+          <span className="deal-limit">first {product.dailyDeal.maxPerPlayer} per player</span>
         </div>
         <div className="deal-timer">
           <Icon name="clock" size={14} /> New deal in {mounted ? <Countdown to={today.endsAt} /> : '…'}

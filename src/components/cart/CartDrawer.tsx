@@ -122,6 +122,15 @@ export function CartDrawer() {
                   <span>Total</span>
                   <strong>{fmt(quote.totalCents)}</strong>
                 </div>
+                {(() => {
+                  // card payments have a minimum – say so before the buyer hits it at checkout
+                  const cardMin = config.paymentMethods.find((m) => m.type === 'stripe')?.minCents ?? 0;
+                  return cardMin > 0 && quote.totalCents > 0 && quote.totalCents < cardMin ? (
+                    <div className="cd-min-note">
+                      <Icon name="info" size={14} /> Card payments start at <strong>{fmt(cardMin)}</strong> – add {fmt(cardMin - quote.totalCents)} more to pay by card.
+                    </div>
+                  ) : null;
+                })()}
                 {config.cashback?.enabled && config.cashback.percent > 0 && quote.totalCents > 0 && (
                   <div className="cashback-row">
                     <Icon name="coin" size={14} /> You get <strong>{fmt(Math.round((quote.totalCents * config.cashback.percent) / 100))}</strong> back as store credit

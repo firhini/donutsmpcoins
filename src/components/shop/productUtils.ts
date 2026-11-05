@@ -1,5 +1,5 @@
 import type { BulkTier, Product } from '../../shared/types';
-import { clampQty, unitPriceCents } from '../../shared/pricing';
+import { clampQty, computeQuote, unitPriceCents } from '../../shared/pricing';
 
 /** Badge class for a product tag ("Instant" → green, "Hot" → red …). */
 export function badgeClassForTag(tag: string): string {
@@ -49,6 +49,12 @@ export function bulkTable(p: Product): { minQty: number; priceCents: number; sav
 /** Line price for a quantity (bulk tiers applied). */
 export function linePrice(p: Product, qty: number): { qty: number; unitCents: number; totalCents: number; bulk: boolean; savingsCents: number } {
   const q = clampQty(p, qty);
+  if (p.dailyDeal) {
+    // same rule as the quote: the first N units at the deal price, the rest at the regular (bulk) price
+    const line = computeQuote([p], [{ productId: p.id, qty: q }]).lines[0];
+    const total = line?.lineTotalCents ?? p.priceCents * q;
+    return { qty: q, unitCents: line?.unitPriceCents ?? p.priceCents, totalCents: total, bulk: !!line?.bulkApplied, savingsCents: Math.max(0, p.dailyDeal.regularCents * q - total) };
+  }
   const { price, bulk } = unitPriceCents(p, q);
   return { qty: q, unitCents: price, totalCents: price * q, bulk, savingsCents: Math.max(0, (p.priceCents - price) * q) };
 }

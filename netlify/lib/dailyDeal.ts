@@ -3,7 +3,7 @@
  * hashed IP, so a second username from the same connection does not reset the limit.
  */
 import { HttpError } from './http';
-import { kvUpdate } from './store';
+import { kvGet, kvUpdate } from './store';
 
 const key = (date: string, productId: string, who: string) => `deal:${date}:${productId}:${who}`;
 
@@ -33,4 +33,13 @@ export async function reserveDeal(date: string, productId: string, username: str
 export async function releaseDeal(date: string, productId: string, username: string, ipHash: string | undefined, qty: number): Promise<void> {
   await bump(key(date, productId, `u:${username.toLowerCase()}`), -qty);
   if (ipHash) await bump(key(date, productId, `ip:${ipHash}`), -qty);
+}
+
+/** Deal units already taken today by this name or this connection (the higher of the two). */
+export async function dealUsed(date: string, productId: string, username: string | undefined, ipHash: string | undefined): Promise<number> {
+  const [u, ip] = await Promise.all([
+    username ? kvGet<number>('misc', key(date, productId, `u:${username.toLowerCase()}`)) : Promise.resolve(null),
+    ipHash ? kvGet<number>('misc', key(date, productId, `ip:${ipHash}`)) : Promise.resolve(null),
+  ]);
+  return Math.max(u ?? 0, ip ?? 0);
 }

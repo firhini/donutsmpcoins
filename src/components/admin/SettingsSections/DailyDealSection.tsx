@@ -31,7 +31,7 @@ export function DailyDealSection({ settings, onSave }: { settings: SiteSettings;
           <div className="stack" style={{ gap: 14 }}>
             <div className="row wrap" style={{ gap: 16 }}>
               <Toggle checked={d.enabled} onChange={(v) => set({ ...d, enabled: v })} label="Deal of the day is running" />
-              <Field label="Max per player / day" htmlFor="dd-max">
+              <Field label="Deal units per player / day (more are sold at the regular price)" htmlFor="dd-max">
                 <NumberInput id="dd-max" value={d.maxPerPlayer} onChange={(v) => set({ ...d, maxPerPlayer: v ?? 3 })} />
               </Field>
             </div>
