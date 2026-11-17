@@ -12,6 +12,7 @@
   padding: var(--sp-16) 0 var(--sp-16);
 }
 .hero::before {
+  display: none;
   content: '';
   position: absolute;
   inset: 0;
@@ -35,8 +36,23 @@
   min-width: 0;
 }
 .hero h1 {
-  font-size: clamp(2.3rem, 5vw, 3.9rem);
+  font-size: clamp(2.4rem, 5.4vw, 4.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
   text-wrap: balance;
+}
+.hero-h1-sub {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.5em;
+  letter-spacing: -0.01em;
+  color: var(--gold-400);
+}
+.hero-buy {
+  min-width: 0;
+}
+.hero .eyebrow {
+  color: var(--text-3);
 }
 .hero .lead {
   font-size: clamp(1rem, 1.4vw, 1.2rem);
@@ -52,8 +68,9 @@
   flex-wrap: wrap;
 }
 .hero-pills .pill {
-  background: rgba(17, 20, 29, 0.7);
-  backdrop-filter: blur(8px);
+  background: transparent;
+  border-color: var(--border-1);
+  color: var(--text-2);
 }
 .hero-pills .pill svg {
   color: var(--gold-400);
@@ -714,4 +731,21 @@
   font-size: 12px;
   font-weight: 700;
   color: var(--gold-400);
+}
+
+/* phones: the buy box is the call to action – keep the copy short so it shows early */
+@media (max-width: 900px) {
+  .hero {
+    padding: var(--sp-6) 0 var(--sp-8);
+  }
+  .hero-copy {
+    gap: var(--sp-3);
+  }
+  .hero-ctas {
+    display: none;
+  }
+  .hero-pills .pill {
+    padding: 5px 9px;
+    font-size: var(--fs-xs);
+  }
 }

@@ -93,6 +93,7 @@ export function toPublicConfig(settings: SiteSettings): PublicConfig {
     dailyDeal: settings.dailyDeal,
     reviewRewardPercent: settings.reviewRewardPercent,
     welcomeCoupon: settings.welcomeCoupon,
+    firstOrderBonus: settings.firstOrderBonus,
     currencies: settings.currencies,
     delivery: settings.delivery,
     maintenance: settings.maintenance,

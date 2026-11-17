@@ -89,21 +89,23 @@ interface RewardsDraft {
   reviewRewardPercent: number | undefined;
   welcomeCoupon: SiteSettings['welcomeCoupon'];
   cashback: SiteSettings['cashback'];
+  firstOrderBonus: SiteSettings['firstOrderBonus'];
 }
 
 export function RewardsSection({ settings, onSave }: { settings: SiteSettings; onSave: SaveFn }) {
-  const value: RewardsDraft = { referral: settings.referral, reviewRewardPercent: settings.reviewRewardPercent, welcomeCoupon: settings.welcomeCoupon, cashback: settings.cashback ?? { enabled: false, percent: 5 } };
+  const value: RewardsDraft = { referral: settings.referral, reviewRewardPercent: settings.reviewRewardPercent, welcomeCoupon: settings.welcomeCoupon, cashback: settings.cashback ?? { enabled: false, percent: 5 }, firstOrderBonus: settings.firstOrderBonus ?? { enabled: false, percent: 25 } };
   return (
     <SectionCard<RewardsDraft>
       id="rewards"
       title="Referral & rewards"
       icon="heart"
-      sub="Cashback, friend discount, referrer store credit, review thank-you and the welcome code."
+      sub="First-order money bonus, cashback, friend discount, referrer store credit, review thank-you and the welcome code."
       value={value}
       toPatch={(d) => ({
         referral: { enabled: d.referral.enabled, friendPercent: Math.max(0, Math.min(50, Math.round(d.referral.friendPercent))), referrerPercent: Math.max(0, Math.min(50, Math.round(d.referral.referrerPercent))) },
         reviewRewardPercent: Math.max(0, Math.min(50, Math.round(d.reviewRewardPercent ?? 0))),
         cashback: { enabled: d.cashback.enabled, percent: Math.max(0, Math.min(30, Math.round(d.cashback.percent ?? 0))) },
+        firstOrderBonus: { enabled: d.firstOrderBonus.enabled, percent: Math.max(0, Math.min(200, Math.round(d.firstOrderBonus.percent ?? 0))) },
         welcomeCoupon: { enabled: d.welcomeCoupon.enabled, code: d.welcomeCoupon.code.trim().toUpperCase().replace(/\s+/g, '') || 'WELCOME5', percent: Math.max(1, Math.min(50, Math.round(d.welcomeCoupon.percent))) },
       })}
       onSave={onSave}
@@ -123,6 +125,10 @@ export function RewardsSection({ settings, onSave }: { settings: SiteSettings; o
             <Toggle checked={d.cashback.enabled} onChange={(v) => set({ ...d, cashback: { ...d.cashback, enabled: v } })} label="Cashback" />
             <Field label="Cashback" hint="Store credit given back once an order is delivered (taken back on refund)" htmlFor="rw-cb">
               <PercentInput id="rw-cb" value={d.cashback.percent} onChange={(v) => set({ ...d, cashback: { ...d.cashback, percent: v ?? 0 } })} />
+            </Field>
+            <Toggle checked={d.firstOrderBonus.enabled} onChange={(v) => set({ ...d, firstOrderBonus: { ...d.firstOrderBonus, enabled: v } })} label="First-order money bonus" />
+            <Field label="Bonus millions" hint="Extra free money on a player's first paid money order (e.g. 25% → 100M + 25M). Added to the order as its own line." htmlFor="rw-bonus">
+              <PercentInput id="rw-bonus" value={d.firstOrderBonus.percent} onChange={(v) => set({ ...d, firstOrderBonus: { ...d.firstOrderBonus, percent: v ?? 0 } })} />
             </Field>
             <Field label="Review reward" hint="Coupon sent when you approve a review (0 = off)" htmlFor="rw-review">
               <PercentInput id="rw-review" value={d.reviewRewardPercent} onChange={(v) => set({ ...d, reviewRewardPercent: v })} />

@@ -6,6 +6,7 @@ import { Icon } from '../../components/ui/Icons';
 import { ContentPage, Callout } from '../../components/shop/ContentPage';
 import { ProductImage } from '../../components/shop/ProductImage';
 import { MoneyCalculator } from '../../components/shop/MoneyCalculator';
+import { QuickBuy } from '../../components/shop/QuickBuy';
 import { Accordion } from '../../components/shop/Accordion';
 import { bulkTable } from '../../components/shop/productUtils';
 import '../../styles/shop.css';
@@ -56,42 +57,13 @@ export default function MoneyLanding() {
     <ContentPage
       faq={faqItems}
       eyebrow={`${server} money`}
-      title={`Buy ${server} money – paid straight to your balance`}
+      title={`${server} money without the grind`}
       seoTitle={`Buy ${server} Money – Prices from ${fmt(bestRate)} per 1M | ${config.storeName}`}
       description={`${server} money from ${fmt(bestRate)} per million with bulk discounts. Delivered to your in-game balance with /pay by real staff, usually within minutes.`}
-      lead={`In-game cash for ${server}, from ${fmt(bestRate)} per million at the top bulk tier. Pick any amount, pay the way you like, and our staff send it to your balance with /pay.`}
+      lead={`From ${fmt(bestRate)} per million. Pick a pack, pay, and a real person /pays it to your balance – usually before you finish your next AFK session.`}
       crumbs={[{ label: `${server} money` }]}
       toc={TOC}
-      cta={
-        unit && (
-          <>
-            <Link to={`/product/${unit.slug}`} className="btn btn-primary btn-lg">
-              <Icon name="coin" size={18} /> Buy money · from {fmt(bestRate)}/1M
-            </Link>
-            <a href="#prices" className="btn btn-secondary btn-lg">
-              See all packs
-            </a>
-          </>
-        )
-      }
-      aside={
-        unit && (
-          <div className="card pad">
-            <div className="row" style={{ gap: 12 }}>
-              <ProductImage product={unit} size="sm" />
-              <div>
-                <strong>Any amount</strong>
-                <div className="small muted">
-                  from {fmt(bestRate)} per 1M
-                </div>
-              </div>
-            </div>
-            <Link to={`/product/${unit.slug}`} className="btn btn-primary btn-block" style={{ marginTop: 14 }}>
-              <Icon name="coin" size={16} /> Buy money
-            </Link>
-          </div>
-        )
-      }
+      cta={<QuickBuy title="Pick a pack – checkout takes a minute" source="money-landing" />}
     >
       <p>
         Money is the thing that gets you going on {server}: spawners from other players, gear on the auction house, buy orders, bounties, the occasional ransom. Grinding it takes days; buying it takes minutes. This page shows

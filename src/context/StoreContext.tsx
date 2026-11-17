@@ -43,6 +43,7 @@ const fallbackConfig: PublicConfig = {
   dailyDeal: defaultSettings.dailyDeal,
   reviewRewardPercent: defaultSettings.reviewRewardPercent,
   welcomeCoupon: defaultSettings.welcomeCoupon,
+  firstOrderBonus: defaultSettings.firstOrderBonus,
   currencies: defaultSettings.currencies,
   delivery: defaultSettings.delivery,
   maintenance: defaultSettings.maintenance,

@@ -88,10 +88,10 @@ export function Analytics() {
       <div className="consent consent-sheet" role="dialog" aria-labelledby="consent-title">
         <img src="/img/brand/mascot.svg" alt="" width={64} height={64} className="consent-mascot" />
         <div className="consent-text">
-          <strong id="consent-title">🍪 Cookies okay?</strong>
+          <strong id="consent-title">Cookies okay?</strong>
           <span>
-            With your OK we remember your visit (an ID on your device) and use Google Analytics to see which deals players like. No ads, never sold – saying no changes
-            nothing. <Link to="/privacy">Privacy policy</Link>
+            With your OK we keep an ID on your device and use Google Analytics to see which deals players like. Never sold – saying no changes nothing.{' '}
+            <Link to="/privacy">Privacy</Link>
           </span>
         </div>
         <div className="consent-actions">

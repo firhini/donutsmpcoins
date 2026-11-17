@@ -9,13 +9,14 @@ import { GoogleLogo, LoginButtons } from '../auth/LoginButtons';
 import { safeHref, isExternal } from '../../lib/url';
 import '../../styles/shop.css';
 
-const NAV: { to: string; label: string; badge?: string }[] = [
+const NAV: { to: string; label: string; badge?: string; mobileOnly?: boolean }[] = [
+  { to: '/donutsmp-money', label: 'Buy Money' },
   { to: '/shop', label: 'Shop' },
   { to: '/shop/mystery-boxes', label: 'Mystery Boxes' },
   { to: '/spin', label: 'Daily Spin', badge: 'FREE' },
-  { to: '/guides', label: 'Guides' },
+  { to: '/guides', label: 'Guides', mobileOnly: true },
   { to: '/wiki', label: 'Wiki' },
-  { to: '/giveaways', label: 'Giveaways' },
+  { to: '/giveaways', label: 'Giveaways', mobileOnly: true },
   { to: '/reviews', label: 'Reviews' },
 ];
 
@@ -65,7 +66,7 @@ export function Header() {
             </span>
           </Link>
           <nav className="nav" aria-label="Main">
-            {NAV.map((n) => (
+            {NAV.filter((n) => !n.mobileOnly).map((n) => (
               <NavLink key={n.to} to={n.to} end={n.to === '/shop'} className={({ isActive }) => (isActive ? 'active' : '')}>
                 {n.label}
                 {n.badge && <span className="nav-badge">{n.badge}</span>}

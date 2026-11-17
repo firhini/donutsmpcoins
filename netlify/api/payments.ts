@@ -16,7 +16,7 @@ import { getSettings } from '../lib/settings';
 import { COLORS, notifyDiscord, siteUrl } from '../lib/discord';
 import { PAID_STATUSES, amountMatches, attachProvider, loadPayableOrder, markPaid, toHttpError } from '../lib/payments/common';
 import { kvUpdate } from '../lib/store';
-import { constructWebhookEvent, createCheckoutSession, retrieveSession, sessionOrderId, stripeConfigured } from '../lib/payments/stripe';
+import { chargeFor, constructWebhookEvent, createCheckoutSession, retrieveSession, sessionCoversOrder, sessionOrderId, stripeConfigured } from '../lib/payments/stripe';
 import { anyCapture, capturePayPalOrder, completedCapture, createPayPalOrder, paypalConfigured } from '../lib/payments/paypal';
 import { NOW_PAID_STATUSES, createInvoice, ipnCoversOrder, nowpaymentsConfigured, verifyIpnSignature, type NowIpn } from '../lib/payments/nowpayments';
 
@@ -71,8 +71,9 @@ async function settleStripeSession(session: Stripe.Checkout.Session): Promise<{ 
   }
   if (PAID_STATUSES.has(order.status)) return { paid: true, order };
   if (session.payment_status !== 'paid') return { paid: false, order };
-  if (typeof session.amount_total === 'number' && session.amount_total !== order.totalCents) {
-    await flagForReview(order, 'Stripe', `Stripe charged ${usd(session.amount_total)} but the order total is ${usd(order.totalCents)} (session ${session.id})`);
+  if (!sessionCoversOrder(session, order)) {
+    const charged = typeof session.amount_total === 'number' ? `${(session.amount_total / 100).toFixed(2)} ${(session.currency ?? 'usd').toUpperCase()}` : '?';
+    await flagForReview(order, 'Stripe', `Stripe charged ${charged} but the order total is ${usd(order.totalCents)} (session ${session.id})`);
     return { paid: false, order };
   }
   const intent = typeof session.payment_intent === 'string' ? session.payment_intent : session.payment_intent?.id;
@@ -92,7 +93,10 @@ export const routes: Route[] = [
       await limitPaymentStarts(req, context);
       const order = await loadPayableOrder(id, 'stripe', 'Stripe');
       try {
-        const session = await createCheckoutSession(order);
+        const settings = await getSettings();
+        const country = (context as unknown as { geo?: { country?: { code?: string } } })?.geo?.country?.code;
+        const eurRate = settings.currencies.find((c) => c.code === 'EUR')?.rate;
+        const session = await createCheckoutSession(order, chargeFor(order, { country, eurRate }));
         if (!session.url) throw new HttpError(502, 'Stripe did not return a checkout link – please try again.', 'provider_error');
         if (order.payment.providerId !== session.id) await attachProvider(order, session.id, session.url, 'Stripe Checkout started');
         return json({ url: session.url, sessionId: session.id });

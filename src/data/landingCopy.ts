@@ -73,8 +73,8 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Is a mystery box worth it?',
         paragraphs: [
-          'Boxes are about the opening: every box always pays out, and the rare lines are where the fun is – Elytras, netherite blocks, dragon heads and big money drops. If you want one specific item for sure, buy it directly: an [Elytra](/product/elytra) is $28.49 on its own, 1M is $0.05 or less, a netherite block $14.49.',
-          'If you want a specific item, buy the item; if you enjoy the opening and would be happy with several outcomes, buy the box. The Coin Crate sits in between: every result is money, the floor is 10M and about one crate in ten pays 50M or more – though a crate averages around 21M, less than the 25M pack costs to buy outright.',
+          'Boxes are about the opening: every box always pays out, and the rare lines are where the fun is – Elytras, netherite blocks, dragon heads and big money drops. If you want one specific item for sure, buy it directly: an [Elytra](/product/elytra) is $28.49 on its own, 1M is $0.03 or less, a netherite block $14.49.',
+          'If you want a specific item, buy the item; if you enjoy the opening and would be happy with several outcomes, buy the box. The Coin Crate sits in between: every result is money, the floor is 10M and about one crate in ten pays 50M or more – though a crate averages around 21M, while $0.75 buys the 25M pack outright.',
         ],
       },
       {
@@ -131,7 +131,7 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Other routes: bundles and boxes',
         paragraphs: [
-          'If you want more than the Elytra, three bundles include one in a single order and handover. The [Pro Bundle](/product/pro-bundle) ($40.99) adds 50M money and 16 skeleton spawners, the [Rich Bundle](/product/rich-bundle) ($59.99) comes with 250M, a God Mystery Box and the full PvP Kit, and the [Basehunter Bundle](/product/basehunter-bundle) ($33.99) pairs an Elytra with the Amethyst Pickaxe, 16 totems and 20M. At current prices each costs less than its parts bought separately – about $4.24 less for the Pro Bundle, $6.98 for the Rich Bundle and $3.81 for the Basehunter Bundle.',
+          'If you want more than the Elytra, three bundles include one in a single order and handover. The [Pro Bundle](/product/pro-bundle) ($40.99) adds 50M money and 16 skeleton spawners, the [Rich Bundle](/product/rich-bundle) ($59.99) comes with 250M, a God Mystery Box and the full PvP Kit, and the [Basehunter Bundle](/product/basehunter-bundle) ($33.99) pairs an Elytra with the Amethyst Pickaxe, 16 totems and 20M. At current prices each costs less than its parts bought separately – about $3.13 less for the Pro Bundle, $1.97 for the Rich Bundle and $3.41 for the Basehunter Bundle.',
           'Random boxes are the gamble: the [Elite Mystery Box](/product/elite-mystery-box) ($8.99) contains an Elytra in roughly 1 in 105 boxes, the [Elytra Crate](/product/elytra-crate) ($7.99) in about 1 in 12 and the [Legendary Crate](/product/legendary-crate) ($34.99) in about 1 in 8. For the Elytra itself, buying it outright at $28.49 is always the safe choice.',
         ],
       },
@@ -181,7 +181,7 @@ export const landingCopy: LandingCopy[] = [
         paragraphs: [
           'A [skeleton spawner](/product/skeleton-spawner) is **$0.89** at DonutCoins. Bulk tiers apply automatically per line: $0.84 each from 25 spawners, $0.79 from 50, $0.74 from 100 and $0.69 from 250, up to 2,000 per line. The tier price applies to every spawner in the line, so 100 spawners cost $74.00, not a blend of rates – and 50 spawners ($39.50) cost less than 45 ($40.05).',
           'On top of the tiers, the cart-wide spending discount takes 5% off orders over $15, 8% over $40 and 12% over $100. A 64-spawner order is $50.56 at the 50+ tier, so the 8% discount applies; 250 spawners are $172.50 and get 12% off.',
-          'Why $0.89? Our spawner prices follow what spawners go for in our own deals – about 18M coins for a skelly. Fan price trackers often show lower figures and player prices swing, so take it as our reference, not a server-wide fact. 18M money costs about the same at our $0.05 base rate, so buying the spawner and buying the coins to pay a player come out roughly even – the difference is that ours are in stock and handed over by staff. Since the June 2026 update the server no longer sells spawners, so every spawner, ours included, comes from player trades. The same logic prices [iron golem spawners](/product/iron-golem-spawner) at $1.99 (about 41M coins) and [cow spawners](/product/cow-spawner) at $4.99 (around 100M).',
+          'Why $0.89? Our spawner prices follow what spawners go for in our own deals – about 18M coins for a skelly. Fan price trackers often show lower figures and player prices swing, so take it as our reference, not a server-wide fact. 18M money costs less – $0.54 at our $0.03 base rate – so buying the coins and paying a player yourself is cheaper if you can find a seller; what you pay for here is a spawner that is in stock and handed over by staff. Since the June 2026 update the server no longer sells spawners, so every spawner, ours included, comes from player trades. The same logic prices [iron golem spawners](/product/iron-golem-spawner) at $1.99 (about 41M coins) and [cow spawners](/product/cow-spawner) at $4.99 (around 100M).',
         ],
       },
       {
@@ -208,7 +208,7 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Alternatives: crates and bundles',
         paragraphs: [
-          'The [Spawner Crate](/product/spawner-crate) ($2.99) gives one spawner drop – mostly zombies or a single skelly, with a cow spawner in about one crate in 33 and 10 skeleton spawners in roughly one in a hundred. The [Starter Bundle](/product/starter-bundle) ($13.49) packs 15 skeleton spawners with 20M and a Diamond Armor Shulker, and the [Spawner Farm Bundle](/product/spawner-farm-bundle) ($45.99) is 64 skeleton spawners plus 10M in one order – about $5.07 less than the parts. For odd quantities or more than 2,000 spawners, message us on Discord for a quote.',
+          'The [Spawner Crate](/product/spawner-crate) ($2.99) gives one spawner drop – mostly zombies or a single skelly, with a cow spawner in about one crate in 33 and 10 skeleton spawners in roughly one in a hundred. The [Starter Bundle](/product/starter-bundle) ($13.49) packs 15 skeleton spawners with 20M and a Diamond Armor Shulker, and the [Spawner Farm Bundle](/product/spawner-farm-bundle) ($45.99) is 64 skeleton spawners plus 10M in one order – about $4.87 less than the parts. For odd quantities or more than 2,000 spawners, message us on Discord for a quote.',
         ],
       },
     ],
@@ -241,21 +241,21 @@ export const landingCopy: LandingCopy[] = [
     title: 'DonutSMP Money Prices: What 1M to 1B Costs Right Now',
     seoTitle: 'DonutSMP Money Prices – 1M to 1B Compared | DonutCoins',
     metaDescription:
-      'DonutSMP money price list: $0.05 per 1M for any amount, bulk tiers to $0.03, packs from 10M ($0.49) to 1B ($28.99), discounts, cashback. Paid with /pay.',
+      'DonutSMP money price list: $0.03 per 1M for any amount, $0.02 from 250M, packs from 10M ($0.29) to 1B ($17.99), discounts, cashback. Paid with /pay.',
     intro:
       'This is the full price list for DonutSMP money at DonutCoins: the pick-your-amount rate with every bulk tier, the fixed packs from 10M to 1B, the discounts that stack on top, and worked examples so you can see what a given amount actually costs. Prices are in USD and come from the same catalog as the checkout. Money is paid to your in-game balance with /pay by our staff, usually within minutes.',
     sections: [
       {
         heading: 'Pick-your-amount rates',
         paragraphs: [
-          'The flexible [money product](/product/donutsmp-money) charges per million: **$0.05 per 1M** for any amount, $0.04 from 100M and $0.03 from 1B, up to 5B in one line. The tier applies to the whole line – 100M costs 100 × $0.04 = $4.00, not a blend, so anything from 80M up is worth rounding to 100M. This is the right choice for odd amounts such as 37M ($1.85) or 120M ($4.80).',
+          'The flexible [money product](/product/donutsmp-money) charges per million: **$0.03 per 1M** for any amount and $0.02 from 250M, up to 5B in one line. The tier applies to the whole line – 250M costs 250 × $0.02 = $5.00, not a blend, so anything from about 170M up is worth rounding to 250M. This is the right choice for odd amounts such as 37M ($1.11) or 320M ($6.40).',
         ],
       },
       {
         heading: 'Fixed packs: the cheapest per million',
         paragraphs: [
-          'At round numbers the fixed packs are a little cheaper than the flexible rate: [10M](/product/10m-money) for $0.49 ($0.049 per 1M), [25M](/product/25m-money) for $1.19 (under $0.048), [50M](/product/50m-money) for $2.39 (under $0.048), [100M](/product/100m-money) for $3.79 (under $0.038), [250M](/product/250m-money) for $9.49 (under $0.038), [500M](/product/500m-money) for $18.99 (under $0.038) and [1B](/product/1b-money) for $28.99 ($0.029). The 100M pack, for example, is about 5% cheaper than 100 flexible millions at $4.00.',
-          'Packs can be combined, but bigger is cheaper per million: two 500M packs cost $37.98, while the 1B pack is $28.99. Buy the largest pack that covers what you need and top up with the flexible listing.',
+          'At round numbers the fixed packs are a little cheaper than the flexible rate: [10M](/product/10m-money) for $0.29 ($0.029 per 1M), [50M](/product/50m-money) for $1.39 (under $0.028 per 1M), [100M](/product/100m-money) for $2.49 (under $0.025), [250M](/product/250m-money) for $4.99 (under $0.02), [500M](/product/500m-money) for $9.49 (under $0.019) and [1B](/product/1b-money) for $17.99 (about $0.018). The 100M pack, for example, is about 17% cheaper than 100 flexible millions at $3.00. The exception is [25M](/product/25m-money) at $0.75, the same as 25 flexible millions – it is also the cheapest pack you can pay by card, since card orders need at least $0.60 and a lone 10M falls below that.',
+          'Packs can be combined, but bigger is cheaper per million: two 500M packs cost $18.98, while the 1B pack is $17.99. Buy the largest pack that covers what you need and top up with the flexible listing.',
         ],
       },
       {
@@ -267,7 +267,7 @@ export const landingCopy: LandingCopy[] = [
       {
         heading: 'Worked examples',
         paragraphs: [
-          '50M: the pack is $2.39 – under the $15 threshold, so no tier discount; with a 5% welcome coupon $2.27. 250M: $9.49, also under $15 – $9.02 with the welcome coupon. 500M: $18.99, 5% tier → $18.04. 1B: $28.99, 5% tier → $27.54, under $0.028 per million. On every one of them, 5% of what you pay comes back as store credit after delivery.',
+          '50M: the pack is $1.39 – under the $15 threshold, so no tier discount; with a 5% welcome coupon $1.32. 250M: $4.99, also under $15 – $4.74 with the welcome coupon. 500M: $9.49, still under $15 – $9.02 with the welcome coupon. 1B: $17.99, 5% tier → $17.09, about $0.017 per million. On every one of them, 5% of what you pay comes back as store credit after delivery.',
           'All examples use the default settings; a sale banner or changed tiers would show at checkout, and the cart always displays the exact total before you pay.',
         ],
       },
@@ -282,7 +282,7 @@ export const landingCopy: LandingCopy[] = [
     faq: [
       {
         q: 'Is there anything cheaper than the 1B pack?',
-        a: 'Not in the store – $28.99 for 1B is the lowest per-million price, and the 5% spending discount brings it to $27.54. For amounts beyond that, message us on Discord for a custom quote.',
+        a: 'Not in the store – $17.99 for 1B is the lowest per-million price, and the 5% spending discount brings it to $17.09. For amounts beyond that, message us on Discord for a custom quote.',
       },
       {
         q: 'Do the prices include fees?',

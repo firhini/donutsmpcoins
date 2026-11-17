@@ -57,9 +57,7 @@
   --grad-pink: linear-gradient(135deg, #ff8fc2 0%, #ff3d93 60%, #c81a6c 100%);
   --grad-brand: linear-gradient(120deg, #ffc233 0%, #ff5ea8 100%);
   --grad-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0) 100%);
-  --grad-hero: radial-gradient(900px 500px at 50% -120px, rgba(255, 194, 51, 0.16), transparent 70%),
-    radial-gradient(700px 500px at 100% 10%, rgba(255, 94, 168, 0.14), transparent 70%),
-    radial-gradient(600px 400px at 0% 40%, rgba(139, 92, 246, 0.12), transparent 70%);
+  --grad-hero: radial-gradient(1000px 420px at 70% -160px, rgba(255, 194, 51, 0.08), transparent 70%);
 
   /* rarity */
   --rarity-common: #9ca3af;
@@ -84,11 +82,11 @@
   --fs-5xl: 3.75rem;
 
   /* radii / spacing / shadows */
-  --r-sm: 8px;
-  --r-md: 12px;
-  --r-lg: 16px;
-  --r-xl: 22px;
-  --r-2xl: 28px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 10px;
+  --r-xl: 12px;
+  --r-2xl: 14px;
   --r-full: 999px;
 
   --sp-1: 4px;
@@ -106,8 +104,8 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
   --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.45);
-  --shadow-gold: 0 10px 30px rgba(255, 176, 33, 0.25);
-  --shadow-pink: 0 10px 30px rgba(255, 61, 147, 0.25);
+  --shadow-gold: 0 4px 0 rgba(0, 0, 0, 0.35);
+  --shadow-pink: 0 4px 0 rgba(0, 0, 0, 0.35);
 
   --container: 1200px;
   --header-h: 68px;

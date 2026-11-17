@@ -130,6 +130,9 @@ export interface Quote {
   referralDiscountCents: number;
   creditAppliedCents: number;
   totalCents: number;
+  /** free bonus millions added to this order (first-order bonus) */
+  bonusMillions?: number;
+  bonusPercent?: number;
   /** human readable warnings (e.g. coupon min order not met) */
   warnings: string[];
 }
@@ -193,6 +196,8 @@ export interface OrderItem {
   /** for bundles/kits: fixed contents for the fulfiller */
   contents?: RolledContent[];
   moneyMillions?: number;
+  /** free line added by the store (first-order bonus) */
+  bonus?: boolean;
 }
 
 export interface OrderPayment {
@@ -543,6 +548,8 @@ export interface SiteSettings {
   dailyDeal: DailyDealSettings;
   reviewRewardPercent: number;
   welcomeCoupon: { enabled: boolean; code: string; percent: number };
+  /** extra free millions on a player's first paid money order (money costs the owner ~1¢ per 1M) */
+  firstOrderBonus: { enabled: boolean; percent: number };
   currencies: CurrencyConfig[];
   delivery: {
     moneyText: string;
@@ -583,6 +590,7 @@ export interface PublicConfig {
   dailyDeal: DailyDealSettings;
   reviewRewardPercent: number;
   welcomeCoupon: SiteSettings['welcomeCoupon'];
+  firstOrderBonus: SiteSettings['firstOrderBonus'];
   currencies: CurrencyConfig[];
   delivery: SiteSettings['delivery'];
   maintenance: SiteSettings['maintenance'];

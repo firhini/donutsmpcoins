@@ -262,6 +262,8 @@ function validateSettingsPatch(body: unknown): Partial<SiteSettings> {
   }
   const cashback = patch.cashback;
   if (isObj(cashback)) numField(cashback, 'percent', 'Cashback percent', 0, 30, true);
+  const bonus = patch.firstOrderBonus;
+  if (isObj(bonus)) numField(bonus, 'percent', 'First-order bonus percent', 0, 200, true);
   const welcome = patch.welcomeCoupon;
   if (isObj(welcome)) {
     numField(welcome, 'percent', 'Welcome coupon percent', 0, 100, true);

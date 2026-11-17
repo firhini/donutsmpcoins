@@ -85,17 +85,17 @@ describe('GET /catalog, /config, /stats, /products/:id/odds', () => {
 
 describe('POST /quote', () => {
   it('prices the cart server-side with bulk tiers', async () => {
-    const res = await post<Quote>('/quote', { items: [{ productId: 'money-1m', qty: 200 }] });
+    const res = await post<Quote>('/quote', { items: [{ productId: 'money-1m', qty: 400 }] });
     expect(res.status).toBe(200);
     expect(res.data.subtotalCents).toBe(800);
-    expect(res.data.lines[0]).toMatchObject({ unitPriceCents: 4, bulkApplied: true });
+    expect(res.data.lines[0]).toMatchObject({ unitPriceCents: 2, bulkApplied: true });
     expect(res.data.totalCents).toBe(800);
     expect(res.data.nextTier).toEqual({ minCents: 1500, percent: 5, missingCents: 700 });
   });
 
   it('looks up coupons and reports unknown ones', async () => {
     await lib.coupons.createCoupon({ code: 'TEST10', type: 'percent', value: 10, source: 'admin' });
-    const ok = await post<Quote>('/quote', { items: [{ productId: 'money-1m', qty: 200 }], discountCode: 'test10' });
+    const ok = await post<Quote>('/quote', { items: [{ productId: 'money-1m', qty: 400 }], discountCode: 'test10' });
     expect(ok.data.couponCode).toBe('TEST10');
     expect(ok.data.couponDiscountCents).toBe(80);
     expect(ok.data.totalCents).toBe(720);
@@ -126,7 +126,7 @@ describe('POST /orders (manual payment)', () => {
     expect(order.payment.instructions).toContain('YourPayPalName');
     expect(order.payment.payLink).toBe('https://paypal.me/YourPayPalName/8.00USD');
     expect(order.timeline[0]).toMatchObject({ status: 'awaiting_payment' });
-    expect(order.items[0]).toMatchObject({ productId: 'money-1m', qty: 200, unitPriceCents: 4, lineTotalCents: 800, moneyMillions: 1 });
+    expect(order.items[0]).toMatchObject({ productId: 'money-1m', qty: 400, unitPriceCents: 2, lineTotalCents: 800, moneyMillions: 1 });
     expect(order.customerNote).toBe('hi there');
 
     // public view hides private fields but keeps a masked e-mail
@@ -172,9 +172,9 @@ describe('POST /orders (manual payment)', () => {
     expect(order.totalCents).toBe(0);
     expect(order.payment.type).toBe('free');
     expect(order.payment.status).toBe('paid');
-    expect(order.creditAppliedCents).toBe(50);
-    expect(order.quote.creditAppliedCents).toBe(50);
-    expect((await lib.credit.getCredit('CreditKing')).balanceCents).toBe(1950);
+    expect(order.creditAppliedCents).toBe(30);
+    expect(order.quote.creditAppliedCents).toBe(30);
+    expect((await lib.credit.getCredit('CreditKing')).balanceCents).toBe(1970);
   });
 
   it('rate limits order creation per IP (10 / 10 min)', async () => {
@@ -288,6 +288,34 @@ describe('POST /orders/:id/reference', () => {
     const paid = await post(`/orders/${order.id}/reference`, { reference: 'TX-late' });
     expect(paid.status).toBe(409);
     expect(paid.data.code).toBe('already_paid');
+  });
+});
+
+describe('first-order money bonus', () => {
+  it('adds free bonus millions to a new player\'s first paid money order only', async () => {
+    const q = await post<Quote>('/quote', { items: [{ productId: 'money-100m', qty: 1 }, { productId: 'elytra', qty: 1 }], username: 'BonusKid' });
+    expect(q.data.bonusMillions).toBe(25);
+    expect(q.data.bonusPercent).toBe(25);
+    const first = await createOrder({ username: 'BonusKid', items: [{ productId: 'money-100m', qty: 1 }] });
+    const bonus = first.items.find((i) => i.bonus)!;
+    expect(bonus).toMatchObject({ productId: 'money-1m', kind: 'money', qty: 25, unitPriceCents: 0, lineTotalCents: 0, moneyMillions: 1 });
+    expect(first.totalCents).toBe(249);
+    // an unpaid order does not use up the bonus, a paid one does
+    expect((await post<Quote>('/quote', { items: [{ productId: 'money-1m', qty: 40 }], username: 'BonusKid' })).data.bonusMillions).toBe(10);
+    await lib.orders.setOrderStatus((await lib.orders.getOrder(first.id))!, 'paid', 'test');
+    const again = await post<Quote>('/quote', { items: [{ productId: 'money-1m', qty: 40 }], username: 'bonuskid' });
+    expect(again.data.bonusMillions).toBeUndefined();
+    // no money in the cart → no bonus
+    expect((await post<Quote>('/quote', { items: [{ productId: 'elytra', qty: 1 }], username: 'Fresh' })).data.bonusMillions).toBeUndefined();
+  });
+
+  it('can be switched off in the settings', async () => {
+    await lib.settings.saveSettings({ firstOrderBonus: { enabled: false, percent: 25 } });
+    try {
+      expect((await post<Quote>('/quote', { items: [{ productId: 'money-1m', qty: 100 }], username: 'NoBonus' })).data.bonusMillions).toBeUndefined();
+    } finally {
+      await lib.settings.saveSettings({ firstOrderBonus: defaultSettings.firstOrderBonus });
+    }
   });
 });
 

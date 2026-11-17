@@ -102,7 +102,7 @@ export async function createReview(order: Order, rating: Review['rating'], comme
     comment,
     status: 'pending',
     createdAt: nowIso(),
-    productNames: Array.from(new Set(order.items.map((i) => i.name))).slice(0, 8),
+    productNames: Array.from(new Set(order.items.filter((i) => !i.bonus).map((i) => i.name))).slice(0, 8),
   };
   await saveReview(review);
   await recomputeStats();

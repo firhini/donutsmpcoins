@@ -18,7 +18,7 @@ describe('order integrity (review fixes)', () => {
   it('store credit cannot be spent twice by concurrent checkouts', async () => {
     await lib.credit.addCredit('Racer', 1000, 'test top-up');
     const results = await Promise.all(
-      Array.from({ length: 5 }, () => post<{ order: PublicOrder }>('/orders', orderBody({ username: 'Racer', items: [{ productId: 'money-1m', qty: 200 }], applyCredit: true }))),
+      Array.from({ length: 5 }, () => post<{ order: PublicOrder }>('/orders', orderBody({ username: 'Racer', items: [{ productId: 'money-1m', qty: 400 }], applyCredit: true }))),
     );
     const created = results.filter((r) => r.status === 201);
     const rejected = results.filter((r) => r.status === 409);

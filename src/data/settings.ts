@@ -152,6 +152,7 @@ export const defaultSettings: SiteSettings = {
   referral: { enabled: true, friendPercent: 5, referrerPercent: 5 },
   reviewRewardPercent: 5,
   welcomeCoupon: { enabled: true, code: 'WELCOME5', percent: 5 },
+  firstOrderBonus: { enabled: true, percent: 25 },
   cashback: { enabled: true, percent: 5 },
   // deal prices sit just above the in-game buying cost (≈ €8.50 per 1B coins); max 3 per player per day
   dailyDeal: {

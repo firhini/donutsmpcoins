@@ -1267,7 +1267,14 @@
   max-width: 78ch;
   margin-top: 8px;
 }
-/* phones: products first – the long intro is cut to two lines (full text stays in the page for search) */
+/* products first – the long intro is cut to two lines (full text stays in the page for search) */
+.shop-intro {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 @media (max-width: 767px) {
   .shop-intro {
     display: -webkit-box;

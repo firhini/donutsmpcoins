@@ -149,10 +149,7 @@ p {
   letter-spacing: 0.02em;
 }
 .grad-text {
-  background: var(--grad-brand);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--gold-400);
 }
 .gold-text {
   color: var(--gold-400);
@@ -289,22 +286,20 @@ p {
   box-shadow: none;
 }
 .btn-primary {
-  background: var(--grad-gold);
+  background: var(--gold-400);
   color: var(--text-inverse);
-  box-shadow: 0 6px 18px rgba(255, 176, 33, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.22), inset 0 2px 0 rgba(255, 255, 255, 0.35);
 }
 .btn-primary:hover:not(:disabled) {
-  box-shadow: 0 10px 26px rgba(255, 176, 33, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  transform: translateY(-1px);
+  background: var(--gold-300);
 }
 .btn-pink {
-  background: var(--grad-pink);
-  color: var(--text-inverse, #10121a);
-  box-shadow: 0 6px 18px rgba(255, 61, 147, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  background: var(--pink-500);
+  color: #fff;
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.22), inset 0 2px 0 rgba(255, 255, 255, 0.25);
 }
 .btn-pink:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 26px rgba(255, 61, 147, 0.45);
+  background: var(--pink-400);
 }
 .btn-secondary {
   background: var(--bg-3);
@@ -350,13 +345,13 @@ p {
   height: 36px;
   padding: 0 14px;
   font-size: var(--fs-xs);
-  border-radius: 10px;
+  border-radius: 6px;
 }
 .btn-lg {
   height: 54px;
   padding: 0 28px;
   font-size: var(--fs-md);
-  border-radius: 14px;
+  border-radius: 8px;
 }
 .btn-block {
   width: 100%;
@@ -425,8 +420,8 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 14px;
-  border-radius: var(--r-full);
+  padding: 7px 12px;
+  border-radius: 6px;
   background: var(--bg-3);
   border: 1px solid var(--border-2);
   font-size: var(--fs-sm);

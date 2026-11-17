@@ -11,8 +11,7 @@ import { saleActive } from '../shared/pricing';
 import { CategoryHotbar, type HotbarValue } from '../components/shop/CategoryHotbar';
 import { ProductGrid } from '../components/shop/ProductGrid';
 import { MoneyCalculator } from '../components/shop/MoneyCalculator';
-import { DeliveryLog } from '../components/shop/DeliveryLog';
-import { Mascot } from '../components/shop/Mascot';
+import { QuickBuy } from '../components/shop/QuickBuy';
 import { ReviewsCarousel } from '../components/shop/ReviewsCarousel';
 import { Accordion } from '../components/shop/Accordion';
 import { renderRich } from '../components/shop/richText';
@@ -28,7 +27,6 @@ export default function Home() {
   const [cat, setCat] = useState<HotbarValue>('all');
   const [q, setQ] = useState('');
   const [showAll, setShowAll] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   const counts = useMemo(() => {
     const c: Partial<Record<HotbarValue, number>> = { all: products.length };
@@ -51,6 +49,7 @@ export default function Home() {
   const visibleRest = showAll || cat !== 'all' || searching ? rest : rest.slice(0, INITIAL_VISIBLE);
   const activeCategory = cat === 'all' ? null : categories.find((c) => c.id === cat) ?? null;
 
+  const hundred = productById('money-100m');
   const pills = buildPills(stats, config.cashback?.enabled ? config.cashback.percent : 0);
   const tiers = [...config.spendingTiers].sort((a, b) => a.minCents - b.minCents);
   const faqVars = {
@@ -73,37 +72,24 @@ export default function Home() {
       <section className="hero">
         <div className="container hero-inner">
           <div className="hero-copy fade-up">
-            <span className="eyebrow">
-              <Icon name="sparkles" size={14} /> {config.serverName} store
-            </span>
+            <span className="eyebrow">{config.serverName} store · delivered by real staff</span>
             <h1>
-              {config.serverName} money, spawners &amp; items – <span className="grad-text">delivered fast.</span>
+              Skip the grind.
+              <span className="hero-h1-sub">Get rich on {config.serverName} tonight.</span>
             </h1>
-            <p className="lead">Cheap prices, real staff, delivered in-game in minutes. Plus a free spin every day.</p>
+            <p className="lead">
+              Money, spawners and god gear, /paid to you in minutes. {hundred ? <>100M costs {fmt(hundred.priceCents)} – less than a snack.</> : null} No bots, no account sharing, no waiting for a reply that never comes.
+            </p>
             <div className="hero-ctas">
-              <a href="#store" className="btn btn-primary btn-lg">
-                <Icon name="cart" size={18} /> Shop now
+              <a href="#store" className="btn btn-secondary btn-lg">
+                <Icon name="cart" size={18} /> Browse everything
               </a>
               {config.spinEnabled && (
-                <Link to="/spin" className="btn btn-pink btn-lg">
-                  <Icon name="spin" size={18} /> Spin for free coins
+                <Link to="/spin" className="btn btn-ghost btn-lg">
+                  <Icon name="spin" size={18} /> Free daily spin
                 </Link>
               )}
             </div>
-            {config.welcomeCoupon.enabled && config.welcomeCoupon.code && (
-              <button
-                type="button"
-                className="hero-welcome"
-                data-track="copy welcome code"
-                onClick={() => {
-                  void navigator.clipboard?.writeText(config.welcomeCoupon.code).catch(() => undefined);
-                  setCopied(true);
-                }}
-              >
-                <Icon name="ticket" size={16} /> First order? <strong>{config.welcomeCoupon.percent}% off</strong> with code <code>{config.welcomeCoupon.code}</code>
-                <span className="hero-welcome-copy">{copied ? 'Copied ✓' : 'Copy'}</span>
-              </button>
-            )}
             <div className="hero-pills">
               {pills.map((p) => (
                 <span key={p.label} className="pill">
@@ -112,16 +98,8 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="hero-visual">
-            <div className="hero-orb" aria-hidden="true" />
-            <span className="hero-coin a" aria-hidden="true">
-              +1M
-            </span>
-            <span className="hero-coin b" aria-hidden="true">
-              -25%
-            </span>
-            <Mascot className="hero-mascot" size={220} />
-            <DeliveryLog />
+          <div className="hero-buy">
+            <QuickBuy source="home" />
           </div>
         </div>
       </section>
@@ -279,7 +257,7 @@ export default function Home() {
         <div className="container">
           <div className="section-head center">
             <span className="eyebrow">How it works</span>
-            <h2>Three steps. Done in minutes.</h2>
+            <h2>You order. You pay. We /pay.</h2>
           </div>
           <div className="hiw-steps">
             <div className="hiw-step card">
@@ -287,8 +265,8 @@ export default function Home() {
               <span className="hiw-icon">
                 <Icon name="cart" size={22} />
               </span>
-              <h3>Pick your items</h3>
-              <p>Bulk discounts apply automatically.</p>
+              <h3>Pick an amount</h3>
+              <p>Bulk prices kick in on their own – no codes to hunt for.</p>
             </div>
             <div className="hiw-step card">
               <span className="hiw-num">STEP 02</span>
@@ -296,7 +274,7 @@ export default function Home() {
                 <Icon name="card" size={22} />
               </span>
               <h3>Pay your way</h3>
-              <p>Card, Apple Pay, Google Pay or crypto.</p>
+              <p>Card, Apple Pay, Google Pay – Klarna &amp; co. in Europe – or crypto.</p>
               <div className="hiw-pay">
                 {(config.paymentMethods.length ? config.paymentMethods.map((m) => m.name) : ['PayPal', 'Crypto', 'Card']).slice(0, 5).map((n) => (
                   <span key={n} className="badge">
@@ -311,7 +289,7 @@ export default function Home() {
                 <Icon name="truck" size={22} />
               </span>
               <h3>Get it in-game</h3>
-              <p>Money via /pay, items handed over in-game.</p>
+              <p>Money lands with /pay. Items get handed over by a real person.</p>
               <div className="hiw-note">
                 <Icon name="clock" size={14} /> {config.delivery.etaText}
               </div>
@@ -325,15 +303,15 @@ export default function Home() {
         <div className="container">
           <div className="section-head">
             <span className="eyebrow">Why {config.storeName}</span>
-            <h2>Why players buy here</h2>
+            <h2>Why not just grind?</h2>
           </div>
           <div className="features">
             <div className="feature card hover">
               <span className="feature-icon">
                 <Icon name="dollar" size={20} />
               </span>
-              <h3>Lowest prices</h3>
-              <p>Bulk tiers on money, spawners and gear.</p>
+              <h3>Cheaper than your time</h3>
+              <p>{hundred ? `100M for ${fmt(hundred.priceCents)}.` : 'Money for pocket change.'} That is a whole weekend of farming you never have to do.</p>
             </div>
             <div className="feature card hover">
               <span className="feature-icon">
@@ -362,8 +340,8 @@ export default function Home() {
               <span className="feature-icon">
                 <Icon name="discord" size={20} />
               </span>
-              <h3>Real support</h3>
-              <p>Fast answers on Discord, every order trackable.</p>
+              <h3>Humans, not bots</h3>
+              <p>Ask on Discord, get an answer. Every order has a live tracking page.</p>
             </div>
           </div>
         </div>
@@ -374,7 +352,7 @@ export default function Home() {
         <div className="container">
           <div className="section-head">
             <span className="eyebrow">Reviews</span>
-            <h2>What customers say</h2>
+            <h2>Players who skipped the grind</h2>
             <p className="lead">Only verified buyers can review – each review is tied to a delivered order.</p>
           </div>
           <ReviewsCarousel limit={12} />
@@ -386,7 +364,7 @@ export default function Home() {
         <div className="container home-faq">
           <div className="section-head center">
             <span className="eyebrow">FAQ</span>
-            <h2>Good questions, honest answers</h2>
+            <h2>Before you ask</h2>
           </div>
           <Accordion items={topFaq.map((f) => ({ id: `home-${f.id}`, q: f.q, a: <p>{renderRich(f.a, faqVars)}</p> }))} />
           <div className="store-more">
@@ -434,7 +412,8 @@ function buildPills(stats: ReturnType<typeof useStore>['stats'], cashback = 0): 
   if (stats && stats.ordersDelivered >= 50) out.push({ icon: 'check', label: `${stats.ordersDelivered.toLocaleString('en-US')} ${stats.ordersDelivered === 1 ? 'order' : 'orders'} delivered` });
   const reviewTotal = stats?.totalReviewCount ?? stats?.reviewCount ?? 0;
   const reviewAvg = stats?.totalAverageRating ?? stats?.averageRating ?? 0;
-  if (stats && reviewTotal > 0) out.push({ icon: 'star', label: `${reviewAvg.toFixed(1)} ★ from ${reviewTotal} review${reviewTotal === 1 ? '' : 's'}` });
+  const vouches = reviewTotal > (stats?.reviewCount ?? 0);
+  if (stats && reviewTotal > 0) out.push({ icon: 'star', label: `${reviewAvg.toFixed(1)} ★ · ${reviewTotal} ${vouches ? 'reviews & Discord vouches' : reviewTotal === 1 ? 'review' : 'reviews'}` });
   const neutral = [
     ...(cashback ? [{ icon: 'coin', label: `${cashback}% cashback on every order` }] : []),
     { icon: 'bolt', label: 'Fast in-game delivery' },

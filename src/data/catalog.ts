@@ -24,23 +24,20 @@ export const products: Product[] = [
   // ───────────── MONEY ─────────────
   P({
     id: 'money-1m', slug: 'donutsmp-money', name: '1M DonutSMP Money', categoryId: 'money', kind: 'money',
-    priceCents: 5, stock: null, unitLabel: 'per 1M', moneyMillions: 1, featured: true, sortOrder: 1,
+    priceCents: 3, stock: null, unitLabel: 'per 1M', moneyMillions: 1, featured: true, sortOrder: 1,
     tags: ['Fast', 'Popular'], image: '/img/products/money-1m.svg',
     shortDesc: 'Pick any amount – the quantity is the number of millions. Bulk prices kick in automatically.',
     description: 'In-game DonutSMP money paid directly to your balance with /pay. Choose the quantity in millions (e.g. 50 = 50M). The more you buy, the cheaper each million gets.',
-    bulkPricing: [
-      { minQty: 100, priceCents: 4 },
-      { minQty: 1000, priceCents: 3 },
-    ],
+    bulkPricing: [{ minQty: 250, priceCents: 2 }],
     minQty: 1, maxQty: 5000,
   }),
-  P({ id: 'money-10m', slug: '10m-money', name: '10M Money Pack', categoryId: 'money', kind: 'money', priceCents: 49, stock: null, moneyMillions: 10, image: '/img/products/money-10m.svg', tags: ['Fast'], sortOrder: 2, shortDesc: 'A quick 10 million to get going.' }),
-  P({ id: 'money-25m', slug: '25m-money', name: '25M Money Pack', categoryId: 'money', kind: 'money', priceCents: 119, stock: null, moneyMillions: 25, image: '/img/products/money-25m.svg', tags: ['Fast'], sortOrder: 3, shortDesc: 'Enough to start a spawner farm.' }),
-  P({ id: 'money-50m', slug: '50m-money', name: '50M Money Pack', categoryId: 'money', kind: 'money', priceCents: 239, stock: null, moneyMillions: 50, image: '/img/products/money-50m.svg', tags: ['Fast', 'Best value'], sortOrder: 4, featured: true, shortDesc: 'Our most popular pack.' }),
-  P({ id: 'money-100m', slug: '100m-money', name: '100M Money Pack', categoryId: 'money', kind: 'money', priceCents: 379, stock: null, moneyMillions: 100, image: '/img/products/money-100m.svg', tags: ['Fast', 'Hot'], sortOrder: 5, shortDesc: 'A serious balance boost overnight.' }),
-  P({ id: 'money-250m', slug: '250m-money', name: '250M Money Pack', categoryId: 'money', kind: 'money', priceCents: 949, stock: null, moneyMillions: 250, image: '/img/products/money-250m.svg', tags: ['Fast'], sortOrder: 6 }),
-  P({ id: 'money-500m', slug: '500m-money', name: '500M Money Pack', categoryId: 'money', kind: 'money', priceCents: 1899, stock: null, moneyMillions: 500, image: '/img/products/money-500m.svg', tags: ['Fast'], sortOrder: 7 }),
-  P({ id: 'money-1b', slug: '1b-money', name: '1B Money Pack', categoryId: 'money', kind: 'money', priceCents: 2899, stock: null, moneyMillions: 1000, image: '/img/products/money-1b.svg', tags: ['Fast', 'Whale'], sortOrder: 8, shortDesc: 'One billion. Yes, really.' }),
+  P({ id: 'money-10m', slug: '10m-money', name: '10M Money Pack', categoryId: 'money', kind: 'money', priceCents: 29, stock: null, moneyMillions: 10, image: '/img/products/money-10m.svg', tags: ['Fast'], sortOrder: 2, shortDesc: 'A quick 10 million to get going.' }),
+  P({ id: 'money-25m', slug: '25m-money', name: '25M Money Pack', categoryId: 'money', kind: 'money', priceCents: 75, stock: null, moneyMillions: 25, image: '/img/products/money-25m.svg', tags: ['Fast'], sortOrder: 3, shortDesc: 'Enough to start a spawner farm.' }),
+  P({ id: 'money-50m', slug: '50m-money', name: '50M Money Pack', categoryId: 'money', kind: 'money', priceCents: 139, stock: null, moneyMillions: 50, image: '/img/products/money-50m.svg', tags: ['Fast', 'Best value'], sortOrder: 4, featured: true, shortDesc: 'Our most popular pack.' }),
+  P({ id: 'money-100m', slug: '100m-money', name: '100M Money Pack', categoryId: 'money', kind: 'money', priceCents: 249, stock: null, moneyMillions: 100, image: '/img/products/money-100m.svg', tags: ['Fast', 'Hot'], sortOrder: 5, shortDesc: 'A serious balance boost overnight.' }),
+  P({ id: 'money-250m', slug: '250m-money', name: '250M Money Pack', categoryId: 'money', kind: 'money', priceCents: 499, stock: null, moneyMillions: 250, image: '/img/products/money-250m.svg', tags: ['Fast'], sortOrder: 6 }),
+  P({ id: 'money-500m', slug: '500m-money', name: '500M Money Pack', categoryId: 'money', kind: 'money', priceCents: 949, stock: null, moneyMillions: 500, image: '/img/products/money-500m.svg', tags: ['Fast'], sortOrder: 7 }),
+  P({ id: 'money-1b', slug: '1b-money', name: '1B Money Pack', categoryId: 'money', kind: 'money', priceCents: 1799, stock: null, moneyMillions: 1000, image: '/img/products/money-1b.svg', tags: ['Fast', 'Whale'], sortOrder: 8, shortDesc: 'One billion. Yes, really.' }),
 
   // ───────────── SPAWNERS & ITEMS ─────────────
   P({

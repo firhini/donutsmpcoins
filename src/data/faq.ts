@@ -54,7 +54,7 @@ export const faqGroups: FaqGroup[] = [
       {
         id: 'cheapest-money',
         q: 'What is the cheapest way to get DonutSMP money?',
-        a: 'Per million, the big fixed packs: **1B for $28.99** (about $0.029 per 1M), 500M for $18.99 and 100M for $3.79 each beat the pick-your-amount price for the same amount ($0.05 per 1M, $0.04 from 100M, $0.03 from 1B). Then let the discounts stack – carts over $15 get 5% off, over $40 8% and over $100 12%, plus one coupon from the [daily spin](/spin) or the welcome code and any store credit – and 5% of every delivered order comes back as cashback credit. If you only need a few million, win them: the spin gives away 10M, 25M and 100M prizes every day. Full price list on [/donutsmp-money](/donutsmp-money).',
+        a: 'Per million, the big fixed packs: **1B for $17.99** (about $0.018 per 1M), 500M for $9.49 and 100M for $2.49 each beat the pick-your-amount price for the same amount ($0.03 per 1M, $0.02 from 250M). Then let the discounts stack – carts over $15 get 5% off, over $40 8% and over $100 12%, plus one coupon from the [daily spin](/spin) or the welcome code and any store credit – and 5% of every delivered order comes back as cashback credit. If you only need a few million, win them: the spin gives away 10M, 25M and 100M prizes every day. Full price list on [/donutsmp-money](/donutsmp-money).',
       },
       {
         id: 'out-of-stock',

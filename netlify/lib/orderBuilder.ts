@@ -118,7 +118,28 @@ export async function serverQuote(input: ServerQuoteInput): Promise<{ quote: Quo
     quote.warnings = quote.warnings.filter((w) => w !== 'Unknown discount code.');
     quote.warnings.push(...welcomeWarnings);
   }
+  // first-order bonus: extra free millions on a new player's first paid money order
+  const bonus = settings.firstOrderBonus;
+  if (!input.includeHidden && bonus?.enabled && bonus.percent > 0) {
+    const byId = new Map(products.map((p) => [p.id, p]));
+    const millions = quote.lines.reduce((s, l) => {
+      const p = byId.get(l.productId);
+      return p?.kind === 'money' ? s + l.qty * (p.moneyMillions ?? 1) : s;
+    }, 0);
+    const extra = Math.floor((millions * bonus.percent) / 100);
+    if (extra > 0 && !(username && (await hasPreviousPurchase(username)))) {
+      quote.bonusMillions = extra;
+      quote.bonusPercent = bonus.percent;
+    }
+  }
   return { quote, products };
+}
+
+/** True when the player already paid for an order (free prizes don't count) – first-order bonus check. */
+export async function hasPreviousPurchase(username: string): Promise<boolean> {
+  const u = username.toLowerCase();
+  const idx = await listOrderIndex();
+  return idx.some((e) => e.username.toLowerCase() === u && e.methodId !== 'free' && (e.status === 'paid' || e.status === 'delivering' || e.status === 'delivered'));
 }
 
 /** True when the player already has an open or completed order (welcome code is first-order only). */
@@ -130,7 +151,7 @@ export async function hasPreviousOrder(username: string): Promise<boolean> {
 
 function buildItems(quote: Quote, products: Product[]): OrderItem[] {
   const byId = new Map(products.map((p) => [p.id, p]));
-  return quote.lines.map((l) => {
+  const items = quote.lines.map((l) => {
     const p = byId.get(l.productId)!;
     const item: OrderItem = {
       productId: p.id,
@@ -160,6 +181,21 @@ function buildItems(quote: Quote, products: Product[]): OrderItem[] {
     }
     return item;
   });
+  if (quote.bonusMillions && quote.bonusMillions > 0) {
+    const money = byId.get('money-1m');
+    items.push({
+      productId: money?.id ?? 'money-1m',
+      name: `First-order bonus (+${quote.bonusPercent ?? 0}%)`,
+      image: money?.image ?? '/img/products/money-1m.svg',
+      kind: 'money',
+      qty: quote.bonusMillions,
+      unitPriceCents: 0,
+      lineTotalCents: 0,
+      moneyMillions: 1,
+      bonus: true,
+    });
+  }
+  return items;
 }
 
 export async function buildOrder(input: BuildOrderInput): Promise<Order> {

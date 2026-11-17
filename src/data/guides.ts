@@ -97,7 +97,7 @@ const raw: GuideInput[] = [
         heading: 'Method 5: Just buy it – what DonutSMP money costs',
         paragraphs: [
           'Every method above costs time – anywhere from a few hours for a crop farm to weeks for a serious spawner setup. If you would rather spend the evening playing, buying DonutSMP money is the shortcut, and the prices are smaller than most people expect.',
-          'At {{store}} the pick-your-amount option starts at **$0.05 per 1M** and drops automatically with volume: $0.04 from 100M and $0.03 from 1B. Fixed packs are a little cheaper for round amounts – a [50M pack](/product/50m-money) is $2.39 (just under $0.048 per million), [100M](/product/100m-money) is $3.79 and [1B](/product/1b-money) is $28.99. On top of that, carts over $15 get 5% off, over $40 get 8% and over $100 get 12%, and 5% of every delivered order comes back as store credit.',
+          'At {{store}} the pick-your-amount option starts at **$0.03 per 1M** and drops automatically with volume: $0.02 from 250M. Fixed packs are a little cheaper for round amounts – a [50M pack](/product/50m-money) is $1.39 (just under $0.028 per million), [100M](/product/100m-money) is $2.49 and [1B](/product/1b-money) is $17.99. On top of that, carts over $15 get 5% off, over $40 get 8% and over $100 get 12%, and 5% of every delivered order comes back as store credit.',
           'Delivery is done by hand: a member of our staff logs in and runs `/pay` to the username on your order. {{eta}} There is no bot and no automation – slower in theory, more reliable in practice, because nothing breaks at 3am. You can follow the status on your order page.',
           'Two honest notes. DonutSMP’s rules prohibit trading in-game money for real currency; enforcement is the server’s decision, has included permanent bans and wipes, and buying is your own responsibility. And {{store}} is an independent player-run store, not affiliated with DonutSMP, Mojang or Microsoft.',
         ],
@@ -123,7 +123,7 @@ const raw: GuideInput[] = [
       },
       {
         q: 'How much is 1M DonutSMP money worth in real money?',
-        a: 'At {{store}} it is $0.05 for a single million and $0.03 per million at 1B on the flexible listing. Fixed packs are a little cheaper – a 100M pack works out to just under $0.038 per million and the 1B pack to about $0.029.',
+        a: 'At {{store}} it is $0.03 for a single million and $0.02 per million from 250M on the flexible listing. Fixed packs are a little cheaper – a 100M pack works out to just under $0.025 per million and the 1B pack to about $0.018.',
       },
       {
         q: 'Can I get banned for buying DonutSMP money?',
@@ -190,7 +190,7 @@ const raw: GuideInput[] = [
       {
         heading: 'Payback math: when does a spawner pay for itself?',
         paragraphs: [
-          'In real-money terms the comparison is simple, because our spawner prices follow the in-game value. A skeleton spawner is $0.89 and in our own trading a skelly goes for about 18M coins – and 18M money costs about the same at our $0.05 base rate. An iron golem spawner ($1.99) matches about 41M coins and a cow spawner ($4.99) around 100M in the same deals – prices vary, so treat these as our observations, not official values. Buying the spawner or buying the money to pay a player therefore costs roughly the same; the spawner has paid for itself once its drops have sold for more than its coin value – about 18M for a skelly. Whether that happens depends on sell prices and how long you keep the farm running.',
+          'In real-money terms the comparison is simple, because our spawner prices follow the in-game value. A skeleton spawner is $0.89 and in our own trading a skelly goes for about 18M coins – while 18M money costs $0.54 at our $0.03 base rate. An iron golem spawner ($1.99) matches about 41M coins and a cow spawner ($4.99) around 100M in the same deals – prices vary, so treat these as our observations, not official values. Buying the money and paying a player yourself is therefore cheaper if you can find a seller, while buying the spawner saves the search; either way, the spawner has paid for itself once its drops have sold for more than its coin value – about 18M for a skelly. Whether that happens depends on sell prices and how long you keep the farm running.',
           'In in-game terms, compare what players currently pay for a spawner with what one spawner’s drops sell for per day through `/sell` or `/orders`. Base prices change with updates, so we will not quote one here; run a single spawner for a day, sell the output and divide its coin value by that number – the result is how many days it needs to earn itself back.',
         ],
         list: [
@@ -296,7 +296,7 @@ const raw: GuideInput[] = [
         heading: 'How to protect yourself anywhere',
         paragraphs: ['These rules apply whether you buy from us, from another store or from a trader in a DM:'],
         list: [
-          'Start small. A 10M order for $0.49 tells you more about a seller than a hundred vouches.',
+          'Start small. A 25M order for $0.75 tells you more about a seller than a hundred vouches.',
           'Pay only to the details shown on the order page or the store’s own checkout – never to a “new address” sent in chat.',
           'Keep the order ID and payment reference until the order is delivered and you are happy.',
           'Use the Discord support channel for problems, quoting the order ID, rather than DMing whoever answers fastest.',
@@ -357,7 +357,7 @@ const raw: GuideInput[] = [
         heading: 'Money crates – Coin Crate $1.99 and Mega Coin Crate $9.99',
         paragraphs: [
           'The [Coin Crate](/product/coin-crate) is one money drop: 10M guaranteed, with 15M in about one crate in four, 25M in one in eight, 50M in one in 20, 100M in one in 25 and a 250M jackpot in roughly one in a hundred. The [Mega Coin Crate](/product/mega-coin-crate) is the big version: 60M guaranteed, 100M in about one crate in four, 200M in one in ten, 500M in one in 25 and a 1B jackpot in roughly one in a hundred.',
-          'On average both pay far less than the same money bought as a [money pack](/donutsmp-money) – a Coin Crate averages about 21M (the 25M pack is $1.19) and a Mega Coin Crate about 110M (the 100M pack is $3.79). You pay for the chance of a big hit. They are a fun flutter, not a money strategy.',
+          'On average both pay far less than the same money bought as a [money pack](/donutsmp-money) – a Coin Crate averages about 21M (the 25M pack is $0.75) and a Mega Coin Crate about 110M (the 100M pack is $2.49). You pay for the chance of a big hit. They are a fun flutter, not a money strategy.',
         ],
       },
       {
@@ -681,7 +681,7 @@ const raw: GuideInput[] = [
         paragraphs: [
           'A store is still a seller you pay first. The difference is structural. At {{store}} the money and items exist before you pay – stock levels on product pages are live. Every order has an ID, a locked price, a timeline and a payment reference you submitted yourself; you can open it at [/track](/track) any time without talking to anyone. Reviews can only be written from delivered orders and are tied to this domain rather than a Discord tag. And there is a published [refund policy](/refund-policy) that says what happens if we fail.',
           'Delivery is still done by real people – a staff member running `/pay` or teleporting to you with a shulker – but the record exists whether or not that person is online. {{eta}} If something goes wrong you have a page to show, not a DM thread with a deleted account.',
-          'Prices are also published and tiered: 1M is $0.05 and falls to $0.03 per million at 1B, spawners are priced on what we see them trade for in-game (a skeleton spawner is $0.89, falling to $0.69 at 250+), and carts over $15, $40 and $100 get 5%, 8% and 12% off automatically.',
+          'Prices are also published and tiered: 1M is $0.03 and falls to $0.02 per million from 250M, spawners are priced on what we see them trade for in-game (a skeleton spawner is $0.89, falling to $0.69 at 250+), and carts over $15, $40 and $100 get 5%, 8% and 12% off automatically.',
         ],
       },
       {

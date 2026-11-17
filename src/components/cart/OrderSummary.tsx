@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import type { Quote } from '../../shared/types';
-import { formatUsd } from '../../shared/pricing';
+import { formatMillions, formatUsd } from '../../shared/pricing';
 import { useStore } from '../../context/StoreContext';
 import { Icon } from '../ui/Icons';
 import { Thumb } from './Thumb';
@@ -97,6 +97,7 @@ export function OrderSummary({
         {quote.couponDiscountCents > 0 && <Row label={`Code ${quote.couponCode}`} value={`−${fmt(quote.couponDiscountCents)}`} tone="good" />}
         {quote.referralDiscountCents > 0 && <Row label={`Referral ${quote.referralCode}`} value={`−${fmt(quote.referralDiscountCents)}`} tone="good" />}
         {quote.creditAppliedCents > 0 && <Row label="Store credit" value={`−${fmt(quote.creditAppliedCents)}`} tone="good" />}
+        {(quote.bonusMillions ?? 0) > 0 && <Row label={`First-order bonus +${quote.bonusPercent}%`} value={`+${formatMillions(quote.bonusMillions!)} free`} tone="good" />}
         {fee > 0 && <Row label={`${feeName ?? 'Payment'} fee +${feePercent}%`} value={`+${fmt(fee)}`} tone="warn" />}
       </div>
 
@@ -104,7 +105,7 @@ export function OrderSummary({
         <span>Total</span>
         <div className="summary-total-amount">
           <strong>{fmt(total)}</strong>
-          {currency.code !== 'USD' && <small>{formatUsd(total)} USD · charged in USD</small>}
+          {currency.code !== 'USD' && <small>{formatUsd(total)} USD{currency.code === 'EUR' ? ' · card checkout in EUR' : ' · charged in USD'}</small>}
         </div>
       </div>
       {config.legal.priceNote && <p className="xs muted summary-pricenote">{config.legal.priceNote}</p>}

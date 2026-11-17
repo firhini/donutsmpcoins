@@ -25,6 +25,7 @@ in dem du Bestellungen abarbeitest. Gebaut für **Netlify** (kostenloser Plan re
 **Kostenlos-Features (Kundenbindung)**
 - 🎡 **Daily Spin** – 1× pro 24 h drehen: Gutscheine (5–25 %), 1M/5M/20M Coins, Skelett-Spawner, …
   (Server entscheidet das Ergebnis, Cooldown per IP + Gerät, max. 1 Gratis-Item pro Minecraft-Name pro Woche)
+- **Erstkauf-Bonus**: +25 % Gratis-Millionen auf die erste bezahlte Geld-Bestellung eines Spielers (Admin → Einstellungen → Referral & rewards). Wird als eigene 0-$-Zeile an die Bestellung gehängt und ist im `/pay`-Betrag enthalten.
 - Willkommens-Gutschein, Gutschein-Codes (Prozent/Fix, Mindestbestellwert, Nutzungen, Ablauf, an Spieler gebunden)
 - **Referral**: Freund bekommt 5 % Rabatt, du bekommst 5 % des Bestellwerts als Store-Guthaben
 - Geschenk-Codes (Admin erstellt z. B. `GIFT-…` → Kunde löst gegen ein Gratis-Item ein)
@@ -42,7 +43,7 @@ in dem du Bestellungen abarbeitest. Gebaut für **Netlify** (kostenloser Plan re
 - Zahlungsarten frei konfigurierbar im Admin:
   - **Manuell** (keine Verifizierung nötig): PayPal (paypal.me-Link, Friends & Family), Litecoin/Bitcoin/USDT-Adresse,
     Revolut, Gutscheinkarten (Amazon/Paysafecard) … – Kunde zahlt, trägt Transaktions-ID ein, du bestätigst
-  - **Automatisch** (optional, braucht Account/Keys): Stripe (Karte, Apple Pay, Google Pay), PayPal Checkout,
+  - **Automatisch** (optional, braucht Account/Keys): Stripe (Karte, Apple Pay, Google Pay – Käufer im Euroraum zahlen in EUR, damit Stripe Klarna, EPS, Bancontact, Revolut Pay usw. anbietet), PayPal Checkout,
     NOWPayments (Krypto mit automatischer Bestätigung)
 - Bestellstatus-Seite `/order/DC-XXXXXX` mit Zahlungsanleitung, „Ich habe bezahlt“-Formular, Status-Timeline, Box-Reveal
 - Discord-Webhook: neue Bestellung, Zahlung gemeldet, Zahlung bestätigt, Gewinne, Giveaway-Ziehungen

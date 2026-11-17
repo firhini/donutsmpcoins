@@ -66,23 +66,11 @@ if (ingot) add(ingot.priceCents * 9);
 
 // amounts that are rounded comparisons or sums of two lines – each checked by hand:
 const APPROXIMATE = new Set<string>([
-  'productCopy:12', // 250M pack: $45.00 base − $32.99 = $12.01
   'productCopy:2.08', // 4 ancient debris at the 32+ tier price
   'categoryCopy:2.08', // same debris example
   'landingCopy:2.08', // same debris example
-  'categoryCopy:10', // Rich Bundle parts $89.96 − $79.99 ≈ $10
-  'landingCopy:10', // same Rich Bundle saving
-  'productCopy:0.10', // 1B pack after 12% tier: $101.19 / 1000M = $0.101 per 1M
-  'productCopy:35.98', // elytra $28.49 + 50M $7.49
   'productCopy:53', // Value Investment Box parts ≈ $53
   'productCopy:92', // Elite Investment Box parts ≈ $92
-  'categoryCopy:1.10', // 50 spawners $20.00 − 45 spawners $18.90
-  'landingCopy:2.40', // Basehunter parts $40.40 − $37.99 = $2.41
-  'landingCopy:2.01', // 100 flexible millions at the 100M tier $16.00 − 100M pack $13.99
-  'landingCopy:40.48', // 250M $32.99 + 50M $7.49
-  'landingCopy:37.24', // $40.48 − 8% spending tier
-  'landingCopy:0.10', // $101.19 / 1000M
-  'landingCopy:91.07', // $101.19 − 10% spin coupon
 ]);
 
 const FILES = ['productCopy', 'categoryCopy', 'landingCopy', 'guides', 'faq'];
