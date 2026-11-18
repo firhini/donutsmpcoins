@@ -44,6 +44,24 @@ describe('cookieless analytics', () => {
     const u = await get<any>('/admin/users', { headers: { authorization: `Bearer ${token}` } });
     expect(u.status).toBe(200);
     expect(u.data.users.find((x: { id: string }) => x.id === '700000000000000001')).toMatchObject({ provider: 'discord', username: 'statsguy' });
+    expect(u.data.total).toBe(u.data.users.length);
+  });
+
+  it('lists guest buyers next to accounts and counts orders by Minecraft name', async () => {
+    const token = await adminToken();
+    const users = await import('../netlify/lib/users');
+    await users.upsertUser({ id: '700000000000000002', username: 'linked' });
+    await users.updateUser('700000000000000002', { mcUsername: 'LinkedKid' });
+    // ordered while logged out – still belongs to the account through the Minecraft name
+    expect((await post('/orders', orderBody({ username: 'LinkedKid' }), { ip: '10.9.5.1' })).status).toBe(201);
+    expect((await post('/orders', orderBody({ username: 'GuestOnly' }), { ip: '10.9.5.2' })).status).toBe(201);
+    const u = await get<any>('/admin/users', { headers: { authorization: `Bearer ${token}` } });
+    const acc = u.data.users.find((x: { id: string }) => x.id === '700000000000000002');
+    expect(acc).toMatchObject({ provider: 'discord', orders: 1, paidOrders: 0 });
+    const guest = u.data.users.find((x: { id: string }) => x.id === 'mc:guestonly');
+    expect(guest).toMatchObject({ provider: 'guest', mcUsername: 'GuestOnly', orders: 1 });
+    expect(u.data.users.some((x: { id: string }) => x.id === 'mc:linkedkid')).toBe(false);
+    expect(u.data.accounts + u.data.guests).toBe(u.data.total);
   });
 });
 

@@ -236,17 +236,47 @@ export const routes: Route[] = [
     return json({ session: { ...s, sourceLabel: sourceLabel(s.source) }, orders: idx.filter((o) => s.orderIds.includes(o.id)) });
   }),
 
+  // everyone who bought or logged in: accounts (Discord/Google) plus guest buyers known only by their Minecraft name
   admin('GET', '/admin/users', async () => {
-    const users = (await loadUsers()).sort((a, b) => (b.lastLoginAt ?? '').localeCompare(a.lastLoginAt ?? ''));
+    const [users, idx] = await Promise.all([loadUsers(), listOrderIndex()]);
+    // orders per Minecraft name and per account id (orders placed while logged out only carry the name)
+    const byName = new Map<string, typeof idx>();
+    const byAccount = new Map<string, typeof idx>();
+    for (const o of idx) {
+      const n = o.username.toLowerCase();
+      byName.set(n, [...(byName.get(n) ?? []), o]);
+      if (o.discordUserId) byAccount.set(o.discordUserId, [...(byAccount.get(o.discordUserId) ?? []), o]);
+    }
+    const stats = (list: typeof idx) => {
+      const real = list.filter((o) => o.methodId !== 'free');
+      return {
+        orders: real.length,
+        paidOrders: real.filter((o) => PAID.has(o.status)).length,
+        spentCents: real.filter((o) => PAID.has(o.status)).reduce((n, o) => n + o.totalCents, 0),
+        freeOrders: list.length - real.length,
+        firstAt: list.reduce<string | undefined>((m, o) => (!m || o.createdAt < m ? o.createdAt : m), undefined),
+        lastAt: list.reduce<string | undefined>((m, o) => (!m || o.createdAt > m ? o.createdAt : m), undefined),
+      };
+    };
+
+    const accountNames = new Set(users.map((u) => u.mcUsername?.toLowerCase()).filter((n): n is string => !!n));
+    const names = new Set<string>([...accountNames, ...byName.keys()]);
     const credits = new Map<string, number>();
     await Promise.all(
-      [...new Set(users.map((u) => u.mcUsername?.toLowerCase()).filter((n): n is string => !!n))].slice(0, 300).map(async (n) => credits.set(n, (await getCredit(n)).balanceCents)),
+      [...names].slice(0, 500).map(async (n) => {
+        const c = await getCredit(n).catch(() => null);
+        if (c) credits.set(n, c.balanceCents);
+      }),
     );
-    return json({
-      total: users.length,
-      users: users.map((u) => ({
+
+    const accounts = users.map((u) => {
+      const mc = u.mcUsername?.toLowerCase();
+      const seen = new Map<string, (typeof idx)[number]>();
+      for (const o of [...(mc ? byName.get(mc) ?? [] : []), ...(byAccount.get(u.id) ?? [])]) seen.set(o.id, o);
+      const st = stats([...seen.values()]);
+      return {
         id: u.id,
-        provider: isGoogleId(u.id) ? 'google' : 'discord',
+        provider: (isGoogleId(u.id) ? 'google' : 'discord') as 'google' | 'discord',
         username: u.username,
         displayName: u.globalName || u.username,
         avatarUrl: avatarUrl(u.id, u.avatar),
@@ -255,10 +285,43 @@ export const routes: Route[] = [
         createdAt: u.createdAt,
         lastLoginAt: u.lastLoginAt,
         logins: u.logins ?? 0,
-        orders: u.orderIds?.length ?? 0,
+        orders: st.orders,
+        paidOrders: st.paidOrders,
+        spentCents: st.spentCents,
+        freeOrders: st.freeOrders,
+        lastOrderAt: st.lastAt,
         prizes: u.prizes?.length ?? 0,
-        creditCents: u.mcUsername ? (credits.get(u.mcUsername.toLowerCase()) ?? 0) : 0,
-      })),
+        creditCents: mc ? (credits.get(mc) ?? 0) : 0,
+      };
     });
+
+    const linkedIds = new Set(users.map((u) => u.id));
+    const guests = [...byName.entries()]
+      .filter(([n, list]) => !accountNames.has(n) && !list.some((o) => o.discordUserId && linkedIds.has(o.discordUserId)))
+      .map(([n, list]) => {
+        const st = stats(list);
+        const name = list[0].username;
+        return {
+          id: `mc:${n}`,
+          provider: 'guest' as const,
+          username: name,
+          displayName: name,
+          avatarUrl: `https://mc-heads.net/avatar/${encodeURIComponent(name)}/28`,
+          mcUsername: name,
+          createdAt: st.firstAt ?? '',
+          lastLoginAt: st.lastAt ?? '',
+          logins: 0,
+          orders: st.orders,
+          paidOrders: st.paidOrders,
+          spentCents: st.spentCents,
+          freeOrders: st.freeOrders,
+          lastOrderAt: st.lastAt,
+          prizes: 0,
+          creditCents: credits.get(n) ?? 0,
+        };
+      });
+
+    const rows = [...accounts, ...guests].sort((a, b) => (b.lastOrderAt ?? b.lastLoginAt ?? '').localeCompare(a.lastOrderAt ?? a.lastLoginAt ?? ''));
+    return json({ total: rows.length, accounts: accounts.length, guests: guests.length, users: rows });
   }),
 ];

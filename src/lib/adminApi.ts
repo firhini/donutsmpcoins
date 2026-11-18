@@ -489,7 +489,8 @@ export interface SessionDetail {
 }
 export interface AdminUserRow {
   id: string;
-  provider: 'discord' | 'google';
+  /** 'guest' = bought without logging in, known only by Minecraft name */
+  provider: 'discord' | 'google' | 'guest';
   username: string;
   displayName: string;
   avatarUrl: string;
@@ -498,7 +499,12 @@ export interface AdminUserRow {
   createdAt: string;
   lastLoginAt: string;
   logins: number;
+  /** paid-for orders (free prizes excluded), matched by account and Minecraft name */
   orders: number;
+  paidOrders?: number;
+  spentCents?: number;
+  freeOrders?: number;
+  lastOrderAt?: string;
   prizes: number;
   creditCents: number;
 }
@@ -506,8 +512,12 @@ export interface AdminUserRow {
 export async function getAnalytics(days = 14): Promise<AdminAnalytics> {
   return unwrap<AdminAnalytics>(await get(`/admin/analytics?days=${days}`), 'analytics');
 }
-export async function getUsers(): Promise<{ total: number; users: AdminUserRow[] }> {
-  return unwrap<{ total: number; users: AdminUserRow[] }>(await get('/admin/users'), 'users');
+export async function getUsers(): Promise<{ total: number; accounts?: number; guests?: number; users: AdminUserRow[] }> {
+  // not unwrap(): the page needs the counts next to the list
+  const res = await get<unknown>('/admin/users');
+  const users = Array.isArray(res) ? (res as AdminUserRow[]) : isObj(res) && Array.isArray(res.users) ? (res.users as AdminUserRow[]) : [];
+  const num = (k: string) => (isObj(res) && typeof res[k] === 'number' ? (res[k] as number) : undefined);
+  return { total: num('total') ?? users.length, accounts: num('accounts'), guests: num('guests'), users };
 }
 
 export async function getSessions(days = 7): Promise<SessionRow[]> {
