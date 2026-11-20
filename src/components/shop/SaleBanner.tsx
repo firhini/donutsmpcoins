@@ -19,9 +19,9 @@ function SaleTimer({ to }: { to?: string }) {
 
 /** Running sale: what is discounted, by how much and until when. Renders nothing without an active sale. */
 export function SaleBanner({ variant = 'hero' }: { variant?: 'hero' | 'strip' }) {
-  const { config, categories } = useStore();
+  const { config, categories, hydrated } = useStore();
   const sale = config.sale;
-  if (!saleActive(sale)) return null;
+  if (!hydrated || !saleActive(sale)) return null;
   const scoped = (sale.categoryIds ?? []).map((id) => categories.find((c) => c.id === id)).filter((c): c is NonNullable<typeof c> => !!c);
   const what = scoped.length ? scoped.map((c) => c.name.toLowerCase()).join(' & ') : 'everything';
   const to = scoped.length === 1 ? `/shop/${scoped[0].slug}` : '/shop';

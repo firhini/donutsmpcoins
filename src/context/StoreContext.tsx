@@ -7,6 +7,8 @@ import { defaultSettings } from '../data/settings';
 import { storageGet, storageSet } from '../lib/device';
 
 interface StoreApi {
+  /** false during SSR and the first client render – gate time-dependent UI on it */
+  hydrated: boolean;
   config: PublicConfig;
   catalog: Catalog;
   products: Product[];
@@ -127,7 +129,15 @@ export function StoreProvider({ children, initial }: { children: ReactNode; init
     const t = setInterval(() => setNow(Date.now()), 60_000);
     return () => clearInterval(t);
   }, [timedSale]);
-  const products = useMemo(() => applyDailyDeal(applySale(catalog.products, config.sale, new Date(now)), config.dailyDeal, new Date(now)), [catalog.products, config.sale, config.dailyDeal, now]);
+  // Time-dependent prices (timed sale, rotating daily deal) are applied only after hydration: the
+  // pre-rendered HTML is built once per deploy, so baking yesterday's deal into it made every page
+  // fail to hydrate (React #418) as soon as the deal rotated.
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+  const products = useMemo(
+    () => (hydrated ? applyDailyDeal(applySale(catalog.products, config.sale, new Date(now)), config.dailyDeal, new Date(now)) : catalog.products),
+    [hydrated, catalog.products, config.sale, config.dailyDeal, now],
+  );
 
   const value = useMemo<StoreApi>(
     () => ({
@@ -144,8 +154,9 @@ export function StoreProvider({ children, initial }: { children: ReactNode; init
       currency,
       setCurrency,
       fmt,
+      hydrated,
     }),
-    [config, catalog, products, stats, loading, error, refresh, currency, setCurrency, fmt],
+    [config, catalog, products, stats, loading, error, refresh, currency, setCurrency, fmt, hydrated],
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

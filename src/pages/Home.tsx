@@ -23,7 +23,7 @@ import '../styles/home.css';
 const INITIAL_VISIBLE = 12;
 
 export default function Home() {
-  const { config, products, categories, stats, loading, fmt, productById } = useStore();
+  const { config, products, categories, stats, loading, fmt, productById, hydrated } = useStore();
   const [cat, setCat] = useState<HotbarValue>('all');
   const [q, setQ] = useState('');
   const [showAll, setShowAll] = useState(false);
@@ -75,7 +75,7 @@ export default function Home() {
             <span className="eyebrow">{config.serverName} store · delivered by real staff</span>
             <h1>
               Skip the grind.
-              <span className="hero-h1-sub">Get rich on {config.serverName} tonight.</span>
+              <span className="hero-h1-sub">{config.serverName} money in minutes, not days.</span>
             </h1>
             <p className="lead">
               Money, spawners and god gear, /paid to you in minutes. {hundred ? <>100M costs {fmt(hundred.priceCents)} – less than a snack.</> : null} No bots, no account sharing, no waiting for a reply that never comes.
@@ -111,7 +111,7 @@ export default function Home() {
 
       {/* ───────── mystery box deal ───────── */}
       <section className="container box-deal-wrap">
-        {saleActive(config.sale) ? (
+        {hydrated && saleActive(config.sale) ? (
           <SaleBanner />
         ) : (
           <Link to="/product/elytra-crate" className="box-deal">
